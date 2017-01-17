@@ -12,9 +12,9 @@
             "role": "Developer"
         }
     ],
-    "support": [
+    "support": {
         "issues": "https://github.com/nabu-3/core/issues"
-    ],
+    },
     "config": {
         "bin-dir": "bin",
         "vendor-dir": "phputils/lib"
