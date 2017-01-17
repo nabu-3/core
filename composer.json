@@ -21,7 +21,6 @@
     },
     "require": {
         "nabu-3/core-composer-plugin": "*",
-        "nabu-3/devel": "~3.0",
         "nabu-3/provider-mysql": "~0.0",
         "nabu-3/provider-apache-httpd": "~0.0",
         "nabu-3/provider-smarty": "~0.0"
