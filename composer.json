@@ -1,5 +1,5 @@
 {
-    "name": "nabu-3 Core",
+    "name": "nabu-3/core",
     "description": "Core package to deploy nabu-3 Framework in your server",
     "version": "3.0.0",
     "type": "project",
@@ -12,9 +12,9 @@
             "role": "Developer"
         }
     ],
-    "support": [
+    "support": {
         "issues": "https://github.com/nabu-3/core/issues"
-    ],
+    },
     "config": {
         "bin-dir": "bin",
         "vendor-dir": "phputils/lib"
