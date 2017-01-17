@@ -1,0 +1,88 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_cluster_user",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "4",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_cluster_user_id": {
+            "name": "nb_cluster_user_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_cluster_user_group_id": {
+            "name": "nb_cluster_user_group_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_cluster_user_os_id": {
+            "name": "nb_cluster_user_os_id",
+            "ordinal": "3",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_cluster_user_os_nick": {
+            "name": "nb_cluster_user_os_nick",
+            "ordinal": "4",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(50)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_cluster_user_id": {
+                    "name": "nb_cluster_user_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_cluster_user_group_fk_idx": {
+            "name": "nb_cluster_user_group_fk_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_cluster_user_group_id": {
+                    "name": "nb_cluster_user_group_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

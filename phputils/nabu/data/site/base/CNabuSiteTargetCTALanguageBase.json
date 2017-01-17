@@ -1,0 +1,127 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_site_target_cta_lang",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": null,
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_site_target_cta_id": {
+            "name": "nb_site_target_cta_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_language_id": {
+            "name": "nb_language_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_cta_lang_target_url": {
+            "name": "nb_site_target_cta_lang_target_url",
+            "ordinal": "3",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_cta_lang_title": {
+            "name": "nb_site_target_cta_lang_title",
+            "ordinal": "4",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_cta_lang_alternate": {
+            "name": "nb_site_target_cta_lang_alternate",
+            "ordinal": "5",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_cta_lang_image": {
+            "name": "nb_site_target_cta_lang_image",
+            "ordinal": "6",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_cta_lang_anchor_text": {
+            "name": "nb_site_target_cta_lang_anchor_text",
+            "ordinal": "7",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_site_target_cta_id": {
+                    "name": "nb_site_target_cta_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                },
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_target_cta_lang_nb_language_fk1_idx": {
+            "name": "nb_site_target_cta_lang_nb_language_fk1_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

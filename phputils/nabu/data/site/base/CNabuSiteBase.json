@@ -1,0 +1,989 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_site",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "6",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_site_id": {
+            "name": "nb_site_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11) unsigned",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_cluster_group_id": {
+            "name": "nb_cluster_group_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_cluster_user_id": {
+            "name": "nb_cluster_user_id",
+            "ordinal": "3",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_customer_id": {
+            "name": "nb_customer_id",
+            "ordinal": "4",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_project_id": {
+            "name": "nb_project_id",
+            "ordinal": "5",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_id": {
+            "name": "nb_commerce_id",
+            "ordinal": "6",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_app_os_id": {
+            "name": "nb_app_os_id",
+            "ordinal": "7",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_delegate_for_role": {
+            "name": "nb_site_delegate_for_role",
+            "ordinal": "8",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_default_role_id": {
+            "name": "nb_site_default_role_id",
+            "ordinal": "9",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_default_language_id": {
+            "name": "nb_site_default_language_id",
+            "ordinal": "10",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_api_language_id": {
+            "name": "nb_site_api_language_id",
+            "ordinal": "11",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_main_alias_id": {
+            "name": "nb_site_main_alias_id",
+            "ordinal": "12",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_mounting_order": {
+            "name": "nb_site_mounting_order",
+            "ordinal": "13",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "0",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_key": {
+            "name": "nb_site_key",
+            "ordinal": "14",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(30)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_creation_datetime": {
+            "name": "nb_site_creation_datetime",
+            "ordinal": "15",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": "CURRENT_TIMESTAMP",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_published": {
+            "name": "nb_site_published",
+            "ordinal": "16",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','F')",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_default_target_use_uri": {
+            "name": "nb_site_default_target_use_uri",
+            "ordinal": "17",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','U','N')",
+            "default": "N",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "Possible values are:\n- \u2019T\u2019 Translated entity\n- \u2018U\u2019 URL\n- \u2019N\u2019 None\n"
+        },
+        "nb_site_default_target_id": {
+            "name": "nb_site_default_target_id",
+            "ordinal": "18",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_page_not_found_target_use_uri": {
+            "name": "nb_site_page_not_found_target_use_uri",
+            "ordinal": "19",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','U','N')",
+            "default": "N",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "Possible values are:\n- \u2019T\u2019 Translated entity\n- \u2018U\u2019 URL\n- \u2019N\u2019 None\n"
+        },
+        "nb_site_page_not_found_target_id": {
+            "name": "nb_site_page_not_found_target_id",
+            "ordinal": "20",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_page_not_found_error_code": {
+            "name": "nb_site_page_not_found_error_code",
+            "ordinal": "21",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "404",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_login_target_use_uri": {
+            "name": "nb_site_login_target_use_uri",
+            "ordinal": "22",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','U','N')",
+            "default": "N",
+            "is_nullable": true,
+            "extra": "",
+            "comment": "Possible values are:\n- \u2019T\u2019 Translated entity\n- \u2018U\u2019 URL\n- \u2019N\u2019 None\n"
+        },
+        "nb_site_login_target_id": {
+            "name": "nb_site_login_target_id",
+            "ordinal": "23",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_login_redirection_target_use_uri": {
+            "name": "nb_site_login_redirection_target_use_uri",
+            "ordinal": "24",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','U','N')",
+            "default": "N",
+            "is_nullable": true,
+            "extra": "",
+            "comment": "Possible values are:\n- \u2019T\u2019 Translated entity\n- \u2018U\u2019 URL\n- \u2019N\u2019 None\n"
+        },
+        "nb_site_login_redirection_target_id": {
+            "name": "nb_site_login_redirection_target_id",
+            "ordinal": "25",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_logout_redirection_target_use_uri": {
+            "name": "nb_site_logout_redirection_target_use_uri",
+            "ordinal": "26",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','U','N')",
+            "default": "N",
+            "is_nullable": true,
+            "extra": "",
+            "comment": "Possible values are:\n- \u2019T\u2019 Translated entity\n- \u2018U\u2019 URL\n- \u2019N\u2019 None\n"
+        },
+        "nb_site_logout_redirection_target_id": {
+            "name": "nb_site_logout_redirection_target_id",
+            "ordinal": "27",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_alias_not_found_target_use_uri": {
+            "name": "nb_site_alias_not_found_target_use_uri",
+            "ordinal": "28",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','U','N')",
+            "default": "N",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "Possible values are:\n- \u2019T\u2019 Translated entity\n- \u2018U\u2019 URL\n- \u2019N\u2019 None\n"
+        },
+        "nb_site_alias_not_found_target_id": {
+            "name": "nb_site_alias_not_found_target_id",
+            "ordinal": "29",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_alias_locked_target_use_uri": {
+            "name": "nb_site_alias_locked_target_use_uri",
+            "ordinal": "30",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','U','N')",
+            "default": "N",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "Possible values are:\n- \u2019T\u2019 Translated entity\n- \u2018U\u2019 URL\n- \u2019N\u2019 None\n"
+        },
+        "nb_site_alias_locked_target_id": {
+            "name": "nb_site_alias_locked_target_id",
+            "ordinal": "31",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_use_cache": {
+            "name": "nb_site_use_cache",
+            "ordinal": "32",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_cache_handler": {
+            "name": "nb_site_cache_handler",
+            "ordinal": "33",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_use_smarty": {
+            "name": "nb_site_use_smarty",
+            "ordinal": "34",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','F')",
+            "default": "F",
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_smarty_error_reporting": {
+            "name": "nb_site_smarty_error_reporting",
+            "ordinal": "35",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_smarty_debugging": {
+            "name": "nb_site_smarty_debugging",
+            "ordinal": "36",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','F')",
+            "default": "F",
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_smarty_template_path": {
+            "name": "nb_site_smarty_template_path",
+            "ordinal": "37",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_smarty_compile_path": {
+            "name": "nb_site_smarty_compile_path",
+            "ordinal": "38",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_smarty_cache_path": {
+            "name": "nb_site_smarty_cache_path",
+            "ordinal": "39",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_smarty_configs_path": {
+            "name": "nb_site_smarty_configs_path",
+            "ordinal": "40",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_smarty_models_path": {
+            "name": "nb_site_smarty_models_path",
+            "ordinal": "41",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_batch_path": {
+            "name": "nb_site_batch_path",
+            "ordinal": "42",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_phputils_path": {
+            "name": "nb_site_phputils_path",
+            "ordinal": "43",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_classes_path": {
+            "name": "nb_site_classes_path",
+            "ordinal": "44",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_plugins_path": {
+            "name": "nb_site_plugins_path",
+            "ordinal": "45",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_plugin_name": {
+            "name": "nb_site_plugin_name",
+            "ordinal": "46",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(60)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_http_support": {
+            "name": "nb_site_http_support",
+            "ordinal": "47",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_https_support": {
+            "name": "nb_site_https_support",
+            "ordinal": "48",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_google_wmr_domain_id": {
+            "name": "nb_site_google_wmr_domain_id",
+            "ordinal": "49",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(43)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_google_wmr_site_id": {
+            "name": "nb_site_google_wmr_site_id",
+            "ordinal": "50",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(43)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_use_awstats": {
+            "name": "nb_site_use_awstats",
+            "ordinal": "51",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_local_path": {
+            "name": "nb_site_local_path",
+            "ordinal": "52",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(256)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_dynamic_cache_control": {
+            "name": "nb_site_dynamic_cache_control",
+            "ordinal": "53",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('F','T')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "Controls the Cache-Control and Expires HTTP Headers:\nF: Disabled (default)\nT: Enabled"
+        },
+        "nb_site_dynamic_cache_default_max_age": {
+            "name": "nb_site_dynamic_cache_default_max_age",
+            "ordinal": "54",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_emailing_id": {
+            "name": "nb_emailing_id",
+            "ordinal": "55",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_email_template_new_user": {
+            "name": "nb_site_email_template_new_user",
+            "ordinal": "56",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_email_template_lost_password": {
+            "name": "nb_site_email_template_lost_password",
+            "ordinal": "57",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_email_template_notify_new_user": {
+            "name": "nb_site_email_template_notify_new_user",
+            "ordinal": "58",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_email_template_remember_new_user": {
+            "name": "nb_site_email_template_remember_new_user",
+            "ordinal": "59",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_email_template_invite_user": {
+            "name": "nb_site_email_template_invite_user",
+            "ordinal": "60",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_email_template_invite_friend": {
+            "name": "nb_site_email_template_invite_friend",
+            "ordinal": "61",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_email_template_new_message": {
+            "name": "nb_site_email_template_new_message",
+            "ordinal": "62",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_apache_personalized": {
+            "name": "nb_site_apache_personalized",
+            "ordinal": "63",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','F')",
+            "default": "F",
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_apache_last_update": {
+            "name": "nb_site_apache_last_update",
+            "ordinal": "64",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_apache_last_update_error": {
+            "name": "nb_site_apache_last_update_error",
+            "ordinal": "65",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','F')",
+            "default": "F",
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_wsearch_enabled": {
+            "name": "nb_site_wsearch_enabled",
+            "ordinal": "66",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','F')",
+            "default": "F",
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_use_framework": {
+            "name": "nb_site_use_framework",
+            "ordinal": "67",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_enable_vhost_file": {
+            "name": "nb_site_enable_vhost_file",
+            "ordinal": "68",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_session_timeout_interval": {
+            "name": "nb_site_session_timeout_interval",
+            "ordinal": "69",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_session_preserve_interval": {
+            "name": "nb_site_session_preserve_interval",
+            "ordinal": "70",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_enable_session_strict_policies": {
+            "name": "nb_site_enable_session_strict_policies",
+            "ordinal": "71",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_static_content_use_alternative": {
+            "name": "nb_site_static_content_use_alternative",
+            "ordinal": "72",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('D','E','B')",
+            "default": "D",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_base_path": {
+            "name": "nb_site_base_path",
+            "ordinal": "73",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_modules_slots": {
+            "name": "nb_site_modules_slots",
+            "ordinal": "74",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_notification_email": {
+            "name": "nb_site_notification_email",
+            "ordinal": "75",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_site_id": {
+                    "name": "nb_site_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_nb_customer_fk": {
+            "name": "nb_site_nb_customer_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_customer_id": {
+                    "name": "nb_customer_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_nb_emailing_fk": {
+            "name": "nb_site_nb_emailing_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_emailing_id": {
+                    "name": "nb_emailing_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_nb_project_fk": {
+            "name": "nb_site_nb_project_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_customer_id": {
+                    "name": "nb_customer_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_project_id": {
+                    "name": "nb_project_id",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_nb_cluster_group_fk": {
+            "name": "nb_site_nb_cluster_group_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_cluster_group_id": {
+                    "name": "nb_cluster_group_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_nb_cluster_user_fk": {
+            "name": "nb_site_nb_cluster_user_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_cluster_user_id": {
+                    "name": "nb_cluster_user_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_nb_commerce_fk1_idx": {
+            "name": "nb_site_nb_commerce_fk1_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_commerce_id": {
+                    "name": "nb_commerce_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_default_language_nb_language_fk": {
+            "name": "nb_site_default_language_nb_language_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_site_default_language_id": {
+                    "name": "nb_site_default_language_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_api_language_nb_language_fk": {
+            "name": "nb_site_api_language_nb_language_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_site_api_language_id": {
+                    "name": "nb_site_api_language_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

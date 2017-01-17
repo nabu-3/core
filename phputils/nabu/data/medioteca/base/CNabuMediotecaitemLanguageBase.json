@@ -1,0 +1,231 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_medioteca_item_lang",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": null,
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_medioteca_item_id": {
+            "name": "nb_medioteca_item_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_language_id": {
+            "name": "nb_language_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_last_update_datetime": {
+            "name": "nb_medioteca_item_lang_last_update_datetime",
+            "ordinal": "3",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_type": {
+            "name": "nb_medioteca_item_lang_type",
+            "ordinal": "4",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('H','N','U','F')",
+            "default": "N",
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_have_public": {
+            "name": "nb_medioteca_item_lang_have_public",
+            "ordinal": "5",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','F')",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_mime_type": {
+            "name": "nb_medioteca_item_lang_mime_type",
+            "ordinal": "6",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(60)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_title": {
+            "name": "nb_medioteca_item_lang_title",
+            "ordinal": "7",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(256)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_subtitle": {
+            "name": "nb_medioteca_item_lang_subtitle",
+            "ordinal": "8",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_opening": {
+            "name": "nb_medioteca_item_lang_opening",
+            "ordinal": "9",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_content": {
+            "name": "nb_medioteca_item_lang_content",
+            "ordinal": "10",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_footer": {
+            "name": "nb_medioteca_item_lang_footer",
+            "ordinal": "11",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_url": {
+            "name": "nb_medioteca_item_lang_url",
+            "ordinal": "12",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_html_object": {
+            "name": "nb_medioteca_item_lang_html_object",
+            "ordinal": "13",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_public_path": {
+            "name": "nb_medioteca_item_lang_public_path",
+            "ordinal": "14",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_lang_original_path": {
+            "name": "nb_medioteca_item_lang_original_path",
+            "ordinal": "15",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_medioteca_item_id": {
+                    "name": "nb_medioteca_item_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                },
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_medioteca_item_lang_nb_language_fk": {
+            "name": "nb_medioteca_item_lang_nb_language_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_medioteca_item_lang_nb_medioteca_item_fk": {
+            "name": "nb_medioteca_item_lang_nb_medioteca_item_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_medioteca_item_id": {
+                    "name": "nb_medioteca_item_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

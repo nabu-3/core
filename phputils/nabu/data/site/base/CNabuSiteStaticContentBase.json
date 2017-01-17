@@ -1,0 +1,126 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_site_static_content",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "1031",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_site_static_content_id": {
+            "name": "nb_site_static_content_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_site_id": {
+            "name": "nb_site_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_static_content_key": {
+            "name": "nb_site_static_content_key",
+            "ordinal": "3",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(30)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_static_content_type": {
+            "name": "nb_site_static_content_type",
+            "ordinal": "4",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('H','P')",
+            "default": "P",
+            "is_nullable": true,
+            "extra": "",
+            "comment": "\u2018H\u2019 = HTML\n\u2018P\u2019 = Plain text"
+        },
+        "nb_site_static_content_use_alternative": {
+            "name": "nb_site_static_content_use_alternative",
+            "ordinal": "5",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('D','E','B','S')",
+            "default": "D",
+            "is_nullable": true,
+            "extra": "",
+            "comment": "\u2018D\u2019 = Disabled\n\u2019S\u2019 = Use site common configuration\n\u2018E\u2019 = Use default language if translation exists\n\u2018B\u2019 = Use default language if exists, else first translation available\n"
+        },
+        "nb_site_static_content_notes": {
+            "name": "nb_site_static_content_notes",
+            "ordinal": "6",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_site_static_content_id": {
+                    "name": "nb_site_static_content_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "fk_nb_site_static_content_nb_site1_idx": {
+            "name": "fk_nb_site_static_content_nb_site1_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_site_id": {
+                    "name": "nb_site_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_static_content_site_target_id_idx": {
+            "name": "nb_site_static_content_site_target_id_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_site_id": {
+                    "name": "nb_site_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

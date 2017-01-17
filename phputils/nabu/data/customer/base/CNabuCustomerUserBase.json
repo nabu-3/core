@@ -1,0 +1,72 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_customer_user",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": null,
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_customer_id": {
+            "name": "nb_customer_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_id": {
+            "name": "nb_user_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_customer_id": {
+                    "name": "nb_customer_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                },
+                "nb_user_id": {
+                    "name": "nb_user_id",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_customer_user_nb_user_fk": {
+            "name": "nb_customer_user_nb_user_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_user_id": {
+                    "name": "nb_user_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

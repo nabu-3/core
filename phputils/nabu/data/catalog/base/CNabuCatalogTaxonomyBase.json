@@ -1,0 +1,123 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_catalog_taxonomy",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "11",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_catalog_taxonomy_id": {
+            "name": "nb_catalog_taxonomy_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_catalog_id": {
+            "name": "nb_catalog_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_taxonomy_key": {
+            "name": "nb_catalog_taxonomy_key",
+            "ordinal": "3",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(30)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_taxonomy_level": {
+            "name": "nb_catalog_taxonomy_level",
+            "ordinal": "4",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "1",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_taxonomy_scope": {
+            "name": "nb_catalog_taxonomy_scope",
+            "ordinal": "5",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('O','P')",
+            "default": "O",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "Scope of the taxonomy related items:\n\nO = Open \/ Public\nP = Private"
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_catalog_taxonomy_id": {
+                    "name": "nb_catalog_taxonomy_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_catalog_taxonomy_nb_catalog_fk": {
+            "name": "nb_catalog_taxonomy_nb_catalog_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_catalog_id": {
+                    "name": "nb_catalog_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_catalog_taxonomy_key_idx": {
+            "name": "nb_catalog_taxonomy_key_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_catalog_id": {
+                    "name": "nb_catalog_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_catalog_taxonomy_key": {
+                    "name": "nb_catalog_taxonomy_key",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

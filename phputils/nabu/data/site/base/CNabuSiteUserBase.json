@@ -1,0 +1,175 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_site_user",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": null,
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_site_id": {
+            "name": "nb_site_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_id": {
+            "name": "nb_user_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_role_id": {
+            "name": "nb_role_id",
+            "ordinal": "3",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_language_id": {
+            "name": "nb_language_id",
+            "ordinal": "4",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_user_force_default_lang": {
+            "name": "nb_site_user_force_default_lang",
+            "ordinal": "5",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "T",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_user_last_login_datetime": {
+            "name": "nb_site_user_last_login_datetime",
+            "ordinal": "6",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_user_notification_sended_datetime": {
+            "name": "nb_site_user_notification_sended_datetime",
+            "ordinal": "7",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_site_id": {
+                    "name": "nb_site_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                },
+                "nb_user_id": {
+                    "name": "nb_user_id",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_user_nb_user_fk": {
+            "name": "nb_site_user_nb_user_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_user_id": {
+                    "name": "nb_user_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_user_nb_role_fk": {
+            "name": "nb_site_user_nb_role_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_role_id": {
+                    "name": "nb_role_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_user_nb_site_fk": {
+            "name": "nb_site_user_nb_site_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_site_id": {
+                    "name": "nb_site_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_user_nb_language_fk": {
+            "name": "nb_site_user_nb_language_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

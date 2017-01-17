@@ -1,0 +1,93 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_medioteca_type",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "6",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_medioteca_type_id": {
+            "name": "nb_medioteca_type_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_customer_id": {
+            "name": "nb_customer_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_type_key": {
+            "name": "nb_medioteca_type_key",
+            "ordinal": "3",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(30)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_medioteca_type_id": {
+                    "name": "nb_medioteca_type_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_medioteca_type_key_idx": {
+            "name": "nb_medioteca_type_key_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_medioteca_type_key": {
+                    "name": "nb_medioteca_type_key",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_medioteca_type_nb_customer_fk": {
+            "name": "nb_medioteca_type_nb_customer_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_customer_id": {
+                    "name": "nb_customer_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

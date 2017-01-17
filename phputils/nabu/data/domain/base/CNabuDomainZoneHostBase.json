@@ -1,0 +1,99 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_domain_zone_host",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "7",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_domain_zone_host_id": {
+            "name": "nb_domain_zone_host_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_domain_zone_id": {
+            "name": "nb_domain_zone_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_host_name": {
+            "name": "nb_domain_zone_host_name",
+            "ordinal": "3",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(30)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_host_type": {
+            "name": "nb_domain_zone_host_type",
+            "ordinal": "4",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(10)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_host_target": {
+            "name": "nb_domain_zone_host_target",
+            "ordinal": "5",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_domain_zone_host_id": {
+                    "name": "nb_domain_zone_host_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_domain_zone_host_nb_domain_zone_fk": {
+            "name": "nb_domain_zone_host_nb_domain_zone_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_domain_zone_id": {
+                    "name": "nb_domain_zone_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,83 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_site_target_cta_role",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": null,
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_site_target_cta_id": {
+            "name": "nb_site_target_cta_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_role_id": {
+            "name": "nb_role_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_cta_role_zone": {
+            "name": "nb_site_target_cta_role_zone",
+            "ordinal": "3",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('O','P','B','H')",
+            "default": "B",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "O: Public\nP: Private\nB: Both\nH: Hidden"
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_site_target_cta_id": {
+                    "name": "nb_site_target_cta_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                },
+                "nb_role_id": {
+                    "name": "nb_role_id",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_target_cta_role_nb_role_fk": {
+            "name": "nb_site_target_cta_role_nb_role_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_role_id": {
+                    "name": "nb_role_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

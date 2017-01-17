@@ -1,0 +1,254 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_catalog_item_lang",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": null,
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_catalog_item_id": {
+            "name": "nb_catalog_item_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_language_id": {
+            "name": "nb_language_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_item_lang_slug": {
+            "name": "nb_catalog_item_lang_slug",
+            "ordinal": "3",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_item_lang_sku": {
+            "name": "nb_catalog_item_lang_sku",
+            "ordinal": "4",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(30)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_item_lang_image": {
+            "name": "nb_catalog_item_lang_image",
+            "ordinal": "5",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(256)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_item_lang_title": {
+            "name": "nb_catalog_item_lang_title",
+            "ordinal": "6",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_item_lang_subtitle": {
+            "name": "nb_catalog_item_lang_subtitle",
+            "ordinal": "7",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_item_lang_opening": {
+            "name": "nb_catalog_item_lang_opening",
+            "ordinal": "8",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_item_lang_content": {
+            "name": "nb_catalog_item_lang_content",
+            "ordinal": "9",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_item_lang_footer": {
+            "name": "nb_catalog_item_lang_footer",
+            "ordinal": "10",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_item_lang_aside": {
+            "name": "nb_catalog_item_lang_aside",
+            "ordinal": "11",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_catalog_item_lang_attributes": {
+            "name": "nb_catalog_item_lang_attributes",
+            "ordinal": "12",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_catalog_item_id": {
+                    "name": "nb_catalog_item_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                },
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_catalog_item_lang_nb_language_fk": {
+            "name": "nb_catalog_item_lang_nb_language_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_catalog_item_slug_idx": {
+            "name": "nb_catalog_item_slug_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_catalog_item_lang_slug": {
+                    "name": "nb_catalog_item_lang_slug",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_catalog_item_lang_fulltext_idx": {
+            "name": "nb_catalog_item_lang_fulltext_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "FULLTEXT",
+            "fields": {
+                "nb_catalog_item_lang_title": {
+                    "name": "nb_catalog_item_lang_title",
+                    "ordinal": "1",
+                    "collation": "DES",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_catalog_item_lang_subtitle": {
+                    "name": "nb_catalog_item_lang_subtitle",
+                    "ordinal": "2",
+                    "collation": "DES",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_catalog_item_lang_opening": {
+                    "name": "nb_catalog_item_lang_opening",
+                    "ordinal": "3",
+                    "collation": "DES",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_catalog_item_lang_content": {
+                    "name": "nb_catalog_item_lang_content",
+                    "ordinal": "4",
+                    "collation": "DES",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_catalog_item_lang_footer": {
+                    "name": "nb_catalog_item_lang_footer",
+                    "ordinal": "5",
+                    "collation": "DES",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_catalog_item_lang_aside": {
+                    "name": "nb_catalog_item_lang_aside",
+                    "ordinal": "6",
+                    "collation": "DES",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

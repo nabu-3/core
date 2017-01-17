@@ -1,0 +1,220 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_site_target_lang",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": null,
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_site_target_id": {
+            "name": "nb_site_target_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_language_id": {
+            "name": "nb_language_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_title": {
+            "name": "nb_site_target_lang_title",
+            "ordinal": "3",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_subtitle": {
+            "name": "nb_site_target_lang_subtitle",
+            "ordinal": "4",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_opening": {
+            "name": "nb_site_target_lang_opening",
+            "ordinal": "5",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_content": {
+            "name": "nb_site_target_lang_content",
+            "ordinal": "6",
+            "data_type": "longtext",
+            "precision": null,
+            "type": "longtext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_footer": {
+            "name": "nb_site_target_lang_footer",
+            "ordinal": "7",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_aside": {
+            "name": "nb_site_target_lang_aside",
+            "ordinal": "8",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_main_image": {
+            "name": "nb_site_target_lang_main_image",
+            "ordinal": "9",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_url": {
+            "name": "nb_site_target_lang_url",
+            "ordinal": "10",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_url_rebuild": {
+            "name": "nb_site_target_lang_url_rebuild",
+            "ordinal": "11",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_head_title": {
+            "name": "nb_site_target_lang_head_title",
+            "ordinal": "12",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_meta_description": {
+            "name": "nb_site_target_lang_meta_description",
+            "ordinal": "13",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_target_lang_meta_keywords": {
+            "name": "nb_site_target_lang_meta_keywords",
+            "ordinal": "14",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_site_target_id": {
+                    "name": "nb_site_target_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                },
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "fk_nb_site_target_lang_nb_uri1_idx": {
+            "name": "fk_nb_site_target_lang_nb_uri1_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_site_target_id": {
+                    "name": "nb_site_target_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "fk_nb_site_target_lang_nb_language1_idx": {
+            "name": "fk_nb_site_target_lang_nb_language1_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

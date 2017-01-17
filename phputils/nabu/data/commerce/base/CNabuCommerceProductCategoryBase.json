@@ -1,0 +1,161 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_commerce_product_category",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "9",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_commerce_product_category_id": {
+            "name": "nb_commerce_product_category_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_commerce_id": {
+            "name": "nb_commerce_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_id": {
+            "name": "nb_medioteca_id",
+            "ordinal": "3",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_category_parent_id": {
+            "name": "nb_commerce_product_category_parent_id",
+            "ordinal": "4",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_category_order": {
+            "name": "nb_commerce_product_category_order",
+            "ordinal": "5",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "1",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_category_key": {
+            "name": "nb_commerce_product_category_key",
+            "ordinal": "6",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(30)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_category_attributes": {
+            "name": "nb_commerce_product_category_attributes",
+            "ordinal": "7",
+            "data_type": "longtext",
+            "precision": null,
+            "type": "longtext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_commerce_product_category_id": {
+                    "name": "nb_commerce_product_category_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_commerce_product_category_key_idx": {
+            "name": "nb_commerce_product_category_key_idx",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_commerce_id": {
+                    "name": "nb_commerce_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_commerce_product_category_key": {
+                    "name": "nb_commerce_product_category_key",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_commerce_product_category_nb_commerce_fk": {
+            "name": "nb_commerce_product_category_nb_commerce_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_commerce_id": {
+                    "name": "nb_commerce_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_commerce_product_category_nb_medioteca_fk": {
+            "name": "nb_commerce_product_category_nb_medioteca_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_medioteca_id": {
+                    "name": "nb_medioteca_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

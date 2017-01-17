@@ -1,0 +1,275 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_domain_zone",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "3",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_domain_zone_id": {
+            "name": "nb_domain_zone_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_customer_id": {
+            "name": "nb_customer_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_name": {
+            "name": "nb_domain_zone_name",
+            "ordinal": "3",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(63)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_origin": {
+            "name": "nb_domain_zone_origin",
+            "ordinal": "4",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('I','E')",
+            "default": "E",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_ttl": {
+            "name": "nb_domain_zone_ttl",
+            "ordinal": "5",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "86400",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_admin_email": {
+            "name": "nb_domain_zone_admin_email",
+            "ordinal": "6",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(256)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_serial": {
+            "name": "nb_domain_zone_serial",
+            "ordinal": "7",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "1",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_refresh": {
+            "name": "nb_domain_zone_refresh",
+            "ordinal": "8",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "10800",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_retry": {
+            "name": "nb_domain_zone_retry",
+            "ordinal": "9",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "3600",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_expiry": {
+            "name": "nb_domain_zone_expiry",
+            "ordinal": "10",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "604800",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_minimum": {
+            "name": "nb_domain_zone_minimum",
+            "ordinal": "11",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "10800",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_last_update_datetime": {
+            "name": "nb_domain_zone_last_update_datetime",
+            "ordinal": "12",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_last_upload_datetime": {
+            "name": "nb_domain_zone_last_upload_datetime",
+            "ordinal": "13",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_dns_01": {
+            "name": "nb_domain_zone_dns_01",
+            "ordinal": "14",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_dns_02": {
+            "name": "nb_domain_zone_dns_02",
+            "ordinal": "15",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_dns_03": {
+            "name": "nb_domain_zone_dns_03",
+            "ordinal": "16",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_dns_04": {
+            "name": "nb_domain_zone_dns_04",
+            "ordinal": "17",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_dns_05": {
+            "name": "nb_domain_zone_dns_05",
+            "ordinal": "18",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_dns_06": {
+            "name": "nb_domain_zone_dns_06",
+            "ordinal": "19",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_dns_origin": {
+            "name": "nb_domain_zone_dns_origin",
+            "ordinal": "20",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('I','E')",
+            "default": "E",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_domain_zone_share_all": {
+            "name": "nb_domain_zone_share_all",
+            "ordinal": "21",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_domain_zone_id": {
+                    "name": "nb_domain_zone_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_domain_zone_nb_customer_fk": {
+            "name": "nb_domain_zone_nb_customer_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_customer_id": {
+                    "name": "nb_customer_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

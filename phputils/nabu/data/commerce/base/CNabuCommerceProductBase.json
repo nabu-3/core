@@ -1,0 +1,372 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_commerce_product",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "1",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_commerce_product_id": {
+            "name": "nb_commerce_product_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_commerce_product_category_id": {
+            "name": "nb_commerce_product_category_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_id": {
+            "name": "nb_commerce_id",
+            "ordinal": "3",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "0",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_tax_id": {
+            "name": "nb_commerce_tax_id",
+            "ordinal": "4",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_provider_id": {
+            "name": "nb_provider_id",
+            "ordinal": "5",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_id": {
+            "name": "nb_medioteca_id",
+            "ordinal": "6",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_id": {
+            "name": "nb_medioteca_item_id",
+            "ordinal": "7",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_type": {
+            "name": "nb_commerce_product_type",
+            "ordinal": "8",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('P','S')",
+            "default": "P",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "\u2018P\u2019 = Product\n\u2019S\u2019 = Service\n"
+        },
+        "nb_commerce_product_sku": {
+            "name": "nb_commerce_product_sku",
+            "ordinal": "9",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(30)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_units_range": {
+            "name": "nb_commerce_product_units_range",
+            "ordinal": "10",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_cost_amount": {
+            "name": "nb_commerce_product_cost_amount",
+            "ordinal": "11",
+            "data_type": "double",
+            "precision": "22",
+            "type": "double",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_cost_money": {
+            "name": "nb_commerce_product_cost_money",
+            "ordinal": "12",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(3)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_price_amount": {
+            "name": "nb_commerce_product_price_amount",
+            "ordinal": "13",
+            "data_type": "double",
+            "precision": "22",
+            "type": "double",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_price_money": {
+            "name": "nb_commerce_product_price_money",
+            "ordinal": "14",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(3)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_provider_reference": {
+            "name": "nb_commerce_product_provider_reference",
+            "ordinal": "15",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_single_unit_suffix": {
+            "name": "nb_commerce_product_single_unit_suffix",
+            "ordinal": "16",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_multi_unit_suffix": {
+            "name": "nb_commerce_product_multi_unit_suffix",
+            "ordinal": "17",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_tax_percentage": {
+            "name": "nb_commerce_product_tax_percentage",
+            "ordinal": "18",
+            "data_type": "double",
+            "precision": "22",
+            "type": "double",
+            "default": "0",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_tax_amount": {
+            "name": "nb_commerce_product_tax_amount",
+            "ordinal": "19",
+            "data_type": "double",
+            "precision": "22",
+            "type": "double",
+            "default": "0",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_price_with_tax": {
+            "name": "nb_commerce_product_price_with_tax",
+            "ordinal": "20",
+            "data_type": "double",
+            "precision": "22",
+            "type": "double",
+            "default": "0",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_is_upselling": {
+            "name": "nb_commerce_product_is_upselling",
+            "ordinal": "21",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_sold_individually": {
+            "name": "nb_commerce_product_sold_individually",
+            "ordinal": "22",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "T",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_is_virtual": {
+            "name": "nb_commerce_product_is_virtual",
+            "ordinal": "23",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_commerce_product_time_to_live": {
+            "name": "nb_commerce_product_time_to_live",
+            "ordinal": "24",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(15)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_commerce_product_id": {
+                    "name": "nb_commerce_product_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_commerce_product_provider_reference_idx": {
+            "name": "nb_commerce_product_provider_reference_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_commerce_product_provider_reference": {
+                    "name": "nb_commerce_product_provider_reference",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_commerce_product_nb_provider_fk": {
+            "name": "nb_commerce_product_nb_provider_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_provider_id": {
+                    "name": "nb_provider_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_commerce_product_nb_commerce_fk_idx": {
+            "name": "nb_commerce_product_nb_commerce_fk_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_commerce_id": {
+                    "name": "nb_commerce_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_commerce_product_nb_commerce_product_category_fk": {
+            "name": "nb_commerce_product_nb_commerce_product_category_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_commerce_product_category_id": {
+                    "name": "nb_commerce_product_category_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_commerce_product_nb_commerce_tax_fk": {
+            "name": "nb_commerce_product_nb_commerce_tax_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_commerce_tax_id": {
+                    "name": "nb_commerce_tax_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,644 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_user",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "1046",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_user_id": {
+            "name": "nb_user_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_customer_id": {
+            "name": "nb_customer_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_prescriber_id": {
+            "name": "nb_user_prescriber_id",
+            "ordinal": "3",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_medioteca_id": {
+            "name": "nb_user_medioteca_id",
+            "ordinal": "4",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_medioteca_item_id": {
+            "name": "nb_user_medioteca_item_id",
+            "ordinal": "5",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_search_visibility": {
+            "name": "nb_user_search_visibility",
+            "ordinal": "6",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('P','F','N')",
+            "default": "N",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_login": {
+            "name": "nb_user_login",
+            "ordinal": "7",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(64)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_passwd": {
+            "name": "nb_user_passwd",
+            "ordinal": "8",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(32)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_validation_status": {
+            "name": "nb_user_validation_status",
+            "ordinal": "9",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','B','F','D','I','P')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "T = Enabled\nB = Banned\nF = Pending to enable without invitation\nD = Disabled\nI = Invited\nP = Pending to enable with invitation"
+        },
+        "nb_user_tester": {
+            "name": "nb_user_tester",
+            "ordinal": "10",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_creation_datetime": {
+            "name": "nb_user_creation_datetime",
+            "ordinal": "11",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": "CURRENT_TIMESTAMP",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_activation_datetime": {
+            "name": "nb_user_activation_datetime",
+            "ordinal": "12",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_last_update_datetime": {
+            "name": "nb_user_last_update_datetime",
+            "ordinal": "13",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_alive": {
+            "name": "nb_user_alive",
+            "ordinal": "14",
+            "data_type": "mediumtext",
+            "precision": null,
+            "type": "mediumtext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "wgeo_country_id": {
+            "name": "wgeo_country_id",
+            "ordinal": "15",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_storage_id": {
+            "name": "nb_user_storage_id",
+            "ordinal": "16",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_first_name": {
+            "name": "nb_user_first_name",
+            "ordinal": "17",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_last_name": {
+            "name": "nb_user_last_name",
+            "ordinal": "18",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_fiscal_number": {
+            "name": "nb_user_fiscal_number",
+            "ordinal": "19",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_birth_date": {
+            "name": "nb_user_birth_date",
+            "ordinal": "20",
+            "data_type": "date",
+            "precision": null,
+            "type": "date",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_address_1": {
+            "name": "nb_user_address_1",
+            "ordinal": "21",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_address_2": {
+            "name": "nb_user_address_2",
+            "ordinal": "22",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_zip_code": {
+            "name": "nb_user_zip_code",
+            "ordinal": "23",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(15)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_city_name": {
+            "name": "nb_user_city_name",
+            "ordinal": "24",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_province_name": {
+            "name": "nb_user_province_name",
+            "ordinal": "25",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_country_name": {
+            "name": "nb_user_country_name",
+            "ordinal": "26",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_telephone_prefix": {
+            "name": "nb_user_telephone_prefix",
+            "ordinal": "27",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(5)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_telephone": {
+            "name": "nb_user_telephone",
+            "ordinal": "28",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_cellular_prefix": {
+            "name": "nb_user_cellular_prefix",
+            "ordinal": "29",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(5)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_cellular": {
+            "name": "nb_user_cellular",
+            "ordinal": "30",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_fax_prefix": {
+            "name": "nb_user_fax_prefix",
+            "ordinal": "31",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(5)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_fax": {
+            "name": "nb_user_fax",
+            "ordinal": "32",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_cellular_push_key": {
+            "name": "nb_user_cellular_push_key",
+            "ordinal": "33",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_email": {
+            "name": "nb_user_email",
+            "ordinal": "34",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_work_centre": {
+            "name": "nb_user_work_centre",
+            "ordinal": "35",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_work_position": {
+            "name": "nb_user_work_position",
+            "ordinal": "36",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_work_city": {
+            "name": "nb_user_work_city",
+            "ordinal": "37",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_about": {
+            "name": "nb_user_about",
+            "ordinal": "38",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_new_email": {
+            "name": "nb_user_new_email",
+            "ordinal": "39",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_allow_notification": {
+            "name": "nb_user_allow_notification",
+            "ordinal": "40",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_user_id": {
+                    "name": "nb_user_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_user_nb_user_login_unx": {
+            "name": "nb_user_nb_user_login_unx",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_customer_id": {
+                    "name": "nb_customer_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_login": {
+                    "name": "nb_user_login",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_user_nb_user_email_unx": {
+            "name": "nb_user_nb_user_email_unx",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_customer_id": {
+                    "name": "nb_customer_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_email": {
+                    "name": "nb_user_email",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": "200",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_user_nb_user_cellular_idx": {
+            "name": "nb_user_nb_user_cellular_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_user_cellular": {
+                    "name": "nb_user_cellular",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_user_nb_customer_fk": {
+            "name": "nb_user_nb_customer_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_customer_id": {
+                    "name": "nb_customer_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_user_nb_medioteca_fk": {
+            "name": "nb_user_nb_medioteca_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_user_medioteca_id": {
+                    "name": "nb_user_medioteca_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_user_nb_medioteca_item_fk": {
+            "name": "nb_user_nb_medioteca_item_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_user_medioteca_item_id": {
+                    "name": "nb_user_medioteca_item_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "wgeo_country_fk": {
+            "name": "wgeo_country_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "wgeo_country_id": {
+                    "name": "wgeo_country_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_user_fulltext": {
+            "name": "nb_user_fulltext",
+            "primary": false,
+            "unique": false,
+            "index_type": "FULLTEXT",
+            "fields": {
+                "nb_user_first_name": {
+                    "name": "nb_user_first_name",
+                    "ordinal": "1",
+                    "collation": "DES",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_last_name": {
+                    "name": "nb_user_last_name",
+                    "ordinal": "2",
+                    "collation": "DES",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_city_name": {
+                    "name": "nb_user_city_name",
+                    "ordinal": "3",
+                    "collation": "DES",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_province_name": {
+                    "name": "nb_user_province_name",
+                    "ordinal": "4",
+                    "collation": "DES",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_email": {
+                    "name": "nb_user_email",
+                    "ordinal": "5",
+                    "collation": "DES",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}
