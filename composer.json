@@ -19,14 +19,14 @@
         "bin-dir": "bin",
         "vendor-dir": "phputils/lib"
     },
-    "require": [
-        "nabu-3/provider-mysql",
-        "nabu-3/provider-apache-httpd",
-        "nabu-3/provider-smarty"
-    ],
-    "suggest": [
-        "nabu-3/provider-apache-apcu"
-    ],
+    "require": {
+        "nabu-3/provider-mysql": "~0.0",
+        "nabu-3/provider-apache-httpd": "~0.0",
+        "nabu-3/provider-smarty": "~0.0"
+    },
+    "suggest": {
+        "nabu-3/provider-apache-apcu": "~0.0"
+    },
     "repositories": [
         {
             "type": "vcs",
