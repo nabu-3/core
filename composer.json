@@ -23,7 +23,8 @@
         "nabu-3/core-composer-plugin": "*",
         "nabu-3/provider-mysql": "*",
         "nabu-3/provider-apache-httpd": "*",
-        "nabu-3/provider-smarty": "*"
+        "nabu-3/provider-smarty": "*",
+        "nabu-3/devel": "*"
     },
     "suggest": {
         "nabu-3/provider-apache-apcu": "*"
