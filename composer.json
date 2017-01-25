@@ -1,7 +1,7 @@
 {
     "name": "nabu-3/core",
     "description": "Core package to deploy nabu-3 Framework in your server",
-    "version": "3.0.2",
+    "version": "3.0.3",
     "type": "project",
     "keywords": [ "nabu", "nabu-3", "core", "framework", "frameworks", "smarty" ],
     "license": "Apache-2.0",
@@ -35,7 +35,6 @@
         }
     ],
     "bin": [
-        "bin/nabu-install.sh",
-        "bin/inc/install.php"
+        "bin/nabu-install.sh"
     ]
 }
