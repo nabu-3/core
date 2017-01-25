@@ -1,7 +1,7 @@
 {
     "name": "nabu-3/core",
     "description": "Core package to deploy nabu-3 Framework in your server",
-    "version": "3.0.4",
+    "version": "3.0.5",
     "type": "project",
     "keywords": [ "nabu", "nabu-3", "core", "framework", "frameworks", "smarty" ],
     "license": "Apache-2.0",
@@ -24,7 +24,7 @@
         "nabu-3/provider-mysql": "*",
         "nabu-3/provider-smarty": "*",
         "nabu-3/provider-apache-httpd": "*",
-        "nabu-3/devel": "~3.0"
+        "nabu-3/sdk": "~3.0"
     },
     "suggest": {
         "nabu-3/provider-apache-apcu": "*"
