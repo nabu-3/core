@@ -1,7 +1,7 @@
 {
     "name": "nabu-3/core",
     "description": "Core package to deploy nabu-3 Framework in your server",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "type": "project",
     "keywords": [ "nabu", "nabu-3", "core", "framework", "frameworks", "smarty" ],
     "license": "Apache-2.0",
@@ -17,10 +17,13 @@
     },
     "config": {
         "bin-dir": "bin",
-        "vendor-dir": "phputils/lib"
+        "vendor-dir": "lib"
     },
     "require": {
-        "nabu-3/composer-installer-plugin": "*"
+        "nabu-3/composer-installer-plugin": "*",
+        "nabu-3/provider-mysql": "*",
+        "nabu-3/provider-smarty": "*",
+        "nabu-3/provider-apache-httpd": "*"
     },
     "suggest": {
         "nabu-3/provider-apache-apcu": "*"
@@ -30,5 +33,9 @@
             "type": "vcs",
             "url": "https://github.com/nabu-3/core"
         }
+    ],
+    "bin": [
+        "bin/install.sh",
+        "bin/inc/install.php"
     ]
 }
