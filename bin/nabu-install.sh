@@ -5,7 +5,7 @@ echo ========================================================================
 echo Copyright 2009-2011 Rafael Gutierrez Martinez
 echo Copyright 2012-2013 Welma WEB MKT LABS, S.L.
 echo Copyright 2014-2016 Where Ideas Simply Come True, S.L.
-echo 
+echo
 echo Licensed under the Apache License, Version 2.0 \(the ""License""\);
 echo you may not use this file except in compliance with the License.
 echo You may obtain a copy of the License at
@@ -30,7 +30,8 @@ echo
 # This variable defines the path for config files. You can change this value.
 # When the PHP install script runs, he creates this path if not exists.
 NABU_ETC_PATH=/etc/opt/nabu-3.conf.d
-INSTALL_PATH=`pwd`
+INSTALL_PATH=`realpath $0`
+INSTALL_PATH=`dirname $INSTALL_PATH`
 
 if [ -d ${NABU_ETC_PATH} ] && [ -f ${NABU_ETC_PATH}/nabu-3.conf ] ; then
     source ${NABU_ETC_PATH}/nabu-3.conf
@@ -38,12 +39,13 @@ else
     echo Install warning: Config not found. Using defaults.
     echo
     NABU_BASE_PATH=`dirname ${INSTALL_PATH}`
+    NABU_BASE_PATH=`dirname ${NABU_BASE_PATH}`
     NABU_WEB_PATH=/var/opt/nabu-3
-    PHP_PARAMS="-B 'ini_set(\"safe_mode\",\"Off\");\ ini_set(\"open_basedir\",\"none\");\ ini_set(\"include_path\",\".:${NABU_BASE_PATH}/phputils/\");'"
+    PHP_PARAMS="-B 'ini_set(\"safe_mode\",\"Off\");\ ini_set(\"open_basedir\",\"none\");\ ini_set(\"include_path\",\".:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/\");'"
 fi
 
 if [ -f ${INSTALL_PATH}/inc/install.php ] ; then
-    php -d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/phputils/ ${INSTALL_PATH}/inc/install.php \
+    php -d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PAtH}/lib/ ${INSTALL_PATH}/inc/install.php \
         --etc-path=${NABU_ETC_PATH} \
         --base-path=${NABU_BASE_PATH} \
         --web-path=${NABU_WEB_PATH} \
@@ -56,4 +58,3 @@ if [ -f ${INSTALL_PATH}/inc/install.php ] ; then
 else
     echo Install error: install.php script not found.
 fi
-
