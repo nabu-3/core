@@ -45,7 +45,7 @@ else
 fi
 
 if [ -f ${INSTALL_PATH}/inc/install.php ] ; then
-    php -d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PAtH}/lib/ ${INSTALL_PATH}/inc/install.php \
+    php -d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PAtH}/lib/ ${INSTALL_PATH}/inc/install.php \
         --etc-path=${NABU_ETC_PATH} \
         --base-path=${NABU_BASE_PATH} \
         --web-path=${NABU_WEB_PATH} \
