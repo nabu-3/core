@@ -355,9 +355,7 @@ class CNabuInstallApp extends CNabuCLIApplication
                   . "MYSQL_USER=$this->mysql_user\n"
                   . "MYSQL_PASSWORD=$this->mysql_password\n"
                   . "\n# Configure PHP common params\n"
-                  . "PHP_PARAMS=\"-B 'ini_set(\"safe_mode\",\"Off\");"
-                  . "\ ini_set(\"open_basedir\",\"none\");"
-                  . "\ ini_set(\"include_path\",\".:\${NABU_CORE_PATH}/phputils/\");'\"\n"
+                  . 'PHP_PARAMS="-d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/"' . "\n"
             );
 
             fclose($handle);

@@ -41,11 +41,11 @@ else
     NABU_BASE_PATH=`dirname ${INSTALL_PATH}`
     NABU_BASE_PATH=`dirname ${NABU_BASE_PATH}`
     NABU_WEB_PATH=/var/opt/nabu-3
-    PHP_PARAMS="-B 'ini_set(\"safe_mode\",\"Off\");\ ini_set(\"open_basedir\",\"none\");\ ini_set(\"include_path\",\".:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/\");'"
+    PHP_PARAMS="-d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/"
 fi
 
 if [ -f ${INSTALL_PATH}/inc/install.php ] ; then
-    php -d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PAtH}/lib/ ${INSTALL_PATH}/inc/install.php \
+    php ${PHP_PARAMS} ${INSTALL_PATH}/inc/install.php \
         --etc-path=${NABU_ETC_PATH} \
         --base-path=${NABU_BASE_PATH} \
         --web-path=${NABU_WEB_PATH} \
