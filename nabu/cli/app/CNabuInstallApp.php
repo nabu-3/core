@@ -20,8 +20,8 @@
 namespace nabu\cli\app;
 
 use \nabu\cli\app\CNabuCLIApplication;
-use \providers\mysql\CMySQLConnector;
-use \providers\mysql\EMySQLException;
+use \providers\mysql\driver\CMySQLConnector;
+use \providers\mysql\driver\EMySQLException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
@@ -31,7 +31,7 @@ class CNabuInstallApp extends CNabuCLIApplication
 {
     /**
      * Silent mode. If true the install does not prompt confirmation to continue
-     * @var boolean
+     * @var bool
      */
     private $silent_mode = false;
     /**
