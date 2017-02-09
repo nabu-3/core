@@ -18,7 +18,7 @@
  */
 
 namespace nabu\db;
-use devel\builders\json\CNabuJSONBuilder;
+use nabu\sdk\builders\json\CNabuJSONBuilder;
 use nabu\core\CNabuObject;
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\db\exceptions\ENabuDBException;

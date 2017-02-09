@@ -19,23 +19,23 @@
 
 namespace nabu\http\managers\base;
 
+use nabu\core\interfaces\INabuManager;
 use nabu\data\CNabuDataObject;
 use nabu\http\app\base\CNabuHTTPApplication;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.9 Surface
  * @package \nabu\http\managers\base
  */
-abstract class CNabuHTTPManager extends CNabuDataObject
+abstract class CNabuHTTPManager extends CNabuDataObject implements INabuManager
 {
     /**
      * Nabu 3 HTTP Application that owns this Manager
      * @var CNabuHTTPApplication
      */
     protected $nb_application = null;
-
-    abstract protected function enableManager();
 
     public function __construct(CNabuHTTPApplication $nb_application)
     {

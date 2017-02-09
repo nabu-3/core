@@ -19,11 +19,12 @@
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.9 Surface
  */
 
 /* Main constants definition */
-define('NABU_VERSION', '3.0.0 Surface');
+define('NABU_VERSION', '3.0.9 Surface');
 define('NABU_OWNER', 'Where Ideas Simply Come True, S.L.');
 define('NABU_LICENSE_TITLE', 'Licensed under the Apache License, Version 2.0');
 define('NABU_LICENSE_TARGET', 'http://www.apache.org/licenses/LICENSE-2.0');
