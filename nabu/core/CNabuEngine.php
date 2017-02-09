@@ -39,7 +39,7 @@ use nabu\db\exceptions\ENabuDBException;
 use nabu\db\interfaces\INabuDBConnector;
 use nabu\http\interfaces\INabuHTTPServer;
 use providers\apache\httpd\CApacheHTTPServer;
-use providers\mysql\CMySQLConnector;
+use providers\mysql\driver\CMySQLConnector;
 
 /**
  * CNabuEngine class governs core functionalities of Nabu: the Engine.
