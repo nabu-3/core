@@ -91,8 +91,8 @@ final class CNabuHTTPResponse extends CNabuObject
 
     /**
      * Default constructor.
-     * @param CNabuHTTPPluginsManager $nb_plugins_manager Nabu 3 HTTP Plugins Manager.
-     * @param CNabuHTTPRequest $nb_request Nabu 3 HTTP Request.
+     * @param CNabuHTTPPluginsManager $nb_plugins_manager nabu-3 HTTP Plugins Manager.
+     * @param CNabuHTTPRequest $nb_request nabu-3 HTTP Request.
      * @throws ENabuCoreException Throws an exception if Plugins Manager is invalid.
      */
     public function __construct($nb_plugins_manager, CNabuHTTPRequest $nb_request = null)

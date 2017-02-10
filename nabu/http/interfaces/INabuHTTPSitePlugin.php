@@ -6,7 +6,7 @@ use nabu\data\security\CNabuUser;
 use nabu\data\site\CNabuSiteUser;
 
 /**
- * Interface to create site plugins to extend the functionality of Nabu 3
+ * Interface to create site plugins to extend the functionality of nabu-3
  * @author Rafael Gutiérrez <rgutierrez@wiscot.com>
  * @version 3.0.0 Surface
  * @package \nabu\http\interfaces

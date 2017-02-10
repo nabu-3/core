@@ -113,7 +113,7 @@ abstract class CNabuHTTPStandaloneApplication extends CNabuHTTPApplication
     }
 
     /**
-     * Enables the Log Tracer of Nabu 3 Engine.
+     * Enables the Log Tracer of nabu-3 Engine.
      */
     public function enableLogTrace()
     {

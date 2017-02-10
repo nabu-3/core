@@ -23,7 +23,7 @@ use \nabu\data\lang\interfaces\INabuTranslated;
 
 /**
  * This interface have the mission to group all classes that represents
- * the translations of parent classes. Some processes of Nabu 3 uses this interface
+ * the translations of parent classes. Some processes of nabu-3 uses this interface
  * to determine if a object is a valid translation of another.
  * We encourage to use this interface to have a well performance of translations.
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>

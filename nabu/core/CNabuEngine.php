@@ -506,7 +506,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     }
 
     /**
-     * Gets the Nabu 3 instance of the running HTTP Server
+     * Gets the nabu-3 instance of the running HTTP Server
      * @return INabuHTTPServer The instance of HTTP Server of null if no instance
      */
     public function getHTTPServer()
@@ -528,7 +528,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     }
 
     /**
-     * Set current Nabu 3 Customer owning the Engine process.
+     * Set current nabu-3 Customer owning the Engine process.
      * If $nb_customer contains only the Id or is an instance of different class than CNabuCustomer,
      * then instantiates a new CNabuCustomer instance and validates it.
      * @param mixed $nb_customer Customer instance or Id to be setted.
@@ -688,7 +688,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     }
 
     /**
-     * Check if Nabu 3 main database is available.
+     * Check if nabu-3 main database is available.
      * @return bool Returns true if available or false if not.
      */
     public function isMainDBAvailable()
@@ -794,7 +794,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     }
 
     /**
-     * Try to detect the running HTTP Server attached to this process and returns their Nabu 3 manager.
+     * Try to detect the running HTTP Server attached to this process and returns their nabu-3 manager.
      * @return INabuHTTPServer Returns an instance of the HTTP Server Engine
      * @throws ENabuCoreException Throws an exception if Nabu Engine is not running in a HTTP Server mode.
      */

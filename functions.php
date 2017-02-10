@@ -30,7 +30,7 @@ use nabu\data\customer\CNabuCustomer;
  * spl_autoload function to load automatically classes, interfaces and traits
  * used in Nabu Framework.
  * If the Engine have a Site defined and requested entity does not represent
- * a valid Nabu 3 Framework entity, then check if the entity exists and is
+ * a valid nabu-3 Framework entity, then check if the entity exists and is
  * available in the Site File System.
  * This function is added internally to SPL Autoload Engine of PHP
  * and you should never call it directly.
@@ -549,7 +549,7 @@ function nb_prefixFieldList($prefix, $fields, $as_array = false, $remask = false
 
 /**
  *
- * @param string $date_interval Unpack a Nabu 3 Encoded Data Interval
+ * @param string $date_interval Unpack a nabu-3 Encoded Data Interval
  */
 function nb_unpackDateInterval($date_interval)
 {

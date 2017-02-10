@@ -26,7 +26,7 @@ use nabu\data\lang\CNabuTranslationList;
 use nabu\data\lang\interfaces\INabuTranslation;
 
 /**
- * This trait implements default actions to manage a Translated object in Nabu 3.
+ * This trait implements default actions to manage a Translated object in nabu-3.
  * A great number of methods defined in the interface \nabu\lang\interfaces\INabuTranslated
  * are implemented here with a default behavior.
  * You can apply this trait to your own classes to speed up your development,

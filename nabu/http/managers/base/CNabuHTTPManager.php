@@ -32,7 +32,7 @@ use nabu\http\app\base\CNabuHTTPApplication;
 abstract class CNabuHTTPManager extends CNabuDataObject implements INabuManager
 {
     /**
-     * Nabu 3 HTTP Application that owns this Manager
+     * nabu-3 HTTP Application that owns this Manager
      * @var CNabuHTTPApplication
      */
     protected $nb_application = null;

@@ -23,5 +23,5 @@ use nabu\core\CNabuEngine;
  * @version 3.0.0 Surface
  */
 
-/* Set the default autoload function for Nabu 3 */
+/* Set the default autoload function for nabu-3 */
 spl_autoload_register('nb_autoLoadClasses');

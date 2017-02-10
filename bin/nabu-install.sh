@@ -1,6 +1,6 @@
 #!/bin/sh
 echo ========================================================================
-echo Nabu 3 - Install Tool
+echo nabu-3 - Install Tool
 echo ========================================================================
 echo Copyright 2009-2011 Rafael Gutierrez Martinez
 echo Copyright 2012-2013 Welma WEB MKT LABS, S.L.

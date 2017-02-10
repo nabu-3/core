@@ -24,7 +24,7 @@ use \nabu\core\CNabuObject;
 use \nabu\core\interfaces\INabuApplication;
 
 /**
- * Abstract base class to implement applications running under Nabu 3 Engine.
+ * Abstract base class to implement applications running under nabu-3 Engine.
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
  * @version 3.0.0 Surface
  * @package name
@@ -36,7 +36,7 @@ abstract class CNabuAbstractApplication extends CNabuObject implements INabuAppl
      * @var CNabuEngine
      */
     protected $nb_engine = null;
-    
+
     /**
      * Create a instance of this class and get the Engine to store in $nb_engine.
      * This method is public but is intended to use internally in launch method.
@@ -44,7 +44,7 @@ abstract class CNabuAbstractApplication extends CNabuObject implements INabuAppl
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->nb_engine = CNabuEngine::getEngine();
     }
 }

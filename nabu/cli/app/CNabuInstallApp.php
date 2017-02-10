@@ -87,7 +87,7 @@ class CNabuInstallApp extends CNabuCLIApplication
 
     public function prepareEnvironment()
     {
-        echo "Setting up environment for Nabu 3\n";
+        echo "Setting up environment for nabu-3\n";
 
         $this->loadParameters();
         $this->checkFHSPaths();
@@ -328,7 +328,7 @@ class CNabuInstallApp extends CNabuCLIApplication
 
     private function writeConfigFiles()
     {
-        echo "\nNow we create default configuration files to run Nabu 3\n";
+        echo "\nNow we create default configuration files to run nabu-3\n";
         $this->writeEtcConfMainFile();
         $this->writeEtcConfPHPMySQLFile();
     }

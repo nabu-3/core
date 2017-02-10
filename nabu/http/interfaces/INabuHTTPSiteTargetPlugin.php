@@ -3,7 +3,7 @@
 namespace nabu\http\interfaces;
 
 /**
- * Interface to create Site Target plugins to extend the functionality of Nabu 3
+ * Interface to create Site Target plugins to extend the functionality of nabu-3
  * @author Rafael Gutiérrez <rgutierrez@wiscot.com>
  * @version 3.0.0 Surface
  */

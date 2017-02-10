@@ -22,7 +22,7 @@ use nabu\data\customer\CNabuCustomer;
 use nabu\data\CNabuDataObject;
 
 /**
- * This trait implements default actions to manage a Customer owned object in Nabu 3.
+ * This trait implements default actions to manage a Customer owned object in nabu-3.
  * A great number of methods defined in the interface \nabu\customer\interfaces\INabuCustomerChild
  * are implemented here with a default behavior.
  * You can apply this trait to your own classes to speed up your development,

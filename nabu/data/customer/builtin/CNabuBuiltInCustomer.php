@@ -36,8 +36,8 @@ class CNabuBuiltInCustomer extends CNabuCustomer
         parent::__construct();
         
         $this->setId(nb_generateGUID());
-        $this->setFiscalName('Nabu 3 Built-in Customer');
+        $this->setFiscalName('nabu-3 Built-in Customer');
         $this->setFiscalNumber('FI-0123456789');
-        $this->setContactName('Nabu 3');
+        $this->setContactName('nabu-3');
     }
 }

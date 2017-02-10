@@ -21,7 +21,7 @@ namespace nabu\data\medioteca\traits;
 use nabu\data\CNabuDataObject;
 use nabu\data\medioteca\CNabuMedioteca;
 /**
- * This trait implements default actions to manage a Medioteca child object in Nabu 3.
+ * This trait implements default actions to manage a Medioteca child object in nabu-3.
  * You can apply this trait to your own classes to speed up your development,
  * or create your own management.
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>

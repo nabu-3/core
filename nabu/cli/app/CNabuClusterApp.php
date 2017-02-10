@@ -99,7 +99,7 @@ class CNabuClusterApp extends CNabuCLIApplication
     
     private function help()
     {
-        echo "\nThis is the Nabu 3 Cluster Management Tool.\n";
+        echo "\nThis is the nabu-3 Cluster Management Tool.\n";
         echo "With this tool you can manage your cluster from the command line.\n\n";
         
         echo "These are the commands available:\n\n";

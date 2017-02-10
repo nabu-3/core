@@ -57,7 +57,7 @@ class CNabuHTTPRequest extends CNabuObject
      */
     private $page_uri;
     /**
-     * Nabu 3 HTTP Application which owns this Request instance
+     * nabu-3 HTTP Application which owns this Request instance
      * @var CNabuHTTPApplication
      */
     private $nb_application = null;
@@ -180,9 +180,9 @@ class CNabuHTTPRequest extends CNabuObject
     /**
      * Default constructor.
      * @param CNabuHTTPApplication $nb_application Application that owns this instance
-     * @param CNabuHTTPSecurityManager $nb_security_manager Nabu 3 HTTP Security Manager used
-     * @param CNabuHTTPPluginsManager $nb_plugins_manager Nabu 3 HTTP Plugins Manager used
-     * @param CNabuModulesManager $nb_modules_manager Nabu 3 HTTP Modules Manager used
+     * @param CNabuHTTPSecurityManager $nb_security_manager nabu-3 HTTP Security Manager used
+     * @param CNabuHTTPPluginsManager $nb_plugins_manager nabu-3 HTTP Plugins Manager used
+     * @param CNabuModulesManager $nb_modules_manager nabu-3 HTTP Modules Manager used
      * @throws ENabuCoreException Throws an exception if application or managers are not valid.
      */
     public function __construct(
@@ -241,7 +241,7 @@ class CNabuHTTPRequest extends CNabuObject
 
     /**
      * Gets the HTTP Response object.
-     * @return CNabuHTTPResponse Returns an instance to Nabu 3 response object.
+     * @return CNabuHTTPResponse Returns an instance to nabu-3 response object.
      */
     public function getResponse()
     {

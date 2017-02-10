@@ -53,7 +53,7 @@ use nabu\http\managers\base\CNabuHTTPManager;
 abstract class CNabuHTTPApplication extends CNabuAbstractApplication
 {
     /**
-     * Nabu 3 running HTTP Server instance
+     * nabu-3 running HTTP Server instance
      * @var INabuHTTPServer
      */
     private $nb_http_server = null;

@@ -90,7 +90,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
     private $nb_site_user;
     /**
      * Contains the Work Customer instance for $nb_user to allow it to manage an alternate Customer.
-     * Normally this feature is intended only for Nabu 3 CMS, but can be applied to other use cases.
+     * Normally this feature is intended only for nabu-3 CMS, but can be applied to other use cases.
      * @var CNabuCustomer
      */
     private $nb_work_customer;

@@ -22,7 +22,7 @@ namespace nabu\data\commerce\traits;
 use nabu\data\commerce\CNabuCommerce;
 
 /**
- * This trait implements default actions to manage a Commerce child object in Nabu 3.
+ * This trait implements default actions to manage a Commerce child object in nabu-3.
  * A lot of methods defined in the interface \nabu\customer\interfaces\INabuCommerceChild
  * are implemented here with a default behavior.
  * You can apply this trait to your own classes to speed up your development,

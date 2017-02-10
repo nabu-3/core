@@ -22,7 +22,7 @@ use nabu\data\CNabuDataObject;
 use nabu\data\site\CNabuSiteTargetCTA;
 
 /**
- * This trait implements default actions to manage a Site Target CTA child object in Nabu 3.
+ * This trait implements default actions to manage a Site Target CTA child object in nabu-3.
  * You can apply this trait to your own classes to speed up your development, or create your own management.
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
  * @version 3.0.0 Surface

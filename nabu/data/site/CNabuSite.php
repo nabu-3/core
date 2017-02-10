@@ -82,7 +82,7 @@ class CNabuSite extends CNabuSiteBase
     const ZONE_HIDDEN = 'H';
 
     /**
-     * Nabu 3 Cache Storage instance of this site
+     * nabu-3 Cache Storage instance of this site
      * @var INabuCacheStorage
      */
     private $cache_storage = null;

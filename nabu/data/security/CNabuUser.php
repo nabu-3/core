@@ -75,7 +75,7 @@ class CNabuUser extends CNabuUserBase
     }
 
     /**
-     * Encodes a clear password using the Nabu 3 algorithm. This algorithm is not reversible.
+     * Encodes a clear password using the nabu-3 algorithm. This algorithm is not reversible.
      * @param string $password Password string to be encoded.
      * @return string Returns the encoded password as string.
      */
