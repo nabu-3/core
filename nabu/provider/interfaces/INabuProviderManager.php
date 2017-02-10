@@ -17,7 +17,7 @@
  *  limitations under the License.
  */
 
-namespace nabu\core\interfaces;
+namespace nabu\provider\interfaces;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
@@ -25,8 +25,8 @@ namespace nabu\core\interfaces;
  * @version 3.0.9 Surface
  * @package \nabu\core\interfaces
  */
-interface INabuManager {
-
+interface INabuProviderManager
+{
     /**
      * Enables the manager to operate with it.
      * @return bool Returns true if the manager has enabled or false if not.
