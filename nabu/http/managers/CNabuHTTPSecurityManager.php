@@ -42,57 +42,27 @@ use nabu\http\managers\base\CNabuHTTPManager;
  */
 class CNabuHTTPSecurityManager extends CNabuHTTPManager
 {
-    /**
-     * Session name for Role instance.
-     * @var string
-     */
+    /** @var string Session name for Role instance. */
     const VAR_SESSION_ROLE = 'nb_role';
-    /**
-     * Session name for User instance.
-     * @var string
-     */
+    /** @var string Session name for User instance. */
     const VAR_SESSION_USER = 'nb_user';
-    /**
-     * Session name for Site User instance.
-     * @var string
-     */
+    /** @var string Session name for Site User instance. */
     const VAR_SESSION_SITE_USER = 'nb_site_user';
-    /**
-     * Session name for preserved flag.
-     * @var string
-     */
+    /** @var string Session name for preserved flag. */
     const VAR_SESSION_PRESERVED = 'nb_session_preserved';
-    /**
-     * Session name for Work Customer instance.
-     * @var string
-     */
+    /** @var string Session name for Work Customer instance. */
     const VAR_SESSION_WORK_CUSTOMER = 'nb_work_customer';
-    /**
-     * Role Mask key for additional param user_signed
-     * @var string
-     */
+    /** @var string Role Mask key for additional param user_signed */
     const ROLE_MASK_USER_SIGNED = 'user_signed';
 
-    /**
-     * Contains the User instance that makes request.
-     * @var CNabuUser
-     */
+    /** @var CNabuUser Contains the User instance that makes request. */
     private $nb_user;
-    /**
-     * Contains the Role instance that pertains to $nb_user.
-     * @var CNabuRole
-     */
+    /** @var CNabuRole Contains the Role instance that pertains to $nb_user. */
     private $nb_role;
-    /**
-     * Contains the Site User (Profile) instance for $nb_user in the current Site.
-     * @var CNabuSiteUser
-     */
+    /** @var CNabuSiteUser Contains the Site User (Profile) instance for $nb_user in the current Site. */
     private $nb_site_user;
-    /**
-     * Contains the Work Customer instance for $nb_user to allow it to manage an alternate Customer.
-     * Normally this feature is intended only for nabu-3 CMS, but can be applied to other use cases.
-     * @var CNabuCustomer
-     */
+    /** @var CNabuCustomer Contains the Work Customer instance for $nb_user to allow it to manage an alternate
+     * Customer. Normally this feature is intended only for nabu-3 CMS, but can be applied to other use cases. */
     private $nb_work_customer;
 
     public function __construct(CNabuHTTPApplication $nb_application)
@@ -100,11 +70,16 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         parent::__construct($nb_application);
     }
 
+    public function getVendorKey()
+    {
+        return 'nabu-3';
+    }
+
     /**
      * Register the provider in current application to extend their functionalities.
      * @return bool Returns true if enable process is succeed.
      */
-    protected function enableManager()
+    public function enableManager()
     {
         return true;
     }

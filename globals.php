@@ -33,8 +33,15 @@ define('NABU_LICENSE_TARGET', 'http://www.apache.org/licenses/LICENSE-2.0');
 define('NABU_DB_DEFAULT_FILENAME_CONFIG', 'nabu-db-config.php.conf');
 define('NABU_VHOST_CONFIG_FILENAME', 'httpd.include');
 
+/* Trace files */
+define('NABU_TRACE_AUTOLOAD', false);
+
 /* Path constants definition */
-define('NABU_PHPUTILS_FOLDER', DIRECTORY_SEPARATOR . 'phputils');
+define('NABU_SRC_FOLDER', DIRECTORY_SEPARATOR . 'src');
+define('NABU_SDK_FOLDER', DIRECTORY_SEPARATOR . 'sdk');
+define('NABU_PUB_FOLDER', DIRECTORY_SEPARATOR . 'pub');
+define('NABU_LIB_FOLDER', DIRECTORY_SEPARATOR . 'lib');
+
 define('NABU_RUNTIME_FOLDER', DIRECTORY_SEPARATOR . 'runtime');
 define('NABU_COMMONDOCS_FOLDER', DIRECTORY_SEPARATOR . 'commondocs');
 define('NABU_HTTPDOCS_FOLDER', DIRECTORY_SEPARATOR . 'httpdocs');
@@ -49,7 +56,13 @@ define('NABU_VHOST_CONFIG_FOLDER', DIRECTORY_SEPARATOR . 'conf');
 define('NABU_ETC_PATH', '/etc/opt/nabu-3.conf.d');
 define('NABU_LOG_PATH', '/var/log/nabu-3');
 define('NABU_BASE_PATH', '/opt/nabu-3');
-define('NABU_PHPUTILS_PATH', NABU_BASE_PATH . NABU_PHPUTILS_FOLDER);
+
+define('NABU_SRC_PATH', NABU_BASE_PATH . NABU_SRC_FOLDER);
+define('NABU_SDK_PATH', NABU_BASE_PATH . NABU_SDK_FOLDER);
+define('NABU_LIB_PATH', NABU_BASE_PATH . NABU_LIB_FOLDER);
+define('NABU_PUB_PATH', NABU_BASE_PATH . NABU_PUB_FOLDER);
+
+define('NABU_PROVIDERS_PATH', NABU_PUB_PATH . NABU_PROVIDERS_FOLDER);
 
 define('NABU_WEB_PATH', '/var/opt/nabu-3');
 define('NABU_VHOSTS_PATH', NABU_WEB_PATH . NABU_VHOSTS_FOLDER);
@@ -98,5 +111,5 @@ define('NABU_MEDIOTECA_FIELD_ID', 'nb_medioteca_id');
 define('NABU_CATALOG_TABLE', 'nb_catalog');
 define('NABU_CATALOG_FIELD_ID', 'nb_catalog_id');
 
-/* Trace files */
-define('NABU_TRACE_AUTOLOAD', false);
+/* Regular expression patterns */
+define('NABU_REGEXP_PATTERN_KEY', '^[a-zA-Z_][a-zA-Z0-9_]+$');

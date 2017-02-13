@@ -26,7 +26,8 @@ use \nabu\http\managers\base\CNabuHTTPManager;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.9 Surface
  * @package \nabu\http\managers
  */
 class CNabuModulesManager extends CNabuHTTPManager
@@ -51,7 +52,7 @@ class CNabuModulesManager extends CNabuHTTPManager
      * Default constructor.
      * @param CNabuHTTPApplication $nb_application Application instance
      * @param CNabuHTTPPluginsManager $nb_plugins_manager Plugins Manager instance
-     * @throws exceptions\ECMSCoreException
+     * @throws ENabuCoreException
      */
     public function __construct(CNabuHTTPApplication $nb_application, CNabuHTTPPluginsManager $nb_plugins_manager)
     {
@@ -65,11 +66,16 @@ class CNabuModulesManager extends CNabuHTTPManager
         $this->nb_module_morph_list = new CNabuModuleMorphList();
     }
 
+    public function getVendorKey()
+    {
+        return 'nabu-3';
+    }
+
     /**
      * Register the provider in current application to extend their functionalities.
-     * @return boolean Returns true if enable process is succeed.
+     * @return bool Returns true if enable process is succeed.
      */
-    protected function enableManager()
+    public function enableManager()
     {
         return true;
     }

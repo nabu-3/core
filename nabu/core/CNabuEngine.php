@@ -38,6 +38,8 @@ use nabu\data\site\builtin\CNabuBuiltInSiteAlias;
 use nabu\db\exceptions\ENabuDBException;
 use nabu\db\interfaces\INabuDBConnector;
 use nabu\http\interfaces\INabuHTTPServer;
+use nabu\provider\CNabuProviderFactory;
+use nabu\provider\interfaces\INabuProviderManager;
 use providers\apache\httpd\CApacheHTTPServer;
 use providers\mysql\driver\CMySQLConnector;
 
@@ -52,73 +54,46 @@ use providers\mysql\driver\CMySQLConnector;
  */
 final class CNabuEngine extends CNabuObject implements INabuSingleton
 {
+    /** @var int Engine Standalone mode. */
     const ENGINE_MODE_STANDALONE = 0x0001;
+    /** @var int Engine Hosted mode. */
     const ENGINE_MODE_HOSTED = 0x0002;
+    /** @var int Engine Clustered mode. */
     const ENGINE_MODE_CLUSTERED = 0x0003;
+    /** @var int Engine CLI mode. */
     const ENGINE_MODE_CLI = 0x0004;
 
-    /**
-     * Contains the singleton instance of class.
-     * @var CNabuEngine
-     */
+    /** @var CNabuEngine Contains the singleton instance of class. */
     private static $nb_engine = null;
-    /**
-     * Flag to indicate if the environment is in install mode or in normal mode.
+    /** @var bool Flag to indicate if the environment is in install mode or in normal mode.
      * A true value represents that Engine is in install mode and sensible features
      * are not considered in execution time, like database connections.
-     * @var boolean
      */
     private static $install_mode = false;
-    /**
-     * Flag specifying the operation mode between Standalone, Stored, Clustered.
-     * @var int
-     */
+    /** @var int Flag specifying the operation mode between Standalone, Stored, Clustered. */
     private static $operation_mode = CNabuEngine::ENGINE_MODE_STANDALONE;
-    /**
-     * Starting microtime to dispatch an engine request
-     * @var long
-     */
+    /** @var int Starting microtime to dispatch an engine request */
     private $microtime_start = null;
-    /**
-     * Ending microtime dispatching an engine request
-     * @var long
-     */
+    /** @var int Ending microtime dispatching an engine request */
     private $microtime_end = null;
-    /**
-     * Microtime execution elapsed dispatching an engine request
-     * @var long
-     */
+    /** @var int Microtime execution elapsed dispatching an engine request */
     private $microtime_elapsed = null;
-    /**
-     * Contains a CNabuErrorHandler instance to manage error handling
-     * @var CNabuErrorHandler
-     */
+    /** @var CNabuErrorHandler Contains a CNabuErrorHandler instance to manage error handling */
     private $nb_error_handler = null;
-    /**
-     * Nabu OS instance that describes the running OS
-     * @var CNabuOS
-     */
+    /** @var CNabuOS Nabu OS instance that describes the running OS */
     private $nb_os = null;
-    /**
-     * Connector to main database of Nabu
-     * @var INabuDBConnector
-     */
+    /** @var array Folders list availables in the Framework */
+    private $framework_folders = null;
+    /** @var INabuDBConnector Connector to main database of Nabu */
     private $main_database = null;
-    /**
-     * Customer instance
-     * @var CNabuCustomer
-     */
+    /** @var CNabuCustomer Customer instance */
     private $nb_customer = null;
-    /**
-     * Web server instance
-     * @var INabuHTTPServer
-     */
+    /** @var INabuHTTPServer Web server instance */
     private $nb_http_server = null;
-    /**
-     * If the Engine was requested to run an Application here is the instance
-     * @var INabuApplication
-     */
+    /** @var INabuApplication If the Engine was requested to run an Application here is the instance */
     private $nb_application = null;
+    /** @var CNabuProviderFactory Provider managers factory */
+    private $nb_provider_factory = null;
 
     /**
      * Default constructor. This object is singleton then, more than one instantiation throws a ENabuSingletonException.
@@ -135,7 +110,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     }
 
     /**
-     * If singleton instance not exists then instantiate it.<br>
+     * If singleton instance not exists then instantiate it.
      * @return CNabuEngine Returns singleton instance
      * @throws ENabuSingletonException
      */
@@ -151,7 +126,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Check if the Nabu Engine is instantiated or not
-     * @return boolean Return true if the Engine is instantiated
+     * @return bool Return true if the Engine is instantiated
      */
     public static function isInstantiated()
     {
@@ -160,7 +135,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Check if the Nabu Engine runs over CLI environment
-     * @return boolean Return true if the environment is CLI
+     * @return bool Return true if the environment is CLI
      */
     public static function isCLIEnvironment()
     {
@@ -169,7 +144,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Check if we are in install mode.
-     * @return boolean Return true if we are in install mode
+     * @return bool Return true if we are in install mode
      */
     public static function isInstallMode()
     {
@@ -179,7 +154,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     /**
      * If we are in PHP CLI mode, then switch the Engine on/off in install mode.
      * In we are not in PHP CLI mode, this method does not have effect.
-     * @param boolean $mode If true then install mode is setted.
+     * @param bool $mode If true then install mode is setted.
      * @throws ENabuCoreException
      */
     public static function setInstallMode($mode)
@@ -263,7 +238,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Checks if the Operation Mode is Standalone
-     * @return boolean Returns true if yes or false if not.
+     * @return bool Returns true if yes or false if not.
      */
     public static function isOperationModeStandalone()
     {
@@ -272,7 +247,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Checks if the Operation Mode is Stored
-     * @return boolean Returns true if yes or false if not.
+     * @return bool Returns true if yes or false if not.
      */
     public static function isOperationModeStored()
     {
@@ -281,7 +256,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Checks if the Operation Mode is Clustered
-     * @return boolean Returns true if yes or false if not.
+     * @return bool Returns true if yes or false if not.
      */
     public static function isOperationModeClustered()
     {
@@ -290,7 +265,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Checks if the Operation Mode is CLI
-     * @return boolean Returns true if yes or false if not.
+     * @return bool Returns true if yes or false if not.
      */
     public static function isOperationModeCLI()
     {
@@ -310,7 +285,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
         $this->nb_application = $nb_application;
 
-        $this->registerProviders();
+        $this->nb_provider_factory->registerApplication($this->nb_application);
     }
 
     /**
@@ -323,7 +298,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Gets current application instance.
-     * @Return INabuApplication Returns current application instance of null if no application is running.
+     * @return INabuApplication Returns current application instance of null if no application is running.
      */
     public function getApplication()
     {
@@ -332,9 +307,9 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Autoload method to load object declarations (classes, interfaces and traits) used in Nabu.
-     * @param type $class_name Name with full path of the class, interface or trait required to load.
-     * @param type $throwable If yes, throws an exception when the class cannot be found.
-     * @return boolean If success returns true else if class not found and $throwable is false, then returns false.
+     * @param string $class_name Name with full path of the class, interface or trait required to load.
+     * @param bool $throwable If yes, throws an exception when the class cannot be found.
+     * @return bool If success returns true else if class not found and $throwable is false, then returns false.
      * @throws ENabuCoreException
      */
     public function autoLoadClasses($class_name, $throwable = true)
@@ -440,10 +415,10 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      * If file exists then load it with require_once primitive and returns true
      * if as the result of the require_once primitive, the class/interface/trait
      * is defined, or false if not.
-     * @param type $filename File name to require_once where the $class_name is defined.
-     * @param type $class_name Name of class/interface/trait with full namespace.
-     * @param type $trace Trace in the Nabu Engine log the object requested.
-     * @return boolean Return true if, as result of the require_once primitive,
+     * @param string $filename File name to require_once where the $class_name is defined.
+     * @param string $class_name Name of class/interface/trait with full namespace.
+     * @param bool $trace Trace in the Nabu Engine log the object requested.
+     * @return bool Return true if, as result of the require_once primitive,
      * the entity declaration is loaded, or false if not.
      */
     private function requireOnce($filename, $class_name, $trace = false)
@@ -468,7 +443,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      * in all deployment folders availables, and their declaration PHP script loaded.
      * If the object is defined then returns true, else returns false.
      * @param string $class_name Full name including namespace of the class to preload.
-     * @return boolean Return true if the class is available or false if not.
+     * @return bool Return true if the class is available or false if not.
      */
     public function preloadClass($class_name)
     {
@@ -558,6 +533,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         $this->nb_os = CNabuOS::getOS();
 
         $this->registerHandlers();
+        $this->registerProviderFactory();
     }
 
     /**
@@ -584,41 +560,11 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     }
 
     /**
-     * Register providers deployed in phputils/providers folder.
-     * Explores first level subfolders and executes files that match init_*.php.
+     * Register the Provider Factory
      */
-    private function registerProviders()
+    private function registerProviderFactory()
     {
-        $basedir = NABU_PHPUTILS_PATH . NABU_PROVIDERS_FOLDER;
-
-        if (is_dir($basedir) && ($h = opendir($basedir))) {
-            $folders = array();
-            while (($folder = readdir($h))) {
-                if ($folder !== '.' && $folder !== '..') {
-                    $subfolder = $basedir . DIRECTORY_SEPARATOR . $folder;
-                    if (is_dir($subfolder) && ($k = opendir($subfolder))) {
-                        while (($filename = readdir($k))) {
-                            $phpfile = $subfolder . DIRECTORY_SEPARATOR . $filename;
-                            if (preg_match('/^init_(.+)\.php$/', $filename) &&
-                                file_exists($phpfile) &&
-                                filesize($phpfile) > 0
-                            ) {
-                                $folders[] = $phpfile;
-                            }
-                        }
-                        closedir($k);
-                    }
-                }
-            }
-            closedir($h);
-
-            if (count($folders) > 0) {
-                $this->traceLog('Load provider folders', $folders);
-                foreach ($folders as $provider) {
-                    nb_requireOnceIsolated($provider, true, true);
-                }
-            }
-        }
+        $this->nb_provider_factory = CNabuProviderFactory::getFactory();
     }
 
     /**
@@ -698,7 +644,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * If a Error Handler is defined, then propagates the error log to the handler elsewhere do nothing.
-     * @param type $message Text message to log
+     * @param string $message Text message to log
      */
     public function errorLog($message)
     {
@@ -722,8 +668,8 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * If a Error Handler is defined, then propagates the trace log to the handler elsewhere do nothing.
-     * @param type $key Categorized data key identifier
-     * @param type $message Text message to log
+     * @param string $key Categorized data key identifier
+     * @param string $message Text message to log
      */
     public function traceLog($key, $message)
     {
@@ -734,8 +680,8 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Trigger and error using the standard PHP Error chain.
-     * @param type $error_message Error message to be triggered.
-     * @param type $error_type Error type to be triggered.
+     * @param string $error_message Error message to be triggered.
+     * @param string $error_type Error type to be triggered.
      */
     public function triggerError($error_message = null, $error_type = null) {
 
@@ -880,6 +826,11 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         $this->nb_http_server->locateRunningConfiguration();
     }
 
+    /**
+     * Locates current running Customer.
+     * @return CNabuCustomer Return the located Customer instance.
+     * @throws ENabuCoreException If no customer found, then raises an exception.
+     */
     private function locateRunningCustomer()
     {
         $this->nb_customer = new CNabuCustomer($this->nb_http_server->getSite());
@@ -890,5 +841,47 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
             "Customer",
             $this->nb_customer->getVisibleName(). ' [' . $this->nb_customer->getValue('nb_customer_id') . ']'
         );
+    }
+
+    /**
+     * Gets the list of PHP root folders in the framework for include purposes.
+     * @return array Returns an string array of all folder paths available in the framework.
+     */
+    public function getPHPIncludeFolders()
+    {
+        if (!is_array($this->framework_folders)) {
+            $this->framework_folders = array();
+
+            if (is_dir(NABU_SRC_PATH)) {
+                $this->framework_folders[] = realpath(NABU_SRC_PATH);
+            }
+            if (is_dir(NABU_SDK_PATH)) {
+                $this->framework_folders[] = realpath(NABU_SDK_PATH);
+            }
+            if (is_dir(NABU_PUB_PATH)) {
+                $this->framework_folders[] = realpath(NABU_PUB_PATH);
+            }
+            if (is_dir(NABU_LIB_PATH)) {
+                $this->framework_folders[] = realpath(NABU_LIB_PATH);
+            }
+            if (count($this->framework_folders) === 0) {
+                $this->framework_folders = null;
+            }
+        }
+
+        return $this->framework_folders;
+    }
+
+    /**
+     * Register a Manager to be used.
+     * @param INabuProviderManager $manager Manager instance to be registered.
+     */
+    public function registerProviderManager(INabuProviderManager $manager)
+    {
+        $nb_manager = new $manager_class($this);
+        $this->nb_manager_list->addItem($nb_manager);
+        if (!$nb_manager->enableManager()) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_ENABLING_HTTP_MANAGER, array($manager_class));
+        }
     }
 }

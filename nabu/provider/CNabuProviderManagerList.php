@@ -17,25 +17,33 @@
  *  limitations under the License.
  */
 
+namespace nabu\provider;
+use nabu\data\CNabuDataObjectList;
+
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
  * @version 3.0.0 Surface
+ * @package \nabu\provider
  */
+class CNabuProviderManagerList extends CNabuDataObjectList
+{
+    public function __construct()
+    {
+        parent::__construct('nb_manager_key');
+    }
 
-/* Include files */
-if (file_exists(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'autoload.php')) {
-    require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'autoload.php';
+    /**
+     * Always returns false.
+     * @param string $key Id of the instance to unserialize.
+     * @param string $index Secondary index to be used if needed.
+     * @return bool Always returns false.
+     */
+    protected function acquireItem($key, $index = false)
+    {
+        return false;
+    }
+
+    protected function createSecondaryIndexes()
+    {
+    }
 }
-
-require_once 'globals.php';
-
-if (file_exists(NABU_SRC_PATH . DIRECTORY_SEPARATOR . 'license.php')) {
-    require_once NABU_SRC_PATH . DIRECTORY_SEPARATOR . 'license.php';
-} else {
-    define('NABU_LICENSED', NABU_OWNER);
-    define('NABU_LICENSEE_TARGET', '');
-}
-
-require_once 'vars.php';
-require_once 'functions.php';
-require_once 'init.php';

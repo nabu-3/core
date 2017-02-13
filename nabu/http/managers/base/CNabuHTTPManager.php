@@ -19,9 +19,8 @@
 
 namespace nabu\http\managers\base;
 
-use nabu\core\interfaces\INabuManager;
-use nabu\data\CNabuDataObject;
 use nabu\http\app\base\CNabuHTTPApplication;
+use nabu\provider\base\CNabuProviderManagerAdapter;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
@@ -29,7 +28,7 @@ use nabu\http\app\base\CNabuHTTPApplication;
  * @version 3.0.9 Surface
  * @package \nabu\http\managers\base
  */
-abstract class CNabuHTTPManager extends CNabuDataObject implements INabuManager
+abstract class CNabuHTTPManager extends CNabuProviderManagerAdapter
 {
     /**
      * nabu-3 HTTP Application that owns this Manager

@@ -24,15 +24,15 @@
   * @package \nabu\http\managers\base
   */
 namespace nabu\messaging\managers\base;
-use nabu\core\interfaces\INabuManager;
 use nabu\data\CNabuDataObject;
+use nabu\provider\interfaces\INabuProviderManager;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
  * @version 3.0.0 Surface
  * @package \nabu\http\managers\base
  */
-abstract class CNabuMessagingManager extends CNabuDataObject implements INabuManager
+abstract class CNabuMessagingManager extends CNabuDataObject implements INabuProviderManager
 {
 
 }

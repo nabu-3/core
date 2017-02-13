@@ -26,13 +26,15 @@ use \nabu\db\exceptions\ENabuDBException;
 use \nabu\db\interfaces\INabuDBConnector;
 use \nabu\db\interfaces\INabuDBObject;
 use \nabu\db\interfaces\INabuDBStatement;
-use \providers\mysql\CMySQLConnector;
+use \providers\mysql\driver\CMySQLConnector;
 use nabu\db\interfaces\INabuDBDescriptor;
 
 /**
  * Abstract Class to implement default management for tables of MySQL.
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.9 Surface
+ * @package nabu\db
  */
 abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
 {

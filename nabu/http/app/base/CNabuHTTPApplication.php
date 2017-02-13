@@ -20,12 +20,9 @@
 namespace nabu\http\app\base;
 
 use nabu\core\base\CNabuAbstractApplication;
-use nabu\core\exceptions\ENabuException;
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\CNabuDataObject;
-use nabu\data\customer\CNabuCustomer;
 use nabu\data\medioteca\CNabuMedioteca;
-use nabu\data\site\CNabuSiteMap;
 use nabu\data\site\CNabuSiteTarget;
 use nabu\http\CNabuHTTPSession;
 use nabu\http\CNabuHTTPRequest;
@@ -83,11 +80,6 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
      */
     private $nb_mediotecas_manager = null;
     /**
-     * Additional Managers collection
-     * @var CNabuHTTPManagerList
-     */
-    private $nb_http_manager_list = null;
-    /**
      * Contains the session instance
      * @var CNabuHTTPSession
      */
@@ -113,24 +105,6 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         $this->prepareMediotecasManager();
 
         $this->nb_engine->registerApplication($this);
-    }
-
-    /**
-     * Register a HTTP Manager to be used by this application.
-     * @param CNabuHTTPManager $manager Manager instance to be registered.
-     */
-    public function registerManager($manager_class)
-    {
-        $extends = class_parents($manager_class, true);
-        if (array_search('nabu\http\managers\base\CNabuHTTPManager', $extends)) {
-            $nb_http_manager = new $manager_class($this);
-            $this->nb_http_manager_list->addItem($nb_http_manager);
-            if (!$nb_http_manager->enableManager()) {
-                throw new ENabuCoreException(ENabuCoreException::ERROR_ENABLING_HTTP_MANAGER, array($manager_class));
-            }
-        } else {
-            throw new ENabuCoreException(ENabuCoreException::ERROR_INVALID_HTTP_MANAGER_CLASS, array($manager_class));
-        }
     }
 
     /**

@@ -17,25 +17,17 @@
  *  limitations under the License.
  */
 
+namespace nabu\provider\base;
+use nabu\data\CNabuDataObject;
+use nabu\provider\interfaces\INabuProviderManager;
+
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.9 Surface
+ * @package \nabu\http\managers\base
  */
+abstract class CNabuProviderManagerAdapter extends CNabuDataObject implements INabuProviderManager
+{
 
-/* Include files */
-if (file_exists(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'autoload.php')) {
-    require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'autoload.php';
 }
-
-require_once 'globals.php';
-
-if (file_exists(NABU_SRC_PATH . DIRECTORY_SEPARATOR . 'license.php')) {
-    require_once NABU_SRC_PATH . DIRECTORY_SEPARATOR . 'license.php';
-} else {
-    define('NABU_LICENSED', NABU_OWNER);
-    define('NABU_LICENSEE_TARGET', '');
-}
-
-require_once 'vars.php';
-require_once 'functions.php';
-require_once 'init.php';

@@ -205,6 +205,17 @@ function nb_isBetween($value, $left, $right)
     return $retval;
 }
 
+/**
+ * Validates a key according to key definition in nabu-3. The pattern is stored in a defined constant to be available
+ * for other purposes.
+ * @param string $key
+ * @return bool Returns true if the key is valid of false if not.
+ */
+function nb_isValidKey($key)
+{
+    return nb_isBetween(strlen($key), 2, 30) && preg_match('/' . NABU_REGEXP_PATTERN_KEY . '/', $key);
+}
+
 /*
 function nb_populateTreeFromObjectList($list)
 {

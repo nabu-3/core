@@ -29,7 +29,8 @@ use nabu\http\managers\base\CNabuHTTPManager;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.9 Surface
  * @package \nabu\http\managers
  */
 class CNabuMediotecasManager extends CNabuHTTPManager
@@ -57,11 +58,16 @@ class CNabuMediotecasManager extends CNabuHTTPManager
         $this->nb_medioteca_list = new CNabuMediotecaList($this->nb_customer);
     }
 
+    public function getVendorKey()
+    {
+        return 'nabu-3';
+    }
+
     /**
      * Register the provider in current application to extend their functionalities.
      * @return bool Returns true if enable process is succeed.
      */
-    protected function enableManager()
+    public function enableManager()
     {
         return true;
     }

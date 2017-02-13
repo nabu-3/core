@@ -32,4 +32,9 @@ interface INabuProviderManager
      * @return bool Returns true if the manager has enabled or false if not.
      */
     public function enableManager();
+    /**
+     * Gets the vendor key to identify this manager.
+     * @return string Returns the assigned vendor key.
+     */
+    public function getVendorKey();
 }

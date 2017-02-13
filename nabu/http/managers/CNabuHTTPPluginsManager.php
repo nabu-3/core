@@ -19,6 +19,7 @@
 
 namespace nabu\http\managers;
 
+use Exception;
 use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\data\module\CNabuModuleMorph;
 use \nabu\data\site\CNabuSite;
@@ -42,21 +43,11 @@ use nabu\data\site\CNabuSiteUser;
  */
 final class CNabuHTTPPluginsManager extends CNabuHTTPManager
 {
-    /**
-     * Plugin of Site
-     * @var INabuHTTPSitePlugin
-     */
+    /** @var INabuHTTPSitePlugin Plugin of Site. */
     private $site_plugin = null;
-    /**
-     * Plugin of Site Target
-     * @var INabuHTTPSiteTargetPlugin
-     */
+    /** @var INabuHTTPSiteTargetPlugin Plugin of Site Target. */
     private $site_target_plugin = null;
-
-    /**
-     * Modules Manager
-     * @var CNabuModulesManager
-     */
+    /** @var CNabuModulesManager Modules Manager instance. */
     private $nb_modules_manager = null;
 
     /**
@@ -67,11 +58,16 @@ final class CNabuHTTPPluginsManager extends CNabuHTTPManager
         parent::__construct($nb_application);
     }
 
+    public function getVendorKey()
+    {
+        return 'nabu-3';
+    }
+
     /**
      * Register the provider in current application to extend their functionalities.
-     * @return boolean Returns true if enable process is succeed.
+     * @return bool Returns true if enable process is succeed.
      */
-    protected function enableManager()
+    public function enableManager()
     {
         return true;
     }

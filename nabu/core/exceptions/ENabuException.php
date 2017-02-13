@@ -17,6 +17,7 @@
  */
 
 namespace nabu\core\exceptions;
+use Exception;
 
 /**
  * Base class for Nabu Exceptions mechanism<br>
@@ -28,12 +29,12 @@ abstract class ENabuException extends \Exception
     /**
      * Default constructor for exceptions. Optional values enhances
      * the exception description depending on each exception kind.
-     * @param type $message Text message to notice in the exception.
-     * @param type $code Code ID of the exception.
-     * @param type $values Scalar or array values to complete notice description for the exception.
-     * @param type $previous Previous exception raised before this to chain both.
+     * @param string $message Text message to notice in the exception.
+     * @param int $code Code ID of the exception.
+     * @param array $values Scalar or array values to complete notice description for the exception.
+     * @param Exception $previous Previous exception raised before this to chain both.
      */
-    public function __construct($message = "", $code = 0, $values = null, $previous = null)
+    public function __construct(string $message = "", int $code = 0, array $values = null, Exception $previous = null)
     {
         if (strlen($message) > 0 && count($values) > 0) {
             $message = nb_vnsprintf($message, (is_array($values) || $values === null ? $values : array($values)));

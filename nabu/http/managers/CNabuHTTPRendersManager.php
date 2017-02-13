@@ -22,14 +22,14 @@ namespace nabu\http\managers;
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\http\CNabuHTTPResponse;
 use nabu\http\app\base\CNabuHTTPApplication;
-use nabu\http\interfaces\INabuHTTPResponseRender;
 use nabu\http\managers\CNabuHTTPRenderDescriptor;
 use nabu\http\managers\base\CNabuHTTPManager;
 
 /**
  * This class manages renders instantiation and access to interfased methods.
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.9 Surface
  * @package \nabu\http\managers
  */
 final class CNabuHTTPRendersManager extends CNabuHTTPManager
@@ -47,11 +47,16 @@ final class CNabuHTTPRendersManager extends CNabuHTTPManager
         $this->nb_http_render_list = new CNabuHTTPRenderList();
     }
 
+    public function getVendorKey()
+    {
+        return 'nabu-3';
+    }
+
     /**
      * Register the provider in current application to extend their functionalities.
-     * @return boolean Returns true if enable process is succeed.
+     * @return bool Returns true if enable process is succeed.
      */
-    protected function enableManager()
+    public function enableManager()
     {
         return true;
     }
