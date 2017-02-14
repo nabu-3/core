@@ -18,6 +18,7 @@
  */
 
 namespace nabu\provider\interfaces;
+use nabu\provider\exceptions\ENabuProviderException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
@@ -37,4 +38,15 @@ interface INabuProviderManager
      * @return string Returns the assigned vendor key.
      */
     public function getVendorKey();
+    /**
+     * Gets the module key to identify this manager.
+     * @return string Returns the assigned module key.
+     */
+    public function getModuleKey();
+    /**
+     * Gets the combined key to identify this manager as "vendor:module"
+     * @return string Returns the combined key.
+     * @throws ENabuProviderException Raises an exception if vendor or module keys are empty or invalid.
+     */
+    public function getComplexKey();
 }

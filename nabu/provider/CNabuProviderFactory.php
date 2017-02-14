@@ -119,10 +119,15 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
     private function init()
     {
         CNabuEngine::getEngine()->traceLog("Provider Factory", NABU_PROVIDERS_PATH);
+    }
 
+    /**
+     * Scan the providers folder to detect installed provider modules.
+     */
+    public function scanProvidersFolder()
+    {
         $folders = array();
         $this->scanVendorFolders($folders);
-        error_log(print_r($folders, true));
 
         if (count($folders) > 0) {
             foreach ($folders as $provider) {
@@ -169,7 +174,6 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
             while (($filename = readdir($h))) {
                 $phpfile = $basedir . DIRECTORY_SEPARATOR . $filename;
                 if (preg_match('/^init_(.+)\.php$/', $filename) && file_exists($phpfile) && filesize($phpfile) > 0) {
-                    error_log($phpfile);
                     $folders[] = $phpfile;
                 }
             }
@@ -185,21 +189,21 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
     public function addManager(INabuProviderManager $manager)
     {
         $vendor_key = $manager->getVendorKey();
-        if ($this->prepareVendor($vendor_key)) {
-            $manager_key = $manager->getManagerKey();
-            if (nb_isValidKey($manager_key)) {
-                if (array_key_exists($manager_key, $this->manager_hierarchy[$vendor_key])) {
+        if ($this->prepareVendorKey($vendor_key)) {
+            $module_key = $manager->getModuleKey();
+            if (nb_isValidKey($module_key)) {
+                if (array_key_exists($module_key, $this->manager_hierarchy[$vendor_key])) {
                     throw new ENabuProviderException(
                         ENabuProviderException::ERROR_MANAGER_ALREADY_EXISTS,
-                        array($vendor_key, $manager_key)
+                        array($vendor_key, $module_key)
                     );
                 } else {
-                    $this->manager_hierarchy[$vendor_key][$manager_key] = $manager;
+                    $this->manager_hierarchy[$vendor_key][$module_key] = $manager;
                 }
             } else {
                 throw new ENabuProviderException(
-                    ENabuProviderException::ERROR_MANAGER_KEY_NOT_VALID,
-                    array($manager_key)
+                    ENabuProviderException::ERROR_MODULE_KEY_NOT_VALID,
+                    array($module_key)
                 );
             }
         } else {

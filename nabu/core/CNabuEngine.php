@@ -565,6 +565,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     private function registerProviderFactory()
     {
         $this->nb_provider_factory = CNabuProviderFactory::getFactory();
+        $this->nb_provider_factory->scanProvidersFolder();
     }
 
     /**
@@ -874,14 +875,17 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Register a Manager to be used.
-     * @param INabuProviderManager $manager Manager instance to be registered.
+     * @param INabuProviderManager $nb_manager Manager instance to be registered.
+     * @return INabuProviderManager Returns the registered manager instance if success.
+     * @throws ENabuCoreException Raises an exception if the manager cannot be enabled.
      */
-    public function registerProviderManager(INabuProviderManager $manager)
+    public function registerProviderManager(INabuProviderManager $nb_manager)
     {
-        $nb_manager = new $manager_class($this);
-        $this->nb_manager_list->addItem($nb_manager);
+        $this->nb_provider_factory->addManager($nb_manager);
         if (!$nb_manager->enableManager()) {
             throw new ENabuCoreException(ENabuCoreException::ERROR_ENABLING_HTTP_MANAGER, array($manager_class));
         }
+
+        return $nb_manager;
     }
 }

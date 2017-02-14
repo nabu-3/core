@@ -19,6 +19,7 @@
 
 namespace nabu\provider\base;
 use nabu\data\CNabuDataObject;
+use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
 
 /**
@@ -29,5 +30,80 @@ use nabu\provider\interfaces\INabuProviderManager;
  */
 abstract class CNabuProviderManagerAdapter extends CNabuDataObject implements INabuProviderManager
 {
+    /** @var string Vendor Key field name */
+    const VENDOR_KEY = 'vendor_key';
+    /** @var string Module Key field name */
+    const MODULE_KEY = 'module_key';
+    /** @var string Complex Key field name */
+    const COMPLEX_KEY = 'complex_key';
 
+    public function getVendorKey()
+    {
+        return $this->getValue(self::VENDOR_KEY);
+    }
+
+    /**
+     * Sets the vendor key
+     * @param string $vendor_key New vendor key.
+     * @return INabuProviderManager Returns manager instance to grant cascade calls.
+     * @throws ENabuProviderException Raises an exception if $vendor_key have an invalid value.
+     */
+     public function setVendorKey(string $vendor_key)
+     {
+         if (!nb_isValidKey($vendor_key)) {
+             throw new ENabuProviderException(ENabuProviderException::ERROR_VENDOR_KEY_NOT_VALID, array($vendor_key));
+         }
+         $this->setValue(self::VENDOR_KEY, $vendor_key);
+
+         try {
+             $this->getComplexKey();
+         } catch (ENabuProviderException $ex) {
+
+         }
+
+         return $this;
+     }
+
+    public function getModuleKey()
+    {
+        return $this->getValue(self::MODULE_KEY);
+    }
+
+    /**
+     * Sets the module key
+     * @param string $module_key New module key.
+     * @return INabuProviderManager Returns the manager instance to grant cascade calls.
+     * @throws ENabuProviderException Raises an exception if $module_key have an invalid value.
+     */
+    public function setModuleKey(string $module_key)
+    {
+        if (!nb_isValidKey($module_key)) {
+            throw new ENabuProviderException(ENabuProviderException::ERROR_MODULE_KEY_NOT_VALID, array($module_key));
+        }
+        $this->setValue(self::MODULE_KEY, $module_key);
+
+        try {
+            $this->getComplexKey();
+        } catch (ENabuProviderException $ex) {
+
+        }
+
+        return $this;
+    }
+
+    public function getComplexKey()
+    {
+        if (!$this->hasValue(self::COMPLEX_KEY)) {
+            $vendor_key = $this->getVendorKey();
+            $module_key = $this->getModuleKey();
+
+            if (nb_isValidKey($vendor_key) && nb_isValidKey($module_key)) {
+                $this->setValue(self::COMPLEX_KEY, "$vendor_key:$module_key");
+            } else {
+                throw new ENabuProviderException(ENabuProviderException::ERROR_INVALID_KEYS);
+            }
+        }
+
+        return $this->getValue(self::COMPLEX_KEY);
+    }
 }

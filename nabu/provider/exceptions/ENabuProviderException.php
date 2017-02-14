@@ -31,11 +31,13 @@ class ENabuProviderException extends ENabuException
     /** @var int Vendor key is not valid. Requires the vendor key. */
     const ERROR_VENDOR_KEY_NOT_VALID    = 0x0001;
     /** @var int Manager key is not valid. Requires the manager key. */
-    const ERROR_MANAGER_KEY_NOT_VALID   = 0x0002;
+    const ERROR_MODULE_KEY_NOT_VALID    = 0x0002;
     /** @var int Manager already exists. Requires vendor and manager keys. */
     const ERROR_MANAGER_ALREADY_EXISTS  = 0x0003;
     /** @var int Error executing init procedure for manager. Requires installation path. */
     const ERROR_MANAGER_NOT_INITIALIZED = 0x0004;
+    /** @var int Invalid vendor or module keys or not defined. */
+    const ERROR_INVALID_KEYS            = 0x0005;
 
     /**
      * List of all error messages defined in this exception.
@@ -44,11 +46,13 @@ class ENabuProviderException extends ENabuException
     protected $error_messages = array(
         ENabuProviderException::ERROR_VENDOR_KEY_NOT_VALID =>
             'Vendor Key [%s] is not valid',
-        ENabuProviderException::ERROR_MANAGER_KEY_NOT_VALID =>
+        ENabuProviderException::ERROR_MODULE_KEY_NOT_VALID =>
             'Manager Key [%s] is not valid',
         ENabuProviderException::ERROR_MANAGER_ALREADY_EXISTS =>
             'Manager instance [%s:%s] already exists',
         ENabuProviderException::ERROR_MANAGER_NOT_INITIALIZED =>
-            'There was an error initializing the manager in %s'
+            'There was an error initializing the manager in %s',
+        ENabuProviderException::ERROR_INVALID_KEYS =>
+            'Invalid vendor or module keys, or not defined.'
     );
 }
