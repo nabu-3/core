@@ -29,7 +29,7 @@ class CNabuProviderManagerList extends CNabuDataObjectList
 {
     public function __construct()
     {
-        parent::__construct('nb_manager_key');
+        parent::__construct('complex_key');
     }
 
     /**

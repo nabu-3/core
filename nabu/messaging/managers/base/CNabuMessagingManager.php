@@ -24,7 +24,7 @@
   * @package \nabu\http\managers\base
   */
 namespace nabu\messaging\managers\base;
-use nabu\data\CNabuDataObject;
+use nabu\provider\base\CNabuProviderManagerAdapter;
 use nabu\provider\interfaces\INabuProviderManager;
 
 /**
@@ -32,7 +32,7 @@ use nabu\provider\interfaces\INabuProviderManager;
  * @version 3.0.0 Surface
  * @package \nabu\http\managers\base
  */
-abstract class CNabuMessagingManager extends CNabuDataObject implements INabuProviderManager
+abstract class CNabuMessagingManager extends CNabuProviderManagerAdapter implements INabuProviderManager
 {
 
 }

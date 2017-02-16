@@ -21,9 +21,9 @@ namespace nabu\provider;
 use Exception;
 use nabu\core\CNabuEngine;
 use nabu\core\CNabuObject;
-use nabu\core\base\CNabuAbstractApplication;
 use nabu\core\exceptions\ENabuSingletonException;
 use nabu\core\interfaces\INabuSingleton;
+use nabu\core\interfaces\INabuApplication;
 use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
 
@@ -42,7 +42,7 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
     private static $nb_provider_factory = null;
     /**
      * List of all registered managers.
-     * @var INabuProviderManager
+     * @var CNabuProviderManagerList
      */
     private $nb_manager_list = null;
     /**
@@ -122,7 +122,7 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
     }
 
     /**
-     * Scan the providers folder to detect installed provider modules.
+     * Scan providers folder to detect installed provider modules.
      */
     public function scanProvidersFolder()
     {
@@ -143,6 +143,10 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
         }
     }
 
+    /**
+     * Scan vendor folders to find modules.
+     * @param array &$folders Array passed by reference to be filled with modules found.
+     */
     private function scanVendorFolders(&$folders)
     {
         $basedir = realpath(NABU_PROVIDERS_PATH);
@@ -156,6 +160,11 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
         }
     }
 
+    /**
+     * Scan module folders to prepare init mechanism.
+     * @param string $basedir Base directory to looking for module folders.
+     * @param array &$folders Array passed by reference to be filled with modules found.
+     */
     private function scanModuleFolders($basedir, &$folders)
     {
         if (is_dir($basedir) && ($h = opendir($basedir))) {
@@ -168,6 +177,11 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
         }
     }
 
+    /**
+     * Scan module root files to locate the init file.
+     * @param string $basedir Base directory to looking for module files.
+     * @param array &$folders Array passed by reference to be filled with modules found.
+     */
     private function scanModuleFiles($basedir, &$folders)
     {
         if (is_dir($basedir) && ($h = opendir($basedir))) {
@@ -212,10 +226,46 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
                 array($vendor_key)
             );
         }
+
+        $this->nb_manager_list->addItem($manager);
+
+        $nb_application = CNabuEngine::getEngine()->getApplication();
+        if ($nb_application instanceof INabuApplication) {
+            $manager->registerApplication($nb_application);
+        }
+
+        return $manager;
     }
 
-    public function registerApplication(CNabuAbstractApplication $nb_application)
+    /**
+     * Gets a Manager instance. This method is intended normally to be used internally and inside provider modules.
+     * @param string $vendor_key Vendor Key to identify the Manager.
+     * @param string $module_key Module Key to identify the Manager.
+     * @return INabuProviderManager Returns the Manager instance if exists or false if not.
+     * @throws ENabuProviderException Raises an exception if $vendor_key or $module_key have invalid values.
+     */
+    public function getManager(string $vendor_key, string $module_key)
     {
 
+        if (nb_isValidKey($vendor_key) && nb_isValidKey($module_key)) {
+            return $this->nb_manager_list->getItem("$vendor_key:$module_key");
+        } else {
+            throw new ENabuProviderException(ENabuProviderException::ERROR_INVALID_KEYS);
+        }
+    }
+
+    /**
+     * Register the application to connect all available managers with it.
+     * @param INabuApplication $nb_application Application instance to be registered.
+     */
+    public function registerApplication(INabuApplication $nb_application)
+    {
+        $this->nb_manager_list->iterate(
+            function($key, $manager) use ($nb_application)
+            {
+                $manager->registerApplication($nb_application);
+                return true;
+            }
+        );
     }
 }

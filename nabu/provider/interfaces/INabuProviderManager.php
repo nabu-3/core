@@ -18,6 +18,7 @@
  */
 
 namespace nabu\provider\interfaces;
+use nabu\core\interfaces\INabuApplication;
 use nabu\provider\exceptions\ENabuProviderException;
 
 /**
@@ -49,4 +50,11 @@ interface INabuProviderManager
      * @throws ENabuProviderException Raises an exception if vendor or module keys are empty or invalid.
      */
     public function getComplexKey();
+    /**
+     * Register an application instance in the module. This method is responsible to connect both module and
+     * application instances to work together.
+     * @param INabuApplication $nb_application Application instance to be registered.
+     * @return INabuProviderManager Returns the same manager instance to grant cascade setter calls.
+     */
+    public function registerApplication(INabuApplication $nb_application);
 }

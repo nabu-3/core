@@ -108,16 +108,6 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
     }
 
     /**
-     * Gets a pre-registered Manager instance, normally of a provider package.
-     * @param string $key Key identifier of the manager.
-     * @return CNabuHTTPManager Returns the requested manager identified by $key if exists or null if not.
-     */
-    public function getManager($key)
-    {
-        return $this->nb_http_manager_list->getItem($key);
-    }
-
-    /**
      * Register a HTTP Render to be used by this application when the response is built.
      * @param CNabuHTTPRenderDescriptor $descriptor Descriptor containing information about the Render to be joined.
      * @throws ENabuCoreException Raises an exception if the $descriptor contains not valid values.

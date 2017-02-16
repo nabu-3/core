@@ -39,6 +39,7 @@ use nabu\db\exceptions\ENabuDBException;
 use nabu\db\interfaces\INabuDBConnector;
 use nabu\http\interfaces\INabuHTTPServer;
 use nabu\provider\CNabuProviderFactory;
+use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
 use providers\apache\httpd\CApacheHTTPServer;
 use providers\mysql\driver\CMySQLConnector;
@@ -284,7 +285,6 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         }
 
         $this->nb_application = $nb_application;
-
         $this->nb_provider_factory->registerApplication($this->nb_application);
     }
 
@@ -727,6 +727,12 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
             $this->nb_error_handler->dumpStack(
                 $e->getMessage(), E_CORE_ERROR, $e->getFile(), $e->getLine(), null, $e->getTrace()
             );
+            if ($this->isOperationModeStandalone() ||
+                $this->isOperationModeStored() ||
+                $this->isOperationModeClustered()
+            ) {
+                nb_displayErrorPage(500, $e);
+            }
             $retval = false;
         }
 
@@ -822,6 +828,9 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         $this->nb_http_server->setSiteAlias($nb_site_alias);
     }
 
+    /**
+     * Locates the running configuration in the HTTP Server.
+     */
     private function locateRunningSite()
     {
         $this->nb_http_server->locateRunningConfiguration();
@@ -886,6 +895,26 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
             throw new ENabuCoreException(ENabuCoreException::ERROR_ENABLING_HTTP_MANAGER, array($manager_class));
         }
 
+        if ($this->nb_application instanceof INabuApplication) {
+            $nb_manager->registerApplication($this->nb_application);
+        }
+
         return $nb_manager;
+    }
+
+    /**
+     * Gets a Manager instance. This method is intended normally to be used internally and inside provider modules.
+     * @param string $vendor_key Vendor Key to identify the Manager.
+     * @param string $module_key Module Key to identify the Manager.
+     * @return INabuProviderManager Returns the Manager instance if exists or false if not.
+     * @throws ENabuProviderException Raises an exception if $vendor_key or $module_key have invalid values.
+     */
+    public function getProviderManager(string $vendor_key, string $module_key)
+    {
+        if ($this->nb_provider_factory instanceof CNabuProviderFactory) {
+            return $this->nb_provider_factory->getManager($vendor_key, $module_key);
+        } else {
+            throw new ENabuProviderException(ENabuProviderException::ERROR_PROVIDER_FACTORY_NOT_AVAILABLE);
+        }
     }
 }
