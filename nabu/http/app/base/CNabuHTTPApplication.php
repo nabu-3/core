@@ -168,7 +168,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
                     }
                 }
             } else {
-                $this->displayErrorPage($this->nb_response->getHTTPResponseCode());
+                nb_displayErrorPage($this->nb_response->getHTTPResponseCode());
             }
         } catch (ENabuRedirectionException $re) {
             $this->nb_engine->traceLog("Redirection", "Via exception");
@@ -492,32 +492,5 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         $this->nb_mediotecas_manager->addMedioteca($nb_medioteca);
 
         return $nb_medioteca;
-    }
-
-    public function displayErrorPage($code, $exception = false)
-    {
-        global $NABU_HTTP_CODES;
-
-        /*
-        if ((is_object($exception) &&
-            (!($exception instanceof ENabuException)) || !array_key_exists($code, $NABU_HTTP_CODES))
-        ) {
-            $code = 500;
-        }
-        */
-        if ($code < 400) {
-            $code = 500;
-        }
-
-        $message = $NABU_HTTP_CODES[$code];
-        header("HTTP/1.1 $code $message");
-        nb_includeIsolated(
-            dirname(__FILE__) . DIRECTORY_SEPARATOR . 'html_display_error_page.php',
-            array(
-                'exception' => $exception,
-                'code' => $code,
-                'message' => $message
-            )
-        );
     }
 }

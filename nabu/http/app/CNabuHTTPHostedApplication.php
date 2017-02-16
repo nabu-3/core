@@ -39,7 +39,7 @@ abstract class CNabuHTTPHostedApplication extends CNabuHTTPApplication
      */
     final public static function launch()
     {
-        try {
+        //try {
             $nb_engine = CNabuEngine::getEngine();
 
             $class_name = get_called_class();
@@ -65,9 +65,9 @@ abstract class CNabuHTTPHostedApplication extends CNabuHTTPApplication
             }
 
             $nb_engine->removeApplication();
-        } catch (Throwable $re) {
+        /*} catch (Throwable $re) {
             if (isset($instance)) {
-                $instance->displayErrorPage(
+                nb_displayErrorPage(
                     ($instance->getResponse() !== null ? $instance->getResponse()->getHTTPResponseCode() : 500),
                     $re
                 );
@@ -75,13 +75,13 @@ abstract class CNabuHTTPHostedApplication extends CNabuHTTPApplication
             throw $re;
         } catch (Exception $re) {
             if (isset($instance)) {
-                $instance->displayErrorPage(
+                nb_displayErrorPage(
                     ($instance->getResponse() !== null ? $instance->getResponse()->getHTTPResponseCode() : 500),
                     $re
                 );
             }
             throw $re;
-        }
+        }*/
 
         return $retval;
     }

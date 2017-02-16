@@ -613,3 +613,35 @@ function nb_grantCustomer($nb_customer, $force = false)
 
     return ($nb_customer instanceof CNabuCustomer) ? $nb_customer : false;
 }
+
+/**
+ * Dumps an HTML error page to show an anormal state of execution.
+ * @param int $code HTTP Code for header response.
+ * @param Exception $exception If exists, the exception instance raised before call this function.
+ */
+function nb_displayErrorPage($code, $exception = false)
+{
+    global $NABU_HTTP_CODES;
+
+    /*
+    if ((is_object($exception) &&
+        (!($exception instanceof ENabuException)) || !array_key_exists($code, $NABU_HTTP_CODES))
+    ) {
+        $code = 500;
+    }
+    */
+    if ($code < 400) {
+        $code = 500;
+    }
+
+    $message = $NABU_HTTP_CODES[$code];
+    header("HTTP/1.1 $code $message");
+    nb_includeIsolated(
+        dirname(__FILE__) . DIRECTORY_SEPARATOR . 'html_display_error_page.php',
+        array(
+            'exception' => $exception,
+            'code' => $code,
+            'message' => $message
+        )
+    );
+}
