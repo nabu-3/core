@@ -28,6 +28,15 @@ use nabu\data\security\interfaces\INabuRoleMask;
  */
 trait TNabuRoleMaskList
 {
+    private $role_applied = false;
+
+    /**
+     * Applies Role policies to this list. All items that does not accomplishes the policies are removed.
+     * @param CNabuRole $nb_role Role instance to be applied.
+     * @param array $additional Additional data to be considered. The treatment of this data depends on the
+     * class representing each item.
+     * @return int Return the number of items that accomplished policies.
+     */
     public function applyRoleMask(CNabuRole $nb_role, array $additional = null)
     {
         $total = $this->getSize();
@@ -41,6 +50,13 @@ trait TNabuRoleMaskList
             return true;
         });
 
+        $this->role_applied = true;
+
         return $total === 0 || ($count > 0 && $count <= $total);
+    }
+
+    public function isEmpty()
+    {
+        return (!$this->role_applied) && parent::isEmpty();
     }
 }

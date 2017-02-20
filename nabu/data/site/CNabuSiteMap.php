@@ -130,6 +130,26 @@ class CNabuSiteMap extends CNabuSiteMapBase implements INabuDataObjectTreeNode, 
         return $this->is_current;
     }
 
+    /**
+     * Checks is this node is applicable for Work Customers.
+     * @return bool Returns true if is applicable.
+     */
+    public function isWorkCustomerRequired()
+    {
+        return $this->hasValue('nb_site_map_customer_required') &&
+               in_array($this->getValue('nb_site_map_customer_required'), array('B', 'T'));
+    }
+
+    /**
+     * Checks is this node is applicable without Work Customers.
+     * @return bool Returns true if is applicable.
+     */
+    public function isWorkCustomerNotRequired()
+    {
+        return $this->hasValue('nb_site_map_customer_required') &&
+               in_array($this->getValue('nb_site_map_customer_required'), array('B', 'F'));
+    }
+
     public function setSiteTarget(CNabuSiteTarget $nb_site_target, $field = NABU_SITE_TARGET_FIELD_ID)
     {
         $this->setUseURI(CNabuSiteTargetLink::USE_URI_TRANSLATED);
@@ -268,11 +288,18 @@ class CNabuSiteMap extends CNabuSiteMapBase implements INabuDataObjectTreeNode, 
         if ($nb_role_mask instanceof CNabuSiteMapRole) {
             if (is_array($additional) &&
                 array_key_exists(CNabuHTTPSecurityManager::ROLE_MASK_USER_SIGNED, $additional) &&
-                is_bool($additional[CNabuHTTPSecurityManager::ROLE_MASK_USER_SIGNED])
+                is_bool($additional[CNabuHTTPSecurityManager::ROLE_MASK_USER_SIGNED]) &&
+                (!array_key_exists(CNabuHTTPSecurityManager::ROLE_MASK_WORK_CUSTOMER, $additional) ||
+                 is_bool($additional[CNabuHTTPSecurityManager::ROLE_MASK_WORK_CUSTOMER])
+                )
             ) {
                 $user_signed = $additional[CNabuHTTPSecurityManager::ROLE_MASK_USER_SIGNED];
-                if (($user_signed && $nb_role_mask->isForPrivateZone()) ||
-                    (!$user_signed && $nb_role_mask->isForPublicZone())
+                $work_customer = array_key_exists(CNabuHTTPSecurityManager::ROLE_MASK_WORK_CUSTOMER, $additional) &&
+                    $additional[CNabuHTTPSecurityManager::ROLE_MASK_WORK_CUSTOMER];
+                if ((($user_signed && $nb_role_mask->isForPrivateZone()) ||
+                    (!$user_signed && $nb_role_mask->isForPublicZone())) &&
+                    (($work_customer && $this->isWorkCustomerRequired()) ||
+                     (!$work_customer && $this->isWorkCustomerNotRequired()))
                 ) {
                     $this->nb_site_map_role_list->addItem($nb_role_mask);
                     $this->nb_tree_child_list->applyRoleMask($nb_role, $additional);

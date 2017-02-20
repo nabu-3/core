@@ -431,10 +431,6 @@ class CNabuSite extends CNabuSiteBase
             ($this->nb_site_map_tree->isEmpty() || $force)
         ) {
             $this->nb_site_map_tree->populate();
-            /*
-            $this->nb_site_map_tree = CNabuSiteMap::getMapsForSite($this);
-            $this->nb_site_map_tree->sort();
-            */
         }
 
         return $this->nb_site_map_tree;

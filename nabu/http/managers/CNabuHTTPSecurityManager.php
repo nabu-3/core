@@ -54,6 +54,8 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
     const VAR_SESSION_WORK_CUSTOMER = 'nb_work_customer';
     /** @var string Role Mask key for additional param user_signed */
     const ROLE_MASK_USER_SIGNED = 'user_signed';
+    /** @var string Role Mask key for additional param work_customer */
+    const ROLE_MASK_WORK_CUSTOMER = 'work_customer';
 
     /** @var CNabuUser Contains the User instance that makes request. */
     private $nb_user;
@@ -134,6 +136,15 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
     }
 
     /**
+     * Checks if the Work Customer is defined.
+     * @return bool Returns true if a Work Customer instance is defined.
+     */
+    public function hasWorkCustomer()
+    {
+        return $this->nb_work_customer instanceof CNabuCustomer;
+    }
+
+    /**
      * Checks if a user is logged.
      * @return bool Returns true if the user is logged
      */
@@ -143,7 +154,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
     }
 
     /**
-     * Validate if current user or anonymous user if none user is nogged in can access to $nb_site_target.
+     * Validate if current user or anonymous user (if none user is nogged in) can access to $nb_site_target.
      * @param CNabuSite $nb_site Current Site that owns the target.
      * @param CNabuSiteTarget $nb_site_target Current Site Target to evaluate.
      * @return bool Returns true if the target is visible.
@@ -511,7 +522,8 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         return $object->applyRoleMask(
             $this->nb_role,
             array(
-                self::ROLE_MASK_USER_SIGNED => $this->isLogged()
+                self::ROLE_MASK_USER_SIGNED => $this->isLogged(),
+                self::ROLE_MASK_WORK_CUSTOMER => $this->hasWorkCustomer()
             )
         );
     }
