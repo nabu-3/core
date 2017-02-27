@@ -3,7 +3,7 @@
     "name": "nb_site",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "6",
+    "autoincrement": "3",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",
@@ -459,53 +459,9 @@
             "extra": "",
             "comment": ""
         },
-        "nb_site_batch_path": {
-            "name": "nb_site_batch_path",
-            "ordinal": "42",
-            "data_type": "varchar",
-            "precision": null,
-            "type": "varchar(200)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_site_phputils_path": {
-            "name": "nb_site_phputils_path",
-            "ordinal": "43",
-            "data_type": "varchar",
-            "precision": null,
-            "type": "varchar(200)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_site_classes_path": {
-            "name": "nb_site_classes_path",
-            "ordinal": "44",
-            "data_type": "varchar",
-            "precision": null,
-            "type": "varchar(200)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_site_plugins_path": {
-            "name": "nb_site_plugins_path",
-            "ordinal": "45",
-            "data_type": "varchar",
-            "precision": null,
-            "type": "varchar(200)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
         "nb_site_plugin_name": {
             "name": "nb_site_plugin_name",
-            "ordinal": "46",
+            "ordinal": "42",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(60)",
@@ -516,7 +472,7 @@
         },
         "nb_site_http_support": {
             "name": "nb_site_http_support",
-            "ordinal": "47",
+            "ordinal": "43",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -527,7 +483,7 @@
         },
         "nb_site_https_support": {
             "name": "nb_site_https_support",
-            "ordinal": "48",
+            "ordinal": "44",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -538,7 +494,7 @@
         },
         "nb_site_google_wmr_domain_id": {
             "name": "nb_site_google_wmr_domain_id",
-            "ordinal": "49",
+            "ordinal": "45",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(43)",
@@ -549,7 +505,7 @@
         },
         "nb_site_google_wmr_site_id": {
             "name": "nb_site_google_wmr_site_id",
-            "ordinal": "50",
+            "ordinal": "46",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(43)",
@@ -560,7 +516,7 @@
         },
         "nb_site_use_awstats": {
             "name": "nb_site_use_awstats",
-            "ordinal": "51",
+            "ordinal": "47",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -571,7 +527,7 @@
         },
         "nb_site_local_path": {
             "name": "nb_site_local_path",
-            "ordinal": "52",
+            "ordinal": "48",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(256)",
@@ -582,7 +538,7 @@
         },
         "nb_site_dynamic_cache_control": {
             "name": "nb_site_dynamic_cache_control",
-            "ordinal": "53",
+            "ordinal": "49",
             "data_type": "enum",
             "precision": null,
             "type": "enum('F','T')",
@@ -593,7 +549,7 @@
         },
         "nb_site_dynamic_cache_default_max_age": {
             "name": "nb_site_dynamic_cache_default_max_age",
-            "ordinal": "54",
+            "ordinal": "50",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -604,7 +560,7 @@
         },
         "nb_emailing_id": {
             "name": "nb_emailing_id",
-            "ordinal": "55",
+            "ordinal": "51",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -615,7 +571,7 @@
         },
         "nb_site_email_template_new_user": {
             "name": "nb_site_email_template_new_user",
-            "ordinal": "56",
+            "ordinal": "52",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -626,7 +582,7 @@
         },
         "nb_site_email_template_lost_password": {
             "name": "nb_site_email_template_lost_password",
-            "ordinal": "57",
+            "ordinal": "53",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -637,7 +593,7 @@
         },
         "nb_site_email_template_notify_new_user": {
             "name": "nb_site_email_template_notify_new_user",
-            "ordinal": "58",
+            "ordinal": "54",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -648,7 +604,7 @@
         },
         "nb_site_email_template_remember_new_user": {
             "name": "nb_site_email_template_remember_new_user",
-            "ordinal": "59",
+            "ordinal": "55",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -659,7 +615,7 @@
         },
         "nb_site_email_template_invite_user": {
             "name": "nb_site_email_template_invite_user",
-            "ordinal": "60",
+            "ordinal": "56",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -670,7 +626,7 @@
         },
         "nb_site_email_template_invite_friend": {
             "name": "nb_site_email_template_invite_friend",
-            "ordinal": "61",
+            "ordinal": "57",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -681,7 +637,7 @@
         },
         "nb_site_email_template_new_message": {
             "name": "nb_site_email_template_new_message",
-            "ordinal": "62",
+            "ordinal": "58",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -692,7 +648,7 @@
         },
         "nb_site_apache_personalized": {
             "name": "nb_site_apache_personalized",
-            "ordinal": "63",
+            "ordinal": "59",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -703,7 +659,7 @@
         },
         "nb_site_apache_last_update": {
             "name": "nb_site_apache_last_update",
-            "ordinal": "64",
+            "ordinal": "60",
             "data_type": "datetime",
             "precision": null,
             "type": "datetime",
@@ -714,7 +670,7 @@
         },
         "nb_site_apache_last_update_error": {
             "name": "nb_site_apache_last_update_error",
-            "ordinal": "65",
+            "ordinal": "61",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -725,7 +681,7 @@
         },
         "nb_site_wsearch_enabled": {
             "name": "nb_site_wsearch_enabled",
-            "ordinal": "66",
+            "ordinal": "62",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -736,7 +692,7 @@
         },
         "nb_site_use_framework": {
             "name": "nb_site_use_framework",
-            "ordinal": "67",
+            "ordinal": "63",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -747,7 +703,7 @@
         },
         "nb_site_enable_vhost_file": {
             "name": "nb_site_enable_vhost_file",
-            "ordinal": "68",
+            "ordinal": "64",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -758,7 +714,7 @@
         },
         "nb_site_session_timeout_interval": {
             "name": "nb_site_session_timeout_interval",
-            "ordinal": "69",
+            "ordinal": "65",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -769,7 +725,7 @@
         },
         "nb_site_session_preserve_interval": {
             "name": "nb_site_session_preserve_interval",
-            "ordinal": "70",
+            "ordinal": "66",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -780,7 +736,7 @@
         },
         "nb_site_enable_session_strict_policies": {
             "name": "nb_site_enable_session_strict_policies",
-            "ordinal": "71",
+            "ordinal": "67",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -791,7 +747,7 @@
         },
         "nb_site_static_content_use_alternative": {
             "name": "nb_site_static_content_use_alternative",
-            "ordinal": "72",
+            "ordinal": "68",
             "data_type": "enum",
             "precision": null,
             "type": "enum('D','E','B')",
@@ -802,7 +758,7 @@
         },
         "nb_site_base_path": {
             "name": "nb_site_base_path",
-            "ordinal": "73",
+            "ordinal": "69",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -813,7 +769,7 @@
         },
         "nb_site_modules_slots": {
             "name": "nb_site_modules_slots",
-            "ordinal": "74",
+            "ordinal": "70",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -824,7 +780,7 @@
         },
         "nb_site_notification_email": {
             "name": "nb_site_notification_email",
-            "ordinal": "75",
+            "ordinal": "71",
             "data_type": "text",
             "precision": null,
             "type": "text",

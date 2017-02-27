@@ -3,7 +3,7 @@
     "name": "nb_commerce_product_category",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "9",
+    "autoincrement": "1",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",

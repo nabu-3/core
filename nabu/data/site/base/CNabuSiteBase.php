@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/01/10 17:58:05 UTC
+ * Created: 2017/02/27 13:06:43 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -43,7 +43,7 @@ use \nabu\db\CNabuDBInternalObject;
 /**
  * Class to manage the entity Site stored in the storage named nb_site.
  * @author Rafael Gutiérrez Martínez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @version 3.0.11 Surface
  * @package \nabu\data\site\base
  */
 abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTranslated
@@ -1216,90 +1216,6 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setSmartyModelsPath($smarty_models_path)
     {
         $this->setValue('nb_site_smarty_models_path', $smarty_models_path);
-        
-        return $this;
-    }
-
-    /**
-     * Get Site Batch Path attribute value
-     * @return null|string Returns the Site Batch Path value
-     */
-    public function getBatchPath()
-    {
-        return $this->getValue('nb_site_batch_path');
-    }
-
-    /**
-     * Sets the Site Batch Path attribute value
-     * @param null|string $batch_path New value for attribute
-     * @return CNabuSiteBase Returns $this
-     */
-    public function setBatchPath($batch_path)
-    {
-        $this->setValue('nb_site_batch_path', $batch_path);
-        
-        return $this;
-    }
-
-    /**
-     * Get Site PHPUtils Path attribute value
-     * @return null|string Returns the Site PHPUtils Path value
-     */
-    public function getPHPUtilsPath()
-    {
-        return $this->getValue('nb_site_phputils_path');
-    }
-
-    /**
-     * Sets the Site PHPUtils Path attribute value
-     * @param null|string $phputils_path New value for attribute
-     * @return CNabuSiteBase Returns $this
-     */
-    public function setPHPUtilsPath($phputils_path)
-    {
-        $this->setValue('nb_site_phputils_path', $phputils_path);
-        
-        return $this;
-    }
-
-    /**
-     * Get Site Classes Path attribute value
-     * @return null|string Returns the Site Classes Path value
-     */
-    public function getClassesPath()
-    {
-        return $this->getValue('nb_site_classes_path');
-    }
-
-    /**
-     * Sets the Site Classes Path attribute value
-     * @param null|string $classes_path New value for attribute
-     * @return CNabuSiteBase Returns $this
-     */
-    public function setClassesPath($classes_path)
-    {
-        $this->setValue('nb_site_classes_path', $classes_path);
-        
-        return $this;
-    }
-
-    /**
-     * Get Site Plugins Path attribute value
-     * @return null|string Returns the Site Plugins Path value
-     */
-    public function getPluginsPath()
-    {
-        return $this->getValue('nb_site_plugins_path');
-    }
-
-    /**
-     * Sets the Site Plugins Path attribute value
-     * @param null|string $plugins_path New value for attribute
-     * @return CNabuSiteBase Returns $this
-     */
-    public function setPluginsPath($plugins_path)
-    {
-        $this->setValue('nb_site_plugins_path', $plugins_path);
         
         return $this;
     }

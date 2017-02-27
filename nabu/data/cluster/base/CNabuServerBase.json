@@ -3,7 +3,7 @@
     "name": "nb_server",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "3",
+    "autoincrement": "2",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",
@@ -63,53 +63,9 @@
             "extra": "",
             "comment": ""
         },
-        "nb_server_base_path": {
-            "name": "nb_server_base_path",
-            "ordinal": "6",
-            "data_type": "text",
-            "precision": null,
-            "type": "text",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_server_framework_path": {
-            "name": "nb_server_framework_path",
-            "ordinal": "7",
-            "data_type": "text",
-            "precision": null,
-            "type": "text",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_server_vhosts_path": {
-            "name": "nb_server_vhosts_path",
-            "ordinal": "8",
-            "data_type": "text",
-            "precision": null,
-            "type": "text",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_server_logs_path": {
-            "name": "nb_server_logs_path",
-            "ordinal": "9",
-            "data_type": "text",
-            "precision": null,
-            "type": "text",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
         "nb_server_notes": {
             "name": "nb_server_notes",
-            "ordinal": "10",
+            "ordinal": "6",
             "data_type": "text",
             "precision": null,
             "type": "text",

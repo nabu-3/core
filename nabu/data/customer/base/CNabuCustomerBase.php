@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/01/10 17:57:55 UTC
+ * Created: 2017/02/27 13:06:33 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -31,7 +31,7 @@ use \nabu\db\CNabuDBInternalObject;
 /**
  * Class to manage the entity Customer stored in the storage named nb_customer.
  * @author Rafael Gutiérrez Martínez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @version 3.0.11 Surface
  * @package \nabu\data\customer\base
  */
 abstract class CNabuCustomerBase extends CNabuDBInternalObject

@@ -22,7 +22,9 @@ namespace nabu\core\exceptions;
 /**
  * Exception to inform errors in Core processes.
  * @author Rafael Gutiérrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.11 Surface
+ * @package \nabu\core\exceptions
  */
 class ENabuCoreException extends ENabuException
 {

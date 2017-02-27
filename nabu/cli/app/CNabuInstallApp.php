@@ -25,64 +25,33 @@ use \providers\mysql\driver\EMySQLException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.11 Surface
+ * @package \nabu\cli\app
  */
 class CNabuInstallApp extends CNabuCLIApplication
 {
-    /**
-     * Silent mode. If true the install does not prompt confirmation to continue
-     * @var bool
-     */
+    /** @var bool $silent_mode Silent mode. If true the install does not prompt confirmation to continue */
     private $silent_mode = false;
-    /**
-     * Path to etc folder
-     * @var string
-     */
+    /** @var string $etc_path Path to etc folder */
     private $etc_path = NABU_ETC_PATH;
-    /**
-     * Base path of Nabu installation
-     * @var string
-     */
+    /** @var string $base_path Base path of Nabu installation */
     private $base_path = NABU_BASE_PATH;
-    /**
-     * Base path of Nabu web folders
-     * @var string
-     */
+    /** @var string $web_path Base path of Nabu web folders */
     private $web_path = NABU_WEB_PATH;
-    /**
-     * Path of Nabu log files
-     * @var string
-     */
+    /** @var string $log_path Path of Nabu log files */
     private $log_path = NABU_LOG_PATH;
-    /**
-     * Host to connect to MySQL Server
-     * @var string
-     */
+    /** @var string $mysql_server Host to connect to MySQL Server */
     private $mysql_server = '127.0.0.1';
-    /**
-     * Port to connect to MySQL Server
-     * @var string
-     */
-    private $mysql_port = '3306';
-    /**
-     * Schema name of Nabu database in MySQL Server
-     * @var string
-     */
+    /** @var int $mysql_port Port to connect to MySQL Server */
+    private $mysql_port = 3306;
+    /** @var string $mysql_schema Schema name of Nabu database in MySQL Server */
     private $mysql_schema = 'nabu-3';
-    /**
-     * User of MySQL Server to access to Nabu database
-     * @var string
-     */
+    /** @var string $mysql_user User of MySQL Server to access to Nabu database */
     private $mysql_user = 'nabu-3';
-    /**
-     * Password of MySQL Server User to access to Nabu database
-     * @var string
-     */
+    /** @var string $mysql_password Password of MySQL Server User to access to Nabu database */
     private $mysql_password = 'nabu-3';
-    /**
-     * MySQL Connector to manage Nabu database
-     * @var CMySQLConnector
-     */
+    /** @var CMySQLConnector $mysql_connector MySQL Connector to manage Nabu database */
     private $mysql_connector = null;
 
     public function prepareEnvironment()

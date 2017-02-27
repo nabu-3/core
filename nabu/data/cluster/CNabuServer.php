@@ -22,16 +22,23 @@ namespace nabu\data\cluster;
 use \nabu\data\cluster\base\CNabuServerBase;
 use \nabu\data\site\CNabuSite;
 use nabu\data\security\CNabuUser;
+use nabu\data\site\CNabuSiteList;
 
 /**
  * Class to extend management of table 'nb_server' where Servers are stored.
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.11 Surface
  */
 class CNabuServer extends CNabuServerBase
 {
+    /** @var $nb_admin_user Admin user instance of this server */
     private $nb_admin_user = null;
 
+    /**
+     * Get all available sites to be indexed in the Web Server
+     * @return CNabuSiteList Returns a list of all available sites if someone exists.
+     */
     public function getSitesIndex() {
 
         if ($this->isValueNumeric('nb_server_id')) {
@@ -53,12 +60,17 @@ class CNabuServer extends CNabuServerBase
                     array('server_id' => $this->getValue('nb_server_id'))
             );
         } else {
-            $retval = null;
+            $retval = new CNabuSiteList();
         }
 
         return $retval;
     }
 
+    /**
+     * Gets the Admin User instance of this server instance.
+     * @param bool $force If true forces to reload instance from the database storage.
+     * @return CNabuUser Retuns a User instance if a user is assigned or null if none.
+     */
     public function getAdminUser($force = false) {
 
         if ($this->nb_admin_user === null || $force) {
@@ -74,12 +86,21 @@ class CNabuServer extends CNabuServerBase
         return $this->nb_admin_user;
     }
 
+    /**
+     * Find a Host using a basic set of params.
+     * @param string $addr IP address of the Web Server.
+     * @param int $port TCP Port of the Web Server.
+     * @param string $server_name Server name or alias of the host.
+     * @return CNabuServer Returns a Server instance if someone is assigned to a server with same param coordinates.
+     */
     public static function findByHostParams($addr, $port, $server_name) {
 
         return CNabuServer::buildObjectFromSQL(
             "select se.*, sh.nb_server_host_id, cg.nb_cluster_group_id, cgs.nb_cluster_group_service_id, "
-                 . "s.nb_customer_id, s.nb_site_id, sa.nb_site_alias_id, dzh.nb_domain_zone_id, dzh.nb_domain_zone_host_id "
-            . "from nb_server se, nb_server_host sh, nb_ip i, nb_site s, nb_cluster_group cg, nb_cluster_group_service cgs, nb_site_alias_service sas, "
+                 . "s.nb_customer_id, s.nb_site_id, sa.nb_site_alias_id, dzh.nb_domain_zone_id, "
+                 . "dzh.nb_domain_zone_host_id "
+            . "from nb_server se, nb_server_host sh, nb_ip i, nb_site s, nb_cluster_group cg, "
+                 . "nb_cluster_group_service cgs, nb_site_alias_service sas, "
                  . "nb_site_alias sa, nb_domain_zone_host dzh, nb_domain_zone dz "
            . "where se.nb_server_id=sh.nb_server_id "
              . "and sh.nb_ip_id=i.nb_ip_id "
@@ -104,42 +125,33 @@ class CNabuServer extends CNabuServerBase
         );
     }
 
-    public static function findByDefaultHostParams($addr, $port, $server_name) {
-
-        $parts = explode('.', $server_name);
-        if (count($parts) > 0) {
-            $parts[0] = '*';
-            $final_name = implode('.', $parts);
-        } else {
-            return null;
-        }
-        return CNabuServer::buildObjectFromSQL(
-                "select se.*, sh.nb_server_host_id, cg.nb_cluster_group_id, cgs.nb_cluster_group_service_id, "
-                     . "s.nb_customer_id, s.nb_site_id, sa.nb_site_alias_id "
-                . "from nb_server se, nb_server_host sh, nb_ip i, nb_site s, nb_cluster_group cg, nb_cluster_group_service cgs, nb_site_alias_service sas, "
-                     . "nb_site_alias sa, nb_domain_zone_host dzh, nb_domain_zone dz "
-               . "where se.nb_server_id=sh.nb_server_id "
-                 . "and sh.nb_ip_id=i.nb_ip_id "
-                 . "and i.nb_ip_ip='%addr\$s' "
-                 . "and sh.nb_server_host_port=%port\$d "
-                 . "and sh.nb_cluster_group_id=cg.nb_cluster_group_id "
-                 . "and sh.nb_cluster_group_id=s.nb_cluster_group_id "
-                 . "and sh.nb_cluster_group_id=cgs.nb_cluster_group_id "
-                 . "and sh.nb_cluster_group_service_id=cgs.nb_cluster_group_service_id "
-                 . "and cgs.nb_cluster_group_service_id=sas.nb_cluster_group_service_id "
-                 . "and sas.nb_site_alias_id=sa.nb_site_alias_id "
-                 . "and sa.nb_site_id=s.nb_site_id "
-                 . "and sa.nb_domain_zone_host_id=dzh.nb_domain_zone_host_id "
-                 . "and dzh.nb_domain_zone_id=dz.nb_domain_zone_id "
-                 . "and dzh.nb_domain_zone_host_type in ('A', 'CNAME') "
-                 . "and concat(dzh.nb_domain_zone_host_name, '.', dz.nb_domain_zone_name)='%server_name\$s'",
-                array(
-                    'addr' => $addr,
-                    'port' => $port,
-                    'server_name' => $final_name
-                )
-        );
+    public function getFrameworkPath()
+    {
+        return NABU_BASE_PATH;
     }
 
+    public function getLogsPath()
+    {
+        return NABU_LOG_PATH . DIRECTORY_SEPARATOR . $this->getKey();
+    }
 
+    public function getVirtualHostsPath()
+    {
+        return NABU_VHOSTS_PATH;
+    }
+
+    public function getVirtualLibrariesPath()
+    {
+        return NABU_VLIB_PATH;
+    }
+
+    public function getVirtualCachePath()
+    {
+        return NABU_VCACHE_PATH;
+    }
+
+    public function getRuntimePath()
+    {
+        return NABU_RUNTIME_PATH;
+    }
 }

@@ -3,7 +3,7 @@
     "name": "nb_medioteca_item",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "203",
+    "autoincrement": "147",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",

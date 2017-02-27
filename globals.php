@@ -20,11 +20,11 @@
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
  * @since 3.0.0 Surface
- * @version 3.0.9 Surface
+ * @version 3.0.11 Surface
  */
 
 /* Main constants definition */
-define('NABU_VERSION', '3.0.9 Surface');
+define('NABU_VERSION', '3.0.10 Surface');
 define('NABU_OWNER', 'Where Ideas Simply Come True, S.L.');
 define('NABU_LICENSE_TITLE', 'Licensed under the Apache License, Version 2.0');
 define('NABU_LICENSE_TARGET', 'http://www.apache.org/licenses/LICENSE-2.0');
@@ -46,7 +46,7 @@ define('NABU_RUNTIME_FOLDER', DIRECTORY_SEPARATOR . 'runtime');
 define('NABU_COMMONDOCS_FOLDER', NABU_PUB_FOLDER . DIRECTORY_SEPARATOR . 'commondocs');
 define('NABU_HTTPDOCS_FOLDER', NABU_PUB_FOLDER . DIRECTORY_SEPARATOR . 'httpdocs');
 define('NABU_HTTPSDOCS_FOLDER', NABU_PUB_FOLDER . DIRECTORY_SEPARATOR . 'httpsdocs');
-define('NABU_SITE_PHP_FOLDER', NABU_SRC_FOLDER . DIRECTORY_SEPARATOR . 'php');
+define('NABU_PHP_FOLDER', NABU_SRC_FOLDER . DIRECTORY_SEPARATOR . 'php');
 define('NABU_VHOSTS_FOLDER', DIRECTORY_SEPARATOR . 'vhosts');
 define('NABU_CLASSES_FOLDER', DIRECTORY_SEPARATOR . 'classes');
 define('NABU_PLUGINS_FOLDER', DIRECTORY_SEPARATOR . 'plugins');
@@ -69,6 +69,8 @@ define('NABU_RUNTIME_PATH', NABU_PUB_PATH . NABU_RUNTIME_FOLDER);
 
 define('NABU_WEB_PATH', NABU_VAR_PATH);
 define('NABU_VHOSTS_PATH', NABU_WEB_PATH . NABU_VHOSTS_FOLDER);
+define('NABU_VLIB_PATH', NABU_WEB_PATH . NABU_LIB_FOLDER);
+define('NABU_VCACHE_PATH', NABU_WEB_PATH . NABU_CACHE_FOLDER);
 
 /* Engine constants */
 define('NABU_PATH_PARAM', '__x_nb_path');

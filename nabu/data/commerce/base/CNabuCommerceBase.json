@@ -3,7 +3,7 @@
     "name": "nb_commerce",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "5",
+    "autoincrement": "1",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",

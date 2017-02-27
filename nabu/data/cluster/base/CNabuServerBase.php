@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/01/10 17:57:57 UTC
+ * Created: 2017/02/27 13:06:35 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -32,7 +32,7 @@ use \nabu\db\CNabuDBInternalObject;
 /**
  * Class to manage the entity Server stored in the storage named nb_server.
  * @author Rafael Gutiérrez Martínez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @version 3.0.11 Surface
  * @package \nabu\data\cluster\base
  */
 abstract class CNabuServerBase extends CNabuDBInternalObject
@@ -258,90 +258,6 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
     public function setName($name)
     {
         $this->setValue('nb_server_name', $name);
-        
-        return $this;
-    }
-
-    /**
-     * Get Server Base Path attribute value
-     * @return null|string Returns the Server Base Path value
-     */
-    public function getBasePath()
-    {
-        return $this->getValue('nb_server_base_path');
-    }
-
-    /**
-     * Sets the Server Base Path attribute value
-     * @param null|string $base_path New value for attribute
-     * @return CNabuServerBase Returns $this
-     */
-    public function setBasePath($base_path)
-    {
-        $this->setValue('nb_server_base_path', $base_path);
-        
-        return $this;
-    }
-
-    /**
-     * Get Server Framework Path attribute value
-     * @return null|string Returns the Server Framework Path value
-     */
-    public function getFrameworkPath()
-    {
-        return $this->getValue('nb_server_framework_path');
-    }
-
-    /**
-     * Sets the Server Framework Path attribute value
-     * @param null|string $framework_path New value for attribute
-     * @return CNabuServerBase Returns $this
-     */
-    public function setFrameworkPath($framework_path)
-    {
-        $this->setValue('nb_server_framework_path', $framework_path);
-        
-        return $this;
-    }
-
-    /**
-     * Get Server VirtualHosts Path attribute value
-     * @return null|string Returns the Server VirtualHosts Path value
-     */
-    public function getVirtualHostsPath()
-    {
-        return $this->getValue('nb_server_vhosts_path');
-    }
-
-    /**
-     * Sets the Server VirtualHosts Path attribute value
-     * @param null|string $vhosts_path New value for attribute
-     * @return CNabuServerBase Returns $this
-     */
-    public function setVirtualHostsPath($vhosts_path)
-    {
-        $this->setValue('nb_server_vhosts_path', $vhosts_path);
-        
-        return $this;
-    }
-
-    /**
-     * Get Server Logs Path attribute value
-     * @return null|string Returns the Server Logs Path value
-     */
-    public function getLogsPath()
-    {
-        return $this->getValue('nb_server_logs_path');
-    }
-
-    /**
-     * Sets the Server Logs Path attribute value
-     * @param null|string $logs_path New value for attribute
-     * @return CNabuServerBase Returns $this
-     */
-    public function setLogsPath($logs_path)
-    {
-        $this->setValue('nb_server_logs_path', $logs_path);
         
         return $this;
     }

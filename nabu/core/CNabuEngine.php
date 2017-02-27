@@ -50,7 +50,8 @@ use providers\mysql\driver\CMySQLConnector;
  * The Engine manages the request and response objects, the Plugin Manager,
  * the Applications Manager and default database connectors.
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.11 Surface
  * @package \nabu\core
  */
 final class CNabuEngine extends CNabuObject implements INabuSingleton
@@ -322,55 +323,11 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
             $nb_site = $this->nb_http_server->getSite();
 
             if ($nb_site !== null) {
-                $vhosts = $nb_server->getVirtualHostsPath();
-                $base = $nb_site->getBasePath() . $nb_site->getPHPUtilsPath();
-
-                if (strlen($base) > 0 && is_dir($vhosts . $base)) {
-                    $classes = $nb_site->getClassesPath();
-                    $plugins = $nb_site->getPluginsPath();
-                    $filename = $vhosts . $base . $classes . $class_filename;
-                    if (!($retval = $this->requireOnce($filename, $class_name)) && $classes !== $plugins) {
-                        $filename = $vhosts . $base . $plugins . $class_filename;
-                        $retval = (strlen($plugins) > 0 && $this->requireOnce($filename, $class_name));
-                    }
+                $base = $nb_site->getVirtualHostPHPPath($nb_server);
+                if (is_dir($base)) {
+                    $filename = $base . $class_filename;
+                    $retval = $this->requireOnce($filename, $class_name);
                 }
-
-                /*
-                if ($this->nb_apps_manager !== null) {
-                    if (preg_match_all(
-                            '/^[\\\\]{0,1}pub\\\\apps\\\\([a-zA-Z][0-9a-zA-Z]*)\\\\plugins\\\\(.+)$/i',
-                            $class_name,
-                            $matches
-                        ) === 1
-                    ) {
-                        $plugins = $this->nb_apps_manager->getPluginsPathByNamespace($matches[1][0]);
-                        $filename = $plugins
-                                  . DIRECTORY_SEPARATOR
-                                  . 'plugin.'
-                                  . str_replace('plugin', '', $matches[2][0])
-                                  . '.php'
-                        ;
-                        if (strlen($plugins) > 0 && $this->requireOnce($filename, $class_name)) {
-                            return true;
-                        }
-                    }
-                    if (preg_match_all(
-                            '/^[\\\\]{0,1}pub\\\\apps\\\\([a-zA-Z][0-9a-zA-Z]*)\\\\(.+)$/i',
-                            $class_name,
-                            $matches
-                        ) === 1
-                    ) {
-                        $classes = $this->nb_apps_manager->getClassesPathByNamespace($matches[1][0]);
-                        $filename = $classes
-                                  . DIRECTORY_SEPARATOR
-                                  . str_replace('\\', DIRECTORY_SEPARATOR, $matches[2][0])
-                                  . '.php';
-                        if (strlen($classes) > 0 && $this->requireOnce($filename, $class_name)) {
-                            return true;
-                        }
-                    }
-                }
-                 */
             }
 
             if (!$retval && $nb_server !== null) {

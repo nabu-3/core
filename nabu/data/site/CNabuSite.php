@@ -33,7 +33,8 @@ use nabu\data\site\base\CNabuSiteBase;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.11 Surface
  * @package \nabu\data\site
  */
 
@@ -60,72 +61,33 @@ class CNabuSite extends CNabuSiteBase
     const DYNAMIC_CACHE_CONTROL_ENABLED = 'T';
     const DYNAMIC_CACHE_CONTROL_DISABLED = 'F';
 
-    /**
-     * Role is applied to Public Zone only.
-     * @var string
-     */
+    /** @var string ZONE_PUBLIC Role is applied to Public Zone only. */
     const ZONE_PUBLIC = 'O';
-    /**
-     * Role is applied to Private Zone only.
-     * @var string
-     */
+    /** @var string ZONE_PRIVATE Role is applied to Private Zone only. */
     const ZONE_PRIVATE = 'P';
-    /**
-     * Role is applied to both zones.
-     * @var string
-     */
+    /** @var string ZONE_BOTH Role is applied to both zones. */
     const ZONE_BOTH = 'B';
-    /**
-     * Role is disabled.
-     * @var string
-     */
+    /** @var string Role is disabled. */
     const ZONE_HIDDEN = 'H';
 
-    /**
-     * nabu-3 Cache Storage instance of this site
-     * @var INabuCacheStorage
-     */
+    /** @var INabuCacheStorage $cache_storage nabu-3 Cache Storage instance of this site. */
     private $cache_storage = null;
-    /**
-     * List of all Site Maps of first level.
-     * Other levels are indexed inside their parent level.
-     * @var CNabuSiteMapTree
-     */
+    /** @var CNabuSiteMapTree $nb_site_map_tree List of all Site Maps of first level. Other levels are indexed
+      * inside their parent level. */
     private $nb_site_map_tree = null;
-    /**
-     * List of all targets loaded in the Site
-     * @var CNabuSiteTargetList
-     */
+    /** @var CNabuSiteTargetList $nb_site_target_list List of all targets loaded in the Site. */
     private $nb_site_target_list = null;
-    /**
-     * List of all Static Content loaded in the Site
-     * @var CNabuSiteStaticContentList
-     */
+    /** @var CNabuSiteStaticContentList $nb_site_static_content_list List of all Static Content loaded in the Site. */
     private $nb_site_static_content_list = null;
-    /**
-     * Default language instance of this Site
-     * @var CNabuLanguage
-     */
+    /** @var CNabuLanguage $nb_default_language Default language instance of this Site. */
     private $nb_default_language = null;
-    /**
-     * Main Site Alias of this Site
-     * @var CNabuSiteAlias
-     */
+    /** @var CNabuSiteAlias $nb_site_main_alias Main Site Alias of this Site. */
     private $nb_site_main_alias = null;
-    /**
-     * Site Alias List of this Site
-     * @var CNabuSiteAliasList
-     */
+    /** @var CNabuSiteAliasList $nb_site_alias_list Site Alias List of this Site. */
     private $nb_site_alias_list = null;
-    /**
-     * Default Role of this Site
-     * @var CNabuRole
-     */
+    /** @var CNabuRole $nb_default_role Default Role of this Site. */
     private $nb_default_role = null;
-    /**
-     * Cluster User instance of this Site
-     * @var CNabuClusterUser
-     */
+    /** @var CNabuClusterUser $nb_cluster_user Cluster User instance of this Site. */
     private $nb_cluster_user = null;
 
     public function __construct($nb_site = false)
@@ -755,5 +717,61 @@ class CNabuSite extends CNabuSiteBase
         $trdata['static_content_keys'] = $this->getStaticContentKeysIndex();
 
         return $trdata;
+    }
+
+    /**
+     * Gets the valid Virtual Host path in a Server.
+     * @param CNabuServer $nb_server Server instance.
+     * @return string Retuns the fully qualified path.
+     */
+    public function getVirtualHostPath(CNabuServer $nb_server)
+    {
+        return $nb_server->getVirtualHostsPath() . DIRECTORY_SEPARATOR . $this->getBasePath();
+    }
+
+    /**
+     * Gets the valid Virtual Host Source path in a Server.
+     * @param CNabuServer $nb_server Server instance.
+     * @return string Retuns the fully qualified path.
+     */
+    public function getVirtualHostSourcePath(CNabuServer $nb_server)
+    {
+        return $nb_server->getVirtualHostsPath()
+             . DIRECTORY_SEPARATOR . $this->getBasePath()
+             . NABU_SRC_FOLDER
+        ;
+    }
+
+    /**
+     * Gets the valid Virtual Host PHP path in a Server.
+     * @param CNabuServer $nb_server Server instance.
+     * @return string Retuns the fully qualified path.
+     */
+    public function getVirtualHostPHPPath(CNabuServer $nb_server)
+    {
+        return $nb_server->getVirtualHostsPath()
+             . DIRECTORY_SEPARATOR . $this->getBasePath()
+             . NABU_PHP_FOLDER
+        ;
+    }
+
+    /**
+     * Gets the valid Virtual Library path in a Server.
+     * @param CNabuServer $nb_server Server instance.
+     * @return string Returns the fully qualified path.
+     */
+    public function getVirtualLibrariesPath(CNabuServer $nb_server)
+    {
+        return $nb_server->getVirtualLibrariesPath() . DIRECTORY_SEPARATOR . $this->getBasePath();
+    }
+
+    /**
+     * Gets the valid Virtual Cache path in a Server.
+     * @param CNabuServer $nb_server Server instance.
+     * @return string Returns the fully qualified path.
+     */
+    public function getVirtualCachePath(CNabuServer $nb_server)
+    {
+        return $nb_server->getVirtualCachePath() . DIRECTORY_SEPARATOR . $this->getBasePath();
     }
 }
