@@ -24,7 +24,7 @@
  */
 
 /* Main constants definition */
-define('NABU_VERSION', '3.0.10 Surface');
+define('NABU_VERSION', '3.0.12 Surface');
 define('NABU_OWNER', 'Where Ideas Simply Come True, S.L.');
 define('NABU_LICENSE_TITLE', 'Licensed under the Apache License, Version 2.0');
 define('NABU_LICENSE_TARGET', 'http://www.apache.org/licenses/LICENSE-2.0');
@@ -115,6 +115,9 @@ define('NABU_MEDIOTECA_FIELD_ID', 'nb_medioteca_id');
 
 define('NABU_CATALOG_TABLE', 'nb_catalog');
 define('NABU_CATALOG_FIELD_ID', 'nb_catalog_id');
+
+define('NABU_MESSAGING_TABLE', 'nb_messaging');
+define('NABU_MESSAGING_FIELD_ID', 'nb_messaging_id');
 
 /* Regular expression patterns */
 define('NABU_REGEXP_PATTERN_KEY', '^[a-zA-Z_][a-zA-Z0-9_]+$');

@@ -28,6 +28,8 @@ use nabu\data\commerce\CNabuCommerce;
 use nabu\data\commerce\CNabuCommerceList;
 use nabu\data\medioteca\CNabuMedioteca;
 use nabu\data\medioteca\CNabuMediotecaList;
+use nabu\data\messaging\CNabuMessaging;
+use nabu\data\messaging\CNabuMessagingList;
 use nabu\data\site\CNabuSite;
 use nabu\data\site\CNabuSiteList;
 
@@ -38,26 +40,21 @@ use nabu\data\site\CNabuSiteList;
  */
 class CNabuCustomer extends CNabuCustomerBase
 {
-    /**
-     * List of Mediotecas. This list can be filled only with requested Mediotecas (on demand) or with a full list.
-     * @var CNabuMediotecaList
-     */
+    /** @var CNabuMediotecaList $nb_medioteca_list List of Mediotecas. This list can be filled only with requested
+     * Mediotecas (on demand) or with a full list. */
     private $nb_medioteca_list;
-    /**
-     * Lit of Sites. This list can be filled only with requested Sites (on demand) or with a full list.
-     * @var CNabuSiteList
-     */
+    /** @var CNabuSiteList $nb_site_list List of Sites. This list can be filled only with requested Sites (on demand)
+     * or with a full list. */
     private $nb_site_list;
-    /**
-     * List of Commerces. This list can be filled only with requested Commerces (on demand) or with a full list.
-     * @var CNabuCommerceList
-     */
+    /** @var CNabuCommerceList $nb_commerce_list List of Commerces. This list can be filled only with requested
+     * Commerces (on demand) or with a full list. */
     private $nb_commerce_list;
-    /**
-     * List of Catalogs. This list can be filled only with requested Catalogs (on demand) or with a full list.
-     * @var CNabuCatalogList
-     */
+    /** @var CNabuCatalogList $nb_catalog_list List of Catalogs. This list can be filled only with requested
+     * Catalogs (on demand) or with a full list. */
     private $nb_catalog_list;
+    /** @var CNabuMessagingList $nb_messaging_list List of Messaging. This list can be filled only with requested
+     * Messagings (on demand) or with a full list. */
+    private $nb_messaging_list;
 
     /**
      * Creates the instance and initializes class variables.
@@ -72,6 +69,7 @@ class CNabuCustomer extends CNabuCustomerBase
         $this->nb_site_list = new CNabuSiteList($this);
         $this->nb_commerce_list = new CNabuCommerceList($this);
         $this->nb_catalog_list = new CNabuCatalogList($this);
+        $this->nb_messaging_list = new CNabuMessagingList($this);
     }
 
     /**
@@ -271,5 +269,20 @@ class CNabuCustomer extends CNabuCustomerBase
     public function getCatalogSetUsedLanguages()
     {
         return CNabuCatalog::getCustomerUsedLanguages($this);
+    }
+
+    /**
+     * Gets available Messaging instances in the list.
+     * @param bool $force If true, foces to merge complete list from the storage.
+     * @return array Returns an associative array where the index is the ID of each Catalog and the value
+     * is the instance.
+     */
+    public function getMessagings($force = false)
+    {
+        if ($force) {
+            $this->nb_messaging_list->merge(CNabuMessaging::getAllMessagings($this));
+        }
+
+        return $this->nb_messaging_list->getItems();
     }
 }

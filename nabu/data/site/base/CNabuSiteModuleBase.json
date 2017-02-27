@@ -1,0 +1,100 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_site_module",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": null,
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_site_id": {
+            "name": "nb_site_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_module_id": {
+            "name": "nb_site_module_id",
+            "ordinal": "2",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_module_status": {
+            "name": "nb_site_module_status",
+            "ordinal": "3",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('E','D')",
+            "default": "D",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "\u2018E\u2019 = Enabled\n\u2018D\u2019 = Disabled"
+        },
+        "nb_site_module_error_reporting": {
+            "name": "nb_site_module_error_reporting",
+            "ordinal": "4",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "0",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_module_debugging": {
+            "name": "nb_site_module_debugging",
+            "ordinal": "5",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "\u2019T\u2019 = True\n\u2018F\u2019 = False"
+        },
+        "nb_site_module_attributes": {
+            "name": "nb_site_module_attributes",
+            "ordinal": "6",
+            "data_type": "longtext",
+            "precision": null,
+            "type": "longtext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_site_id": {
+                    "name": "nb_site_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                },
+                "nb_site_module_id": {
+                    "name": "nb_site_module_id",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        }
+    }
+}
