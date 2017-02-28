@@ -758,6 +758,11 @@ class CNabuHTTPRequest extends CNabuObject
                (is_array($this->xdr_post) && array_key_exists($field_name, $this->xdr_post));
     }
 
+    public function getPOSTFieldNames()
+    {
+        return count($_POST) > 0 ? array_keys($_POST) : null;
+    }
+
     public function hasREQUESTField($field_name)
     {
         return array_key_exists($field_name, $_REQUEST);
@@ -811,38 +816,50 @@ class CNabuHTTPRequest extends CNabuObject
         return $this;
     }
 
-    public function updateObjectFromPost($object, $fields, $def_values = false, $null_values = false) {
-
-        if ($object === null) {
-            return false;
-        }
-
-        if (!($object instanceof CNabuDataObject)) {
-            throw new ENabuCoreException(
-                ENabuCoreException::ERROR_UNEXPECTED_OBJECT_CLASS_TYPE,
-                array(get_class($object))
-            );
-        }
-
+    /**
+     * Get all index key values of parameters containing arrays.
+     * @param array $fields List of fields to be observed. If empty (null) then scan all fields.
+     * @return array Returns an array containing all available fields without duplicates or null if none index is found.
+     */
+    public function getCombinedPostIndexes(array $fields = null)
+    {
         if ($fields === null) {
-            throw new ENabuCoreException(
-                ENabuCoreException::ERROR_METHOD_PARAMETER_IS_EMPTY,
-                array('updateObjectFromGet', '$fields')
-            );
+            $fields = $this->getPOSTFieldNames();
         }
 
-        if (!is_array($fields)) {
-            throw new ENabuCoreException(
-                ENabuCoreException::ERROR_METHOD_PARAMETER_NOT_VALID,
-                array('$fields', print_r($fields, true))
-            );
+        $keys = array();
+
+        if (count($fields) > 0) {
+            foreach ($fields as $field) {
+                if (array_key_exists($field, $_POST) && is_array($_POST[$field])) {
+                    $keys = array_merge($keys, array_keys($_POST[$field]));
+                }
+            }
+            $keys = array_unique($keys);
         }
 
+        return count($keys) > 0 ? $keys : null;
+    }
+
+    public function updateObjectFromPost(
+        CNabuDataObject $object,
+        array $fields,
+        array $def_values = null,
+        array $null_values = null,
+        string $index = null
+    ) {
         $total = 0;
 
         foreach($fields as $key=>$value) {
             if ($this->hasPOSTField($key)) {
                 $final = $this->getPOSTField($key);
+                if ($index !== null && is_array($final)) {
+                    if (array_key_exists($index, $final)) {
+                        $final = $final[$index];
+                    } else {
+                        unset($final);
+                    }
+                }
             } else if ($def_values && count($def_values) > 0 && array_key_exists($key, $def_values)) {
                 $final = $def_values[$key];
             }

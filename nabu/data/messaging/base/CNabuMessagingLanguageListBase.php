@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/02/28 18:06:47 UTC
+ * Created: 2017/02/28 18:07:31 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -22,33 +22,26 @@
  * limitations under the License.
  */
 
-namespace nabu\data\site\base;
+namespace nabu\data\messaging\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\data\CNabuDataObjectList;
-use \nabu\data\CNabuDataObjectListIndex;
-use \nabu\data\site\CNabuSite;
+use \nabu\data\messaging\CNabuMessaging;
 
 /**
- * Class to manage a list of Site instances.
+ * Class to manage a list of Messaging Language instances.
  * @author Rafael Gutiérrez Martínez <rgutierrez@wiscot.com>
  * @version 3.0.12 Surface
- * @package \nabu\data\site\base
+ * @package \nabu\data\messaging\base
  */
-abstract class CNabuSiteListBase extends CNabuDataObjectList
+abstract class CNabuMessagingLanguageListBase extends CNabuDataObjectList
 {
-    /**
-     * Index the list using the key field.
-     * @var string
-     */
-    const INDEX_KEY = "keys";
-
     /**
      * Instantiates the class.
      */
     public function __construct()
     {
-        parent::__construct('nb_site_id');
+        parent::__construct('nb_language_id');
     }
 
     /**
@@ -56,13 +49,10 @@ abstract class CNabuSiteListBase extends CNabuDataObjectList
      */
     protected function createSecondaryIndexes()
     {
-        $this->addIndex(
-            new CNabuDataObjectListIndex($this, 'nb_site_key', 'nb_site_order', self::INDEX_KEY)
-        );
     }
 
     /**
-     * Acquires an instance of class CNabuSite from the database.
+     * Acquires an instance of class CNabuMessaging from the database.
      * @param string $key Id or reference field in the instance to acquire.
      * @param string $index Secondary index to be used if needed.
      * @return mixed Returns the unserialized instance if exists or false if not.
@@ -72,7 +62,7 @@ abstract class CNabuSiteListBase extends CNabuDataObjectList
         $retval = false;
         
         if ($index === false && CNabuEngine::getEngine()->isMainDBAvailable()) {
-            $item = new CNabuSite($key);
+            $item = new CNabuMessaging($key);
             if ($item->isFetched()) {
                 $retval = $item;
             }

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/02/28 18:07:22 UTC
+ * Created: 2017/02/28 18:07:31 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -22,39 +22,39 @@
  * limitations under the License.
  */
 
-namespace nabu\data\catalog\base;
+namespace nabu\data\messaging\base;
 
 use \nabu\core\exceptions\ENabuCoreException;
-use \nabu\data\catalog\CNabuCatalogTagLanguage;
-use \nabu\data\catalog\CNabuCatalogTagLanguageList;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslation;
 use \nabu\data\lang\traits\TNabuTranslation;
+use \nabu\data\messaging\CNabuMessagingLanguage;
+use \nabu\data\messaging\CNabuMessagingLanguageList;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
- * Class to manage the entity Catalog Tag Language stored in the storage named nb_catalog_tag_lang.
+ * Class to manage the entity Messaging Language stored in the storage named nb_messaging_lang.
  * @author Rafael Gutiérrez Martínez <rgutierrez@wiscot.com>
  * @version 3.0.12 Surface
- * @package \nabu\data\catalog\base
+ * @package \nabu\data\messaging\base
  */
-abstract class CNabuCatalogTagLanguageBase extends CNabuDBInternalObject implements INabuTranslation
+abstract class CNabuMessagingLanguageBase extends CNabuDBInternalObject implements INabuTranslation
 {
     use TNabuTranslation;
 
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
      * the instance is deserialized from the storage.
-     * @param mixed $nb_catalog_tag An instance of CNabuCatalogTagLanguageBase or another object descending from
-     * \nabu\data\CNabuDataObject which contains a field named nb_catalog_tag_id, or a valid ID.
-     * @param mixed $nb_language An instance of CNabuCatalogTagLanguageBase or another object descending from
+     * @param mixed $nb_messaging An instance of CNabuMessagingLanguageBase or another object descending from
+     * \nabu\data\CNabuDataObject which contains a field named nb_messaging_id, or a valid ID.
+     * @param mixed $nb_language An instance of CNabuMessagingLanguageBase or another object descending from
      * \nabu\data\CNabuDataObject which contains a field named nb_language_id, or a valid ID.
      */
-    public function __construct($nb_catalog_tag = false, $nb_language = false)
+    public function __construct($nb_messaging = false, $nb_language = false)
     {
-        if ($nb_catalog_tag) {
-            $this->transferMixedValue($nb_catalog_tag, 'nb_catalog_tag_id');
+        if ($nb_messaging) {
+            $this->transferMixedValue($nb_messaging, 'nb_messaging_id');
         }
         
         if ($nb_language) {
@@ -79,7 +79,7 @@ abstract class CNabuCatalogTagLanguageBase extends CNabuDBInternalObject impleme
      */
     public static function getStorageName()
     {
-        return 'nb_catalog_tag_lang';
+        return 'nb_messaging_lang';
     }
 
     /**
@@ -88,11 +88,11 @@ abstract class CNabuCatalogTagLanguageBase extends CNabuDBInternalObject impleme
      */
     public function getSelectRegister()
     {
-        return ($this->isValueNumeric('nb_catalog_tag_id') && $this->isValueNumeric('nb_language_id'))
+        return ($this->isValueNumeric('nb_messaging_id') && $this->isValueNumeric('nb_language_id'))
             ? $this->buildSentence(
                     'select * '
-                    . 'from nb_catalog_tag_lang '
-                   . "where nb_catalog_tag_id=%nb_catalog_tag_id\$d "
+                    . 'from nb_messaging_lang '
+                   . "where nb_messaging_id=%nb_messaging_id\$d "
                      . "and nb_language_id=%nb_language_id\$d "
               )
             : null;
@@ -108,21 +108,21 @@ abstract class CNabuCatalogTagLanguageBase extends CNabuDBInternalObject impleme
      */
     public static function getLanguagesForTranslatedObject($translated)
     {
-        $nb_catalog_tag_id = nb_getMixedValue(
+        $nb_messaging_id = nb_getMixedValue(
                 $translated,
-                'nb_catalog_tag_id',
-                '\\nabu\\data\\catalog\\CNabuCatalogTag'
+                'nb_messaging_id',
+                '\\nabu\\data\\messaging\\CNabuMessaging'
         );
-        if (is_numeric($nb_catalog_tag_id)) {
+        if (is_numeric($nb_messaging_id)) {
             $retval = CNabuLanguage::buildObjectListFromSQL(
                     'nb_language_id',
                     'select l.* '
-                    . 'from nb_language l, nb_catalog_tag t1, nb_catalog_tag_lang t2 '
-                   . 'where t1.nb_catalog_tag_id=t2.nb_catalog_tag_id '
-                     . 'and t1.nb_catalog_tag_id=%nb_catalog_tag_id$d '
+                    . 'from nb_language l, nb_messaging t1, nb_messaging_lang t2 '
+                   . 'where t1.nb_messaging_id=t2.nb_messaging_id '
+                     . 'and t1.nb_messaging_id=%nb_messaging_id$d '
                      . 'and l.nb_language_id=t2.nb_language_id ',
                     array(
-                        'nb_catalog_tag_id' => $nb_catalog_tag_id
+                        'nb_messaging_id' => $nb_messaging_id
                     )
             );
         } else {
@@ -134,28 +134,28 @@ abstract class CNabuCatalogTagLanguageBase extends CNabuDBInternalObject impleme
 
     /**
      * Query the storage to retrieve the full list of available translations for $translated and returns an associative
-     * array in which each one is of class \nabu\data\catalog\CNabuCatalogTagLanguage.
+     * array in which each one is of class \nabu\data\messaging\CNabuMessagingLanguage.
      * @param object $translated Translated object to retrieve translations
      * @return false|null|array Returns an associative array indexed by the language Id, null if no languages are
      * available, or false if $translated cannot be identified.
      */
     public static function getTranslationsForTranslatedObject($translated)
     {
-        $nb_catalog_tag_id = nb_getMixedValue(
+        $nb_messaging_id = nb_getMixedValue(
                 $translated,
-                'nb_catalog_tag_id',
-                '\\nabu\\data\\catalog\\CNabuCatalogTag'
+                'nb_messaging_id',
+                '\\nabu\\data\\messaging\\CNabuMessaging'
         );
-        if (is_numeric($nb_catalog_tag_id)) {
-            $retval = CNabuCatalogTagLanguage::buildObjectListFromSQL(
+        if (is_numeric($nb_messaging_id)) {
+            $retval = CNabuMessagingLanguage::buildObjectListFromSQL(
                     'nb_language_id',
                     'select t2.* '
-                    . 'from nb_language l, nb_catalog_tag t1, nb_catalog_tag_lang t2 '
-                   . 'where t1.nb_catalog_tag_id=t2.nb_catalog_tag_id '
-                     . 'and t1.nb_catalog_tag_id=%nb_catalog_tag_id$d '
+                    . 'from nb_language l, nb_messaging t1, nb_messaging_lang t2 '
+                   . 'where t1.nb_messaging_id=t2.nb_messaging_id '
+                     . 'and t1.nb_messaging_id=%nb_messaging_id$d '
                      . 'and l.nb_language_id=t2.nb_language_id ',
                     array(
-                        'nb_catalog_tag_id' => $nb_catalog_tag_id
+                        'nb_messaging_id' => $nb_messaging_id
                     )
             );
             $retval->iterate(
@@ -164,35 +164,35 @@ abstract class CNabuCatalogTagLanguageBase extends CNabuDBInternalObject impleme
                 }
             );
         } else {
-            $retval = new CNabuCatalogTagLanguageList();
+            $retval = new CNabuMessagingLanguageList();
         }
         
         return $retval;
     }
 
     /**
-     * Get Catalog Tag Id attribute value
-     * @return int Returns the Catalog Tag Id value
+     * Get Messaging Id attribute value
+     * @return int Returns the Messaging Id value
      */
-    public function getCatalogTagId()
+    public function getMessagingId()
     {
-        return $this->getValue('nb_catalog_tag_id');
+        return $this->getValue('nb_messaging_id');
     }
 
     /**
-     * Sets the Catalog Tag Id attribute value
-     * @param int $nb_catalog_tag_id New value for attribute
-     * @return CNabuCatalogTagLanguageBase Returns $this
+     * Sets the Messaging Id attribute value
+     * @param int $nb_messaging_id New value for attribute
+     * @return CNabuMessagingLanguageBase Returns $this
      */
-    public function setCatalogTagId($nb_catalog_tag_id)
+    public function setMessagingId($nb_messaging_id)
     {
-        if ($nb_catalog_tag_id === null) {
+        if ($nb_messaging_id === null) {
             throw new ENabuCoreException(
                     ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
-                    array("\$nb_catalog_tag_id")
+                    array("\$nb_messaging_id")
             );
         }
-        $this->setValue('nb_catalog_tag_id', $nb_catalog_tag_id);
+        $this->setValue('nb_messaging_id', $nb_messaging_id);
         
         return $this;
     }
@@ -209,7 +209,7 @@ abstract class CNabuCatalogTagLanguageBase extends CNabuDBInternalObject impleme
     /**
      * Sets the Language Id attribute value
      * @param int $nb_language_id New value for attribute
-     * @return CNabuCatalogTagLanguageBase Returns $this
+     * @return CNabuMessagingLanguageBase Returns $this
      */
     public function setLanguageId($nb_language_id)
     {
@@ -225,106 +225,49 @@ abstract class CNabuCatalogTagLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Get Catalog Tag Lang Slug attribute value
-     * @return null|string Returns the Catalog Tag Lang Slug value
+     * Get Messaging Lang Templates Status attribute value
+     * @return string Returns the Messaging Lang Templates Status value
      */
-    public function getSlug()
+    public function getTemplatesStatus()
     {
-        return $this->getValue('nb_catalog_tag_lang_slug');
+        return $this->getValue('nb_messaging_lang_templates_status');
     }
 
     /**
-     * Sets the Catalog Tag Lang Slug attribute value
-     * @param null|string $slug New value for attribute
-     * @return CNabuCatalogTagLanguageBase Returns $this
+     * Sets the Messaging Lang Templates Status attribute value
+     * @param string $templates_status New value for attribute
+     * @return CNabuMessagingLanguageBase Returns $this
      */
-    public function setSlug($slug)
+    public function setTemplatesStatus($templates_status)
     {
-        $this->setValue('nb_catalog_tag_lang_slug', $slug);
+        if ($templates_status === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$templates_status")
+            );
+        }
+        $this->setValue('nb_messaging_lang_templates_status', $templates_status);
         
         return $this;
     }
 
     /**
-     * Get Catalog Tag Lang Title attribute value
-     * @return null|string Returns the Catalog Tag Lang Title value
+     * Get Messaging Lang Name attribute value
+     * @return null|string Returns the Messaging Lang Name value
      */
-    public function getTitle()
+    public function getName()
     {
-        return $this->getValue('nb_catalog_tag_lang_title');
+        return $this->getValue('nb_messaging_lang_name');
     }
 
     /**
-     * Sets the Catalog Tag Lang Title attribute value
-     * @param null|string $title New value for attribute
-     * @return CNabuCatalogTagLanguageBase Returns $this
+     * Sets the Messaging Lang Name attribute value
+     * @param null|string $name New value for attribute
+     * @return CNabuMessagingLanguageBase Returns $this
      */
-    public function setTitle($title)
+    public function setName($name)
     {
-        $this->setValue('nb_catalog_tag_lang_title', $title);
-        
-        return $this;
-    }
-
-    /**
-     * Get Catalog Tag Lang Image attribute value
-     * @return null|string Returns the Catalog Tag Lang Image value
-     */
-    public function getImage()
-    {
-        return $this->getValue('nb_catalog_tag_lang_image');
-    }
-
-    /**
-     * Sets the Catalog Tag Lang Image attribute value
-     * @param null|string $image New value for attribute
-     * @return CNabuCatalogTagLanguageBase Returns $this
-     */
-    public function setImage($image)
-    {
-        $this->setValue('nb_catalog_tag_lang_image', $image);
-        
-        return $this;
-    }
-
-    /**
-     * Get Catalog Tag Lang Alternate attribute value
-     * @return null|string Returns the Catalog Tag Lang Alternate value
-     */
-    public function getAlternate()
-    {
-        return $this->getValue('nb_catalog_tag_lang_alternate');
-    }
-
-    /**
-     * Sets the Catalog Tag Lang Alternate attribute value
-     * @param null|string $alternate New value for attribute
-     * @return CNabuCatalogTagLanguageBase Returns $this
-     */
-    public function setAlternate($alternate)
-    {
-        $this->setValue('nb_catalog_tag_lang_alternate', $alternate);
-        
-        return $this;
-    }
-
-    /**
-     * Get Catalog Tag Lang Anchor Text attribute value
-     * @return null|string Returns the Catalog Tag Lang Anchor Text value
-     */
-    public function getAnchorText()
-    {
-        return $this->getValue('nb_catalog_tag_lang_anchor_text');
-    }
-
-    /**
-     * Sets the Catalog Tag Lang Anchor Text attribute value
-     * @param null|string $anchor_text New value for attribute
-     * @return CNabuCatalogTagLanguageBase Returns $this
-     */
-    public function setAnchorText($anchor_text)
-    {
-        $this->setValue('nb_catalog_tag_lang_anchor_text', $anchor_text);
+        $this->setValue('nb_messaging_lang_name', $name);
         
         return $this;
     }

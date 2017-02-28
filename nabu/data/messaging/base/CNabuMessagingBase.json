@@ -3,7 +3,7 @@
     "name": "nb_messaging",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "1",
+    "autoincrement": "2",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",
@@ -24,7 +24,7 @@
             "ordinal": "2",
             "data_type": "varchar",
             "precision": null,
-            "type": "varchar(32)",
+            "type": "varchar(38)",
             "default": null,
             "is_nullable": true,
             "extra": "",
@@ -86,6 +86,22 @@
                     "name": "nb_messaging_id",
                     "ordinal": "1",
                     "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_messsaging_hash": {
+            "name": "nb_messsaging_hash",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_messaging_hash": {
+                    "name": "nb_messaging_hash",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
                     "comments": ""
                 }
             }

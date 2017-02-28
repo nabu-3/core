@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/02/27 16:28:50 UTC
+ * Created: 2017/02/28 18:07:30 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -26,9 +26,17 @@ namespace nabu\data\messaging\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\customer\CNabuCustomer;
 use \nabu\data\customer\traits\TNabuCustomerChild;
+use \nabu\data\lang\CNabuLanguage;
+use \nabu\data\lang\CNabuLanguageList;
+use \nabu\data\lang\interfaces\INabuTranslated;
+use \nabu\data\lang\interfaces\INabuTranslation;
+use \nabu\data\lang\traits\TNabuTranslated;
+use \nabu\data\messaging\builtin\CNabuBuiltInMessagingLanguage;
 use \nabu\data\messaging\CNabuMessaging;
+use \nabu\data\messaging\CNabuMessagingLanguage;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -37,9 +45,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\messaging\base
  */
-abstract class CNabuMessagingBase extends CNabuDBInternalObject
+abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabuTranslated
 {
     use TNabuCustomerChild;
+    use TNabuTranslated;
 
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
@@ -54,6 +63,7 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject
         }
         
         parent::__construct();
+        $this->__translatedConstruct();
     }
 
     /**
@@ -188,6 +198,106 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject
     }
 
     /**
+     * Check if the instance passed as parameter $translation is a valid child translation for this object
+     * @param INabuTranslation $translation Translation instance to check
+     * @return bool Return true if a valid object is passed as instance or false elsewhere
+     */
+    protected function checkForValidTranslationInstance($translation)
+    {
+        return ($translation !== null &&
+                $translation instanceof CNabuMessagingLanguage &&
+                $translation->matchValue($this, 'nb_messaging_id')
+        );
+    }
+
+    /**
+     * Get all language instances corresponding to available translations.
+     * @param bool $force If true force to reload languages list from storage.
+     * @return null|array Return an array of \nabu\data\lang\CNabuLanguage instances if they have translations or null
+     * if not.
+     */
+    public function getLanguages($force = false)
+    {
+        if (!CNabuEngine::getEngine()->isOperationModeStandalone() &&
+            ($this->languages_list->getSize() === 0 || $force)
+        ) {
+            $this->languages_list = CNabuMessagingLanguage::getLanguagesForTranslatedObject($this);
+        }
+        
+        return $this->languages_list;
+    }
+
+    /**
+     * Gets available translation instances.
+     * @param bool $force If true force to reload translations list from storage.
+     * @return null|array Return an array of \nabu\data\messaging\CNabuMessagingLanguage instances if they have
+     * translations or null if not.
+     */
+    public function getTranslations($force = false)
+    {
+        if (!CNabuEngine::getEngine()->isOperationModeStandalone() &&
+            ($this->translations_list->getSize() === 0 || $force)
+        ) {
+            $this->translations_list = CNabuMessagingLanguage::getTranslationsForTranslatedObject($this);
+        }
+        
+        return $this->translations_list;
+    }
+
+    /**
+     * Creates a new translation instance. I the translation already exists then replaces ancient translation with this
+     * new.
+     * @param int|string|CNabuDataObject $nb_language A valid Id or object containing a nb_language_id field to
+     * identify the language of new translation.
+     * @return CNabuMessagingLanguage Returns the created instance to store translation or null if not valid language
+     * was provided.
+     */
+    public function newTranslation($nb_language)
+    {
+        $nb_language_id = nb_getMixedValue($nb_language, NABU_LANG_FIELD_ID);
+        if (is_numeric($nb_language_id) || nb_isValidGUID($nb_language_id)) {
+            $nb_translation = $this->isBuiltIn()
+                            ? new CNabuBuiltInMessagingLanguage()
+                            : new CNabuMessagingLanguage()
+            ;
+            $nb_translation->transferValue($this, 'nb_messaging_id');
+            $nb_translation->transferValue($nb_language, NABU_LANG_FIELD_ID);
+            $this->setTranslation($nb_translation);
+        } else {
+            $nb_translation = null;
+        }
+        
+        return $nb_translation;
+    }
+
+    /**
+     * Get all language instances used along of all Messaging set of a Customer
+     * @param mixed $nb_customer A CNabuDataObject instance containing a field named nb_customer_id or a Customer ID
+     * @return CNabuLanguageList Returns the list of language instances used.
+     */
+    public static function getCustomerUsedLanguages($nb_customer)
+    {
+        $nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID);
+        if (is_numeric($nb_customer_id)) {
+            $nb_language_list = CNabuLanguage::buildObjectListFromSQL(
+                'nb_language_id',
+                'select l.* '
+                . 'from nb_language l, '
+                     . '(select distinct nb_language_id '
+                        . 'from nb_catalog ca, nb_catalog_lang cal '
+                       . 'where ca.nb_catalog_id=cal.nb_catalog_id '
+                         . 'and ca.nb_customer_id=%cust_id$d) as lid '
+               . 'where l.nb_language_id=lid.nb_language_id',
+                array('cust_id' => $nb_customer_id)
+            );
+        } else {
+            $nb_language_list = new CNabuLanguageList();
+        }
+        
+        return $nb_language_list;
+    }
+
+    /**
      * Get Messaging Id attribute value
      * @return int Returns the Messaging Id value
      */
@@ -317,5 +427,20 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject
         $this->setValue('nb_messaging_name', $name);
         
         return $this;
+    }
+
+    /**
+     * Overrides this method to add support to traits and/or attributes.
+     * @param int|CNabuDataObject $nb_language Instance or Id of the language to be used.
+     * @param bool $dataonly Render only field values and ommit class control flags.
+     * @return array Returns a multilevel associative array with all data.
+     */
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $trdata = parent::getTreeData($nb_language, $dataonly);
+        
+        $trdata = $this->appendTranslatedTreeData($trdata, $nb_language, $dataonly);
+        
+        return $trdata;
     }
 }
