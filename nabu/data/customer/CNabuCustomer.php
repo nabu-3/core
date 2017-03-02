@@ -285,4 +285,40 @@ class CNabuCustomer extends CNabuCustomerBase
 
         return $this->nb_messaging_list->getItems();
     }
+
+    /**
+     * Gets a Messaging by their ID.
+     * If the internal Messaging List contains a instance with same ID returns this instance, else if not exists,
+     * tries to locate it in the storage and, if exits, the load it, add into Messaging List and returns their
+     * instance as result.
+     * @param mixed $nb_messaging A CNabuDataObject instance containing a nb_messaging_id field or an ID.
+     * @return CNabuMessaging Returns the Messaging instance if exists or false if not.
+     * @throws ENabuCoreException Raises an exception if $nb_messaging has no valid value.
+     */
+    public function getMessaging($nb_messaging)
+    {
+        $retval = false;
+
+        if (is_object($nb_messaging) && !($nb_messaging instanceof CNabuDataObject)) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_CLASS_TYPE,
+                array('$nb_messaging', get_class($nb_messaging))
+            );
+        }
+
+        if ($nb_messaging !== null) {
+            $nb_messaging_id = nb_getMixedValue($nb_messaging, NABU_MESSAGING_FIELD_ID);
+            if (is_numeric($nb_messaging_id) || nb_isValidGUID($nb_messaging_id)) {
+                $retval = $this->nb_messaging_list->getItem($nb_messaging_id);
+            } elseif ($nb_messaging_id !== null && $nb_messaging_id !== false) {
+                throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                    array('$nb_messaging', print_r($nb_messaging, true))
+                );
+            }
+        }
+
+        return $retval;
+    }
+
 }
