@@ -18,7 +18,7 @@
  */
 
 namespace nabu\data\messaging;
-use nabu\data\messaging\base\CNabuMessagingAccountListBase;
+use nabu\data\messaging\base\CNabuMessagingServiceBase;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
@@ -26,7 +26,7 @@ use nabu\data\messaging\base\CNabuMessagingAccountListBase;
  * @version 3.0.12 Surface
  * @package \nabu\data\site
  */
-class CNabuMessagingAccountList extends CNabuMessagingAccountListBase
+class CNabuMessagingService extends CNabuMessagingServiceBase
 {
-    
+
 }

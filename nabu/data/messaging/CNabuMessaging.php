@@ -29,33 +29,33 @@ use nabu\data\messaging\base\CNabuMessagingBase;
  */
 class CNabuMessaging extends CNabuMessagingBase
 {
-    /** @var CNabuMessagingAccount $nb_messaging_account_list List of accounts of this instance. */
-    private $nb_messaging_account_list = null;
+    /** @var CNabuMessagingService $nb_messaging_service_list List of services of this instance. */
+    private $nb_messaging_service_list = null;
 
     public function __construct($nb_messaging = false)
     {
         parent::__construct($nb_messaging);
 
-        $this->nb_messaging_account_list = new CNabuMessagingAccountList();
+        $this->nb_messaging_service_list = new CNabuMessagingServiceList();
     }
 
     /**
-     * Get Accounts assigned to this Messaging instance.
-     * @param bool $force If true, the Messaging Account list is refreshed from the database.
-     * @return CNabuMessagingAccountList Returns the list of Accounts. If none Account exists, the list is empty.
+     * Get Services assigned to this Messaging instance.
+     * @param bool $force If true, the Messaging Service list is refreshed from the database.
+     * @return CNabuMessagingServiceList Returns the list of Services. If none Service exists, the list is empty.
      */
-    public function getAccounts($force = false)
+    public function getServices($force = false)
     {
-        if ($this->nb_messaging_account_list === null) {
-            $this->nb_messaging_account_list = new CNabuMessagingAccountList();
+        if ($this->nb_messaging_service_list === null) {
+            $this->nb_messaging_service_list = new CNabuMessagingServiceList();
         }
 
-        if ($this->nb_messaging_account_list->isEmpty() || $force) {
-            $this->nb_messaging_account_list->clear();
-            $this->nb_messaging_account_list->merge(CNabuMessagingAccount::getAllMessagingAccounts($this));
+        if ($this->nb_messaging_service_list->isEmpty() || $force) {
+            $this->nb_messaging_service_list->clear();
+            $this->nb_messaging_service_list->merge(CNabuMessagingService::getAllMessagingServices($this));
         }
 
-        return $this->nb_messaging_account_list;
+        return $this->nb_messaging_service_list;
     }
 
     /**
@@ -71,7 +71,7 @@ class CNabuMessaging extends CNabuMessagingBase
         $trdata = parent::getTreeData($nb_language, $dataonly);
 
         $trdata['languages'] = $this->getLanguages();
-        $trdata['accounts'] = $this->getAccounts();
+        $trdata['services'] = $this->getServices();
 
         return $trdata;
     }
@@ -83,6 +83,6 @@ class CNabuMessaging extends CNabuMessagingBase
     public function refresh()
     {
         error_log("////////=> Refresh");
-        return parent::refresh() && $this->getAccounts();
+        return parent::refresh() && $this->getServices();
     }
 }

@@ -1,6 +1,6 @@
 {
     "schema": "nabu-3",
-    "name": "nb_messaging_account",
+    "name": "nb_messaging_service",
     "engine": "MyISAM",
     "type": "table",
     "autoincrement": "1",
@@ -8,8 +8,8 @@
     "collation": "utf8_general_ci",
     "comment": "",
     "fields": {
-        "nb_messaging_account_id": {
-            "name": "nb_messaging_account_id",
+        "nb_messaging_service_id": {
+            "name": "nb_messaging_service_id",
             "ordinal": "1",
             "data_type": "int",
             "precision": "10",
@@ -30,8 +30,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_messaging_account_hash": {
-            "name": "nb_messaging_account_hash",
+        "nb_messaging_service_hash": {
+            "name": "nb_messaging_service_hash",
             "ordinal": "3",
             "data_type": "varchar",
             "precision": null,
@@ -41,8 +41,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_messaging_account_key": {
-            "name": "nb_messaging_account_key",
+        "nb_messaging_service_key": {
+            "name": "nb_messaging_service_key",
             "ordinal": "4",
             "data_type": "varchar",
             "precision": null,
@@ -52,8 +52,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_messaging_account_provider": {
-            "name": "nb_messaging_account_provider",
+        "nb_messaging_service_provider": {
+            "name": "nb_messaging_service_provider",
             "ordinal": "5",
             "data_type": "varchar",
             "precision": null,
@@ -63,8 +63,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_messaging_account_interface": {
-            "name": "nb_messaging_account_interface",
+        "nb_messaging_service_interface": {
+            "name": "nb_messaging_service_interface",
             "ordinal": "6",
             "data_type": "varchar",
             "precision": null,
@@ -74,8 +74,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_messaging_account_attributes": {
-            "name": "nb_messaging_account_attributes",
+        "nb_messaging_service_attributes": {
+            "name": "nb_messaging_service_attributes",
             "ordinal": "7",
             "data_type": "longtext",
             "precision": null,
@@ -93,16 +93,16 @@
             "index_type": "BTREE",
             "comments": "",
             "fields": {
-                "nb_messaging_account_id": {
-                    "name": "nb_messaging_account_id",
+                "nb_messaging_service_id": {
+                    "name": "nb_messaging_service_id",
                     "ordinal": "1",
                     "collation": "ASC",
                     "comments": ""
                 }
             }
         },
-        "nb_messaging_account_nb_messaging_fk": {
-            "name": "nb_messaging_account_nb_messaging_fk",
+        "nb_messaging_service_nb_messaging_fk": {
+            "name": "nb_messaging_service_nb_messaging_fk",
             "primary": false,
             "unique": false,
             "index_type": "BTREE",
