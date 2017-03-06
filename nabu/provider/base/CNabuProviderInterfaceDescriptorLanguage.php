@@ -17,22 +17,42 @@
  *  limitations under the License.
  */
 
- /**
-  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
-  * @since 3.0.9 Surface
-  * @version 3.0.9 Surface
-  * @package \nabu\http\managers\base
-  */
-namespace nabu\messaging\managers\base;
-use nabu\provider\base\CNabuProviderManagerAdapter;
-use nabu\provider\interfaces\INabuProviderManager;
+namespace nabu\provider\base;
+use nabu\data\CNabuDataObject;
+use nabu\data\lang\CNabuLanguage;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.12 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\http\managers\base
  */
-abstract class CNabuMessagingManager extends CNabuProviderManagerAdapter implements INabuProviderManager
+class CNabuProviderInterfaceDescriptorLanguage extends CNabuDataObject
 {
+    /** @var CNabuLanguage $nb_language Language instance of tnis translation. */
+    private $nb_language = null;
 
+    public function getLanguage()
+    {
+        return $nb_language;
+    }
+
+    public function setLanguage(CNabuLanguage $nb_language)
+    {
+        $this->nb_language = $nb_language;
+
+        return $this;
+    }
+
+    public function getTitle()
+    {
+        return $this->getValue('interface_lang_title');
+    }
+
+    public function setTitle(string $title)
+    {
+        $this->setValue('interface_lang_title', $title);
+
+        return $this;
+    }
 }

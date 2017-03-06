@@ -28,7 +28,7 @@ use nabu\provider\interfaces\INabuProviderManager;
  * @version 3.0.9 Surface
  * @package \nabu\http\managers\base
  */
-abstract class CNabuProviderManagerAdapter extends CNabuDataObject implements INabuProviderManager
+abstract class CNabuProviderModuleManagerAdapter extends CNabuDataObject implements INabuProviderManager
 {
     /** @var string Vendor Key field name */
     const VENDOR_KEY = 'vendor_key';
@@ -36,6 +36,14 @@ abstract class CNabuProviderManagerAdapter extends CNabuDataObject implements IN
     const MODULE_KEY = 'module_key';
     /** @var string Complex Key field name */
     const COMPLEX_KEY = 'complex_key';
+
+    public function __construct(string $vendor_key, string $module_key)
+    {
+        parent::__construct();
+        
+        $this->setVendorKey($vendor_key);
+        $this->setModuleKey($module_key);
+    }
 
     public function getVendorKey()
     {

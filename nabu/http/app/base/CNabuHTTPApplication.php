@@ -70,15 +70,20 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
      */
     private $nb_modules_manager = null;
     /**
+     * Mediotecas Manager instance
+     * @var CNabuMediotecasManager
+     */
+    private $nb_mediotecas_manager = null;
+    /**
      * Renders Manager instance
      * @var CNabuHTTPRendersManager
      */
     private $nb_http_renders_manager = null;
     /**
-     * Mediotecas Manager instance
-     * @var CNabuMediotecasManager
+     * Messaging Accounts Manager instance
+     * @var
      */
-    private $nb_mediotecas_manager = null;
+    private $nb_messaging_accounts_manager = null;
     /**
      * Contains the session instance
      * @var CNabuHTTPSession

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/05 23:04:54 UTC
+ * Created: 2017/03/06 17:56:37 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -37,6 +37,7 @@ use \nabu\data\lang\traits\TNabuTranslated;
 use \nabu\data\messaging\builtin\CNabuBuiltInMessagingLanguage;
 use \nabu\data\messaging\CNabuMessaging;
 use \nabu\data\messaging\CNabuMessagingLanguage;
+use \nabu\data\messaging\CNabuMessagingList;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -148,7 +149,7 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
                 $nb_customer
             );
         } else {
-            $retval = null;
+            $retval = new CNabuMessagingList();
         }
         
         return $retval;

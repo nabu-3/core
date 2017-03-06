@@ -40,6 +40,10 @@ class ENabuProviderException extends ENabuException
     const ERROR_INVALID_KEYS                    = 0x0005;
     /** @var int Provider Factory not instantiated. */
     const ERROR_PROVIDER_FACTORY_NOT_AVAILABLE  = 0x0006;
+    /** @var int Provider Manager fails when instantiate it. Requires complex key. */
+    const ERROR_PROVIDER_MANAGER_FAIL           = 0x0007;
+    /** @var int Provider Interface type does not exists. Requires interface type. */
+    const ERROR_INTERFACE_TYPE_NOT_EXISTS       = 0x0008;
 
     /**
      * List of all error messages defined in this exception.
@@ -57,6 +61,10 @@ class ENabuProviderException extends ENabuException
         ENabuProviderException::ERROR_INVALID_KEYS =>
             'Invalid vendor or module keys, or not defined.',
         ENabuProviderException::ERROR_PROVIDER_FACTORY_NOT_AVAILABLE =>
-            'Nabu Provider Factory is not available.'
+            'Nabu Provider Factory is not available.',
+        ENabuProviderException::ERROR_PROVIDER_MANAGER_FAIL,
+            'Nabu Provider [%s] fails when instantiate it.',
+        ENabuProviderException::ERROR_INTERFACE_TYPE_NOT_EXISTS =>
+            'Provider Interface type [%s] does not exists.'
     );
 }

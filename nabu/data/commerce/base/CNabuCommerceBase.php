@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/05 23:04:32 UTC
+ * Created: 2017/03/06 17:56:17 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -30,6 +30,7 @@ use \nabu\data\CNabuDataObject;
 use \nabu\data\commerce\builtin\CNabuBuiltInCommerceLanguage;
 use \nabu\data\commerce\CNabuCommerce;
 use \nabu\data\commerce\CNabuCommerceLanguage;
+use \nabu\data\commerce\CNabuCommerceList;
 use \nabu\data\customer\CNabuCustomer;
 use \nabu\data\customer\traits\TNabuCustomerChild;
 use \nabu\data\lang\CNabuLanguage;
@@ -148,7 +149,7 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
                 $nb_customer
             );
         } else {
-            $retval = null;
+            $retval = new CNabuCommerceList();
         }
         
         return $retval;

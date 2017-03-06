@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/05 23:04:26 UTC
+ * Created: 2017/03/06 17:56:11 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -34,6 +34,7 @@ use \nabu\data\site\builtin\CNabuBuiltInSiteMapLanguage;
 use \nabu\data\site\CNabuSite;
 use \nabu\data\site\CNabuSiteMap;
 use \nabu\data\site\CNabuSiteMapLanguage;
+use \nabu\data\site\CNabuSiteMapList;
 use \nabu\data\site\traits\TNabuSiteChild;
 use \nabu\data\site\traits\TNabuSiteTargetChild;
 use \nabu\db\CNabuDBInternalObject;
@@ -148,7 +149,7 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
                 $nb_site
             );
         } else {
-            $retval = null;
+            $retval = new CNabuSiteMapList();
         }
         
         return $retval;

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/05 23:04:41 UTC
+ * Created: 2017/03/06 17:56:25 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -30,6 +30,7 @@ use \nabu\data\catalog\builtin\CNabuBuiltInCatalogTaxonomyLanguage;
 use \nabu\data\catalog\CNabuCatalog;
 use \nabu\data\catalog\CNabuCatalogTaxonomy;
 use \nabu\data\catalog\CNabuCatalogTaxonomyLanguage;
+use \nabu\data\catalog\CNabuCatalogTaxonomyList;
 use \nabu\data\catalog\traits\TNabuCatalogChild;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\interfaces\INabuTranslated;
@@ -130,7 +131,7 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
      * @param CNabuCatalog $nb_catalog The CNabuCatalog instance of the Catalog that owns the Catalog Taxonomy List.
      * @return mixed Returns and array with all items.
      */
-    public static function getAllCatalogTaxonomys(CNabuCatalog $nb_catalog)
+    public static function getAllCatalogTaxonomies(CNabuCatalog $nb_catalog)
     {
         $nb_catalog_id = nb_getMixedValue($nb_catalog, 'nb_catalog_id');
         if (is_numeric($nb_catalog_id)) {
@@ -146,7 +147,7 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
                 $nb_catalog
             );
         } else {
-            $retval = null;
+            $retval = new CNabuCatalogTaxonomyList();
         }
         
         return $retval;

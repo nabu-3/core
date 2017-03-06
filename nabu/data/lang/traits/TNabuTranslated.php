@@ -208,7 +208,7 @@ trait TNabuTranslated
     }
 
     /**
-     * Calls internally all translation child objects stocked inside this entity to add / update them in the database
+     * Calls internally all translation child objects stocked inside this entity to add / update them in the database.
      * @return int|false Return the number of childs updated or false if no childs found
      */
     public function updateTranslations()

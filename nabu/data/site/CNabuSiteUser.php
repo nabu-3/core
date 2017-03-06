@@ -67,8 +67,8 @@ class CNabuSiteUser extends CNabuSiteUserBase
     }
     */
 
-    public function logAccess() {
-
+    public function logAccess()
+    {
         $this->db->executeUpdate(
                 "update nb_site_user "
                  . "set nb_site_user_last_login_datetime=now() "

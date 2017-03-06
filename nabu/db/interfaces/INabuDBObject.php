@@ -102,9 +102,15 @@ interface INabuDBObject
      * @param string|array|object $sentence Sentence to execute
      * @param array|false $params Associative array with the collection of params to be combined with the sentence
      * @param bool $trace True if they want to trace the sentence in the Engine Log Handler
-     * @return bool Returns true if success of false if not.
+     * @return bool Returns true if success or false if not.
      */
     public function load($sentence = false, $params = false, $trace = false);
+
+    /**
+     * Refresh all data from the database.
+     * @return bool Returns true if success or false if not.
+     */
+    public function refresh();
 
     /**
      * Fetchs a cursor stored in a INabuDBStatement object and fill

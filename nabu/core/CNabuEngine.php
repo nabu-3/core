@@ -39,6 +39,8 @@ use nabu\db\exceptions\ENabuDBException;
 use nabu\db\interfaces\INabuDBConnector;
 use nabu\http\interfaces\INabuHTTPServer;
 use nabu\provider\CNabuProviderFactory;
+use nabu\provider\CNabuProviderInterfaceDescriptorList;
+use nabu\provider\base\CNabuProviderInterfaceDescriptor;
 use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
 use providers\apache\httpd\CApacheHTTPServer;
@@ -848,13 +850,6 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     public function registerProviderManager(INabuProviderManager $nb_manager)
     {
         $this->nb_provider_factory->addManager($nb_manager);
-        if (!$nb_manager->enableManager()) {
-            throw new ENabuCoreException(ENabuCoreException::ERROR_ENABLING_HTTP_MANAGER, array($manager_class));
-        }
-
-        if ($this->nb_application instanceof INabuApplication) {
-            $nb_manager->registerApplication($this->nb_application);
-        }
 
         return $nb_manager;
     }
@@ -873,5 +868,25 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         } else {
             throw new ENabuProviderException(ENabuProviderException::ERROR_PROVIDER_FACTORY_NOT_AVAILABLE);
         }
+    }
+
+    /**
+     * Register a Provider Interface to be used.
+     * @param CNabuProviderInterfaceDescriptor $nb_descriptor Descriptor instance of the interface.
+     * @throws ENabuProviderException Raises an exception if the interface is not registered.
+     */
+    public function registerProviderInterface(CNabuProviderInterfaceDescriptor $nb_descriptor)
+    {
+        return $this->nb_provider_factory->addInterface($nb_descriptor);
+    }
+
+    /**
+     * Gets the Provider Interface descriptors list for a type of interfaces.
+     * @param int $interface_type Interface type.
+     * @return CNabuProviderInterfaceDescriptorList Returns the list of descriptors. If none the the list is empty.
+     */
+    public function getProvidersInterfaceDescriptors(int $interface_type)
+    {
+        return $this->nb_provider_factory->getInterfaceDescriptors($interface_type);
     }
 }

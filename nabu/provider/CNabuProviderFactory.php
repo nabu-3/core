@@ -24,6 +24,8 @@ use nabu\core\CNabuObject;
 use nabu\core\exceptions\ENabuSingletonException;
 use nabu\core\interfaces\INabuSingleton;
 use nabu\core\interfaces\INabuApplication;
+use nabu\provider\base\CNabuProviderInterfaceDescriptor;
+use nabu\provider\base\CNabuProviderInterfaceDescriptorList;
 use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
 
@@ -35,21 +37,15 @@ use nabu\provider\interfaces\INabuProviderManager;
  */
 class CNabuProviderFactory extends CNabuObject implements INabuSingleton
 {
-    /**
-     * Contains the singleton instance of class.
-     * @var CNabuProviderFactory
-     */
+    /** @var int INTERFACE_MESSAGING_ACCOUNT Messaging Account Interface identificator. */
+    const INTERFACE_MESSAGING_ACCOUNT       = 0x0001;
+
+    /** @var CNabuProviderFactory $nb_provider_factory Contains the singleton instance of class. */
     private static $nb_provider_factory = null;
-    /**
-     * List of all registered managers.
-     * @var CNabuProviderManagerList
-     */
+    /** @var CNabuProviderManagerList $nb_manager_list List of all registered managers. */
     private $nb_manager_list = null;
-    /**
-     * Index of vendors and managers.
-     * @var array
-     */
-    private $manager_hierarchy = null;
+    /** @var array $nb_interface_list Index of interfaces. */
+    private $nb_interface_list = null;
 
     /**
      * Default constructor for singleton instance.
@@ -66,6 +62,9 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
         CNabuProviderFactory::$nb_provider_factory = $this;
 
         $this->nb_manager_list = new CNabuProviderManagerList();
+        $this->nb_interface_list = array(
+            self::INTERFACE_MESSAGING_ACCOUNT => new CNabuProviderInterfaceDescriptorList()
+        );
     }
 
     /**
@@ -90,27 +89,6 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
     public static function isInstantiated()
     {
         return is_object(CNabuProviderFactory::$nb_provider_factory);
-    }
-
-    /**
-     * Check if a vendor key is valid and set up the manager hierarchy to contain it.
-     * @param string $vendor_key Vendor key to be checked.
-     * @return bool Returns true if the vendor key is valid and the hierarchy setted.
-     */
-    private function prepareVendorKey(string $vendor_key)
-    {
-        $retval = false;
-
-        if (nb_isValidKey($vendor_key)) {
-            if (!is_array($this->manager_hierarchy)) {
-                $this->manager_hierarchy = array($vendor_key => array());
-            } elseif (!array_key_exists($vendor_key, $this->manager_hierarchy)) {
-                $this->manager_hierarchy[$vendor_key] = array();
-            }
-            $retval = true;
-        }
-
-        return $retval;
     }
 
     /**
@@ -200,21 +178,12 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
      * @param INabuProviderManager $manager Manager to be added.
      * @return INabuProviderManager Returns the added manager if success or false if not.
      */
-    public function addManager(INabuProviderManager $manager)
+    public function addManager(INabuProviderManager $nb_manager)
     {
-        $vendor_key = $manager->getVendorKey();
-        if ($this->prepareVendorKey($vendor_key)) {
-            $module_key = $manager->getModuleKey();
-            if (nb_isValidKey($module_key)) {
-                if (array_key_exists($module_key, $this->manager_hierarchy[$vendor_key])) {
-                    throw new ENabuProviderException(
-                        ENabuProviderException::ERROR_MANAGER_ALREADY_EXISTS,
-                        array($vendor_key, $module_key)
-                    );
-                } else {
-                    $this->manager_hierarchy[$vendor_key][$module_key] = $manager;
-                }
-            } else {
+        $vendor_key = $nb_manager->getVendorKey();
+        if (nb_isValidKey($vendor_key)) {
+            $module_key = $nb_manager->getModuleKey();
+            if (!nb_isValidKey($module_key)) {
                 throw new ENabuProviderException(
                     ENabuProviderException::ERROR_MODULE_KEY_NOT_VALID,
                     array($module_key)
@@ -227,14 +196,18 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
             );
         }
 
-        $this->nb_manager_list->addItem($manager);
+        $this->nb_manager_list->addItem($nb_manager);
+
+        if (!$nb_manager->enableManager()) {
+            throw new ENabuProviderException(ENabuProviderException::ERROR_PROVIDER_MANAGER_FAIL, array($manager_class));
+        }
 
         $nb_application = CNabuEngine::getEngine()->getApplication();
         if ($nb_application instanceof INabuApplication) {
-            $manager->registerApplication($nb_application);
+            $nb_manager->registerApplication($nb_application);
         }
 
-        return $manager;
+        return $nb_manager;
     }
 
     /**
@@ -252,6 +225,44 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
         } else {
             throw new ENabuProviderException(ENabuProviderException::ERROR_INVALID_KEYS);
         }
+    }
+
+    /**
+     * Adds an interface to the interfaces list.
+     * @param CNabuProviderInterfaceDescriptor $nb_descriptor Descriptor instance of the interface.
+     * @return bool Returns true if the interface is registered.
+     */
+    public function addInterface(CNabuProviderInterfaceDescriptor $nb_descriptor)
+    {
+        $interface_type = $nb_descriptor->getType();
+
+        if (!array_key_exists($interface_type, $this->nb_interface_list)) {
+            throw new ENabuProviderException(
+                ENabuProviderException::ERROR_INTERFACE_TYPE_NOT_EXISTS,
+                array(print_r($interface_type, true))
+            );
+        }
+
+        $this->nb_interface_list[$interface_type]->addItem($nb_descriptor);
+
+        return true;
+    }
+
+    /**
+     * Gets the interfaces descriptor list of a type of interfaces.
+     * @param int $interface_type Interface type to be retrieved.
+     * @return CNabuProviderInterfaceDescriptorList The list of available interfaces.
+     */
+    public function getInterfaceDescriptors(int $interface_type)
+    {
+        if (!array_key_exists($interface_type, $this->nb_interface_list)) {
+            throw new ENabuProviderException(
+                ENabuProviderException::ERROR_INTERFACE_TYPE_NOT_EXISTS,
+                array(print_r($interface_type, true))
+            );
+        }
+
+        return $this->nb_interface_list[$interface_type];
     }
 
     /**

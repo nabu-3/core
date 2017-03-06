@@ -271,6 +271,7 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
      */
     public function refresh()
     {
+        $this->relinkDB();
         return $this->load();
     }
 

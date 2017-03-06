@@ -36,7 +36,6 @@ class CNabuMessaging extends CNabuMessagingBase
     {
         parent::__construct($nb_messaging);
 
-        error_log("HOLA");
         $this->nb_messaging_account_list = new CNabuMessagingAccountList();
     }
 
@@ -47,6 +46,10 @@ class CNabuMessaging extends CNabuMessagingBase
      */
     public function getAccounts($force = false)
     {
+        if ($this->nb_messaging_account_list === null) {
+            $this->nb_messaging_account_list = new CNabuMessagingAccountList();
+        }
+
         if ($this->nb_messaging_account_list->isEmpty() || $force) {
             $this->nb_messaging_account_list->clear();
             $this->nb_messaging_account_list->merge(CNabuMessagingAccount::getAllMessagingAccounts($this));
@@ -74,7 +77,7 @@ class CNabuMessaging extends CNabuMessagingBase
     }
 
     /**
-     * Overrides refresh method to add messaging subentities to refresh.
+     * Overrides refresh method to add messaging subentities to be refreshed.
      * @return bool Returns true if transations are empty or refreshed.
      */
     public function refresh()

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/05 23:04:21 UTC
+ * Created: 2017/03/06 17:56:06 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -35,6 +35,7 @@ use \nabu\data\medioteca\traits\TNabuMediotecaChild;
 use \nabu\data\site\builtin\CNabuBuiltInSiteTargetSectionLanguage;
 use \nabu\data\site\CNabuSiteTargetSection;
 use \nabu\data\site\CNabuSiteTargetSectionLanguage;
+use \nabu\data\site\CNabuSiteTargetSectionList;
 use \nabu\data\site\traits\TNabuSiteTargetChild;
 use \nabu\db\CNabuDBInternalObject;
 
@@ -149,7 +150,7 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
                 $nb_medioteca
             );
         } else {
-            $retval = null;
+            $retval = new CNabuSiteTargetSectionList();
         }
         
         return $retval;

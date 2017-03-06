@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/05 23:04:45 UTC
+ * Created: 2017/03/06 17:56:29 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -29,6 +29,7 @@ use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\data\catalog\builtin\CNabuBuiltInCatalogTagLanguage;
 use \nabu\data\catalog\CNabuCatalog;
 use \nabu\data\catalog\CNabuCatalogTagLanguage;
+use \nabu\data\catalog\CNabuCatalogTagList;
 use \nabu\data\catalog\traits\TNabuCatalogChild;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\interfaces\INabuTranslated;
@@ -118,7 +119,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
                 $nb_catalog
             );
         } else {
-            $retval = null;
+            $retval = new CNabuCatalogTagList();
         }
         
         return $retval;

@@ -63,9 +63,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_messaging_account_interface": {
+            "name": "nb_messaging_account_interface",
+            "ordinal": "6",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(50)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_messaging_account_attributes": {
             "name": "nb_messaging_account_attributes",
-            "ordinal": "6",
+            "ordinal": "7",
             "data_type": "longtext",
             "precision": null,
             "type": "longtext",
@@ -90,8 +101,8 @@
                 }
             }
         },
-        "nb_messaging_account_nb_messaging_fk1_idx": {
-            "name": "nb_messaging_account_nb_messaging_fk1_idx",
+        "nb_messaging_account_nb_messaging_fk": {
+            "name": "nb_messaging_account_nb_messaging_fk",
             "primary": false,
             "unique": false,
             "index_type": "BTREE",

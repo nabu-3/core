@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/05 23:04:34 UTC
+ * Created: 2017/03/06 17:56:19 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -31,6 +31,7 @@ use \nabu\data\commerce\builtin\CNabuBuiltInCommerceProductCategoryLanguage;
 use \nabu\data\commerce\CNabuCommerce;
 use \nabu\data\commerce\CNabuCommerceProductCategory;
 use \nabu\data\commerce\CNabuCommerceProductCategoryLanguage;
+use \nabu\data\commerce\CNabuCommerceProductCategoryList;
 use \nabu\data\commerce\traits\TNabuCommerceChild;
 use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -134,7 +135,7 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
      * Category List.
      * @return mixed Returns and array with all items.
      */
-    public static function getAllCommerceProductCategorys(CNabuCommerce $nb_commerce)
+    public static function getAllCommerceProductCategories(CNabuCommerce $nb_commerce)
     {
         $nb_commerce_id = nb_getMixedValue($nb_commerce, 'nb_commerce_id');
         if (is_numeric($nb_commerce_id)) {
@@ -150,7 +151,7 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
                 $nb_commerce
             );
         } else {
-            $retval = null;
+            $retval = new CNabuCommerceProductCategoryList();
         }
         
         return $retval;
