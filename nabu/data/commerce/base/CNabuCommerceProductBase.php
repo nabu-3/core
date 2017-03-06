@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/02/28 18:07:12 UTC
+ * Created: 2017/03/05 23:04:36 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -238,6 +238,15 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
         }
         
         return $nb_translation;
+    }
+
+    /**
+     * Overrides refresh method to add translations branch to refresh.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh()
+    {
+        return parent::refresh() && $this->appendTranslatedRefresh();
     }
 
     /**

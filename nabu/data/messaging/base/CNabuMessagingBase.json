@@ -3,7 +3,7 @@
     "name": "nb_messaging",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "2",
+    "autoincrement": "63",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",
@@ -41,8 +41,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_smtp_account_id": {
-            "name": "nb_smtp_account_id",
+        "nb_messaging_default_language_id": {
+            "name": "nb_messaging_default_language_id",
             "ordinal": "4",
             "data_type": "int",
             "precision": "10",
@@ -58,17 +58,6 @@
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(32)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_messaging_name": {
-            "name": "nb_messaging_name",
-            "ordinal": "6",
-            "data_type": "varchar",
-            "precision": null,
-            "type": "varchar(100)",
             "default": null,
             "is_nullable": true,
             "extra": "",
@@ -106,22 +95,6 @@
                 }
             }
         },
-        "nb_messaging_nb_smtp_account_fk": {
-            "name": "nb_messaging_nb_smtp_account_fk",
-            "primary": false,
-            "unique": false,
-            "index_type": "BTREE",
-            "fields": {
-                "nb_smtp_account_id": {
-                    "name": "nb_smtp_account_id",
-                    "ordinal": "1",
-                    "collation": "ASC",
-                    "null": true,
-                    "subpart": null,
-                    "comments": ""
-                }
-            }
-        },
         "nb_messaging_nb_customer_fk": {
             "name": "nb_messaging_nb_customer_fk",
             "primary": false,
@@ -130,6 +103,22 @@
             "fields": {
                 "nb_customer_id": {
                     "name": "nb_customer_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_messaging_nb_language_fk1_idx": {
+            "name": "nb_messaging_nb_language_fk1_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_messaging_default_language_id": {
+                    "name": "nb_messaging_default_language_id",
                     "ordinal": "1",
                     "collation": "ASC",
                     "null": true,

@@ -33,7 +33,7 @@ use nabu\db\interfaces\INabuDBDescriptor;
  * Abstract Class to implement default management for tables of MySQL.
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
  * @since 3.0.0 Surface
- * @version 3.0.9 Surface
+ * @version 3.0.12 Surface
  * @package nabu\db
  */
 abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
@@ -263,6 +263,15 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
         } else {
             return false;
         }
+    }
+
+    /**
+     * Refresh data from the database storage.
+     * @return bool Returns true if data is refreshed.
+     */
+    public function refresh()
+    {
+        return $this->load();
     }
 
     public function fetch($statement)

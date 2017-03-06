@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/02/28 18:07:30 UTC
+ * Created: 2017/03/05 23:04:54 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -298,6 +298,15 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
     }
 
     /**
+     * Overrides refresh method to add translations branch to refresh.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh()
+    {
+        return parent::refresh() && $this->appendTranslatedRefresh();
+    }
+
+    /**
      * Get Messaging Id attribute value
      * @return int Returns the Messaging Id value
      */
@@ -367,22 +376,22 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
     }
 
     /**
-     * Get Smtp Account Id attribute value
-     * @return null|int Returns the Smtp Account Id value
+     * Get Messaging Default Language Id attribute value
+     * @return null|int Returns the Messaging Default Language Id value
      */
-    public function getSmtpAccountId()
+    public function getDefaultLanguageId()
     {
-        return $this->getValue('nb_smtp_account_id');
+        return $this->getValue('nb_messaging_default_language_id');
     }
 
     /**
-     * Sets the Smtp Account Id attribute value
-     * @param null|int $nb_smtp_account_id New value for attribute
+     * Sets the Messaging Default Language Id attribute value
+     * @param null|int $default_language_id New value for attribute
      * @return CNabuMessagingBase Returns $this
      */
-    public function setSmtpAccountId($nb_smtp_account_id)
+    public function setDefaultLanguageId($default_language_id)
     {
-        $this->setValue('nb_smtp_account_id', $nb_smtp_account_id);
+        $this->setValue('nb_messaging_default_language_id', $default_language_id);
         
         return $this;
     }
@@ -404,27 +413,6 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
     public function setKey($key)
     {
         $this->setValue('nb_messaging_key', $key);
-        
-        return $this;
-    }
-
-    /**
-     * Get Messaging Name attribute value
-     * @return null|string Returns the Messaging Name value
-     */
-    public function getName()
-    {
-        return $this->getValue('nb_messaging_name');
-    }
-
-    /**
-     * Sets the Messaging Name attribute value
-     * @param null|string $name New value for attribute
-     * @return CNabuMessagingBase Returns $this
-     */
-    public function setName($name)
-    {
-        $this->setValue('nb_messaging_name', $name);
         
         return $this;
     }

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/02/28 18:07:32 UTC
+ * Created: 2017/03/05 23:04:55 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -26,7 +26,9 @@ namespace nabu\data\messaging\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\messaging\CNabuMessaging;
 use \nabu\data\messaging\CNabuMessagingAccount;
+use \nabu\data\messaging\traits\TNabuMessagingChild;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -37,6 +39,8 @@ use \nabu\db\CNabuDBInternalObject;
  */
 abstract class CNabuMessagingAccountBase extends CNabuDBInternalObject
 {
+    use TNabuMessagingChild;
+
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
      * the instance is deserialized from the storage.
@@ -87,33 +91,58 @@ abstract class CNabuMessagingAccountBase extends CNabuDBInternalObject
 
     /**
      * Find an instance identified by nb_messaging_account_key field.
+     * @param mixed $nb_messaging Messaging that owns Messaging Account
      * @param string $key Key to search
      * @return CNabuMessagingAccount Returns a valid instance if exists or null if not.
      */
-    public static function findByKey($key)
+    public static function findByKey($nb_messaging, $key)
     {
-        return CNabuMessagingAccount::buildObjectFromSQL(
-                'select * '
-                . 'from nb_messaging_account '
-               . "where nb_messaging_account_key='%key\$s'",
-                array(
-                    'key' => $key
-                )
-        );
+        $nb_messaging_id = nb_getMixedValue($nb_messaging, 'nb_messaging_id');
+        if (is_numeric($nb_messaging_id)) {
+            $retval = CNabuMessagingAccount::buildObjectFromSQL(
+                    'select * '
+                    . 'from nb_messaging_account '
+                   . 'where nb_messaging_id=%messaging_id$d '
+                     . "and nb_messaging_account_key='%key\$s'",
+                    array(
+                        'messaging_id' => $nb_messaging_id,
+                        'key' => $key
+                    )
+            );
+        } else {
+            $retval = null;
+        }
+        
+        return $retval;
     }
 
     /**
      * Get all items in the storage as an associative array where the field 'nb_messaging_account_id' is the index, and
      * each value is an instance of class CNabuMessagingAccountBase.
+     * @param CNabuMessaging $nb_messaging The CNabuMessaging instance of the Messagin that owns the Messaging Account
+     * List
      * @return mixed Returns and array with all items.
      */
-    public static function getAllMessagingAccounts()
+    public static function getAllMessagingAccounts(CNabuMessaging $nb_messaging)
     {
-        return forward_static_call(
-                array(get_called_class(), 'buildObjectListFromSQL'),
+        $nb_messaging_id = nb_getMixedValue($nb_messaging, 'nb_messaging_id');
+        if (is_numeric($nb_messaging_id)) {
+            $retval = forward_static_call(
+            array(get_called_class(), 'buildObjectListFromSQL'),
                 'nb_messaging_account_id',
-                'select * from nb_messaging_account'
-        );
+                'select * '
+                . 'from nb_messaging_account '
+               . 'where nb_messaging_id=%messaging_id$d',
+                array(
+                    'messaging_id' => $nb_messaging_id
+                ),
+                $nb_messaging
+            );
+        } else {
+            $retval = null;
+        }
+        
+        return $retval;
     }
 
     /**
@@ -121,6 +150,7 @@ abstract class CNabuMessagingAccountBase extends CNabuDBInternalObject
      * select a subset of fields, order by concrete fields, or truncate the list by a number of rows starting in an
      * offset.
      * @throws \nabu\core\exceptions\ENabuCoreException Raises an exception if $fields or $order have invalid values.
+     * @param mixed $nb_messaging Messaging instance, object containing a Messaging Id field or an Id.
      * @param string $q Query string to filter results using a context index.
      * @param string|array $fields List of fields to put in the results.
      * @param string|array $order List of fields to order the results. Each field can be suffixed with "ASC" or "DESC"
@@ -129,25 +159,32 @@ abstract class CNabuMessagingAccountBase extends CNabuDBInternalObject
      * @param int $num_items Number of continue rows to get as maximum in the results.
      * @return array Returns an array with all rows found using the criteria.
      */
-    public static function getFilteredMessagingAccountList($q = null, $fields = null, $order = null, $offset = 0, $num_items = 0)
+    public static function getFilteredMessagingAccountList($nb_messaging = null, $q = null, $fields = null, $order = null, $offset = 0, $num_items = 0)
     {
-        $fields_part = nb_prefixFieldList(CNabuMessagingAccountBase::getStorageName(), $fields, false, true, '`');
-        $order_part = nb_prefixFieldList(CNabuMessagingAccountBase::getStorageName(), $fields, false, false, '`');
+        $nb_messaging_id = nb_getMixedValue($nb_customer, NABU_MESSAGING_FIELD_ID);
+        if (is_numeric($nb_messaging_id)) {
+            $fields_part = nb_prefixFieldList(CNabuMessagingAccountBase::getStorageName(), $fields, false, true, '`');
+            $order_part = nb_prefixFieldList(CNabuMessagingAccountBase::getStorageName(), $fields, false, false, '`');
         
-        if ($num_items !== 0) {
-            $limit_part = ($offset > 0 ? $offset . ', ' : '') . $num_items;
+            if ($num_items !== 0) {
+                $limit_part = ($offset > 0 ? $offset . ', ' : '') . $num_items;
+            } else {
+                $limit_part = false;
+            }
+        
+            $nb_item_list = CNabuEngine::getEngine()->getMainDB()->getQueryAsArray(
+                "select " . ($fields_part ? $fields_part . ' ' : '* ')
+                . 'from nb_messaging_account '
+               . 'where ' . NABU_MESSAGING_FIELD_ID . '=%messaging_id$d '
+                . ($order_part ? "order by $order_part " : '')
+                . ($limit_part ? "limit $limit_part" : ''),
+                array(
+                    'messaging_id' => $nb_messaging_id
+                )
+            );
         } else {
-            $limit_part = false;
+            $nb_item_list = null;
         }
-        
-        $nb_item_list = CNabuEngine::getEngine()->getMainDB()->getQueryAsArray(
-            "select " . ($fields_part ? $fields_part . ' ' : '* ')
-            . 'from nb_messaging_account '
-            . ($order_part ? "order by $order_part " : '')
-            . ($limit_part ? "limit $limit_part" : ''),
-            array(
-            )
-        );
         
         return $nb_item_list;
     }
@@ -244,6 +281,27 @@ abstract class CNabuMessagingAccountBase extends CNabuDBInternalObject
     public function setKey($key)
     {
         $this->setValue('nb_messaging_account_key', $key);
+        
+        return $this;
+    }
+
+    /**
+     * Get Messaging Account Provider attribute value
+     * @return null|string Returns the Messaging Account Provider value
+     */
+    public function getProvider()
+    {
+        return $this->getValue('nb_messaging_account_provider');
+    }
+
+    /**
+     * Sets the Messaging Account Provider attribute value
+     * @param null|string $provider New value for attribute
+     * @return CNabuMessagingAccountBase Returns $this
+     */
+    public function setProvider($provider)
+    {
+        $this->setValue('nb_messaging_account_provider', $provider);
         
         return $this;
     }

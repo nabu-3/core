@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/02/28 18:07:16 UTC
+ * Created: 2017/03/05 23:04:41 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -157,6 +157,7 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
      * select a subset of fields, order by concrete fields, or truncate the list by a number of rows starting in an
      * offset.
      * @throws \nabu\core\exceptions\ENabuCoreException Raises an exception if $fields or $order have invalid values.
+     * @param mixed $nb_catalog Catalog instance, object containing a Catalog Id field or an Id.
      * @param string $q Query string to filter results using a context index.
      * @param string|array $fields List of fields to put in the results.
      * @param string|array $order List of fields to order the results. Each field can be suffixed with "ASC" or "DESC"
@@ -165,7 +166,7 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
      * @param int $num_items Number of continue rows to get as maximum in the results.
      * @return array Returns an array with all rows found using the criteria.
      */
-    public static function getFilteredCatalogTaxonomyList($q = null, $fields = null, $order = null, $offset = 0, $num_items = 0)
+    public static function getFilteredCatalogTaxonomyList($nb_catalog, $q = null, $fields = null, $order = null, $offset = 0, $num_items = 0)
     {
         $nb_catalog_id = nb_getMixedValue($nbu_customer, NABU_CATALOG_FIELD_ID);
         if (is_numeric($nb_catalog_id)) {
@@ -266,6 +267,15 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
         }
         
         return $nb_translation;
+    }
+
+    /**
+     * Overrides refresh method to add translations branch to refresh.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh()
+    {
+        return parent::refresh() && $this->appendTranslatedRefresh();
     }
 
     /**

@@ -256,4 +256,13 @@ trait TNabuTranslated
 
         return $tdata;
     }
+
+    /**
+     * Overrides refresh method to add translations branch to refresh.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function appendTranslatedRefresh()
+    {
+        return $this->getLanguages(true) && $this->getTranslations(true);
+    }
 }
