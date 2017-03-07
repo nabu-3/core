@@ -350,6 +350,8 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
                         $retval = $this->load();
                     }
                 }
+            } else {
+                $retval = true;
             }
         }
 

@@ -72,6 +72,37 @@ class CNabuCustomer extends CNabuCustomerBase
         $this->nb_messaging_list = new CNabuMessagingList($this);
     }
 
+    public function relinkDB()
+    {
+        error_log(__METHOD__);
+        parent::relinkDB();
+
+        $this->nb_medioteca_list->iterate(function($key, $nb_medioteca) {
+            $nb_medioteca->relinkDB();
+            return true;
+        });
+
+        $this->nb_site_list->iterate(function($key, $nb_site) {
+            $nb_site->relinkDB();
+            return true;
+        });
+
+        $this->nb_commerce_list->iterate(function($key, $nb_commerce) {
+            $nb_commerce->relinkDB();
+            return true;
+        });
+
+        $this->nb_catalog_list->iterate(function($key, $nb_catalog) {
+            $nb_catalog->relinkDB();
+            return true;
+        });
+
+        $this->nb_messaging_list->iterate(function($key, $nb_messaging) {
+            $nb_messaging->relinkDB();
+            return true;
+        });
+    }
+
     /**
      * Gets the "visible name" of Customer. Internally, checks by priority order a valid name to show, and if no name
      * available, then returns a "<nonamed>" default value.
