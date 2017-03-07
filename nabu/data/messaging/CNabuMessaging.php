@@ -82,7 +82,6 @@ class CNabuMessaging extends CNabuMessagingBase
      */
     public function refresh()
     {
-        error_log("////////=> Refresh");
         return parent::refresh() && $this->getServices();
     }
 }
