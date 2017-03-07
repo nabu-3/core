@@ -268,7 +268,7 @@ class CNabuCatalog extends CNabuCatalogBase
         if ($this->nb_catalog_taxonomy_list->isEmpty() || $force) {
             $this->nb_catalog_taxonomy_list->clear();
             $this->nb_catalog_taxonomy_list->merge(
-                CNabuCatalogTaxonomy::getAllCatalogTaxonomys($this)
+                CNabuCatalogTaxonomy::getAllCatalogTaxonomies($this)
             );
         }
 
