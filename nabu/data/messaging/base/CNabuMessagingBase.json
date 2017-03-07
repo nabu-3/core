@@ -111,8 +111,8 @@
                 }
             }
         },
-        "nb_messaging_nb_language_fk1_idx": {
-            "name": "nb_messaging_nb_language_fk1_idx",
+        "nb_messaging_nb_language_fk": {
+            "name": "nb_messaging_nb_language_fk",
             "primary": false,
             "unique": false,
             "index_type": "BTREE",
