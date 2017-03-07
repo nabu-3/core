@@ -31,28 +31,76 @@ class CNabuLanguage extends CNabuLanguageBase
 {
     const LANGUAGE_ENABLED = 'T';
     const LANGUAGE_DISABLED = 'F';
-    
+    const LANGUAGE_IS_API = 'T';
+    const LANGUAGE_IS_NATURAL = 'F';
+
     public function isEnabled()
     {
         return $this->getEnabled() === self::LANGUAGE_ENABLED;
     }
-    
+
     public function isDisabled()
     {
         return $this->getEnabled() !== self::LANGUAGE_ENABLED;
     }
-    
+
     public function enable()
     {
         $this->setEnabled(self::LANGUAGE_ENABLED);
-        
+
         return $this;
     }
-    
+
     public function disable()
     {
         $this->setDisabled(self::LANGUAGE_DISABLED);
-        
+
         return $this;
+    }
+
+    /**
+     * Get natural languages list in the storage where the field 'nb_language_id' is the index, and each
+     * value is an instance of class CNabuLanguageBase or inherited.
+     * @return mixed Returns and array with all items.
+     */
+    public static function getNaturalLanguages()
+    {
+        return forward_static_call(
+                array(get_called_class(), 'buildObjectListFromSQL'),
+                'nb_language_id',
+                'select * from nb_language where nb_language_is_api=\'F\''
+        );
+    }
+
+    /**
+     * Get API languages list in the storage where the field 'nb_language_id' is the index, and each
+     * value is an instance of class CNabuLanguageBase or inherited.
+     * @return mixed Returns and array with all items.
+     */
+    public static function getAPILanguages()
+    {
+        return forward_static_call(
+                array(get_called_class(), 'buildObjectListFromSQL'),
+                'nb_language_id',
+                'select * from nb_language where nb_language_is_api=\'T\''
+        );
+    }
+
+    /**
+     * Check if the instance contains a natural language.
+     * @return bool Returns true if the instance is a natural language.
+     */
+    public function isNaturalLanguage()
+    {
+        return $this->getIsApi() === self::LANGUAGE_IS_NATURAL;
+    }
+
+    /**
+     * Check if the instance contains an API language.
+     * @return bool Returns true if the instance is an API language.
+     */
+    public function isAPILanguage()
+    {
+        return $this->getIsApi() === self::LANGUAGE_IS_API;
     }
 }

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/06 22:29:32 UTC
+ * Created: 2017/03/07 12:49:23 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -209,33 +209,6 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
     }
 
     /**
-     * Get Language Name attribute value
-     * @return string Returns the Language Name value
-     */
-    public function getName()
-    {
-        return $this->getValue('nb_language_name');
-    }
-
-    /**
-     * Sets the Language Name attribute value
-     * @param string $name New value for attribute
-     * @return CNabuLanguageBase Returns $this
-     */
-    public function setName($name)
-    {
-        if ($name === null) {
-            throw new ENabuCoreException(
-                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
-                    array("\$name")
-            );
-        }
-        $this->setValue('nb_language_name', $name);
-        
-        return $this;
-    }
-
-    /**
      * Get Language ISO639 1 attribute value
      * @return mixed Returns the Language ISO639 1 value
      */
@@ -273,6 +246,33 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
     public function setISO6392($ISO639_2)
     {
         $this->setValue('nb_language_ISO639_2', $ISO639_2);
+        
+        return $this;
+    }
+
+    /**
+     * Get Language Is Api attribute value
+     * @return string Returns the Language Is Api value
+     */
+    public function getIsApi()
+    {
+        return $this->getValue('nb_language_is_api');
+    }
+
+    /**
+     * Sets the Language Is Api attribute value
+     * @param string $is_api New value for attribute
+     * @return CNabuLanguageBase Returns $this
+     */
+    public function setIsApi($is_api)
+    {
+        if ($is_api === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$is_api")
+            );
+        }
+        $this->setValue('nb_language_is_api', $is_api);
         
         return $this;
     }
@@ -336,6 +336,33 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
     public function setWGEOCountryId($wgeo_country_id)
     {
         $this->setValue('wgeo_country_id', $wgeo_country_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Language Name attribute value
+     * @return string Returns the Language Name value
+     */
+    public function getName()
+    {
+        return $this->getValue('nb_language_name');
+    }
+
+    /**
+     * Sets the Language Name attribute value
+     * @param string $name New value for attribute
+     * @return CNabuLanguageBase Returns $this
+     */
+    public function setName($name)
+    {
+        if ($name === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$name")
+            );
+        }
+        $this->setValue('nb_language_name', $name);
         
         return $this;
     }
