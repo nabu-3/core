@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/07 13:57:15 UTC
+ * Created: 2017/03/08 12:49:12 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -335,27 +335,6 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
     }
 
     /**
-     * Get Messaging Hash attribute value
-     * @return null|string Returns the Messaging Hash value
-     */
-    public function getHash()
-    {
-        return $this->getValue('nb_messaging_hash');
-    }
-
-    /**
-     * Sets the Messaging Hash attribute value
-     * @param null|string $hash New value for attribute
-     * @return CNabuMessagingBase Returns $this
-     */
-    public function setHash($hash)
-    {
-        $this->setValue('nb_messaging_hash', $hash);
-        
-        return $this;
-    }
-
-    /**
      * Get Customer Id attribute value
      * @return null|int Returns the Customer Id value
      */
@@ -377,22 +356,22 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
     }
 
     /**
-     * Get Messaging Default Language Id attribute value
-     * @return null|int Returns the Messaging Default Language Id value
+     * Get Messaging Hash attribute value
+     * @return null|string Returns the Messaging Hash value
      */
-    public function getDefaultLanguageId()
+    public function getHash()
     {
-        return $this->getValue('nb_messaging_default_language_id');
+        return $this->getValue('nb_messaging_hash');
     }
 
     /**
-     * Sets the Messaging Default Language Id attribute value
-     * @param null|int $default_language_id New value for attribute
+     * Sets the Messaging Hash attribute value
+     * @param null|string $hash New value for attribute
      * @return CNabuMessagingBase Returns $this
      */
-    public function setDefaultLanguageId($default_language_id)
+    public function setHash($hash)
     {
-        $this->setValue('nb_messaging_default_language_id', $default_language_id);
+        $this->setValue('nb_messaging_hash', $hash);
         
         return $this;
     }
@@ -414,6 +393,27 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
     public function setKey($key)
     {
         $this->setValue('nb_messaging_key', $key);
+        
+        return $this;
+    }
+
+    /**
+     * Get Messaging Default Language Id attribute value
+     * @return null|int Returns the Messaging Default Language Id value
+     */
+    public function getDefaultLanguageId()
+    {
+        return $this->getValue('nb_messaging_default_language_id');
+    }
+
+    /**
+     * Sets the Messaging Default Language Id attribute value
+     * @param null|int $default_language_id New value for attribute
+     * @return CNabuMessagingBase Returns $this
+     */
+    public function setDefaultLanguageId($default_language_id)
+    {
+        $this->setValue('nb_messaging_default_language_id', $default_language_id);
         
         return $this;
     }

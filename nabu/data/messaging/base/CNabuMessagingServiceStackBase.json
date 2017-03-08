@@ -1,0 +1,257 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_messaging_service_stack",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "1",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_messaging_service_stack_id": {
+            "name": "nb_messaging_service_stack_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_messaging_id": {
+            "name": "nb_messaging_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_id": {
+            "name": "nb_messaging_service_id",
+            "ordinal": "3",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_template_id": {
+            "name": "nb_messaging_template_id",
+            "ordinal": "4",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_language_id": {
+            "name": "nb_language_id",
+            "ordinal": "5",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_status": {
+            "name": "nb_messaging_service_stack_status",
+            "ordinal": "6",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('N','P','E','S')",
+            "default": "P",
+            "is_nullable": false,
+            "extra": "",
+            "comment": "N: New\nP: Pending\nS: Sent\nE: Error\n"
+        },
+        "nb_messaging_service_stack_creation_datetime": {
+            "name": "nb_messaging_service_stack_creation_datetime",
+            "ordinal": "7",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_sent_datetime": {
+            "name": "nb_messaging_service_stack_sent_datetime",
+            "ordinal": "8",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_response_code": {
+            "name": "nb_messaging_service_stack_response_code",
+            "ordinal": "9",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_response_message": {
+            "name": "nb_messaging_service_stack_response_message",
+            "ordinal": "10",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_target": {
+            "name": "nb_messaging_service_stack_target",
+            "ordinal": "11",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_params": {
+            "name": "nb_messaging_service_stack_params",
+            "ordinal": "12",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_subject": {
+            "name": "nb_messaging_service_stack_subject",
+            "ordinal": "13",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_body_html": {
+            "name": "nb_messaging_service_stack_body_html",
+            "ordinal": "14",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_body_text": {
+            "name": "nb_messaging_service_stack_body_text",
+            "ordinal": "15",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_messaging_service_stack_id": {
+                    "name": "nb_messaging_service_stack_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_messaging_service_stack_nb_messaging_fk": {
+            "name": "nb_messaging_service_stack_nb_messaging_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_messaging_id": {
+                    "name": "nb_messaging_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_messaging_service_stack_nb_messaging_service_fk": {
+            "name": "nb_messaging_service_stack_nb_messaging_service_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_messaging_service_id": {
+                    "name": "nb_messaging_service_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_messaging_service_stack_nb_messaging_template_fk": {
+            "name": "nb_messaging_service_stack_nb_messaging_template_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_messaging_template_id": {
+                    "name": "nb_messaging_template_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_messaging_service_stack_nb_language_fk": {
+            "name": "nb_messaging_service_stack_nb_language_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

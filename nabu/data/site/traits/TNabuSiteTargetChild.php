@@ -19,6 +19,7 @@
 
 namespace nabu\data\site\traits;
 
+use nabu\data\CNabuDataObject;
 use nabu\data\site\CNabuSiteTarget;
 
 /**
@@ -55,7 +56,9 @@ trait TNabuSiteTargetChild
     public function setSiteTarget(CNabuSiteTarget $nb_site_target, $field = NABU_SITE_TARGET_FIELD_ID)
     {
         $this->nb_site_target = $nb_site_target;
-        $this->transferValue($nb_site_target, NABU_SITE_TARGET_FIELD_ID, $field);
+        if ($this instanceof CNabuDataObject) {
+            $this->transferValue($nb_site_target, NABU_SITE_TARGET_FIELD_ID, $field);
+        }
 
         return $this;
     }

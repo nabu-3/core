@@ -19,9 +19,20 @@
             "extra": "auto_increment",
             "comment": ""
         },
+        "nb_customer_id": {
+            "name": "nb_customer_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_messaging_hash": {
             "name": "nb_messaging_hash",
-            "ordinal": "2",
+            "ordinal": "3",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(38)",
@@ -30,12 +41,12 @@
             "extra": "",
             "comment": ""
         },
-        "nb_customer_id": {
-            "name": "nb_customer_id",
-            "ordinal": "3",
-            "data_type": "int",
-            "precision": "10",
-            "type": "int(11)",
+        "nb_messaging_key": {
+            "name": "nb_messaging_key",
+            "ordinal": "4",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(30)",
             "default": null,
             "is_nullable": true,
             "extra": "",
@@ -43,21 +54,10 @@
         },
         "nb_messaging_default_language_id": {
             "name": "nb_messaging_default_language_id",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_messaging_key": {
-            "name": "nb_messaging_key",
-            "ordinal": "5",
-            "data_type": "varchar",
-            "precision": null,
-            "type": "varchar(32)",
             "default": null,
             "is_nullable": true,
             "extra": "",
@@ -103,22 +103,6 @@
             "fields": {
                 "nb_customer_id": {
                     "name": "nb_customer_id",
-                    "ordinal": "1",
-                    "collation": "ASC",
-                    "null": true,
-                    "subpart": null,
-                    "comments": ""
-                }
-            }
-        },
-        "nb_messaging_nb_language_fk": {
-            "name": "nb_messaging_nb_language_fk",
-            "primary": false,
-            "unique": false,
-            "index_type": "BTREE",
-            "fields": {
-                "nb_messaging_default_language_id": {
-                    "name": "nb_messaging_default_language_id",
                     "ordinal": "1",
                     "collation": "ASC",
                     "null": true,

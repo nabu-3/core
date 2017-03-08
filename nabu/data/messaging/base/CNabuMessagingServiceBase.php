@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/07 13:57:17 UTC
+ * Created: 2017/03/08 12:49:14 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -120,7 +120,7 @@ abstract class CNabuMessagingServiceBase extends CNabuDBInternalObject
     /**
      * Get all items in the storage as an associative array where the field 'nb_messaging_service_id' is the index, and
      * each value is an instance of class CNabuMessagingServiceBase.
-     * @param CNabuMessaging $nb_messaging The CNabuMessaging instance of the Messagin that owns the Messaging Service
+     * @param CNabuMessaging $nb_messaging The CNabuMessaging instance of the Messaging that owns the Messaging Service
      * List
      * @return mixed Returns and array with all items.
      */
@@ -303,6 +303,27 @@ abstract class CNabuMessagingServiceBase extends CNabuDBInternalObject
     public function setProvider($provider)
     {
         $this->setValue('nb_messaging_service_provider', $provider);
+        
+        return $this;
+    }
+
+    /**
+     * Get Messaging Service Name attribute value
+     * @return null|string Returns the Messaging Service Name value
+     */
+    public function getName()
+    {
+        return $this->getValue('nb_messaging_service_name');
+    }
+
+    /**
+     * Sets the Messaging Service Name attribute value
+     * @param null|string $name New value for attribute
+     * @return CNabuMessagingServiceBase Returns $this
+     */
+    public function setName($name)
+    {
+        $this->setValue('nb_messaging_service_name', $name);
         
         return $this;
     }

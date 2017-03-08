@@ -20,7 +20,7 @@
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
  * @since 3.0.0 Surface
- * @version 3.0.11 Surface
+ * @version 3.0.12 Surface
  */
 
 /* Main constants definition */
@@ -118,6 +118,9 @@ define('NABU_CATALOG_FIELD_ID', 'nb_catalog_id');
 
 define('NABU_MESSAGING_TABLE', 'nb_messaging');
 define('NABU_MESSAGING_FIELD_ID', 'nb_messaging_id');
+
+define('NABU_MESSAGING_SERVICE_TABLE', 'nb_messaging_service');
+define('NABU_MESSAGING_SERVICE_FIELD_ID', 'nb_messaging_service_id');
 
 /* Regular expression patterns */
 define('NABU_REGEXP_PATTERN_KEY', '^[a-zA-Z_][a-zA-Z0-9_]+$');

@@ -3,7 +3,7 @@
     "name": "nb_messaging_service",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "1",
+    "autoincrement": "2",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",
@@ -63,8 +63,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_messaging_service_interface": {
-            "name": "nb_messaging_service_interface",
+        "nb_messaging_service_name": {
+            "name": "nb_messaging_service_name",
             "ordinal": "6",
             "data_type": "varchar",
             "precision": null,
@@ -74,9 +74,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_messaging_service_interface": {
+            "name": "nb_messaging_service_interface",
+            "ordinal": "7",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(256)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_messaging_service_attributes": {
             "name": "nb_messaging_service_attributes",
-            "ordinal": "7",
+            "ordinal": "8",
             "data_type": "longtext",
             "precision": null,
             "type": "longtext",

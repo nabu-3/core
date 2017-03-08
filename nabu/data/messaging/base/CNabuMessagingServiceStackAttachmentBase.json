@@ -1,0 +1,99 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_messaging_service_stack_attachment",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "1",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_messaging_service_stack_attachment_id": {
+            "name": "nb_messaging_service_stack_attachment_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_id": {
+            "name": "nb_messaging_service_stack_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_attachment_mimetype": {
+            "name": "nb_messaging_service_stack_attachment_mimetype",
+            "ordinal": "3",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_attachment_hash": {
+            "name": "nb_messaging_service_stack_attachment_hash",
+            "ordinal": "4",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_attachment_filename": {
+            "name": "nb_messaging_service_stack_attachment_filename",
+            "ordinal": "5",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_messaging_service_stack_attachment_id": {
+                    "name": "nb_messaging_service_stack_attachment_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_messaging_service_stack_attachment_nb_msg_service_stack_fk": {
+            "name": "nb_messaging_service_stack_attachment_nb_msg_service_stack_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_messaging_service_stack_id": {
+                    "name": "nb_messaging_service_stack_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

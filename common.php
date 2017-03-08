@@ -19,7 +19,8 @@
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
  */
 
 /* Include files */
