@@ -37,7 +37,6 @@ use nabu\http\managers\CNabuHTTPRendersManager;
 use nabu\http\managers\CNabuHTTPPluginsManager;
 use nabu\http\managers\CNabuHTTPSecurityManager;
 use nabu\http\managers\CNabuHTTPRenderDescriptor;
-use nabu\http\managers\base\CNabuHTTPManager;
 
 /**
  * Abstract base class to implement Web based applications.
