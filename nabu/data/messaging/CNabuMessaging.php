@@ -25,18 +25,21 @@ use nabu\data\messaging\base\CNabuMessagingBase;
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\data\site
+ * @package \nabu\data\messaging
  */
 class CNabuMessaging extends CNabuMessagingBase
 {
-    /** @var CNabuMessagingService $nb_messaging_service_list List of services of this instance. */
+    /** @var CNabuMessagingServiceList $nb_messaging_service_list List of services of this instance. */
     private $nb_messaging_service_list = null;
+    /** @var CNabuMessagingTemplateList $nb_messaging_template_list List of templates of this instance. */
+    private $nb_messaging_template_list = null;
 
     public function __construct($nb_messaging = false)
     {
         parent::__construct($nb_messaging);
 
         $this->nb_messaging_service_list = new CNabuMessagingServiceList();
+        $this->nb_messaging_template_list = new CNabuMessagingTemplateList();
     }
 
     /**
@@ -59,6 +62,25 @@ class CNabuMessaging extends CNabuMessagingBase
     }
 
     /**
+     * Get Templates assigned to this Messaging instance.
+     * @param bool $force If true, the Messaging Template List is refreshed from the database.
+     * @return CNabuMessagingTemplateList Returns the list of Templates. If noe Template exists, the list is empty.
+     */
+    public function getTemplates($force = false)
+    {
+        if ($this->nb_messaging_template_list === null) {
+            $this->nb_messaging_template_list = new CNabuMessagingTemplateList();
+        }
+
+        if ($this->nb_messaging_template_list->isEmpty() || $force) {
+            $this->nb_messaging_template_list->clear();
+            $this->nb_messaging_template_list->merge(CNabuMessagingTemplate::getAllMessagingTemplates($this));
+        }
+
+        return $this->nb_messaging_template_list;
+    }
+
+    /**
      * Overrides getTreeData method to add translations branch.
      * If $nb_language have a valid value, also adds a translation object
      * with current translation pointed by it.
@@ -72,6 +94,7 @@ class CNabuMessaging extends CNabuMessagingBase
 
         $trdata['languages'] = $this->getLanguages();
         $trdata['services'] = $this->getServices();
+        $trdata['templates'] = $this->getTemplates();
 
         return $trdata;
     }
@@ -82,6 +105,6 @@ class CNabuMessaging extends CNabuMessagingBase
      */
     public function refresh()
     {
-        return parent::refresh() && $this->getServices();
+        return parent::refresh() && $this->getServices() && $this->getTemplates();
     }
 }

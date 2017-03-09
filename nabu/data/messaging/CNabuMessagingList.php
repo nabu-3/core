@@ -24,9 +24,9 @@ use nabu\data\messaging\base\CNabuMessagingListBase;
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\data\site
+ * @package \nabu\data\messaging
  */
 class CNabuMessagingList extends CNabuMessagingListBase
 {
-    
+
 }

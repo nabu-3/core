@@ -36,6 +36,7 @@
         }
     ],
     "bin": [
-        "bin/nabu-install.sh"
+        "bin/nabu-install.sh",
+        "bin/nabu-messaging-daemon.sh"
     ]
 }
