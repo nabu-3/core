@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/08 12:49:15 UTC
+ * Created: 2017/03/13 17:24:46 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -330,6 +330,27 @@ abstract class CNabuMessagingTemplateBase extends CNabuDBInternalObject implemen
             );
         }
         $this->setValue('nb_messaging_id', $nb_messaging_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Messaging Template Hash attribute value
+     * @return null|string Returns the Messaging Template Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_messaging_template_hash');
+    }
+
+    /**
+     * Sets the Messaging Template Hash attribute value
+     * @param null|string $hash New value for attribute
+     * @return CNabuMessagingTemplateBase Returns $this
+     */
+    public function setHash($hash)
+    {
+        $this->setValue('nb_messaging_template_hash', $hash);
         
         return $this;
     }
