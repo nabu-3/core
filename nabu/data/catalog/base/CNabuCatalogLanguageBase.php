@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/13 17:24:30 UTC
+ * Created: 2017/03/14 12:23:29 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -102,19 +102,13 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Query the storage to retrieve the full list of available languages (those that correspond to existent
-     * translations) for $translated and returns an associative array in which each one is of class
-     * \nabu\data\lang\CNabuLanguage.
-     * @param object $translated Translated object to retrieve languages
-     * @return false|null|array Returns an associative array indexed by the language Id, null if no languages are
-     * available, or false if $translated cannot be identified.
+     * translations) for $translated and returns a list with all languages.
+     * @param mixed $translated Translated object or Id to retrieve languages.
+     * @return CNabuLanguageList Returns a list of languages. If no languages are available, the list is empty.
      */
     public static function getLanguagesForTranslatedObject($translated)
     {
-        $nb_catalog_id = nb_getMixedValue(
-                $translated,
-                'nb_catalog_id',
-                '\\nabu\\data\\catalog\\CNabuCatalog'
-        );
+        $nb_catalog_id = nb_getMixedValue($translated, 'nb_catalog_id');
         if (is_numeric($nb_catalog_id)) {
             $retval = CNabuLanguage::buildObjectListFromSQL(
                     'nb_language_id',
@@ -135,19 +129,15 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Query the storage to retrieve the full list of available translations for $translated and returns an associative
-     * array in which each one is of class \nabu\data\catalog\CNabuCatalogLanguage.
-     * @param object $translated Translated object to retrieve translations
-     * @return false|null|array Returns an associative array indexed by the language Id, null if no languages are
-     * available, or false if $translated cannot be identified.
+     * Query the storage to retrieve the full list of available translations for $translated and returns a list with
+     * all translations.
+     * @param mixed $translated Translated object or Id to retrieve translations.
+     * @return CNabuCatalogLanguageList Returns a list of translations. If no translations are available, the list is
+     * empty.
      */
     public static function getTranslationsForTranslatedObject($translated)
     {
-        $nb_catalog_id = nb_getMixedValue(
-                $translated,
-                'nb_catalog_id',
-                '\\nabu\\data\\catalog\\CNabuCatalog'
-        );
+        $nb_catalog_id = nb_getMixedValue($translated, 'nb_catalog_id');
         if (is_numeric($nb_catalog_id)) {
             $retval = CNabuCatalogLanguage::buildObjectListFromSQL(
                     'nb_language_id',

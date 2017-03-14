@@ -3,7 +3,7 @@
     "name": "nb_site_static_content",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "27",
+    "autoincrement": "28",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",

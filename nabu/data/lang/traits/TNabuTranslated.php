@@ -62,6 +62,9 @@ trait TNabuTranslated
      */
     protected abstract function checkForValidTranslationInstance($translation);
 
+    /**
+     * Fragment of constructor to maintain initialization of trait variables.
+     */
     protected function __translatedConstruct()
     {
         $this->languages_list = new CNabuLanguageList();
@@ -71,7 +74,7 @@ trait TNabuTranslated
 
     /**
      * Gets the language object owned by this object that represents a language entity allowed for them
-     * @param CNabuDataObject|int|GUID $nb_language Object containing a valid language ID or and ID directly
+     * @param mixed $nb_language Object containing a valid language ID or and ID directly
      * @return INabuTranslation If this entity owns the requested language returns a language instance
      * else returns null.
      */
@@ -116,7 +119,7 @@ trait TNabuTranslated
 
     /**
      * Get the translation child object that represents the translated fields of this entity
-     * @param CNabuDataObject|int|GUID $nb_language Object containing a valid language ID or and ID directly
+     * @param mixed $nb_language Object containing a valid language ID or and ID directly
      * @return array|null Returns a child object derivated from this entity that represents
      * the translation part of fields
      */
@@ -137,7 +140,7 @@ trait TNabuTranslated
 
     /**
      * Returns true if the object has the translation for the laguage passed as parameter
-     * @param CNabuDataObject|int|GUID $nb_language Object containing a valid language ID or and ID directly
+     * @param mixed $nb_language Object containing a valid language ID or and ID directly
      * @return bool Returns true the language is supported
      */
     public function hasTranslation($nb_language)
@@ -191,7 +194,7 @@ trait TNabuTranslated
      * Remove a translation child object from the internal list of this entity. If after this action
      * you calls updateTranslations method, then it call the delete method to remove definitely
      * this translation from the database
-     * @param CNabuDataObject|int|GUID $nb_translation Object containing a valid language ID or and ID directly
+     * @param mixed $nb_translation Object containing a valid language ID or and ID directly
      */
     public function removeTranslation($nb_translation)
     {

@@ -466,7 +466,7 @@ abstract class CNabuDataObjectList extends CNabuObject
 
     public function containsKey($key)
     {
-        return is_array($this->list) && is_string($key) && strlen($key) > 0 && array_key_exists($key, $this->list);
+        return is_array($this->list) && is_scalar($key) && array_key_exists($key, $this->list);
     }
 
     public function findByRegExpr($name, $key)
