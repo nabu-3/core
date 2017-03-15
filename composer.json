@@ -20,12 +20,14 @@
         "vendor-dir": "lib"
     },
     "require": {
+        "php": ">=7.0",
         "nabu-3/composer-installer-plugin": "~3.0",
         "nabu-3/provider-mysql-driver": "*",
         "nabu-3/provider-apache-httpd": "*",
         "nabu-3/sdk": "~3.0"
     },
     "require-dev": {
+        "php": ">=7.0",
         "nabu-3/composer-installer-plugin": "dev-master",
         "nabu-3/provider-mysql-driver": "dev-master",
         "nabu-3/provider-apache-httpd": "dev-master",
