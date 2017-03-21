@@ -175,7 +175,7 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
 
     /**
      * Adds a manager to the managers list.
-     * @param INabuProviderManager $manager Manager to be added.
+     * @param INabuProviderManager $nb_manager Manager to be added.
      * @return INabuProviderManager Returns the added manager if success or false if not.
      */
     public function addManager(INabuProviderManager $nb_manager)

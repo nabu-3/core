@@ -18,13 +18,29 @@
  */
 
 namespace nabu\messaging\interfaces;
+use nabu\messaging\exceptions\ENabuMessagingException;
+use nabu\provider\exceptions\ENabuProviderException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\http\managers\base
+ * @package \nabu\messaging\interfaces
  */
 interface INabuMessagingModule {
-    
+
+    /**
+     * Create a Service Interface to manage a Messaging service.
+     * @param string $name Class name to be instantiated.
+     * @return INabuMessagingServiceInterface Returns a valid instance if $name is a valid name.
+     * @throws ENabuMessagingException Raises an exception if the interface name is invalid.
+     */
+    public function createServiceInterface(string $name);
+
+    /**
+     * This method is called to finish the use of a Service Interface instance.
+     * @param INabuMessagingServiceInterface $interface Interface instance to be released.
+     * @throws ENabuMessagingException Raises an exception if $interface is not a candidate to be released.
+     */
+    public function releaseServiceInterface(INabuMessagingServiceInterface $interface);
 }
