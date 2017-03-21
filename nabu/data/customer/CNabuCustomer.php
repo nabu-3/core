@@ -26,6 +26,7 @@ use nabu\data\catalog\CNabuCatalog;
 use nabu\data\catalog\CNabuCatalogList;
 use nabu\data\commerce\CNabuCommerce;
 use nabu\data\commerce\CNabuCommerceList;
+use nabu\data\lang\CNabuLanguageList;
 use nabu\data\medioteca\CNabuMedioteca;
 use nabu\data\medioteca\CNabuMediotecaList;
 use nabu\data\messaging\CNabuMessaging;
@@ -35,7 +36,8 @@ use nabu\data\site\CNabuSiteList;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\data\customer
  */
 class CNabuCustomer extends CNabuCustomerBase
@@ -118,6 +120,30 @@ class CNabuCustomer extends CNabuCustomerBase
     }
 
     /**
+     * Gets available Medioteca instances in the list.
+     * @param bool $force If true, forces to merge complete list form the storage.
+     * @return array Returns an associative array where the index is the ID of each Medioteca and the value
+     * is the instance.
+     */
+    public function getMediotecas($force = false)
+    {
+        if ($force) {
+            $this->nb_medioteca_list->merge(CNabuMedioteca::getAllMediotecas($this));
+        }
+
+        return $this->nb_medioteca_list->getItems();
+    }
+
+    /**
+     * Get all languages used in the Medioteca set.
+     * @return CNabuLanguageList Returns the list of unique languages used.
+     */
+    public function getMediotecaSetUsedLanguages()
+    {
+        return CNabuMedioteca::getCustomerUsedLanguages($this);
+    }
+
+    /**
      * Gets a Medioteca by their ID.
      * If the internal Medioteca List contains a instance with same ID returns this instance, else if not exists,
      * tries to locate it in the storage and, if exists, then load it, add into Medioteca List and returns their
@@ -153,18 +179,26 @@ class CNabuCustomer extends CNabuCustomerBase
     }
 
     /**
-     * Gets available Medioteca instances in the list.
+     * Gets available Site instances in the list.
      * @param bool $force If true, forces to merge complete list form the storage.
-     * @return array Returns an associative array where the index is the ID of each Medioteca and the value
-     * is the instance.
+     * @return array Returns an associative array where the index is the ID of each Site and the value is the instance.
      */
-    public function getMediotecas($force = false)
+    public function getSites($force = false)
     {
         if ($force) {
-            $this->nb_medioteca_list->merge(CNabuMedioteca::getAllMediotecas($this));
+            $this->nb_site_list->merge(CNabuSite::getAllSites($this));
         }
 
-        return $this->nb_medioteca_list->getItems();
+        return $this->nb_site_list->getItems();
+    }
+
+    /**
+     * Get all languages used in the Site set.
+     * @return CNabuLanguageList Returns the list of unique languages used.
+     */
+    public function getSiteSetUsedLanguages()
+    {
+        return CNabuSite::getCustomerUsedLanguages($this);
     }
 
     /**
@@ -203,20 +237,6 @@ class CNabuCustomer extends CNabuCustomerBase
     }
 
     /**
-     * Gets available Site instances in the list.
-     * @param bool $force If true, forces to merge complete list form the storage.
-     * @return array Returns an associative array where the index is the ID of each Site and the value is the instance.
-     */
-    public function getSites($force = false)
-    {
-        if ($force) {
-            $this->nb_site_list->merge(CNabuSite::getAllSites($this));
-        }
-
-        return $this->nb_site_list->getItems();
-    }
-
-    /**
      * Gets available Commerce instances in the list.
      * @param bool $force If true, forces to merge complete list from the storage.
      * @return array Returns an associative array where the index is the ID of each Commerce and the value
@@ -229,6 +249,15 @@ class CNabuCustomer extends CNabuCustomerBase
         }
 
         return $this->nb_commerce_list->getItems();
+    }
+
+    /**
+     * Get all languages used in the Commerce set.
+     * @return CNabuLanguageList Returns the list of unique languages used.
+     */
+    public function getCommerceSetUsedLanguages()
+    {
+        return CNabuCommerce::getCustomerUsedLanguages($this);
     }
 
     /**
@@ -266,6 +295,11 @@ class CNabuCustomer extends CNabuCustomerBase
         return $retval;
     }
 
+    /**
+     * Gets a Catalog instance using their key.
+     * @param string $key Key of the Catalog to be retrieved.
+     * @return CNabuCatalog Returns a Catalog instance if exists or false if not.
+     */
     public function getCatalogByKey($key)
     {
         if (!is_string($key) || strlen($key) === 0) {
@@ -295,7 +329,7 @@ class CNabuCustomer extends CNabuCustomerBase
 
     /**
      * Get all languages used in the Catalog set.
-     * @ return CNabuLanguageList Returns the list of unique languages used.
+     * @return CNabuLanguageList Returns the list of unique languages used.
      */
     public function getCatalogSetUsedLanguages()
     {
@@ -315,6 +349,15 @@ class CNabuCustomer extends CNabuCustomerBase
         }
 
         return $this->nb_messaging_list->getItems();
+    }
+
+    /**
+     * Get all languages used in the Messaging set.
+     * @return CNabuLanguageList Returns the list of unique languages used.
+     */
+    public function getMessagingSetUsedLanguages()
+    {
+        return CNabuMessaging::getCustomerUsedLanguages($this);
     }
 
     /**
