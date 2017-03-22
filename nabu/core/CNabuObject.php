@@ -27,22 +27,18 @@ namespace nabu\core;
  */
 class CNabuObject
 {
-    const HASH_PREFIX = "#9120@";
-    const HASH_GLUE = "9234sdhcfjsd";
-    const HASH_POSTFIX = "0123190=";
-    
     /**
      * Timestamp of instance creation
      * @var int
      */
     private $timestamp;
-    
+
     /**
      * Hash to identify an instance across the entire collection in your class
      * @var string
      */
     private $hash = false;
-    
+
     /**
      * Default constructor. Assign current timestamp to $timestamp
      */
@@ -59,35 +55,30 @@ class CNabuObject
     {
         return $this->timestamp;
     }
-    
+
     /**
      * Check if an instance is of type Built-in.
-     * @return boolean Returns true if the instance is of type BuiltIn
+     * @return bool Returns true if the instance is of type BuiltIn
      */
     public function isBuiltIn()
     {
         return false;
     }
-    
+
     /**
      * Create a new hash for an instance
      */
     public function createHash()
     {
-        srand((int)((double)  microtime(true) * 1E+9));
-        $this->hash = md5(
-                CNabuObject::HASH_PREFIX
-                . get_called_class()
-                . CNabuObject::HASH_GLUE
-                . rand(0, getrandmax())
-                . CNabuObject::HASH_GLUE
-                . $this->timestamp
-                . CNabuObject::HASH_POSTFIX
-        );
-        
+        $this->hash = nb_generateGUID();
+
         return $this->hash;
     }
-    
+
+    /**
+     * Gets the current hash and, if none exists, then creates it.
+     * @return string Retuns a valid unique hash (GUID) to identify this instance.
+     */
     public function getHash()
     {
         return ($this->hash ? $this->hash : $this->createHash());

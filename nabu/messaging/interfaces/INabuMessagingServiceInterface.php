@@ -18,6 +18,7 @@
  */
 
 namespace nabu\messaging\interfaces;
+use nabu\data\messaging\CNabuMessagingService;
 use nabu\provider\interfaces\INabuProviderInterface;
 
 /**
@@ -28,5 +29,32 @@ use nabu\provider\interfaces\INabuProviderInterface;
  */
 interface INabuMessagingServiceInterface extends INabuProviderInterface
 {
-    
+    /**
+     * Gets the current hash and, if none exists, then creates it.
+     * @return string Retuns a valid unique hash (GUID) to identify this instance.
+     */
+    public function getHash();
+
+    /**
+     * Initialize the interface instance.
+     * @return bool Return true if the instance is initialized.
+     */
+    public function init();
+
+    /**
+     * Open the connection of this interface.
+     * @param CNabuMessagingService $nb_messaging_service Messaging Service instance with connection params.
+     * @return bool Returns true if the connection is made.
+     */
+    public function connect(CNabuMessagingService $nb_messaging_service);
+
+    /**
+     * Close the connection of this interface.
+     */
+    public function disconnect();
+
+    /**
+     * Finish the interface instance.
+     */
+    public function finish();
 }
