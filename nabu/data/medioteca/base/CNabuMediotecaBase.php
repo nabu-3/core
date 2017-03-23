@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/14 12:23:38 UTC
+ * Created: 2017/03/23 11:36:15 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -383,22 +383,22 @@ abstract class CNabuMediotecaBase extends CNabuDBInternalObject implements INabu
     }
 
     /**
-     * Get User Id attribute value
-     * @return null|int Returns the User Id value
+     * Get Medioteca Hash attribute value
+     * @return null|string Returns the Medioteca Hash value
      */
-    public function getUserId()
+    public function getHash()
     {
-        return $this->getValue('nb_user_id');
+        return $this->getValue('nb_medioteca_hash');
     }
 
     /**
-     * Sets the User Id attribute value
-     * @param null|int $nb_user_id New value for attribute
+     * Sets the Medioteca Hash attribute value
+     * @param null|string $hash New value for attribute
      * @return CNabuMediotecaBase Returns $this
      */
-    public function setUserId($nb_user_id)
+    public function setHash($hash)
     {
-        $this->setValue('nb_user_id', $nb_user_id);
+        $this->setValue('nb_medioteca_hash', $hash);
         
         return $this;
     }
@@ -420,6 +420,48 @@ abstract class CNabuMediotecaBase extends CNabuDBInternalObject implements INabu
     public function setKey($key)
     {
         $this->setValue('nb_medioteca_key', $key);
+        
+        return $this;
+    }
+
+    /**
+     * Get User Id attribute value
+     * @return null|int Returns the User Id value
+     */
+    public function getUserId()
+    {
+        return $this->getValue('nb_user_id');
+    }
+
+    /**
+     * Sets the User Id attribute value
+     * @param null|int $nb_user_id New value for attribute
+     * @return CNabuMediotecaBase Returns $this
+     */
+    public function setUserId($nb_user_id)
+    {
+        $this->setValue('nb_user_id', $nb_user_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Medioteca Default Language Id attribute value
+     * @return null|int Returns the Medioteca Default Language Id value
+     */
+    public function getDefaultLanguageId()
+    {
+        return $this->getValue('nb_medioteca_default_language_id');
+    }
+
+    /**
+     * Sets the Medioteca Default Language Id attribute value
+     * @param null|int $default_language_id New value for attribute
+     * @return CNabuMediotecaBase Returns $this
+     */
+    public function setDefaultLanguageId($default_language_id)
+    {
+        $this->setValue('nb_medioteca_default_language_id', $default_language_id);
         
         return $this;
     }

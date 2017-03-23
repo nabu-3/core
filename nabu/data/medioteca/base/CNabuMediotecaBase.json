@@ -41,12 +41,12 @@
             "extra": "",
             "comment": ""
         },
-        "nb_user_id": {
-            "name": "nb_user_id",
+        "nb_medioteca_hash": {
+            "name": "nb_medioteca_hash",
             "ordinal": "4",
-            "data_type": "int",
-            "precision": "10",
-            "type": "int(11)",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
             "default": null,
             "is_nullable": true,
             "extra": "",
@@ -63,9 +63,31 @@
             "extra": "",
             "comment": ""
         },
+        "nb_user_id": {
+            "name": "nb_user_id",
+            "ordinal": "6",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_default_language_id": {
+            "name": "nb_medioteca_default_language_id",
+            "ordinal": "7",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_medioteca_base_path": {
             "name": "nb_medioteca_base_path",
-            "ordinal": "6",
+            "ordinal": "8",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -76,7 +98,7 @@
         },
         "nb_medioteca_internal_path": {
             "name": "nb_medioteca_internal_path",
-            "ordinal": "7",
+            "ordinal": "9",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -87,7 +109,7 @@
         },
         "nb_medioteca_notes": {
             "name": "nb_medioteca_notes",
-            "ordinal": "8",
+            "ordinal": "10",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -152,6 +174,22 @@
             "fields": {
                 "nb_medioteca_type_id": {
                     "name": "nb_medioteca_type_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_medioteca_hash_idx": {
+            "name": "nb_medioteca_hash_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_medioteca_hash": {
+                    "name": "nb_medioteca_hash",
                     "ordinal": "1",
                     "collation": "ASC",
                     "null": true,

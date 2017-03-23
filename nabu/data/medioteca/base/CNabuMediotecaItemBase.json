@@ -30,9 +30,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_medioteca_item_hash": {
+            "name": "nb_medioteca_item_hash",
+            "ordinal": "3",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_medioteca_item_key": {
             "name": "nb_medioteca_item_key",
-            "ordinal": "3",
+            "ordinal": "4",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(30)",
@@ -43,7 +54,7 @@
         },
         "nb_medioteca_item_order": {
             "name": "nb_medioteca_item_order",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -54,7 +65,7 @@
         },
         "nb_medioteca_item_visible": {
             "name": "nb_medioteca_item_visible",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -65,7 +76,7 @@
         },
         "nb_medioteca_item_begin_datetime": {
             "name": "nb_medioteca_item_begin_datetime",
-            "ordinal": "6",
+            "ordinal": "7",
             "data_type": "datetime",
             "precision": null,
             "type": "datetime",
@@ -76,7 +87,7 @@
         },
         "nb_medioteca_item_end_datetime": {
             "name": "nb_medioteca_item_end_datetime",
-            "ordinal": "7",
+            "ordinal": "8",
             "data_type": "datetime",
             "precision": null,
             "type": "datetime",
@@ -87,7 +98,7 @@
         },
         "nb_medioteca_item_have_original": {
             "name": "nb_medioteca_item_have_original",
-            "ordinal": "8",
+            "ordinal": "9",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -98,7 +109,7 @@
         },
         "nb_medioteca_item_original_path": {
             "name": "nb_medioteca_item_original_path",
-            "ordinal": "9",
+            "ordinal": "10",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(256)",
@@ -109,7 +120,7 @@
         },
         "nb_medioteca_item_css_class": {
             "name": "nb_medioteca_item_css_class",
-            "ordinal": "10",
+            "ordinal": "11",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(50)",
@@ -120,7 +131,7 @@
         },
         "nb_medioteca_item_icon": {
             "name": "nb_medioteca_item_icon",
-            "ordinal": "11",
+            "ordinal": "12",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(50)",
@@ -178,6 +189,22 @@
                 "nb_medioteca_item_key": {
                     "name": "nb_medioteca_item_key",
                     "ordinal": "2",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_medioteca_item_hash_idx": {
+            "name": "nb_medioteca_item_hash_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_medioteca_item_hash": {
+                    "name": "nb_medioteca_item_hash",
+                    "ordinal": "1",
                     "collation": "ASC",
                     "null": true,
                     "subpart": null,
