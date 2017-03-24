@@ -66,9 +66,9 @@
         "nb_medioteca_item_visible": {
             "name": "nb_medioteca_item_visible",
             "ordinal": "6",
-            "data_type": "set",
+            "data_type": "enum",
             "precision": null,
-            "type": "set('T','F')",
+            "type": "enum('T','F')",
             "default": "F",
             "is_nullable": true,
             "extra": "",
@@ -99,9 +99,9 @@
         "nb_medioteca_item_have_original": {
             "name": "nb_medioteca_item_have_original",
             "ordinal": "9",
-            "data_type": "set",
+            "data_type": "enum",
             "precision": null,
-            "type": "set('T','F')",
+            "type": "enum('T','F')",
             "default": "F",
             "is_nullable": true,
             "extra": "",

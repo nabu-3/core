@@ -76,7 +76,6 @@ class CNabuCustomer extends CNabuCustomerBase
 
     public function relinkDB()
     {
-        error_log(__METHOD__);
         parent::relinkDB();
 
         $this->nb_medioteca_list->iterate(function($key, $nb_medioteca) {
@@ -258,6 +257,41 @@ class CNabuCustomer extends CNabuCustomerBase
     public function getCommerceSetUsedLanguages()
     {
         return CNabuCommerce::getCustomerUsedLanguages($this);
+    }
+
+    /**
+     * Gets a Commerce by their ID.
+     * If the internal Commerce List contains a instance with same ID returns this instance, else if not exists,
+     * tries to locate it in the storage and, if exists, then load it, add into Commerce List and returns their
+     * instance as result.
+     * @param mixed $nb_commerce A CNabuDataObject instance containing a nb_commerce_id field or an ID.
+     * @return CNabuCommerce Returns the Commerce instance if exists or false if not.
+     * @throws ENabuCoreException Raises an exception if $nb_commerce has no valid value.
+     */
+    public function getCommerce($nb_commerce)
+    {
+        $retval = false;
+
+        if (is_object($nb_commerce) && !($nb_commerce instanceof CNabuDataObject)) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_CLASS_TYPE,
+                array('$nb_commerce', get_class($nb_commerce))
+            );
+        }
+
+        if ($nb_commerce !== null) {
+            $nb_commerce_id = nb_getMixedValue($nb_commerce, NABU_COMMERCE_FIELD_ID);
+            if (is_numeric($nb_commerce_id) || nb_isValidGUID($nb_commerce_id)) {
+                $retval = $this->nb_commerce_list->getItem($nb_commerce_id);
+            } elseif ($nb_commerce_id !== null && $nb_commerce_id !== false) {
+                throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                    array('$nb_commerce', print_r($nb_commerce, true))
+                );
+            }
+        }
+
+        return $retval;
     }
 
     /**

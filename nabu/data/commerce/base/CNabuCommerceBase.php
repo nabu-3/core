@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/23 11:35:59 UTC
+ * Created: 2017/03/24 12:55:44 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -336,7 +336,7 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Get Customer Id attribute value
-     * @return null|int Returns the Customer Id value
+     * @return int Returns the Customer Id value
      */
     public function getCustomerId()
     {
@@ -345,12 +345,39 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Customer Id attribute value
-     * @param null|int $nb_customer_id New value for attribute
+     * @param int $nb_customer_id New value for attribute
      * @return CNabuCommerceBase Returns $this
      */
     public function setCustomerId($nb_customer_id)
     {
+        if ($nb_customer_id === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$nb_customer_id")
+            );
+        }
         $this->setValue('nb_customer_id', $nb_customer_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Commerce Default Language Id attribute value
+     * @return null|int Returns the Commerce Default Language Id value
+     */
+    public function getDefaultLanguageId()
+    {
+        return $this->getValue('nb_commerce_default_language_id');
+    }
+
+    /**
+     * Sets the Commerce Default Language Id attribute value
+     * @param null|int $default_language_id New value for attribute
+     * @return CNabuCommerceBase Returns $this
+     */
+    public function setDefaultLanguageId($default_language_id)
+    {
+        $this->setValue('nb_commerce_default_language_id', $default_language_id);
         
         return $this;
     }

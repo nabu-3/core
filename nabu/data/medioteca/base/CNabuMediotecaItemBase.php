@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/23 11:36:17 UTC
+ * Created: 2017/03/24 12:56:02 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -398,7 +398,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Get Medioteca Item Visible attribute value
-     * @return mixed Returns the Medioteca Item Visible value
+     * @return null|string Returns the Medioteca Item Visible value
      */
     public function getVisible()
     {
@@ -407,7 +407,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Medioteca Item Visible attribute value
-     * @param mixed $visible New value for attribute
+     * @param null|string $visible New value for attribute
      * @return CNabuMediotecaItemBase Returns $this
      */
     public function setVisible($visible)
@@ -461,7 +461,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Get Medioteca Item Have Original attribute value
-     * @return mixed Returns the Medioteca Item Have Original value
+     * @return null|string Returns the Medioteca Item Have Original value
      */
     public function getHaveOriginal()
     {
@@ -470,7 +470,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Medioteca Item Have Original attribute value
-     * @param mixed $have_original New value for attribute
+     * @param null|string $have_original New value for attribute
      * @return CNabuMediotecaItemBase Returns $this
      */
     public function setHaveOriginal($have_original)

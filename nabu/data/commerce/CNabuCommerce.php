@@ -109,4 +109,13 @@ class CNabuCommerce extends CNabuCommerceBase
 
         return $trdata;
     }
+
+    /**
+     * Overrides refresh method to add commerce subentities to be refreshed.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh()
+    {
+        return parent::refresh() && $this->getProductCategories();
+    }
 }

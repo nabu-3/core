@@ -30,9 +30,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_medioteca_lang_status": {
+            "name": "nb_medioteca_lang_status",
+            "ordinal": "3",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('E','D')",
+            "default": "D",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
         "nb_medioteca_lang_title": {
             "name": "nb_medioteca_lang_title",
-            "ordinal": "3",
+            "ordinal": "4",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -43,7 +54,7 @@
         },
         "nb_medioteca_lang_subtitle": {
             "name": "nb_medioteca_lang_subtitle",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -54,7 +65,7 @@
         },
         "nb_medioteca_lang_content": {
             "name": "nb_medioteca_lang_content",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "text",
             "precision": null,
             "type": "text",

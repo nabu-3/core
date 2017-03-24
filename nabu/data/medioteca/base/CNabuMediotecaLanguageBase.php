@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/23 11:36:16 UTC
+ * Created: 2017/03/24 12:56:01 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -212,6 +212,33 @@ abstract class CNabuMediotecaLanguageBase extends CNabuDBInternalObject implemen
             );
         }
         $this->setValue('nb_language_id', $nb_language_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Medioteca Lang Status attribute value
+     * @return string Returns the Medioteca Lang Status value
+     */
+    public function getStatus()
+    {
+        return $this->getValue('nb_medioteca_lang_status');
+    }
+
+    /**
+     * Sets the Medioteca Lang Status attribute value
+     * @param string $status New value for attribute
+     * @return CNabuMediotecaLanguageBase Returns $this
+     */
+    public function setStatus($status)
+    {
+        if ($status === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$status")
+            );
+        }
+        $this->setValue('nb_medioteca_lang_status', $status);
         
         return $this;
     }
