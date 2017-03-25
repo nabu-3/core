@@ -48,7 +48,7 @@
             "precision": null,
             "type": "set('H','N','U','F')",
             "default": "N",
-            "is_nullable": true,
+            "is_nullable": false,
             "extra": "",
             "comment": ""
         },
@@ -58,8 +58,8 @@
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
-            "default": null,
-            "is_nullable": true,
+            "default": "F",
+            "is_nullable": false,
             "extra": "",
             "comment": ""
         },

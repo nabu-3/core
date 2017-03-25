@@ -3,7 +3,7 @@
     "name": "nb_catalog_taxonomy",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "10",
+    "autoincrement": "11",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/24 12:56:04 UTC
+ * Created: 2017/03/25 19:50:09 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -285,8 +285,8 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
                 'select l.* '
                 . 'from nb_language l, '
                      . '(select distinct nb_language_id '
-                        . 'from nb_catalog ca, nb_catalog_lang cal '
-                       . 'where ca.nb_catalog_id=cal.nb_catalog_id '
+                        . 'from nb_messaging ca, nb_messaging_lang cal '
+                       . 'where ca.nb_messaging_id=cal.nb_messaging_id '
                          . 'and ca.nb_customer_id=%cust_id$d) as lid '
                . 'where l.nb_language_id=lid.nb_language_id',
                 array('cust_id' => $nb_customer_id)

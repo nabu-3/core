@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/24 12:56:03 UTC
+ * Created: 2017/03/25 19:50:08 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -251,6 +251,12 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
      */
     public function setType($type)
     {
+        if ($type === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$type")
+            );
+        }
         $this->setValue('nb_medioteca_item_lang_type', $type);
         
         return $this;
@@ -272,6 +278,12 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
      */
     public function setHavePublic($have_public)
     {
+        if ($have_public === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$have_public")
+            );
+        }
         $this->setValue('nb_medioteca_item_lang_have_public', $have_public);
         
         return $this;
