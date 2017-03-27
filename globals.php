@@ -122,5 +122,8 @@ define('NABU_MESSAGING_FIELD_ID', 'nb_messaging_id');
 define('NABU_MESSAGING_SERVICE_TABLE', 'nb_messaging_service');
 define('NABU_MESSAGING_SERVICE_FIELD_ID', 'nb_messaging_service_id');
 
+define('NABU_PROJECT_TABLE', 'nb_project');
+define('NABU_PROJECT_FIELD_ID', 'nb_project_id');
+
 /* Regular expression patterns */
 define('NABU_REGEXP_PATTERN_KEY', '^[a-zA-Z_][a-zA-Z0-9_]+$');
