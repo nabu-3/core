@@ -31,6 +31,8 @@ use nabu\data\medioteca\CNabuMedioteca;
 use nabu\data\medioteca\CNabuMediotecaList;
 use nabu\data\messaging\CNabuMessaging;
 use nabu\data\messaging\CNabuMessagingList;
+use nabu\data\project\CNabuProject;
+use nabu\data\project\CNabuProjectList;
 use nabu\data\site\CNabuSite;
 use nabu\data\site\CNabuSiteList;
 
@@ -57,6 +59,9 @@ class CNabuCustomer extends CNabuCustomerBase
     /** @var CNabuMessagingList $nb_messaging_list List of Messaging. This list can be filled only with requested
      * Messagings (on demand) or with a full list. */
     private $nb_messaging_list;
+    /** @var CNabuProject $nb_project_list List of Projects. This list can be filled only with requested Projects
+     * (on demand) or with a full list. */
+    private $nb_project_list;
 
     /**
      * Creates the instance and initializes class variables.
@@ -72,36 +77,70 @@ class CNabuCustomer extends CNabuCustomerBase
         $this->nb_commerce_list = new CNabuCommerceList($this);
         $this->nb_catalog_list = new CNabuCatalogList($this);
         $this->nb_messaging_list = new CNabuMessagingList($this);
+        $this->nb_project_list = new CNabuProjectList($this);
     }
 
     public function relinkDB()
     {
         parent::relinkDB();
 
-        $this->nb_medioteca_list->iterate(function($key, $nb_medioteca) {
-            $nb_medioteca->relinkDB();
-            return true;
-        });
+        if ($this->nb_medioteca_list !== null) {
+            $this->nb_medioteca_list->iterate(function($key, $nb_medioteca) {
+                $nb_medioteca->relinkDB();
+                return true;
+            });
+        }
 
-        $this->nb_site_list->iterate(function($key, $nb_site) {
-            $nb_site->relinkDB();
-            return true;
-        });
+        if ($this->nb_site_list !== null) {
+            $this->nb_site_list->iterate(function($key, $nb_site) {
+                $nb_site->relinkDB();
+                return true;
+            });
+        }
 
-        $this->nb_commerce_list->iterate(function($key, $nb_commerce) {
-            $nb_commerce->relinkDB();
-            return true;
-        });
+        if ($this->nb_commerce_list !== null) {
+            $this->nb_commerce_list->iterate(function($key, $nb_commerce) {
+                $nb_commerce->relinkDB();
+                return true;
+            });
+        }
 
-        $this->nb_catalog_list->iterate(function($key, $nb_catalog) {
-            $nb_catalog->relinkDB();
-            return true;
-        });
+        if ($this->nb_catalog_list !== null) {
+            $this->nb_catalog_list->iterate(function($key, $nb_catalog) {
+                $nb_catalog->relinkDB();
+                return true;
+            });
+        }
 
-        $this->nb_messaging_list->iterate(function($key, $nb_messaging) {
-            $nb_messaging->relinkDB();
-            return true;
-        });
+        if ($this->nb_messaging_list !== null) {
+            $this->nb_messaging_list->iterate(function($key, $nb_messaging) {
+                $nb_messaging->relinkDB();
+                return true;
+            });
+        }
+
+        if ($this->nb_project_list !== null) {
+            $this->nb_project_list->iterate(function($fkey, $nb_project) {
+                $nb_project->relinkDB();
+                return true;
+            });
+        }
+    }
+
+    /**
+     * Overrides refresh method to add Customer subentities to be refreshed.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh()
+    {
+        return parent::refresh() &&
+               $this->getMediotecas() &&
+               $this->getSites() &&
+               $this->getCommerces() &&
+               $this->getCatalogs() &&
+               $this->getMessagings() &&
+               $this->getProjects()
+        ;
     }
 
     /**
@@ -429,4 +468,66 @@ class CNabuCustomer extends CNabuCustomerBase
         return $retval;
     }
 
+    /**
+     * Gets available Project instances in the list.
+     * @param bool $force If true, foces to merge complete list from the storage.
+     * @return array Returns an associative array where the index is the ID of each Catalog and the value
+     * is the instance.
+     */
+    public function getProjects($force = false)
+    {
+        if ($this->nb_project_list === null) {
+            $this->nb_project_list = new CNabuProjectList($this);
+        }
+        
+        if ($force) {
+            $this->nb_project_list->merge(CNabuProject::getAllProjects($this));
+        }
+
+        return $this->nb_project_list->getItems();
+    }
+
+    /**
+     * Get all languages used in the Project set.
+     * @return CNabuLanguageList Returns the list of unique languages used.
+     */
+    public function getProjectSetUsedLanguages()
+    {
+        return CNabuProject::getCustomerUsedLanguages($this);
+    }
+
+    /**
+     * Gets a Project by their ID.
+     * If the internal Project List contains a instance with same ID returns this instance, else if not exists,
+     * tries to locate it in the storage and, if exits, the load it, add into Project List and returns their
+     * instance as result.
+     * @param mixed $nb_project A CNabuDataObject instance containing a nb_project_id field or an ID.
+     * @return CNabuProject Returns the Project instance if exists or false if not.
+     * @throws ENabuCoreException Raises an exception if $nb_project has no valid value.
+     */
+    public function getProject($nb_project)
+    {
+        $retval = false;
+
+        if (is_object($nb_project) && !($nb_project instanceof CNabuDataObject)) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_CLASS_TYPE,
+                array('$nb_project', get_class($nb_project))
+            );
+        }
+
+        if ($nb_project !== null) {
+            $nb_project_id = nb_getMixedValue($nb_project, NABU_PROJECT_FIELD_ID);
+            if (is_numeric($nb_project_id) || nb_isValidGUID($nb_project_id)) {
+                $retval = $this->nb_project_list->getItem($nb_project_id);
+            } elseif ($nb_project_id !== null && $nb_project_id !== false) {
+                throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                    array('$nb_project', print_r($nb_project, true))
+                );
+            }
+        }
+
+        return $retval;
+    }
 }

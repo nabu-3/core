@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/27 17:07:58 UTC
+ * Created: 2017/03/28 17:12:58 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -210,6 +210,27 @@ abstract class CNabuProjectVersionLanguageBase extends CNabuDBInternalObject imp
             );
         }
         $this->setValue('nb_language_id', $nb_language_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Project Version Lang Name attribute value
+     * @return null|string Returns the Project Version Lang Name value
+     */
+    public function getName()
+    {
+        return $this->getValue('nb_project_version_lang_name');
+    }
+
+    /**
+     * Sets the Project Version Lang Name attribute value
+     * @param null|string $name New value for attribute
+     * @return CNabuProjectVersionLanguageBase Returns $this
+     */
+    public function setName($name)
+    {
+        $this->setValue('nb_project_version_lang_name', $name);
         
         return $this;
     }

@@ -18,9 +18,8 @@
  */
 
 namespace nabu\data\project;
+use nabu\data\CNabuDataObject;
 use nabu\data\project\base\CNabuProjectBase;
-use nabu\data\project\base\CNabuProjectVersion;
-use nabu\data\project\base\CNabuProjectVersionList;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
@@ -58,4 +57,32 @@ class CNabuProject extends CNabuProjectBase
 
         return $this->nb_project_version_list;
     }
+
+    /**
+     * Overrides getTreeData method to add translations branch.
+     * If $nb_language have a valid value, also adds a translation object
+     * with current translation pointed by it.
+     * @param int|CNabuDataObject $nb_language Instance or Id of the language to be used.
+     * @param bool $dataonly Render only field values and ommit class control flags.
+     * @return array Returns a multilevel associative array with all data.
+     */
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $trdata = parent::getTreeData($nb_language, $dataonly);
+
+        $trdata['languages'] = $this->getLanguages();
+        $trdata['versions'] = $this->getVersions();
+
+        return $trdata;
+    }
+
+    /**
+     * Overrides refresh method to add messaging subentities to be refreshed.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh()
+    {
+        return parent::refresh() && $this->getVersions();
+    }
+
 }

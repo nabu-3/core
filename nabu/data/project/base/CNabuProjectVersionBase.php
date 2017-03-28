@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/27 17:07:57 UTC
+ * Created: 2017/03/28 17:12:57 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -116,9 +116,10 @@ abstract class CNabuProjectVersionBase extends CNabuDBInternalObject implements 
                 array(
                     'project_id' => $nb_project_id
                 ),
-                \%nb_project
+                $nb_project
             );
-        } else {    $retval = new CNabuProjectVersionList();
+        } else {
+            $retval = new CNabuProjectVersionList();
         }
         
         return $retval;

@@ -28,5 +28,5 @@ use nabu\data\project\base\CNabuProjectVersionListBase;
  */
 class CNabuProjectVersionList extends CNabuProjectVersionListBase
 {
-    
+
 }

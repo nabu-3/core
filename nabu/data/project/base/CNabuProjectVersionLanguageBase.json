@@ -30,9 +30,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_project_version_lang_name": {
+            "name": "nb_project_version_lang_name",
+            "ordinal": "3",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_project_version_lang_description": {
             "name": "nb_project_version_lang_description",
-            "ordinal": "3",
+            "ordinal": "4",
             "data_type": "text",
             "precision": null,
             "type": "text",
