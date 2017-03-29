@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/03/28 17:12:55 UTC
+ * Created: 2017/03/29 13:31:10 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -332,6 +332,27 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
             );
         }
         $this->setValue('nb_customer_id', $nb_customer_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Project Hash attribute value
+     * @return null|string Returns the Project Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_project_hash');
+    }
+
+    /**
+     * Sets the Project Hash attribute value
+     * @param null|string $hash New value for attribute
+     * @return CNabuProjectBase Returns $this
+     */
+    public function setHash($hash)
+    {
+        $this->setValue('nb_project_hash', $hash);
         
         return $this;
     }

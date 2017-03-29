@@ -30,9 +30,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_project_version_hash": {
+            "name": "nb_project_version_hash",
+            "ordinal": "3",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_project_version_code": {
             "name": "nb_project_version_code",
-            "ordinal": "3",
+            "ordinal": "4",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(100)",
@@ -68,6 +79,22 @@
                     "ordinal": "1",
                     "collation": "ASC",
                     "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_project_version_hash_idx": {
+            "name": "nb_project_version_hash_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_project_version_hash": {
+                    "name": "nb_project_version_hash",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
                     "subpart": null,
                     "comments": ""
                 }
