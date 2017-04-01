@@ -78,12 +78,17 @@ class CNabuMedioteca extends CNabuMediotecaBase
      * @param string $key A key idenfying a possible item in the Medioteca.
      * @return CNabuMediotecaItem If an Item exists, identified by $key, then returns it, elsewhere returns null.
      */
-    public function getItemByKey($key)
+    public function getItemByKey(string $key)
     {
         return $this->nb_medioteca_item_list->getItem($key, CNabuMediotecaItemList::INDEX_KEY);
     }
 
-    public function newItem($key = null)
+    /**
+     * Create a new Item in the list.
+     * @param string $key Optional key of the item to be assigned.
+     * @return CNabuMediotecaItem Returns the created Item instance.
+     */
+    public function newItem(string $key = null)
     {
         $nb_medioteca_item = $this->isBuiltIn()
                            ? new CNabuBuiltInMediotecaItem()
@@ -94,6 +99,11 @@ class CNabuMedioteca extends CNabuMediotecaBase
         return $this->addItemObject($nb_medioteca_item);
     }
 
+    /**
+     * Add an Item instance to the list.
+     * @param CNabuMediotecaItem $nb_medioteca_item Item instance to be added.
+     * @return CNabuMediotecaItem Returns the item added.
+     */
     public function addItemObject(CNabuMediotecaItem $nb_medioteca_item)
     {
         $nb_medioteca_item->setMedioteca($this);
@@ -101,11 +111,18 @@ class CNabuMedioteca extends CNabuMediotecaBase
         return $this->nb_medioteca_item_list->addItem($nb_medioteca_item);
     }
 
+    /**
+     * Forces to reindex entiry list by all available indexes.
+     */
     public function indexAll()
     {
         $this->nb_medioteca_item_list->sort();
     }
 
+    /**
+     * Get an array of all keys in the Medioteca Collection.
+     * @return array Returns an array of keys if some Medioteca have a key value, or null if none exists.
+     */
     public function getMediotecaItemKeysIndex()
     {
         return $this->nb_medioteca_item_list->getIndex(CNabuMediotecaItemList::INDEX_KEY);
@@ -131,6 +148,11 @@ class CNabuMedioteca extends CNabuMediotecaBase
         return $trdata;
     }
 
+    /**
+     * Get all Mediotecas of a Customer.
+     * @param CNabuCustomer $nb_customer Customer instance that owns Mediotecas to be getted.
+     * @return CNabuMediotecaList Returns a list of all instances. If no instances available the list object is empty.
+     */
     static public function getMediotecasForCustomer(CNabuCustomer $nb_customer)
     {
         $nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID);
@@ -142,9 +164,9 @@ class CNabuMedioteca extends CNabuMediotecaBase
                 . 'where nb_customer_id=%cust_id$d',
                 array(
                     'cust_id' => $nb_customer_id
-                )
+                ),
+                $nb_customer
             );
-            $retval->setCustomer($nb_customer);
         } else {
             $retval = new CNabuMediotecaList($nb_customer);
         }

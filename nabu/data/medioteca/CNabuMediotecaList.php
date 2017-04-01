@@ -21,6 +21,7 @@ namespace nabu\data\medioteca;
 
 use nabu\core\CNabuEngine;
 use nabu\data\customer\CNabuCustomer;
+use nabu\data\customer\traits\TNabuCustomerChild;
 use nabu\data\medioteca\base\CNabuMediotecaListBase;
 
 /**
@@ -31,41 +32,16 @@ use nabu\data\medioteca\base\CNabuMediotecaListBase;
  */
 class CNabuMediotecaList extends CNabuMediotecaListBase
 {
-    /**
-     * Customer instance which owns this list.
-     * @var CNabuCustomer
-     */
-    private $nb_customer = null;
+    use TNabuCustomerChild;
 
     /**
      * @param CNabuCustomer $nb_customer
      */
-    public function __construct(CNabuCustomer $nb_customer = null)
+    public function __construct(CNabuCustomer $nb_customer)
     {
         parent::__construct();
 
-        $this->nb_customer = $nb_customer;
-    }
-
-    /**
-     * Gets the Customer owner of this list.
-     * @return CNabuCustomer Returns the Customer instance.
-     */
-    public function getCustomer()
-    {
-        return $this->nb_customer;
-    }
-
-    /**
-     * Sets the Customer owner of this list.
-     * @param CNabuCustomer $nb_customer Customer instance to be setted.
-     * @return CNabuMediotecaList Returns the $this instance to grant chained callss.
-     */
-    public function setCustomer(CNabuCustomer $nb_customer)
-    {
-        $this->nb_customer = $nb_customer;
-
-        return $this;
+        $this->setCustomer($nb_customer);
     }
 
     public function acquireItem($key, $index = false)
@@ -76,6 +52,12 @@ class CNabuMediotecaList extends CNabuMediotecaListBase
                     $item = CNabuMedioteca::findByKey($this->nb_customer, $key);
                     break;
             }
+        }
+
+        if (!($item instanceof CNabuMedioteca) || !$item->validateCustomer($this->nb_customer)) {
+            $item = false;
+        } else {
+            $item->setCustomer($this->nb_customer);
         }
 
         return $item;
