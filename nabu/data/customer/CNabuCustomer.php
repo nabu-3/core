@@ -129,17 +129,23 @@ class CNabuCustomer extends CNabuCustomerBase
 
     /**
      * Overrides refresh method to add Customer subentities to be refreshed.
+     * @param bool $force Forces to reload entities from the database storage.
+     * @param bool $cascade Forces to reload child entities from the database storage.
      * @return bool Returns true if transations are empty or refreshed.
      */
-    public function refresh()
+    public function refresh(bool $force = false, bool $cascade = false)
     {
-        return parent::refresh() &&
-               $this->getMediotecas() &&
-               $this->getSites() &&
-               $this->getCommerces() &&
-               $this->getCatalogs() &&
-               $this->getMessagings() &&
-               $this->getProjects()
+        return parent::refresh($force, $cascade) &&
+               (!$cascade ||
+                    (
+                        $this->getMediotecas($force) &&
+                        $this->getSites($force) &&
+                        $this->getCommerces($force) &&
+                        $this->getCatalogs($force) &&
+                        $this->getMessagings($force) &&
+                        $this->getProjects($force)
+                    )
+               )
         ;
     }
 
@@ -479,7 +485,7 @@ class CNabuCustomer extends CNabuCustomerBase
         if ($this->nb_project_list === null) {
             $this->nb_project_list = new CNabuProjectList($this);
         }
-        
+
         if ($force) {
             $this->nb_project_list->merge(CNabuProject::getAllProjects($this));
         }

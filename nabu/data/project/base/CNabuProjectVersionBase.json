@@ -3,7 +3,7 @@
     "name": "nb_project_version",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "2",
+    "autoincrement": "4",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",

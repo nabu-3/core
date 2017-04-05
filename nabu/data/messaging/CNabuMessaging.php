@@ -101,10 +101,17 @@ class CNabuMessaging extends CNabuMessagingBase
 
     /**
      * Overrides refresh method to add messaging subentities to be refreshed.
+     * @param bool $force Forces to reload entities from the database storage.
+     * @param bool $cascade Forces to reload child entities from the database storage.
      * @return bool Returns true if transations are empty or refreshed.
      */
-    public function refresh()
+    public function refresh(bool $force = false, bool $cascade = false)
     {
-        return parent::refresh() && $this->getServices() && $this->getTemplates();
+        return parent::refresh($force, $cascade) &&
+               (!$cascade || (
+                   $this->getServices($force) &&
+                   $this->getTemplates($force)
+               ))
+        ;
     }
 }

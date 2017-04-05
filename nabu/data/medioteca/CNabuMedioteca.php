@@ -173,4 +173,15 @@ class CNabuMedioteca extends CNabuMediotecaBase
 
         return $retval;
     }
+
+    /**
+     * Overrides refresh method to add Medioteca subentities to be refreshed.
+     * @param bool $force Forces to reload entities from the database storage.
+     * @param bool $cascade Forces to reload child entities from the database storage.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh(bool $force = false, bool $cascade = false)
+    {
+        return parent::refresh($force, $cascade) && (!$cascade || $this->getItems($force));
+    }
 }

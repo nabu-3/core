@@ -267,9 +267,11 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
 
     /**
      * Refresh data from the database storage.
+     * @param bool $force Forces to reload entities from the database storage.
+     * @param bool $cascade Forces to reload child entities from the database storage.
      * @return bool Returns true if data is refreshed.
      */
-    public function refresh()
+    public function refresh(bool $force = false, bool $cascade = false)
     {
         $this->relinkDB();
         return $this->load();

@@ -41,20 +41,9 @@
             "extra": "",
             "comment": ""
         },
-        "nb_medioteca_id": {
-            "name": "nb_medioteca_id",
+        "nb_project_default_language_id": {
+            "name": "nb_project_default_language_id",
             "ordinal": "4",
-            "data_type": "int",
-            "precision": "10",
-            "type": "int(11)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_project_front_image_id": {
-            "name": "nb_project_front_image_id",
-            "ordinal": "5",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -65,7 +54,29 @@
         },
         "nb_project_current_version_id": {
             "name": "nb_project_current_version_id",
+            "ordinal": "5",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_id": {
+            "name": "nb_medioteca_id",
             "ordinal": "6",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_project_front_image_id": {
+            "name": "nb_project_front_image_id",
+            "ordinal": "7",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",

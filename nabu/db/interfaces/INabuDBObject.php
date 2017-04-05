@@ -108,9 +108,11 @@ interface INabuDBObject
 
     /**
      * Refresh all data from the database.
+     * @param bool $force Forces to reload entities from the database storage.
+     * @param bool $cascade Forces to reload child entities from the database storage.
      * @return bool Returns true if success or false if not.
      */
-    public function refresh();
+    public function refresh(bool $force = false, bool $cascade = false);
 
     /**
      * Fetchs a cursor stored in a INabuDBStatement object and fill

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/03 15:53:28 UTC
+ * Created: 2017/04/05 12:21:38 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -275,11 +275,13 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Overrides refresh method to add translations branch to refresh.
+     * @param bool $force Forces to reload entities from the database storage.
+     * @param bool $cascade Forces to reload child entities from the database storage.
      * @return bool Returns true if transations are empty or refreshed.
      */
-    public function refresh()
+    public function refresh(bool $force = false, bool $cascade = false)
     {
-        return parent::refresh() && $this->appendTranslatedRefresh();
+        return parent::refresh($force, $cascade) && $this->appendTranslatedRefresh($force);
     }
 
     /**
@@ -358,6 +360,48 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
+     * Get Project Default Language Id attribute value
+     * @return null|int Returns the Project Default Language Id value
+     */
+    public function getDefaultLanguageId()
+    {
+        return $this->getValue('nb_project_default_language_id');
+    }
+
+    /**
+     * Sets the Project Default Language Id attribute value
+     * @param null|int $default_language_id New value for attribute
+     * @return CNabuProjectBase Returns $this
+     */
+    public function setDefaultLanguageId($default_language_id)
+    {
+        $this->setValue('nb_project_default_language_id', $default_language_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Project Current Version Id attribute value
+     * @return null|int Returns the Project Current Version Id value
+     */
+    public function getCurrentVersionId()
+    {
+        return $this->getValue('nb_project_current_version_id');
+    }
+
+    /**
+     * Sets the Project Current Version Id attribute value
+     * @param null|int $current_version_id New value for attribute
+     * @return CNabuProjectBase Returns $this
+     */
+    public function setCurrentVersionId($current_version_id)
+    {
+        $this->setValue('nb_project_current_version_id', $current_version_id);
+        
+        return $this;
+    }
+
+    /**
      * Get Medioteca Id attribute value
      * @return null|int Returns the Medioteca Id value
      */
@@ -395,27 +439,6 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
     public function setFrontImageId($front_image_id)
     {
         $this->setValue('nb_project_front_image_id', $front_image_id);
-        
-        return $this;
-    }
-
-    /**
-     * Get Project Current Version Id attribute value
-     * @return null|int Returns the Project Current Version Id value
-     */
-    public function getCurrentVersionId()
-    {
-        return $this->getValue('nb_project_current_version_id');
-    }
-
-    /**
-     * Sets the Project Current Version Id attribute value
-     * @param null|int $current_version_id New value for attribute
-     * @return CNabuProjectBase Returns $this
-     */
-    public function setCurrentVersionId($current_version_id)
-    {
-        $this->setValue('nb_project_current_version_id', $current_version_id);
         
         return $this;
     }
