@@ -98,18 +98,18 @@ final class CNabuHTTPPluginsManager extends CNabuHTTPManager
         }
 
         if ($this->site_plugin !== null) {
-            ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_ALREADY_ASSIGNED);
+            throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_ALREADY_ASSIGNED);
         }
 
         if ($nb_site->contains('nb_site_plugin_name') && strlen($class_name = $nb_site->getValue('nb_site_plugin_name')) > 0) {
             try {
                 $this->site_plugin = new $class_name();
                 if (!($this->site_plugin instanceof INabuHTTPSitePlugin)) {
-                    ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_NOT_VALID, $class_name);
+                    throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_NOT_VALID, $class_name);
                 }
                 $this->invoqueTrap($nb_request, $nb_response);
             } catch(Exception $ex) {
-                throw ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_NOT_VALID, $class_name);
+                throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_NOT_VALID, $class_name);
             }
         }
     }
