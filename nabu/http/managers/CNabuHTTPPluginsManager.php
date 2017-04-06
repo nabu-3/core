@@ -105,11 +105,11 @@ final class CNabuHTTPPluginsManager extends CNabuHTTPManager
             try {
                 $this->site_plugin = new $class_name();
                 if (!($this->site_plugin instanceof INabuHTTPSitePlugin)) {
-                    throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_NOT_VALID, $class_name);
+                    throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_NOT_VALID, array($class_name));
                 }
                 $this->invoqueTrap($nb_request, $nb_response);
             } catch(Exception $ex) {
-                throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_NOT_VALID, $class_name);
+                throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_NOT_VALID, array($class_name));
             }
         }
     }
