@@ -155,9 +155,11 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
                         $this->processMethods() &&
                         $this->processCommands())
                     {
-                        $this->prepareHeaders();
+                        //$this->prepareHeaders();
                         if ($method !== 'OPTIONS' && $method !== 'HEAD') {
                             $this->buildResponse();
+                        } else {
+                            $this->prepareHeaders();
                         }
                     }
                 }
@@ -469,6 +471,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
                 $this->nb_modules_manager->invoqueBeforeMorphDisplay($this->nb_request, $this->nb_response)
                )
             {
+                $this->prepareHeaders();
                 /** @todo Pending to revise in a near future */
                 /*
                 $this->nb_apps_manager->render();
