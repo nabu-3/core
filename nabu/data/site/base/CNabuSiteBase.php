@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/05 12:21:24 UTC
+ * Created: 2017/04/09 23:08:09 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -339,6 +339,48 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     }
 
     /**
+     * Get Site Hash attribute value
+     * @return null|string Returns the Site Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_site_hash');
+    }
+
+    /**
+     * Sets the Site Hash attribute value
+     * @param null|string $hash New value for attribute
+     * @return CNabuSiteBase Returns $this
+     */
+    public function setHash($hash)
+    {
+        $this->setValue('nb_site_hash', $hash);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Key attribute value
+     * @return null|string Returns the Site Key value
+     */
+    public function getKey()
+    {
+        return $this->getValue('nb_site_key');
+    }
+
+    /**
+     * Sets the Site Key attribute value
+     * @param null|string $key New value for attribute
+     * @return CNabuSiteBase Returns $this
+     */
+    public function setKey($key)
+    {
+        $this->setValue('nb_site_key', $key);
+        
+        return $this;
+    }
+
+    /**
      * Get Cluster Group Id attribute value
      * @return null|int Returns the Cluster Group Id value
      */
@@ -592,33 +634,6 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_mounting_order', $mounting_order);
-        
-        return $this;
-    }
-
-    /**
-     * Get Site Key attribute value
-     * @return string Returns the Site Key value
-     */
-    public function getKey()
-    {
-        return $this->getValue('nb_site_key');
-    }
-
-    /**
-     * Sets the Site Key attribute value
-     * @param string $key New value for attribute
-     * @return CNabuSiteBase Returns $this
-     */
-    public function setKey($key)
-    {
-        if ($key === null) {
-            throw new ENabuCoreException(
-                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
-                    array("\$key")
-            );
-        }
-        $this->setValue('nb_site_key', $key);
         
         return $this;
     }
