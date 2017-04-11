@@ -1,4 +1,4 @@
-<?php
+medioteca<?php
 
 /*  Copyright 2009-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -220,6 +220,23 @@ class CNabuCustomer extends CNabuCustomerBase
         }
 
         return $retval;
+    }
+
+    /**
+     * Gets a Medioteca instance using their key.
+     * @param string $key Key of the Medioteca to be retrieved.
+     * @return CNabuMedioteca Returns a Medioteca instance if exists or false if not.
+     */
+    public function getMediotecaByKey(string $key)
+    {
+        if (strlen($key) === 0) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                array('$key', print_r($key, true))
+            );
+        }
+
+        return $this->nb_medioteca_list->getItem($key, CNabuMediotecaList::INDEX_KEY);
     }
 
     /**
