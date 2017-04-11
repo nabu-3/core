@@ -162,7 +162,7 @@ if (!function_exists('params2string')) {
         </style>
     </head>
     <body>
-        <h1><?php echo 'nabu 3 <small>v'. NABU_VERSION . '</small>';?></h1>
+        <h1><?php echo 'nabu-3 <small>v'. NABU_VERSION . '</small>';?></h1>
         <h3>Error <?php echo "$code: $message";?></h3>
 <?php   if ($exception) { ?>
         <code>
@@ -194,6 +194,6 @@ if (!function_exists('params2string')) {
 <?php       } ?>
         </code>
 <?php   } ?>
-        <footer><span class="left"><?php echo NABU_LICENSE_TITLE . (NABU_LICENSED !== NABU_OWNER ? ' to ' . ( NABU_LICENSEE_TARGET !== '' ? '<a href="' . NABU_LICENSEE_TARGET . '">' . NABU_LICENSED . '</a>' : NABU_LICENSED ) : '');?></span>&copy; 2014-<?php echo date('Y');?> <?php echo NABU_OWNER;?></footer>
+        <footer><span class="left"><?php echo NABU_LICENSE_TITLE . (NABU_LICENSED !== NABU_OWNER ? ' to ' . ( NABU_LICENSEE_TARGET !== '' ? '<a href="' . NABU_LICENSEE_TARGET . '">' . NABU_LICENSED . '</a>' : NABU_LICENSED ) : '');?></span>&copy; 2009-<?php echo date('Y');?> <?php echo NABU_OWNER;?></footer>
     </body>
 </html>

@@ -25,7 +25,7 @@
 
 /* Main constants definition */
 define('NABU_VERSION', '3.0.12 Surface');
-define('NABU_OWNER', 'Where Ideas Simply Come True, S.L.');
+define('NABU_OWNER', 'nabu-3 group');
 define('NABU_LICENSE_TITLE', 'Licensed under the Apache License, Version 2.0');
 define('NABU_LICENSE_TARGET', 'http://www.apache.org/licenses/LICENSE-2.0');
 
