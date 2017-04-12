@@ -284,8 +284,6 @@ class CNabuSiteMap extends CNabuSiteMapBase implements INabuDataObjectTreeNode, 
     {
         $nb_role_id = $nb_role->getId();
         $nb_role_mask = $this->nb_site_map_role_list->getItem($nb_role_id);
-        error_log("==== **** ==== " . print_r($nb_role_mask->getTreeData(null, true), true));
-        error_log("==== **** ==== " . print_r($additional, true));
         $this->nb_site_map_role_list->clear();
         if ($nb_role_mask instanceof CNabuSiteMapRole) {
             if (is_array($additional) &&
