@@ -71,7 +71,7 @@ class CNabuUser extends CNabuUserBase
 
     public function setPassword($password)
     {
-        $this->setValue('nb_user_password', CNabuUser::encodePassword($password));
+        $this->setValue('nb_user_passwd', CNabuUser::encodePassword($password));
     }
 
     /**
