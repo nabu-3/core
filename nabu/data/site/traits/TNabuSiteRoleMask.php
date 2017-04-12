@@ -42,7 +42,7 @@ trait TNabuSiteRoleMask
 
         $zone = $this->getZone();
 
-        return ($zone === CNabuSite::ZONE_PUBLIC || ($strict && $zone === CNabuSite::ZONE_BOTH));
+        return ($zone === CNabuSite::ZONE_PUBLIC || (!$strict && $zone === CNabuSite::ZONE_BOTH));
     }
 
     /**
@@ -59,7 +59,7 @@ trait TNabuSiteRoleMask
 
         $zone = $this->getZone();
 
-        return ($zone === CNabuSite::ZONE_PRIVATE || ($strict && $zone === CNabuSite::ZONE_BOTH));
+        return ($zone === CNabuSite::ZONE_PRIVATE || (!$strict && $zone === CNabuSite::ZONE_BOTH));
     }
 
     /**
