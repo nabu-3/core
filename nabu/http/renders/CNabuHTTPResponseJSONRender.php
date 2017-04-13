@@ -24,17 +24,19 @@ use \nabu\http\renders\base\CNabuHTTPResponseRenderAdapter;
 /**
  * Class to dump JSON as HTTP response.
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\http\renders\base
  */
-class CNabuHTTPResponseJSONRender extends CNabuHTTPResponseRenderAdapter {
-
-    public function __construct($main_render = false) {
+class CNabuHTTPResponseJSONRender extends CNabuHTTPResponseRenderAdapter
+{
+    public function __construct($main_render = false)
+    {
         parent::__construct($main_render);
     }
 
-    public function render() {
-
+    public function render()
+    {
         if ($this->isEmpty()) {
             echo "{}";
         } else {

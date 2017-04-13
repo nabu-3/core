@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/09 23:08:15 UTC
+ * Created: 2017/04/13 21:42:26 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -31,7 +31,7 @@ use \nabu\data\site\CNabuSiteStaticContent;
 
 /**
  * Class to manage a list of Site Static Content instances.
- * @author Rafael Gutiérrez Martínez <rgutierrez@wiscot.com>
+ * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
  */

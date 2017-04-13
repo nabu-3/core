@@ -4,22 +4,25 @@ namespace nabu\http\interfaces;
 use nabu\data\security\CNabuRole;
 use nabu\data\security\CNabuUser;
 use nabu\data\site\CNabuSiteUser;
+use nabu\http\CNabuHTTPRequest;
+use nabu\http\CNabuHTTPResponse;
 
 /**
  * Interface to create site plugins to extend the functionality of nabu-3
  * @author Rafael Gutiérrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\http\interfaces
  */
 interface INabuHTTPSitePlugin
 {
     /**
      * This method is called just after the instantiation of plugin to set request and response objects
-     * @param $nb_request nabu\http\CNabuHTTPRequest Request object
-     * @param $nb_response nabu\http\CNabuHTTPResponse Response object
-     * @return boolean Return true if trap successfully or false if not
+     * @param CNabuHTTPRequest $nb_request Request object
+     * @param CNabuHTTPResponse $nb_response Response object
+     * @return bool Return true if trap successfully or false if not
      */
-    public function trap($nb_request, $nb_response);
+    public function trap(CNabuHTTPRequest $nb_request, CNabuHTTPResponse $nb_response);
 
     /**
      * This method is called when the site is prepared at the beggining of the build page step,
@@ -27,16 +30,16 @@ interface INabuHTTPSitePlugin
      * @return mixed Returns different values according to result of call:
      * - true: if success
      * - false: if error
-     * - \nabu\core\CNabuHTTPRedirection: if redirection needed
+     * - CNabuHTTPRedirection: if redirection needed
      */
     public function prepareSite();
 
     /**
      * This method if called when the request header have a CORS Origin header in order to validate the target.
      * @param string $origin URL targeted by CORS
-     * @return boolean Returns true if $origin is allowed or false elsewhere.
+     * @return bool Returns true if $origin is allowed or false elsewhere.
      */
-    public function validateCORSOrigin($origin);
+    public function validateCORSOrigin(string $origin) : bool;
 
     /**
      * This method is called when the root page is requested and not defined.
@@ -70,28 +73,28 @@ interface INabuHTTPSitePlugin
 
     /**
      * This method is called when no valid page is found
-     * @param $path file path that cannot be found
+     * @param string $path file path that cannot be found
      * @return mixed Returns different values according to result of call:
      * - true: if success
      * - false: if error
      * - \nabu\core\CNabuHTTPRedirection: if redirection needed
      */
-    public function targetNotFound($path);
+    public function targetNotFound(string $path);
 
     /**
-     * This method is called when invoque programmatically to {@see \nabu\http\CCMSSession logout}
+     * This method is called when invoque programmatically to {@see CNabuHTTPSession logout}
      */
     public function beforeLogout();
 
     /**
      * This method is called after a login is made
-     * @param $nb_user nabu\security\CNabuUser User logged
-     * @param $nb_role nabu\security\CNabuRole Role granted for private session
-     * @param $nb_site_user nabu\security\CNabuSiteUser Profile of user in this site with this role
+     * @param CNabuUser $nb_user User logged
+     * @param CNabuRole $nb_role Role granted for private session
+     * @param CNabuSiteUser $nb_site_user Profile of user in this site with this role
      * @return mixed Returns different values according to result of call:
      * - true: if success
      * - false: if error
-     * - \nabu\core\CNabuHTTPRedirection: if redirection needed
+     * - CNabuHTTPRedirection: if redirection needed
      */
     public function afterLogin(CNabuUser $nb_user, CNabuRole $nb_role, CNabuSiteUser $nb_site_user);
 }

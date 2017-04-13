@@ -84,7 +84,7 @@ abstract class CNabuDataObject extends CNabuObject
         return ($and ? (($this->edit_mode & $value) === $value) : ($this->edit_mode | $value) !== 0);
     }
 
-    public function getValue($name)
+    public function getValue(string $name)
     {
         return ($this->data == null || !array_key_exists($name, $this->data) ? null : $this->data[$name]);
     }

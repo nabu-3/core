@@ -21,123 +21,75 @@ namespace nabu\http\adapters;
 
 use \nabu\core\CNabuEngine;
 use \nabu\data\cluster\CNabuServer;
+use \nabu\data\commerce\CNabuCommerce;
 use \nabu\data\customer\CNabuCustomer;
 use \nabu\data\lang\CNabuLanguage;
+use \nabu\data\security\CNabuRole;
+use \nabu\data\security\CNabuUser;
 use \nabu\data\site\CNabuSite;
 use \nabu\data\site\CNabuSiteAlias;
 use \nabu\data\site\CNabuSiteTarget;
+use \nabu\data\site\CNabuSiteUser;
 use \nabu\http\CNabuHTTPRequest;
 use \nabu\http\CNabuHTTPResponse;
 use \nabu\http\CNabuHTTPSession;
 use \nabu\http\interfaces\INabuHTTPSiteTargetPlugin;
+use nabu\http\app\base\CNabuHTTPApplication;
 
 /**
  * Abstract adapter to easy implementation of Article plugins
  * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\http\adapters
  */
 abstract class CNabuHTTPSiteTargetPluginAdapter implements INabuHTTPSiteTargetPlugin
 {
-    /**
-     *
-     * @var CNabuEngine
-     */
+    /** @var CNabuEngine $nb_engine Engine instance. */
     protected $nb_engine = null;
-    /**
-     * Application instance
-     * @var CNabuHTTPApplication
-     */
+    /** @var CNabuHTTPApplication $nb_application Application instance. */
     protected $nb_application = null;
-    /**
-     *
-     * @var CNabuHTTPSession
-     */
+    /** @var CNabuHTTPSession $nb_session Session instance. */
     protected $nb_session = null;
-    /**
-     *
-     * @var CNabuServer
-     */
+    /** @var CNabuServer $nb_server Server instance. */
     protected $nb_server = null;
-    /**
-     *
-     * @var CNabuCustomer
-     */
+    /** @var CNabuCustomer $nb_customer Customer instance. */
     protected $nb_customer = null;
-    /**
-     *
-     * @var CNabuCustomer
-     */
+    /** @var CNabuCustomer $nb_work_customer Work Customer instance. */
     protected $nb_work_customer = null;
-    /**
-     *
-     * @var CNabuHTTPRequest
-     */
+    /** @var CNabuHTTPRequest $nb_request Request instance. */
     protected $nb_request = null;
-    /**
-     *
-     * @var CNabuHTTPResponse
-     */
+    /** @var CNabuHTTPResponse $nb_response Response instance. */
     protected $nb_response = null;
-    /**
-     *
-     * @var CNabuSite
-     */
+    /** @var CNabuSite $nb_site Site instance. */
     protected $nb_site = null;
-    /**
-     *
-     * @var CNabuSiteAlias
-     */
+    /** @var CNabuSiteAlias $nb_site_alias Site Alias instance. */
     protected $nb_site_alias = null;
-    /**
-     *
-     * @var \nabu\security\CNabuRole
-     */
+    /** @var CNabuRole $nb_site_alias_role Site Alias Role instance. */
     protected $nb_site_alias_role = null;
-    /**
-     * Commerce instance
-     * @var \nabu\commerce\CNabuCommerce
-     */
+    /** @var CNabuCommerce $nb_commerce Commerce instance. */
     protected $nb_commerce = null;
-    /**
-     *
-     * @var CNabuSiteTarget
-     */
+    /** @var CNabuSiteTarget $nb_site_target Site Target instance. */
     protected $nb_site_target = null;
-    /**
-     *
-     * @var CNabuLanguage
-     */
+    /** @var CNabuLanguage $nb_language Current Language instance. */
     protected $nb_language = null;
-    /**
-     *
-     * @var \nabu\security\CNabuUser
-     */
+    /** @var CNabuUser $nb_user Current User instance. */
     protected $nb_user = null;
-    /**
-     *
-     * @var \nabu\security\CNabuRole
-     */
+    /** @var CNabuRole $nb_role Current Role instance. */
     protected $nb_role = null;
-    /**
-     *
-     * @var \nabu\security\CNabuUserRole
-     */
-    protected $nb_user_role = null;
-    /**
-     *
-     * @var array \nabu\app\CNabuAppMorph
-     */
-    protected $nb_apps_morphs = null;
+    /** @var CNabuSiteUser $nb_site_user Current Site User instance. */
+    protected $nb_site_user = null;
+    /* @var array \nabu\app\CNabuAppMorph
+    protected $nb_apps_morphs = null;*/
 
     /**
      * This method is called just after the instantiation of plugin to set request and response objects.
      * After called from the Engine, all protected properties of this class are setted with proper values.
      * @param CNabuHTTPRequest $nb_request Request instance.
      * @param CNabuHTTPResponse $nb_response Response instance.
-     * @return boolean Return true if trap successfully or false if not.
+     * @return bool Return true if trap successfully or false if not.
      */
-    public function trap($nb_request, $nb_response)
+    public function trap(CNabuHTTPRequest $nb_request, CNabuHTTPResponse $nb_response) : bool
     {
         if (($this->nb_request = $nb_request) === null ||
             ($this->nb_response = $nb_response) === null ||
@@ -156,7 +108,7 @@ abstract class CNabuHTTPSiteTargetPluginAdapter implements INabuHTTPSiteTargetPl
             $this->nb_work_customer = $this->nb_application->getSecurityManager()->getWorkCustomer();
             $this->nb_user = $this->nb_application->getSecurityManager()->getUser();
             $this->nb_role = $this->nb_application->getSecurityManager()->getRole();
-            $this->nb_user_role = $this->nb_application->getSecurityManager()->getSiteUser();
+            $this->nb_site_user = $this->nb_application->getSecurityManager()->getSiteUser();
             $this->nb_site_alias_role = $this->nb_request->getSiteAliasRole();
             $this->nb_commerce = $this->nb_request->getCommerce();
             //$this->nb_apps_morphs = $this->nb_engine->getAppsMorphs();

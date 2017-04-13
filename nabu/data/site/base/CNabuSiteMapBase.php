@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/09 23:08:14 UTC
+ * Created: 2017/04/13 21:42:25 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -41,7 +41,7 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity Site Map stored in the storage named nb_site_map.
- * @author Rafael Gutiérrez Martínez <rgutierrez@wiscot.com>
+ * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
  */
@@ -305,6 +305,27 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
             );
         }
         $this->setValue('nb_site_map_id', $id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Map Hash attribute value
+     * @return null|string Returns the Site Map Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_site_map_hash');
+    }
+
+    /**
+     * Sets the Site Map Hash attribute value
+     * @param null|string $hash New value for attribute
+     * @return CNabuSiteMapBase Returns $this
+     */
+    public function setHash($hash)
+    {
+        $this->setValue('nb_site_map_hash', $hash);
         
         return $this;
     }

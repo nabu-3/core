@@ -1,22 +1,26 @@
 <?php
 
 namespace nabu\http\interfaces;
+use nabu\http\CNabuHTTPRequest;
+use nabu\http\CNabuHTTPResponse;
 
 /**
  * Interface to create Site Target plugins to extend the functionality of nabu-3
  * @author Rafael Gutiérrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
+ * @package \nabu\http\interfaces
  */
 interface INabuHTTPSiteTargetPlugin
 {
     /**
      * This method is called just after the instantiation of plugin to set request and response objects
-     * @param $nb_request nabu\http\CNabuHTTPRequest Request object
-     * @param $nb_response nabu\http\CNabuHTTPResponse Response object
-     * @return boolean Return true if trap successfully or false if not
+     * @param CNabuHTTPRequest $nb_request Request object
+     * @param CNabuHTTPResponse $nb_response Response object
+     * @return bool Return true if trap successfully or false if not
      */
-    public function trap($nb_request, $nb_response);
-    
+    public function trap(CNabuHTTPRequest $nb_request, CNabuHTTPResponse $nb_response) : bool;
+
     /**
      * This method is called when the target is located
      * @return mixed Returns different values according to result of call:

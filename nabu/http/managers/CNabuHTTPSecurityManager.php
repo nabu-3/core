@@ -415,7 +415,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                     session_regenerate_id(true);
                 }
 
-                if ($nb_site_user->isValueEqualThan('nb_user_role_force_default_lang', 'T') &&
+                if ($nb_site_user->isValueEqualThan('nb_site_user_force_default_lang', 'T') &&
                     $nb_site_user->isValueNumeric('nb_language_id')
                 ) {
                     $lang = $nb_site_user->getLanguageId();

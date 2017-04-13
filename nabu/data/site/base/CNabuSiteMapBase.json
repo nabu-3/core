@@ -19,9 +19,20 @@
             "extra": "auto_increment",
             "comment": ""
         },
+        "nb_site_map_hash": {
+            "name": "nb_site_map_hash",
+            "ordinal": "2",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_site_id": {
             "name": "nb_site_id",
-            "ordinal": "2",
+            "ordinal": "3",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -32,7 +43,7 @@
         },
         "nb_site_map_parent_id": {
             "name": "nb_site_map_parent_id",
-            "ordinal": "3",
+            "ordinal": "4",
             "data_type": "int",
             "precision": "10",
             "type": "int(10)",
@@ -43,7 +54,7 @@
         },
         "nb_site_map_order": {
             "name": "nb_site_map_order",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "int",
             "precision": "10",
             "type": "int(10)",
@@ -54,7 +65,7 @@
         },
         "nb_site_map_customer_required": {
             "name": "nb_site_map_customer_required",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F','B')",
@@ -65,7 +76,7 @@
         },
         "nb_site_map_level": {
             "name": "nb_site_map_level",
-            "ordinal": "6",
+            "ordinal": "7",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -76,7 +87,7 @@
         },
         "nb_site_map_next_sibling": {
             "name": "nb_site_map_next_sibling",
-            "ordinal": "7",
+            "ordinal": "8",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -87,7 +98,7 @@
         },
         "nb_site_target_id": {
             "name": "nb_site_target_id",
-            "ordinal": "8",
+            "ordinal": "9",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -98,7 +109,7 @@
         },
         "nb_site_map_use_uri": {
             "name": "nb_site_map_use_uri",
-            "ordinal": "9",
+            "ordinal": "10",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','U','N')",
@@ -109,7 +120,7 @@
         },
         "nb_site_map_open_popup": {
             "name": "nb_site_map_open_popup",
-            "ordinal": "10",
+            "ordinal": "11",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -120,7 +131,7 @@
         },
         "nb_site_map_key": {
             "name": "nb_site_map_key",
-            "ordinal": "11",
+            "ordinal": "12",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(30)",
@@ -131,7 +142,7 @@
         },
         "nb_site_map_visible": {
             "name": "nb_site_map_visible",
-            "ordinal": "12",
+            "ordinal": "13",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -142,7 +153,7 @@
         },
         "nb_site_map_separator": {
             "name": "nb_site_map_separator",
-            "ordinal": "13",
+            "ordinal": "14",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -153,7 +164,7 @@
         },
         "nb_site_map_tree_position": {
             "name": "nb_site_map_tree_position",
-            "ordinal": "14",
+            "ordinal": "15",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -164,7 +175,7 @@
         },
         "nb_site_map_icon": {
             "name": "nb_site_map_icon",
-            "ordinal": "15",
+            "ordinal": "16",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(100)",
@@ -175,7 +186,7 @@
         },
         "nb_site_map_css_class": {
             "name": "nb_site_map_css_class",
-            "ordinal": "16",
+            "ordinal": "17",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(100)",
@@ -196,6 +207,22 @@
                     "name": "nb_site_map_id",
                     "ordinal": "1",
                     "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_map_hash_idx": {
+            "name": "nb_site_map_hash_idx",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_site_map_hash": {
+                    "name": "nb_site_map_hash",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
                     "comments": ""
                 }
             }

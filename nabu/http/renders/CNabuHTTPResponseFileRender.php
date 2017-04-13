@@ -20,6 +20,7 @@
 namespace nabu\http\renders;
 
 use nabu\http\renders\base\CNabuHTTPResponseRenderAdapter;
+use nabu\sdk\builders\CNabuAbstractBuilder;
 
 /**
  * Render to dump a file as attachment
@@ -27,15 +28,24 @@ use nabu\http\renders\base\CNabuHTTPResponseRenderAdapter;
  * @version 3.0.0 Surface
  * @package \nabu\http\renders\base
  */
-class CNabuHTTPResponseFileRender extends CNabuHTTPResponseRenderAdapter {
-
-    public function __construct($main_render = false) {
+class CNabuHTTPResponseFileRender extends CNabuHTTPResponseRenderAdapter
+{
+    public function __construct($main_render = false)
+    {
 
         parent::__construct($main_render);
     }
 
-    public function render() {
-
-        $this->dumpFile($this->source_filename);
+    public function render()
+    {
+        if (is_string($this->source_filename) &&
+            file_exists($this->source_filename) &&
+            is_file($this->source_filename)
+        ) {
+            $this->dumpFile($this->source_filename);
+            unlink($this->source_filename);
+        } elseif ($this->contentBuilder instanceof CNabuAbstractBuilder) {
+            echo $this->contentBuilder->create();
+        }
     }
 }

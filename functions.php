@@ -335,7 +335,8 @@ function nb_apacheLicense($comment_symbol)
     $symbol = $comment_symbol . (strlen($comment_symbol) > 0 && !nb_strEndsWith($comment_symbol, ' ') ? ' ' : '');
     return  $symbol . "Copyright 2009-2011 Rafael Gutierrez Martinez\n"
           . $symbol . "Copyright 2012-2013 Welma WEB MKT LABS, S.L.\n"
-          . $symbol . "Copyright 2014-" .date('Y') . " Where Ideas Simply Come True, S.L.\n"
+          . $symbol . "Copyright 2014-2016 Where Ideas Simply Come True, S.L.\n"
+          . $symbol . "Copyright 2017" . (date('Y') > 2017 ? '-' . date('Y') : '') . " nabu-3 Group\n"
           . $symbol . "\n"
           . $symbol . "Licensed under the Apache License, Version 2.0 (the \"License\");\n"
           . $symbol . "you may not use this file except in compliance with the License.\n"
