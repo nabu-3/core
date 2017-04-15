@@ -17,17 +17,22 @@
  *  limitations under the License.
  */
 
-namespace nabu\data\security;
-use nabu\data\security\base\CNabuUserListBase;
+namespace nabu\xml\security;
+use nabu\data\lang\interfaces\INabuTranslation;
+use nabu\xml\lang\CNabuXMLTranslation;
+use nabu\xml\lang\CNabuXMLTranslationsList;
 
 /**
- * Class to manage a User List.
+ * Class to manage a Role Translations List as an XML branch.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
- * @since 3.0.0 Surface
+ * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\data\security
+ * @package nabu\xml\security
  */
-class CNabuUserList extends CNabuUserListBase
+class CNabuXMLRoleLanguageList extends CNabuXMLTranslationsList
 {
-
+    protected function createXMLTranslationsObject(INabuTranslation $nb_translation): CNabuXMLTranslation
+    {
+        return new CNabuXMLRoleLanguage($nb_translation);
+    }
 }

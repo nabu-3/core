@@ -18,16 +18,27 @@
  */
 
 namespace nabu\data\security;
-use nabu\data\security\base\CNabuUserListBase;
+use nabu\data\security\base\CNabuRoleListBase;
 
 /**
- * Class to manage a User List.
+ * Class to manage a Role List.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.0 Surface
  * @version 3.0.12 Surface
  * @package \nabu\data\security
  */
-class CNabuUserList extends CNabuUserListBase
+class CNabuRoleList extends CNabuRoleListBase
 {
-
+    /**
+     * Clear the list and fill it from Roles assigned to a Site.
+     * @param mixed $nb_site A Site instance, an object containing a field name nb_site_id or a Site Id.
+     * @return int Returns the number of Roles found.
+     */
+    public function fillFromSite($nb_site) : int
+    {
+        $this->clear();
+        $this->merge(CNabuRole::getRolesForSite($nb_site));
+        
+        return $this->getSize();
+    }
 }

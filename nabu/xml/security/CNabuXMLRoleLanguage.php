@@ -17,17 +17,27 @@
  *  limitations under the License.
  */
 
-namespace nabu\data\security;
-use nabu\data\security\base\CNabuUserListBase;
+namespace nabu\xml\security;
+use SimpleXMLElement;
+use nabu\xml\lang\CNabuXMLTranslation;
 
 /**
- * Class to manage a User List.
+ * Class to manage a Role Language instance as an XML branch.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
- * @since 3.0.0 Surface
+ * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\data\security
+ * @package nabu\xml\security
  */
-class CNabuUserList extends CNabuUserListBase
+class CNabuXMLRoleLanguage extends CNabuXMLTranslation
 {
+    protected function setAttributes(SimpleXMLElement $element)
+    {
+        $nb_language = $this->nb_data_object->getTranslatedObject()->getLanguage($this->nb_data_object->getLanguageId());
+        $element->addAttribute('lang', $nb_language->getHash());
+    }
 
+    protected function setChilds(SimpleXMLElement $element)
+    {
+        $element->addChild('name', $this->nb_data_object->getName());
+    }
 }

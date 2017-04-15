@@ -47,15 +47,24 @@ abstract class CNabuXMLDataObject extends CNabuXMLObject
      * Set a group of attributes listed in an array.
      * @param SimpleXMLElement $element Element instance to set attributes.
      * @param array $attributes Associative array with the list of data fields as keys and the attribute name as value.
+     * @param bool $ignore_empty If true, empty values are ignored (null, '')
      * @return int Returns the number of attributes setted.
      */
-    protected function putAttributesFromList(SimpleXMLElement $element, array $attributes) : int
-    {
+    protected function putAttributesFromList(
+        SimpleXMLElement $element,
+        array $attributes,
+        bool $ignore_empty = false
+    ) : int {
         $count = 0;
 
         if (count($attributes) > 0) {
             foreach ($attributes as $field => $attr) {
-                if ($this->nb_data_object->contains($field)) {
+                if ($this->nb_data_object->contains($field) &&
+                    (!$ignore_empty ||
+                     !$this->nb_data_object->isValueNull($field) ||
+                     !$this->nb_data_object->isValueEmptyString($field)
+                    )
+                ) {
                     $element->addAttribute($attr, $this->nb_data_object->getValue($field));
                     $count++;
                 }
