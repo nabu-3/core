@@ -341,7 +341,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
 
         $nb_site_target = $this->nb_request->getSiteTarget();
         if ($nb_site_target instanceof CNabuDataObject &&
-            !$nb_site_target->isEmptyValue('nb_mimetype_id') &&
+            !$nb_site_target->isValueEmpty('nb_mimetype_id') &&
             $this->nb_response->getMimetype() === null) {
             $this->nb_response->setMimetype($this->nb_request->getSiteTarget()->getMimetypeId());
         }

@@ -180,7 +180,7 @@ class CNabuMedioteca extends CNabuMediotecaBase
      * @param bool $cascade Forces to reload child entities from the database storage.
      * @return bool Returns true if transations are empty or refreshed.
      */
-    public function refresh(bool $force = false, bool $cascade = false)
+    public function refresh(bool $force = false, bool $cascade = false) : bool
     {
         return parent::refresh($force, $cascade) && (!$cascade || $this->getItems($force));
     }

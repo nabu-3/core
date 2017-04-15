@@ -218,7 +218,7 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
         return $this->isFetched;
     }
 
-    public function load($sentence = false, $params = false, $trace = false)
+    public function load($sentence = false, $params = false, bool $trace = false) : bool
     {
         if (!$sentence) {
             $sentence = $this->getSelectRegister();
@@ -271,13 +271,13 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
      * @param bool $cascade Forces to reload child entities from the database storage.
      * @return bool Returns true if data is refreshed.
      */
-    public function refresh(bool $force = false, bool $cascade = false)
+    public function refresh(bool $force = false, bool $cascade = false) : bool
     {
         $this->relinkDB();
         return $this->load();
     }
 
-    public function fetch($statement)
+    public function fetch($statement) : bool
     {
         $this->reset();
 

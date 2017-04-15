@@ -104,7 +104,7 @@ interface INabuDBObject
      * @param bool $trace True if they want to trace the sentence in the Engine Log Handler
      * @return bool Returns true if success or false if not.
      */
-    public function load($sentence = false, $params = false, $trace = false);
+    public function load($sentence = false, $params = false, bool $trace = false) : bool;
 
     /**
      * Refresh all data from the database.
@@ -112,7 +112,7 @@ interface INabuDBObject
      * @param bool $cascade Forces to reload child entities from the database storage.
      * @return bool Returns true if success or false if not.
      */
-    public function refresh(bool $force = false, bool $cascade = false);
+    public function refresh(bool $force = false, bool $cascade = false) : bool;
 
     /**
      * Fetchs a cursor stored in a INabuDBStatement object and fill
@@ -121,7 +121,7 @@ interface INabuDBObject
      * @param INabuDBStatement $statement Statement that contains the cursor to fetch
      * @return bool Returns true if success of false if not.
      */
-    public function fetch($statement);
+    public function fetch($statement) : bool;
 
     /**
      * Determines the status of the object and prepares internal values for new/fetched/deleted status
