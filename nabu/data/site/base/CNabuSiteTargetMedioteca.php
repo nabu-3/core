@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:51 UTC
+ * Created: 2017/04/15 14:11:39 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\site\traits\TNabuSiteTargetChild;
 use \nabu\db\CNabuDBInternalObject;
 
@@ -135,17 +136,17 @@ abstract class CNabuSiteTargetMedioteca extends CNabuDBInternalObject
      * Get Site Target Id attribute value
      * @return int Returns the Site Target Id value
      */
-    public function getSiteTargetId()
+    public function getSiteTargetId() : int
     {
         return $this->getValue('nb_site_target_id');
     }
 
     /**
-     * Sets the Site Target Id attribute value
+     * Sets the Site Target Id attribute value.
      * @param int $nb_site_target_id New value for attribute
-     * @return CNabuSiteTargetMedioteca Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteTargetId($nb_site_target_id)
+    public function setSiteTargetId(int $nb_site_target_id) : CNabuDataObject
     {
         if ($nb_site_target_id === null) {
             throw new ENabuCoreException(
@@ -162,17 +163,17 @@ abstract class CNabuSiteTargetMedioteca extends CNabuDBInternalObject
      * Get Medioteca Id attribute value
      * @return int Returns the Medioteca Id value
      */
-    public function getMediotecaId()
+    public function getMediotecaId() : int
     {
         return $this->getValue('nb_medioteca_id');
     }
 
     /**
-     * Sets the Medioteca Id attribute value
+     * Sets the Medioteca Id attribute value.
      * @param int $nb_medioteca_id New value for attribute
-     * @return CNabuSiteTargetMedioteca Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMediotecaId($nb_medioteca_id)
+    public function setMediotecaId(int $nb_medioteca_id) : CNabuDataObject
     {
         if ($nb_medioteca_id === null) {
             throw new ENabuCoreException(
@@ -195,11 +196,11 @@ abstract class CNabuSiteTargetMedioteca extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Target Medioteca Alias attribute value
+     * Sets the Site Target Medioteca Alias attribute value.
      * @param null|string $alias New value for attribute
-     * @return CNabuSiteTargetMedioteca Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAlias($alias)
+    public function setAlias(string $alias = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_medioteca_alias', $alias);
         

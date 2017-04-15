@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:46 UTC
+ * Created: 2017/04/15 14:11:35 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -132,17 +133,17 @@ abstract class CNabuSiteAliasServiceBase extends CNabuDBInternalObject
      * Get Site Alias Id attribute value
      * @return int Returns the Site Alias Id value
      */
-    public function getSiteAliasId()
+    public function getSiteAliasId() : int
     {
         return $this->getValue('nb_site_alias_id');
     }
 
     /**
-     * Sets the Site Alias Id attribute value
+     * Sets the Site Alias Id attribute value.
      * @param int $nb_site_alias_id New value for attribute
-     * @return CNabuSiteAliasServiceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteAliasId($nb_site_alias_id)
+    public function setSiteAliasId(int $nb_site_alias_id) : CNabuDataObject
     {
         if ($nb_site_alias_id === null) {
             throw new ENabuCoreException(
@@ -159,17 +160,17 @@ abstract class CNabuSiteAliasServiceBase extends CNabuDBInternalObject
      * Get Cluster Group Service Id attribute value
      * @return int Returns the Cluster Group Service Id value
      */
-    public function getClusterGroupServiceId()
+    public function getClusterGroupServiceId() : int
     {
         return $this->getValue('nb_cluster_group_service_id');
     }
 
     /**
-     * Sets the Cluster Group Service Id attribute value
+     * Sets the Cluster Group Service Id attribute value.
      * @param int $nb_cluster_group_service_id New value for attribute
-     * @return CNabuSiteAliasServiceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setClusterGroupServiceId($nb_cluster_group_service_id)
+    public function setClusterGroupServiceId(int $nb_cluster_group_service_id) : CNabuDataObject
     {
         if ($nb_cluster_group_service_id === null) {
             throw new ENabuCoreException(

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:52 UTC
+ * Created: 2017/04/15 14:11:40 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -26,6 +26,7 @@
 namespace nabu\data\site\base;
 
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -165,17 +166,17 @@ abstract class CNabuSiteMapLanguageBase extends CNabuDBInternalObject implements
      * Get Site Map Id attribute value
      * @return int Returns the Site Map Id value
      */
-    public function getSiteMapId()
+    public function getSiteMapId() : int
     {
         return $this->getValue('nb_site_map_id');
     }
 
     /**
-     * Sets the Site Map Id attribute value
+     * Sets the Site Map Id attribute value.
      * @param int $nb_site_map_id New value for attribute
-     * @return CNabuSiteMapLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteMapId($nb_site_map_id)
+    public function setSiteMapId(int $nb_site_map_id) : CNabuDataObject
     {
         if ($nb_site_map_id === null) {
             throw new ENabuCoreException(
@@ -192,17 +193,17 @@ abstract class CNabuSiteMapLanguageBase extends CNabuDBInternalObject implements
      * Get Language Id attribute value
      * @return int Returns the Language Id value
      */
-    public function getLanguageId()
+    public function getLanguageId() : int
     {
         return $this->getValue('nb_language_id');
     }
 
     /**
-     * Sets the Language Id attribute value
+     * Sets the Language Id attribute value.
      * @param int $nb_language_id New value for attribute
-     * @return CNabuSiteMapLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLanguageId($nb_language_id)
+    public function setLanguageId(int $nb_language_id) : CNabuDataObject
     {
         if ($nb_language_id === null) {
             throw new ENabuCoreException(
@@ -225,11 +226,11 @@ abstract class CNabuSiteMapLanguageBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Site Map Lang Translation Status attribute value
+     * Sets the Site Map Lang Translation Status attribute value.
      * @param null|string $translation_status New value for attribute
-     * @return CNabuSiteMapLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTranslationStatus($translation_status)
+    public function setTranslationStatus(string $translation_status = "E") : CNabuDataObject
     {
         $this->setValue('nb_site_map_lang_translation_status', $translation_status);
         
@@ -246,11 +247,11 @@ abstract class CNabuSiteMapLanguageBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Site Map Lang Title attribute value
+     * Sets the Site Map Lang Title attribute value.
      * @param null|string $title New value for attribute
-     * @return CNabuSiteMapLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTitle($title)
+    public function setTitle(string $title = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_lang_title', $title);
         
@@ -267,11 +268,11 @@ abstract class CNabuSiteMapLanguageBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Site Map Lang Subtitle attribute value
+     * Sets the Site Map Lang Subtitle attribute value.
      * @param null|string $subtitle New value for attribute
-     * @return CNabuSiteMapLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSubtitle($subtitle)
+    public function setSubtitle(string $subtitle = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_lang_subtitle', $subtitle);
         
@@ -288,11 +289,11 @@ abstract class CNabuSiteMapLanguageBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Site Map Lang Content attribute value
+     * Sets the Site Map Lang Content attribute value.
      * @param null|string $content New value for attribute
-     * @return CNabuSiteMapLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setContent($content)
+    public function setContent(string $content = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_lang_content', $content);
         
@@ -309,11 +310,11 @@ abstract class CNabuSiteMapLanguageBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Site Map Lang URL attribute value
+     * Sets the Site Map Lang URL attribute value.
      * @param null|string $url New value for attribute
-     * @return CNabuSiteMapLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setURL($url)
+    public function setURL(string $url = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_lang_url', $url);
         
@@ -330,11 +331,11 @@ abstract class CNabuSiteMapLanguageBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Site Map Lang Image attribute value
+     * Sets the Site Map Lang Image attribute value.
      * @param null|string $image New value for attribute
-     * @return CNabuSiteMapLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setImage($image)
+    public function setImage(string $image = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_lang_image', $image);
         
@@ -351,11 +352,11 @@ abstract class CNabuSiteMapLanguageBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Site Map Lang Match URL Fragment attribute value
+     * Sets the Site Map Lang Match URL Fragment attribute value.
      * @param null|string $match_url_fragment New value for attribute
-     * @return CNabuSiteMapLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMatchURLFragment($match_url_fragment)
+    public function setMatchURLFragment(string $match_url_fragment = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_lang_match_url_fragment', $match_url_fragment);
         

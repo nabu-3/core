@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:47 UTC
+ * Created: 2017/04/15 14:11:36 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\site\traits\TNabuSiteChild;
 use \nabu\db\CNabuDBInternalObject;
 
@@ -134,17 +135,17 @@ abstract class CNabuSiteMediotecaBase extends CNabuDBInternalObject
      * Get Site Id attribute value
      * @return int Returns the Site Id value
      */
-    public function getSiteId()
+    public function getSiteId() : int
     {
         return $this->getValue('nb_site_id');
     }
 
     /**
-     * Sets the Site Id attribute value
+     * Sets the Site Id attribute value.
      * @param int $nb_site_id New value for attribute
-     * @return CNabuSiteMediotecaBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteId($nb_site_id)
+    public function setSiteId(int $nb_site_id) : CNabuDataObject
     {
         if ($nb_site_id === null) {
             throw new ENabuCoreException(
@@ -161,17 +162,17 @@ abstract class CNabuSiteMediotecaBase extends CNabuDBInternalObject
      * Get Medioteca Id attribute value
      * @return int Returns the Medioteca Id value
      */
-    public function getMediotecaId()
+    public function getMediotecaId() : int
     {
         return $this->getValue('nb_medioteca_id');
     }
 
     /**
-     * Sets the Medioteca Id attribute value
+     * Sets the Medioteca Id attribute value.
      * @param int $nb_medioteca_id New value for attribute
-     * @return CNabuSiteMediotecaBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMediotecaId($nb_medioteca_id)
+    public function setMediotecaId(int $nb_medioteca_id) : CNabuDataObject
     {
         if ($nb_medioteca_id === null) {
             throw new ENabuCoreException(
@@ -194,11 +195,11 @@ abstract class CNabuSiteMediotecaBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Medioteca Alias Path attribute value
+     * Sets the Site Medioteca Alias Path attribute value.
      * @param null|string $alias_path New value for attribute
-     * @return CNabuSiteMediotecaBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAliasPath($alias_path)
+    public function setAliasPath(string $alias_path = null) : CNabuDataObject
     {
         $this->setValue('nb_site_medioteca_alias_path', $alias_path);
         
@@ -215,11 +216,11 @@ abstract class CNabuSiteMediotecaBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Medioteca Hide Original attribute value
+     * Sets the Site Medioteca Hide Original attribute value.
      * @param mixed $hide_original New value for attribute
-     * @return CNabuSiteMediotecaBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHideOriginal($hide_original)
+    public function setHideOriginal($hide_original) : CNabuDataObject
     {
         $this->setValue('nb_site_medioteca_hide_original', $hide_original);
         
@@ -236,11 +237,11 @@ abstract class CNabuSiteMediotecaBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Medioteca Last Update attribute value
+     * Sets the Site Medioteca Last Update attribute value.
      * @param mixed $last_update New value for attribute
-     * @return CNabuSiteMediotecaBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLastUpdate($last_update)
+    public function setLastUpdate($last_update) : CNabuDataObject
     {
         $this->setValue('nb_site_medioteca_last_update', $last_update);
         

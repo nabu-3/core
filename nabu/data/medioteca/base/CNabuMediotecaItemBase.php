@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:03 UTC
+ * Created: 2017/04/15 14:11:54 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\medioteca\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -45,8 +47,9 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\medioteca\base
  */
-abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
+    use TNabuHashed;
     use TNabuMediotecaChild;
     use TNabuTranslated;
 
@@ -286,17 +289,17 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
      * Get Medioteca Item Id attribute value
      * @return int Returns the Medioteca Item Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_medioteca_item_id');
     }
 
     /**
-     * Sets the Medioteca Item Id attribute value
+     * Sets the Medioteca Item Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -319,11 +322,11 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Medioteca Id attribute value
+     * Sets the Medioteca Id attribute value.
      * @param null|int $nb_medioteca_id New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMediotecaId($nb_medioteca_id)
+    public function setMediotecaId(int $nb_medioteca_id = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_id', $nb_medioteca_id);
         
@@ -340,11 +343,11 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Medioteca Item Hash attribute value
+     * Sets the Medioteca Item Hash attribute value.
      * @param null|string $hash New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHash($hash)
+    public function setHash(string $hash = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_item_hash', $hash);
         
@@ -361,11 +364,11 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Medioteca Item Key attribute value
+     * Sets the Medioteca Item Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_item_key', $key);
         
@@ -376,17 +379,17 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
      * Get Medioteca Item Order attribute value
      * @return int Returns the Medioteca Item Order value
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return $this->getValue('nb_medioteca_item_order');
     }
 
     /**
-     * Sets the Medioteca Item Order attribute value
+     * Sets the Medioteca Item Order attribute value.
      * @param int $order New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOrder($order)
+    public function setOrder(int $order = 1) : CNabuDataObject
     {
         if ($order === null) {
             throw new ENabuCoreException(
@@ -409,11 +412,11 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Medioteca Item Visible attribute value
+     * Sets the Medioteca Item Visible attribute value.
      * @param null|string $visible New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setVisible($visible)
+    public function setVisible(string $visible = "F") : CNabuDataObject
     {
         $this->setValue('nb_medioteca_item_visible', $visible);
         
@@ -430,11 +433,11 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Medioteca Item Begin Datetime attribute value
+     * Sets the Medioteca Item Begin Datetime attribute value.
      * @param mixed $begin_datetime New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setBeginDatetime($begin_datetime)
+    public function setBeginDatetime($begin_datetime) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_item_begin_datetime', $begin_datetime);
         
@@ -451,11 +454,11 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Medioteca Item End Datetime attribute value
+     * Sets the Medioteca Item End Datetime attribute value.
      * @param mixed $end_datetime New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEndDatetime($end_datetime)
+    public function setEndDatetime($end_datetime) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_item_end_datetime', $end_datetime);
         
@@ -472,11 +475,11 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Medioteca Item Have Original attribute value
+     * Sets the Medioteca Item Have Original attribute value.
      * @param null|string $have_original New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHaveOriginal($have_original)
+    public function setHaveOriginal(string $have_original = "F") : CNabuDataObject
     {
         $this->setValue('nb_medioteca_item_have_original', $have_original);
         
@@ -493,11 +496,11 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Medioteca Item Original Path attribute value
+     * Sets the Medioteca Item Original Path attribute value.
      * @param null|string $original_path New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOriginalPath($original_path)
+    public function setOriginalPath(string $original_path = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_item_original_path', $original_path);
         
@@ -514,11 +517,11 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Medioteca Item CSS Class attribute value
+     * Sets the Medioteca Item CSS Class attribute value.
      * @param null|string $css_class New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCSSClass($css_class)
+    public function setCSSClass(string $css_class = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_item_css_class', $css_class);
         
@@ -535,11 +538,11 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Medioteca Item Icon attribute value
+     * Sets the Medioteca Item Icon attribute value.
      * @param null|string $icon New value for attribute
-     * @return CNabuMediotecaItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setIcon($icon)
+    public function setIcon(string $icon = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_item_icon', $icon);
         

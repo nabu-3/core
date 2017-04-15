@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:48 UTC
+ * Created: 2017/04/15 14:11:37 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -26,6 +26,7 @@
 namespace nabu\data\site\base;
 
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -167,17 +168,17 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
      * Get Site Target Id attribute value
      * @return int Returns the Site Target Id value
      */
-    public function getSiteTargetId()
+    public function getSiteTargetId() : int
     {
         return $this->getValue('nb_site_target_id');
     }
 
     /**
-     * Sets the Site Target Id attribute value
+     * Sets the Site Target Id attribute value.
      * @param int $nb_site_target_id New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteTargetId($nb_site_target_id)
+    public function setSiteTargetId(int $nb_site_target_id) : CNabuDataObject
     {
         if ($nb_site_target_id === null) {
             throw new ENabuCoreException(
@@ -194,17 +195,17 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
      * Get Language Id attribute value
      * @return int Returns the Language Id value
      */
-    public function getLanguageId()
+    public function getLanguageId() : int
     {
         return $this->getValue('nb_language_id');
     }
 
     /**
-     * Sets the Language Id attribute value
+     * Sets the Language Id attribute value.
      * @param int $nb_language_id New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLanguageId($nb_language_id)
+    public function setLanguageId(int $nb_language_id) : CNabuDataObject
     {
         if ($nb_language_id === null) {
             throw new ENabuCoreException(
@@ -227,11 +228,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang Title attribute value
+     * Sets the Site Target Lang Title attribute value.
      * @param null|string $title New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTitle($title)
+    public function setTitle(string $title = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_title', $title);
         
@@ -248,11 +249,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang Subtitle attribute value
+     * Sets the Site Target Lang Subtitle attribute value.
      * @param null|string $subtitle New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSubtitle($subtitle)
+    public function setSubtitle(string $subtitle = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_subtitle', $subtitle);
         
@@ -269,11 +270,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang Opening attribute value
+     * Sets the Site Target Lang Opening attribute value.
      * @param null|string $opening New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOpening($opening)
+    public function setOpening(string $opening = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_opening', $opening);
         
@@ -290,11 +291,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang Content attribute value
+     * Sets the Site Target Lang Content attribute value.
      * @param null|string $content New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setContent($content)
+    public function setContent(string $content = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_content', $content);
         
@@ -311,11 +312,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang Footer attribute value
+     * Sets the Site Target Lang Footer attribute value.
      * @param null|string $footer New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFooter($footer)
+    public function setFooter(string $footer = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_footer', $footer);
         
@@ -332,11 +333,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang Aside attribute value
+     * Sets the Site Target Lang Aside attribute value.
      * @param null|string $aside New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAside($aside)
+    public function setAside(string $aside = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_aside', $aside);
         
@@ -353,11 +354,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang Main Image attribute value
+     * Sets the Site Target Lang Main Image attribute value.
      * @param null|string $main_image New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMainImage($main_image)
+    public function setMainImage(string $main_image = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_main_image', $main_image);
         
@@ -374,11 +375,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang URL attribute value
+     * Sets the Site Target Lang URL attribute value.
      * @param null|string $url New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setURL($url)
+    public function setURL(string $url = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_url', $url);
         
@@ -395,11 +396,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang URL Rebuild attribute value
+     * Sets the Site Target Lang URL Rebuild attribute value.
      * @param null|string $url_rebuild New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setURLRebuild($url_rebuild)
+    public function setURLRebuild(string $url_rebuild = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_url_rebuild', $url_rebuild);
         
@@ -416,11 +417,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang Head Title attribute value
+     * Sets the Site Target Lang Head Title attribute value.
      * @param null|string $head_title New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHeadTitle($head_title)
+    public function setHeadTitle(string $head_title = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_head_title', $head_title);
         
@@ -437,11 +438,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang Meta Description attribute value
+     * Sets the Site Target Lang Meta Description attribute value.
      * @param null|string $meta_description New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMetaDescription($meta_description)
+    public function setMetaDescription(string $meta_description = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_meta_description', $meta_description);
         
@@ -458,11 +459,11 @@ abstract class CNabuSiteTargetLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Sets the Site Target Lang Meta Keywords attribute value
+     * Sets the Site Target Lang Meta Keywords attribute value.
      * @param null|string $meta_keywords New value for attribute
-     * @return CNabuSiteTargetLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMetaKeywords($meta_keywords)
+    public function setMetaKeywords(string $meta_keywords = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_lang_meta_keywords', $meta_keywords);
         

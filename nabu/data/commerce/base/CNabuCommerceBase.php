@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:55 UTC
+ * Created: 2017/04/15 14:11:44 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -314,17 +314,17 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
      * Get Commerce Id attribute value
      * @return int Returns the Commerce Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_commerce_id');
     }
 
     /**
-     * Sets the Commerce Id attribute value
+     * Sets the Commerce Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuCommerceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -341,17 +341,17 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
      * Get Customer Id attribute value
      * @return int Returns the Customer Id value
      */
-    public function getCustomerId()
+    public function getCustomerId() : int
     {
         return $this->getValue('nb_customer_id');
     }
 
     /**
-     * Sets the Customer Id attribute value
+     * Sets the Customer Id attribute value.
      * @param int $nb_customer_id New value for attribute
-     * @return CNabuCommerceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCustomerId($nb_customer_id)
+    public function setCustomerId(int $nb_customer_id) : CNabuDataObject
     {
         if ($nb_customer_id === null) {
             throw new ENabuCoreException(
@@ -374,11 +374,11 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
     }
 
     /**
-     * Sets the Commerce Default Language Id attribute value
+     * Sets the Commerce Default Language Id attribute value.
      * @param null|int $default_language_id New value for attribute
-     * @return CNabuCommerceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDefaultLanguageId($default_language_id)
+    public function setDefaultLanguageId(int $default_language_id = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_default_language_id', $default_language_id);
         
@@ -395,11 +395,11 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
     }
 
     /**
-     * Sets the User Id attribute value
+     * Sets the User Id attribute value.
      * @param null|int $nb_user_id New value for attribute
-     * @return CNabuCommerceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUserId($nb_user_id)
+    public function setUserId(int $nb_user_id = null) : CNabuDataObject
     {
         $this->setValue('nb_user_id', $nb_user_id);
         
@@ -416,11 +416,11 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
     }
 
     /**
-     * Sets the Commerce Key attribute value
+     * Sets the Commerce Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuCommerceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_key', $key);
         
@@ -437,11 +437,11 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
     }
 
     /**
-     * Sets the Commerce Admin User attribute value
+     * Sets the Commerce Admin User attribute value.
      * @param null|int $admin_user New value for attribute
-     * @return CNabuCommerceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAdminUser($admin_user)
+    public function setAdminUser(int $admin_user = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_admin_user', $admin_user);
         
@@ -458,11 +458,11 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
     }
 
     /**
-     * Sets the Emailing Id attribute value
+     * Sets the Emailing Id attribute value.
      * @param null|int $nb_emailing_id New value for attribute
-     * @return CNabuCommerceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailingId($nb_emailing_id)
+    public function setEmailingId(int $nb_emailing_id = null) : CNabuDataObject
     {
         $this->setValue('nb_emailing_id', $nb_emailing_id);
         
@@ -479,11 +479,11 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
     }
 
     /**
-     * Sets the Commerce Email Template Admin Error attribute value
+     * Sets the Commerce Email Template Admin Error attribute value.
      * @param null|int $email_template_admin_error New value for attribute
-     * @return CNabuCommerceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateAdminError($email_template_admin_error)
+    public function setEmailTemplateAdminError(int $email_template_admin_error = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_email_template_admin_error', $email_template_admin_error);
         

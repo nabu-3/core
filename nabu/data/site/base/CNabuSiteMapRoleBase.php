@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:53 UTC
+ * Created: 2017/04/15 14:11:41 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -131,17 +132,17 @@ abstract class CNabuSiteMapRoleBase extends CNabuDBInternalObject
      * Get Site Map Id attribute value
      * @return int Returns the Site Map Id value
      */
-    public function getSiteMapId()
+    public function getSiteMapId() : int
     {
         return $this->getValue('nb_site_map_id');
     }
 
     /**
-     * Sets the Site Map Id attribute value
+     * Sets the Site Map Id attribute value.
      * @param int $nb_site_map_id New value for attribute
-     * @return CNabuSiteMapRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteMapId($nb_site_map_id)
+    public function setSiteMapId(int $nb_site_map_id = 0) : CNabuDataObject
     {
         if ($nb_site_map_id === null) {
             throw new ENabuCoreException(
@@ -158,17 +159,17 @@ abstract class CNabuSiteMapRoleBase extends CNabuDBInternalObject
      * Get Role Id attribute value
      * @return int Returns the Role Id value
      */
-    public function getRoleId()
+    public function getRoleId() : int
     {
         return $this->getValue('nb_role_id');
     }
 
     /**
-     * Sets the Role Id attribute value
+     * Sets the Role Id attribute value.
      * @param int $nb_role_id New value for attribute
-     * @return CNabuSiteMapRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setRoleId($nb_role_id)
+    public function setRoleId(int $nb_role_id = 0) : CNabuDataObject
     {
         if ($nb_role_id === null) {
             throw new ENabuCoreException(
@@ -185,17 +186,17 @@ abstract class CNabuSiteMapRoleBase extends CNabuDBInternalObject
      * Get Site Map Role Zone attribute value
      * @return string Returns the Site Map Role Zone value
      */
-    public function getZone()
+    public function getZone() : string
     {
         return $this->getValue('nb_site_map_role_zone');
     }
 
     /**
-     * Sets the Site Map Role Zone attribute value
+     * Sets the Site Map Role Zone attribute value.
      * @param string $zone New value for attribute
-     * @return CNabuSiteMapRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setZone($zone)
+    public function setZone(string $zone = "B") : CNabuDataObject
     {
         if ($zone === null) {
             throw new ENabuCoreException(

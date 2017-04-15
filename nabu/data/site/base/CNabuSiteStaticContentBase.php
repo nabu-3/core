@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:53 UTC
+ * Created: 2017/04/15 14:11:41 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -286,17 +286,17 @@ abstract class CNabuSiteStaticContentBase extends CNabuDBInternalObject implemen
      * Get Site Static Content Id attribute value
      * @return int Returns the Site Static Content Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_site_static_content_id');
     }
 
     /**
-     * Sets the Site Static Content Id attribute value
+     * Sets the Site Static Content Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuSiteStaticContentBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -313,17 +313,17 @@ abstract class CNabuSiteStaticContentBase extends CNabuDBInternalObject implemen
      * Get Site Id attribute value
      * @return int Returns the Site Id value
      */
-    public function getSiteId()
+    public function getSiteId() : int
     {
         return $this->getValue('nb_site_id');
     }
 
     /**
-     * Sets the Site Id attribute value
+     * Sets the Site Id attribute value.
      * @param int $nb_site_id New value for attribute
-     * @return CNabuSiteStaticContentBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteId($nb_site_id)
+    public function setSiteId(int $nb_site_id) : CNabuDataObject
     {
         if ($nb_site_id === null) {
             throw new ENabuCoreException(
@@ -346,11 +346,11 @@ abstract class CNabuSiteStaticContentBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Site Static Content Key attribute value
+     * Sets the Site Static Content Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuSiteStaticContentBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_site_static_content_key', $key);
         
@@ -367,11 +367,11 @@ abstract class CNabuSiteStaticContentBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Site Static Content Type attribute value
+     * Sets the Site Static Content Type attribute value.
      * @param null|string $type New value for attribute
-     * @return CNabuSiteStaticContentBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setType($type)
+    public function setType(string $type = "P") : CNabuDataObject
     {
         $this->setValue('nb_site_static_content_type', $type);
         
@@ -388,11 +388,11 @@ abstract class CNabuSiteStaticContentBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Site Static Content Use Alternative attribute value
+     * Sets the Site Static Content Use Alternative attribute value.
      * @param null|string $use_alternative New value for attribute
-     * @return CNabuSiteStaticContentBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUseAlternative($use_alternative)
+    public function setUseAlternative(string $use_alternative = "D") : CNabuDataObject
     {
         $this->setValue('nb_site_static_content_use_alternative', $use_alternative);
         
@@ -409,11 +409,11 @@ abstract class CNabuSiteStaticContentBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Site Static Content Notes attribute value
+     * Sets the Site Static Content Notes attribute value.
      * @param null|string $notes New value for attribute
-     * @return CNabuSiteStaticContentBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setNotes($notes)
+    public function setNotes(string $notes = null) : CNabuDataObject
     {
         $this->setValue('nb_site_static_content_notes', $notes);
         

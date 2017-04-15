@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:49 UTC
+ * Created: 2017/04/15 14:11:38 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -43,8 +45,9 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
  */
-abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
+    use TNabuHashed;
     use TNabuSiteTargetChild;
     use TNabuTranslated;
 
@@ -252,17 +255,17 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
      * Get Site Target CTA Id attribute value
      * @return int Returns the Site Target CTA Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_site_target_cta_id');
     }
 
     /**
-     * Sets the Site Target CTA Id attribute value
+     * Sets the Site Target CTA Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuSiteTargetCTABase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -279,17 +282,17 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
      * Get Site Target Id attribute value
      * @return int Returns the Site Target Id value
      */
-    public function getSiteTargetId()
+    public function getSiteTargetId() : int
     {
         return $this->getValue('nb_site_target_id');
     }
 
     /**
-     * Sets the Site Target Id attribute value
+     * Sets the Site Target Id attribute value.
      * @param int $nb_site_target_id New value for attribute
-     * @return CNabuSiteTargetCTABase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteTargetId($nb_site_target_id)
+    public function setSiteTargetId(int $nb_site_target_id) : CNabuDataObject
     {
         if ($nb_site_target_id === null) {
             throw new ENabuCoreException(
@@ -312,11 +315,11 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Site Target CTA Key attribute value
+     * Sets the Site Target CTA Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuSiteTargetCTABase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_cta_key', $key);
         
@@ -333,11 +336,11 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Site Target CTA Hash attribute value
+     * Sets the Site Target CTA Hash attribute value.
      * @param null|string $hash New value for attribute
-     * @return CNabuSiteTargetCTABase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHash($hash)
+    public function setHash(string $hash = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_cta_hash', $hash);
         
@@ -348,17 +351,17 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
      * Get Site Target CTA Target Use URI attribute value
      * @return string Returns the Site Target CTA Target Use URI value
      */
-    public function getTargetUseURI()
+    public function getTargetUseURI() : string
     {
         return $this->getValue('nb_site_target_cta_target_use_uri');
     }
 
     /**
-     * Sets the Site Target CTA Target Use URI attribute value
+     * Sets the Site Target CTA Target Use URI attribute value.
      * @param string $target_use_uri New value for attribute
-     * @return CNabuSiteTargetCTABase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTargetUseURI($target_use_uri)
+    public function setTargetUseURI(string $target_use_uri = "N") : CNabuDataObject
     {
         if ($target_use_uri === null) {
             throw new ENabuCoreException(
@@ -381,11 +384,11 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Site Target CTA Target Id attribute value
+     * Sets the Site Target CTA Target Id attribute value.
      * @param null|int $target_id New value for attribute
-     * @return CNabuSiteTargetCTABase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTargetId($target_id)
+    public function setTargetId(int $target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_cta_target_id', $target_id);
         
@@ -396,17 +399,17 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
      * Get Site Target CTA Order attribute value
      * @return int Returns the Site Target CTA Order value
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return $this->getValue('nb_site_target_cta_order');
     }
 
     /**
-     * Sets the Site Target CTA Order attribute value
+     * Sets the Site Target CTA Order attribute value.
      * @param int $order New value for attribute
-     * @return CNabuSiteTargetCTABase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOrder($order)
+    public function setOrder(int $order = 0) : CNabuDataObject
     {
         if ($order === null) {
             throw new ENabuCoreException(
@@ -429,11 +432,11 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Site Target CTA CSS Class attribute value
+     * Sets the Site Target CTA CSS Class attribute value.
      * @param null|string $css_class New value for attribute
-     * @return CNabuSiteTargetCTABase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCSSClass($css_class)
+    public function setCSSClass(string $css_class = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_cta_css_class', $css_class);
         

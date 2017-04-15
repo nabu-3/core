@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:59 UTC
+ * Created: 2017/04/15 14:11:49 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -286,17 +286,17 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
      * Get Catalog Taxonomy Id attribute value
      * @return int Returns the Catalog Taxonomy Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_catalog_taxonomy_id');
     }
 
     /**
-     * Sets the Catalog Taxonomy Id attribute value
+     * Sets the Catalog Taxonomy Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuCatalogTaxonomyBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -319,11 +319,11 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Catalog Id attribute value
+     * Sets the Catalog Id attribute value.
      * @param null|int $nb_catalog_id New value for attribute
-     * @return CNabuCatalogTaxonomyBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCatalogId($nb_catalog_id)
+    public function setCatalogId(int $nb_catalog_id = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_id', $nb_catalog_id);
         
@@ -340,11 +340,11 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Catalog Taxonomy Key attribute value
+     * Sets the Catalog Taxonomy Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuCatalogTaxonomyBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_taxonomy_key', $key);
         
@@ -355,17 +355,17 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
      * Get Catalog Taxonomy Level attribute value
      * @return int Returns the Catalog Taxonomy Level value
      */
-    public function getLevel()
+    public function getLevel() : int
     {
         return $this->getValue('nb_catalog_taxonomy_level');
     }
 
     /**
-     * Sets the Catalog Taxonomy Level attribute value
+     * Sets the Catalog Taxonomy Level attribute value.
      * @param int $level New value for attribute
-     * @return CNabuCatalogTaxonomyBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLevel($level)
+    public function setLevel(int $level = 1) : CNabuDataObject
     {
         if ($level === null) {
             throw new ENabuCoreException(
@@ -382,17 +382,17 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
      * Get Catalog Taxonomy Scope attribute value
      * @return string Returns the Catalog Taxonomy Scope value
      */
-    public function getScope()
+    public function getScope() : string
     {
         return $this->getValue('nb_catalog_taxonomy_scope');
     }
 
     /**
-     * Sets the Catalog Taxonomy Scope attribute value
+     * Sets the Catalog Taxonomy Scope attribute value.
      * @param string $scope New value for attribute
-     * @return CNabuCatalogTaxonomyBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setScope($scope)
+    public function setScope(string $scope = "O") : CNabuDataObject
     {
         if ($scope === null) {
             throw new ENabuCoreException(

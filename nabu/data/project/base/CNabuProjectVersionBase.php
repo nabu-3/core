@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:09 UTC
+ * Created: 2017/04/15 14:11:59 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\project\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -44,8 +46,9 @@ use nabu\data\project\traits\TNabuProjectChild;
  * @version 3.0.12 Surface
  * @package \nabu\data\project\base
  */
-abstract class CNabuProjectVersionBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuProjectVersionBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
+    use TNabuHashed;
     use TNabuProjectChild;
     use TNabuTranslated;
 
@@ -258,17 +261,17 @@ abstract class CNabuProjectVersionBase extends CNabuDBInternalObject implements 
      * Get Project Version Id attribute value
      * @return int Returns the Project Version Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_project_version_id');
     }
 
     /**
-     * Sets the Project Version Id attribute value
+     * Sets the Project Version Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuProjectVersionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -285,17 +288,17 @@ abstract class CNabuProjectVersionBase extends CNabuDBInternalObject implements 
      * Get Project Id attribute value
      * @return int Returns the Project Id value
      */
-    public function getProjectId()
+    public function getProjectId() : int
     {
         return $this->getValue('nb_project_id');
     }
 
     /**
-     * Sets the Project Id attribute value
+     * Sets the Project Id attribute value.
      * @param int $nb_project_id New value for attribute
-     * @return CNabuProjectVersionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setProjectId($nb_project_id)
+    public function setProjectId(int $nb_project_id) : CNabuDataObject
     {
         if ($nb_project_id === null) {
             throw new ENabuCoreException(
@@ -318,11 +321,11 @@ abstract class CNabuProjectVersionBase extends CNabuDBInternalObject implements 
     }
 
     /**
-     * Sets the Project Version Hash attribute value
+     * Sets the Project Version Hash attribute value.
      * @param null|string $hash New value for attribute
-     * @return CNabuProjectVersionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHash($hash)
+    public function setHash(string $hash = null) : CNabuDataObject
     {
         $this->setValue('nb_project_version_hash', $hash);
         
@@ -339,11 +342,11 @@ abstract class CNabuProjectVersionBase extends CNabuDBInternalObject implements 
     }
 
     /**
-     * Sets the Project Version Code attribute value
+     * Sets the Project Version Code attribute value.
      * @param null|string $code New value for attribute
-     * @return CNabuProjectVersionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCode($code)
+    public function setCode(string $code = null) : CNabuDataObject
     {
         $this->setValue('nb_project_version_code', $code);
         

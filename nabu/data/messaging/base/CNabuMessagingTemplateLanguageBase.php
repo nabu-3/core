@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:06 UTC
+ * Created: 2017/04/15 14:11:57 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -26,6 +26,7 @@
 namespace nabu\data\messaging\base;
 
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -165,17 +166,17 @@ abstract class CNabuMessagingTemplateLanguageBase extends CNabuDBInternalObject 
      * Get Messaging Template Id attribute value
      * @return int Returns the Messaging Template Id value
      */
-    public function getMessagingTemplateId()
+    public function getMessagingTemplateId() : int
     {
         return $this->getValue('nb_messaging_template_id');
     }
 
     /**
-     * Sets the Messaging Template Id attribute value
+     * Sets the Messaging Template Id attribute value.
      * @param int $nb_messaging_template_id New value for attribute
-     * @return CNabuMessagingTemplateLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMessagingTemplateId($nb_messaging_template_id)
+    public function setMessagingTemplateId(int $nb_messaging_template_id) : CNabuDataObject
     {
         if ($nb_messaging_template_id === null) {
             throw new ENabuCoreException(
@@ -192,17 +193,17 @@ abstract class CNabuMessagingTemplateLanguageBase extends CNabuDBInternalObject 
      * Get Language Id attribute value
      * @return int Returns the Language Id value
      */
-    public function getLanguageId()
+    public function getLanguageId() : int
     {
         return $this->getValue('nb_language_id');
     }
 
     /**
-     * Sets the Language Id attribute value
+     * Sets the Language Id attribute value.
      * @param int $nb_language_id New value for attribute
-     * @return CNabuMessagingTemplateLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLanguageId($nb_language_id)
+    public function setLanguageId(int $nb_language_id) : CNabuDataObject
     {
         if ($nb_language_id === null) {
             throw new ENabuCoreException(
@@ -225,11 +226,11 @@ abstract class CNabuMessagingTemplateLanguageBase extends CNabuDBInternalObject 
     }
 
     /**
-     * Sets the Messaging Template Lang Name attribute value
+     * Sets the Messaging Template Lang Name attribute value.
      * @param null|string $name New value for attribute
-     * @return CNabuMessagingTemplateLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName($name)
+    public function setName(string $name = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_lang_name', $name);
         
@@ -246,11 +247,11 @@ abstract class CNabuMessagingTemplateLanguageBase extends CNabuDBInternalObject 
     }
 
     /**
-     * Sets the Messaging Template Lang Subject attribute value
+     * Sets the Messaging Template Lang Subject attribute value.
      * @param null|string $subject New value for attribute
-     * @return CNabuMessagingTemplateLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSubject($subject)
+    public function setSubject(string $subject = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_lang_subject', $subject);
         
@@ -267,11 +268,11 @@ abstract class CNabuMessagingTemplateLanguageBase extends CNabuDBInternalObject 
     }
 
     /**
-     * Sets the Messaging Template Lang Html attribute value
+     * Sets the Messaging Template Lang Html attribute value.
      * @param null|string $html New value for attribute
-     * @return CNabuMessagingTemplateLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHtml($html)
+    public function setHtml(string $html = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_lang_html', $html);
         
@@ -288,11 +289,11 @@ abstract class CNabuMessagingTemplateLanguageBase extends CNabuDBInternalObject 
     }
 
     /**
-     * Sets the Messaging Template Lang Text attribute value
+     * Sets the Messaging Template Lang Text attribute value.
      * @param null|string $text New value for attribute
-     * @return CNabuMessagingTemplateLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setText($text)
+    public function setText(string $text = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_lang_text', $text);
         

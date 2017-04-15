@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:43 UTC
+ * Created: 2017/04/15 14:11:32 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\domain\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\customer\CNabuCustomer;
 use \nabu\data\customer\traits\TNabuCustomerChild;
 use \nabu\data\domain\CNabuDomainZoneList;
@@ -165,17 +166,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Id attribute value
      * @return int Returns the Domain Zone Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_domain_zone_id');
     }
 
     /**
-     * Sets the Domain Zone Id attribute value
+     * Sets the Domain Zone Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -198,11 +199,11 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Id attribute value
+     * Sets the Customer Id attribute value.
      * @param null|int $nb_customer_id New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCustomerId($nb_customer_id)
+    public function setCustomerId(int $nb_customer_id = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_id', $nb_customer_id);
         
@@ -213,17 +214,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Name attribute value
      * @return string Returns the Domain Zone Name value
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->getValue('nb_domain_zone_name');
     }
 
     /**
-     * Sets the Domain Zone Name attribute value
+     * Sets the Domain Zone Name attribute value.
      * @param string $name New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName($name)
+    public function setName(string $name) : CNabuDataObject
     {
         if ($name === null) {
             throw new ENabuCoreException(
@@ -246,11 +247,11 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Domain Zone Origin attribute value
+     * Sets the Domain Zone Origin attribute value.
      * @param mixed $origin New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOrigin($origin)
+    public function setOrigin($origin) : CNabuDataObject
     {
         if ($origin === null) {
             throw new ENabuCoreException(
@@ -267,17 +268,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Ttl attribute value
      * @return int Returns the Domain Zone Ttl value
      */
-    public function getTtl()
+    public function getTtl() : int
     {
         return $this->getValue('nb_domain_zone_ttl');
     }
 
     /**
-     * Sets the Domain Zone Ttl attribute value
+     * Sets the Domain Zone Ttl attribute value.
      * @param int $ttl New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTtl($ttl)
+    public function setTtl(int $ttl = 86400) : CNabuDataObject
     {
         if ($ttl === null) {
             throw new ENabuCoreException(
@@ -294,17 +295,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Admin Email attribute value
      * @return string Returns the Domain Zone Admin Email value
      */
-    public function getAdminEmail()
+    public function getAdminEmail() : string
     {
         return $this->getValue('nb_domain_zone_admin_email');
     }
 
     /**
-     * Sets the Domain Zone Admin Email attribute value
+     * Sets the Domain Zone Admin Email attribute value.
      * @param string $admin_email New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAdminEmail($admin_email)
+    public function setAdminEmail(string $admin_email) : CNabuDataObject
     {
         if ($admin_email === null) {
             throw new ENabuCoreException(
@@ -321,17 +322,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Serial attribute value
      * @return int Returns the Domain Zone Serial value
      */
-    public function getSerial()
+    public function getSerial() : int
     {
         return $this->getValue('nb_domain_zone_serial');
     }
 
     /**
-     * Sets the Domain Zone Serial attribute value
+     * Sets the Domain Zone Serial attribute value.
      * @param int $serial New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSerial($serial)
+    public function setSerial(int $serial = 1) : CNabuDataObject
     {
         if ($serial === null) {
             throw new ENabuCoreException(
@@ -348,17 +349,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Refresh attribute value
      * @return int Returns the Domain Zone Refresh value
      */
-    public function getRefresh()
+    public function getRefresh() : int
     {
         return $this->getValue('nb_domain_zone_refresh');
     }
 
     /**
-     * Sets the Domain Zone Refresh attribute value
+     * Sets the Domain Zone Refresh attribute value.
      * @param int $refresh New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setRefresh($refresh)
+    public function setRefresh(int $refresh = 10800) : CNabuDataObject
     {
         if ($refresh === null) {
             throw new ENabuCoreException(
@@ -375,17 +376,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Retry attribute value
      * @return int Returns the Domain Zone Retry value
      */
-    public function getRetry()
+    public function getRetry() : int
     {
         return $this->getValue('nb_domain_zone_retry');
     }
 
     /**
-     * Sets the Domain Zone Retry attribute value
+     * Sets the Domain Zone Retry attribute value.
      * @param int $retry New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setRetry($retry)
+    public function setRetry(int $retry = 3600) : CNabuDataObject
     {
         if ($retry === null) {
             throw new ENabuCoreException(
@@ -402,17 +403,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Expiry attribute value
      * @return int Returns the Domain Zone Expiry value
      */
-    public function getExpiry()
+    public function getExpiry() : int
     {
         return $this->getValue('nb_domain_zone_expiry');
     }
 
     /**
-     * Sets the Domain Zone Expiry attribute value
+     * Sets the Domain Zone Expiry attribute value.
      * @param int $expiry New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setExpiry($expiry)
+    public function setExpiry(int $expiry = 604800) : CNabuDataObject
     {
         if ($expiry === null) {
             throw new ENabuCoreException(
@@ -429,17 +430,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Minimum attribute value
      * @return int Returns the Domain Zone Minimum value
      */
-    public function getMinimum()
+    public function getMinimum() : int
     {
         return $this->getValue('nb_domain_zone_minimum');
     }
 
     /**
-     * Sets the Domain Zone Minimum attribute value
+     * Sets the Domain Zone Minimum attribute value.
      * @param int $minimum New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMinimum($minimum)
+    public function setMinimum(int $minimum = 10800) : CNabuDataObject
     {
         if ($minimum === null) {
             throw new ENabuCoreException(
@@ -462,11 +463,11 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Domain Zone Last Update Datetime attribute value
+     * Sets the Domain Zone Last Update Datetime attribute value.
      * @param mixed $last_update_datetime New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLastUpdateDatetime($last_update_datetime)
+    public function setLastUpdateDatetime($last_update_datetime) : CNabuDataObject
     {
         $this->setValue('nb_domain_zone_last_update_datetime', $last_update_datetime);
         
@@ -483,11 +484,11 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Domain Zone Last Upload Datetime attribute value
+     * Sets the Domain Zone Last Upload Datetime attribute value.
      * @param mixed $last_upload_datetime New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLastUploadDatetime($last_upload_datetime)
+    public function setLastUploadDatetime($last_upload_datetime) : CNabuDataObject
     {
         $this->setValue('nb_domain_zone_last_upload_datetime', $last_upload_datetime);
         
@@ -498,17 +499,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Dns 01 attribute value
      * @return string Returns the Domain Zone Dns 01 value
      */
-    public function getDns01()
+    public function getDns01() : string
     {
         return $this->getValue('nb_domain_zone_dns_01');
     }
 
     /**
-     * Sets the Domain Zone Dns 01 attribute value
+     * Sets the Domain Zone Dns 01 attribute value.
      * @param string $dns_01 New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDns01($dns_01)
+    public function setDns01(string $dns_01) : CNabuDataObject
     {
         if ($dns_01 === null) {
             throw new ENabuCoreException(
@@ -525,17 +526,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Dns 02 attribute value
      * @return string Returns the Domain Zone Dns 02 value
      */
-    public function getDns02()
+    public function getDns02() : string
     {
         return $this->getValue('nb_domain_zone_dns_02');
     }
 
     /**
-     * Sets the Domain Zone Dns 02 attribute value
+     * Sets the Domain Zone Dns 02 attribute value.
      * @param string $dns_02 New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDns02($dns_02)
+    public function setDns02(string $dns_02) : CNabuDataObject
     {
         if ($dns_02 === null) {
             throw new ENabuCoreException(
@@ -558,11 +559,11 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Domain Zone Dns 03 attribute value
+     * Sets the Domain Zone Dns 03 attribute value.
      * @param null|string $dns_03 New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDns03($dns_03)
+    public function setDns03(string $dns_03 = null) : CNabuDataObject
     {
         $this->setValue('nb_domain_zone_dns_03', $dns_03);
         
@@ -579,11 +580,11 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Domain Zone Dns 04 attribute value
+     * Sets the Domain Zone Dns 04 attribute value.
      * @param null|string $dns_04 New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDns04($dns_04)
+    public function setDns04(string $dns_04 = null) : CNabuDataObject
     {
         $this->setValue('nb_domain_zone_dns_04', $dns_04);
         
@@ -600,11 +601,11 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Domain Zone Dns 05 attribute value
+     * Sets the Domain Zone Dns 05 attribute value.
      * @param null|string $dns_05 New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDns05($dns_05)
+    public function setDns05(string $dns_05 = null) : CNabuDataObject
     {
         $this->setValue('nb_domain_zone_dns_05', $dns_05);
         
@@ -621,11 +622,11 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Domain Zone Dns 06 attribute value
+     * Sets the Domain Zone Dns 06 attribute value.
      * @param null|string $dns_06 New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDns06($dns_06)
+    public function setDns06(string $dns_06 = null) : CNabuDataObject
     {
         $this->setValue('nb_domain_zone_dns_06', $dns_06);
         
@@ -642,11 +643,11 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Domain Zone Dns Origin attribute value
+     * Sets the Domain Zone Dns Origin attribute value.
      * @param mixed $dns_origin New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDnsOrigin($dns_origin)
+    public function setDnsOrigin($dns_origin) : CNabuDataObject
     {
         if ($dns_origin === null) {
             throw new ENabuCoreException(
@@ -663,17 +664,17 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
      * Get Domain Zone Share All attribute value
      * @return string Returns the Domain Zone Share All value
      */
-    public function getShareAll()
+    public function getShareAll() : string
     {
         return $this->getValue('nb_domain_zone_share_all');
     }
 
     /**
-     * Sets the Domain Zone Share All attribute value
+     * Sets the Domain Zone Share All attribute value.
      * @param string $share_all New value for attribute
-     * @return CNabuDomainZoneBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setShareAll($share_all)
+    public function setShareAll(string $share_all = "F") : CNabuDataObject
     {
         if ($share_all === null) {
             throw new ENabuCoreException(

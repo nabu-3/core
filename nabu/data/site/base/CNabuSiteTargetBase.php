@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:47 UTC
+ * Created: 2017/04/15 14:11:36 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -45,8 +47,9 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
  */
-abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
+    use TNabuHashed;
     use TNabuSiteChild;
     use TNabuTranslated;
 
@@ -285,17 +288,17 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
      * Get Site Target Id attribute value
      * @return int Returns the Site Target Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_site_target_id');
     }
 
     /**
-     * Sets the Site Target Id attribute value
+     * Sets the Site Target Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -312,17 +315,17 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
      * Get Site Id attribute value
      * @return int Returns the Site Id value
      */
-    public function getSiteId()
+    public function getSiteId() : int
     {
         return $this->getValue('nb_site_id');
     }
 
     /**
-     * Sets the Site Id attribute value
+     * Sets the Site Id attribute value.
      * @param int $nb_site_id New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteId($nb_site_id)
+    public function setSiteId(int $nb_site_id) : CNabuDataObject
     {
         if ($nb_site_id === null) {
             throw new ENabuCoreException(
@@ -345,11 +348,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Hash attribute value
+     * Sets the Site Target Hash attribute value.
      * @param null|string $hash New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHash($hash)
+    public function setHash(string $hash = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_hash', $hash);
         
@@ -360,17 +363,17 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
      * Get Site Target Order attribute value
      * @return int Returns the Site Target Order value
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return $this->getValue('nb_site_target_order');
     }
 
     /**
-     * Sets the Site Target Order attribute value
+     * Sets the Site Target Order attribute value.
      * @param int $order New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOrder($order)
+    public function setOrder(int $order) : CNabuDataObject
     {
         if ($order === null) {
             throw new ENabuCoreException(
@@ -393,11 +396,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Begin Date attribute value
+     * Sets the Site Target Begin Date attribute value.
      * @param mixed $begin_date New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setBeginDate($begin_date)
+    public function setBeginDate($begin_date) : CNabuDataObject
     {
         $this->setValue('nb_site_target_begin_date', $begin_date);
         
@@ -414,11 +417,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Modif Date attribute value
+     * Sets the Site Target Modif Date attribute value.
      * @param mixed $modif_date New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setModifDate($modif_date)
+    public function setModifDate($modif_date) : CNabuDataObject
     {
         $this->setValue('nb_site_target_modif_date', $modif_date);
         
@@ -435,11 +438,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target URL Filter attribute value
+     * Sets the Site Target URL Filter attribute value.
      * @param null|string $url_filter New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setURLFilter($url_filter)
+    public function setURLFilter(string $url_filter = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_url_filter', $url_filter);
         
@@ -456,11 +459,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Key attribute value
+     * Sets the Site Target Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_key', $key);
         
@@ -477,11 +480,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Zone attribute value
+     * Sets the Site Target Zone attribute value.
      * @param null|string $zone New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setZone($zone)
+    public function setZone(string $zone = "B") : CNabuDataObject
     {
         $this->setValue('nb_site_target_zone', $zone);
         
@@ -492,17 +495,17 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
      * Get Site Target Use HTTP attribute value
      * @return string Returns the Site Target Use HTTP value
      */
-    public function getUseHTTP()
+    public function getUseHTTP() : string
     {
         return $this->getValue('nb_site_target_use_http');
     }
 
     /**
-     * Sets the Site Target Use HTTP attribute value
+     * Sets the Site Target Use HTTP attribute value.
      * @param string $use_http New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUseHTTP($use_http)
+    public function setUseHTTP(string $use_http = "F") : CNabuDataObject
     {
         if ($use_http === null) {
             throw new ENabuCoreException(
@@ -519,17 +522,17 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
      * Get Site Target Use HTTPS attribute value
      * @return string Returns the Site Target Use HTTPS value
      */
-    public function getUseHTTPS()
+    public function getUseHTTPS() : string
     {
         return $this->getValue('nb_site_target_use_https');
     }
 
     /**
-     * Sets the Site Target Use HTTPS attribute value
+     * Sets the Site Target Use HTTPS attribute value.
      * @param string $use_https New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUseHTTPS($use_https)
+    public function setUseHTTPS(string $use_https = "F") : CNabuDataObject
     {
         if ($use_https === null) {
             throw new ENabuCoreException(
@@ -552,11 +555,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Output Type attribute value
+     * Sets the Site Target Output Type attribute value.
      * @param null|string $output_type New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOutputType($output_type)
+    public function setOutputType(string $output_type = "HTML") : CNabuDataObject
     {
         $this->setValue('nb_site_target_output_type', $output_type);
         
@@ -573,11 +576,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Mimetype Id attribute value
+     * Sets the Mimetype Id attribute value.
      * @param null|string $nb_mimetype_id New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMimetypeId($nb_mimetype_id)
+    public function setMimetypeId(string $nb_mimetype_id = null) : CNabuDataObject
     {
         $this->setValue('nb_mimetype_id', $nb_mimetype_id);
         
@@ -594,11 +597,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Smarty Display File attribute value
+     * Sets the Site Target Smarty Display File attribute value.
      * @param null|string $smarty_display_file New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSmartyDisplayFile($smarty_display_file)
+    public function setSmartyDisplayFile(string $smarty_display_file = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_smarty_display_file', $smarty_display_file);
         
@@ -615,11 +618,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Smarty Content File attribute value
+     * Sets the Site Target Smarty Content File attribute value.
      * @param null|string $smarty_content_file New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSmartyContentFile($smarty_content_file)
+    public function setSmartyContentFile(string $smarty_content_file = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_smarty_content_file', $smarty_content_file);
         
@@ -630,17 +633,17 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
      * Get Site Target Smarty Debugging attribute value
      * @return string Returns the Site Target Smarty Debugging value
      */
-    public function getSmartyDebugging()
+    public function getSmartyDebugging() : string
     {
         return $this->getValue('nb_site_target_smarty_debugging');
     }
 
     /**
-     * Sets the Site Target Smarty Debugging attribute value
+     * Sets the Site Target Smarty Debugging attribute value.
      * @param string $smarty_debugging New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSmartyDebugging($smarty_debugging)
+    public function setSmartyDebugging(string $smarty_debugging = "F") : CNabuDataObject
     {
         if ($smarty_debugging === null) {
             throw new ENabuCoreException(
@@ -663,11 +666,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Plugin Name attribute value
+     * Sets the Site Target Plugin Name attribute value.
      * @param null|string $plugin_name New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setPluginName($plugin_name)
+    public function setPluginName(string $plugin_name = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_plugin_name', $plugin_name);
         
@@ -678,17 +681,17 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
      * Get Site Target PHP Trace attribute value
      * @return string Returns the Site Target PHP Trace value
      */
-    public function getPHPTrace()
+    public function getPHPTrace() : string
     {
         return $this->getValue('nb_site_target_php_trace');
     }
 
     /**
-     * Sets the Site Target PHP Trace attribute value
+     * Sets the Site Target PHP Trace attribute value.
      * @param string $php_trace New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setPHPTrace($php_trace)
+    public function setPHPTrace(string $php_trace = "F") : CNabuDataObject
     {
         if ($php_trace === null) {
             throw new ENabuCoreException(
@@ -705,17 +708,17 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
      * Get Site Target Use Commerce attribute value
      * @return string Returns the Site Target Use Commerce value
      */
-    public function getUseCommerce()
+    public function getUseCommerce() : string
     {
         return $this->getValue('nb_site_target_use_commerce');
     }
 
     /**
-     * Sets the Site Target Use Commerce attribute value
+     * Sets the Site Target Use Commerce attribute value.
      * @param string $use_commerce New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUseCommerce($use_commerce)
+    public function setUseCommerce(string $use_commerce = "F") : CNabuDataObject
     {
         if ($use_commerce === null) {
             throw new ENabuCoreException(
@@ -732,17 +735,17 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
      * Get Site Target Use Apps attribute value
      * @return string Returns the Site Target Use Apps value
      */
-    public function getUseApps()
+    public function getUseApps() : string
     {
         return $this->getValue('nb_site_target_use_apps');
     }
 
     /**
-     * Sets the Site Target Use Apps attribute value
+     * Sets the Site Target Use Apps attribute value.
      * @param string $use_apps New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUseApps($use_apps)
+    public function setUseApps(string $use_apps = "F") : CNabuDataObject
     {
         if ($use_apps === null) {
             throw new ENabuCoreException(
@@ -759,17 +762,17 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
      * Get Site Target Dynamic Cache Control attribute value
      * @return string Returns the Site Target Dynamic Cache Control value
      */
-    public function getDynamicCacheControl()
+    public function getDynamicCacheControl() : string
     {
         return $this->getValue('nb_site_target_dynamic_cache_control');
     }
 
     /**
-     * Sets the Site Target Dynamic Cache Control attribute value
+     * Sets the Site Target Dynamic Cache Control attribute value.
      * @param string $dynamic_cache_control New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDynamicCacheControl($dynamic_cache_control)
+    public function setDynamicCacheControl(string $dynamic_cache_control = "S") : CNabuDataObject
     {
         if ($dynamic_cache_control === null) {
             throw new ENabuCoreException(
@@ -792,11 +795,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Dynamic Cache Max Age attribute value
+     * Sets the Site Target Dynamic Cache Max Age attribute value.
      * @param null|int $dynamic_cache_max_age New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDynamicCacheMaxAge($dynamic_cache_max_age)
+    public function setDynamicCacheMaxAge(int $dynamic_cache_max_age = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_dynamic_cache_max_age', $dynamic_cache_max_age);
         
@@ -813,11 +816,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Script File attribute value
+     * Sets the Site Target Script File attribute value.
      * @param null|string $script_file New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setScriptFile($script_file)
+    public function setScriptFile(string $script_file = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_script_file', $script_file);
         
@@ -834,11 +837,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target CSS File attribute value
+     * Sets the Site Target CSS File attribute value.
      * @param null|string $css_file New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCSSFile($css_file)
+    public function setCSSFile(string $css_file = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_css_file', $css_file);
         
@@ -855,11 +858,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target CSS Class attribute value
+     * Sets the Site Target CSS Class attribute value.
      * @param null|string $css_class New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCSSClass($css_class)
+    public function setCSSClass(string $css_class = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_css_class', $css_class);
         
@@ -876,11 +879,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Commands attribute value
+     * Sets the Site Target Commands attribute value.
      * @param null|string $commands New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCommands($commands)
+    public function setCommands(string $commands = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_commands', $commands);
         
@@ -897,11 +900,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Meta Robots attribute value
+     * Sets the Site Target Meta Robots attribute value.
      * @param null|string $meta_robots New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMetaRobots($meta_robots)
+    public function setMetaRobots(string $meta_robots = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_meta_robots', $meta_robots);
         
@@ -918,11 +921,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Icon attribute value
+     * Sets the Site Target Icon attribute value.
      * @param null|string $icon New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setIcon($icon)
+    public function setIcon(string $icon = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_icon', $icon);
         
@@ -939,11 +942,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Apps Slot attribute value
+     * Sets the Site Target Apps Slot attribute value.
      * @param null|string $apps_slot New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAppsSlot($apps_slot)
+    public function setAppsSlot(string $apps_slot = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_apps_slot', $apps_slot);
         
@@ -960,11 +963,11 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Site Target Attributes attribute value
+     * Sets the Site Target Attributes attribute value.
      * @param null|string|array $attributes New value for attribute
-     * @return CNabuSiteTargetBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAttributes($attributes)
+    public function setAttributes(string $attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_site_target_attributes', $attributes);
         

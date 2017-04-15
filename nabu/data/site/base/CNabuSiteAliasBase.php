@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:46 UTC
+ * Created: 2017/04/15 14:11:35 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\site\CNabuSite;
 use \nabu\data\site\CNabuSiteAliasList;
 use \nabu\data\site\traits\TNabuSiteChild;
@@ -165,17 +166,17 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
      * Get Site Alias Id attribute value
      * @return int Returns the Site Alias Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_site_alias_id');
     }
 
     /**
-     * Sets the Site Alias Id attribute value
+     * Sets the Site Alias Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuSiteAliasBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -198,11 +199,11 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Id attribute value
+     * Sets the User Id attribute value.
      * @param null|int $nb_user_id New value for attribute
-     * @return CNabuSiteAliasBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUserId($nb_user_id)
+    public function setUserId(int $nb_user_id = null) : CNabuDataObject
     {
         $this->setValue('nb_user_id', $nb_user_id);
         
@@ -213,17 +214,17 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
      * Get Site Id attribute value
      * @return int Returns the Site Id value
      */
-    public function getSiteId()
+    public function getSiteId() : int
     {
         return $this->getValue('nb_site_id');
     }
 
     /**
-     * Sets the Site Id attribute value
+     * Sets the Site Id attribute value.
      * @param int $nb_site_id New value for attribute
-     * @return CNabuSiteAliasBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteId($nb_site_id)
+    public function setSiteId(int $nb_site_id) : CNabuDataObject
     {
         if ($nb_site_id === null) {
             throw new ENabuCoreException(
@@ -240,17 +241,17 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
      * Get Domain Zone Host Id attribute value
      * @return int Returns the Domain Zone Host Id value
      */
-    public function getDomainZoneHostId()
+    public function getDomainZoneHostId() : int
     {
         return $this->getValue('nb_domain_zone_host_id');
     }
 
     /**
-     * Sets the Domain Zone Host Id attribute value
+     * Sets the Domain Zone Host Id attribute value.
      * @param int $nb_domain_zone_host_id New value for attribute
-     * @return CNabuSiteAliasBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDomainZoneHostId($nb_domain_zone_host_id)
+    public function setDomainZoneHostId(int $nb_domain_zone_host_id) : CNabuDataObject
     {
         if ($nb_domain_zone_host_id === null) {
             throw new ENabuCoreException(
@@ -273,11 +274,11 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Cluster Group Service Id attribute value
+     * Sets the Cluster Group Service Id attribute value.
      * @param null|int $nb_cluster_group_service_id New value for attribute
-     * @return CNabuSiteAliasBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setClusterGroupServiceId($nb_cluster_group_service_id)
+    public function setClusterGroupServiceId(int $nb_cluster_group_service_id = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_group_service_id', $nb_cluster_group_service_id);
         
@@ -288,17 +289,17 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
      * Get Site Alias Type attribute value
      * @return string Returns the Site Alias Type value
      */
-    public function getType()
+    public function getType() : string
     {
         return $this->getValue('nb_site_alias_type');
     }
 
     /**
-     * Sets the Site Alias Type attribute value
+     * Sets the Site Alias Type attribute value.
      * @param string $type New value for attribute
-     * @return CNabuSiteAliasBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setType($type)
+    public function setType(string $type = "F") : CNabuDataObject
     {
         if ($type === null) {
             throw new ENabuCoreException(
@@ -315,17 +316,17 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
      * Get Site Alias Status attribute value
      * @return string Returns the Site Alias Status value
      */
-    public function getStatus()
+    public function getStatus() : string
     {
         return $this->getValue('nb_site_alias_status');
     }
 
     /**
-     * Sets the Site Alias Status attribute value
+     * Sets the Site Alias Status attribute value.
      * @param string $status New value for attribute
-     * @return CNabuSiteAliasBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setStatus($status)
+    public function setStatus(string $status = "D") : CNabuDataObject
     {
         if ($status === null) {
             throw new ENabuCoreException(
@@ -348,11 +349,11 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Alias Parent attribute value
+     * Sets the Site Alias Parent attribute value.
      * @param null|int $parent New value for attribute
-     * @return CNabuSiteAliasBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setParent($parent)
+    public function setParent(int $parent = null) : CNabuDataObject
     {
         $this->setValue('nb_site_alias_parent', $parent);
         
@@ -369,11 +370,11 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Alias Storage Id attribute value
+     * Sets the Site Alias Storage Id attribute value.
      * @param null|string $storage_id New value for attribute
-     * @return CNabuSiteAliasBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setStorageId($storage_id)
+    public function setStorageId(string $storage_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_alias_storage_id', $storage_id);
         

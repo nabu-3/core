@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:41 UTC
+ * Created: 2017/04/15 14:11:31 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\cluster\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -139,17 +140,17 @@ abstract class CNabuClusterGroupServiceBase extends CNabuDBInternalObject
      * Get Cluster Group Service Id attribute value
      * @return int Returns the Cluster Group Service Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_cluster_group_service_id');
     }
 
     /**
-     * Sets the Cluster Group Service Id attribute value
+     * Sets the Cluster Group Service Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuClusterGroupServiceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -166,17 +167,17 @@ abstract class CNabuClusterGroupServiceBase extends CNabuDBInternalObject
      * Get Cluster Group Id attribute value
      * @return int Returns the Cluster Group Id value
      */
-    public function getClusterGroupId()
+    public function getClusterGroupId() : int
     {
         return $this->getValue('nb_cluster_group_id');
     }
 
     /**
-     * Sets the Cluster Group Id attribute value
+     * Sets the Cluster Group Id attribute value.
      * @param int $nb_cluster_group_id New value for attribute
-     * @return CNabuClusterGroupServiceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setClusterGroupId($nb_cluster_group_id)
+    public function setClusterGroupId(int $nb_cluster_group_id) : CNabuDataObject
     {
         if ($nb_cluster_group_id === null) {
             throw new ENabuCoreException(
@@ -199,11 +200,11 @@ abstract class CNabuClusterGroupServiceBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Cluster Group Service Port attribute value
+     * Sets the Cluster Group Service Port attribute value.
      * @param null|int $port New value for attribute
-     * @return CNabuClusterGroupServiceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setPort($port)
+    public function setPort(int $port = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_group_service_port', $port);
         
@@ -220,11 +221,11 @@ abstract class CNabuClusterGroupServiceBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Cluster Group Service Name attribute value
+     * Sets the Cluster Group Service Name attribute value.
      * @param null|string $name New value for attribute
-     * @return CNabuClusterGroupServiceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName($name)
+    public function setName(string $name = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_group_service_name', $name);
         
@@ -235,17 +236,17 @@ abstract class CNabuClusterGroupServiceBase extends CNabuDBInternalObject
      * Get Cluster Group Service Use SSL attribute value
      * @return string Returns the Cluster Group Service Use SSL value
      */
-    public function getUseSSL()
+    public function getUseSSL() : string
     {
         return $this->getValue('nb_cluster_group_service_use_ssl');
     }
 
     /**
-     * Sets the Cluster Group Service Use SSL attribute value
+     * Sets the Cluster Group Service Use SSL attribute value.
      * @param string $use_ssl New value for attribute
-     * @return CNabuClusterGroupServiceBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUseSSL($use_ssl)
+    public function setUseSSL(string $use_ssl = "F") : CNabuDataObject
     {
         if ($use_ssl === null) {
             throw new ENabuCoreException(

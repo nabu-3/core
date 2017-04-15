@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:45 UTC
+ * Created: 2017/04/15 14:11:35 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\site\traits\TNabuSiteChild;
 use \nabu\db\CNabuDBInternalObject;
 
@@ -134,17 +135,17 @@ abstract class CNabuSiteModuleBase extends CNabuDBInternalObject
      * Get Site Id attribute value
      * @return int Returns the Site Id value
      */
-    public function getSiteId()
+    public function getSiteId() : int
     {
         return $this->getValue('nb_site_id');
     }
 
     /**
-     * Sets the Site Id attribute value
+     * Sets the Site Id attribute value.
      * @param int $nb_site_id New value for attribute
-     * @return CNabuSiteModuleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteId($nb_site_id)
+    public function setSiteId(int $nb_site_id) : CNabuDataObject
     {
         if ($nb_site_id === null) {
             throw new ENabuCoreException(
@@ -161,17 +162,17 @@ abstract class CNabuSiteModuleBase extends CNabuDBInternalObject
      * Get Site Module Id attribute value
      * @return string Returns the Site Module Id value
      */
-    public function getId()
+    public function getId() : string
     {
         return $this->getValue('nb_site_module_id');
     }
 
     /**
-     * Sets the Site Module Id attribute value
+     * Sets the Site Module Id attribute value.
      * @param string $id New value for attribute
-     * @return CNabuSiteModuleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(string $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -188,17 +189,17 @@ abstract class CNabuSiteModuleBase extends CNabuDBInternalObject
      * Get Site Module Status attribute value
      * @return string Returns the Site Module Status value
      */
-    public function getStatus()
+    public function getStatus() : string
     {
         return $this->getValue('nb_site_module_status');
     }
 
     /**
-     * Sets the Site Module Status attribute value
+     * Sets the Site Module Status attribute value.
      * @param string $status New value for attribute
-     * @return CNabuSiteModuleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setStatus($status)
+    public function setStatus(string $status = "D") : CNabuDataObject
     {
         if ($status === null) {
             throw new ENabuCoreException(
@@ -215,17 +216,17 @@ abstract class CNabuSiteModuleBase extends CNabuDBInternalObject
      * Get Site Module Error Reporting attribute value
      * @return int Returns the Site Module Error Reporting value
      */
-    public function getErrorReporting()
+    public function getErrorReporting() : int
     {
         return $this->getValue('nb_site_module_error_reporting');
     }
 
     /**
-     * Sets the Site Module Error Reporting attribute value
+     * Sets the Site Module Error Reporting attribute value.
      * @param int $error_reporting New value for attribute
-     * @return CNabuSiteModuleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setErrorReporting($error_reporting)
+    public function setErrorReporting(int $error_reporting = 0) : CNabuDataObject
     {
         if ($error_reporting === null) {
             throw new ENabuCoreException(
@@ -242,17 +243,17 @@ abstract class CNabuSiteModuleBase extends CNabuDBInternalObject
      * Get Site Module Debugging attribute value
      * @return string Returns the Site Module Debugging value
      */
-    public function getDebugging()
+    public function getDebugging() : string
     {
         return $this->getValue('nb_site_module_debugging');
     }
 
     /**
-     * Sets the Site Module Debugging attribute value
+     * Sets the Site Module Debugging attribute value.
      * @param string $debugging New value for attribute
-     * @return CNabuSiteModuleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDebugging($debugging)
+    public function setDebugging(string $debugging = "F") : CNabuDataObject
     {
         if ($debugging === null) {
             throw new ENabuCoreException(
@@ -275,11 +276,11 @@ abstract class CNabuSiteModuleBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Module Attributes attribute value
+     * Sets the Site Module Attributes attribute value.
      * @param null|string|array $attributes New value for attribute
-     * @return CNabuSiteModuleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAttributes($attributes)
+    public function setAttributes(string $attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_site_module_attributes', $attributes);
         

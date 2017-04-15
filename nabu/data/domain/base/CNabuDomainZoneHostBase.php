@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:43 UTC
+ * Created: 2017/04/15 14:11:33 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\domain\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -139,17 +140,17 @@ abstract class CNabuDomainZoneHostBase extends CNabuDBInternalObject
      * Get Domain Zone Host Id attribute value
      * @return int Returns the Domain Zone Host Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_domain_zone_host_id');
     }
 
     /**
-     * Sets the Domain Zone Host Id attribute value
+     * Sets the Domain Zone Host Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuDomainZoneHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -166,17 +167,17 @@ abstract class CNabuDomainZoneHostBase extends CNabuDBInternalObject
      * Get Domain Zone Id attribute value
      * @return int Returns the Domain Zone Id value
      */
-    public function getDomainZoneId()
+    public function getDomainZoneId() : int
     {
         return $this->getValue('nb_domain_zone_id');
     }
 
     /**
-     * Sets the Domain Zone Id attribute value
+     * Sets the Domain Zone Id attribute value.
      * @param int $nb_domain_zone_id New value for attribute
-     * @return CNabuDomainZoneHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDomainZoneId($nb_domain_zone_id)
+    public function setDomainZoneId(int $nb_domain_zone_id) : CNabuDataObject
     {
         if ($nb_domain_zone_id === null) {
             throw new ENabuCoreException(
@@ -193,17 +194,17 @@ abstract class CNabuDomainZoneHostBase extends CNabuDBInternalObject
      * Get Domain Zone Host Name attribute value
      * @return string Returns the Domain Zone Host Name value
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->getValue('nb_domain_zone_host_name');
     }
 
     /**
-     * Sets the Domain Zone Host Name attribute value
+     * Sets the Domain Zone Host Name attribute value.
      * @param string $name New value for attribute
-     * @return CNabuDomainZoneHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName($name)
+    public function setName(string $name) : CNabuDataObject
     {
         if ($name === null) {
             throw new ENabuCoreException(
@@ -226,11 +227,11 @@ abstract class CNabuDomainZoneHostBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Domain Zone Host Type attribute value
+     * Sets the Domain Zone Host Type attribute value.
      * @param null|string $type New value for attribute
-     * @return CNabuDomainZoneHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setType($type)
+    public function setType(string $type = null) : CNabuDataObject
     {
         $this->setValue('nb_domain_zone_host_type', $type);
         
@@ -247,11 +248,11 @@ abstract class CNabuDomainZoneHostBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Domain Zone Host Target attribute value
+     * Sets the Domain Zone Host Target attribute value.
      * @param null|string $target New value for attribute
-     * @return CNabuDomainZoneHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTarget($target)
+    public function setTarget(string $target = null) : CNabuDataObject
     {
         $this->setValue('nb_domain_zone_host_target', $target);
         

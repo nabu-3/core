@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:52 UTC
+ * Created: 2017/04/15 14:11:40 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -46,8 +48,9 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
  */
-abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
+    use TNabuHashed;
     use TNabuSiteChild;
     use TNabuSiteTargetChild;
     use TNabuTranslated;
@@ -287,17 +290,17 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
      * Get Site Map Id attribute value
      * @return int Returns the Site Map Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_site_map_id');
     }
 
     /**
-     * Sets the Site Map Id attribute value
+     * Sets the Site Map Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -320,11 +323,11 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Site Map Hash attribute value
+     * Sets the Site Map Hash attribute value.
      * @param null|string $hash New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHash($hash)
+    public function setHash(string $hash = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_hash', $hash);
         
@@ -335,17 +338,17 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
      * Get Site Id attribute value
      * @return int Returns the Site Id value
      */
-    public function getSiteId()
+    public function getSiteId() : int
     {
         return $this->getValue('nb_site_id');
     }
 
     /**
-     * Sets the Site Id attribute value
+     * Sets the Site Id attribute value.
      * @param int $nb_site_id New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteId($nb_site_id)
+    public function setSiteId(int $nb_site_id) : CNabuDataObject
     {
         if ($nb_site_id === null) {
             throw new ENabuCoreException(
@@ -368,11 +371,11 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Site Map Parent Id attribute value
+     * Sets the Site Map Parent Id attribute value.
      * @param null|int $parent_id New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setParentId($parent_id)
+    public function setParentId(int $parent_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_parent_id', $parent_id);
         
@@ -383,17 +386,17 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
      * Get Site Map Order attribute value
      * @return int Returns the Site Map Order value
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return $this->getValue('nb_site_map_order');
     }
 
     /**
-     * Sets the Site Map Order attribute value
+     * Sets the Site Map Order attribute value.
      * @param int $order New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOrder($order)
+    public function setOrder(int $order) : CNabuDataObject
     {
         if ($order === null) {
             throw new ENabuCoreException(
@@ -410,17 +413,17 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
      * Get Site Map Customer Required attribute value
      * @return string Returns the Site Map Customer Required value
      */
-    public function getCustomerRequired()
+    public function getCustomerRequired() : string
     {
         return $this->getValue('nb_site_map_customer_required');
     }
 
     /**
-     * Sets the Site Map Customer Required attribute value
+     * Sets the Site Map Customer Required attribute value.
      * @param string $customer_required New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCustomerRequired($customer_required)
+    public function setCustomerRequired(string $customer_required = "B") : CNabuDataObject
     {
         if ($customer_required === null) {
             throw new ENabuCoreException(
@@ -437,17 +440,17 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
      * Get Site Map Level attribute value
      * @return int Returns the Site Map Level value
      */
-    public function getLevel()
+    public function getLevel() : int
     {
         return $this->getValue('nb_site_map_level');
     }
 
     /**
-     * Sets the Site Map Level attribute value
+     * Sets the Site Map Level attribute value.
      * @param int $level New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLevel($level)
+    public function setLevel(int $level = 1) : CNabuDataObject
     {
         if ($level === null) {
             throw new ENabuCoreException(
@@ -470,11 +473,11 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Site Map Next Sibling attribute value
+     * Sets the Site Map Next Sibling attribute value.
      * @param null|int $next_sibling New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setNextSibling($next_sibling)
+    public function setNextSibling(int $next_sibling = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_next_sibling', $next_sibling);
         
@@ -491,11 +494,11 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Site Target Id attribute value
+     * Sets the Site Target Id attribute value.
      * @param null|int $nb_site_target_id New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteTargetId($nb_site_target_id)
+    public function setSiteTargetId(int $nb_site_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_id', $nb_site_target_id);
         
@@ -506,17 +509,17 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
      * Get Site Map Use URI attribute value
      * @return string Returns the Site Map Use URI value
      */
-    public function getUseURI()
+    public function getUseURI() : string
     {
         return $this->getValue('nb_site_map_use_uri');
     }
 
     /**
-     * Sets the Site Map Use URI attribute value
+     * Sets the Site Map Use URI attribute value.
      * @param string $use_uri New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUseURI($use_uri)
+    public function setUseURI(string $use_uri = "N") : CNabuDataObject
     {
         if ($use_uri === null) {
             throw new ENabuCoreException(
@@ -533,17 +536,17 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
      * Get Site Map Open Popup attribute value
      * @return string Returns the Site Map Open Popup value
      */
-    public function getOpenPopup()
+    public function getOpenPopup() : string
     {
         return $this->getValue('nb_site_map_open_popup');
     }
 
     /**
-     * Sets the Site Map Open Popup attribute value
+     * Sets the Site Map Open Popup attribute value.
      * @param string $open_popup New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOpenPopup($open_popup)
+    public function setOpenPopup(string $open_popup = "F") : CNabuDataObject
     {
         if ($open_popup === null) {
             throw new ENabuCoreException(
@@ -566,11 +569,11 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Site Map Key attribute value
+     * Sets the Site Map Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_key', $key);
         
@@ -581,17 +584,17 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
      * Get Site Map Visible attribute value
      * @return string Returns the Site Map Visible value
      */
-    public function getVisible()
+    public function getVisible() : string
     {
         return $this->getValue('nb_site_map_visible');
     }
 
     /**
-     * Sets the Site Map Visible attribute value
+     * Sets the Site Map Visible attribute value.
      * @param string $visible New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setVisible($visible)
+    public function setVisible(string $visible = "T") : CNabuDataObject
     {
         if ($visible === null) {
             throw new ENabuCoreException(
@@ -608,17 +611,17 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
      * Get Site Map Separator attribute value
      * @return string Returns the Site Map Separator value
      */
-    public function getSeparator()
+    public function getSeparator() : string
     {
         return $this->getValue('nb_site_map_separator');
     }
 
     /**
-     * Sets the Site Map Separator attribute value
+     * Sets the Site Map Separator attribute value.
      * @param string $separator New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSeparator($separator)
+    public function setSeparator(string $separator = "F") : CNabuDataObject
     {
         if ($separator === null) {
             throw new ENabuCoreException(
@@ -641,11 +644,11 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Site Map Tree Position attribute value
+     * Sets the Site Map Tree Position attribute value.
      * @param null|int $tree_position New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTreePosition($tree_position)
+    public function setTreePosition(int $tree_position = 1) : CNabuDataObject
     {
         $this->setValue('nb_site_map_tree_position', $tree_position);
         
@@ -662,11 +665,11 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Site Map Icon attribute value
+     * Sets the Site Map Icon attribute value.
      * @param null|string $icon New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setIcon($icon)
+    public function setIcon(string $icon = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_icon', $icon);
         
@@ -683,11 +686,11 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Site Map CSS Class attribute value
+     * Sets the Site Map CSS Class attribute value.
      * @param null|string $css_class New value for attribute
-     * @return CNabuSiteMapBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCSSClass($css_class)
+    public function setCSSClass(string $css_class = null) : CNabuDataObject
     {
         $this->setValue('nb_site_map_css_class', $css_class);
         

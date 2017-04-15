@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:37 UTC
+ * Created: 2017/04/15 14:11:28 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\customer\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -138,17 +139,17 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
      * Get Customer Id attribute value
      * @return int Returns the Customer Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_customer_id');
     }
 
     /**
-     * Sets the Customer Id attribute value
+     * Sets the Customer Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -171,11 +172,11 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Fiscal Name attribute value
+     * Sets the Customer Fiscal Name attribute value.
      * @param null|string $fiscal_name New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFiscalName($fiscal_name)
+    public function setFiscalName(string $fiscal_name = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_fiscal_name', $fiscal_name);
         
@@ -192,11 +193,11 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Fiscal Number attribute value
+     * Sets the Customer Fiscal Number attribute value.
      * @param null|string $fiscal_number New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFiscalNumber($fiscal_number)
+    public function setFiscalNumber(string $fiscal_number = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_fiscal_number', $fiscal_number);
         
@@ -213,11 +214,11 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Fiscal Address Id attribute value
+     * Sets the Customer Fiscal Address Id attribute value.
      * @param null|int $fiscal_address_id New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFiscalAddressId($fiscal_address_id)
+    public function setFiscalAddressId(int $fiscal_address_id = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_fiscal_address_id', $fiscal_address_id);
         
@@ -234,11 +235,11 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Contact Name attribute value
+     * Sets the Customer Contact Name attribute value.
      * @param null|string $contact_name New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setContactName($contact_name)
+    public function setContactName(string $contact_name = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_contact_name', $contact_name);
         
@@ -255,11 +256,11 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Contact Position attribute value
+     * Sets the Customer Contact Position attribute value.
      * @param null|string $contact_position New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setContactPosition($contact_position)
+    public function setContactPosition(string $contact_position = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_contact_position', $contact_position);
         
@@ -276,11 +277,11 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Contact Telephone attribute value
+     * Sets the Customer Contact Telephone attribute value.
      * @param null|string $contact_telephone New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setContactTelephone($contact_telephone)
+    public function setContactTelephone(string $contact_telephone = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_contact_telephone', $contact_telephone);
         
@@ -297,11 +298,11 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Contact Cellular attribute value
+     * Sets the Customer Contact Cellular attribute value.
      * @param null|string $contact_cellular New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setContactCellular($contact_cellular)
+    public function setContactCellular(string $contact_cellular = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_contact_cellular', $contact_cellular);
         
@@ -318,11 +319,11 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Contact Email attribute value
+     * Sets the Customer Contact Email attribute value.
      * @param null|string $contact_email New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setContactEmail($contact_email)
+    public function setContactEmail(string $contact_email = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_contact_email', $contact_email);
         
@@ -339,11 +340,11 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Contact Address Id attribute value
+     * Sets the Customer Contact Address Id attribute value.
      * @param null|int $contact_address_id New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setContactAddressId($contact_address_id)
+    public function setContactAddressId(int $contact_address_id = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_contact_address_id', $contact_address_id);
         
@@ -360,11 +361,11 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Address Id attribute value
+     * Sets the Customer Address Id attribute value.
      * @param null|int $address_id New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAddressId($address_id)
+    public function setAddressId(int $address_id = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_address_id', $address_id);
         
@@ -381,11 +382,11 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Avatar Medioteca Id attribute value
+     * Sets the Customer Avatar Medioteca Id attribute value.
      * @param null|int $avatar_medioteca_id New value for attribute
-     * @return CNabuCustomerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAvatarMediotecaId($avatar_medioteca_id)
+    public function setAvatarMediotecaId(int $avatar_medioteca_id = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_avatar_medioteca_id', $avatar_medioteca_id);
         

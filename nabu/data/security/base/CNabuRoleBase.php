@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:42 UTC
+ * Created: 2017/04/15 14:11:31 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -314,17 +314,17 @@ abstract class CNabuRoleBase extends CNabuDBInternalObject implements INabuTrans
      * Get Role Id attribute value
      * @return int Returns the Role Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_role_id');
     }
 
     /**
-     * Sets the Role Id attribute value
+     * Sets the Role Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -347,11 +347,11 @@ abstract class CNabuRoleBase extends CNabuDBInternalObject implements INabuTrans
     }
 
     /**
-     * Sets the Customer Id attribute value
+     * Sets the Customer Id attribute value.
      * @param null|int $nb_customer_id New value for attribute
-     * @return CNabuRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCustomerId($nb_customer_id)
+    public function setCustomerId(int $nb_customer_id = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_id', $nb_customer_id);
         
@@ -368,11 +368,11 @@ abstract class CNabuRoleBase extends CNabuDBInternalObject implements INabuTrans
     }
 
     /**
-     * Sets the Role Key attribute value
+     * Sets the Role Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_role_key', $key);
         
@@ -383,17 +383,17 @@ abstract class CNabuRoleBase extends CNabuDBInternalObject implements INabuTrans
      * Get Role Root attribute value
      * @return string Returns the Role Root value
      */
-    public function getRoot()
+    public function getRoot() : string
     {
         return $this->getValue('nb_role_root');
     }
 
     /**
-     * Sets the Role Root attribute value
+     * Sets the Role Root attribute value.
      * @param string $root New value for attribute
-     * @return CNabuRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setRoot($root)
+    public function setRoot(string $root = "F") : CNabuDataObject
     {
         if ($root === null) {
             throw new ENabuCoreException(

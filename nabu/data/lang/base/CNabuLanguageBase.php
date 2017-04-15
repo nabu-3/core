@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:37 UTC
+ * Created: 2017/04/15 14:11:27 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,9 @@ namespace nabu\data\lang\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -35,8 +38,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\lang\base
  */
-abstract class CNabuLanguageBase extends CNabuDBInternalObject
+abstract class CNabuLanguageBase extends CNabuDBInternalObject implements INabuHashed
 {
+    use TNabuHashed;
+
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
      * the instance is deserialized from the storage.
@@ -138,17 +143,17 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
      * Get Language Id attribute value
      * @return int Returns the Language Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_language_id');
     }
 
     /**
-     * Sets the Language Id attribute value
+     * Sets the Language Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -162,20 +167,41 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
     }
 
     /**
+     * Get Language Hash attribute value
+     * @return null|string Returns the Language Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_language_hash');
+    }
+
+    /**
+     * Sets the Language Hash attribute value.
+     * @param null|string $hash New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setHash(string $hash = null) : CNabuDataObject
+    {
+        $this->setValue('nb_language_hash', $hash);
+        
+        return $this;
+    }
+
+    /**
      * Get Language Type attribute value
      * @return string Returns the Language Type value
      */
-    public function getType()
+    public function getType() : string
     {
         return $this->getValue('nb_language_type');
     }
 
     /**
-     * Sets the Language Type attribute value
+     * Sets the Language Type attribute value.
      * @param string $type New value for attribute
-     * @return CNabuLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setType($type)
+    public function setType(string $type = "C") : CNabuDataObject
     {
         if ($type === null) {
             throw new ENabuCoreException(
@@ -198,11 +224,11 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Language Enabled attribute value
+     * Sets the Language Enabled attribute value.
      * @param null|string $enabled New value for attribute
-     * @return CNabuLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEnabled($enabled)
+    public function setEnabled(string $enabled = "F") : CNabuDataObject
     {
         $this->setValue('nb_language_enabled', $enabled);
         
@@ -219,11 +245,11 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Language ISO639 1 attribute value
+     * Sets the Language ISO639 1 attribute value.
      * @param mixed $ISO639_1 New value for attribute
-     * @return CNabuLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setISO6391($ISO639_1)
+    public function setISO6391($ISO639_1) : CNabuDataObject
     {
         $this->setValue('nb_language_ISO639_1', $ISO639_1);
         
@@ -240,11 +266,11 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Language ISO639 2 attribute value
+     * Sets the Language ISO639 2 attribute value.
      * @param mixed $ISO639_2 New value for attribute
-     * @return CNabuLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setISO6392($ISO639_2)
+    public function setISO6392($ISO639_2) : CNabuDataObject
     {
         $this->setValue('nb_language_ISO639_2', $ISO639_2);
         
@@ -255,17 +281,17 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
      * Get Language Is Api attribute value
      * @return string Returns the Language Is Api value
      */
-    public function getIsApi()
+    public function getIsApi() : string
     {
         return $this->getValue('nb_language_is_api');
     }
 
     /**
-     * Sets the Language Is Api attribute value
+     * Sets the Language Is Api attribute value.
      * @param string $is_api New value for attribute
-     * @return CNabuLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setIsApi($is_api)
+    public function setIsApi(string $is_api = "F") : CNabuDataObject
     {
         if ($is_api === null) {
             throw new ENabuCoreException(
@@ -288,11 +314,11 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Language Default Country Code attribute value
+     * Sets the Language Default Country Code attribute value.
      * @param null|string $default_country_code New value for attribute
-     * @return CNabuLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDefaultCountryCode($default_country_code)
+    public function setDefaultCountryCode(string $default_country_code = null) : CNabuDataObject
     {
         $this->setValue('nb_language_default_country_code', $default_country_code);
         
@@ -309,11 +335,11 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the WGEO Language Id attribute value
+     * Sets the WGEO Language Id attribute value.
      * @param null|string $wgeo_language_id New value for attribute
-     * @return CNabuLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setWGEOLanguageId($wgeo_language_id)
+    public function setWGEOLanguageId(string $wgeo_language_id = null) : CNabuDataObject
     {
         $this->setValue('wgeo_language_id', $wgeo_language_id);
         
@@ -330,11 +356,11 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the WGEO Country Id attribute value
+     * Sets the WGEO Country Id attribute value.
      * @param null|int $wgeo_country_id New value for attribute
-     * @return CNabuLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setWGEOCountryId($wgeo_country_id)
+    public function setWGEOCountryId(int $wgeo_country_id = null) : CNabuDataObject
     {
         $this->setValue('wgeo_country_id', $wgeo_country_id);
         
@@ -345,17 +371,17 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
      * Get Language Name attribute value
      * @return string Returns the Language Name value
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->getValue('nb_language_name');
     }
 
     /**
-     * Sets the Language Name attribute value
+     * Sets the Language Name attribute value.
      * @param string $name New value for attribute
-     * @return CNabuLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName($name)
+    public function setName(string $name) : CNabuDataObject
     {
         if ($name === null) {
             throw new ENabuCoreException(
@@ -378,11 +404,11 @@ abstract class CNabuLanguageBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Language Flag URL attribute value
+     * Sets the Language Flag URL attribute value.
      * @param null|string $flag_url New value for attribute
-     * @return CNabuLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFlagURL($flag_url)
+    public function setFlagURL(string $flag_url = null) : CNabuDataObject
     {
         $this->setValue('nb_language_flag_url', $flag_url);
         

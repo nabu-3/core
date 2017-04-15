@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:06 UTC
+ * Created: 2017/04/15 14:11:57 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\messaging\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 use nabu\data\messaging\traits\TNabuMessagingServiceChild;
 
@@ -135,17 +136,17 @@ abstract class CNabuMessagingServiceTemplateBase extends CNabuDBInternalObject
      * Get Messaging Service Id attribute value
      * @return int Returns the Messaging Service Id value
      */
-    public function getMessagingServiceId()
+    public function getMessagingServiceId() : int
     {
         return $this->getValue('nb_messaging_service_id');
     }
 
     /**
-     * Sets the Messaging Service Id attribute value
+     * Sets the Messaging Service Id attribute value.
      * @param int $nb_messaging_service_id New value for attribute
-     * @return CNabuMessagingServiceTemplateBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMessagingServiceId($nb_messaging_service_id)
+    public function setMessagingServiceId(int $nb_messaging_service_id) : CNabuDataObject
     {
         if ($nb_messaging_service_id === null) {
             throw new ENabuCoreException(
@@ -162,17 +163,17 @@ abstract class CNabuMessagingServiceTemplateBase extends CNabuDBInternalObject
      * Get Messaging Template Id attribute value
      * @return int Returns the Messaging Template Id value
      */
-    public function getMessagingTemplateId()
+    public function getMessagingTemplateId() : int
     {
         return $this->getValue('nb_messaging_template_id');
     }
 
     /**
-     * Sets the Messaging Template Id attribute value
+     * Sets the Messaging Template Id attribute value.
      * @param int $nb_messaging_template_id New value for attribute
-     * @return CNabuMessagingServiceTemplateBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMessagingTemplateId($nb_messaging_template_id)
+    public function setMessagingTemplateId(int $nb_messaging_template_id) : CNabuDataObject
     {
         if ($nb_messaging_template_id === null) {
             throw new ENabuCoreException(
@@ -189,17 +190,17 @@ abstract class CNabuMessagingServiceTemplateBase extends CNabuDBInternalObject
      * Get Messaging Service Template Status attribute value
      * @return string Returns the Messaging Service Template Status value
      */
-    public function getStatus()
+    public function getStatus() : string
     {
         return $this->getValue('nb_messaging_service_template_status');
     }
 
     /**
-     * Sets the Messaging Service Template Status attribute value
+     * Sets the Messaging Service Template Status attribute value.
      * @param string $status New value for attribute
-     * @return CNabuMessagingServiceTemplateBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setStatus($status)
+    public function setStatus(string $status = "D") : CNabuDataObject
     {
         if ($status === null) {
             throw new ENabuCoreException(

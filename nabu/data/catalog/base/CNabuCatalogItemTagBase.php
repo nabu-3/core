@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:01 UTC
+ * Created: 2017/04/15 14:11:52 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\catalog\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -132,17 +133,17 @@ abstract class CNabuCatalogItemTagBase extends CNabuDBInternalObject
      * Get Catalog Item Id attribute value
      * @return int Returns the Catalog Item Id value
      */
-    public function getCatalogItemId()
+    public function getCatalogItemId() : int
     {
         return $this->getValue('nb_catalog_item_id');
     }
 
     /**
-     * Sets the Catalog Item Id attribute value
+     * Sets the Catalog Item Id attribute value.
      * @param int $nb_catalog_item_id New value for attribute
-     * @return CNabuCatalogItemTagBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCatalogItemId($nb_catalog_item_id)
+    public function setCatalogItemId(int $nb_catalog_item_id) : CNabuDataObject
     {
         if ($nb_catalog_item_id === null) {
             throw new ENabuCoreException(
@@ -159,17 +160,17 @@ abstract class CNabuCatalogItemTagBase extends CNabuDBInternalObject
      * Get Catalog Tag Id attribute value
      * @return int Returns the Catalog Tag Id value
      */
-    public function getCatalogTagId()
+    public function getCatalogTagId() : int
     {
         return $this->getValue('nb_catalog_tag_id');
     }
 
     /**
-     * Sets the Catalog Tag Id attribute value
+     * Sets the Catalog Tag Id attribute value.
      * @param int $nb_catalog_tag_id New value for attribute
-     * @return CNabuCatalogItemTagBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCatalogTagId($nb_catalog_tag_id)
+    public function setCatalogTagId(int $nb_catalog_tag_id) : CNabuDataObject
     {
         if ($nb_catalog_tag_id === null) {
             throw new ENabuCoreException(

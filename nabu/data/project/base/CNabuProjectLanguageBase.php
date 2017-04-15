@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:08 UTC
+ * Created: 2017/04/15 14:11:59 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -26,6 +26,7 @@
 namespace nabu\data\project\base;
 
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -167,17 +168,17 @@ abstract class CNabuProjectLanguageBase extends CNabuDBInternalObject implements
      * Get Project Id attribute value
      * @return int Returns the Project Id value
      */
-    public function getProjectId()
+    public function getProjectId() : int
     {
         return $this->getValue('nb_project_id');
     }
 
     /**
-     * Sets the Project Id attribute value
+     * Sets the Project Id attribute value.
      * @param int $nb_project_id New value for attribute
-     * @return CNabuProjectLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setProjectId($nb_project_id)
+    public function setProjectId(int $nb_project_id) : CNabuDataObject
     {
         if ($nb_project_id === null) {
             throw new ENabuCoreException(
@@ -194,17 +195,17 @@ abstract class CNabuProjectLanguageBase extends CNabuDBInternalObject implements
      * Get Language Id attribute value
      * @return int Returns the Language Id value
      */
-    public function getLanguageId()
+    public function getLanguageId() : int
     {
         return $this->getValue('nb_language_id');
     }
 
     /**
-     * Sets the Language Id attribute value
+     * Sets the Language Id attribute value.
      * @param int $nb_language_id New value for attribute
-     * @return CNabuProjectLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLanguageId($nb_language_id)
+    public function setLanguageId(int $nb_language_id) : CNabuDataObject
     {
         if ($nb_language_id === null) {
             throw new ENabuCoreException(
@@ -227,11 +228,11 @@ abstract class CNabuProjectLanguageBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Project Lang Title attribute value
+     * Sets the Project Lang Title attribute value.
      * @param null|string $title New value for attribute
-     * @return CNabuProjectLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTitle($title)
+    public function setTitle(string $title = null) : CNabuDataObject
     {
         $this->setValue('nb_project_lang_title', $title);
         
@@ -248,11 +249,11 @@ abstract class CNabuProjectLanguageBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Project Lang Subtitle attribute value
+     * Sets the Project Lang Subtitle attribute value.
      * @param null|string $subtitle New value for attribute
-     * @return CNabuProjectLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSubtitle($subtitle)
+    public function setSubtitle(string $subtitle = null) : CNabuDataObject
     {
         $this->setValue('nb_project_lang_subtitle', $subtitle);
         
@@ -269,11 +270,11 @@ abstract class CNabuProjectLanguageBase extends CNabuDBInternalObject implements
     }
 
     /**
-     * Sets the Project Lang Opening attribute value
+     * Sets the Project Lang Opening attribute value.
      * @param null|string $opening New value for attribute
-     * @return CNabuProjectLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOpening($opening)
+    public function setOpening(string $opening = null) : CNabuDataObject
     {
         $this->setValue('nb_project_lang_opening', $opening);
         

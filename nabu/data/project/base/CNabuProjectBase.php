@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:07 UTC
+ * Created: 2017/04/15 14:11:59 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\project\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\customer\CNabuCustomer;
 use \nabu\data\customer\traits\TNabuCustomerChild;
@@ -47,9 +49,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\project\base
  */
-abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
     use TNabuCustomerChild;
+    use TNabuHashed;
     use TNabuMediotecaChild;
     use TNabuTranslated;
 
@@ -289,17 +292,17 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
      * Get Project Id attribute value
      * @return int Returns the Project Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_project_id');
     }
 
     /**
-     * Sets the Project Id attribute value
+     * Sets the Project Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuProjectBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -316,17 +319,17 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
      * Get Customer Id attribute value
      * @return int Returns the Customer Id value
      */
-    public function getCustomerId()
+    public function getCustomerId() : int
     {
         return $this->getValue('nb_customer_id');
     }
 
     /**
-     * Sets the Customer Id attribute value
+     * Sets the Customer Id attribute value.
      * @param int $nb_customer_id New value for attribute
-     * @return CNabuProjectBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCustomerId($nb_customer_id)
+    public function setCustomerId(int $nb_customer_id) : CNabuDataObject
     {
         if ($nb_customer_id === null) {
             throw new ENabuCoreException(
@@ -349,11 +352,11 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Project Hash attribute value
+     * Sets the Project Hash attribute value.
      * @param null|string $hash New value for attribute
-     * @return CNabuProjectBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHash($hash)
+    public function setHash(string $hash = null) : CNabuDataObject
     {
         $this->setValue('nb_project_hash', $hash);
         
@@ -370,11 +373,11 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Project Default Language Id attribute value
+     * Sets the Project Default Language Id attribute value.
      * @param null|int $default_language_id New value for attribute
-     * @return CNabuProjectBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDefaultLanguageId($default_language_id)
+    public function setDefaultLanguageId(int $default_language_id = null) : CNabuDataObject
     {
         $this->setValue('nb_project_default_language_id', $default_language_id);
         
@@ -391,11 +394,11 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Project Current Version Id attribute value
+     * Sets the Project Current Version Id attribute value.
      * @param null|int $current_version_id New value for attribute
-     * @return CNabuProjectBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCurrentVersionId($current_version_id)
+    public function setCurrentVersionId(int $current_version_id = null) : CNabuDataObject
     {
         $this->setValue('nb_project_current_version_id', $current_version_id);
         
@@ -412,11 +415,11 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Medioteca Id attribute value
+     * Sets the Medioteca Id attribute value.
      * @param null|int $nb_medioteca_id New value for attribute
-     * @return CNabuProjectBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMediotecaId($nb_medioteca_id)
+    public function setMediotecaId(int $nb_medioteca_id = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_id', $nb_medioteca_id);
         
@@ -433,11 +436,11 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Project Front Image Id attribute value
+     * Sets the Project Front Image Id attribute value.
      * @param null|int $front_image_id New value for attribute
-     * @return CNabuProjectBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFrontImageId($front_image_id)
+    public function setFrontImageId(int $front_image_id = null) : CNabuDataObject
     {
         $this->setValue('nb_project_front_image_id', $front_image_id);
         

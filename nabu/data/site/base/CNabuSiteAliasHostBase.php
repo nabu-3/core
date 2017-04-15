@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:46 UTC
+ * Created: 2017/04/15 14:11:35 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -132,17 +133,17 @@ abstract class CNabuSiteAliasHostBase extends CNabuDBInternalObject
      * Get Site Alias Id attribute value
      * @return int Returns the Site Alias Id value
      */
-    public function getSiteAliasId()
+    public function getSiteAliasId() : int
     {
         return $this->getValue('nb_site_alias_id');
     }
 
     /**
-     * Sets the Site Alias Id attribute value
+     * Sets the Site Alias Id attribute value.
      * @param int $nb_site_alias_id New value for attribute
-     * @return CNabuSiteAliasHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteAliasId($nb_site_alias_id)
+    public function setSiteAliasId(int $nb_site_alias_id) : CNabuDataObject
     {
         if ($nb_site_alias_id === null) {
             throw new ENabuCoreException(
@@ -159,17 +160,17 @@ abstract class CNabuSiteAliasHostBase extends CNabuDBInternalObject
      * Get Server Host Id attribute value
      * @return int Returns the Server Host Id value
      */
-    public function getServerHostId()
+    public function getServerHostId() : int
     {
         return $this->getValue('nb_server_host_id');
     }
 
     /**
-     * Sets the Server Host Id attribute value
+     * Sets the Server Host Id attribute value.
      * @param int $nb_server_host_id New value for attribute
-     * @return CNabuSiteAliasHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setServerHostId($nb_server_host_id)
+    public function setServerHostId(int $nb_server_host_id) : CNabuDataObject
     {
         if ($nb_server_host_id === null) {
             throw new ENabuCoreException(
@@ -186,17 +187,17 @@ abstract class CNabuSiteAliasHostBase extends CNabuDBInternalObject
      * Get Site Alias Host Status attribute value
      * @return string Returns the Site Alias Host Status value
      */
-    public function getStatus()
+    public function getStatus() : string
     {
         return $this->getValue('nb_site_alias_host_status');
     }
 
     /**
-     * Sets the Site Alias Host Status attribute value
+     * Sets the Site Alias Host Status attribute value.
      * @param string $status New value for attribute
-     * @return CNabuSiteAliasHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setStatus($status)
+    public function setStatus(string $status = "D") : CNabuDataObject
     {
         if ($status === null) {
             throw new ENabuCoreException(
@@ -219,11 +220,11 @@ abstract class CNabuSiteAliasHostBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Alias Host Last Update Datetime attribute value
+     * Sets the Site Alias Host Last Update Datetime attribute value.
      * @param mixed $last_update_datetime New value for attribute
-     * @return CNabuSiteAliasHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLastUpdateDatetime($last_update_datetime)
+    public function setLastUpdateDatetime($last_update_datetime) : CNabuDataObject
     {
         $this->setValue('nb_site_alias_host_last_update_datetime', $last_update_datetime);
         
@@ -234,17 +235,17 @@ abstract class CNabuSiteAliasHostBase extends CNabuDBInternalObject
      * Get Site Alias Host Last Update Error Code attribute value
      * @return int Returns the Site Alias Host Last Update Error Code value
      */
-    public function getLastUpdateErrorCode()
+    public function getLastUpdateErrorCode() : int
     {
         return $this->getValue('nb_site_alias_host_last_update_error_code');
     }
 
     /**
-     * Sets the Site Alias Host Last Update Error Code attribute value
+     * Sets the Site Alias Host Last Update Error Code attribute value.
      * @param int $last_update_error_code New value for attribute
-     * @return CNabuSiteAliasHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLastUpdateErrorCode($last_update_error_code)
+    public function setLastUpdateErrorCode(int $last_update_error_code = 0) : CNabuDataObject
     {
         if ($last_update_error_code === null) {
             throw new ENabuCoreException(

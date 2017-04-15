@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:00 UTC
+ * Created: 2017/04/15 14:11:50 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -260,17 +260,17 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
      * Get Catalog Item Id attribute value
      * @return int Returns the Catalog Item Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_catalog_item_id');
     }
 
     /**
-     * Sets the Catalog Item Id attribute value
+     * Sets the Catalog Item Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuCatalogItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -287,17 +287,17 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
      * Get Catalog Id attribute value
      * @return int Returns the Catalog Id value
      */
-    public function getCatalogId()
+    public function getCatalogId() : int
     {
         return $this->getValue('nb_catalog_id');
     }
 
     /**
-     * Sets the Catalog Id attribute value
+     * Sets the Catalog Id attribute value.
      * @param int $nb_catalog_id New value for attribute
-     * @return CNabuCatalogItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCatalogId($nb_catalog_id)
+    public function setCatalogId(int $nb_catalog_id) : CNabuDataObject
     {
         if ($nb_catalog_id === null) {
             throw new ENabuCoreException(
@@ -320,11 +320,11 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
     }
 
     /**
-     * Sets the Catalog Taxonomy Id attribute value
+     * Sets the Catalog Taxonomy Id attribute value.
      * @param null|int $nb_catalog_taxonomy_id New value for attribute
-     * @return CNabuCatalogItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCatalogTaxonomyId($nb_catalog_taxonomy_id)
+    public function setCatalogTaxonomyId(int $nb_catalog_taxonomy_id = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_taxonomy_id', $nb_catalog_taxonomy_id);
         
@@ -341,11 +341,11 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
     }
 
     /**
-     * Sets the Catalog Item Parent Id attribute value
+     * Sets the Catalog Item Parent Id attribute value.
      * @param null|int $parent_id New value for attribute
-     * @return CNabuCatalogItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setParentId($parent_id)
+    public function setParentId(int $parent_id = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_item_parent_id', $parent_id);
         
@@ -356,17 +356,17 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
      * Get Catalog Item Level attribute value
      * @return int Returns the Catalog Item Level value
      */
-    public function getLevel()
+    public function getLevel() : int
     {
         return $this->getValue('nb_catalog_item_level');
     }
 
     /**
-     * Sets the Catalog Item Level attribute value
+     * Sets the Catalog Item Level attribute value.
      * @param int $level New value for attribute
-     * @return CNabuCatalogItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLevel($level)
+    public function setLevel(int $level = 1) : CNabuDataObject
     {
         if ($level === null) {
             throw new ENabuCoreException(
@@ -383,17 +383,17 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
      * Get Catalog Item Order attribute value
      * @return int Returns the Catalog Item Order value
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return $this->getValue('nb_catalog_item_order');
     }
 
     /**
-     * Sets the Catalog Item Order attribute value
+     * Sets the Catalog Item Order attribute value.
      * @param int $order New value for attribute
-     * @return CNabuCatalogItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOrder($order)
+    public function setOrder(int $order = 0) : CNabuDataObject
     {
         if ($order === null) {
             throw new ENabuCoreException(
@@ -416,11 +416,11 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
     }
 
     /**
-     * Sets the Catalog Item Next Sibling attribute value
+     * Sets the Catalog Item Next Sibling attribute value.
      * @param null|int $next_sibling New value for attribute
-     * @return CNabuCatalogItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setNextSibling($next_sibling)
+    public function setNextSibling(int $next_sibling = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_item_next_sibling', $next_sibling);
         
@@ -437,11 +437,11 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
     }
 
     /**
-     * Sets the Medioteca Id attribute value
+     * Sets the Medioteca Id attribute value.
      * @param null|int $nb_medioteca_id New value for attribute
-     * @return CNabuCatalogItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMediotecaId($nb_medioteca_id)
+    public function setMediotecaId(int $nb_medioteca_id = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_id', $nb_medioteca_id);
         
@@ -458,11 +458,11 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
     }
 
     /**
-     * Sets the Medioteca Item Id attribute value
+     * Sets the Medioteca Item Id attribute value.
      * @param null|int $nb_medioteca_item_id New value for attribute
-     * @return CNabuCatalogItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMediotecaItemId($nb_medioteca_item_id)
+    public function setMediotecaItemId(int $nb_medioteca_item_id = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_item_id', $nb_medioteca_item_id);
         
@@ -479,11 +479,11 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
     }
 
     /**
-     * Sets the Catalog Item Attributes attribute value
+     * Sets the Catalog Item Attributes attribute value.
      * @param null|string|array $attributes New value for attribute
-     * @return CNabuCatalogItemBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAttributes($attributes)
+    public function setAttributes(string $attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_catalog_item_attributes', $attributes);
         

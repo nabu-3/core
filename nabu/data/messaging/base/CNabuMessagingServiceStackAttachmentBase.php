@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:07 UTC
+ * Created: 2017/04/15 14:11:58 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,9 @@ namespace nabu\data\messaging\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -36,8 +39,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\messaging\base
  */
-abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalObject
+abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalObject implements INabuHashed
 {
+    use TNabuHashed;
+
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
      * the instance is deserialized from the storage.
@@ -141,17 +146,17 @@ abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalO
      * Get Messaging Service Stack Attachment Id attribute value
      * @return int Returns the Messaging Service Stack Attachment Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_messaging_service_stack_attachment_id');
     }
 
     /**
-     * Sets the Messaging Service Stack Attachment Id attribute value
+     * Sets the Messaging Service Stack Attachment Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuMessagingServiceStackAttachmentBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -168,17 +173,17 @@ abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalO
      * Get Messaging Service Stack Id attribute value
      * @return int Returns the Messaging Service Stack Id value
      */
-    public function getMessagingServiceStackId()
+    public function getMessagingServiceStackId() : int
     {
         return $this->getValue('nb_messaging_service_stack_id');
     }
 
     /**
-     * Sets the Messaging Service Stack Id attribute value
+     * Sets the Messaging Service Stack Id attribute value.
      * @param int $nb_messaging_service_stack_id New value for attribute
-     * @return CNabuMessagingServiceStackAttachmentBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMessagingServiceStackId($nb_messaging_service_stack_id)
+    public function setMessagingServiceStackId(int $nb_messaging_service_stack_id) : CNabuDataObject
     {
         if ($nb_messaging_service_stack_id === null) {
             throw new ENabuCoreException(
@@ -201,11 +206,11 @@ abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalO
     }
 
     /**
-     * Sets the Messaging Service Stack Attachment Mimetype attribute value
+     * Sets the Messaging Service Stack Attachment Mimetype attribute value.
      * @param null|string $mimetype New value for attribute
-     * @return CNabuMessagingServiceStackAttachmentBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMimetype($mimetype)
+    public function setMimetype(string $mimetype = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_attachment_mimetype', $mimetype);
         
@@ -222,11 +227,11 @@ abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalO
     }
 
     /**
-     * Sets the Messaging Service Stack Attachment Hash attribute value
+     * Sets the Messaging Service Stack Attachment Hash attribute value.
      * @param null|string $hash New value for attribute
-     * @return CNabuMessagingServiceStackAttachmentBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHash($hash)
+    public function setHash(string $hash = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_attachment_hash', $hash);
         
@@ -243,11 +248,11 @@ abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalO
     }
 
     /**
-     * Sets the Messaging Service Stack Attachment Filename attribute value
+     * Sets the Messaging Service Stack Attachment Filename attribute value.
      * @param null|string $filename New value for attribute
-     * @return CNabuMessagingServiceStackAttachmentBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFilename($filename)
+    public function setFilename(string $filename = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_attachment_filename', $filename);
         

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:39 UTC
+ * Created: 2017/04/15 14:11:29 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\cluster\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -138,17 +139,17 @@ abstract class CNabuServerHostBase extends CNabuDBInternalObject
      * Get Server Host Id attribute value
      * @return int Returns the Server Host Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_server_host_id');
     }
 
     /**
-     * Sets the Server Host Id attribute value
+     * Sets the Server Host Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuServerHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -165,17 +166,17 @@ abstract class CNabuServerHostBase extends CNabuDBInternalObject
      * Get Server Id attribute value
      * @return int Returns the Server Id value
      */
-    public function getServerId()
+    public function getServerId() : int
     {
         return $this->getValue('nb_server_id');
     }
 
     /**
-     * Sets the Server Id attribute value
+     * Sets the Server Id attribute value.
      * @param int $nb_server_id New value for attribute
-     * @return CNabuServerHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setServerId($nb_server_id)
+    public function setServerId(int $nb_server_id) : CNabuDataObject
     {
         if ($nb_server_id === null) {
             throw new ENabuCoreException(
@@ -192,17 +193,17 @@ abstract class CNabuServerHostBase extends CNabuDBInternalObject
      * Get IP Id attribute value
      * @return int Returns the IP Id value
      */
-    public function getIPId()
+    public function getIPId() : int
     {
         return $this->getValue('nb_ip_id');
     }
 
     /**
-     * Sets the IP Id attribute value
+     * Sets the IP Id attribute value.
      * @param int $nb_ip_id New value for attribute
-     * @return CNabuServerHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setIPId($nb_ip_id)
+    public function setIPId(int $nb_ip_id) : CNabuDataObject
     {
         if ($nb_ip_id === null) {
             throw new ENabuCoreException(
@@ -219,17 +220,17 @@ abstract class CNabuServerHostBase extends CNabuDBInternalObject
      * Get Cluster Group Id attribute value
      * @return int Returns the Cluster Group Id value
      */
-    public function getClusterGroupId()
+    public function getClusterGroupId() : int
     {
         return $this->getValue('nb_cluster_group_id');
     }
 
     /**
-     * Sets the Cluster Group Id attribute value
+     * Sets the Cluster Group Id attribute value.
      * @param int $nb_cluster_group_id New value for attribute
-     * @return CNabuServerHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setClusterGroupId($nb_cluster_group_id)
+    public function setClusterGroupId(int $nb_cluster_group_id) : CNabuDataObject
     {
         if ($nb_cluster_group_id === null) {
             throw new ENabuCoreException(
@@ -246,17 +247,17 @@ abstract class CNabuServerHostBase extends CNabuDBInternalObject
      * Get Cluster Group Service Id attribute value
      * @return int Returns the Cluster Group Service Id value
      */
-    public function getClusterGroupServiceId()
+    public function getClusterGroupServiceId() : int
     {
         return $this->getValue('nb_cluster_group_service_id');
     }
 
     /**
-     * Sets the Cluster Group Service Id attribute value
+     * Sets the Cluster Group Service Id attribute value.
      * @param int $nb_cluster_group_service_id New value for attribute
-     * @return CNabuServerHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setClusterGroupServiceId($nb_cluster_group_service_id)
+    public function setClusterGroupServiceId(int $nb_cluster_group_service_id) : CNabuDataObject
     {
         if ($nb_cluster_group_service_id === null) {
             throw new ENabuCoreException(
@@ -273,17 +274,17 @@ abstract class CNabuServerHostBase extends CNabuDBInternalObject
      * Get Server Host Port attribute value
      * @return int Returns the Server Host Port value
      */
-    public function getPort()
+    public function getPort() : int
     {
         return $this->getValue('nb_server_host_port');
     }
 
     /**
-     * Sets the Server Host Port attribute value
+     * Sets the Server Host Port attribute value.
      * @param int $port New value for attribute
-     * @return CNabuServerHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setPort($port)
+    public function setPort(int $port = 80) : CNabuDataObject
     {
         if ($port === null) {
             throw new ENabuCoreException(
@@ -306,11 +307,11 @@ abstract class CNabuServerHostBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Server Host Name attribute value
+     * Sets the Server Host Name attribute value.
      * @param null|string $name New value for attribute
-     * @return CNabuServerHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName($name)
+    public function setName(string $name = null) : CNabuDataObject
     {
         $this->setValue('nb_server_host_name', $name);
         
@@ -327,11 +328,11 @@ abstract class CNabuServerHostBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Server Host Notes attribute value
+     * Sets the Server Host Notes attribute value.
      * @param null|string $notes New value for attribute
-     * @return CNabuServerHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setNotes($notes)
+    public function setNotes(string $notes = null) : CNabuDataObject
     {
         $this->setValue('nb_server_host_notes', $notes);
         
@@ -348,11 +349,11 @@ abstract class CNabuServerHostBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Server Host Status attribute value
+     * Sets the Server Host Status attribute value.
      * @param mixed $status New value for attribute
-     * @return CNabuServerHostBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setStatus($status)
+    public function setStatus($status) : CNabuDataObject
     {
         $this->setValue('nb_server_host_status', $status);
         

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:49 UTC
+ * Created: 2017/04/15 14:11:38 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -26,6 +26,7 @@
 namespace nabu\data\site\base;
 
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -165,17 +166,17 @@ abstract class CNabuSiteTargetSectionLanguageBase extends CNabuDBInternalObject 
      * Get Site Target Section Id attribute value
      * @return int Returns the Site Target Section Id value
      */
-    public function getSiteTargetSectionId()
+    public function getSiteTargetSectionId() : int
     {
         return $this->getValue('nb_site_target_section_id');
     }
 
     /**
-     * Sets the Site Target Section Id attribute value
+     * Sets the Site Target Section Id attribute value.
      * @param int $nb_site_target_section_id New value for attribute
-     * @return CNabuSiteTargetSectionLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteTargetSectionId($nb_site_target_section_id)
+    public function setSiteTargetSectionId(int $nb_site_target_section_id) : CNabuDataObject
     {
         if ($nb_site_target_section_id === null) {
             throw new ENabuCoreException(
@@ -192,17 +193,17 @@ abstract class CNabuSiteTargetSectionLanguageBase extends CNabuDBInternalObject 
      * Get Language Id attribute value
      * @return int Returns the Language Id value
      */
-    public function getLanguageId()
+    public function getLanguageId() : int
     {
         return $this->getValue('nb_language_id');
     }
 
     /**
-     * Sets the Language Id attribute value
+     * Sets the Language Id attribute value.
      * @param int $nb_language_id New value for attribute
-     * @return CNabuSiteTargetSectionLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLanguageId($nb_language_id)
+    public function setLanguageId(int $nb_language_id) : CNabuDataObject
     {
         if ($nb_language_id === null) {
             throw new ENabuCoreException(
@@ -225,11 +226,11 @@ abstract class CNabuSiteTargetSectionLanguageBase extends CNabuDBInternalObject 
     }
 
     /**
-     * Sets the Site Target Section Lang Main Image attribute value
+     * Sets the Site Target Section Lang Main Image attribute value.
      * @param null|string $main_image New value for attribute
-     * @return CNabuSiteTargetSectionLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMainImage($main_image)
+    public function setMainImage(string $main_image = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_section_lang_main_image', $main_image);
         
@@ -246,11 +247,11 @@ abstract class CNabuSiteTargetSectionLanguageBase extends CNabuDBInternalObject 
     }
 
     /**
-     * Sets the Site Target Section Lang Title attribute value
+     * Sets the Site Target Section Lang Title attribute value.
      * @param null|string $title New value for attribute
-     * @return CNabuSiteTargetSectionLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTitle($title)
+    public function setTitle(string $title = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_section_lang_title', $title);
         
@@ -267,11 +268,11 @@ abstract class CNabuSiteTargetSectionLanguageBase extends CNabuDBInternalObject 
     }
 
     /**
-     * Sets the Site Target Section Lang Subtitle attribute value
+     * Sets the Site Target Section Lang Subtitle attribute value.
      * @param null|string $subtitle New value for attribute
-     * @return CNabuSiteTargetSectionLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSubtitle($subtitle)
+    public function setSubtitle(string $subtitle = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_section_lang_subtitle', $subtitle);
         
@@ -288,11 +289,11 @@ abstract class CNabuSiteTargetSectionLanguageBase extends CNabuDBInternalObject 
     }
 
     /**
-     * Sets the Site Target Section Lang Opening attribute value
+     * Sets the Site Target Section Lang Opening attribute value.
      * @param null|string $opening New value for attribute
-     * @return CNabuSiteTargetSectionLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOpening($opening)
+    public function setOpening(string $opening = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_section_lang_opening', $opening);
         
@@ -309,11 +310,11 @@ abstract class CNabuSiteTargetSectionLanguageBase extends CNabuDBInternalObject 
     }
 
     /**
-     * Sets the Site Target Section Lang Content attribute value
+     * Sets the Site Target Section Lang Content attribute value.
      * @param null|string $content New value for attribute
-     * @return CNabuSiteTargetSectionLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setContent($content)
+    public function setContent(string $content = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_section_lang_content', $content);
         
@@ -330,11 +331,11 @@ abstract class CNabuSiteTargetSectionLanguageBase extends CNabuDBInternalObject 
     }
 
     /**
-     * Sets the Site Target Section Lang Footer attribute value
+     * Sets the Site Target Section Lang Footer attribute value.
      * @param null|string $footer New value for attribute
-     * @return CNabuSiteTargetSectionLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFooter($footer)
+    public function setFooter(string $footer = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_section_lang_footer', $footer);
         
@@ -351,11 +352,11 @@ abstract class CNabuSiteTargetSectionLanguageBase extends CNabuDBInternalObject 
     }
 
     /**
-     * Sets the Site Target Section Lang Aside attribute value
+     * Sets the Site Target Section Lang Aside attribute value.
      * @param null|string $aside New value for attribute
-     * @return CNabuSiteTargetSectionLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAside($aside)
+    public function setAside(string $aside = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_section_lang_aside', $aside);
         

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:43 UTC
+ * Created: 2017/04/15 14:11:32 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\security\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\customer\CNabuCustomer;
 use \nabu\data\customer\traits\TNabuCustomerChild;
 use \nabu\data\security\CNabuUserList;
@@ -165,17 +166,17 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
      * Get User Id attribute value
      * @return int Returns the User Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_user_id');
     }
 
     /**
-     * Sets the User Id attribute value
+     * Sets the User Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -198,11 +199,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Customer Id attribute value
+     * Sets the Customer Id attribute value.
      * @param null|int $nb_customer_id New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCustomerId($nb_customer_id)
+    public function setCustomerId(int $nb_customer_id = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_id', $nb_customer_id);
         
@@ -219,11 +220,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Prescriber Id attribute value
+     * Sets the User Prescriber Id attribute value.
      * @param null|int $prescriber_id New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setPrescriberId($prescriber_id)
+    public function setPrescriberId(int $prescriber_id = null) : CNabuDataObject
     {
         $this->setValue('nb_user_prescriber_id', $prescriber_id);
         
@@ -240,11 +241,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Medioteca Id attribute value
+     * Sets the User Medioteca Id attribute value.
      * @param null|int $medioteca_id New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMediotecaId($medioteca_id)
+    public function setMediotecaId(int $medioteca_id = null) : CNabuDataObject
     {
         $this->setValue('nb_user_medioteca_id', $medioteca_id);
         
@@ -261,11 +262,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Medioteca Item Id attribute value
+     * Sets the User Medioteca Item Id attribute value.
      * @param null|int $medioteca_item_id New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMediotecaItemId($medioteca_item_id)
+    public function setMediotecaItemId(int $medioteca_item_id = null) : CNabuDataObject
     {
         $this->setValue('nb_user_medioteca_item_id', $medioteca_item_id);
         
@@ -276,17 +277,17 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
      * Get User Search Visibility attribute value
      * @return string Returns the User Search Visibility value
      */
-    public function getSearchVisibility()
+    public function getSearchVisibility() : string
     {
         return $this->getValue('nb_user_search_visibility');
     }
 
     /**
-     * Sets the User Search Visibility attribute value
+     * Sets the User Search Visibility attribute value.
      * @param string $search_visibility New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSearchVisibility($search_visibility)
+    public function setSearchVisibility(string $search_visibility = "N") : CNabuDataObject
     {
         if ($search_visibility === null) {
             throw new ENabuCoreException(
@@ -303,17 +304,17 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
      * Get User Login attribute value
      * @return string Returns the User Login value
      */
-    public function getLogin()
+    public function getLogin() : string
     {
         return $this->getValue('nb_user_login');
     }
 
     /**
-     * Sets the User Login attribute value
+     * Sets the User Login attribute value.
      * @param string $login New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLogin($login)
+    public function setLogin(string $login) : CNabuDataObject
     {
         if ($login === null) {
             throw new ENabuCoreException(
@@ -330,17 +331,17 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
      * Get User Password attribute value
      * @return string Returns the User Password value
      */
-    public function getPassword()
+    public function getPassword() : string
     {
         return $this->getValue('nb_user_passwd');
     }
 
     /**
-     * Sets the User Password attribute value
+     * Sets the User Password attribute value.
      * @param string $passwd New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setPassword($passwd)
+    public function setPassword(string $passwd) : CNabuDataObject
     {
         if ($passwd === null) {
             throw new ENabuCoreException(
@@ -357,17 +358,17 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
      * Get User Validation Status attribute value
      * @return string Returns the User Validation Status value
      */
-    public function getValidationStatus()
+    public function getValidationStatus() : string
     {
         return $this->getValue('nb_user_validation_status');
     }
 
     /**
-     * Sets the User Validation Status attribute value
+     * Sets the User Validation Status attribute value.
      * @param string $validation_status New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setValidationStatus($validation_status)
+    public function setValidationStatus(string $validation_status = "F") : CNabuDataObject
     {
         if ($validation_status === null) {
             throw new ENabuCoreException(
@@ -384,17 +385,17 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
      * Get User Tester attribute value
      * @return string Returns the User Tester value
      */
-    public function getTester()
+    public function getTester() : string
     {
         return $this->getValue('nb_user_tester');
     }
 
     /**
-     * Sets the User Tester attribute value
+     * Sets the User Tester attribute value.
      * @param string $tester New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTester($tester)
+    public function setTester(string $tester = "F") : CNabuDataObject
     {
         if ($tester === null) {
             throw new ENabuCoreException(
@@ -417,11 +418,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Creation Datetime attribute value
+     * Sets the User Creation Datetime attribute value.
      * @param mixed $creation_datetime New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCreationDatetime($creation_datetime)
+    public function setCreationDatetime($creation_datetime) : CNabuDataObject
     {
         if ($creation_datetime === null) {
             throw new ENabuCoreException(
@@ -444,11 +445,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Activation Datetime attribute value
+     * Sets the User Activation Datetime attribute value.
      * @param mixed $activation_datetime New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setActivationDatetime($activation_datetime)
+    public function setActivationDatetime($activation_datetime) : CNabuDataObject
     {
         $this->setValue('nb_user_activation_datetime', $activation_datetime);
         
@@ -465,11 +466,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Last Update Datetime attribute value
+     * Sets the User Last Update Datetime attribute value.
      * @param mixed $last_update_datetime New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLastUpdateDatetime($last_update_datetime)
+    public function setLastUpdateDatetime($last_update_datetime) : CNabuDataObject
     {
         $this->setValue('nb_user_last_update_datetime', $last_update_datetime);
         
@@ -486,11 +487,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Alive attribute value
+     * Sets the User Alive attribute value.
      * @param mixed $alive New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAlive($alive)
+    public function setAlive($alive) : CNabuDataObject
     {
         $this->setValue('nb_user_alive', $alive);
         
@@ -507,11 +508,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the WGEO Country Id attribute value
+     * Sets the WGEO Country Id attribute value.
      * @param null|int $wgeo_country_id New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setWGEOCountryId($wgeo_country_id)
+    public function setWGEOCountryId(int $wgeo_country_id = null) : CNabuDataObject
     {
         $this->setValue('wgeo_country_id', $wgeo_country_id);
         
@@ -528,11 +529,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Storage Id attribute value
+     * Sets the User Storage Id attribute value.
      * @param null|string $storage_id New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setStorageId($storage_id)
+    public function setStorageId(string $storage_id = null) : CNabuDataObject
     {
         $this->setValue('nb_user_storage_id', $storage_id);
         
@@ -549,11 +550,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User First Name attribute value
+     * Sets the User First Name attribute value.
      * @param null|string $first_name New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFirstName($first_name)
+    public function setFirstName(string $first_name = null) : CNabuDataObject
     {
         $this->setValue('nb_user_first_name', $first_name);
         
@@ -570,11 +571,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Last Name attribute value
+     * Sets the User Last Name attribute value.
      * @param null|string $last_name New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLastName($last_name)
+    public function setLastName(string $last_name = null) : CNabuDataObject
     {
         $this->setValue('nb_user_last_name', $last_name);
         
@@ -591,11 +592,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Fiscal Number attribute value
+     * Sets the User Fiscal Number attribute value.
      * @param null|string $fiscal_number New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFiscalNumber($fiscal_number)
+    public function setFiscalNumber(string $fiscal_number = null) : CNabuDataObject
     {
         $this->setValue('nb_user_fiscal_number', $fiscal_number);
         
@@ -612,11 +613,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Birth Date attribute value
+     * Sets the User Birth Date attribute value.
      * @param mixed $birth_date New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setBirthDate($birth_date)
+    public function setBirthDate($birth_date) : CNabuDataObject
     {
         $this->setValue('nb_user_birth_date', $birth_date);
         
@@ -633,11 +634,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Address 1 attribute value
+     * Sets the User Address 1 attribute value.
      * @param null|string $address_1 New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAddress1($address_1)
+    public function setAddress1(string $address_1 = null) : CNabuDataObject
     {
         $this->setValue('nb_user_address_1', $address_1);
         
@@ -654,11 +655,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Address 2 attribute value
+     * Sets the User Address 2 attribute value.
      * @param null|string $address_2 New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAddress2($address_2)
+    public function setAddress2(string $address_2 = null) : CNabuDataObject
     {
         $this->setValue('nb_user_address_2', $address_2);
         
@@ -675,11 +676,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User ZIP Code attribute value
+     * Sets the User ZIP Code attribute value.
      * @param null|string $zip_code New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setZIPCode($zip_code)
+    public function setZIPCode(string $zip_code = null) : CNabuDataObject
     {
         $this->setValue('nb_user_zip_code', $zip_code);
         
@@ -696,11 +697,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User City Name attribute value
+     * Sets the User City Name attribute value.
      * @param null|string $city_name New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCityName($city_name)
+    public function setCityName(string $city_name = null) : CNabuDataObject
     {
         $this->setValue('nb_user_city_name', $city_name);
         
@@ -717,11 +718,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Province Name attribute value
+     * Sets the User Province Name attribute value.
      * @param null|string $province_name New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setProvinceName($province_name)
+    public function setProvinceName(string $province_name = null) : CNabuDataObject
     {
         $this->setValue('nb_user_province_name', $province_name);
         
@@ -738,11 +739,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Country Name attribute value
+     * Sets the User Country Name attribute value.
      * @param null|string $country_name New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCountryName($country_name)
+    public function setCountryName(string $country_name = null) : CNabuDataObject
     {
         $this->setValue('nb_user_country_name', $country_name);
         
@@ -759,11 +760,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Telephone Prefix attribute value
+     * Sets the User Telephone Prefix attribute value.
      * @param null|string $telephone_prefix New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTelephonePrefix($telephone_prefix)
+    public function setTelephonePrefix(string $telephone_prefix = null) : CNabuDataObject
     {
         $this->setValue('nb_user_telephone_prefix', $telephone_prefix);
         
@@ -780,11 +781,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Telephone attribute value
+     * Sets the User Telephone attribute value.
      * @param null|string $telephone New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTelephone($telephone)
+    public function setTelephone(string $telephone = null) : CNabuDataObject
     {
         $this->setValue('nb_user_telephone', $telephone);
         
@@ -801,11 +802,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Cellular Prefix attribute value
+     * Sets the User Cellular Prefix attribute value.
      * @param null|string $cellular_prefix New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCellularPrefix($cellular_prefix)
+    public function setCellularPrefix(string $cellular_prefix = null) : CNabuDataObject
     {
         $this->setValue('nb_user_cellular_prefix', $cellular_prefix);
         
@@ -822,11 +823,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Cellular attribute value
+     * Sets the User Cellular attribute value.
      * @param null|string $cellular New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCellular($cellular)
+    public function setCellular(string $cellular = null) : CNabuDataObject
     {
         $this->setValue('nb_user_cellular', $cellular);
         
@@ -843,11 +844,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Fax Prefix attribute value
+     * Sets the User Fax Prefix attribute value.
      * @param null|string $fax_prefix New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFaxPrefix($fax_prefix)
+    public function setFaxPrefix(string $fax_prefix = null) : CNabuDataObject
     {
         $this->setValue('nb_user_fax_prefix', $fax_prefix);
         
@@ -864,11 +865,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Fax attribute value
+     * Sets the User Fax attribute value.
      * @param null|string $fax New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setFax($fax)
+    public function setFax(string $fax = null) : CNabuDataObject
     {
         $this->setValue('nb_user_fax', $fax);
         
@@ -885,11 +886,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Cellular Push Key attribute value
+     * Sets the User Cellular Push Key attribute value.
      * @param null|string $cellular_push_key New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCellularPushKey($cellular_push_key)
+    public function setCellularPushKey(string $cellular_push_key = null) : CNabuDataObject
     {
         $this->setValue('nb_user_cellular_push_key', $cellular_push_key);
         
@@ -900,17 +901,17 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
      * Get User Email attribute value
      * @return string Returns the User Email value
      */
-    public function getEmail()
+    public function getEmail() : string
     {
         return $this->getValue('nb_user_email');
     }
 
     /**
-     * Sets the User Email attribute value
+     * Sets the User Email attribute value.
      * @param string $email New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmail($email)
+    public function setEmail(string $email) : CNabuDataObject
     {
         if ($email === null) {
             throw new ENabuCoreException(
@@ -933,11 +934,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Work Centre attribute value
+     * Sets the User Work Centre attribute value.
      * @param null|string $work_centre New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setWorkCentre($work_centre)
+    public function setWorkCentre(string $work_centre = null) : CNabuDataObject
     {
         $this->setValue('nb_user_work_centre', $work_centre);
         
@@ -954,11 +955,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Work Position attribute value
+     * Sets the User Work Position attribute value.
      * @param null|string $work_position New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setWorkPosition($work_position)
+    public function setWorkPosition(string $work_position = null) : CNabuDataObject
     {
         $this->setValue('nb_user_work_position', $work_position);
         
@@ -975,11 +976,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User Work City attribute value
+     * Sets the User Work City attribute value.
      * @param null|string $work_city New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setWorkCity($work_city)
+    public function setWorkCity(string $work_city = null) : CNabuDataObject
     {
         $this->setValue('nb_user_work_city', $work_city);
         
@@ -996,11 +997,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User About attribute value
+     * Sets the User About attribute value.
      * @param null|string $about New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAbout($about)
+    public function setAbout(string $about = null) : CNabuDataObject
     {
         $this->setValue('nb_user_about', $about);
         
@@ -1017,11 +1018,11 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the User New Email attribute value
+     * Sets the User New Email attribute value.
      * @param null|string $new_email New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setNewEmail($new_email)
+    public function setNewEmail(string $new_email = null) : CNabuDataObject
     {
         $this->setValue('nb_user_new_email', $new_email);
         
@@ -1032,17 +1033,17 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
      * Get User Allow Notification attribute value
      * @return string Returns the User Allow Notification value
      */
-    public function getAllowNotification()
+    public function getAllowNotification() : string
     {
         return $this->getValue('nb_user_allow_notification');
     }
 
     /**
-     * Sets the User Allow Notification attribute value
+     * Sets the User Allow Notification attribute value.
      * @param string $allow_notification New value for attribute
-     * @return CNabuUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAllowNotification($allow_notification)
+    public function setAllowNotification(string $allow_notification = "F") : CNabuDataObject
     {
         if ($allow_notification === null) {
             throw new ENabuCoreException(

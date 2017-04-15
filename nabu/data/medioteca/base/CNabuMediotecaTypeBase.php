@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:02 UTC
+ * Created: 2017/04/15 14:11:52 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -314,17 +314,17 @@ abstract class CNabuMediotecaTypeBase extends CNabuDBInternalObject implements I
      * Get Medioteca Type Id attribute value
      * @return int Returns the Medioteca Type Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_medioteca_type_id');
     }
 
     /**
-     * Sets the Medioteca Type Id attribute value
+     * Sets the Medioteca Type Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuMediotecaTypeBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -341,17 +341,17 @@ abstract class CNabuMediotecaTypeBase extends CNabuDBInternalObject implements I
      * Get Customer Id attribute value
      * @return int Returns the Customer Id value
      */
-    public function getCustomerId()
+    public function getCustomerId() : int
     {
         return $this->getValue('nb_customer_id');
     }
 
     /**
-     * Sets the Customer Id attribute value
+     * Sets the Customer Id attribute value.
      * @param int $nb_customer_id New value for attribute
-     * @return CNabuMediotecaTypeBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCustomerId($nb_customer_id)
+    public function setCustomerId(int $nb_customer_id) : CNabuDataObject
     {
         if ($nb_customer_id === null) {
             throw new ENabuCoreException(
@@ -374,11 +374,11 @@ abstract class CNabuMediotecaTypeBase extends CNabuDBInternalObject implements I
     }
 
     /**
-     * Sets the Medioteca Type Key attribute value
+     * Sets the Medioteca Type Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuMediotecaTypeBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_type_key', $key);
         

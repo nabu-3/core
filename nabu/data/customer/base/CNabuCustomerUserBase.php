@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:38 UTC
+ * Created: 2017/04/15 14:11:28 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\customer\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\customer\traits\TNabuCustomerChild;
 use \nabu\db\CNabuDBInternalObject;
 
@@ -134,17 +135,17 @@ abstract class CNabuCustomerUserBase extends CNabuDBInternalObject
      * Get Customer Id attribute value
      * @return int Returns the Customer Id value
      */
-    public function getCustomerId()
+    public function getCustomerId() : int
     {
         return $this->getValue('nb_customer_id');
     }
 
     /**
-     * Sets the Customer Id attribute value
+     * Sets the Customer Id attribute value.
      * @param int $nb_customer_id New value for attribute
-     * @return CNabuCustomerUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCustomerId($nb_customer_id)
+    public function setCustomerId(int $nb_customer_id) : CNabuDataObject
     {
         if ($nb_customer_id === null) {
             throw new ENabuCoreException(
@@ -161,17 +162,17 @@ abstract class CNabuCustomerUserBase extends CNabuDBInternalObject
      * Get User Id attribute value
      * @return int Returns the User Id value
      */
-    public function getUserId()
+    public function getUserId() : int
     {
         return $this->getValue('nb_user_id');
     }
 
     /**
-     * Sets the User Id attribute value
+     * Sets the User Id attribute value.
      * @param int $nb_user_id New value for attribute
-     * @return CNabuCustomerUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUserId($nb_user_id)
+    public function setUserId(int $nb_user_id) : CNabuDataObject
     {
         if ($nb_user_id === null) {
             throw new ENabuCoreException(

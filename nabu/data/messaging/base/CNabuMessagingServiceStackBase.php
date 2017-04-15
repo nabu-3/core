@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:07 UTC
+ * Created: 2017/04/15 14:11:58 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\messaging\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\messaging\CNabuMessaging;
 use \nabu\data\messaging\CNabuMessagingServiceStackList;
 use \nabu\data\messaging\traits\TNabuMessagingChild;
@@ -172,17 +173,17 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
      * Get Messaging Service Stack Id attribute value
      * @return int Returns the Messaging Service Stack Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_messaging_service_stack_id');
     }
 
     /**
-     * Sets the Messaging Service Stack Id attribute value
+     * Sets the Messaging Service Stack Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -199,17 +200,17 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
      * Get Messaging Id attribute value
      * @return int Returns the Messaging Id value
      */
-    public function getMessagingId()
+    public function getMessagingId() : int
     {
         return $this->getValue('nb_messaging_id');
     }
 
     /**
-     * Sets the Messaging Id attribute value
+     * Sets the Messaging Id attribute value.
      * @param int $nb_messaging_id New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMessagingId($nb_messaging_id)
+    public function setMessagingId(int $nb_messaging_id) : CNabuDataObject
     {
         if ($nb_messaging_id === null) {
             throw new ENabuCoreException(
@@ -226,17 +227,17 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
      * Get Messaging Service Id attribute value
      * @return int Returns the Messaging Service Id value
      */
-    public function getMessagingServiceId()
+    public function getMessagingServiceId() : int
     {
         return $this->getValue('nb_messaging_service_id');
     }
 
     /**
-     * Sets the Messaging Service Id attribute value
+     * Sets the Messaging Service Id attribute value.
      * @param int $nb_messaging_service_id New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMessagingServiceId($nb_messaging_service_id)
+    public function setMessagingServiceId(int $nb_messaging_service_id) : CNabuDataObject
     {
         if ($nb_messaging_service_id === null) {
             throw new ENabuCoreException(
@@ -253,17 +254,17 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
      * Get Messaging Template Id attribute value
      * @return int Returns the Messaging Template Id value
      */
-    public function getMessagingTemplateId()
+    public function getMessagingTemplateId() : int
     {
         return $this->getValue('nb_messaging_template_id');
     }
 
     /**
-     * Sets the Messaging Template Id attribute value
+     * Sets the Messaging Template Id attribute value.
      * @param int $nb_messaging_template_id New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMessagingTemplateId($nb_messaging_template_id)
+    public function setMessagingTemplateId(int $nb_messaging_template_id) : CNabuDataObject
     {
         if ($nb_messaging_template_id === null) {
             throw new ENabuCoreException(
@@ -280,17 +281,17 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
      * Get Language Id attribute value
      * @return int Returns the Language Id value
      */
-    public function getLanguageId()
+    public function getLanguageId() : int
     {
         return $this->getValue('nb_language_id');
     }
 
     /**
-     * Sets the Language Id attribute value
+     * Sets the Language Id attribute value.
      * @param int $nb_language_id New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLanguageId($nb_language_id)
+    public function setLanguageId(int $nb_language_id) : CNabuDataObject
     {
         if ($nb_language_id === null) {
             throw new ENabuCoreException(
@@ -307,17 +308,17 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
      * Get Messaging Service Stack Status attribute value
      * @return string Returns the Messaging Service Stack Status value
      */
-    public function getStatus()
+    public function getStatus() : string
     {
         return $this->getValue('nb_messaging_service_stack_status');
     }
 
     /**
-     * Sets the Messaging Service Stack Status attribute value
+     * Sets the Messaging Service Stack Status attribute value.
      * @param string $status New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setStatus($status)
+    public function setStatus(string $status = "P") : CNabuDataObject
     {
         if ($status === null) {
             throw new ENabuCoreException(
@@ -340,11 +341,11 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Messaging Service Stack Creation Datetime attribute value
+     * Sets the Messaging Service Stack Creation Datetime attribute value.
      * @param mixed $creation_datetime New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCreationDatetime($creation_datetime)
+    public function setCreationDatetime($creation_datetime) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_creation_datetime', $creation_datetime);
         
@@ -361,11 +362,11 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Messaging Service Stack Sent Datetime attribute value
+     * Sets the Messaging Service Stack Sent Datetime attribute value.
      * @param mixed $sent_datetime New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSentDatetime($sent_datetime)
+    public function setSentDatetime($sent_datetime) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_sent_datetime', $sent_datetime);
         
@@ -382,11 +383,11 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Messaging Service Stack Response Code attribute value
+     * Sets the Messaging Service Stack Response Code attribute value.
      * @param null|int $response_code New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setResponseCode($response_code)
+    public function setResponseCode(int $response_code = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_response_code', $response_code);
         
@@ -403,11 +404,11 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Messaging Service Stack Response Message attribute value
+     * Sets the Messaging Service Stack Response Message attribute value.
      * @param null|string $response_message New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setResponseMessage($response_message)
+    public function setResponseMessage(string $response_message = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_response_message', $response_message);
         
@@ -424,11 +425,11 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Messaging Service Stack Target attribute value
+     * Sets the Messaging Service Stack Target attribute value.
      * @param null|string $target New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTarget($target)
+    public function setTarget(string $target = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_target', $target);
         
@@ -445,11 +446,11 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Messaging Service Stack Params attribute value
+     * Sets the Messaging Service Stack Params attribute value.
      * @param null|string $params New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setParams($params)
+    public function setParams(string $params = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_params', $params);
         
@@ -466,11 +467,11 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Messaging Service Stack Subject attribute value
+     * Sets the Messaging Service Stack Subject attribute value.
      * @param null|string $subject New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSubject($subject)
+    public function setSubject(string $subject = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_subject', $subject);
         
@@ -487,11 +488,11 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Messaging Service Stack Body Html attribute value
+     * Sets the Messaging Service Stack Body Html attribute value.
      * @param null|string $body_html New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setBodyHtml($body_html)
+    public function setBodyHtml(string $body_html = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_body_html', $body_html);
         
@@ -508,11 +509,11 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Messaging Service Stack Body Text attribute value
+     * Sets the Messaging Service Stack Body Text attribute value.
      * @param null|string $body_text New value for attribute
-     * @return CNabuMessagingServiceStackBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setBodyText($body_text)
+    public function setBodyText(string $body_text = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_body_text', $body_text);
         

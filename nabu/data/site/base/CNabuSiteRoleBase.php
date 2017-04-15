@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:55 UTC
+ * Created: 2017/04/15 14:11:42 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\site\traits\TNabuSiteChild;
 use \nabu\db\CNabuDBInternalObject;
 
@@ -134,17 +135,17 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
      * Get Site Id attribute value
      * @return int Returns the Site Id value
      */
-    public function getSiteId()
+    public function getSiteId() : int
     {
         return $this->getValue('nb_site_id');
     }
 
     /**
-     * Sets the Site Id attribute value
+     * Sets the Site Id attribute value.
      * @param int $nb_site_id New value for attribute
-     * @return CNabuSiteRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteId($nb_site_id)
+    public function setSiteId(int $nb_site_id) : CNabuDataObject
     {
         if ($nb_site_id === null) {
             throw new ENabuCoreException(
@@ -161,17 +162,17 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
      * Get Role Id attribute value
      * @return int Returns the Role Id value
      */
-    public function getRoleId()
+    public function getRoleId() : int
     {
         return $this->getValue('nb_role_id');
     }
 
     /**
-     * Sets the Role Id attribute value
+     * Sets the Role Id attribute value.
      * @param int $nb_role_id New value for attribute
-     * @return CNabuSiteRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setRoleId($nb_role_id)
+    public function setRoleId(int $nb_role_id) : CNabuDataObject
     {
         if ($nb_role_id === null) {
             throw new ENabuCoreException(
@@ -194,11 +195,11 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Role Email Template New User attribute value
+     * Sets the Site Role Email Template New User attribute value.
      * @param null|int $email_template_new_user New value for attribute
-     * @return CNabuSiteRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateNewUser($email_template_new_user)
+    public function setEmailTemplateNewUser(int $email_template_new_user = null) : CNabuDataObject
     {
         $this->setValue('nb_site_role_email_template_new_user', $email_template_new_user);
         
@@ -215,11 +216,11 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Role Email Template Lost Password attribute value
+     * Sets the Site Role Email Template Lost Password attribute value.
      * @param null|int $email_template_lost_password New value for attribute
-     * @return CNabuSiteRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateLostPassword($email_template_lost_password)
+    public function setEmailTemplateLostPassword(int $email_template_lost_password = null) : CNabuDataObject
     {
         $this->setValue('nb_site_role_email_template_lost_password', $email_template_lost_password);
         
@@ -236,11 +237,11 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Role Email Template Notify New User attribute value
+     * Sets the Site Role Email Template Notify New User attribute value.
      * @param null|int $email_template_notify_new_user New value for attribute
-     * @return CNabuSiteRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateNotifyNewUser($email_template_notify_new_user)
+    public function setEmailTemplateNotifyNewUser(int $email_template_notify_new_user = null) : CNabuDataObject
     {
         $this->setValue('nb_site_role_email_template_notify_new_user', $email_template_notify_new_user);
         
@@ -257,11 +258,11 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Role Email Template Remember New User attribute value
+     * Sets the Site Role Email Template Remember New User attribute value.
      * @param null|int $email_template_remember_new_user New value for attribute
-     * @return CNabuSiteRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateRememberNewUser($email_template_remember_new_user)
+    public function setEmailTemplateRememberNewUser(int $email_template_remember_new_user = null) : CNabuDataObject
     {
         $this->setValue('nb_site_role_email_template_remember_new_user', $email_template_remember_new_user);
         
@@ -278,11 +279,11 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Role Email Template Invite User attribute value
+     * Sets the Site Role Email Template Invite User attribute value.
      * @param null|int $email_template_invite_user New value for attribute
-     * @return CNabuSiteRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateInviteUser($email_template_invite_user)
+    public function setEmailTemplateInviteUser(int $email_template_invite_user = null) : CNabuDataObject
     {
         $this->setValue('nb_site_role_email_template_invite_user', $email_template_invite_user);
         
@@ -299,11 +300,11 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Role Email Template Invite Friend attribute value
+     * Sets the Site Role Email Template Invite Friend attribute value.
      * @param null|int $email_template_invite_friend New value for attribute
-     * @return CNabuSiteRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateInviteFriend($email_template_invite_friend)
+    public function setEmailTemplateInviteFriend(int $email_template_invite_friend = null) : CNabuDataObject
     {
         $this->setValue('nb_site_role_email_template_invite_friend', $email_template_invite_friend);
         
@@ -320,11 +321,11 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Site Role Email Template New Message attribute value
+     * Sets the Site Role Email Template New Message attribute value.
      * @param null|int $email_template_new_message New value for attribute
-     * @return CNabuSiteRoleBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateNewMessage($email_template_new_message)
+    public function setEmailTemplateNewMessage(int $email_template_new_message = null) : CNabuDataObject
     {
         $this->setValue('nb_site_role_email_template_new_message', $email_template_new_message);
         

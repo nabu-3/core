@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:05 UTC
+ * Created: 2017/04/15 14:11:55 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\messaging\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\customer\CNabuCustomer;
 use \nabu\data\customer\traits\TNabuCustomerChild;
@@ -47,9 +49,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\messaging\base
  */
-abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
     use TNabuCustomerChild;
+    use TNabuHashed;
     use TNabuTranslated;
 
     /**
@@ -314,17 +317,17 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
      * Get Messaging Id attribute value
      * @return int Returns the Messaging Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_messaging_id');
     }
 
     /**
-     * Sets the Messaging Id attribute value
+     * Sets the Messaging Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuMessagingBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -347,11 +350,11 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
     }
 
     /**
-     * Sets the Customer Id attribute value
+     * Sets the Customer Id attribute value.
      * @param null|int $nb_customer_id New value for attribute
-     * @return CNabuMessagingBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCustomerId($nb_customer_id)
+    public function setCustomerId(int $nb_customer_id = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_id', $nb_customer_id);
         
@@ -368,11 +371,11 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
     }
 
     /**
-     * Sets the Messaging Hash attribute value
+     * Sets the Messaging Hash attribute value.
      * @param null|string $hash New value for attribute
-     * @return CNabuMessagingBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHash($hash)
+    public function setHash(string $hash = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_hash', $hash);
         
@@ -389,11 +392,11 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
     }
 
     /**
-     * Sets the Messaging Key attribute value
+     * Sets the Messaging Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuMessagingBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_key', $key);
         
@@ -410,11 +413,11 @@ abstract class CNabuMessagingBase extends CNabuDBInternalObject implements INabu
     }
 
     /**
-     * Sets the Messaging Default Language Id attribute value
+     * Sets the Messaging Default Language Id attribute value.
      * @param null|int $default_language_id New value for attribute
-     * @return CNabuMessagingBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDefaultLanguageId($default_language_id)
+    public function setDefaultLanguageId(int $default_language_id = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_default_language_id', $default_language_id);
         

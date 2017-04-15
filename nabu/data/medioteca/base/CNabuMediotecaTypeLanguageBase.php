@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:02 UTC
+ * Created: 2017/04/15 14:11:53 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -26,6 +26,7 @@
 namespace nabu\data\medioteca\base;
 
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -165,17 +166,17 @@ abstract class CNabuMediotecaTypeLanguageBase extends CNabuDBInternalObject impl
      * Get Medioteca Type Id attribute value
      * @return int Returns the Medioteca Type Id value
      */
-    public function getMediotecaTypeId()
+    public function getMediotecaTypeId() : int
     {
         return $this->getValue('nb_medioteca_type_id');
     }
 
     /**
-     * Sets the Medioteca Type Id attribute value
+     * Sets the Medioteca Type Id attribute value.
      * @param int $nb_medioteca_type_id New value for attribute
-     * @return CNabuMediotecaTypeLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMediotecaTypeId($nb_medioteca_type_id)
+    public function setMediotecaTypeId(int $nb_medioteca_type_id) : CNabuDataObject
     {
         if ($nb_medioteca_type_id === null) {
             throw new ENabuCoreException(
@@ -192,17 +193,17 @@ abstract class CNabuMediotecaTypeLanguageBase extends CNabuDBInternalObject impl
      * Get Language Id attribute value
      * @return int Returns the Language Id value
      */
-    public function getLanguageId()
+    public function getLanguageId() : int
     {
         return $this->getValue('nb_language_id');
     }
 
     /**
-     * Sets the Language Id attribute value
+     * Sets the Language Id attribute value.
      * @param int $nb_language_id New value for attribute
-     * @return CNabuMediotecaTypeLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLanguageId($nb_language_id)
+    public function setLanguageId(int $nb_language_id) : CNabuDataObject
     {
         if ($nb_language_id === null) {
             throw new ENabuCoreException(
@@ -225,11 +226,11 @@ abstract class CNabuMediotecaTypeLanguageBase extends CNabuDBInternalObject impl
     }
 
     /**
-     * Sets the Medioteca Type Lang Name attribute value
+     * Sets the Medioteca Type Lang Name attribute value.
      * @param null|string $name New value for attribute
-     * @return CNabuMediotecaTypeLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName($name)
+    public function setName(string $name = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_type_lang_name', $name);
         

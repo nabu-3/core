@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:48 UTC
+ * Created: 2017/04/15 14:11:37 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -289,17 +289,17 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
      * Get Site Target Section Id attribute value
      * @return int Returns the Site Target Section Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_site_target_section_id');
     }
 
     /**
-     * Sets the Site Target Section Id attribute value
+     * Sets the Site Target Section Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuSiteTargetSectionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -316,17 +316,17 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
      * Get Site Target Id attribute value
      * @return int Returns the Site Target Id value
      */
-    public function getSiteTargetId()
+    public function getSiteTargetId() : int
     {
         return $this->getValue('nb_site_target_id');
     }
 
     /**
-     * Sets the Site Target Id attribute value
+     * Sets the Site Target Id attribute value.
      * @param int $nb_site_target_id New value for attribute
-     * @return CNabuSiteTargetSectionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteTargetId($nb_site_target_id)
+    public function setSiteTargetId(int $nb_site_target_id) : CNabuDataObject
     {
         if ($nb_site_target_id === null) {
             throw new ENabuCoreException(
@@ -349,11 +349,11 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Site Target Section Parent Id attribute value
+     * Sets the Site Target Section Parent Id attribute value.
      * @param null|int $parent_id New value for attribute
-     * @return CNabuSiteTargetSectionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setParentId($parent_id)
+    public function setParentId(int $parent_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_section_parent_id', $parent_id);
         
@@ -370,11 +370,11 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Site Target Section Key attribute value
+     * Sets the Site Target Section Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuSiteTargetSectionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_section_key', $key);
         
@@ -385,17 +385,17 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
      * Get Site Target Section Order attribute value
      * @return int Returns the Site Target Section Order value
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return $this->getValue('nb_site_target_section_order');
     }
 
     /**
-     * Sets the Site Target Section Order attribute value
+     * Sets the Site Target Section Order attribute value.
      * @param int $order New value for attribute
-     * @return CNabuSiteTargetSectionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOrder($order)
+    public function setOrder(int $order) : CNabuDataObject
     {
         if ($order === null) {
             throw new ENabuCoreException(
@@ -418,11 +418,11 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Site Target CTA Id attribute value
+     * Sets the Site Target CTA Id attribute value.
      * @param null|int $nb_site_target_cta_id New value for attribute
-     * @return CNabuSiteTargetSectionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSiteTargetCTAId($nb_site_target_cta_id)
+    public function setSiteTargetCTAId(int $nb_site_target_cta_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_cta_id', $nb_site_target_cta_id);
         
@@ -439,11 +439,11 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Medioteca Id attribute value
+     * Sets the Medioteca Id attribute value.
      * @param null|int $nb_medioteca_id New value for attribute
-     * @return CNabuSiteTargetSectionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMediotecaId($nb_medioteca_id)
+    public function setMediotecaId(int $nb_medioteca_id = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_id', $nb_medioteca_id);
         
@@ -460,11 +460,11 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Site Target Section CSS Class attribute value
+     * Sets the Site Target Section CSS Class attribute value.
      * @param null|string $css_class New value for attribute
-     * @return CNabuSiteTargetSectionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCSSClass($css_class)
+    public function setCSSClass(string $css_class = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_section_css_class', $css_class);
         
@@ -481,11 +481,11 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Site Target Section Anchor attribute value
+     * Sets the Site Target Section Anchor attribute value.
      * @param null|string $anchor New value for attribute
-     * @return CNabuSiteTargetSectionBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAnchor($anchor)
+    public function setAnchor(string $anchor = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_section_anchor', $anchor);
         

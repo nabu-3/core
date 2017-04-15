@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:56 UTC
+ * Created: 2017/04/15 14:11:45 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -290,17 +290,17 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
      * Get Commerce Product Category Id attribute value
      * @return int Returns the Commerce Product Category Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_commerce_product_category_id');
     }
 
     /**
-     * Sets the Commerce Product Category Id attribute value
+     * Sets the Commerce Product Category Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuCommerceProductCategoryBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -317,17 +317,17 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
      * Get Commerce Id attribute value
      * @return int Returns the Commerce Id value
      */
-    public function getCommerceId()
+    public function getCommerceId() : int
     {
         return $this->getValue('nb_commerce_id');
     }
 
     /**
-     * Sets the Commerce Id attribute value
+     * Sets the Commerce Id attribute value.
      * @param int $nb_commerce_id New value for attribute
-     * @return CNabuCommerceProductCategoryBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCommerceId($nb_commerce_id)
+    public function setCommerceId(int $nb_commerce_id) : CNabuDataObject
     {
         if ($nb_commerce_id === null) {
             throw new ENabuCoreException(
@@ -350,11 +350,11 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
     }
 
     /**
-     * Sets the Medioteca Id attribute value
+     * Sets the Medioteca Id attribute value.
      * @param null|int $nb_medioteca_id New value for attribute
-     * @return CNabuCommerceProductCategoryBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMediotecaId($nb_medioteca_id)
+    public function setMediotecaId(int $nb_medioteca_id = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_id', $nb_medioteca_id);
         
@@ -371,11 +371,11 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
     }
 
     /**
-     * Sets the Commerce Product Category Parent Id attribute value
+     * Sets the Commerce Product Category Parent Id attribute value.
      * @param null|int $parent_id New value for attribute
-     * @return CNabuCommerceProductCategoryBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setParentId($parent_id)
+    public function setParentId(int $parent_id = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_category_parent_id', $parent_id);
         
@@ -386,17 +386,17 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
      * Get Commerce Product Category Order attribute value
      * @return int Returns the Commerce Product Category Order value
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return $this->getValue('nb_commerce_product_category_order');
     }
 
     /**
-     * Sets the Commerce Product Category Order attribute value
+     * Sets the Commerce Product Category Order attribute value.
      * @param int $order New value for attribute
-     * @return CNabuCommerceProductCategoryBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOrder($order)
+    public function setOrder(int $order = 1) : CNabuDataObject
     {
         if ($order === null) {
             throw new ENabuCoreException(
@@ -419,11 +419,11 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
     }
 
     /**
-     * Sets the Commerce Product Category Key attribute value
+     * Sets the Commerce Product Category Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuCommerceProductCategoryBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_category_key', $key);
         
@@ -440,11 +440,11 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
     }
 
     /**
-     * Sets the Commerce Product Category Attributes attribute value
+     * Sets the Commerce Product Category Attributes attribute value.
      * @param null|string|array $attributes New value for attribute
-     * @return CNabuCommerceProductCategoryBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAttributes($attributes)
+    public function setAttributes(string $attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_commerce_product_category_attributes', $attributes);
         

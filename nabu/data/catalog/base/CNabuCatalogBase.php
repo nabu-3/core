@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:58 UTC
+ * Created: 2017/04/15 14:11:48 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -314,17 +314,17 @@ abstract class CNabuCatalogBase extends CNabuDBInternalObject implements INabuTr
      * Get Catalog Id attribute value
      * @return int Returns the Catalog Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_catalog_id');
     }
 
     /**
-     * Sets the Catalog Id attribute value
+     * Sets the Catalog Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuCatalogBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -341,17 +341,17 @@ abstract class CNabuCatalogBase extends CNabuDBInternalObject implements INabuTr
      * Get Customer Id attribute value
      * @return int Returns the Customer Id value
      */
-    public function getCustomerId()
+    public function getCustomerId() : int
     {
         return $this->getValue('nb_customer_id');
     }
 
     /**
-     * Sets the Customer Id attribute value
+     * Sets the Customer Id attribute value.
      * @param int $nb_customer_id New value for attribute
-     * @return CNabuCatalogBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCustomerId($nb_customer_id)
+    public function setCustomerId(int $nb_customer_id) : CNabuDataObject
     {
         if ($nb_customer_id === null) {
             throw new ENabuCoreException(
@@ -374,11 +374,11 @@ abstract class CNabuCatalogBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Catalog Default Language Id attribute value
+     * Sets the Catalog Default Language Id attribute value.
      * @param null|int $default_language_id New value for attribute
-     * @return CNabuCatalogBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDefaultLanguageId($default_language_id)
+    public function setDefaultLanguageId(int $default_language_id = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_default_language_id', $default_language_id);
         
@@ -395,11 +395,11 @@ abstract class CNabuCatalogBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Catalog Key attribute value
+     * Sets the Catalog Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuCatalogBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_key', $key);
         
@@ -416,11 +416,11 @@ abstract class CNabuCatalogBase extends CNabuDBInternalObject implements INabuTr
     }
 
     /**
-     * Sets the Catalog Attributes attribute value
+     * Sets the Catalog Attributes attribute value.
      * @param null|string|array $attributes New value for attribute
-     * @return CNabuCatalogBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAttributes($attributes)
+    public function setAttributes(string $attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_catalog_attributes', $attributes);
         

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:40 UTC
+ * Created: 2017/04/15 14:11:31 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -28,6 +28,7 @@ namespace nabu\data\cluster\base;
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\data\cluster\CNabuClusterGroup;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -156,17 +157,17 @@ abstract class CNabuClusterGroupBase extends CNabuDBInternalObject
      * Get Cluster Group Id attribute value
      * @return int Returns the Cluster Group Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_cluster_group_id');
     }
 
     /**
-     * Sets the Cluster Group Id attribute value
+     * Sets the Cluster Group Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuClusterGroupBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -189,11 +190,11 @@ abstract class CNabuClusterGroupBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Cluster Group Key attribute value
+     * Sets the Cluster Group Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuClusterGroupBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_group_key', $key);
         
@@ -210,11 +211,11 @@ abstract class CNabuClusterGroupBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Cluster Group Name attribute value
+     * Sets the Cluster Group Name attribute value.
      * @param null|string $name New value for attribute
-     * @return CNabuClusterGroupBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName($name)
+    public function setName(string $name = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_group_name', $name);
         
@@ -231,11 +232,11 @@ abstract class CNabuClusterGroupBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Cluster Group Notes attribute value
+     * Sets the Cluster Group Notes attribute value.
      * @param null|string $notes New value for attribute
-     * @return CNabuClusterGroupBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setNotes($notes)
+    public function setNotes(string $notes = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_group_notes', $notes);
         

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:59 UTC
+ * Created: 2017/04/15 14:11:49 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -28,6 +28,7 @@ namespace nabu\data\catalog\base;
 use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\data\catalog\CNabuCatalogTaxonomyLanguage;
 use \nabu\data\catalog\CNabuCatalogTaxonomyLanguageList;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -165,17 +166,17 @@ abstract class CNabuCatalogTaxonomyLanguageBase extends CNabuDBInternalObject im
      * Get Catalog Taxonomy Id attribute value
      * @return int Returns the Catalog Taxonomy Id value
      */
-    public function getCatalogTaxonomyId()
+    public function getCatalogTaxonomyId() : int
     {
         return $this->getValue('nb_catalog_taxonomy_id');
     }
 
     /**
-     * Sets the Catalog Taxonomy Id attribute value
+     * Sets the Catalog Taxonomy Id attribute value.
      * @param int $nb_catalog_taxonomy_id New value for attribute
-     * @return CNabuCatalogTaxonomyLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCatalogTaxonomyId($nb_catalog_taxonomy_id)
+    public function setCatalogTaxonomyId(int $nb_catalog_taxonomy_id) : CNabuDataObject
     {
         if ($nb_catalog_taxonomy_id === null) {
             throw new ENabuCoreException(
@@ -192,17 +193,17 @@ abstract class CNabuCatalogTaxonomyLanguageBase extends CNabuDBInternalObject im
      * Get Language Id attribute value
      * @return int Returns the Language Id value
      */
-    public function getLanguageId()
+    public function getLanguageId() : int
     {
         return $this->getValue('nb_language_id');
     }
 
     /**
-     * Sets the Language Id attribute value
+     * Sets the Language Id attribute value.
      * @param int $nb_language_id New value for attribute
-     * @return CNabuCatalogTaxonomyLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLanguageId($nb_language_id)
+    public function setLanguageId(int $nb_language_id) : CNabuDataObject
     {
         if ($nb_language_id === null) {
             throw new ENabuCoreException(
@@ -225,11 +226,11 @@ abstract class CNabuCatalogTaxonomyLanguageBase extends CNabuDBInternalObject im
     }
 
     /**
-     * Sets the Catalog Taxonomy Lang Title attribute value
+     * Sets the Catalog Taxonomy Lang Title attribute value.
      * @param null|string $title New value for attribute
-     * @return CNabuCatalogTaxonomyLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setTitle($title)
+    public function setTitle(string $title = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_taxonomy_lang_title', $title);
         
@@ -246,11 +247,11 @@ abstract class CNabuCatalogTaxonomyLanguageBase extends CNabuDBInternalObject im
     }
 
     /**
-     * Sets the Catalog Taxonomy Lang Internal Notes attribute value
+     * Sets the Catalog Taxonomy Lang Internal Notes attribute value.
      * @param null|string $internal_notes New value for attribute
-     * @return CNabuCatalogTaxonomyLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setInternalNotes($internal_notes)
+    public function setInternalNotes(string $internal_notes = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_taxonomy_lang_internal_notes', $internal_notes);
         

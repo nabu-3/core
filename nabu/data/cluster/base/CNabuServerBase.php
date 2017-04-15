@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:39 UTC
+ * Created: 2017/04/15 14:11:29 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -28,6 +28,7 @@ namespace nabu\data\cluster\base;
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\data\cluster\CNabuServer;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -156,17 +157,17 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
      * Get Server Id attribute value
      * @return int Returns the Server Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_server_id');
     }
 
     /**
-     * Sets the Server Id attribute value
+     * Sets the Server Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuServerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -189,11 +190,11 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Server Admin User Id attribute value
+     * Sets the Server Admin User Id attribute value.
      * @param null|int $admin_user_id New value for attribute
-     * @return CNabuServerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAdminUserId($admin_user_id)
+    public function setAdminUserId(int $admin_user_id = null) : CNabuDataObject
     {
         $this->setValue('nb_server_admin_user_id', $admin_user_id);
         
@@ -210,11 +211,11 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Cluster User Group Id attribute value
+     * Sets the Cluster User Group Id attribute value.
      * @param null|int $nb_cluster_user_group_id New value for attribute
-     * @return CNabuServerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setClusterUserGroupId($nb_cluster_user_group_id)
+    public function setClusterUserGroupId(int $nb_cluster_user_group_id = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_user_group_id', $nb_cluster_user_group_id);
         
@@ -231,11 +232,11 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Server Key attribute value
+     * Sets the Server Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuServerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_server_key', $key);
         
@@ -252,11 +253,11 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Server Name attribute value
+     * Sets the Server Name attribute value.
      * @param null|string $name New value for attribute
-     * @return CNabuServerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName($name)
+    public function setName(string $name = null) : CNabuDataObject
     {
         $this->setValue('nb_server_name', $name);
         
@@ -273,11 +274,11 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Sets the Server Notes attribute value
+     * Sets the Server Notes attribute value.
      * @param null|string $notes New value for attribute
-     * @return CNabuServerBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setNotes($notes)
+    public function setNotes(string $notes = null) : CNabuDataObject
     {
         $this->setValue('nb_server_notes', $notes);
         

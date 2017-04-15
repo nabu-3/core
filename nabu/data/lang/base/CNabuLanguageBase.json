@@ -19,9 +19,20 @@
             "extra": "auto_increment",
             "comment": ""
         },
+        "nb_language_hash": {
+            "name": "nb_language_hash",
+            "ordinal": "2",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_language_type": {
             "name": "nb_language_type",
-            "ordinal": "2",
+            "ordinal": "3",
             "data_type": "enum",
             "precision": null,
             "type": "enum('I','C')",
@@ -32,7 +43,7 @@
         },
         "nb_language_enabled": {
             "name": "nb_language_enabled",
-            "ordinal": "3",
+            "ordinal": "4",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -43,7 +54,7 @@
         },
         "nb_language_ISO639_1": {
             "name": "nb_language_ISO639_1",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "char",
             "precision": null,
             "type": "char(2)",
@@ -54,7 +65,7 @@
         },
         "nb_language_ISO639_2": {
             "name": "nb_language_ISO639_2",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "char",
             "precision": null,
             "type": "char(3)",
@@ -65,7 +76,7 @@
         },
         "nb_language_is_api": {
             "name": "nb_language_is_api",
-            "ordinal": "6",
+            "ordinal": "7",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -76,7 +87,7 @@
         },
         "nb_language_default_country_code": {
             "name": "nb_language_default_country_code",
-            "ordinal": "7",
+            "ordinal": "8",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(8)",
@@ -87,7 +98,7 @@
         },
         "wgeo_language_id": {
             "name": "wgeo_language_id",
-            "ordinal": "8",
+            "ordinal": "9",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(6)",
@@ -98,7 +109,7 @@
         },
         "wgeo_country_id": {
             "name": "wgeo_country_id",
-            "ordinal": "9",
+            "ordinal": "10",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -109,7 +120,7 @@
         },
         "nb_language_name": {
             "name": "nb_language_name",
-            "ordinal": "10",
+            "ordinal": "11",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(50)",
@@ -120,7 +131,7 @@
         },
         "nb_language_flag_url": {
             "name": "nb_language_flag_url",
-            "ordinal": "11",
+            "ordinal": "12",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -141,6 +152,22 @@
                     "name": "nb_language_id",
                     "ordinal": "1",
                     "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_language_hash": {
+            "name": "nb_language_hash",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_language_hash": {
+                    "name": "nb_language_hash",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
                     "comments": ""
                 }
             }

@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:01 UTC
+ * Created: 2017/04/15 14:11:51 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -257,17 +257,17 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
      * Get Catalog Tag Id attribute value
      * @return int Returns the Catalog Tag Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_catalog_tag_id');
     }
 
     /**
-     * Sets the Catalog Tag Id attribute value
+     * Sets the Catalog Tag Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuCatalogTagBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -284,17 +284,17 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
      * Get Catalog Id attribute value
      * @return int Returns the Catalog Id value
      */
-    public function getCatalogId()
+    public function getCatalogId() : int
     {
         return $this->getValue('nb_catalog_id');
     }
 
     /**
-     * Sets the Catalog Id attribute value
+     * Sets the Catalog Id attribute value.
      * @param int $nb_catalog_id New value for attribute
-     * @return CNabuCatalogTagBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCatalogId($nb_catalog_id)
+    public function setCatalogId(int $nb_catalog_id) : CNabuDataObject
     {
         if ($nb_catalog_id === null) {
             throw new ENabuCoreException(
@@ -317,11 +317,11 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Sets the Catalog Tag Anchor attribute value
+     * Sets the Catalog Tag Anchor attribute value.
      * @param null|string $anchor New value for attribute
-     * @return CNabuCatalogTagBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAnchor($anchor)
+    public function setAnchor(string $anchor = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_tag_anchor', $anchor);
         

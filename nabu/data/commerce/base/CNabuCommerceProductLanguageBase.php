@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:57 UTC
+ * Created: 2017/04/15 14:11:46 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -26,6 +26,7 @@
 namespace nabu\data\commerce\base;
 
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\commerce\CNabuCommerceProductLanguage;
 use \nabu\data\commerce\CNabuCommerceProductLanguageList;
 use \nabu\data\lang\CNabuLanguage;
@@ -165,17 +166,17 @@ abstract class CNabuCommerceProductLanguageBase extends CNabuDBInternalObject im
      * Get Commerce Product Id attribute value
      * @return int Returns the Commerce Product Id value
      */
-    public function getCommerceProductId()
+    public function getCommerceProductId() : int
     {
         return $this->getValue('nb_commerce_product_id');
     }
 
     /**
-     * Sets the Commerce Product Id attribute value
+     * Sets the Commerce Product Id attribute value.
      * @param int $nb_commerce_product_id New value for attribute
-     * @return CNabuCommerceProductLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCommerceProductId($nb_commerce_product_id)
+    public function setCommerceProductId(int $nb_commerce_product_id) : CNabuDataObject
     {
         if ($nb_commerce_product_id === null) {
             throw new ENabuCoreException(
@@ -192,17 +193,17 @@ abstract class CNabuCommerceProductLanguageBase extends CNabuDBInternalObject im
      * Get Language Id attribute value
      * @return int Returns the Language Id value
      */
-    public function getLanguageId()
+    public function getLanguageId() : int
     {
         return $this->getValue('nb_language_id');
     }
 
     /**
-     * Sets the Language Id attribute value
+     * Sets the Language Id attribute value.
      * @param int $nb_language_id New value for attribute
-     * @return CNabuCommerceProductLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLanguageId($nb_language_id)
+    public function setLanguageId(int $nb_language_id) : CNabuDataObject
     {
         if ($nb_language_id === null) {
             throw new ENabuCoreException(
@@ -225,11 +226,11 @@ abstract class CNabuCommerceProductLanguageBase extends CNabuDBInternalObject im
     }
 
     /**
-     * Sets the Commerce Product Lang Name attribute value
+     * Sets the Commerce Product Lang Name attribute value.
      * @param null|string $name New value for attribute
-     * @return CNabuCommerceProductLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName($name)
+    public function setName(string $name = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_lang_name', $name);
         
@@ -246,11 +247,11 @@ abstract class CNabuCommerceProductLanguageBase extends CNabuDBInternalObject im
     }
 
     /**
-     * Sets the Commerce Product Lang Slug attribute value
+     * Sets the Commerce Product Lang Slug attribute value.
      * @param null|string $slug New value for attribute
-     * @return CNabuCommerceProductLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSlug($slug)
+    public function setSlug(string $slug = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_lang_slug', $slug);
         
@@ -267,11 +268,11 @@ abstract class CNabuCommerceProductLanguageBase extends CNabuDBInternalObject im
     }
 
     /**
-     * Sets the Commerce Product Lang Description attribute value
+     * Sets the Commerce Product Lang Description attribute value.
      * @param null|string $description New value for attribute
-     * @return CNabuCommerceProductLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDescription($description)
+    public function setDescription(string $description = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_lang_description', $description);
         

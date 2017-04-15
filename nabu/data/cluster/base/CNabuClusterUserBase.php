@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:40 UTC
+ * Created: 2017/04/15 14:11:30 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,7 @@ namespace nabu\data\cluster\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -138,17 +139,17 @@ abstract class CNabuClusterUserBase extends CNabuDBInternalObject
      * Get Cluster User Id attribute value
      * @return int Returns the Cluster User Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_cluster_user_id');
     }
 
     /**
-     * Sets the Cluster User Id attribute value
+     * Sets the Cluster User Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuClusterUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -165,17 +166,17 @@ abstract class CNabuClusterUserBase extends CNabuDBInternalObject
      * Get Cluster User Group Id attribute value
      * @return int Returns the Cluster User Group Id value
      */
-    public function getGroupId()
+    public function getGroupId() : int
     {
         return $this->getValue('nb_cluster_user_group_id');
     }
 
     /**
-     * Sets the Cluster User Group Id attribute value
+     * Sets the Cluster User Group Id attribute value.
      * @param int $group_id New value for attribute
-     * @return CNabuClusterUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setGroupId($group_id)
+    public function setGroupId(int $group_id) : CNabuDataObject
     {
         if ($group_id === null) {
             throw new ENabuCoreException(
@@ -192,17 +193,17 @@ abstract class CNabuClusterUserBase extends CNabuDBInternalObject
      * Get Cluster User OS Id attribute value
      * @return int Returns the Cluster User OS Id value
      */
-    public function getOSId()
+    public function getOSId() : int
     {
         return $this->getValue('nb_cluster_user_os_id');
     }
 
     /**
-     * Sets the Cluster User OS Id attribute value
+     * Sets the Cluster User OS Id attribute value.
      * @param int $os_id New value for attribute
-     * @return CNabuClusterUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOSId($os_id)
+    public function setOSId(int $os_id) : CNabuDataObject
     {
         if ($os_id === null) {
             throw new ENabuCoreException(
@@ -219,17 +220,17 @@ abstract class CNabuClusterUserBase extends CNabuDBInternalObject
      * Get Cluster User OS Nick attribute value
      * @return string Returns the Cluster User OS Nick value
      */
-    public function getOSNick()
+    public function getOSNick() : string
     {
         return $this->getValue('nb_cluster_user_os_nick');
     }
 
     /**
-     * Sets the Cluster User OS Nick attribute value
+     * Sets the Cluster User OS Nick attribute value.
      * @param string $os_nick New value for attribute
-     * @return CNabuClusterUserBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOSNick($os_nick)
+    public function setOSNick(string $os_nick) : CNabuDataObject
     {
         if ($os_nick === null) {
             throw new ENabuCoreException(

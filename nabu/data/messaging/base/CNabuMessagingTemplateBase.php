@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:53:06 UTC
+ * Created: 2017/04/15 14:11:56 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\messaging\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -45,8 +47,9 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\messaging\base
  */
-abstract class CNabuMessagingTemplateBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuMessagingTemplateBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
+    use TNabuHashed;
     use TNabuMessagingChild;
     use TNabuTranslated;
 
@@ -287,17 +290,17 @@ abstract class CNabuMessagingTemplateBase extends CNabuDBInternalObject implemen
      * Get Messaging Template Id attribute value
      * @return int Returns the Messaging Template Id value
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->getValue('nb_messaging_template_id');
     }
 
     /**
-     * Sets the Messaging Template Id attribute value
+     * Sets the Messaging Template Id attribute value.
      * @param int $id New value for attribute
-     * @return CNabuMessagingTemplateBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setId($id)
+    public function setId(int $id) : CNabuDataObject
     {
         if ($id === null) {
             throw new ENabuCoreException(
@@ -314,17 +317,17 @@ abstract class CNabuMessagingTemplateBase extends CNabuDBInternalObject implemen
      * Get Messaging Id attribute value
      * @return int Returns the Messaging Id value
      */
-    public function getMessagingId()
+    public function getMessagingId() : int
     {
         return $this->getValue('nb_messaging_id');
     }
 
     /**
-     * Sets the Messaging Id attribute value
+     * Sets the Messaging Id attribute value.
      * @param int $nb_messaging_id New value for attribute
-     * @return CNabuMessagingTemplateBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMessagingId($nb_messaging_id)
+    public function setMessagingId(int $nb_messaging_id) : CNabuDataObject
     {
         if ($nb_messaging_id === null) {
             throw new ENabuCoreException(
@@ -347,11 +350,11 @@ abstract class CNabuMessagingTemplateBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Messaging Template Hash attribute value
+     * Sets the Messaging Template Hash attribute value.
      * @param null|string $hash New value for attribute
-     * @return CNabuMessagingTemplateBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHash($hash)
+    public function setHash(string $hash = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_hash', $hash);
         
@@ -368,11 +371,11 @@ abstract class CNabuMessagingTemplateBase extends CNabuDBInternalObject implemen
     }
 
     /**
-     * Sets the Messaging Template Key attribute value
+     * Sets the Messaging Template Key attribute value.
      * @param null|string $key New value for attribute
-     * @return CNabuMessagingTemplateBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey($key)
+    public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_key', $key);
         

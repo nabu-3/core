@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/13 21:52:42 UTC
+ * Created: 2017/04/15 14:11:32 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -26,6 +26,7 @@
 namespace nabu\data\security\base;
 
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -167,17 +168,17 @@ abstract class CNabuRoleLanguageBase extends CNabuDBInternalObject implements IN
      * Get Role Id attribute value
      * @return int Returns the Role Id value
      */
-    public function getRoleId()
+    public function getRoleId() : int
     {
         return $this->getValue('nb_role_id');
     }
 
     /**
-     * Sets the Role Id attribute value
+     * Sets the Role Id attribute value.
      * @param int $nb_role_id New value for attribute
-     * @return CNabuRoleLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setRoleId($nb_role_id)
+    public function setRoleId(int $nb_role_id) : CNabuDataObject
     {
         if ($nb_role_id === null) {
             throw new ENabuCoreException(
@@ -194,17 +195,17 @@ abstract class CNabuRoleLanguageBase extends CNabuDBInternalObject implements IN
      * Get Language Id attribute value
      * @return int Returns the Language Id value
      */
-    public function getLanguageId()
+    public function getLanguageId() : int
     {
         return $this->getValue('nb_language_id');
     }
 
     /**
-     * Sets the Language Id attribute value
+     * Sets the Language Id attribute value.
      * @param int $nb_language_id New value for attribute
-     * @return CNabuRoleLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLanguageId($nb_language_id)
+    public function setLanguageId(int $nb_language_id) : CNabuDataObject
     {
         if ($nb_language_id === null) {
             throw new ENabuCoreException(
@@ -227,11 +228,11 @@ abstract class CNabuRoleLanguageBase extends CNabuDBInternalObject implements IN
     }
 
     /**
-     * Sets the Role Lang Name attribute value
+     * Sets the Role Lang Name attribute value.
      * @param null|string $name New value for attribute
-     * @return CNabuRoleLanguageBase Returns $this
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName($name)
+    public function setName(string $name = null) : CNabuDataObject
     {
         $this->setValue('nb_role_lang_name', $name);
         
