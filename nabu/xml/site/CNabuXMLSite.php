@@ -19,6 +19,7 @@
 
 namespace nabu\xml\site;
 use SimpleXMLElement;
+use nabu\data\lang\CNabuLanguage;
 use nabu\data\site\CNabuSite;
 use nabu\xml\lang\CNabuXMLTranslated;
 use nabu\xml\lang\CNabuXMLTranslationsList;
@@ -47,21 +48,31 @@ class CNabuXMLSite extends CNabuXMLTranslated
         $this->putAttributesFromList(
             $element,
             array(
-                'nb_site_hash' => 'id',
+                'nb_site_hash' => 'GUID',
                 'nb_site_key' => 'key',
                 'nb_site_http_support' => 'http_support',
                 'nb_site_https_support' => 'https_support'
             )
         );
+
+        $nb_language = $this->nb_data_object->getDefaultLanguage();
+        if ($nb_language instanceof CNabuLanguage) {
+            $element->addAttribute('defaultLanguage', $nb_language->getHash());
+        }
+
+        $nb_language = $this->nb_data_object->getAPILanguage();
+        if ($nb_language instanceof CNabuLanguage) {
+            $element->addAttribute('APILanguage', $nb_language->getHash());
+        }
     }
 
     protected function setChilds(SimpleXMLElement $element)
     {
         parent::setChilds($element);
 
-        $this->setPages($element);
-        $list = new CNabuXMLSiteMapList($this->nb_data_object->getSiteMaps());
-        $list->build($element);
+        $this->setRedirections($element);
+        $this->setTargets($element);
+        $this->setMaps($element);
     }
 
     protected function createXMLTranslationsObject(): CNabuXMLTranslationsList
@@ -70,28 +81,28 @@ class CNabuXMLSite extends CNabuXMLTranslated
     }
 
     /**
-     * Build page pointers for special cases.
+     * Build redirection pointers for special cases.
      * @param SimpleXMLElement $element Parent element to put pages collection.
      */
-    private function setPages(SimpleXMLElement $element)
+    private function setRedirections(SimpleXMLElement $element)
     {
-        $pages = $element->addChild('pages');
-        $this->setPage($pages, 'default', 'default');
-        $this->setPage($pages, 'page_not_found', 'pageNotFound');
-        $this->setPage($pages, 'login', 'login');
-        $this->setPage($pages, 'login_redirection', 'loginRedirection');
-        $this->setPage($pages, 'logout_redirection', 'logoutRedirection');
-        $this->setPage($pages, 'alias_not_found', 'aliasNotFound');
-        $this->setPage($pages, 'alias_locked', 'aliasLocked');
+        $pages = $element->addChild('redirections');
+        $this->setRedirection($pages, 'default', 'default');
+        $this->setRedirection($pages, 'page_not_found', 'pageNotFound');
+        $this->setRedirection($pages, 'login', 'login');
+        $this->setRedirection($pages, 'login_redirection', 'loginRedirection');
+        $this->setRedirection($pages, 'logout_redirection', 'logoutRedirection');
+        $this->setRedirection($pages, 'alias_not_found', 'aliasNotFound');
+        $this->setRedirection($pages, 'alias_locked', 'aliasLocked');
     }
 
     /**
-     * Build a page element.
+     * Build a redirection element.
      * @param SimpleXMLElement $element Parent element.
      * @param string $field Field part name in the original data object.
      * @param string $tag_name Tag name of the element.
      */
-    private function setPage(SimpleXMLElement $element, string $field, string $tag_name)
+    private function setRedirection(SimpleXMLElement $element, string $field, string $tag_name)
     {
         $page = $element->addChild($tag_name);
         switch ($this->nb_data_object->getValue("nb_site_${field}_target_use_uri")) {
@@ -106,12 +117,48 @@ class CNabuXMLSite extends CNabuXMLTranslated
                 }
                 break;
             case 'U':
-                $page->addAttribute('useURI', 'U');
+                $translations = $this->nb_data_object->getTranslations();
+                $urls = array();
+                $translations->iterate(function($lang, $nb_translation) use(&$urls, $field) {
+                    $urls[$lang] = $nb_translation->getValue("nb_site_lang_${field}_target_url");
+                    return true;
+                });
+                if (count($urls) > 0) {
+                    $page->addAttribute('useURI', 'U');
+                    foreach ($urls as $lang => $url) {
+                        if (strlen($url) > 0) {
+                            $nb_language = $this->nb_data_object->getLanguage($lang);
+                            $address = $page->addChild('url');
+                            $address->addAttribute('lang', $nb_language->getHash());
+                            $address->addAttribute('url', $url);
+                        }
+                    }
+                }
                 $this->putAttributesFromList($page, array(
                     "nb_site_${field}_error_code" => "errorCode"
-                ));
+                ), true);
                 break;
         }
+    }
+
+    /**
+     * Build Target branch.
+     * @param SimpleXMLElement $parent Parent XML Element to insert targets.
+     */
+    private function setTargets(SimpleXMLElement $parent)
+    {
+        $xml_targets = new CNabuXMLSiteTargetList($this->nb_data_object->getTargets(true));
+        $xml_targets->build($parent);
+    }
+
+    /**
+     * Build Map branch.
+     * @param SimpleXMLElement $parent Parent XML Element to insert targets.
+     */
+    private function setMaps(SimpleXMLElement $parent)
+    {
+        $xml_targets = new CNabuXMLSiteMapList($this->nb_data_object->getSiteMaps(true));
+        $xml_targets->build($parent);
     }
 
     /**
@@ -122,11 +169,6 @@ class CNabuXMLSite extends CNabuXMLTranslated
     private function grantTargetHash(int $nb_site_target_id) : string
     {
         $nb_site_target = $this->nb_data_object->getTarget($nb_site_target_id);
-        if (!nb_isValidGUID($retval = $this->nb_data_object->getHash())) {
-            $this->nb_data_object->setHash($retval = nb_generateGUID());
-            $this->nb_data_object->save();
-        }
-
-        return $retval;
+        return $nb_site_target->isFetched() ? $nb_site_target->grantHash(true) : null;
     }
 }

@@ -18,29 +18,23 @@
  */
 
 namespace nabu\xml\site;
-use nabu\data\CNabuDataObject;
-use nabu\xml\CNabuXMLDataObject;
-use nabu\xml\CNabuXMLDataObjectList;
+use SimpleXMLElement;
+use nabu\xml\lang\CNabuXMLTranslation;
 
 /**
- * Class to manage Site List as an XML branch.
+ * Class to manage a Site Target instance as an XML branch.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSiteList extends CNabuXMLDataObjectList
+class CNabuXMLSiteTargetLanguage extends CNabuXMLTranslation
 {
-    protected static function getTagName(): string
+    protected function setAttributes(SimpleXMLElement $element)
     {
-        return 'sites';
     }
 
-    protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
+    protected function setChilds(SimpleXMLElement $element)
     {
-        $nb_child->refresh();
-        $nb_child->grantHash(true);
-
-        return new CNabuXMLSite($nb_child);
     }
 }

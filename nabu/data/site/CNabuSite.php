@@ -29,12 +29,13 @@ use nabu\data\commerce\traits\TNabuCommerceChild;
 use nabu\data\customer\traits\TNabuCustomerChild;
 use nabu\data\lang\CNabuLanguage;
 use nabu\data\security\CNabuRole;
+use nabu\data\security\CNabuRoleList;
 use nabu\data\site\base\CNabuSiteBase;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.0 Surface
- * @version 3.0.11 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\data\site
  */
 
@@ -85,6 +86,8 @@ class CNabuSite extends CNabuSiteBase
     private $nb_site_main_alias = null;
     /** @var CNabuSiteAliasList $nb_site_alias_list Site Alias List of this Site. */
     private $nb_site_alias_list = null;
+    /** @var CNabuRoleList $nb_role_list List or Roles availables in this Site. */
+    private $nb_role_list = null;
     /** @var CNabuRole $nb_default_role Default Role of this Site. */
     private $nb_default_role = null;
     /** @var CNabuClusterUser $nb_cluster_user Cluster User instance of this Site. */
@@ -98,6 +101,7 @@ class CNabuSite extends CNabuSiteBase
         $this->nb_site_map_tree = new CNabuSiteMapTree($this);
         $this->nb_site_target_list = new CNabuSiteTargetList();
         $this->nb_site_static_content_list = new CNabuSiteStaticContentList();
+        $this->nb_role_list = new CNabuRoleList();
     }
 
     static public function findByAlias($alias)
@@ -177,11 +181,17 @@ class CNabuSite extends CNabuSiteBase
         return $this->nb_site_target_list->getItem($key, CNabuSiteTargetList::INDEX_KEY);
     }
 
-    public function getTargets($force = false)
+    /**
+     * Gets the Target list associated with this instance.
+     * @param bool $force If true forces to reload entire list from database.
+     * @return CNabuSiteTargetList Returns the list instance containing all associated contents.
+     */
+    public function getTargets($force = false) : CNabuSiteTargetList
     {
         if (!$this->isBuiltIn() &&
             ($this->nb_site_target_list->isEmpty() || $force)
         ) {
+            $this->nb_site_target_list->clear();
             $this->nb_site_target_list->merge(CNabuSiteTarget::getAllSiteTargets($this));
         }
 
@@ -221,7 +231,7 @@ class CNabuSite extends CNabuSiteBase
      * @param bool $force If true forces to reload entire list from database.
      * @return CNabuSiteStaticContentList Returns the list instance containing all associated contents.
      */
-    public function getStaticContents($force = false)
+    public function getStaticContents($force = false) : CNabuSiteStaticContentList
     {
         if (!$this->isBuiltIn() &&
             ($this->nb_site_static_content_list->isEmpty() || $force)
@@ -364,7 +374,7 @@ class CNabuSite extends CNabuSiteBase
         $retval = null;
 
         $nb_site_map_id = nb_getMixedValue($nb_site_map, 'nb_site_map_id');
-        if (is_numeric($nb_site_map_id) || nb_isValidGUID($nb_site_map_id)) {
+        if (is_numeric($nb_site_map_id) || nb_isValidGUID($nb_site_map_id)) {
             if ($cascade) {
                 $retval = $this->nb_site_map_tree->getItem($nb_site_map_id);
             } else{
@@ -783,4 +793,39 @@ class CNabuSite extends CNabuSiteBase
      /_/\_\_|  |_|_____| |_____/_/\_\ .__/ \___|_|  |_|_| |_| |_|\___|_| |_|\__|
                                     |_|
     */
+    public function refresh(bool $force = false, bool $cascade = false) : bool
+    {
+        return parent::refresh($force, $cascade) &&
+               (!$cascade ||
+                    (
+                        $this->getSiteMaps($force) &&
+                        $this->getStaticContent($force) &&
+                        $this->getTargets($force)
+                    )
+               )
+        ;
+    }
+
+    /**
+     * Gets the API Language instance.
+     * @return CNabuLanguage Returns the API Language instance if defined.
+     */
+    public function getAPILanguage() : CNabuLanguage
+    {
+        return $this->getLanguage($this->getAPILanguageId());
+    }
+
+    /**
+     * Gets a list of all Roles availables in this Site.
+     * @param bool $force If true, the list is reloaded from the storage.
+     * @return CNabuRoleList Returns the list of roles if any, of an empty list if none.
+     */
+    public function getRoles(bool $force = false) : CNabuRoleList
+    {
+        if ($this->nb_role_list->isEmpty() || $force) {
+            $this->nb_role_list->fillFromSite($this);
+        }
+
+        return $this->nb_role_list;
+    }
 }

@@ -18,29 +18,21 @@
  */
 
 namespace nabu\xml\site;
-use nabu\data\CNabuDataObject;
-use nabu\xml\CNabuXMLDataObject;
-use nabu\xml\CNabuXMLDataObjectList;
+use nabu\data\lang\interfaces\INabuTranslation;
+use nabu\xml\lang\CNabuXMLTranslation;
+use nabu\xml\lang\CNabuXMLTranslationsList;
 
 /**
- * Class to manage Site List as an XML branch.
+ * Class to manage a Site Target Language List as an XML branch.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSiteList extends CNabuXMLDataObjectList
+class CNabuXMLSiteTargetLanguageList extends CNabuXMLTranslationsList
 {
-    protected static function getTagName(): string
+    protected function createXMLTranslationsObject(INabuTranslation $nb_translation): CNabuXMLTranslation
     {
-        return 'sites';
-    }
-
-    protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
-    {
-        $nb_child->refresh();
-        $nb_child->grantHash(true);
-
-        return new CNabuXMLSite($nb_child);
+        return new CNabuXMLSiteTargetLanguage($nb_translation);
     }
 }

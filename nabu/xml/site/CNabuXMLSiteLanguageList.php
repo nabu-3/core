@@ -23,7 +23,7 @@ use nabu\xml\lang\CNabuXMLTranslation;
 use nabu\xml\lang\CNabuXMLTranslationsList;
 
 /**
- * Class to manage Site Language List as an XML branch.
+ * Class to manage a Site Language List as an XML branch.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface

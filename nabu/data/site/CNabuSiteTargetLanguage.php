@@ -30,20 +30,21 @@ class CNabuSiteTargetLanguage extends CNabuSiteTargetLanguageBase
 {
     public function getEffectiveURL($params = false)
     {
+        $url = false;
         $nb_site_target = $this->getTranslatedObject();
 
-        if (($nb_site_target->isURLRegExpExpression() || $nb_site_target->isURLLikeExpression()) &&
-            strlen($this->getURLRebuild()) > 0
-        ) {
-            if (count($params) > 0) {
-                $url = nb_vnsprintf($this->getURLRebuild(), $params);
-            } else {
-                $url = $this->getURLRebuild();
+        if ($nb_site_target !== null) {
+            if (($nb_site_target->isURLRegExpExpression() || $nb_site_target->isURLLikeExpression()) &&
+                strlen($this->getURLRebuild()) > 0
+            ) {
+                if (count($params) > 0) {
+                    $url = nb_vnsprintf($this->getURLRebuild(), $params);
+                } else {
+                    $url = $this->getURLRebuild();
+                }
+            } elseif ($nb_site_target->isURLStaticPath()) {
+                $url = $this->getURL();
             }
-        } elseif ($nb_site_target->isURLStaticPath()) {
-            $url = $this->getURL();
-        } else {
-            $url = false;
         }
 
         return $url;

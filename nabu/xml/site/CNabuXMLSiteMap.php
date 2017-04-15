@@ -38,7 +38,7 @@ class CNabuXMLSiteMap extends CNabuXMLDataObject
 
     protected static function getTagName(): string
     {
-        return 'siteMap';
+        return 'map';
     }
 
     protected function setAttributes(SimpleXMLElement $element)

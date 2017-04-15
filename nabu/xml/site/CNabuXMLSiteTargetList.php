@@ -23,24 +23,21 @@ use nabu\xml\CNabuXMLDataObject;
 use nabu\xml\CNabuXMLDataObjectList;
 
 /**
- * Class to manage Site List as an XML branch.
+ * Class to manage Site Target List as an XML branch.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSiteList extends CNabuXMLDataObjectList
+class CNabuXMLSiteTargetList extends CNabuXMLDataObjectList
 {
     protected static function getTagName(): string
     {
-        return 'sites';
+        return 'targets';
     }
 
     protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
     {
-        $nb_child->refresh();
-        $nb_child->grantHash(true);
-
-        return new CNabuXMLSite($nb_child);
+        return new CNabuXMLSiteTarget($nb_child);
     }
 }

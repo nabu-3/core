@@ -32,9 +32,41 @@ class CNabuXMLSiteLanguage extends CNabuXMLTranslation
 {
     protected function setAttributes(SimpleXMLElement $element)
     {
+        $nb_site = $this->nb_data_object->getTranslatedObject();
+        if ($nb_site !== null) {
+            $nb_language = $nb_site->getLanguage($this->nb_data_object->getLanguageId());
+            $element->addAttribute('lang', $nb_language->getHash());
+            $this->putAttributesFromList($element, array(
+                'nb_site_lang_enabled' => 'enabled',
+                'nb_site_lang_translation_status' => 'status',
+                'nb_site_lang_order' => 'order',
+                'nb_site_lang_editable' => 'editable'
+            ));
+        } else {
+            error_log("**** No site found for translation: " . $this->nb_data_object->getLanguageId());
+        }
     }
 
     protected function setChilds(SimpleXMLElement $element)
     {
+        $element->addChild('name', $this->packCDATA($this->nb_data_object->getName()));
+        
+        $formats = $element->addChild('formats');
+        $fdatetime = $formats->addChild('datetime');
+        $this->putAttributesFromList($fdatetime, array(
+            'nb_site_lang_short_datetime_format' => 'short',
+            'nb_site_lang_middle_datetime_format' => 'middle',
+            'nb_site_lang_full_datetime_format' => 'full'
+        ));
+        $fdate = $formats->addChild('date');
+        $this->putAttributesFromList($fdate, array(
+            'nb_site_lang_short_date_format' => 'short',
+            'nb_site_lang_middle_date_format' => 'middle',
+            'nb_site_lang_full_date_format' => 'full'
+        ));
+        $ftime = $formats->addChild('time');
+        $this->putAttributesFromList($ftime, array(
+            'nb_site_lang_full_time_format' => 'full'
+        ));
     }
 }
