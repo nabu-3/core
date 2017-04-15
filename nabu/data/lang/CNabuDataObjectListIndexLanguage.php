@@ -25,7 +25,7 @@ use nabu\data\lang\interfaces\INabuTranslated;
 
 /**
  * Manages a secondary index in a list of CNabuDataObjectList using their translations.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\lang
  */

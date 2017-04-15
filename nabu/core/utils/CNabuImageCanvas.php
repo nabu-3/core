@@ -23,7 +23,7 @@ use \nabu\core\CNabuObject;
 
 /**
  * Class to manage and transform images.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\utils
  */

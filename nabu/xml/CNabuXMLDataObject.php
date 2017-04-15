@@ -19,11 +19,12 @@
 
 namespace nabu\xml;
 use SimpleXMLElement;
+use nabu\core\interfaces\INabuHashed;
 use nabu\data\CNabuDataObject;
 
 /**
  * Abstract class to manage XML elements.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package nabu\xml
@@ -37,6 +38,9 @@ abstract class CNabuXMLDataObject extends CNabuXMLObject
     {
         parent::__construct();
         $this->nb_data_object = $nb_data_object;
+        if ($nb_data_object instanceof INabuHashed) {
+            $nb_data_object->grantHash(true);
+        }
     }
 
     /**

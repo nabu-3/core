@@ -21,7 +21,7 @@ namespace nabu\messaging\adapters;
 use nabu\messaging\interfaces\INabuEmailingConnector;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.9 Surface
  * @version 3.0.9 Surface
  * @package \nabu\http\managers\base

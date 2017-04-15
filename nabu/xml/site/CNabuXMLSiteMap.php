@@ -24,7 +24,7 @@ use nabu\xml\CNabuXMLDataObject;
 
 /**
  * Class to manage a Site instance as an XML branch.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package nabu\xml\site
@@ -38,7 +38,7 @@ class CNabuXMLSiteMap extends CNabuXMLDataObject
 
     protected static function getTagName(): string
     {
-        return 'SiteMap';
+        return 'siteMap';
     }
 
     protected function setAttributes(SimpleXMLElement $element)

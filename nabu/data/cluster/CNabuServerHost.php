@@ -23,7 +23,7 @@ use \nabu\data\cluster\base\CNabuServerHostBase;
 
 /**
  * Class to extend management of table 'nb_server_host storage' where Server Hosts are stored.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 class CNabuServerHost extends CNabuServerHostBase

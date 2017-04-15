@@ -21,7 +21,7 @@ namespace nabu\data\catalog;
 use nabu\data\catalog\base\CNabuCatalogItemLanguageListBase;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\catalog
  */

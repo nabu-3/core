@@ -18,14 +18,14 @@
  */
 
 namespace nabu\xml\site;
-use SimpleXMLElement;
-use nabu\data\site\CNabuSite;
+use nabu\data\CNabuDataObject;
+use nabu\xml\CNabuXMLDataObject;
 use nabu\xml\CNabuXMLDataObjectList;
 
 /**
  * Class to manage Site List as an XML branch.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.12 Surface
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
+ * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
@@ -33,25 +33,17 @@ class CNabuXMLSiteList extends CNabuXMLDataObjectList
 {
     protected static function getTagName(): string
     {
-        return 'Sites';
+        return 'sites';
     }
 
-    protected function setAttributes(SimpleXMLElement $element)
+    protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
     {
-        $element->addAttribute('count', $this->list->getSize());
-    }
+        $nb_child->refresh();
 
-    protected function setChilds(SimpleXMLElement $element)
-    {
-        $this->list->iterate(function (string $key, CNabuSite $nb_site) use ($element) {
-            $nb_site->refresh(true, true);
-            if (!nb_isValidGUID($nb_site->getHash())) {
-                $nb_site->setHash(nb_generateGUID());
-                $nb_site->save();
-            }
-            $xml_site = new CNabuXMLSite($nb_site);
-            $xml_site->build($element);
-            return true;
-        });
+        if (!nb_isValidGUID($nb_child->getHash())) {
+            $nb_child->setHash(nb_generateGUID());
+            $nb_child->save();
+        }
+        return new CNabuXMLSite($nb_child);
     }
 }

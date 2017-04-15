@@ -26,7 +26,7 @@ use nabu\data\medioteca\base\CNabuMediotecaListBase;
 
 /**
  * Class to manage Medioteca Lists of entities.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\medioteca
  */

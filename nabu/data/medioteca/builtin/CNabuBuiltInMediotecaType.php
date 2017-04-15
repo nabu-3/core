@@ -23,7 +23,7 @@ use \nabu\data\medioteca\CNabuMediotecaType;
 
 /**
  * Built-in class for default Mediotecas on Standalone Operation Mode.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\medioteca\builtin
  */

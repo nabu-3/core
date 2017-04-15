@@ -24,7 +24,7 @@ use nabu\http\CNabuHTTPRedirection;
 
 /**
  * Exception to throw redirections to Engine level breaking the process and return flow to Core main process.
- * @author Rafael Gutiérrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @since 3.0.0 Surface
  * @version 3.0.12 Surface
  * @package \nabu\http\exceptions

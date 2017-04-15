@@ -22,7 +22,7 @@ namespace nabu\data\customer;
 use nabu\data\customer\base\CNabuCustomerListBase;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\customer
  */

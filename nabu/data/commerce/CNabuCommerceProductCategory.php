@@ -23,7 +23,7 @@ use \nabu\data\commerce\base\CNabuCommerceProductCategoryBase;
 use nabu\data\commerce\traits\TNabuCommerceChild;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\commerce
  */

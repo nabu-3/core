@@ -23,7 +23,7 @@ use nabu\data\site\base\CNabuSiteAliasListBase;
 
 /**
  * Class to manage Site Alias Lists of entities.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package name
  */

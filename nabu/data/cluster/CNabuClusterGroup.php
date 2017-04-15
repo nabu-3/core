@@ -23,7 +23,7 @@ use \nabu\data\cluster\base\CNabuClusterGroupBase;
 
 /**
  * Class to extend management of table nb_cluster_group where all Cluster Groups are stored.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 class CNabuClusterGroup extends CNabuClusterGroupBase

@@ -25,7 +25,7 @@ use nabu\core\exceptions\ENabuCoreException;
  * Manages a secondary index in a list of CNabuDataObjectList.
  * By default, this class manages and index based in a single field which could be number or string.
  * To manage other kind of fields or tuples, this class can be overrided to implement aditional features.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data
  */

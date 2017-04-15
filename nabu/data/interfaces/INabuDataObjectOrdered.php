@@ -21,7 +21,7 @@ namespace nabu\data\interfaces;
 
 /**
  * Interface to define ordered objects.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\interfaces
  */

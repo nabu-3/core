@@ -25,7 +25,7 @@ use nabu\data\site\base\CNabuSiteTargetCTAListBase;
 use nabu\data\site\traits\TNabuSiteTargetChild;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\site
  */

@@ -19,13 +19,14 @@
 
 namespace nabu\xml\site;
 use SimpleXMLElement;
-use nabu\data\site\CNabuSiteMap;
+use nabu\data\CNabuDataObject;
+use nabu\xml\CNabuXMLDataObject;
 use nabu\xml\CNabuXMLDataObjectList;
 
 /**
  * Class to manage Site Map List as an XML branch.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.12 Surface
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
+ * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
@@ -33,7 +34,7 @@ class CNabuXMLSiteMapList extends CNabuXMLDataObjectList
 {
     protected static function getTagName(): string
     {
-        return 'SiteMaps';
+        return 'siteMaps';
     }
 
     protected function setAttributes(SimpleXMLElement $element)
@@ -41,17 +42,13 @@ class CNabuXMLSiteMapList extends CNabuXMLDataObjectList
         $element->addAttribute('count', $this->list->getSize());
     }
 
-    protected function setChilds(SimpleXMLElement $element)
+    protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
     {
-        $this->list->iterate(function ($key, CNabuSiteMap $nb_site_map) use ($element) {
-            $nb_site_map->refresh(true, true);
-            if (!nb_isValidGUID($nb_site_map->getHash())) {
-                $nb_site_map->setHash(nb_generateGUID());
-                $nb_site_map->save();
-            }
-            $xml_site_map = new CNabuXMLSiteMap($nb_site_map);
-            $xml_site_map->build($element);
-            return true;
-        });
+        if (!nb_isValidGUID($nb_child->getHash())) {
+            $nb_child->setHash(nb_generateGUID());
+            $nb_child->save();
+        }
+
+        return new CNabuXMLSiteMap($nb_child);
     }
 }

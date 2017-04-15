@@ -51,7 +51,7 @@ use providers\mysql\driver\CMySQLConnector;
  * The Framework calls methods in this class to respond to remote hosts calls and create content as response.
  * The Engine manages the request and response objects, the Plugin Manager,
  * the Applications Manager and default database connectors.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.0 Surface
  * @version 3.0.11 Surface
  * @package \nabu\core
@@ -132,7 +132,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      * Check if the Nabu Engine is instantiated or not
      * @return bool Return true if the Engine is instantiated
      */
-    public static function isInstantiated()
+    public static function isInstantiated() : bool
     {
         return (CNabuEngine::$nb_engine !== null);
     }

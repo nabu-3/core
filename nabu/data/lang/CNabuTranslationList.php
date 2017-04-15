@@ -22,7 +22,7 @@ namespace nabu\data\lang;
 use \nabu\data\CNabuDataObjectList;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\lang
  */

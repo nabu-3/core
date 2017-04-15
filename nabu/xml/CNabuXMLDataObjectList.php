@@ -18,11 +18,13 @@
  */
 
 namespace nabu\xml;
+use SimpleXMLElement;
+use nabu\data\CNabuDataObject;
 use nabu\data\CNabuDataObjectList;
 
 /**
  * Abstract class to manage Lists as XML branches.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package nabu\xml
@@ -32,8 +34,28 @@ abstract class CNabuXMLDataObjectList extends CNabuXMLObject
     /** @var CNabuDataObjectList $list List of entities to convert from/to XML. */
     protected $list = null;
 
+    /**
+     * Create the XML Child object filled with their Data Object.
+     * @param CNabuDataObject $nb_child Child data object.
+     * @return CNabuXMLDataObject Returns a XML instance with the child data object instance.
+     */
+    abstract protected function createXMLChildObject(CNabuDataObject $nb_child) : CNabuXMLDataObject;
+
     public function __construct(CNabuDataObjectList $list)
     {
         $this->list = $list;
+    }
+    protected function setAttributes(SimpleXMLElement $element)
+    {
+        $element->addAttribute('count', $this->list->getSize());
+    }
+
+    protected function setChilds(SimpleXMLElement $element)
+    {
+        $this->list->iterate(function ($key, $nb_child) use ($element) {
+            $xml = $this->createXMLChildObject($nb_child);
+            $xml->build($element);
+            return true;
+        });
     }
 }

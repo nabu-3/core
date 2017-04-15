@@ -26,7 +26,7 @@ use \nabu\core\CNabuEngine;
  * Abstract base class to implement PHP CLI applications.
  * To create an application you need to extend this class and implement
  * abstract methods.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 abstract class CNabuCLIApplication extends CNabuAbstractApplication

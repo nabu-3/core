@@ -25,7 +25,7 @@ use nabu\utils\CNabuImageCanvas;
 
 /**
  * Class to dump images as HTTP response.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\http\renders\base
  */

@@ -27,7 +27,7 @@ use nabu\core\exceptions\ENabuCoreException;
 
 /**
  * Abstract Class to implement default management for Nabu core tables in MySQL.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 abstract class CNabuDBInternalObject extends CNabuDBObject

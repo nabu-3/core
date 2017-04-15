@@ -26,7 +26,7 @@ use \nabu\data\lang\interfaces\INabuTranslated;
  * the translations of parent classes. Some processes of nabu-3 uses this interface
  * to determine if a object is a valid translation of another.
  * We encourage to use this interface to have a well performance of translations.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\lang\interfaces;
  */

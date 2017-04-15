@@ -25,7 +25,7 @@ use \nabu\core\interfaces\INabuApplication;
 
 /**
  * Abstract base class to implement applications running under nabu-3 Engine.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package name
  */

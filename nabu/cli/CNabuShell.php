@@ -23,7 +23,7 @@ use nabu\core\CNabuObject;
 
 /**
  * Encapsulate the access to the system shell or command line
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\cli
  */

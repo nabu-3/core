@@ -22,9 +22,10 @@ namespace nabu\data\site;
 use \nabu\data\site\base\CNabuSiteMapLanguageBase;
 use nabu\core\CNabuEngine;
 use nabu\core\exceptions\ENabuCoreException;
+use nabu\data\CNabuDataObject;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\site
  */
@@ -63,7 +64,7 @@ class CNabuSiteMapLanguage extends CNabuSiteMapLanguageBase
         return $this->match_url_fragment;
     }
 
-    public function setMatchURLFragment($match_list)
+    public function setMatchURLFragment(string $match_list = null) : CNabuDataObject
     {
         if (is_string($match_list)) {
             $this->match_url_fragment = array($match_list);

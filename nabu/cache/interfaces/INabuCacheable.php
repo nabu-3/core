@@ -21,7 +21,7 @@ namespace nabu\cache\interfaces;
 
 /**
  * Interface for cacheable objects.
- * @author Rafael Gutiérrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\cache\interfaces
  */

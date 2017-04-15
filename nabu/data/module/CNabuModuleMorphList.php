@@ -24,7 +24,7 @@ use nabu\core\CNabuEngine;
 
 /**
  * Class to manage lists of Module Morphs.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\module
  */

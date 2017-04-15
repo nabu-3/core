@@ -27,7 +27,7 @@ use nabu\http\managers\base\CNabuHTTPManager;
 
 /**
  * This class manages renders instantiation and access to interfased methods.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.0 Surface
  * @version 3.0.9 Surface
  * @package \nabu\http\managers

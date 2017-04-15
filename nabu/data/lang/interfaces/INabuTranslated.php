@@ -26,7 +26,7 @@ use \nabu\data\lang\CNabuLanguage;
  * This interface group all classes that have translations associated to it.
  * You can use the trait \nabu\lang\traits\TNabuTranslated to speed up
  * your implementation or redefine at your way these methods.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\lang\interfaces;
  */

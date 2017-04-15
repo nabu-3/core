@@ -24,7 +24,7 @@ use nabu\sdk\builders\CNabuAbstractBuilder;
 
 /**
  * Render to dump a file as attachment
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\http\renders\base
  */

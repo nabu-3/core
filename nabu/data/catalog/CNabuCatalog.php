@@ -22,7 +22,7 @@ use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\catalog\base\CNabuCatalogBase;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\catalog
  */

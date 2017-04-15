@@ -28,7 +28,7 @@ use nabu\data\traits\TNabuDataObjectTreeNode;
 use nabu\http\managers\CNabuHTTPSecurityManager;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\site
  */

@@ -20,9 +20,10 @@
 namespace nabu\data\security;
 
 use \nabu\data\security\base\CNabuUserBase;
+use nabu\data\CNabuDataObject;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package name
  */
@@ -69,9 +70,9 @@ class CNabuUser extends CNabuUserBase
      */
     const PASS_SUFF = '935nkwnf';
 
-    public function setPassword($password)
+    public function setPassword(string $password) : CNabuDataObject
     {
-        $this->setValue('nb_user_passwd', CNabuUser::encodePassword($password));
+        return parent::setPassword(CNabuUser::encodePassword($password));
     }
 
     /**

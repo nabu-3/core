@@ -21,7 +21,7 @@ namespace nabu\core\traits;
 
 /**
  * Overrides some methods to fake Built-in classes to work as stored.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\core\traits
  */

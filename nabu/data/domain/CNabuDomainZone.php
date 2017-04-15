@@ -22,7 +22,7 @@ namespace nabu\data\domain;
 use \nabu\data\domain\base\CNabuDomainZoneBase;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package name
  */

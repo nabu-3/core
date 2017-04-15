@@ -23,7 +23,7 @@ use \nabu\data\cluster\base\CNabuIPBase;
 
 /**
  * Class to manage table nb_ip where all IPs of the system are stored.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 class CNabuIP extends CNabuIPBase

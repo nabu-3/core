@@ -25,7 +25,7 @@ use nabu\data\commerce\traits\TNabuCommerceChild;
 use nabu\data\lang\CNabuDataObjectListIndexLanguage;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\lang
  */

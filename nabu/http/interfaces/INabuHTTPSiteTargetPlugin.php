@@ -6,7 +6,7 @@ use nabu\http\CNabuHTTPResponse;
 
 /**
  * Interface to create Site Target plugins to extend the functionality of nabu-3
- * @author Rafael Gutiérrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @since 3.0.0 Surface
  * @version 3.0.12 Surface
  * @package \nabu\http\interfaces

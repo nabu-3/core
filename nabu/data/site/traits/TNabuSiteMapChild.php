@@ -26,7 +26,7 @@ use nabu\data\site\CNabuSiteMap;
  * This trait implements default actions to manage a Site Target child object in nabu-3.
  * You can apply this trait to your own classes to speed up your development,
  * or create your own management.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\site\traits;
  */

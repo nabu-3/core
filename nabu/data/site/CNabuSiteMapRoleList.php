@@ -23,7 +23,7 @@ use nabu\data\site\base\CNabuSiteMapRoleListBase;
 use nabu\data\site\traits\TNabuSiteMapChild;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\site
  */

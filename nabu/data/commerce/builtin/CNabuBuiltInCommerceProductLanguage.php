@@ -23,7 +23,7 @@ use nabu\data\commerce\CNabuCommerceProductLanguage;
 
 /**
  * Alias class to represent a built-in commerce product language, specially in Standalone Operation Mode.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\commerce\builtin
  */

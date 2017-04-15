@@ -24,7 +24,7 @@ use nabu\db\exceptions\ENabuDBException;
 /**
  * Interface to create standard access to Database Descriptors of different providers.
  * Classes implementing this interface are placed in the \providers namespace.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\db\interfaces
  */

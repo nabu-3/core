@@ -22,7 +22,7 @@ namespace nabu\data\site;
 use \nabu\data\site\base\CNabuSiteAliasServiceBase;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\site
  */

@@ -22,7 +22,7 @@ namespace nabu\data\medioteca;
 use nabu\data\medioteca\base\CNabuMediotecaitemLanguageBase;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\medioteca
  */

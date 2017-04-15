@@ -25,7 +25,7 @@ use nabu\data\messaging\CNabuMessagingService;
  * This trait implements default actions to manage a Messaging Service child object in nabu-3.
  * You can apply this trait to your own classes to speed up your development,
  * or create your own management.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package \nabu\data\messaging\traits;

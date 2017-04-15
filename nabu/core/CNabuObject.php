@@ -21,7 +21,7 @@ namespace nabu\core;
 
 /**
  * Base class for all classes. Implements basic functionalities of classes.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\core
  */

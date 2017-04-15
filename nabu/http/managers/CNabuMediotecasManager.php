@@ -28,7 +28,7 @@ use nabu\http\app\base\CNabuHTTPApplication;
 use nabu\http\managers\base\CNabuHTTPManager;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.0 Surface
  * @version 3.0.9 Surface
  * @package \nabu\http\managers

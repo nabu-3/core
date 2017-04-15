@@ -24,7 +24,7 @@ use \nabu\data\site\CNabuSite;
 
 /**
  * Built-in class to Standalone mode
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\site\builtin
  */

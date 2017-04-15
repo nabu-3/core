@@ -21,7 +21,7 @@ namespace nabu\db\interfaces;
 
 /**
  * Interface to handle an statement from a database query and manage resulset
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\core\exceptions
  */

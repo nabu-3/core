@@ -31,7 +31,7 @@ use nabu\db\interfaces\INabuDBDescriptor;
 
 /**
  * Abstract Class to implement default management for tables of MySQL.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.0 Surface
  * @version 3.0.12 Surface
  * @package nabu\db

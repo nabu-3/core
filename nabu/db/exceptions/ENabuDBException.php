@@ -23,7 +23,7 @@ use nabu\core\exceptions\ENabuException;
 use nabu\db\interfaces\INabuDBException;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 

@@ -23,7 +23,7 @@ use \nabu\data\security\CNabuRole;
 
 /**
  * Built-in class for default Role when no role is defined or for Standalone Operation Mode.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package name
  */

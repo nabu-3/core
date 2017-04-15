@@ -22,7 +22,7 @@ namespace nabu\data\lang\builtin;
 use \nabu\data\lang\CNabuLanguage;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\lang\builtin
  */

@@ -23,7 +23,7 @@ use \nabu\data\cluster\base\CNabuClusterUserBase;
 
 /**
  * Class to extend management of table nb_cluster_user where all Cluster Users are stored.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 class CNabuClusterUser extends CNabuClusterUserBase

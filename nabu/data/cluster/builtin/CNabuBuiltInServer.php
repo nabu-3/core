@@ -22,7 +22,7 @@ namespace nabu\data\cluster\builtin;
 use \nabu\data\cluster\CNabuServer;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\cluster
  */

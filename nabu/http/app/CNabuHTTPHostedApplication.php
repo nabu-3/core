@@ -26,7 +26,7 @@ use nabu\http\app\base\CNabuHTTPApplication;
 
 /**
  * Abstract class to implement child classes to manage HTTP Server Applications.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package name
  */

@@ -37,7 +37,7 @@ use nabu\http\app\base\CNabuHTTPApplication;
 
 /**
  * Abstract adapter to easy implementation of Site plugins
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\http\adapters
  */

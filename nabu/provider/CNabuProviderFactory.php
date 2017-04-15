@@ -30,9 +30,9 @@ use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.9 Surface
- * @version 3.0.9 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\core\interfaces
  */
 class CNabuProviderFactory extends CNabuObject implements INabuSingleton
@@ -86,7 +86,7 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
      * Check if the singleton instance is instantiated.
      * @return bool Return true if singleton class is instantiated.
      */
-    public static function isInstantiated()
+    public static function isInstantiated() : bool
     {
         return is_object(CNabuProviderFactory::$nb_provider_factory);
     }

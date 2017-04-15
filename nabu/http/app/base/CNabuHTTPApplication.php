@@ -42,7 +42,7 @@ use nabu\http\managers\CNabuHTTPRenderDescriptor;
  * Abstract base class to implement Web based applications.
  * This class have different extended classes to create Standalone, Stored
  * or Clustered applications.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\http\base
  */

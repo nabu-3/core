@@ -24,7 +24,7 @@ use nabu\data\interfaces\INabuDataObjectTreeNode;
 
 /**
  * Interface to define minimum access to Tree structures.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\interfaces
  */

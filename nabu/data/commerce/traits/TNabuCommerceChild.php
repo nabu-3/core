@@ -27,7 +27,7 @@ use nabu\data\commerce\CNabuCommerce;
  * are implemented here with a default behavior.
  * You can apply this trait to your own classes to speed up your development,
  * or create your own management.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\commerce\traits;
  */

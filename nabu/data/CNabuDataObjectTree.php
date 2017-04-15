@@ -22,7 +22,7 @@ use nabu\data\CNabuDataObjectList;
 
 /**
  * Manages a list of instances which they are derived form CNabuDataObject
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data
  */

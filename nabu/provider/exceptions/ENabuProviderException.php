@@ -21,7 +21,7 @@ namespace nabu\provider\exceptions;
 use nabu\core\exceptions\ENabuException;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.9 Surface
  * @version 3.0.9 Surface
  * @package \nabu\core\interfaces

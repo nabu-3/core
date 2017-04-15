@@ -23,7 +23,7 @@ use \nabu\data\cluster\base\CNabuClusterUserGroupBase;
 
 /**
  * Class to extend management of table nb_cluster_user_group where all User Groups of clusters are stored.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 class CNabuClusterUserGroup extends CNabuClusterUserGroupBase

@@ -21,7 +21,7 @@ namespace nabu\data\messaging;
 use nabu\data\messaging\base\CNabuMessagingLanguageBase;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package \nabu\data\messaging

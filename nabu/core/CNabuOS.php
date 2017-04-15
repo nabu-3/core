@@ -25,9 +25,10 @@ use nabu\core\interfaces\INabuSingleton;
 
 /**
  * This class gets all information about the running OS
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
- * @version 3.0.0 Surface
- * @package name
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
+ * @package nabu\core
  */
 class CNabuOS extends CNabuObject implements INabuSingleton
 {
@@ -56,7 +57,7 @@ class CNabuOS extends CNabuObject implements INabuSingleton
      * @var string
      */
     private $php_version = null;
-    
+
     /**
      * Default constructor. Controls if is already instantiated and throws an exception.
      * @throws ENabuSingletonException Throws this exception if this class
@@ -67,10 +68,10 @@ class CNabuOS extends CNabuObject implements INabuSingleton
         if (CNabuOS::$nb_os !== null) {
             throw new ENabuSingletonException("OS already instantiated");
         }
-        
+
         parent::__construct();
     }
-    
+
     /**
      * Get the singleton instance of CNabuOS.
      * @return CNabuOS Returns the singleton instance of CNabuOS
@@ -81,19 +82,19 @@ class CNabuOS extends CNabuObject implements INabuSingleton
             CNabuOS::$nb_os = new CNabuOS();
             CNabuOS::$nb_os->init();
         }
-        
+
         return CNabuOS::$nb_os;
     }
-    
+
     /**
      * Check if the class is instantiated.
-     * @return boolean Returns true if this singleton class is instantiated.
+     * @return bool Returns true if this singleton class is instantiated.
      */
-    public static function isInstantiated()
+    public static function isInstantiated() : bool
     {
         return (CNabuOS::$nb_os !== null);
     }
-    
+
     /**
      * Initiates the singleton instance and gater the OS information.
      */
@@ -104,22 +105,22 @@ class CNabuOS extends CNabuObject implements INabuSingleton
         $this->os_architecture = php_uname('m');
         $this->php_version = preg_split('/\\./', phpversion());
     }
-    
+
     public function getOSName()
     {
         return $this->os_name;
     }
-    
+
     public function getOSVersion()
     {
         return $this->os_version;
     }
-    
+
     public function getOSArchitecture()
     {
         return $this->os_architecture;
     }
-    
+
     public function getPHPVersion()
     {
         return $this->php_version;

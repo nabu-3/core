@@ -30,7 +30,7 @@ use \nabu\http\interfaces\INabuHTTPResponseRender;
 use \nabu\http\managers\CNabuHTTPPluginsManager;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\http
  */

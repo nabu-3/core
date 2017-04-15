@@ -22,7 +22,7 @@ use nabu\core\interfaces\INabuApplication;
 use nabu\provider\exceptions\ENabuProviderException;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.9 Surface
  * @version 3.0.9 Surface
  * @package \nabu\core\interfaces

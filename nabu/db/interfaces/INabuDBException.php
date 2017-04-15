@@ -21,7 +21,7 @@ namespace nabu\db\interfaces;
 
 /**
  * Interface to implement a Database Exception Class
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\core\exceptions
  */

@@ -22,7 +22,7 @@ use nabu\data\catalog\CNabuCatalog;
 use nabu\data\catalog\CNabuCatalogItemList;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\catalog
  */

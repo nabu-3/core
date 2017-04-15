@@ -23,7 +23,7 @@ use \nabu\data\site\base\CNabuSiteTargetCTALanguageBase;
 use nabu\core\CNabuEngine;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package name
  */

@@ -29,7 +29,7 @@ use nabu\data\site\builtin\CNabuBuiltInSiteTargetSection;
 use nabu\data\site\builtin\CNabuBuiltInSiteTargetLanguage;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\site
  */

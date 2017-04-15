@@ -22,7 +22,7 @@ namespace nabu\data\security;
 use \nabu\data\security\base\CNabuRoleLanguageBase;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package name
  */

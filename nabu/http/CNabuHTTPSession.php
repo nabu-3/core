@@ -31,7 +31,7 @@ use \nabu\data\site\CNabuSiteUser;
 use \nabu\db\interfaces\INabuDBObject;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\http
  */
@@ -78,7 +78,7 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
      * Check if the session is instantiated.
      * @return boolean Returns true if the session is instantiated
      */
-    public static function isInstantiated()
+    public static function isInstantiated() : bool
     {
         return (CNabuHTTPSession::$nb_session !== null);
     }

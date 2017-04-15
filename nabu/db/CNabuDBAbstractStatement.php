@@ -25,7 +25,7 @@ use \nabu\db\interfaces\INabuDBStatement;
 
 /**
  * Abstract base class to manage Database Statements.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 abstract class CNabuDBAbstractStatement extends CNabuObject implements INabuDBStatement

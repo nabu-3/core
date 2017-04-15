@@ -26,7 +26,7 @@ use nabu\data\interfaces\INabuDataObjectTreeNode;
  * This trait implements a set of minimum functionalities to manage Tree Nodes.
  * You can apply this trait to your own classes to speed up your development,
  * or create your own management.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\interfaces
  */

@@ -20,7 +20,7 @@ namespace nabu\core\exceptions;
 
 /**
  * Exception to inform errors in Singleton instances.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 class ENabuSingletonException extends ENabuException

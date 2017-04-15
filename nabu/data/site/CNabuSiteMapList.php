@@ -27,7 +27,7 @@ use nabu\data\site\traits\TNabuSiteChild;
 
 /**
  * Class to manage Site Map lists.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\site
  */

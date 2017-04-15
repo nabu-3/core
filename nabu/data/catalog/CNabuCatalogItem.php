@@ -23,7 +23,7 @@ use nabu\data\interfaces\INabuDataObjectTreeNode;
 use nabu\data\traits\TNabuDataObjectTreeNode;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\catalog
  */

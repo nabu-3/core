@@ -23,7 +23,7 @@ use nabu\core\exceptions\ENabuCoreException;
 
 /**
  * Class to manage the Error Handler and Error Storage
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\core
  */

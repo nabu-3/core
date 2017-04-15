@@ -36,7 +36,7 @@ use nabu\http\managers\base\CNabuHTTPManager;
 
 /**
  * Class to manage Security of HTTP requests.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\http\managers
  */

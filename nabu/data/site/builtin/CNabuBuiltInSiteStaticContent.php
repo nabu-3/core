@@ -23,7 +23,7 @@ use \nabu\core\traits\TNabuBuiltIn;
 use \nabu\data\site\CNabuSiteStaticContent;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\site\builtin
  */

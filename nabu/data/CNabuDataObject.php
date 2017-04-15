@@ -24,7 +24,7 @@ use \nabu\core\CNabuObject;
 /**
  * Abstract class to implement all inherited data objects of nabu-3.
  * This class can also be extended by third party classes to inherit his functionality.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data
  */

@@ -21,7 +21,7 @@ use Exception;
 
 /**
  * Base class for Nabu Exceptions mechanism<br>
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 abstract class ENabuException extends \Exception

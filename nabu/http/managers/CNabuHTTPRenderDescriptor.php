@@ -24,7 +24,7 @@ use nabu\http\app\base\CNabuHTTPApplication;
 
 /**
  * This class acts as a render descriptor to know how it works and obtain all class names.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\http\managers
  */

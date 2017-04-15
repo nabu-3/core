@@ -21,7 +21,7 @@ namespace nabu\db\interfaces;
 
 /**
  * Interface that describes a Syntax Builder for common sentences.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 interface INabuDBSyntaxBuilder

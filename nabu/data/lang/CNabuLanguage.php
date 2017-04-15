@@ -23,7 +23,7 @@ use \nabu\data\lang\base\CNabuLanguageBase;
 
 /**
  * Class to manage a language instance
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package name
  */

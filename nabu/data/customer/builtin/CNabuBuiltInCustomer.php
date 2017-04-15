@@ -23,7 +23,7 @@ use \nabu\data\customer\CNabuCustomer;
 
 /**
  * Alias class to represent a built-in customer, specially in Standalone Operation Mode.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\customer\builtin
  */

@@ -23,7 +23,7 @@ use \nabu\cli\app\CNabuCLIApplication;
 use \nabu\cli\app\CNabuClusterApp;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
 class CNabuClusterApp extends CNabuCLIApplication

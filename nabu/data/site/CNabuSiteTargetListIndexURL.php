@@ -25,7 +25,7 @@ use nabu\data\CNabuDataObjectListIndex;
 
 /**
  * Manages a secondary index in a list of CNabuSiteTargetList using their URLs.
- * @author Rafael Gutierrez <rgutierrez@wiscot.com>
+ * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\site
  */
