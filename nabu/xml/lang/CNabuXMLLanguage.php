@@ -38,19 +38,19 @@ class CNabuXMLLanguage extends CNabuXMLDataObject
     protected function setAttributes(SimpleXMLElement $element)
     {
         $this->putAttributesFromList($element, array(
-            'nb_language_hash' => 'id',
+            'nb_language_hash' => 'GUID',
             'nb_language_type' => 'type',
             'nb_language_enabled' => 'enabled',
-            'nb_language_ISO639_1' => 'iso639_1',
-            'nb_language_ISO639_2' => 'iso639_2',
+            'nb_language_ISO639_1' => 'ISO639v1',
+            'nb_language_ISO639_2' => 'ISO639v2',
             'nb_language_is_api' => 'isAPI',
             'nb_language_default_country_code' => 'defaultCountryCode',
-            'nb_language_name' => 'name',
             'nb_language_flag_url' => 'flagURL'
-        ));
+        ), true);
     }
 
     protected function setChilds(SimpleXMLElement $element)
     {
+        $element->addChild('name', $this->nb_data_object->getName());
     }
 }

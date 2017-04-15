@@ -155,14 +155,14 @@ abstract class CNabuDataObject extends CNabuObject
         return $this->data !== null && array_key_exists($name, $this->data) ? is_null($this->data[$name]) : false;
     }
 
-    public function isValueEmpty($name)
+    public function isValueEmptyString($name)
     {
         return $this->data !== null && array_key_exists($name, $this->data)
                ? (strlen($this->data[$name]) === 0)
                : false;
     }
 
-    public function isEmptyValue($name)
+    public function isValueEmpty($name)
     {
         return $this->data !== null && array_key_exists($name, $this->data) &&
                ($this->data[$name] === null || $this->data[$name] === false || strlen($this->data[$name]) === 0)
