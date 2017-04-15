@@ -73,4 +73,17 @@ abstract class CNabuXMLDataObject extends CNabuXMLObject
 
         return $count;
     }
+
+    /**
+     * Transform String to CDATA.
+     * @param string $source Source string.
+     * @return string Returns packed CDATA string.
+     */
+    protected function packCDATA(string $source = null) : string
+    {
+        return ($source === null
+                ? '<![CDATA[]]>'
+                : '<![CDATA[' . htmlentities($source, ENT_COMPAT, 'UTF-8') . ']]>'
+        );
+    }
 }

@@ -51,6 +51,6 @@ class CNabuXMLLanguage extends CNabuXMLDataObject
 
     protected function setChilds(SimpleXMLElement $element)
     {
-        $element->addChild('name', $this->nb_data_object->getName());
+        $element->addChild('name', $this->packCDATA($this->nb_data_object->getName()));
     }
 }
