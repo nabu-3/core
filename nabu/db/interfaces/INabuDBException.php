@@ -18,32 +18,44 @@
  */
 
 namespace nabu\db\interfaces;
+use Exception;
 
 /**
  * Interface to implement a Database Exception Class
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\core\exceptions
  */
 interface INabuDBException
 {
     /**
      * Force to unify declaration of constructor.
-     * @param type $code
-     * @param type $sql_code
-     * @param type $sql_message
-     * @param type $sql_script
-     * @param type $values
-     * @param type $previous
+     * @param int $code
+     * @param int $sql_code
+     * @param string $sql_message
+     * @param string $sql_script
+     * @param array $values
+     * @param Exception $previous
      */
     public function __construct(
-        $code,
-        $sql_code = 0,
-        $sql_message = null,
-        $sql_script = null,
-        $values = null,
-        $previous = null
+        int $code,
+        int $sql_code = 0,
+        string $sql_message = null,
+        string $sql_script = null,
+        array $values = null,
+        Exception $previous = null
     );
-    public function getSQLCode();
+
+    /**
+     * Gets the SQL Code of the exception.
+     * @return int Returns the SQL Code.
+     */
+    public function getSQLCode() : int;
+
+    /**
+     * Gets the SQL Script of the exception.
+     * @return mixed Returns the SQL script.
+     */
     public function getSQLScript();
 }

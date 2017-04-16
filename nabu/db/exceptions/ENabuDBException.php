@@ -19,12 +19,15 @@
 
 namespace nabu\db\exceptions;
 
+use Exception;
 use nabu\core\exceptions\ENabuException;
 use nabu\db\interfaces\INabuDBException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
+ * @package \nabu\db\exceptions
  */
 
 class ENabuDBException extends ENabuException implements INabuDBException
@@ -105,20 +108,20 @@ class ENabuDBException extends ENabuException implements INabuDBException
 
     /**
      * Constructor
-     * @param type $code Nabu code of the exception raised
-     * @param type $sql_code Database code of the exception raised
-     * @param type $sql_message Database message of the exception raised
-     * @param type $sql_script Sentence that raises the exception
-     * @param type $values Parameters to mix with the exception message
-     * @param type $previous Previous exception to concatenate both
+     * @param int $code Nabu code of the exception raised
+     * @param int $sql_code Database code of the exception raised
+     * @param string $sql_message Database message of the exception raised
+     * @param string $sql_script Sentence that raises the exception
+     * @param array $values Parameters to mix with the exception message
+     * @param Exception $previous Previous exception to concatenate both
      */
     public function __construct(
-        $code,
-        $sql_code = 0,
-        $sql_message = null,
-        $sql_script = null,
-        $values = null,
-        $previous = null
+        int $code,
+        int $sql_code = 0,
+        string $sql_message = null,
+        string $sql_script = null,
+        array $values = null,
+        Exception $previous = null
     ) {
         $this->sql_code = $sql_code;
         $this->sql_message = $sql_message;
@@ -137,9 +140,9 @@ class ENabuDBException extends ENabuException implements INabuDBException
 
     /**
      * Get the database error code that raises the exception.
-     * @return type int|object Returns the Database Code
+     * @return int Returns the Database Code
      */
-    public function getSQLCode()
+    public function getSQLCode() : int
     {
         return $this->sql_code;
     }
@@ -155,7 +158,7 @@ class ENabuDBException extends ENabuException implements INabuDBException
 
     /**
      * Return the object sentence that raises the exception.
-     * @return object
+     * @return mixed Returns the object sentence that was raised the exception.
      */
     public function getSQLScript()
     {
