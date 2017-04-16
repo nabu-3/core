@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/15 14:11:53 UTC
+ * Created: 2017/04/16 11:26:17 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -29,6 +29,7 @@ use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\data\lang\CNabuLanguageList;
+use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
 use \nabu\data\lang\traits\TNabuTranslation;
 use \nabu\data\medioteca\CNabuMediotecaLanguage;
@@ -152,11 +153,14 @@ abstract class CNabuMediotecaLanguageBase extends CNabuDBInternalObject implemen
                         'nb_medioteca_id' => $nb_medioteca_id
                     )
             );
-            $retval->iterate(
-                function ($key, $nb_translation) use($translated) {
-                    $nb_translation->setTranslatedObject($translated);
-                }
-            );
+            if ($translated instanceof INabuTranslated) {
+                $retval->iterate(
+                    function ($key, $nb_translation) use($translated) {
+                        $nb_translation->setTranslatedObject($translated);
+                        return true;
+                    }
+                );
+            }
         } else {
             $retval = new CNabuMediotecaLanguageList();
         }

@@ -18,8 +18,7 @@
  */
 
 namespace nabu\xml\lang;
-use SimpleXMLElement;
-use nabu\xml\CNabuXMLDataObject;
+use nabu\xml\lang\base\CNabuXMLLanguageBase;
 
 /**
  * Class to manage a Language instance as an XML branch.
@@ -28,29 +27,7 @@ use nabu\xml\CNabuXMLDataObject;
  * @version 3.0.12 Surface
  * @package nabu\xml\lang
  */
-class CNabuXMLLanguage extends CNabuXMLDataObject
+class CNabuXMLLanguage extends CNabuXMLLanguageBase
 {
-    protected static function getTagName(): string
-    {
-        return 'language';
-    }
 
-    protected function setAttributes(SimpleXMLElement $element)
-    {
-        $this->putAttributesFromList($element, array(
-            'nb_language_hash' => 'GUID',
-            'nb_language_type' => 'type',
-            'nb_language_enabled' => 'enabled',
-            'nb_language_ISO639_1' => 'ISO639v1',
-            'nb_language_ISO639_2' => 'ISO639v2',
-            'nb_language_is_api' => 'isAPI',
-            'nb_language_default_country_code' => 'defaultCountryCode',
-            'nb_language_flag_url' => 'flagURL'
-        ), true);
-    }
-
-    protected function setChilds(SimpleXMLElement $element)
-    {
-        $element->addChild('name', $this->packCDATA($this->nb_data_object->getName()));
-    }
 }

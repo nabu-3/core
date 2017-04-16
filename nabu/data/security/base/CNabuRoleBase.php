@@ -3,7 +3,7 @@
  * File generated automatically by Nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/15 14:11:31 UTC
+ * Created: 2017/04/16 11:26:00 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\security\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\customer\CNabuCustomer;
 use \nabu\data\customer\traits\TNabuCustomerChild;
@@ -47,9 +49,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\security\base
  */
-abstract class CNabuRoleBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuRoleBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
     use TNabuCustomerChild;
+    use TNabuHashed;
     use TNabuTranslated;
 
     /**
@@ -305,7 +308,7 @@ abstract class CNabuRoleBase extends CNabuDBInternalObject implements INabuTrans
      * @param bool $cascade Forces to reload child entities from the database storage.
      * @return bool Returns true if transations are empty or refreshed.
      */
-    public function refresh(bool $force = false, bool $cascade = false)
+    public function refresh(bool $force = false, bool $cascade = false) : bool
     {
         return parent::refresh($force, $cascade) && $this->appendTranslatedRefresh($force);
     }
@@ -333,6 +336,27 @@ abstract class CNabuRoleBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_role_id', $id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Role Hash attribute value
+     * @return null|string Returns the Role Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_role_hash');
+    }
+
+    /**
+     * Sets the Role Hash attribute value.
+     * @param null|string $hash New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setHash(string $hash = null) : CNabuDataObject
+    {
+        $this->setValue('nb_role_hash', $hash);
         
         return $this;
     }

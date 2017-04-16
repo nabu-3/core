@@ -75,6 +75,37 @@ abstract class CNabuXMLDataObject extends CNabuXMLObject
     }
 
     /**
+     * Set a group of childs listed in an array as Element > CDATA structure.
+     * @param SimpleXMLElement $element Element instance to set childs.
+     * @param array $childs Associative array with the list of data fields as keys and the element name as value.
+     * @param bool $ignore_empty If true, empty values are ignored (null, '')
+     * @return int Returns the number of childs setted.
+     */
+    protected function putChildsAsCDATAFromList(
+        SimpleXMLElement $element,
+        array $childs,
+        bool $ignore_empty = false
+    ) : int {
+        $count = 0;
+
+        if (count($childs) > 0) {
+            foreach ($childs as $field => $child) {
+                if ($this->nb_data_object->contains($field) &&
+                    (!$ignore_empty ||
+                     !$this->nb_data_object->isValueNull($field) ||
+                     !$this->nb_data_object->isValueEmptyString($field)
+                    )
+                ) {
+                    $element->addChild($child, $this->packCDATA($this->nb_data_object->getValue($field)));
+                    $count++;
+                }
+            }
+        }
+
+        return $count;
+    }
+
+    /**
      * Transform String to CDATA.
      * @param string $source Source string.
      * @return string Returns packed CDATA string.
@@ -83,7 +114,7 @@ abstract class CNabuXMLDataObject extends CNabuXMLObject
     {
         return ($source === null
                 ? '<![CDATA[]]>'
-                : '<![CDATA[' . htmlentities($source, ENT_COMPAT, 'UTF-8') . ']]>'
+                : "<![CDATA[$source]]>"
         );
     }
 }

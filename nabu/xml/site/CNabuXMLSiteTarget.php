@@ -19,8 +19,7 @@
 
 namespace nabu\xml\site;
 use SimpleXMLElement;
-use nabu\xml\lang\CNabuXMLTranslated;
-use nabu\xml\lang\CNabuXMLTranslationsList;
+use nabu\xml\site\base\CNabuXMLSiteTargetBase;
 
 /**
  * Class to manage a Site Target instance as an XML branch.
@@ -29,31 +28,8 @@ use nabu\xml\lang\CNabuXMLTranslationsList;
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSiteTarget extends CNabuXMLTranslated
+class CNabuXMLSiteTarget extends CNabuXMLSiteTargetBase
 {
-    protected static function getTagName(): string
-    {
-        return 'target';
-    }
-
-    protected function createXMLTranslationsObject(): CNabuXMLTranslationsList
-    {
-        return new CNabuXMLSiteTargetLanguageList($this->nb_data_object->getTranslations());
-    }
-
-    protected function setAttributes(SimpleXMLElement $element)
-    {
-        $element->addAttribute('GUID', $this->nb_data_object->grantHash(true));
-        $this->putAttributesFromList($element, array(
-            'nb_site_target_key' => 'key',
-            'nb_site_target_order' => 'order',
-            'nb_site_target_begin_date' => 'beginDate',
-            'nb_site_target_plugin_name' => 'plugin',
-            'nb_site_target_use_commerce' => 'useCommerce',
-            'nb_site_target_use_apps' => 'useApps',
-        ));
-    }
-
     protected function setChilds(SimpleXMLElement $element)
     {
         $scope = $element->addChild('scope');

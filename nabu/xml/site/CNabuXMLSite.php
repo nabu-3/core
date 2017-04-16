@@ -20,9 +20,7 @@
 namespace nabu\xml\site;
 use SimpleXMLElement;
 use nabu\data\lang\CNabuLanguage;
-use nabu\data\site\CNabuSite;
-use nabu\xml\lang\CNabuXMLTranslated;
-use nabu\xml\lang\CNabuXMLTranslationsList;
+use nabu\xml\site\base\CNabuXMLSiteBase;
 
 /**
  * Class to manage a Site instance as an XML branch.
@@ -31,29 +29,11 @@ use nabu\xml\lang\CNabuXMLTranslationsList;
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSite extends CNabuXMLTranslated
+class CNabuXMLSite extends CNabuXMLSiteBase
 {
-    public function __construct(CNabuSite $nb_site)
-    {
-        parent::__construct($nb_site);
-    }
-
-    protected static function getTagName(): string
-    {
-        return 'site';
-    }
-
     protected function setAttributes(SimpleXMLElement $element)
     {
-        $this->putAttributesFromList(
-            $element,
-            array(
-                'nb_site_hash' => 'GUID',
-                'nb_site_key' => 'key',
-                'nb_site_http_support' => 'http_support',
-                'nb_site_https_support' => 'https_support'
-            )
-        );
+        parent::setAttributes($element);
 
         $nb_language = $this->nb_data_object->getDefaultLanguage();
         if ($nb_language instanceof CNabuLanguage) {
@@ -73,11 +53,6 @@ class CNabuXMLSite extends CNabuXMLTranslated
         $this->setRedirections($element);
         $this->setTargets($element);
         $this->setMaps($element);
-    }
-
-    protected function createXMLTranslationsObject(): CNabuXMLTranslationsList
-    {
-        return new CNabuXMLSiteLanguageList($this->nb_data_object->getTranslations());
     }
 
     /**

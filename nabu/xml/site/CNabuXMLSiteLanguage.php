@@ -19,7 +19,7 @@
 
 namespace nabu\xml\site;
 use SimpleXMLElement;
-use nabu\xml\lang\CNabuXMLTranslation;
+use nabu\xml\site\base\CNabuXMLSiteLanguageBase;
 
 /**
  * Class to manage a Site Language instance as an XML branch.
@@ -28,29 +28,12 @@ use nabu\xml\lang\CNabuXMLTranslation;
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSiteLanguage extends CNabuXMLTranslation
+class CNabuXMLSiteLanguage extends CNabuXMLSiteLanguageBase
 {
-    protected function setAttributes(SimpleXMLElement $element)
-    {
-        $nb_site = $this->nb_data_object->getTranslatedObject();
-        if ($nb_site !== null) {
-            $nb_language = $nb_site->getLanguage($this->nb_data_object->getLanguageId());
-            $element->addAttribute('lang', $nb_language->getHash());
-            $this->putAttributesFromList($element, array(
-                'nb_site_lang_enabled' => 'enabled',
-                'nb_site_lang_translation_status' => 'status',
-                'nb_site_lang_order' => 'order',
-                'nb_site_lang_editable' => 'editable'
-            ));
-        } else {
-            error_log("**** No site found for translation: " . $this->nb_data_object->getLanguageId());
-        }
-    }
-
     protected function setChilds(SimpleXMLElement $element)
     {
-        $element->addChild('name', $this->packCDATA($this->nb_data_object->getName()));
-        
+        parent::setChilds($element);
+
         $formats = $element->addChild('formats');
         $fdatetime = $formats->addChild('datetime');
         $this->putAttributesFromList($fdatetime, array(

@@ -18,9 +18,7 @@
  */
 
 namespace nabu\xml\lang;
-use nabu\data\CNabuDataObject;
-use nabu\xml\CNabuXMLDataObject;
-use nabu\xml\CNabuXMLDataObjectList;
+use nabu\xml\lang\base\CNabuXMLLanguageListBase;
 
 /**
  * Class to manage a Language List as an XML branch.
@@ -29,15 +27,7 @@ use nabu\xml\CNabuXMLDataObjectList;
  * @version 3.0.12 Surface
  * @package nabu\xml\lang
  */
-class CNabuXMLLanguageList extends CNabuXMLDataObjectList
+class CNabuXMLLanguageList extends CNabuXMLLanguageListBase
 {
-    protected static function getTagName(): string
-    {
-        return 'languages';
-    }
 
-    protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
-    {
-        return new CNabuXMLLanguage($nb_child);
-    }
 }
