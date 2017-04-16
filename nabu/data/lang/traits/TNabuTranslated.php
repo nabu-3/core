@@ -68,7 +68,7 @@ trait TNabuTranslated
     protected function __translatedConstruct()
     {
         $this->languages_list = new CNabuLanguageList();
-        $this->translations_list = new CNabuTranslationList();
+        //$this->translations_list = new CNabuTranslationList();
         $this->translations_removed = new CNabuTranslationList();
     }
 

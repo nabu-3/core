@@ -1,9 +1,9 @@
 <?php
 /* ===========================================================================
- * File generated automatically by Nabu-3.
+ * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/16 11:26:05 UTC
+ * Created: 2017/04/16 22:45:17 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -46,8 +48,9 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
  */
-abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
+    use TNabuHashed;
     use TNabuMediotecaChild;
     use TNabuSiteTargetChild;
     use TNabuTranslated;
@@ -308,6 +311,27 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
             );
         }
         $this->setValue('nb_site_target_section_id', $id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Target Section Hash attribute value
+     * @return null|string Returns the Site Target Section Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_site_target_section_hash');
+    }
+
+    /**
+     * Sets the Site Target Section Hash attribute value.
+     * @param null|string $hash New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setHash(string $hash = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_target_section_hash', $hash);
         
         return $this;
     }

@@ -18,23 +18,16 @@
  */
 
 namespace nabu\xml\site;
-use SimpleXMLElement;
-use nabu\xml\lang\CNabuXMLTranslation;
+use nabu\xml\site\base\CNabuXMLSiteTargetLanguageBase;
 
 /**
- * Class to manage a Site Target instance as an XML branch.
+ * Class to manage a Site Target Language instance as an XML branch.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSiteTargetLanguage extends CNabuXMLTranslation
+class CNabuXMLSiteTargetLanguage extends CNabuXMLSiteTargetLanguageBase
 {
-    protected function setAttributes(SimpleXMLElement $element)
-    {
-    }
 
-    protected function setChilds(SimpleXMLElement $element)
-    {
-    }
 }

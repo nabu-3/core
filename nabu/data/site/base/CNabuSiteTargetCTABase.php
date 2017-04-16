@@ -1,9 +1,9 @@
 <?php
 /* ===========================================================================
- * File generated automatically by Nabu-3.
+ * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/16 11:26:05 UTC
+ * Created: 2017/04/16 22:45:20 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -279,6 +279,27 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
     }
 
     /**
+     * Get Site Target CTA Hash attribute value
+     * @return null|string Returns the Site Target CTA Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_site_target_cta_hash');
+    }
+
+    /**
+     * Sets the Site Target CTA Hash attribute value.
+     * @param null|string $hash New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setHash(string $hash = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_target_cta_hash', $hash);
+        
+        return $this;
+    }
+
+    /**
      * Get Site Target Id attribute value
      * @return int Returns the Site Target Id value
      */
@@ -322,27 +343,6 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
     public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_site_target_cta_key', $key);
-        
-        return $this;
-    }
-
-    /**
-     * Get Site Target CTA Hash attribute value
-     * @return null|string Returns the Site Target CTA Hash value
-     */
-    public function getHash()
-    {
-        return $this->getValue('nb_site_target_cta_hash');
-    }
-
-    /**
-     * Sets the Site Target CTA Hash attribute value.
-     * @param null|string $hash New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setHash(string $hash = null) : CNabuDataObject
-    {
-        $this->setValue('nb_site_target_cta_hash', $hash);
         
         return $this;
     }

@@ -18,9 +18,7 @@
  */
 
 namespace nabu\xml\site;
-use nabu\data\lang\interfaces\INabuTranslation;
-use nabu\xml\lang\CNabuXMLTranslation;
-use nabu\xml\lang\CNabuXMLTranslationsList;
+use nabu\xml\site\base\CNabuXMLSiteTargetLanguageListBase;
 
 /**
  * Class to manage a Site Target Language List as an XML branch.
@@ -29,10 +27,7 @@ use nabu\xml\lang\CNabuXMLTranslationsList;
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSiteTargetLanguageList extends CNabuXMLTranslationsList
+class CNabuXMLSiteTargetLanguageList extends CNabuXMLSiteTargetLanguageListBase
 {
-    protected function createXMLTranslationsObject(INabuTranslation $nb_translation): CNabuXMLTranslation
-    {
-        return new CNabuXMLSiteTargetLanguage($nb_translation);
-    }
+
 }

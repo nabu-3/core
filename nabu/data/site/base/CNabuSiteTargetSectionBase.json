@@ -19,9 +19,20 @@
             "extra": "auto_increment",
             "comment": ""
         },
+        "nb_site_target_section_hash": {
+            "name": "nb_site_target_section_hash",
+            "ordinal": "2",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_site_target_id": {
             "name": "nb_site_target_id",
-            "ordinal": "2",
+            "ordinal": "3",
             "data_type": "int",
             "precision": "10",
             "type": "int(10) unsigned",
@@ -32,7 +43,7 @@
         },
         "nb_site_target_section_parent_id": {
             "name": "nb_site_target_section_parent_id",
-            "ordinal": "3",
+            "ordinal": "4",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -43,7 +54,7 @@
         },
         "nb_site_target_section_key": {
             "name": "nb_site_target_section_key",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(30)",
@@ -54,7 +65,7 @@
         },
         "nb_site_target_section_order": {
             "name": "nb_site_target_section_order",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "int",
             "precision": "10",
             "type": "int(10) unsigned",
@@ -65,7 +76,7 @@
         },
         "nb_site_target_cta_id": {
             "name": "nb_site_target_cta_id",
-            "ordinal": "6",
+            "ordinal": "7",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -76,7 +87,7 @@
         },
         "nb_medioteca_id": {
             "name": "nb_medioteca_id",
-            "ordinal": "7",
+            "ordinal": "8",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -87,7 +98,7 @@
         },
         "nb_site_target_section_css_class": {
             "name": "nb_site_target_section_css_class",
-            "ordinal": "8",
+            "ordinal": "9",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(50)",
@@ -98,7 +109,7 @@
         },
         "nb_site_target_section_anchor": {
             "name": "nb_site_target_section_anchor",
-            "ordinal": "9",
+            "ordinal": "10",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(50)",
@@ -119,6 +130,22 @@
                     "name": "nb_site_target_section_id",
                     "ordinal": "1",
                     "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_target_section_hash_idx": {
+            "name": "nb_site_target_section_hash_idx",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_site_target_section_hash": {
+                    "name": "nb_site_target_section_hash",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
                     "comments": ""
                 }
             }

@@ -18,9 +18,7 @@
  */
 
 namespace nabu\xml\site;
-use nabu\data\CNabuDataObject;
-use nabu\xml\CNabuXMLDataObject;
-use nabu\xml\CNabuXMLDataObjectList;
+use nabu\xml\site\base\CNabuXMLSiteTargetListBase;
 
 /**
  * Class to manage Site Target List as an XML branch.
@@ -29,15 +27,7 @@ use nabu\xml\CNabuXMLDataObjectList;
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSiteTargetList extends CNabuXMLDataObjectList
+class CNabuXMLSiteTargetList extends CNabuXMLSiteTargetListBase
 {
-    protected static function getTagName(): string
-    {
-        return 'targets';
-    }
 
-    protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
-    {
-        return new CNabuXMLSiteTarget($nb_child);
-    }
 }

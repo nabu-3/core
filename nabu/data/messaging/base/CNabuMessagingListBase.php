@@ -1,9 +1,9 @@
 <?php
 /* ===========================================================================
- * File generated automatically by Nabu-3.
+ * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/16 11:26:18 UTC
+ * Created: 2017/04/16 22:45:38 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
