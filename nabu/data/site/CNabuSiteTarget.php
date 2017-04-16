@@ -76,7 +76,7 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
 
     /**
      * @deprecated since version 3.0.0 Surface
-     * @var type
+     * @var string
      */
     private $pdf_filename;
 

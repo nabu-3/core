@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/16 22:45:32 UTC
+ * Created: 2017/04/16 23:21:57 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -30,6 +30,7 @@ use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\data\catalog\builtin\CNabuBuiltInCatalogItemLanguage;
 use \nabu\data\catalog\CNabuCatalog;
 use \nabu\data\catalog\CNabuCatalogItemLanguage;
+use \nabu\data\catalog\CNabuCatalogItemLanguageList;
 use \nabu\data\catalog\CNabuCatalogItemList;
 use \nabu\data\catalog\traits\TNabuCatalogChild;
 use \nabu\data\CNabuDataObject;
@@ -65,6 +66,7 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
         
         parent::__construct();
         $this->__translatedConstruct();
+        $this->translations_list = new CNabuCatalogItemLanguageList();
     }
 
     /**

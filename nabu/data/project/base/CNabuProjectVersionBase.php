@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/16 22:45:42 UTC
+ * Created: 2017/04/16 23:22:07 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -36,6 +36,7 @@ use \nabu\data\lang\traits\TNabuTranslated;
 use \nabu\data\project\builtin\CNabuBuiltInProjectVersionLanguage;
 use \nabu\data\project\CNabuProject;
 use \nabu\data\project\CNabuProjectVersionLanguage;
+use \nabu\data\project\CNabuProjectVersionLanguageList;
 use \nabu\data\project\CNabuProjectVersionList;
 use \nabu\db\CNabuDBInternalObject;
 use nabu\data\project\traits\TNabuProjectChild;
@@ -66,6 +67,7 @@ abstract class CNabuProjectVersionBase extends CNabuDBInternalObject implements 
         
         parent::__construct();
         $this->__translatedConstruct();
+        $this->translations_list = new CNabuProjectVersionLanguageList();
     }
 
     /**

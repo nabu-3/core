@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/16 22:45:36 UTC
+ * Created: 2017/04/16 23:22:01 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -37,6 +37,7 @@ use \nabu\data\medioteca\builtin\CNabuBuiltInMediotecaItemLanguage;
 use \nabu\data\medioteca\CNabuMedioteca;
 use \nabu\data\medioteca\CNabuMediotecaItem;
 use \nabu\data\medioteca\CNabuMediotecaItemLanguage;
+use \nabu\data\medioteca\CNabuMediotecaItemLanguageList;
 use \nabu\data\medioteca\CNabuMediotecaItemList;
 use \nabu\data\medioteca\traits\TNabuMediotecaChild;
 use \nabu\db\CNabuDBInternalObject;
@@ -67,6 +68,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
         
         parent::__construct();
         $this->__translatedConstruct();
+        $this->translations_list = new CNabuMediotecaItemLanguageList();
     }
 
     /**
