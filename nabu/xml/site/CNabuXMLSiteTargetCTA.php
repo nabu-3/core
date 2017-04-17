@@ -18,6 +18,8 @@
  */
 
 namespace nabu\xml\site;
+use SimpleXMLElement;
+use nabu\data\site\CNabuSiteTarget;
 use nabu\xml\site\base\CNabuXMLSiteTargetCTABase;
 
 /**
@@ -29,5 +31,24 @@ use nabu\xml\site\base\CNabuXMLSiteTargetCTABase;
  */
 class CNabuXMLSiteTargetCTA extends CNabuXMLSiteTargetCTABase
 {
-    
+    protected function setChilds(SimpleXMLElement $element)
+    {
+        parent::setChilds($element);
+
+        $link = $element->addChild('link');
+        switch ($this->nb_data_object->getTargetUseURI()) {
+            case 'T':
+                $nb_target = $this->nb_data_object->getCTATarget();
+                $this->putAttributesFromList($link, array(
+                    'nb_site_target_cta_target_use_uri' => 'useURI'
+                ));
+                $link->addAttribute('target', ($nb_target !== null ? $nb_target->grantHash(true) : ''));
+                break;
+            case 'U':
+                $this->putAttributesFromList($link, array(
+                    'nb_site_target_cta_target_use_uri' => 'useURI'
+                ));
+                break;
+        }
+    }
 }

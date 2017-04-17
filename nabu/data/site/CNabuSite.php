@@ -193,6 +193,10 @@ class CNabuSite extends CNabuSiteBase
         ) {
             $this->nb_site_target_list->clear();
             $this->nb_site_target_list->merge(CNabuSiteTarget::getAllSiteTargets($this));
+            $this->nb_site_target_list->iterate(function ($key, $nb_site_target) {
+                $nb_site_target->setSite($this);
+                return true;
+            });
         }
 
         return $this->nb_site_target_list;

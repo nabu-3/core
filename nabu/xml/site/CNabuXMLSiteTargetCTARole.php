@@ -18,23 +18,16 @@
  */
 
 namespace nabu\xml\site;
-use nabu\data\CNabuDataObject;
-use nabu\xml\CNabuXMLDataObject;
-use nabu\xml\site\base\CNabuXMLSiteTargetListBase;
+use nabu\xml\site\base\CNabuXMLSiteTargetCTARoleBase;
 
 /**
- * Class to manage Site Target List as an XML branch.
+ * Class to manage a Site Target CTA Role instance as an XML branch.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSiteTargetList extends CNabuXMLSiteTargetListBase
+class CNabuXMLSiteTargetCTARole extends CNabuXMLSiteTargetCTARoleBase
 {
-    protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
-    {
-        $nb_child->getCTAs(true);
-        $nb_child->canonizeCTAs();
-        return parent::createXMLChildObject($nb_child);
-    }
+    
 }
