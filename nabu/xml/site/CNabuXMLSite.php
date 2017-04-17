@@ -53,6 +53,7 @@ class CNabuXMLSite extends CNabuXMLSiteBase
         $this->setRedirections($element);
         $this->setTargets($element);
         $this->setMaps($element);
+        $this->setStaticContents($element);
     }
 
     /**
@@ -134,6 +135,16 @@ class CNabuXMLSite extends CNabuXMLSiteBase
     {
         $xml_targets = new CNabuXMLSiteMapList($this->nb_data_object->getSiteMaps(true));
         $xml_targets->build($parent);
+    }
+
+    /**
+     * Build Static Content branch.
+     * @param SimpleXMLElement $parent Parent XML Element to insert targets.
+     */
+    private function setStaticContents(SimpleXMLElement $parent)
+    {
+        $xml_statics = new CNabuXMLSiteStaticContentList($this->nb_data_object->getStaticContents(true));
+        $xml_statics->build($parent);
     }
 
     /**

@@ -49,6 +49,11 @@ class CNabuSiteStaticContent extends CNabuSiteStaticContentBase
                     'site_id' => $nb_site_id
                 )
             );
+            if ($nb_site instanceof CNabuSite) {
+                $retval->iterate(function($key, $nb_static) use ($nb_site) {
+                    $nb_static->setSite($nb_site);
+                });
+            }
         } else {
             $retval = new CNabuSiteStaticContentList();
         }
