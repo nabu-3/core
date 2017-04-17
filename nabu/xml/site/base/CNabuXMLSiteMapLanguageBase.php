@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/17 16:31:26 UTC
+ * Created: 2017/04/17 17:19:55 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -57,6 +57,10 @@ abstract class CNabuXMLSiteMapLanguageBase extends CNabuXMLTranslation
         if ($nb_parent !== null) {
             $nb_language = $nb_parent->getLanguage($this->nb_data_object->getLanguageId());
             $element->addAttribute('lang', $nb_language->grantHash(true));
+            $this->putAttributesFromList($element, array(
+                'nb_site_map_lang_translation_status' => 'status',
+                'nb_site_map_lang_image' => 'image'
+            ), false);
         }
     }
 
@@ -66,5 +70,10 @@ abstract class CNabuXMLSiteMapLanguageBase extends CNabuXMLTranslation
      */
     protected function setChilds(SimpleXMLElement $element)
     {
+        $this->putChildsAsCDATAFromList($element, array(
+            'nb_site_map_lang_title' => 'title',
+            'nb_site_map_lang_subtitle' => 'subtitle',
+            'nb_site_map_lang_content' => 'content'
+        ), false);
     }
 }
