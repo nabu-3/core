@@ -96,6 +96,12 @@ class CNabuSiteTargetCTA extends CNabuSiteTargetCTABase implements INabuRoleMask
                     'target_id' => $nb_site_target_id
                 )
             );
+            if ($nb_site_target instanceof CNabuSiteTarget) {
+                $retval->iterate(function($key, $nb_cta) use($nb_site_target) {
+                    $nb_cta->setSiteTarget($nb_site_target);
+                    return true;
+                });
+            }
         } else {
             $retval = new CNabuSiteTargetCTAList();
         }
@@ -171,6 +177,15 @@ class CNabuSiteTargetCTA extends CNabuSiteTargetCTABase implements INabuRoleMask
         }
 
         return $this->nb_site_target_cta_role_list->isFilled();
+    }
+
+    public function getRoles($force = false)
+    {
+        if ($this->nb_site_target_cta_role_list->isEmpty() || $force) {
+            $this->nb_site_target_cta_role_list->fillFromCTA();
+        }
+
+        return $this->nb_site_target_cta_role_list;
     }
 
     public function canonize()

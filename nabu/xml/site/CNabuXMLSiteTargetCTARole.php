@@ -18,6 +18,11 @@
  */
 
 namespace nabu\xml\site;
+use SimpleXMLElement;
+use nabu\data\security\CNabuRole;
+use nabu\data\site\CNabuSite;
+use nabu\data\site\CNabuSiteTarget;
+use nabu\data\site\CNabuSiteTargetCTA;
 use nabu\xml\site\base\CNabuXMLSiteTargetCTARoleBase;
 
 /**
@@ -29,5 +34,17 @@ use nabu\xml\site\base\CNabuXMLSiteTargetCTARoleBase;
  */
 class CNabuXMLSiteTargetCTARole extends CNabuXMLSiteTargetCTARoleBase
 {
-    
+    protected function setAttributes(SimpleXMLElement $element)
+    {
+        parent::setAttributes($element);
+
+        if (($nb_cta = $this->nb_data_object->getSiteTargetCTA()) instanceof CNabuSiteTargetCTA &&
+            ($nb_site_target = $nb_cta->getSiteTarget()) instanceof CNabuSiteTarget &&
+            ($nb_site = $nb_site_target->getSite()) instanceof CNabuSite &&
+            ($nb_role_list = $nb_site->getRoles())->getSize() > 0 &&
+            ($nb_role = $nb_role_list->getItem($this->nb_data_object->getRoleId())) instanceof CNabuRole
+        ) {
+            $element->addAttribute('role', $nb_role->getHash());
+        }
+    }
 }

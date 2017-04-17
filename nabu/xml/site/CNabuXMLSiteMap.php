@@ -19,8 +19,9 @@
 
 namespace nabu\xml\site;
 use SimpleXMLElement;
-use nabu\data\site\CNabuSiteMap;
-use nabu\xml\CNabuXMLDataObject;
+use nabu\data\site\CNabuSite;
+use nabu\data\site\CNabuSiteTarget;
+use nabu\xml\site\base\CNabuXMLSiteMapBase;
 
 /**
  * Class to manage a Site instance as an XML branch.
@@ -29,34 +30,72 @@ use nabu\xml\CNabuXMLDataObject;
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSiteMap extends CNabuXMLDataObject
+class CNabuXMLSiteMap extends CNabuXMLSiteMapBase
 {
-    public function __construct(CNabuSiteMap $nb_site_map)
-    {
-        parent::__construct($nb_site_map);
-    }
-
-    protected static function getTagName(): string
-    {
-        return 'map';
-    }
-
-    protected function setAttributes(SimpleXMLElement $element)
-    {
-        $this->putAttributesFromList(
-            $element,
-            array(
-                'nb_site_map_hash' => 'id',
-                'nb_site_map_key' => 'key'
-            )
-        );
-    }
-
+    /**
+     * @inheritDoc
+     */
     protected function setChilds(SimpleXMLElement $element)
     {
-        if ($this->nb_data_object->getChilds()->getSize() > 0) {
-            $list = new CNabuXMLSiteMapList($this->nb_data_object->getChilds());
-            $list->build($element);
+        parent::setChilds($element);
+        $this->setTarget($element);
+        $this->setMapChilds($element);
+    }
+
+    /**
+     * Set the target branch.
+     * @param SimpleXMLElement $element Parent element to anidate branch.
+     */
+    private function setTarget(SimpleXMLElement $element)
+    {
+        $target = $element->addChild('target');
+        switch ($this->nb_data_object->getUseURI()) {
+            case 'T':
+                if (($nb_site = $this->nb_data_object->getSite()) instanceof CNabuSite &&
+                    ($nb_site_target = $nb_site->getTarget($this->nb_data_object->getSiteTargetId())) instanceof CNabuSiteTarget
+                ) {
+                    $target->addAttribute('useURI', 'T');
+                    $target->addAttribute('target', $nb_site_target->getHash());
+                } else {
+                    error_log("Target not exists");
+                }
+                break;
+            case 'U':
+                $translations = $this->nb_data_object->getTranslations();
+                $urls = array();
+                $translations->iterate(function ($lang, $nb_translation) use (&$urls) {
+                    $urls[$lang] = array(
+                        'url' => $nb_translation->getURL(),
+                        'match' => $nb_translation->getMatchURLFragment()
+                    );
+                    return true;
+                });
+                if (count($urls) > 0) {
+                    $target->addAttribute('useURI', 'U');
+                    foreach ($urls as $lang => $url) {
+                        if (strlen($url) > 0) {
+                            $nb_language = $this->nb_data_object->getLanguage($lang);
+                            $address = $target->addChild('url');
+                            $address->addAttribute('lang', $nb_language->getHash());
+                            $address->addAttribute('url', $url['url']);
+                            $address->addAttribute('match', $turl['match']);
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
+    /**
+     * Set the child maps of this node.
+     * @param SimpleXMLElement $element Parent element to anidate branch.
+     */
+    private function setMapChilds(SimpleXMLElement $element)
+    {
+        $nb_map_list = $this->nb_data_object->getChilds();
+        if ($nb_map_list->getSize() > 0) {
+            $xml_childs = new CNabuXMLSiteMapList($nb_map_list);
+            $xml_childs->build($element);
         }
     }
 }

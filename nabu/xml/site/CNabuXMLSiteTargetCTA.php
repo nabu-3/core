@@ -19,6 +19,7 @@
 
 namespace nabu\xml\site;
 use SimpleXMLElement;
+use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\site\CNabuSiteTarget;
 use nabu\xml\site\base\CNabuXMLSiteTargetCTABase;
 
@@ -39,16 +40,23 @@ class CNabuXMLSiteTargetCTA extends CNabuXMLSiteTargetCTABase
         switch ($this->nb_data_object->getTargetUseURI()) {
             case 'T':
                 $nb_target = $this->nb_data_object->getCTATarget();
-                $this->putAttributesFromList($link, array(
-                    'nb_site_target_cta_target_use_uri' => 'useURI'
-                ));
-                $link->addAttribute('target', ($nb_target !== null ? $nb_target->grantHash(true) : ''));
+                if ($nb_target instanceof CNabuSiteTarget) {
+                    $this->putAttributesFromList($link, array(
+                        'nb_site_target_cta_target_use_uri' => 'useURI'
+                    ));
+                    $link->addAttribute('target', ($nb_target !== null ? $nb_target->grantHash(true) : ''));
+                }
                 break;
             case 'U':
                 $this->putAttributesFromList($link, array(
                     'nb_site_target_cta_target_use_uri' => 'useURI'
                 ));
+                throw new ENabuCoreException(ENabuCoreException::ERROR_FEATURE_NOT_IMPLEMENTED);
                 break;
         }
+
+        $security = $element->addChild('security');
+        $xml_roles = new CNabuXMLSiteTargetCTARoleList($this->nb_data_object->getRoles());
+        $xml_roles->build($security);
     }
 }

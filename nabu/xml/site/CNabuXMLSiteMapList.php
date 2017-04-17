@@ -18,10 +18,7 @@
  */
 
 namespace nabu\xml\site;
-use SimpleXMLElement;
-use nabu\data\CNabuDataObject;
-use nabu\xml\CNabuXMLDataObject;
-use nabu\xml\CNabuXMLDataObjectList;
+use nabu\xml\site\base\CNabuXMLSiteMapListBase;
 
 /**
  * Class to manage Site Map List as an XML branch.
@@ -30,25 +27,7 @@ use nabu\xml\CNabuXMLDataObjectList;
  * @version 3.0.12 Surface
  * @package nabu\xml\site
  */
-class CNabuXMLSiteMapList extends CNabuXMLDataObjectList
+class CNabuXMLSiteMapList extends CNabuXMLSiteMapListBase
 {
-    protected static function getTagName(): string
-    {
-        return 'maps';
-    }
 
-    protected function setAttributes(SimpleXMLElement $element)
-    {
-        $element->addAttribute('count', $this->list->getSize());
-    }
-
-    protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
-    {
-        if (!nb_isValidGUID($nb_child->getHash())) {
-            $nb_child->setHash(nb_generateGUID());
-            $nb_child->save();
-        }
-
-        return new CNabuXMLSiteMap($nb_child);
-    }
 }

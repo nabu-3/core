@@ -34,7 +34,7 @@ trait TNabuHashed
      * @param bool $save If true, the save() method is called after grant the hash and just before return.
      * @return string Returns a valid hash.
      */
-    public function grantHash(bool $save) : string
+    public function grantHash(bool $save = false) : string
     {
         if (!nb_isValidGUID($hash = $this->getHash())) {
             $this->setHash($hash = nb_generateGUID());

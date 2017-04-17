@@ -38,4 +38,25 @@ class CNabuSiteTargetCTARoleList extends CNabuSiteTargetCTARoleListBase
             $this->setSiteTargetCTA($nb_site_target_cta);
         }
     }
+
+    public function fillFromCTA()
+    {
+        $this->clear();
+        if ($this->nb_site_target_cta !== null &&
+            is_numeric($nb_site_target_cta_id = $this->nb_site_target_cta->getId())
+        ) {
+            $this->merge(
+                CNabuSiteTargetCTARole::buildObjectListFromSQL(
+                    'nb_role_id',
+                    'select * '
+                    . 'from nb_site_target_cta_role '
+                   . 'where nb_site_target_cta_id=%cta_id$d',
+                    array(
+                       'cta_id' => $nb_site_target_cta_id
+                   ),
+                   $this->nb_site_target_cta
+                )
+            );
+        }
+    }
 }
