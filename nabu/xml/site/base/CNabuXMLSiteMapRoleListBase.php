@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/17 18:22:22 UTC
+ * Created: 2017/04/17 18:22:44 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -26,27 +26,27 @@
 namespace nabu\xml\site\base;
 
 use \nabu\data\CNabuDataObject;
-use \nabu\data\site\CNabuSiteTargetSectionList;
+use \nabu\data\site\CNabuSiteMapRoleList;
 use \nabu\xml\CNabuXMLDataObject;
 use \nabu\xml\CNabuXMLDataObjectList;
-use \nabu\xml\site\CNabuXMLSiteTargetSection;
+use \nabu\xml\site\CNabuXMLSiteMapRole;
 
 /**
- * Class to manage the Site Target Section List as a XML branch.
+ * Class to manage the Site Map Role List as a XML branch.
  * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package \nabu\xml\site\base
  */
-abstract class CNabuXMLSiteTargetSectionListBase extends CNabuXMLDataObjectList
+abstract class CNabuXMLSiteMapRoleListBase extends CNabuXMLDataObjectList
 {
     /**
-     * Instantiates the class. Receives as parameter a qualified CNabuSiteTargetSectionList class.
-     * @param CNabuSiteTargetSectionList $nb_site_target_section $this->entity_name instance to be managed as XML
+     * Instantiates the class. Receives as parameter a qualified CNabuSiteMapRoleList class.
+     * @param CNabuSiteMapRoleList $nb_site_map_role $this->entity_name instance to be managed as XML
      */
-    public function __construct(CNabuSiteTargetSectionList $nb_site_target_section)
+    public function __construct(CNabuSiteMapRoleList $nb_site_map_role)
     {
-        parent::__construct($nb_site_target_section);
+        parent::__construct($nb_site_map_role);
     }
 
     /**
@@ -55,7 +55,7 @@ abstract class CNabuXMLSiteTargetSectionListBase extends CNabuXMLDataObjectList
      */
     protected static function getTagName() : string
     {
-        return 'sections';
+        return 'roles';
     }
 
     /**
@@ -65,6 +65,6 @@ abstract class CNabuXMLSiteTargetSectionListBase extends CNabuXMLDataObjectList
      */
     protected function createXMLChildObject(CNabuDataObject $nb_child) : CNabuXMLDataObject
     {
-        return new CNabuXMLSiteTargetSection($nb_child);
+        return new CNabuXMLSiteMapRole($nb_child);
     }
 }

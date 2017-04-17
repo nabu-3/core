@@ -39,6 +39,7 @@ class CNabuXMLSiteMap extends CNabuXMLSiteMapBase
     {
         parent::setChilds($element);
         $this->setTarget($element);
+        $this->setSecurity($element);
         $this->setMapChilds($element);
     }
 
@@ -84,6 +85,18 @@ class CNabuXMLSiteMap extends CNabuXMLSiteMapBase
                 }
                 break;
         }
+    }
+
+    /**
+     * Set the security branch.
+     * @param SimpleXMLElement $element Parent element to anidate branch.
+     */
+    private function setSecurity(SimpleXMLElement $element)
+    {
+        $security = $element->addChild('security');
+
+        $xml_roles = new CNabuXMLSiteMapRoleList($this->nb_data_object->getRoles());
+        $xml_roles->build($security);
     }
 
     /**

@@ -207,6 +207,11 @@ class CNabuSiteMap extends CNabuSiteMapBase implements INabuDataObjectTreeNode, 
         return $nb_role;
     }
 
+    public function getRoles()
+    {
+        return $this->nb_site_map_role_list;
+    }
+
     /**
      * Canonizes the Site Map node to be applied to a concrete target.
      * Updates in cascade all childs and create the final_url in each translation.

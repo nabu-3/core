@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/17 18:23:15 UTC
+ * Created: 2017/04/17 18:22:44 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -23,52 +23,52 @@
  * limitations under the License.
  */
 
-namespace nabu\data\catalog\base;
+namespace nabu\xml\site\base;
 
-use \nabu\core\CNabuEngine;
-use \nabu\data\catalog\CNabuCatalogItemTag;
-use \nabu\data\CNabuDataObjectList;
+use \nabu\data\site\CNabuSiteMapRole;
+use \nabu\xml\CNabuXMLDataObject;
+use \SimpleXMLElement;
 
 /**
- * Class to manage a list of Catalog Item Tag instances.
+ * Class to manage the Site Map Role as a XML branch.
  * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
+ * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\data\catalog\base
+ * @package \nabu\xml\site\base
  */
-abstract class CNabuCatalogItemTagListBase extends CNabuDataObjectList
+abstract class CNabuXMLSiteMapRoleBase extends CNabuXMLDataObject
 {
     /**
-     * Instantiates the class.
+     * Instantiates the class. Receives as parameter a qualified CNabuSiteMapRole class.
+     * @param CNabuSiteMapRole $nb_site_map_role $this->entity_name instance to be managed as XML
      */
-    public function __construct()
+    public function __construct(CNabuSiteMapRole $nb_site_map_role)
     {
-        parent::__construct('nb_catalog_tag_id');
+        parent::__construct($nb_site_map_role);
     }
 
     /**
-     * Creates alternate indexes for this list.
+     * Static method to get the Tag name of this XML Element.
+     * @return string Return the Tag name.
      */
-    protected function createSecondaryIndexes()
+    protected static function getTagName() : string
+    {
+        return 'role';
+    }
+
+    /**
+     * Set default attributes of Site Map Role XML Element.
+     * @param SimpleXMLElement $element XML Element to set attributes
+     */
+    protected function setAttributes(SimpleXMLElement $element)
     {
     }
 
     /**
-     * Acquires an instance of class CNabuCatalogItemTag from the database.
-     * @param string $key Id or reference field in the instance to acquire.
-     * @param string $index Secondary index to be used if needed.
-     * @return mixed Returns the unserialized instance if exists or false if not.
+     * Set default childs of Site Map Role XML Element as Element > CDATA structure.
+     * @param SimpleXMLElement $element XML Element to set childs
      */
-    public function acquireItem($key, $index = false)
+    protected function setChilds(SimpleXMLElement $element)
     {
-        $retval = false;
-        
-        if ($index === false && CNabuEngine::getEngine()->isMainDBAvailable()) {
-            $item = new CNabuCatalogItemTag($key);
-            if ($item->isFetched()) {
-                $retval = $item;
-            }
-        }
-        
-        return $retval;
     }
 }
