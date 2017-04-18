@@ -37,7 +37,7 @@ class CNabuHTTPResponseJSONRender extends CNabuHTTPResponseRenderAdapter
 
     public function render()
     {
-        if ($this->isEmpty()) {
+        if ($this->nb_render_data->isEmpty()) {
             echo "{}";
         } else {
             echo json_encode($this->data);
