@@ -240,6 +240,23 @@ class CNabuCustomer extends CNabuCustomerBase
     }
 
     /**
+     * Gets a Site instance using their key.
+     * @param string $key Key of the Site to be retrieved.
+     * @return CNabuSite Returns a Site instance if exists or false if not.
+     */
+    public function getSiteByKey($key)
+    {
+        if (!is_string($key) || strlen($key) === 0) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                array('$key', print_r($key, true))
+            );
+        }
+
+        return $this->nb_site_list->getItem($key, CNabuSiteList::INDEX_KEY);
+    }
+
+    /**
      * Gets available Site instances in the list.
      * @param bool $force If true, forces to merge complete list form the storage.
      * @return array Returns an associative array where the index is the ID of each Site and the value is the instance.
