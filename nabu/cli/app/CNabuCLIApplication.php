@@ -20,7 +20,6 @@
 namespace nabu\cli\app;
 
 use \nabu\core\base\CNabuAbstractApplication;
-use \nabu\core\CNabuEngine;
 
 /**
  * Abstract base class to implement PHP CLI applications.
@@ -31,6 +30,18 @@ use \nabu\core\CNabuEngine;
  */
 abstract class CNabuCLIApplication extends CNabuAbstractApplication
 {
+    /** @var array $arguments Arguments list passed as $argv global variable. */
+    protected $arguments = null;
+
+    public function __construct()
+    {
+        global $argv;
+
+        $value = parent::__construct();
+
+        $this->arguments = $argv;
+    }
+
     /**
      * Launch the application represented in an inherited class of this class.
      * @return mixed Returns the value returned internally by the run method.

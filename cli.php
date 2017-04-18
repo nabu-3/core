@@ -52,7 +52,7 @@ function nbCLIInput($title, $default = true, $silent = false)
     if ($silent && strlen($default) > 0) {
         return $default;
     }
-    
+
     do {
         echo $title;
         if ($default !== false && $default !== true) {
@@ -61,11 +61,11 @@ function nbCLIInput($title, $default = true, $silent = false)
         echo ": ";
         $input = preg_replace('/^\\s*/', '', preg_replace('/\\s*$/', '', fgets(STDIN)));
     } while (strlen($input) === 0 && ($default === true || strlen($default) === 0));
-    
+
     if (strlen($input) === 0 && strlen($default) > 0) {
         $input = $default;
     }
-    
+
     return $input;
 }
 
@@ -94,10 +94,10 @@ function nbCLICheckConfirm($die = true, $die_message = false)
 /**
  * Generic request to the user for a Yes/no answer. If $die is true
  * then the execution is aborted if the user answers No.
- * @param type $title Title to preceed the cursor.
- * @param type $die_message In case to die, the message to show.
- * @param boolean $die True if the execution die inmediately.
- * @return boolean Return true y the user type Yes or false if not.
+ * @param string $title Title to preceed the cursor.
+ * @param string $die_message In case to die, the message to show.
+ * @param bool $die True if the execution die inmediately.
+ * @return bool Return true y the user type Yes or false if not.
  */
 function nbCLICheckYesNo($title, $die_message = false, $die = true)
 {
@@ -128,13 +128,13 @@ function nbCLICheckYesNo($title, $die_message = false, $die = true)
  * - '::' => Optional
  * - '' => Empty
  * @param string $default Default value if the parameter does not exists.
- * @param boolean $die If true the execution die.
+ * @param bool $die If true the execution die.
  * @return string Return a string containing finally value for the parameter.
  */
 function nbCLICheckOption($short, $large, $required = '', $default = false, $die = true)
 {
     $retval = $default;
-    
+
     $options = getopt($short . $required, array($large . $required));
     if (array_key_exists($short, $options)) {
         if (array_key_exists($large, $options)) {
@@ -149,6 +149,6 @@ function nbCLICheckOption($short, $large, $required = '', $default = false, $die
     } elseif ($die && $required === ':') {
         die ("$large not defined\n");
     }
-    
+
     return $retval;
 }
