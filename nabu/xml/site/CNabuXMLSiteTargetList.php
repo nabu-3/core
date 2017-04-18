@@ -33,8 +33,6 @@ class CNabuXMLSiteTargetList extends CNabuXMLSiteTargetListBase
 {
     protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
     {
-        $nb_child->getCTAs(true);
-        $nb_child->canonizeCTAs();
         return parent::createXMLChildObject($nb_child);
     }
 }
