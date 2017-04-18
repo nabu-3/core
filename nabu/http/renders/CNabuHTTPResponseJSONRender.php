@@ -40,7 +40,7 @@ class CNabuHTTPResponseJSONRender extends CNabuHTTPResponseRenderAdapter
         if ($this->nb_render_data->isEmpty()) {
             echo "{}";
         } else {
-            echo json_encode($this->data);
+            echo json_encode($this->nb_render_data->getTreeData(null, true));
         }
     }
 }
