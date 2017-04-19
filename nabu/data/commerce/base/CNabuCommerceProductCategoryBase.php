@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/17 22:37:12 UTC
+ * Created: 2017/04/19 12:55:36 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\commerce\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\commerce\builtin\CNabuBuiltInCommerceProductCategoryLanguage;
 use \nabu\data\commerce\CNabuCommerce;
@@ -47,9 +49,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\commerce\base
  */
-abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
     use TNabuCommerceChild;
+    use TNabuHashed;
     use TNabuMediotecaChild;
     use TNabuTranslated;
 
@@ -311,6 +314,27 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
             );
         }
         $this->setValue('nb_commerce_product_category_id', $id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Commerce Product Category Hash attribute value
+     * @return null|string Returns the Commerce Product Category Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_commerce_product_category_hash');
+    }
+
+    /**
+     * Sets the Commerce Product Category Hash attribute value.
+     * @param null|string $hash New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setHash(string $hash = null) : CNabuDataObject
+    {
+        $this->setValue('nb_commerce_product_category_hash', $hash);
         
         return $this;
     }

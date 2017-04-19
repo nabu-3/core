@@ -19,9 +19,20 @@
             "extra": "auto_increment",
             "comment": ""
         },
+        "nb_commerce_product_category_hash": {
+            "name": "nb_commerce_product_category_hash",
+            "ordinal": "2",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_commerce_id": {
             "name": "nb_commerce_id",
-            "ordinal": "2",
+            "ordinal": "3",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -32,7 +43,7 @@
         },
         "nb_medioteca_id": {
             "name": "nb_medioteca_id",
-            "ordinal": "3",
+            "ordinal": "4",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -43,7 +54,7 @@
         },
         "nb_commerce_product_category_parent_id": {
             "name": "nb_commerce_product_category_parent_id",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -54,7 +65,7 @@
         },
         "nb_commerce_product_category_order": {
             "name": "nb_commerce_product_category_order",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -65,7 +76,7 @@
         },
         "nb_commerce_product_category_key": {
             "name": "nb_commerce_product_category_key",
-            "ordinal": "6",
+            "ordinal": "7",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(30)",
@@ -76,7 +87,7 @@
         },
         "nb_commerce_product_category_attributes": {
             "name": "nb_commerce_product_category_attributes",
-            "ordinal": "7",
+            "ordinal": "8",
             "data_type": "longtext",
             "precision": null,
             "type": "longtext",
@@ -118,6 +129,22 @@
                 "nb_commerce_product_category_key": {
                     "name": "nb_commerce_product_category_key",
                     "ordinal": "2",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_commerce_product_category_hash_idx": {
+            "name": "nb_commerce_product_category_hash_idx",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_commerce_product_category_hash": {
+                    "name": "nb_commerce_product_category_hash",
+                    "ordinal": "1",
                     "collation": "ASC",
                     "null": true,
                     "subpart": null,
