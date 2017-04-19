@@ -49,11 +49,18 @@ abstract class CNabuXMLObject extends CNabuObject
     /**
      * Encode structured data in a well formed string as child of $parent Element.
      * @param SimpleXMLElement $parent Parent of this XML node.
+     * @return SimpleXMLElement Returns the created XML element.
      */
-    public function build(SimpleXMLElement $parent)
+    public function build(SimpleXMLElement $parent = null) : SimpleXMLElement
     {
-        $xml = $parent->addChild(get_called_class()::getTagName());
+        if ($parent === null) {
+            $xml = new SimpleXMLElement('<' . get_called_class()::getTagName() . "/>", LIBXML_PARSEHUGE);
+        } else {
+            $xml = $parent->addChild(get_called_class()::getTagName());
+        }
         $this->setAttributes($xml);
         $this->setChilds($xml);
+
+        return $xml;
     }
 }

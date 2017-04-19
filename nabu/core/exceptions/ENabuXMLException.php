@@ -20,25 +20,25 @@
 namespace nabu\core\exceptions;
 
 /**
- * Exception to inform security errors.
+ * Exception to inform XML errors.
  * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package \nabu\core\exceptions
  */
-class ENabuSecurityException extends ENabuException
+class ENabuXMLException extends ENabuException
 {
-    /** @var int Customer is not the owner of this object. */
-    const ERROR_CUSTOMER_NOT_OWNER                      = 0x0001;
+    /** @var int Only one Root Element is allowed. */
+    const ERROR_ONLY_ONE_ROOT                           = 0x0001;
 
     /** @var array $error_messages Error array messages list. */
     private static $error_messages = array(
-        ENabuSecurityException::ERROR_CUSTOMER_NOT_OWNER =>
-            'Customer is not the owner of this object.'
+        ENabuXMLException::ERROR_ONLY_ONE_ROOT =>
+            'Only one Root Element is allowed.'
     );
 
     public function __construct($code, $values = null)
     {
-        parent::__construct(ENabuSecurityException::$error_messages[$code], $code, $values);
+        parent::__construct(ENabuXMLException::$error_messages[$code], $code, $values);
     }
 }
