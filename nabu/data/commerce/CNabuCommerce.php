@@ -79,6 +79,7 @@ class CNabuCommerce extends CNabuCommerceBase
     public function getProductCategories($force = false)
     {
         if ($this->nb_commerce_product_category_list->isEmpty() || $force) {
+            $this->nb_commerce_product_category_list->clear();
             $this->nb_commerce_product_category_list->merge(
                 CNabuCommerceProductCategory::getCategoriesForCommerce($this)
             );
