@@ -105,6 +105,7 @@ class CNabuCommerce extends CNabuCommerceBase
     {
         $trdata = parent::getTreeData($nb_language, $dataonly);
 
+        $trdata['languages'] = $this->getLanguages();
         $trdata['categories'] = $this->nb_commerce_product_category_list;
 
         return $trdata;
@@ -119,6 +120,6 @@ class CNabuCommerce extends CNabuCommerceBase
     public function refresh(bool $force = false, bool $cascade = false) : bool
     {
         return parent::refresh($force, $cascade) &&
-               (!$cascade || $this->getProductCategories());
+               (!$cascade || $this->getProductCategories($force));
     }
 }
