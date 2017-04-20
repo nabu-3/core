@@ -36,10 +36,20 @@ abstract class CNabuXMLObject extends CNabuObject
      */
     abstract static protected function getTagName() : string;
     /**
+     * Get attributes from an XML Element passed as parameter.
+     * @param SimpleXMLElement $element Element instance to get attributes.
+     */
+    abstract protected function getAttributes(SimpleXMLElement $element);
+    /**
      * Add attributes to XML Element passed as parameter.
      * @param SimpleXMLElement $element Element instance to add attributes.
      */
     abstract protected function setAttributes(SimpleXMLElement $element);
+    /**
+     * Get childs from an XML Element passed as parameter.
+     * @param SimpleXMLElement $element Element instance to get attributes.
+     */
+    abstract protected function getChilds(SimpleXMLElement $element);
     /**
      * Add child elements to XML Element passed as parameter.
      * @param SimpleXMLElement $element Element instance to add childs.

@@ -19,6 +19,7 @@
 
 namespace nabu\xml;
 use SimpleXMLElement;
+use nabu\core\exceptions\ENabuXMLException;
 use nabu\core\interfaces\INabuHashed;
 use nabu\data\CNabuDataObject;
 
@@ -34,12 +35,48 @@ abstract class CNabuXMLDataObject extends CNabuXMLObject
     /** @var CNabuDataObject $nb_data_object Data Object instance. */
     protected $nb_data_object = null;
 
-    public function __construct(CNabuDataObject $nb_data_object)
+    /**
+     * Abstract method to locate a Data Object.
+     * @param SimpleXMLElement $element Element to locate her Data Object.
+     * @param CNabuDataObject $data_parent Data Parent object.
+     * @return CNabuDataObject Returns the Data Object found if any or null if none.
+     */
+    abstract protected function locateDataObject(SimpleXMLElement $element, CNabuDataObject $data_parent = null);
+
+    public function __construct(CNabuDataObject $nb_data_object = null)
     {
         parent::__construct();
         $this->nb_data_object = $nb_data_object;
         if ($nb_data_object instanceof INabuHashed) {
             $nb_data_object->grantHash(true);
+        }
+    }
+
+    /**
+     * Get a group of attributes listed in an array.
+     * @param SimpleXMLElement $element Element instance to get attributes.
+     * @param array $attributes Associative array with the list of data fields as keys and the attribute name as value.
+     * @param bool $ignore_empty If true, empty values are ignored (null, '')
+     * @return int Returns the number of attributes setted.
+     */
+    protected function getAttributesFromList(
+        SimpleXMLElement $element,
+        array $attributes,
+        bool $ignore_empty = false
+    ) : int {
+        $count = 0;
+
+        if (count($attributes) > 0) {
+            foreach ($attributes as $field => $attr) {
+                if (array_key_exists($attr, $element{'@attributes'}) &&
+                    (!$ignore_empty ||
+                     !is_null($value = $element{'@attributes'}[$attr]) ||
+                     !(is_string($value) && strlen($value) === 0)
+                    )
+                ) {
+                    $this->nb_data_object->setValue($field, $value);
+                }
+            }
         }
     }
 
@@ -72,6 +109,21 @@ abstract class CNabuXMLDataObject extends CNabuXMLObject
         }
 
         return $count;
+    }
+
+    /**
+     * Gets a group of childs listed in an array as Element > CDATA structure.
+     * @param SimpleXMLElement $element Element instance to get childs.
+     * @param array $childs Associative array with the list of data fields as keys and the element name as value.
+     * @param bool $ignore_empty If true, empty values are ignored (null, '')
+     * @return int Returns the number of childs setted.
+     */
+    protected function getChildsAsCDATAFromList(
+        SimpleXMLElement $element,
+        array $childs,
+        bool $ignore_empty = false
+    ) : int {
+        return 0;
     }
 
     /**
@@ -116,5 +168,23 @@ abstract class CNabuXMLDataObject extends CNabuXMLObject
                 ? '<![CDATA[]]>'
                 : "<![CDATA[$source]]>"
         );
+    }
+
+    /**
+     * Parses a XML in a string an extract this structure.
+     * @param string $raw XML raw string to be parsed.
+     * @return bool Returns true if success.
+     * @throws ENabuXMLException Raises an exception if any error is detected parsing or interpreting the content.
+     */
+    public function parse(string $raw)
+    {
+        $root = new SimpleXMLElement($raw);
+
+        if ($this->locateDataObject($root)) {
+            $this->getAttributes($root);
+            $this->getChilds($root);
+        } else {
+            throw new ENabuXMLException(ENabuXMLException::ERROR_UNEXPECTED_ELEMENT, array($root->getName()));
+        }
     }
 }

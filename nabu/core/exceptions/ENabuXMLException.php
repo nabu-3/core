@@ -30,11 +30,15 @@ class ENabuXMLException extends ENabuException
 {
     /** @var int Only one Root Element is allowed. */
     const ERROR_ONLY_ONE_ROOT                           = 0x0001;
+    /** @var int Unexpected Element. Requires element name. */
+    const ERROR_UNEXPECTED_ELEMENT                      = 0x0002;
 
     /** @var array $error_messages Error array messages list. */
     private static $error_messages = array(
         ENabuXMLException::ERROR_ONLY_ONE_ROOT =>
-            'Only one Root Element is allowed.'
+            'Only one Root Element is allowed.',
+        ENabuXMLException::ERROR_UNEXPECTED_ELEMENT =>
+            'Unexpected Element %s'
     );
 
     public function __construct($code, $values = null)
