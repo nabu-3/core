@@ -30,4 +30,10 @@ interface INabuHashed
      * @return string Returns a valid hash.
      */
     public function grantHash(bool $save = false) : string;
+    /**
+     * Find an instance identified by nb_role_hash field.
+     * @param string $hash Hash to search
+     * @return CNabuDataObject Returns a valid instance if exists or null if not.
+     */
+    public static function findByHash(string $hash);
 }

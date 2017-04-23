@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/19 12:55:07 UTC
+ * Created: 2017/04/23 22:38:16 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,17 +27,21 @@ namespace nabu\data\customer\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
+use \nabu\data\customer\CNabuCustomer;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity Customer stored in the storage named nb_customer.
- * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\customer\base
  */
-abstract class CNabuCustomerBase extends CNabuDBInternalObject
+abstract class CNabuCustomerBase extends CNabuDBInternalObject implements INabuHashed
 {
+    use TNabuHashed;
+
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
      * the instance is deserialized from the storage.
@@ -84,6 +88,23 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
                    . "where nb_customer_id=%nb_customer_id\$d "
               )
             : null;
+    }
+
+    /**
+     * Find an instance identified by nb_customer_hash field.
+     * @param string $hash Hash to search
+     * @return CNabuDataObject Returns a valid instance if exists or null if not.
+     */
+    public static function findByHash(string $hash)
+    {
+        return CNabuCustomer::buildObjectFromSQL(
+                'select * '
+                . 'from nb_customer '
+               . "where nb_customer_hash='%hash\$s'",
+                array(
+                    'hash' => $hash
+                )
+        );
     }
 
     /**
@@ -158,6 +179,27 @@ abstract class CNabuCustomerBase extends CNabuDBInternalObject
             );
         }
         $this->setValue('nb_customer_id', $id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Customer Hash attribute value
+     * @return null|string Returns the Customer Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_customer_hash');
+    }
+
+    /**
+     * Sets the Customer Hash attribute value.
+     * @param null|string $hash New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setHash(string $hash = null) : CNabuDataObject
+    {
+        $this->setValue('nb_customer_hash', $hash);
         
         return $this;
     }

@@ -45,9 +45,18 @@ abstract class CNabuXMLDataObjectList extends CNabuXMLObject
     {
         $this->list = $list;
     }
+
+    protected function getAttributes(SimpleXMLElement $element)
+    {
+    }
+
     protected function setAttributes(SimpleXMLElement $element)
     {
         $element->addAttribute('count', $this->list->getSize());
+    }
+
+    protected function getChilds(SimpleXMLElement $element)
+    {
     }
 
     protected function setChilds(SimpleXMLElement $element)

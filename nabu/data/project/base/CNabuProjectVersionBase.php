@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/19 12:55:51 UTC
+ * Created: 2017/04/23 22:39:03 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -35,6 +35,7 @@ use \nabu\data\lang\interfaces\INabuTranslation;
 use \nabu\data\lang\traits\TNabuTranslated;
 use \nabu\data\project\builtin\CNabuBuiltInProjectVersionLanguage;
 use \nabu\data\project\CNabuProject;
+use \nabu\data\project\CNabuProjectVersion;
 use \nabu\data\project\CNabuProjectVersionLanguage;
 use \nabu\data\project\CNabuProjectVersionLanguageList;
 use \nabu\data\project\CNabuProjectVersionList;
@@ -43,7 +44,6 @@ use nabu\data\project\traits\TNabuProjectChild;
 
 /**
  * Class to manage the entity Project Version stored in the storage named nb_project_version.
- * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\project\base
  */
@@ -101,6 +101,23 @@ abstract class CNabuProjectVersionBase extends CNabuDBInternalObject implements 
                    . "where nb_project_version_id=%nb_project_version_id\$d "
               )
             : null;
+    }
+
+    /**
+     * Find an instance identified by nb_project_version_hash field.
+     * @param string $hash Hash to search
+     * @return CNabuDataObject Returns a valid instance if exists or null if not.
+     */
+    public static function findByHash(string $hash)
+    {
+        return CNabuProjectVersion::buildObjectFromSQL(
+                'select * '
+                . 'from nb_project_version '
+               . "where nb_project_version_hash='%hash\$s'",
+                array(
+                    'hash' => $hash
+                )
+        );
     }
 
     /**

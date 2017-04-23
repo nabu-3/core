@@ -29,5 +29,4 @@ use nabu\xml\lang\base\CNabuXMLLanguageBase;
  */
 class CNabuXMLLanguage extends CNabuXMLLanguageBase
 {
-
 }

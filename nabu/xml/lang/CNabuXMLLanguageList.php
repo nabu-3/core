@@ -18,6 +18,10 @@
  */
 
 namespace nabu\xml\lang;
+use SimpleXMLElement;
+use nabu\data\CNabuDataObject;
+use nabu\data\CNabuDataObjectList;
+use nabu\data\lang\CNabuLanguageList;
 use nabu\xml\lang\base\CNabuXMLLanguageListBase;
 
 /**
@@ -29,5 +33,23 @@ use nabu\xml\lang\base\CNabuXMLLanguageListBase;
  */
 class CNabuXMLLanguageList extends CNabuXMLLanguageListBase
 {
+    protected function locateDataObject(SimpleXMLElement $element, CNabuDataObject $data_parent = null): bool
+    {
+        if (!($this->list instanceof CNabuDataObjectList)) {
+            $this->list = new CNabuLanguageList();
+        }
 
+        return ($this->list instanceof CNabuDataObjectList);
+    }
+
+    protected function getChilds(SimpleXMLElement $element)
+    {
+        parent::getChilds($element);
+
+        foreach ($element->children() as $child) {
+            $xml = new CNabuXMLLanguage();
+            $xml->collect($child);
+            $this->list->addItem($xml->getDataObject());
+        }
+    }
 }

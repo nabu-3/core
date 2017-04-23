@@ -19,9 +19,20 @@
             "extra": "auto_increment",
             "comment": ""
         },
+        "nb_customer_hash": {
+            "name": "nb_customer_hash",
+            "ordinal": "2",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_customer_fiscal_name": {
             "name": "nb_customer_fiscal_name",
-            "ordinal": "2",
+            "ordinal": "3",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(150)",
@@ -32,7 +43,7 @@
         },
         "nb_customer_fiscal_number": {
             "name": "nb_customer_fiscal_number",
-            "ordinal": "3",
+            "ordinal": "4",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(16)",
@@ -43,7 +54,7 @@
         },
         "nb_customer_fiscal_address_id": {
             "name": "nb_customer_fiscal_address_id",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -54,7 +65,7 @@
         },
         "nb_customer_contact_name": {
             "name": "nb_customer_contact_name",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(100)",
@@ -65,7 +76,7 @@
         },
         "nb_customer_contact_position": {
             "name": "nb_customer_contact_position",
-            "ordinal": "6",
+            "ordinal": "7",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(50)",
@@ -76,7 +87,7 @@
         },
         "nb_customer_contact_telephone": {
             "name": "nb_customer_contact_telephone",
-            "ordinal": "7",
+            "ordinal": "8",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(16)",
@@ -87,7 +98,7 @@
         },
         "nb_customer_contact_cellular": {
             "name": "nb_customer_contact_cellular",
-            "ordinal": "8",
+            "ordinal": "9",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(16)",
@@ -98,7 +109,7 @@
         },
         "nb_customer_contact_email": {
             "name": "nb_customer_contact_email",
-            "ordinal": "9",
+            "ordinal": "10",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(256)",
@@ -109,7 +120,7 @@
         },
         "nb_customer_contact_address_id": {
             "name": "nb_customer_contact_address_id",
-            "ordinal": "10",
+            "ordinal": "11",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -120,7 +131,7 @@
         },
         "nb_customer_address_id": {
             "name": "nb_customer_address_id",
-            "ordinal": "11",
+            "ordinal": "12",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -131,7 +142,7 @@
         },
         "nb_customer_avatar_medioteca_id": {
             "name": "nb_customer_avatar_medioteca_id",
-            "ordinal": "12",
+            "ordinal": "13",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -152,6 +163,22 @@
                     "name": "nb_customer_id",
                     "ordinal": "1",
                     "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_customer_hash_idx": {
+            "name": "nb_customer_hash_idx",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_customer_hash": {
+                    "name": "nb_customer_hash",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
                     "comments": ""
                 }
             }

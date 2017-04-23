@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/19 12:55:50 UTC
+ * Created: 2017/04/23 22:39:02 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -39,6 +39,7 @@ use \nabu\data\lang\interfaces\INabuTranslation;
 use \nabu\data\lang\traits\TNabuTranslated;
 use \nabu\data\medioteca\traits\TNabuMediotecaChild;
 use \nabu\data\project\builtin\CNabuBuiltInProjectLanguage;
+use \nabu\data\project\CNabuProject;
 use \nabu\data\project\CNabuProjectLanguage;
 use \nabu\data\project\CNabuProjectLanguageList;
 use \nabu\data\project\CNabuProjectList;
@@ -46,7 +47,6 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity Project stored in the storage named nb_project.
- * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\project\base
  */
@@ -105,6 +105,23 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
                    . "where nb_project_id=%nb_project_id\$d "
               )
             : null;
+    }
+
+    /**
+     * Find an instance identified by nb_project_hash field.
+     * @param string $hash Hash to search
+     * @return CNabuDataObject Returns a valid instance if exists or null if not.
+     */
+    public static function findByHash(string $hash)
+    {
+        return CNabuProject::buildObjectFromSQL(
+                'select * '
+                . 'from nb_project '
+               . "where nb_project_hash='%hash\$s'",
+                array(
+                    'hash' => $hash
+                )
+        );
     }
 
     /**

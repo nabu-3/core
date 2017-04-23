@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/19 12:55:11 UTC
+ * Created: 2017/04/23 22:38:20 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -46,7 +46,6 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity Role stored in the storage named nb_role.
- * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\security\base
  */
@@ -104,6 +103,23 @@ abstract class CNabuRoleBase extends CNabuDBInternalObject implements INabuTrans
                    . "where nb_role_id=%nb_role_id\$d "
               )
             : null;
+    }
+
+    /**
+     * Find an instance identified by nb_role_hash field.
+     * @param string $hash Hash to search
+     * @return CNabuDataObject Returns a valid instance if exists or null if not.
+     */
+    public static function findByHash(string $hash)
+    {
+        return CNabuRole::buildObjectFromSQL(
+                'select * '
+                . 'from nb_role '
+               . "where nb_role_hash='%hash\$s'",
+                array(
+                    'hash' => $hash
+                )
+        );
     }
 
     /**

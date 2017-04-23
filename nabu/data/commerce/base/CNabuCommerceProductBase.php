@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/19 12:55:37 UTC
+ * Created: 2017/04/23 22:38:48 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -41,7 +41,6 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity Commerce Product stored in the storage named nb_commerce_product.
- * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\commerce\base
  */

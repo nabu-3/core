@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/19 12:55:06 UTC
+ * Created: 2017/04/23 22:38:15 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -25,6 +25,7 @@
 
 namespace nabu\xml\lang\base;
 
+use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\xml\CNabuXMLDataObject;
 use \SimpleXMLElement;
@@ -42,7 +43,7 @@ abstract class CNabuXMLLanguageBase extends CNabuXMLDataObject
      * Instantiates the class. Receives as parameter a qualified CNabuLanguage class.
      * @param CNabuLanguage $nb_language $this->entity_name instance to be managed as XML
      */
-    public function __construct(CNabuLanguage $nb_language)
+    public function __construct(CNabuLanguage $nb_language = null)
     {
         parent::__construct($nb_language);
     }
@@ -57,7 +58,52 @@ abstract class CNabuXMLLanguageBase extends CNabuXMLDataObject
     }
 
     /**
-     * Set default attributes of Language XML Element.
+     * Locate a Data Object.
+     * @param SimpleXMLElement $element Element to locate the Data Object.
+     * @param CNabuDataObject $data_parent Data Parent object.
+     * @return bool Returns true if the Data Object found or false if not.
+     */
+    protected function locateDataObject(SimpleXMLElement $element, CNabuDataObject $data_parent = null) : bool
+    {
+        $retval = false;
+        
+        if (isset($element['GUID'])) {
+            $guid = (string)$element['GUID'];
+            if (!($this->nb_data_object instanceof CNabuLanguage)) {
+                $this->nb_data_object = CNabuLanguage::findByHash($guid);
+            } else {
+                $this->nb_data_object = null;
+            }
+        
+            if (!($this->nb_data_object instanceof CNabuLanguage)) {
+                $this->nb_data_object = new CNabuLanguage();
+                $this->nb_data_object->setHash($guid);
+            }
+            $retval = true;
+        }
+        
+        return $retval;
+    }
+
+    /**
+     * Get default attributes of Language from XML Element.
+     * @param SimpleXMLElement $element XML Element to get attributes
+     */
+    protected function getAttributes(SimpleXMLElement $element)
+    {
+        $this->getAttributesFromList($element, array(
+            'nb_language_type' => 'type',
+            'nb_language_enabled' => 'enabled',
+            'nb_language_ISO639_1' => 'ISO639v1',
+            'nb_language_ISO639_2' => 'ISO639v2',
+            'nb_language_is_api' => 'isAPI',
+            'nb_language_default_country_code' => 'defaultCountryCode',
+            'nb_language_flag_url' => 'flagURL'
+        ), false);
+    }
+
+    /**
+     * Set default attributes of Language in XML Element.
      * @param SimpleXMLElement $element XML Element to set attributes
      */
     protected function setAttributes(SimpleXMLElement $element)
@@ -71,6 +117,17 @@ abstract class CNabuXMLLanguageBase extends CNabuXMLDataObject
             'nb_language_is_api' => 'isAPI',
             'nb_language_default_country_code' => 'defaultCountryCode',
             'nb_language_flag_url' => 'flagURL'
+        ), false);
+    }
+
+    /**
+     * Get default childs of Language from XML Element as Element > CDATA structure.
+     * @param SimpleXMLElement $element XML Element to get childs
+     */
+    protected function getChilds(SimpleXMLElement $element)
+    {
+        $this->getChildsAsCDATAFromList($element, array(
+            'nb_language_name' => 'name'
         ), false);
     }
 

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/19 12:55:45 UTC
+ * Created: 2017/04/23 22:38:56 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -44,7 +44,6 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity Medioteca Item stored in the storage named nb_medioteca_item.
- * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\medioteca\base
  */
@@ -102,6 +101,23 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
                    . "where nb_medioteca_item_id=%nb_medioteca_item_id\$d "
               )
             : null;
+    }
+
+    /**
+     * Find an instance identified by nb_medioteca_item_hash field.
+     * @param string $hash Hash to search
+     * @return CNabuDataObject Returns a valid instance if exists or null if not.
+     */
+    public static function findByHash(string $hash)
+    {
+        return CNabuMediotecaItem::buildObjectFromSQL(
+                'select * '
+                . 'from nb_medioteca_item '
+               . "where nb_medioteca_item_hash='%hash\$s'",
+                array(
+                    'hash' => $hash
+                )
+        );
     }
 
     /**

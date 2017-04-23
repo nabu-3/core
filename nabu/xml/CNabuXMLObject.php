@@ -20,6 +20,8 @@
 namespace nabu\xml;
 use SimpleXMLElement;
 use nabu\core\CNabuObject;
+use nabu\core\exceptions\ENabuXMLException;
+use nabu\data\CNabuDataObject;
 
 /**
  * Abstract class to manage XML elements.
@@ -35,6 +37,13 @@ abstract class CNabuXMLObject extends CNabuObject
      * @return string Returns the name of the Tag.
      */
     abstract static protected function getTagName() : string;
+    /**
+     * Abstract method to locate a Data Object.
+     * @param SimpleXMLElement $element Element to locate her Data Object.
+     * @param CNabuDataObject $data_parent Data Parent object.
+     * @return bool Returns true if the Data Object found or false if not.
+     */
+    abstract protected function locateDataObject(SimpleXMLElement $element, CNabuDataObject $data_parent = null) : bool;
     /**
      * Get attributes from an XML Element passed as parameter.
      * @param SimpleXMLElement $element Element instance to get attributes.
@@ -72,5 +81,32 @@ abstract class CNabuXMLObject extends CNabuObject
         $this->setChilds($xml);
 
         return $xml;
+    }
+
+    /**
+     * Parses a XML in a string an extract this structure.
+     * @param string $raw XML raw string to be parsed.
+     * @throws ENabuXMLException Raises an exception if any error is detected parsing or interpreting the content.
+     */
+    public function parse(string $raw)
+    {
+        $root = new SimpleXMLElement($raw);
+
+        $this->collect($root);
+    }
+
+    /**
+     * Collects data from a XML branch.
+     * @param SimpleXMLElement $element Element of XML containing data to be collected.
+     * @throws ENabuXMLException Raises an exception if any error is detected collecting the content.
+     */
+    public function collect(SimpleXMLElement $element)
+    {
+        if ($element->getName() === get_called_class()::getTagName() && $this->locateDataObject($element)) {
+            $this->getAttributes($element);
+            $this->getChilds($element);
+        } else {
+            throw new ENabuXMLException(ENabuXMLException::ERROR_UNEXPECTED_ELEMENT, array($element->getName()));
+        }
     }
 }
