@@ -202,6 +202,7 @@ class CNabuSiteTargetCTA extends CNabuSiteTargetCTABase implements INabuRoleMask
                 } elseif ($this->isUsingURIAsURL()) {
                     $nb_site_target_cta_translation->setFinalURL($nb_site_target_cta_translation->getTargetURL());
                 }
+                return true;
             }
         );
     }
