@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/23 22:38:32 UTC
+ * Created: 2017/04/24 14:20:19 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -25,7 +25,6 @@
 
 namespace nabu\xml\site\base;
 
-use \nabu\data\CNabuDataObject;
 use \nabu\data\site\CNabuSiteTargetSection;
 use \nabu\xml\lang\CNabuXMLTranslated;
 use \nabu\xml\lang\CNabuXMLTranslationsList;
@@ -45,7 +44,7 @@ abstract class CNabuXMLSiteTargetSectionBase extends CNabuXMLTranslated
      * Instantiates the class. Receives as parameter a qualified CNabuSiteTargetSection class.
      * @param CNabuSiteTargetSection $nb_site_target_section $this->entity_name instance to be managed as XML
      */
-    public function __construct(CNabuSiteTargetSection $nb_site_target_section = null)
+    public function __construct(CNabuSiteTargetSection $nb_site_target_section)
     {
         parent::__construct($nb_site_target_section);
     }
@@ -69,49 +68,7 @@ abstract class CNabuXMLSiteTargetSectionBase extends CNabuXMLTranslated
     }
 
     /**
-     * Locate a Data Object.
-     * @param SimpleXMLElement $element Element to locate the Data Object.
-     * @param CNabuDataObject $data_parent Data Parent object.
-     * @return bool Returns true if the Data Object found or false if not.
-     */
-    protected function locateDataObject(SimpleXMLElement $element, CNabuDataObject $data_parent = null) : bool
-    {
-        $retval = false;
-        
-        if (isset($element['GUID'])) {
-            $guid = (string)$element['GUID'];
-            if (!($this->nb_data_object instanceof CNabuSiteTargetSection)) {
-                $this->nb_data_object = CNabuSiteTargetSection::findByHash($guid);
-            } else {
-                $this->nb_data_object = null;
-            }
-        
-            if (!($this->nb_data_object instanceof CNabuSiteTargetSection)) {
-                $this->nb_data_object = new CNabuSiteTargetSection();
-                $this->nb_data_object->setHash($guid);
-            }
-            $retval = true;
-        }
-        
-        return $retval;
-    }
-
-    /**
-     * Get default attributes of Site Target Section from XML Element.
-     * @param SimpleXMLElement $element XML Element to get attributes
-     */
-    protected function getAttributes(SimpleXMLElement $element)
-    {
-        $this->getAttributesFromList($element, array(
-            'nb_site_target_section_key' => 'key',
-            'nb_site_target_section_order' => 'order',
-            'nb_site_target_section_anchor' => 'anchor',
-            'nb_site_target_section_css_class' => 'cssClass'
-        ), false);
-    }
-
-    /**
-     * Set default attributes of Site Target Section in XML Element.
+     * Set default attributes of Site Target Section XML Element.
      * @param SimpleXMLElement $element XML Element to set attributes
      */
     protected function setAttributes(SimpleXMLElement $element)
@@ -123,15 +80,6 @@ abstract class CNabuXMLSiteTargetSectionBase extends CNabuXMLTranslated
             'nb_site_target_section_anchor' => 'anchor',
             'nb_site_target_section_css_class' => 'cssClass'
         ), false);
-    }
-
-    /**
-     * Get default childs of Site Target Section from XML Element as Element > CDATA structure.
-     * @param SimpleXMLElement $element XML Element to get childs
-     */
-    protected function getChilds(SimpleXMLElement $element)
-    {
-        parent::getChilds($element)
     }
 
     /**

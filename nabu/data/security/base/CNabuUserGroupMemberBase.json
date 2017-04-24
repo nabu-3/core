@@ -1,0 +1,149 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_user_group_member",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": null,
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_user_id": {
+            "name": "nb_user_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(10) unsigned",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_id": {
+            "name": "nb_user_group_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(10) unsigned",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_member_creation_datetime": {
+            "name": "nb_user_group_member_creation_datetime",
+            "ordinal": "3",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_member_invitation_datetime": {
+            "name": "nb_user_group_member_invitation_datetime",
+            "ordinal": "4",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_member_accept_datetime": {
+            "name": "nb_user_group_member_accept_datetime",
+            "ordinal": "5",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_member_disabled_datetime": {
+            "name": "nb_user_group_member_disabled_datetime",
+            "ordinal": "6",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_member_new": {
+            "name": "nb_user_group_member_new",
+            "ordinal": "7",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "T",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_member_admin": {
+            "name": "nb_user_group_member_admin",
+            "ordinal": "8",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_member_status": {
+            "name": "nb_user_group_member_status",
+            "ordinal": "9",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('I','R','E','D')",
+            "default": "D",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_user_id": {
+                    "name": "nb_user_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                },
+                "nb_user_group_id": {
+                    "name": "nb_user_group_id",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_user_group_member_nb_user_group_fk": {
+            "name": "nb_user_group_member_nb_user_group_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_user_group_id": {
+                    "name": "nb_user_group_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

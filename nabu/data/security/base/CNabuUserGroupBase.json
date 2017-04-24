@@ -1,0 +1,175 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_user_group",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "1",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_user_group_id": {
+            "name": "nb_user_group_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(10) unsigned",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_customer_id": {
+            "name": "nb_customer_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(10) unsigned",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_type_id": {
+            "name": "nb_user_group_type_id",
+            "ordinal": "3",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(10) unsigned",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_id": {
+            "name": "nb_user_id",
+            "ordinal": "4",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_id": {
+            "name": "nb_medioteca_id",
+            "ordinal": "5",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_medioteca_item_id": {
+            "name": "nb_medioteca_item_id",
+            "ordinal": "6",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_creation_datetime": {
+            "name": "nb_user_group_creation_datetime",
+            "ordinal": "7",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_disabled_datetime": {
+            "name": "nb_user_group_disabled_datetime",
+            "ordinal": "8",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_group_status": {
+            "name": "nb_user_group_status",
+            "ordinal": "9",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('D','E')",
+            "default": "E",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_user_group_id": {
+                    "name": "nb_user_group_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_user_group_nb_user_fk": {
+            "name": "nb_user_group_nb_user_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_user_id": {
+                    "name": "nb_user_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_user_group_nb_medioteca_fk": {
+            "name": "nb_user_group_nb_medioteca_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_medioteca_id": {
+                    "name": "nb_medioteca_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_user_group_nb_user_group_type_fk": {
+            "name": "nb_user_group_nb_user_group_type_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_user_group_type_id": {
+                    "name": "nb_user_group_type_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}

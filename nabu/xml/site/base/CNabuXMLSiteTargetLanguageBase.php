@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/23 22:38:30 UTC
+ * Created: 2017/04/24 14:20:17 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -25,7 +25,6 @@
 
 namespace nabu\xml\site\base;
 
-use \nabu\data\CNabuDataObject;
 use \nabu\data\site\CNabuSiteTargetLanguage;
 use \nabu\xml\lang\CNabuXMLTranslation;
 use \SimpleXMLElement;
@@ -43,37 +42,9 @@ abstract class CNabuXMLSiteTargetLanguageBase extends CNabuXMLTranslation
      * Instantiates the class. Receives as parameter a qualified CNabuSiteTargetLanguage class.
      * @param CNabuSiteTargetLanguage $nb_site_target_lang $this->entity_name instance to be managed as XML
      */
-    public function __construct(CNabuSiteTargetLanguage $nb_site_target_lang = null)
+    public function __construct(CNabuSiteTargetLanguage $nb_site_target_lang)
     {
         parent::__construct($nb_site_target_lang);
-    }
-
-    /**
-     * Locate a Data Object.
-     * @param SimpleXMLElement $element Element to locate the Data Object.
-     * @param CNabuDataObject $data_parent Data Parent object.
-     * @return bool Returns true if the Data Object found or false if not.
-     */
-    protected function locateDataObject(SimpleXMLElement $element, CNabuDataObject $data_parent = null) : bool
-    {
-        $retval = false;
-        
-        if (isset($element['GUID'])) {
-            $guid = (string)$element['GUID'];
-            if (!($this->nb_data_object instanceof CNabuSiteTargetLanguage)) {
-                $this->nb_data_object = CNabuSiteTargetLanguage::findByHash($guid);
-            } else {
-                $this->nb_data_object = null;
-            }
-        
-            if (!($this->nb_data_object instanceof CNabuSiteTargetLanguage)) {
-                $this->nb_data_object = new CNabuSiteTargetLanguage();
-                $this->nb_data_object->setHash($guid);
-            }
-            $retval = true;
-        }
-        
-        return $retval;
     }
 
     /**
@@ -90,22 +61,6 @@ abstract class CNabuXMLSiteTargetLanguageBase extends CNabuXMLTranslation
                 'nb_site_target_lang_main_image' => 'image'
             ), false);
         }
-    }
-
-    /**
-     * Get default childs of Site Target Language from XML Element as Element > CDATA structure.
-     * @param SimpleXMLElement $element XML Element to get childs
-     */
-    protected function getChilds(SimpleXMLElement $element)
-    {
-        $this->getChildsAsCDATAFromList($element, array(
-            'nb_site_target_lang_title' => 'title',
-            'nb_site_target_lang_subtitle' => 'subtitle',
-            'nb_site_target_lang_opening' => 'opening',
-            'nb_site_target_lang_content' => 'content',
-            'nb_site_target_lang_footer' => 'footer',
-            'nb_site_target_lang_aside' => 'aside'
-        ), false);
     }
 
     /**
