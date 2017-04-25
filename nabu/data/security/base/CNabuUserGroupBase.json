@@ -170,6 +170,22 @@
                     "comments": ""
                 }
             }
+        },
+        "nb_user_group_nb_customer_fk": {
+            "name": "nb_user_group_nb_customer_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_customer_id": {
+                    "name": "nb_customer_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
         }
     }
 }

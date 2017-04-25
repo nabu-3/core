@@ -163,4 +163,71 @@ class CNabuUser extends CNabuUserBase
         return $nb_user_list;
     }
     */
+
+    /**
+     *  _   _                  ____
+     * | | | |___  ___ _ __   / ___|_ __ ___  _   _ _ __  ___
+     * | | | / __|/ _ \ '__| | |  _| '__/ _ \| | | | '_ \/ __|
+     * | |_| \__ \  __/ |    | |_| | | | (_) | |_| | |_) \__ \
+     *  \___/|___/\___|_|     \____|_|  \___/ \__,_| .__/|___/
+     *                                             |_|
+     */
+    public function getActiveGroupsAsMember($nb_group_type = null)
+    {
+        error_log(__METHOD__);
+        return $this->getGroupsAsMemberByStatus($nb_group_type, 'E');
+    }
+
+    private function getGroupsAsMemberByStatus($nb_group_type = null, $status = null)
+    {
+        $retval = null;
+
+        if ($this->isValueNumeric('nb_user_id') && $this->isValueNumeric('nb_customer_id')) {
+            if ($nb_group_type !== null && $nb_group_type->isValueNumeric('nb_user_group_type_id')) {
+                $retval = CNabuUserGroup::buildObjectListFromSQL(
+                                'nb_user_group_id',
+                                "select ug.* "
+                                . "from nb_user_group_member ugm, nb_user_group ug, nb_user u "
+                               . "where ugm.nb_user_id=%user_id\$d "
+                                 . "and ugm.nb_user_id=u.nb_user_id "
+                                 . "and ugm.nb_user_group_id=ug.nb_user_group_id "
+                                 . "and ug.nb_user_group_type_id=%type_id\$d "
+                                 . "and ug.nb_customer_id=%customer_id\$d "
+                                 . ($status !== null ? "and ugm.nb_user_group_member_status='%status\$s'" : ''),
+                                array(
+                                    'user_id' => $this->getValue('nb_user_id'),
+                                    'type_id' => $nb_group_type->getValue('nb_user_group_type_id'),
+                                    'customer_id' => $this->getValue('nb_customer_id'),
+                                    'status' => $status
+                                ), null, true
+                );
+            } else if ($nb_group_type === null) {
+                $retval = CNabuUserGroup::buildObjectListFromSQL(
+                                'nb_user_group_id',
+                                "select ug.* "
+                                . "from nb_user_group_member ugm, nb_user_group ug "
+                               . "where ugm.nb_user_id=%user_id\$d "
+                                 . "and ugm.nb_user_group_id=ug.nb_user_group_id "
+                                . "and ug.nb_customer_id=%customer_id\$d "
+                                . ($status !== null ? "and ugm.nb_user_group_member_status='%status\$d'" : ''),
+                                array(
+                                    'user_id' => $this->getValue('nb_user_id'),
+                                    'customer_id' => $this->getValue('nb_customer_id'),
+                                    'status' => $status
+                                ), null, true
+                );
+            }
+        }
+
+        if ($retval === null) {
+            $retval = new CNabuUserGroupList();
+        } elseif ($this->getCustomer() !== null) {
+            $retval->iterate(function($key, $nb_user) {
+                $nb_user->setCustomer($this->getCustomer());
+                return true;
+            });
+        }
+
+        return $retval;
+    }
 }

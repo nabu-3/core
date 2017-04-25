@@ -33,6 +33,7 @@ use nabu\data\messaging\CNabuMessaging;
 use nabu\data\messaging\CNabuMessagingList;
 use nabu\data\project\CNabuProject;
 use nabu\data\project\CNabuProjectList;
+use nabu\data\security\CNabuUser;
 use nabu\data\site\CNabuSite;
 use nabu\data\site\CNabuSiteList;
 
@@ -565,6 +566,21 @@ class CNabuCustomer extends CNabuCustomerBase
                     ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
                     array('$nb_project', print_r($nb_project, true))
                 );
+            }
+        }
+
+        return $retval;
+    }
+
+    public function getUser($nb_user)
+    {
+        $retval = null;
+
+        $nb_user_id = nb_getMixedValue($nb_user, 'nb_user_id');
+        if (is_numeric($nb_user_id)) {
+            $nb_new_user = new CNabuUser($nb_user_id);
+            if ($nb_new_user->validateCustomer($this)) {
+                $retval = $nb_new_user;
             }
         }
 

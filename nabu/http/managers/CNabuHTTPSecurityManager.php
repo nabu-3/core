@@ -401,6 +401,9 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
             $after_login = false;
         } else {
             if (($after_login = $nb_plugins_manager->invoqueAfterLogin($nb_user, $nb_role, $nb_site_user)) === true) {
+
+                $nb_user->setCustomer(CNabuEngine::getEngine()->getCustomer());
+
                 $nb_session = $this->nb_application->getSession();
                 $nb_session->setVariable(self::VAR_SESSION_USER, $nb_user);
                 $nb_session->setVariable(self::VAR_SESSION_ROLE, $nb_role);

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/24 14:20:10 UTC
+ * Created: 2017/04/25 15:21:56 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -28,10 +28,13 @@ namespace nabu\data\security\base;
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\data\CNabuDataObject;
+use \nabu\data\customer\CNabuCustomer;
+use \nabu\data\customer\traits\TNabuCustomerChild;
+use \nabu\data\lang\CNabuLanguage;
+use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
 use \nabu\data\lang\traits\TNabuTranslated;
-use \nabu\data\medioteca\CNabuMedioteca;
 use \nabu\data\medioteca\traits\TNabuMediotecaChild;
 use \nabu\data\security\builtin\CNabuBuiltInUserGroupLanguage;
 use \nabu\data\security\CNabuUserGroupLanguage;
@@ -46,6 +49,7 @@ use \nabu\db\CNabuDBInternalObject;
  */
 abstract class CNabuUserGroupBase extends CNabuDBInternalObject implements INabuTranslated
 {
+    use TNabuCustomerChild;
     use TNabuMediotecaChild;
     use TNabuTranslated;
 
@@ -102,23 +106,23 @@ abstract class CNabuUserGroupBase extends CNabuDBInternalObject implements INabu
     /**
      * Get all items in the storage as an associative array where the field 'nb_user_group_id' is the index, and each
      * value is an instance of class CNabuUserGroupBase.
-     * @param CNabuMedioteca $nb_medioteca The CNabuMedioteca instance of the Medioteca that owns the User Group List.
+     * @param CNabuCustomer $nb_customer The CNabuCustomer instance of the Customer that owns the User Group List.
      * @return mixed Returns and array with all items.
      */
-    public static function getAllUserGroups(CNabuMedioteca $nb_medioteca)
+    public static function getAllUserGroups(CNabuCustomer $nb_customer)
     {
-        $nb_medioteca_id = nb_getMixedValue($nb_medioteca, 'nb_medioteca_id');
-        if (is_numeric($nb_medioteca_id)) {
+        $nb_customer_id = nb_getMixedValue($nb_customer, 'nb_customer_id');
+        if (is_numeric($nb_customer_id)) {
             $retval = forward_static_call(
             array(get_called_class(), 'buildObjectListFromSQL'),
                 'nb_user_group_id',
                 'select * '
                 . 'from nb_user_group '
-               . 'where nb_medioteca_id=%medioteca_id$d',
+               . 'where nb_customer_id=%cust_id$d',
                 array(
-                    'medioteca_id' => $nb_medioteca_id
+                    'cust_id' => $nb_customer_id
                 ),
-                $nb_medioteca
+                $nb_customer
             );
         } else {
             $retval = new CNabuUserGroupList();
@@ -131,6 +135,7 @@ abstract class CNabuUserGroupBase extends CNabuDBInternalObject implements INabu
      * Gets a filtered list of User Group instances represented as an array. Params allows the capability of select a
      * subset of fields, order by concrete fields, or truncate the list by a number of rows starting in an offset.
      * @throws \nabu\core\exceptions\ENabuCoreException Raises an exception if $fields or $order have invalid values.
+     * @param mixed $nb_customer Customer instance, object containing a Customer Id field or an Id.
      * @param mixed $nb_medioteca Medioteca instance, object containing a Medioteca Id field or an Id.
      * @param string $q Query string to filter results using a context index.
      * @param string|array $fields List of fields to put in the results.
@@ -140,10 +145,10 @@ abstract class CNabuUserGroupBase extends CNabuDBInternalObject implements INabu
      * @param int $num_items Number of continue rows to get as maximum in the results.
      * @return array Returns an array with all rows found using the criteria.
      */
-    public static function getFilteredUserGroupList($nb_medioteca = null, $q = null, $fields = null, $order = null, $offset = 0, $num_items = 0)
+    public static function getFilteredUserGroupList($nb_customer, $nb_medioteca = null, $q = null, $fields = null, $order = null, $offset = 0, $num_items = 0)
     {
-        $nb_medioteca_id = nb_getMixedValue($nb_customer, NABU_MEDIOTECA_FIELD_ID);
-        if (is_numeric($nb_medioteca_id)) {
+        $nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID);
+        if (is_numeric($nb_customer_id)) {
             $fields_part = nb_prefixFieldList(CNabuUserGroupBase::getStorageName(), $fields, false, true, '`');
             $order_part = nb_prefixFieldList(CNabuUserGroupBase::getStorageName(), $fields, false, false, '`');
         
@@ -156,11 +161,11 @@ abstract class CNabuUserGroupBase extends CNabuDBInternalObject implements INabu
             $nb_item_list = CNabuEngine::getEngine()->getMainDB()->getQueryAsArray(
                 "select " . ($fields_part ? $fields_part . ' ' : '* ')
                 . 'from nb_user_group '
-               . 'where ' . NABU_MEDIOTECA_FIELD_ID . '=%medioteca_id$d '
+               . 'where ' . NABU_CUSTOMER_FIELD_ID . '=%cust_id$d '
                 . ($order_part ? "order by $order_part " : '')
                 . ($limit_part ? "limit $limit_part" : ''),
                 array(
-                    'medioteca_id' => $nb_medioteca_id
+                    'cust_id' => $nb_customer_id
                 )
             );
         } else {
@@ -241,6 +246,33 @@ abstract class CNabuUserGroupBase extends CNabuDBInternalObject implements INabu
         }
         
         return $nb_translation;
+    }
+
+    /**
+     * Get all language instances used along of all User Group set of a Customer
+     * @param mixed $nb_customer A CNabuDataObject instance containing a field named nb_customer_id or a Customer ID
+     * @return CNabuLanguageList Returns the list of language instances used.
+     */
+    public static function getCustomerUsedLanguages($nb_customer)
+    {
+        $nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID);
+        if (is_numeric($nb_customer_id)) {
+            $nb_language_list = CNabuLanguage::buildObjectListFromSQL(
+                'nb_language_id',
+                'select l.* '
+                . 'from nb_language l, '
+                     . '(select distinct nb_language_id '
+                        . 'from nb_user_group ca, nb_user_group_lang cal '
+                       . 'where ca.nb_user_group_id=cal.nb_user_group_id '
+                         . 'and ca.nb_customer_id=%cust_id$d) as lid '
+               . 'where l.nb_language_id=lid.nb_language_id',
+                array('cust_id' => $nb_customer_id)
+            );
+        } else {
+            $nb_language_list = new CNabuLanguageList();
+        }
+        
+        return $nb_language_list;
     }
 
     /**

@@ -66,9 +66,9 @@
         "nb_catalog_item_lang_title": {
             "name": "nb_catalog_item_lang_title",
             "ordinal": "6",
-            "data_type": "tinytext",
+            "data_type": "text",
             "precision": null,
-            "type": "tinytext",
+            "type": "text",
             "default": null,
             "is_nullable": true,
             "extra": "",
@@ -77,9 +77,9 @@
         "nb_catalog_item_lang_subtitle": {
             "name": "nb_catalog_item_lang_subtitle",
             "ordinal": "7",
-            "data_type": "tinytext",
+            "data_type": "text",
             "precision": null,
-            "type": "tinytext",
+            "type": "text",
             "default": null,
             "is_nullable": true,
             "extra": "",
