@@ -175,6 +175,7 @@ abstract class CNabuXMLDataObject extends CNabuXMLObject
     {
         parent::collect($element);
 
+        error_log('====> ' . get_called_class() . ' <====');
         if ($this->nb_data_object !== null) {
             error_log('====> ' . print_r($this->nb_data_object->getTreeData(null, true), true));
         } else {

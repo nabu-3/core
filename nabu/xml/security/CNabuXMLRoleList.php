@@ -18,7 +18,10 @@
  */
 
 namespace nabu\xml\security;
+use SimpleXMLElement;
 use nabu\data\CNabuDataObject;
+use nabu\data\CNabuDataObjectList;
+use nabu\data\security\CNabuRoleList;
 use nabu\xml\CNabuXMLDataObject;
 use nabu\xml\CNabuXMLDataObjectList;
 
@@ -42,5 +45,14 @@ class CNabuXMLRoleList extends CNabuXMLDataObjectList
         $nb_child->grantHash(true);
 
         return new CNabuXMLRole($nb_child);
+    }
+
+    protected function locateDataObject(SimpleXMLElement $element, CNabuDataObject $data_parent = null): bool
+    {
+        if (!($this->list instanceof CNabuDataObjectList)) {
+            $this->list = new CNabuRoleList();
+        }
+
+        return ($this->list instanceof CNabuRoleList);
     }
 }
