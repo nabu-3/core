@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/25 20:18:04 UTC
+ * Created: 2017/04/25 20:18:09 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -23,38 +23,29 @@
  * limitations under the License.
  */
 
-namespace nabu\xml\lang\base;
+namespace nabu\xml\security\base;
 
 use \nabu\data\CNabuDataObject;
-use \nabu\data\lang\CNabuLanguage;
-use \nabu\xml\CNabuXMLDataObject;
+use \nabu\data\security\CNabuRoleLanguage;
+use \nabu\xml\lang\CNabuXMLTranslation;
 use \SimpleXMLElement;
 
 /**
- * Class to manage the Language as a XML branch.
+ * Class to manage the Role Language as a XML branch.
  * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\xml\lang\base
+ * @package \nabu\xml\security\base
  */
-abstract class CNabuXMLLanguageBase extends CNabuXMLDataObject
+abstract class CNabuXMLRoleLanguageBase extends CNabuXMLTranslation
 {
     /**
-     * Instantiates the class. Receives as parameter a qualified CNabuLanguage class.
-     * @param CNabuLanguage $nb_language $this->entity_name instance to be managed as XML
+     * Instantiates the class. Receives as parameter a qualified CNabuRoleLanguage class.
+     * @param CNabuRoleLanguage $nb_role_lang $this->entity_name instance to be managed as XML
      */
-    public function __construct(CNabuLanguage $nb_language = null)
+    public function __construct(CNabuRoleLanguage $nb_role_lang = null)
     {
-        parent::__construct($nb_language);
-    }
-
-    /**
-     * Static method to get the Tag name of this XML Element.
-     * @return string Return the Tag name.
-     */
-    protected static function getTagName() : string
-    {
-        return 'language';
+        parent::__construct($nb_role_lang);
     }
 
     /**
@@ -69,14 +60,14 @@ abstract class CNabuXMLLanguageBase extends CNabuXMLDataObject
         
         if (isset($element['GUID'])) {
             $guid = (string)$element['GUID'];
-            if (!($this->nb_data_object instanceof CNabuLanguage)) {
-                $this->nb_data_object = CNabuLanguage::findByHash($guid);
+            if (!($this->nb_data_object instanceof CNabuRoleLanguage)) {
+                $this->nb_data_object = CNabuRoleLanguage::findByHash($guid);
             } else {
                 $this->nb_data_object = null;
             }
         
-            if (!($this->nb_data_object instanceof CNabuLanguage)) {
-                $this->nb_data_object = new CNabuLanguage();
+            if (!($this->nb_data_object instanceof CNabuRoleLanguage)) {
+                $this->nb_data_object = new CNabuRoleLanguage();
                 $this->nb_data_object->setHash($guid);
             }
             $retval = true;
@@ -86,59 +77,37 @@ abstract class CNabuXMLLanguageBase extends CNabuXMLDataObject
     }
 
     /**
-     * Get default attributes of Language from XML Element.
-     * @param SimpleXMLElement $element XML Element to get attributes
-     */
-    protected function getAttributes(SimpleXMLElement $element)
-    {
-        $this->getAttributesFromList($element, array(
-            'nb_language_type' => 'type',
-            'nb_language_enabled' => 'enabled',
-            'nb_language_ISO639_1' => 'ISO639v1',
-            'nb_language_ISO639_2' => 'ISO639v2',
-            'nb_language_is_api' => 'isAPI',
-            'nb_language_default_country_code' => 'defaultCountryCode',
-            'nb_language_flag_url' => 'flagURL'
-        ), false);
-    }
-
-    /**
-     * Set default attributes of Language in XML Element.
+     * Set default attributes of Role Language XML Element.
      * @param SimpleXMLElement $element XML Element to set attributes
      */
     protected function setAttributes(SimpleXMLElement $element)
     {
-        $element->addAttribute('GUID', $this->nb_data_object->grantHash(true));
-        $this->putAttributesFromList($element, array(
-            'nb_language_type' => 'type',
-            'nb_language_enabled' => 'enabled',
-            'nb_language_ISO639_1' => 'ISO639v1',
-            'nb_language_ISO639_2' => 'ISO639v2',
-            'nb_language_is_api' => 'isAPI',
-            'nb_language_default_country_code' => 'defaultCountryCode',
-            'nb_language_flag_url' => 'flagURL'
-        ), false);
+        $nb_parent = $this->nb_data_object->getTranslatedObject();
+        if ($nb_parent !== null) {
+            $nb_language = $nb_parent->getLanguage($this->nb_data_object->getLanguageId());
+            $element->addAttribute('lang', $nb_language->grantHash(true));
+        }
     }
 
     /**
-     * Get default childs of Language from XML Element as Element > CDATA structure.
+     * Get default childs of Role Language from XML Element as Element > CDATA structure.
      * @param SimpleXMLElement $element XML Element to get childs
      */
     protected function getChilds(SimpleXMLElement $element)
     {
         $this->getChildsAsCDATAFromList($element, array(
-            'nb_language_name' => 'name'
+            'nb_role_lang_name' => 'name'
         ), false);
     }
 
     /**
-     * Set default childs of Language XML Element as Element > CDATA structure.
+     * Set default childs of Role Language XML Element as Element > CDATA structure.
      * @param SimpleXMLElement $element XML Element to set childs
      */
     protected function setChilds(SimpleXMLElement $element)
     {
         $this->putChildsAsCDATAFromList($element, array(
-            'nb_language_name' => 'name'
+            'nb_role_lang_name' => 'name'
         ), false);
     }
 }

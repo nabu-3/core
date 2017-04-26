@@ -22,8 +22,7 @@ use SimpleXMLElement;
 use nabu\data\CNabuDataObject;
 use nabu\data\CNabuDataObjectList;
 use nabu\data\security\CNabuRoleList;
-use nabu\xml\CNabuXMLDataObject;
-use nabu\xml\CNabuXMLDataObjectList;
+use nabu\xml\security\base\CNabuXMLRoleListBase;
 
 /**
  * Class to manage a Role List as an XML branch.
@@ -32,21 +31,8 @@ use nabu\xml\CNabuXMLDataObjectList;
  * @version 3.0.12 Surface
  * @package nabu\xml\security
  */
-class CNabuXMLRoleList extends CNabuXMLDataObjectList
+class CNabuXMLRoleList extends CNabuXMLRoleListBase
 {
-    protected static function getTagName(): string
-    {
-        return 'roles';
-    }
-
-    protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
-    {
-        $nb_child->refresh();
-        $nb_child->grantHash(true);
-
-        return new CNabuXMLRole($nb_child);
-    }
-
     protected function locateDataObject(SimpleXMLElement $element, CNabuDataObject $data_parent = null): bool
     {
         if (!($this->list instanceof CNabuDataObjectList)) {

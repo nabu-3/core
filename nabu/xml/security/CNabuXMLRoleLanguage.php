@@ -18,8 +18,7 @@
  */
 
 namespace nabu\xml\security;
-use SimpleXMLElement;
-use nabu\xml\lang\CNabuXMLTranslation;
+use nabu\xml\security\base\CNabuXMLRoleLanguageBase;
 
 /**
  * Class to manage a Role Language instance as an XML branch.
@@ -28,16 +27,6 @@ use nabu\xml\lang\CNabuXMLTranslation;
  * @version 3.0.12 Surface
  * @package nabu\xml\security
  */
-class CNabuXMLRoleLanguage extends CNabuXMLTranslation
+class CNabuXMLRoleLanguage extends CNabuXMLRoleLanguageBase
 {
-    protected function setAttributes(SimpleXMLElement $element)
-    {
-        $nb_language = $this->nb_data_object->getTranslatedObject()->getLanguage($this->nb_data_object->getLanguageId());
-        $element->addAttribute('lang', $nb_language->getHash());
-    }
-
-    protected function setChilds(SimpleXMLElement $element)
-    {
-        $element->addChild('name', $this->packCDATA($this->nb_data_object->getName()));
-    }
 }

@@ -18,9 +18,7 @@
  */
 
 namespace nabu\xml\security;
-use SimpleXMLElement;
-use nabu\xml\lang\CNabuXMLTranslated;
-use nabu\xml\lang\CNabuXMLTranslationsList;
+use nabu\xml\security\base\CNabuXMLRoleBase;
 
 /**
  * Class to manage a Role instance as an XML branch.
@@ -29,24 +27,6 @@ use nabu\xml\lang\CNabuXMLTranslationsList;
  * @version 3.0.12 Surface
  * @package nabu\xml\security
  */
-class CNabuXMLRole extends CNabuXMLTranslated
+class CNabuXMLRole extends CNabuXMLRoleBase
 {
-    protected static function getTagName(): string
-    {
-        return 'role';
-    }
-
-    protected function createXMLTranslationsObject(): CNabuXMLTranslationsList
-    {
-        return new CNabuXMLRoleLanguageList($this->nb_data_object->getTranslations());
-    }
-
-    protected function setAttributes(SimpleXMLElement $element)
-    {
-        $this->putAttributesFromList($element, array(
-            'nb_role_hash' => 'GUID',
-            'nb_role_key' => 'key',
-            'nb_role_root' => 'root'
-        ));
-    }
 }

@@ -41,15 +41,4 @@ class CNabuXMLLanguageList extends CNabuXMLLanguageListBase
 
         return ($this->list instanceof CNabuDataObjectList);
     }
-
-    protected function getChilds(SimpleXMLElement $element)
-    {
-        parent::getChilds($element);
-
-        foreach ($element->children() as $child) {
-            $xml = new CNabuXMLLanguage();
-            $xml->collect($child);
-            $this->list->addItem($xml->getDataObject());
-        }
-    }
 }

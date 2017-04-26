@@ -18,9 +18,11 @@
  */
 
 namespace nabu\xml\security;
-use nabu\data\lang\interfaces\INabuTranslation;
-use nabu\xml\lang\CNabuXMLTranslation;
-use nabu\xml\lang\CNabuXMLTranslationsList;
+use SimpleXMLElement;
+use nabu\data\CNabuDataObject;
+use nabu\data\CNabuDataObjectList;
+use nabu\data\security\CNabuRoleLanguageList;
+use nabu\xml\security\base\CNabuXMLRoleLanguageListBase;
 
 /**
  * Class to manage a Role Translations List as an XML branch.
@@ -29,10 +31,14 @@ use nabu\xml\lang\CNabuXMLTranslationsList;
  * @version 3.0.12 Surface
  * @package nabu\xml\security
  */
-class CNabuXMLRoleLanguageList extends CNabuXMLTranslationsList
+class CNabuXMLRoleLanguageList extends CNabuXMLRoleLanguageListBase
 {
-    protected function createXMLTranslationsObject(INabuTranslation $nb_translation): CNabuXMLTranslation
+    protected function locateDataObject(SimpleXMLElement $element, CNabuDataObject $data_parent = null): bool
     {
-        return new CNabuXMLRoleLanguage($nb_translation);
+        if (!($this->list instanceof CNabuDataObjectList)) {
+            $this->list = new CNabuRoleLanguageList();
+        }
+
+        return ($this->list instanceof CNabuRoleLanguageList);
     }
 }

@@ -37,9 +37,17 @@ abstract class CNabuXMLTranslated extends CNabuXMLDataObject
      */
     abstract protected function createXMLTranslationsObject() : CNabuXMLTranslationsList;
 
-    public function __construct(INabuTranslated $nb_translated)
+    public function __construct(INabuTranslated $nb_translated = null)
     {
         parent::__construct($nb_translated);
+    }
+
+    protected function getChilds(SimpleXMLElement $element)
+    {
+        if (isset($element->translations)) {
+            $xml = $this->createXMLTranslationsObject();
+            $xml->collect($element->translations);
+        }
     }
 
     protected function setChilds(SimpleXMLElement $element)

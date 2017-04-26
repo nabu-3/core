@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/25 20:18:40 UTC
+ * Created: 2017/04/25 20:18:09 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -23,52 +23,48 @@
  * limitations under the License.
  */
 
-namespace nabu\data\catalog\base;
+namespace nabu\xml\security\base;
 
-use \nabu\core\CNabuEngine;
-use \nabu\data\catalog\CNabuCatalogItemTag;
-use \nabu\data\CNabuDataObjectList;
+use \nabu\data\CNabuDataObject;
+use \nabu\data\security\CNabuRoleList;
+use \nabu\xml\CNabuXMLDataObject;
+use \nabu\xml\CNabuXMLDataObjectList;
+use \nabu\xml\security\CNabuXMLRole;
 
 /**
- * Class to manage a list of Catalog Item Tag instances.
+ * Class to manage the Role List as a XML branch.
  * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
+ * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\data\catalog\base
+ * @package \nabu\xml\security\base
  */
-abstract class CNabuCatalogItemTagListBase extends CNabuDataObjectList
+abstract class CNabuXMLRoleListBase extends CNabuXMLDataObjectList
 {
     /**
-     * Instantiates the class.
+     * Instantiates the class. Receives as parameter a qualified CNabuRoleList class.
+     * @param CNabuRoleList $nb_role $this->entity_name instance to be managed as XML
      */
-    public function __construct()
+    public function __construct(CNabuRoleList $nb_role)
     {
-        parent::__construct('nb_catalog_tag_id');
+        parent::__construct($nb_role);
     }
 
     /**
-     * Creates alternate indexes for this list.
+     * Static method to get the Tag name of this XML Element.
+     * @return string Return the Tag name.
      */
-    protected function createSecondaryIndexes()
+    protected static function getTagName() : string
     {
+        return 'roles';
     }
 
     /**
-     * Acquires an instance of class CNabuCatalogItemTag from the database.
-     * @param string $key Id or reference field in the instance to acquire.
-     * @param string $index Secondary index to be used if needed.
-     * @return mixed Returns the unserialized instance if exists or false if not.
+     * Create the XML Child object filled with their Data Object.
+     * @param CNabuDataObject $nb_child Child data object.
+     * @return CNabuXMLDataObject Returns a XML instance with the child data object instance.
      */
-    public function acquireItem($key, $index = false)
+    protected function createXMLChildObject(CNabuDataObject $nb_child = null) : CNabuXMLDataObject
     {
-        $retval = false;
-        
-        if ($index === false && CNabuEngine::getEngine()->isMainDBAvailable()) {
-            $item = new CNabuCatalogItemTag($key);
-            if ($item->isFetched()) {
-                $retval = $item;
-            }
-        }
-        
-        return $retval;
+        return new CNabuXMLRole($nb_child);
     }
 }

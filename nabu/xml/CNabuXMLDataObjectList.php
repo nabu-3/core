@@ -39,7 +39,7 @@ abstract class CNabuXMLDataObjectList extends CNabuXMLObject
      * @param CNabuDataObject $nb_child Child data object.
      * @return CNabuXMLDataObject Returns a XML instance with the child data object instance.
      */
-    abstract protected function createXMLChildObject(CNabuDataObject $nb_child) : CNabuXMLDataObject;
+    abstract protected function createXMLChildObject(CNabuDataObject $nb_child = null) : CNabuXMLDataObject;
 
     public function __construct(CNabuDataObjectList $list)
     {
@@ -57,6 +57,11 @@ abstract class CNabuXMLDataObjectList extends CNabuXMLObject
 
     protected function getChilds(SimpleXMLElement $element)
     {
+        foreach ($element->children() as $child) {
+            $xml = $this->createXMLChildObject();
+            $xml->collect($child);
+            $this->list->addItem($xml->getDataObject());
+        }
     }
 
     protected function setChilds(SimpleXMLElement $element)

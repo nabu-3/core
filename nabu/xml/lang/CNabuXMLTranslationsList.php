@@ -56,7 +56,7 @@ abstract class CNabuXMLTranslationsList extends CNabuXMLDataObjectList
      * @param CNabuDataObject $nb_child Child data object to create her XML object.
      * @return CNabuXMLDataObject Returns an instance of a descendant class from XNabuXMLDataObject.
      */
-    final protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
+    final protected function createXMLChildObject(CNabuDataObject $nb_child = null): CNabuXMLDataObject
     {
         return $this->createXMLTranslationsObject($nb_child);
     }

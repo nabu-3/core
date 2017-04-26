@@ -1,6 +1,6 @@
 {
     "name": "nabu-3/core",
-    "description": "Core package to deploy nabu-3 Framework in your server",
+    "description": "nabu-3 Core package to deploy the Framework in your server",
     "version": "3.0.12",
     "type": "project",
     "keywords": [ "nabu", "nabu-3", "core", "framework", "frameworks", "smarty" ],
