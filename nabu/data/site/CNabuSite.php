@@ -26,6 +26,7 @@ use nabu\data\CNabuDataObject;
 use nabu\data\cluster\CNabuServer;
 use nabu\data\cluster\CNabuClusterUser;
 use nabu\data\commerce\traits\TNabuCommerceChild;
+use nabu\data\customer\CNabuCustomer;
 use nabu\data\customer\traits\TNabuCustomerChild;
 use nabu\data\lang\CNabuLanguage;
 use nabu\data\security\CNabuRole;
@@ -452,6 +453,17 @@ class CNabuSite extends CNabuSiteBase
         $this->transferValue($nb_language, 'nb_language_id', 'nb_default_language_id');
 
         return $this;
+    }
+
+    public function getMessaging(CNabuCustomer $nb_customer = null, $force = false)
+    {
+        if (($nb_messaging = parent::getMessaging($nb_customer === null ? $this->getCustomer() : null, $force)) === null || $force) {
+            if ($this->isValueNumeric(NABU_MESSAGING_FIELD_ID)) {
+                $nb_messaging = $this->getCustomer()->getMessaging($this);
+            }
+        }
+
+        return $nb_messaging;
     }
 
     public function setAlias(CNabuSiteAlias $nb_site_alias)

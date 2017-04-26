@@ -96,9 +96,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_messaging_id": {
+            "name": "nb_messaging_id",
+            "ordinal": "9",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_app_os_id": {
             "name": "nb_app_os_id",
-            "ordinal": "9",
+            "ordinal": "10",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -109,7 +120,7 @@
         },
         "nb_site_delegate_for_role": {
             "name": "nb_site_delegate_for_role",
-            "ordinal": "10",
+            "ordinal": "11",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -120,7 +131,7 @@
         },
         "nb_site_default_role_id": {
             "name": "nb_site_default_role_id",
-            "ordinal": "11",
+            "ordinal": "12",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -131,7 +142,7 @@
         },
         "nb_site_default_language_id": {
             "name": "nb_site_default_language_id",
-            "ordinal": "12",
+            "ordinal": "13",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -142,7 +153,7 @@
         },
         "nb_site_api_language_id": {
             "name": "nb_site_api_language_id",
-            "ordinal": "13",
+            "ordinal": "14",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -153,7 +164,7 @@
         },
         "nb_site_main_alias_id": {
             "name": "nb_site_main_alias_id",
-            "ordinal": "14",
+            "ordinal": "15",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -164,7 +175,7 @@
         },
         "nb_site_mounting_order": {
             "name": "nb_site_mounting_order",
-            "ordinal": "15",
+            "ordinal": "16",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -175,7 +186,7 @@
         },
         "nb_site_creation_datetime": {
             "name": "nb_site_creation_datetime",
-            "ordinal": "16",
+            "ordinal": "17",
             "data_type": "datetime",
             "precision": null,
             "type": "datetime",
@@ -186,7 +197,7 @@
         },
         "nb_site_published": {
             "name": "nb_site_published",
-            "ordinal": "17",
+            "ordinal": "18",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -197,7 +208,7 @@
         },
         "nb_site_default_target_use_uri": {
             "name": "nb_site_default_target_use_uri",
-            "ordinal": "18",
+            "ordinal": "19",
             "data_type": "set",
             "precision": null,
             "type": "set('T','U','N')",
@@ -208,7 +219,7 @@
         },
         "nb_site_default_target_id": {
             "name": "nb_site_default_target_id",
-            "ordinal": "19",
+            "ordinal": "20",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -219,7 +230,7 @@
         },
         "nb_site_page_not_found_target_use_uri": {
             "name": "nb_site_page_not_found_target_use_uri",
-            "ordinal": "20",
+            "ordinal": "21",
             "data_type": "set",
             "precision": null,
             "type": "set('T','U','N')",
@@ -230,7 +241,7 @@
         },
         "nb_site_page_not_found_target_id": {
             "name": "nb_site_page_not_found_target_id",
-            "ordinal": "21",
+            "ordinal": "22",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -241,7 +252,7 @@
         },
         "nb_site_page_not_found_error_code": {
             "name": "nb_site_page_not_found_error_code",
-            "ordinal": "22",
+            "ordinal": "23",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -252,7 +263,7 @@
         },
         "nb_site_login_target_use_uri": {
             "name": "nb_site_login_target_use_uri",
-            "ordinal": "23",
+            "ordinal": "24",
             "data_type": "set",
             "precision": null,
             "type": "set('T','U','N')",
@@ -263,7 +274,7 @@
         },
         "nb_site_login_target_id": {
             "name": "nb_site_login_target_id",
-            "ordinal": "24",
+            "ordinal": "25",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -274,7 +285,7 @@
         },
         "nb_site_login_redirection_target_use_uri": {
             "name": "nb_site_login_redirection_target_use_uri",
-            "ordinal": "25",
+            "ordinal": "26",
             "data_type": "set",
             "precision": null,
             "type": "set('T','U','N')",
@@ -285,7 +296,7 @@
         },
         "nb_site_login_redirection_target_id": {
             "name": "nb_site_login_redirection_target_id",
-            "ordinal": "26",
+            "ordinal": "27",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -296,7 +307,7 @@
         },
         "nb_site_logout_redirection_target_use_uri": {
             "name": "nb_site_logout_redirection_target_use_uri",
-            "ordinal": "27",
+            "ordinal": "28",
             "data_type": "set",
             "precision": null,
             "type": "set('T','U','N')",
@@ -307,7 +318,7 @@
         },
         "nb_site_logout_redirection_target_id": {
             "name": "nb_site_logout_redirection_target_id",
-            "ordinal": "28",
+            "ordinal": "29",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -318,7 +329,7 @@
         },
         "nb_site_alias_not_found_target_use_uri": {
             "name": "nb_site_alias_not_found_target_use_uri",
-            "ordinal": "29",
+            "ordinal": "30",
             "data_type": "set",
             "precision": null,
             "type": "set('T','U','N')",
@@ -329,7 +340,7 @@
         },
         "nb_site_alias_not_found_target_id": {
             "name": "nb_site_alias_not_found_target_id",
-            "ordinal": "30",
+            "ordinal": "31",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -340,7 +351,7 @@
         },
         "nb_site_alias_locked_target_use_uri": {
             "name": "nb_site_alias_locked_target_use_uri",
-            "ordinal": "31",
+            "ordinal": "32",
             "data_type": "set",
             "precision": null,
             "type": "set('T','U','N')",
@@ -351,7 +362,7 @@
         },
         "nb_site_alias_locked_target_id": {
             "name": "nb_site_alias_locked_target_id",
-            "ordinal": "32",
+            "ordinal": "33",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -362,7 +373,7 @@
         },
         "nb_site_use_cache": {
             "name": "nb_site_use_cache",
-            "ordinal": "33",
+            "ordinal": "34",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -373,7 +384,7 @@
         },
         "nb_site_cache_handler": {
             "name": "nb_site_cache_handler",
-            "ordinal": "34",
+            "ordinal": "35",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(100)",
@@ -384,7 +395,7 @@
         },
         "nb_site_use_smarty": {
             "name": "nb_site_use_smarty",
-            "ordinal": "35",
+            "ordinal": "36",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -395,7 +406,7 @@
         },
         "nb_site_smarty_error_reporting": {
             "name": "nb_site_smarty_error_reporting",
-            "ordinal": "36",
+            "ordinal": "37",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -406,7 +417,7 @@
         },
         "nb_site_smarty_debugging": {
             "name": "nb_site_smarty_debugging",
-            "ordinal": "37",
+            "ordinal": "38",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -417,7 +428,7 @@
         },
         "nb_site_smarty_template_path": {
             "name": "nb_site_smarty_template_path",
-            "ordinal": "38",
+            "ordinal": "39",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(200)",
@@ -428,7 +439,7 @@
         },
         "nb_site_smarty_compile_path": {
             "name": "nb_site_smarty_compile_path",
-            "ordinal": "39",
+            "ordinal": "40",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(200)",
@@ -439,7 +450,7 @@
         },
         "nb_site_smarty_cache_path": {
             "name": "nb_site_smarty_cache_path",
-            "ordinal": "40",
+            "ordinal": "41",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(200)",
@@ -450,7 +461,7 @@
         },
         "nb_site_smarty_configs_path": {
             "name": "nb_site_smarty_configs_path",
-            "ordinal": "41",
+            "ordinal": "42",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(200)",
@@ -461,7 +472,7 @@
         },
         "nb_site_smarty_models_path": {
             "name": "nb_site_smarty_models_path",
-            "ordinal": "42",
+            "ordinal": "43",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(200)",
@@ -472,7 +483,7 @@
         },
         "nb_site_plugin_name": {
             "name": "nb_site_plugin_name",
-            "ordinal": "43",
+            "ordinal": "44",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(60)",
@@ -483,7 +494,7 @@
         },
         "nb_site_http_support": {
             "name": "nb_site_http_support",
-            "ordinal": "44",
+            "ordinal": "45",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -494,7 +505,7 @@
         },
         "nb_site_https_support": {
             "name": "nb_site_https_support",
-            "ordinal": "45",
+            "ordinal": "46",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -505,7 +516,7 @@
         },
         "nb_site_google_wmr_domain_id": {
             "name": "nb_site_google_wmr_domain_id",
-            "ordinal": "46",
+            "ordinal": "47",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(43)",
@@ -516,7 +527,7 @@
         },
         "nb_site_google_wmr_site_id": {
             "name": "nb_site_google_wmr_site_id",
-            "ordinal": "47",
+            "ordinal": "48",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(43)",
@@ -527,7 +538,7 @@
         },
         "nb_site_use_awstats": {
             "name": "nb_site_use_awstats",
-            "ordinal": "48",
+            "ordinal": "49",
             "data_type": "set",
             "precision": null,
             "type": "set('T','F')",
@@ -538,7 +549,7 @@
         },
         "nb_site_local_path": {
             "name": "nb_site_local_path",
-            "ordinal": "49",
+            "ordinal": "50",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(256)",
@@ -549,7 +560,7 @@
         },
         "nb_site_dynamic_cache_control": {
             "name": "nb_site_dynamic_cache_control",
-            "ordinal": "50",
+            "ordinal": "51",
             "data_type": "enum",
             "precision": null,
             "type": "enum('F','T')",
@@ -560,17 +571,6 @@
         },
         "nb_site_dynamic_cache_default_max_age": {
             "name": "nb_site_dynamic_cache_default_max_age",
-            "ordinal": "51",
-            "data_type": "int",
-            "precision": "10",
-            "type": "int(11)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_emailing_id": {
-            "name": "nb_emailing_id",
             "ordinal": "52",
             "data_type": "int",
             "precision": "10",
@@ -872,22 +872,6 @@
                 }
             }
         },
-        "nb_site_nb_emailing_fk": {
-            "name": "nb_site_nb_emailing_fk",
-            "primary": false,
-            "unique": false,
-            "index_type": "BTREE",
-            "fields": {
-                "nb_emailing_id": {
-                    "name": "nb_emailing_id",
-                    "ordinal": "1",
-                    "collation": "ASC",
-                    "null": true,
-                    "subpart": null,
-                    "comments": ""
-                }
-            }
-        },
         "nb_site_nb_project_fk": {
             "name": "nb_site_nb_project_fk",
             "primary": false,
@@ -984,6 +968,22 @@
             "fields": {
                 "nb_commerce_id": {
                     "name": "nb_commerce_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_nb_messaging_fk": {
+            "name": "nb_site_nb_messaging_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_messaging_id": {
+                    "name": "nb_messaging_id",
                     "ordinal": "1",
                     "collation": "ASC",
                     "null": true,

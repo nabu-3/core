@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/26 08:35:32 UTC
+ * Created: 2017/04/26 14:47:41 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -38,6 +38,7 @@ use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
 use \nabu\data\lang\traits\TNabuTranslated;
+use \nabu\data\messaging\traits\TNabuMessagingChild;
 use \nabu\data\site\builtin\CNabuBuiltInSiteLanguage;
 use \nabu\data\site\CNabuSite;
 use \nabu\data\site\CNabuSiteLanguage;
@@ -56,6 +57,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     use TNabuCommerceChild;
     use TNabuCustomerChild;
     use TNabuHashed;
+    use TNabuMessagingChild;
     use TNabuTranslated;
 
     /**
@@ -185,6 +187,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
      * of fields, order by concrete fields, or truncate the list by a number of rows starting in an offset.
      * @throws \nabu\core\exceptions\ENabuCoreException Raises an exception if $fields or $order have invalid values.
      * @param mixed $nb_customer Customer instance, object containing a Customer Id field or an Id.
+     * @param mixed $nb_messaging Messaging instance, object containing a Messaging Id field or an Id.
      * @param string $q Query string to filter results using a context index.
      * @param string|array $fields List of fields to put in the results.
      * @param string|array $order List of fields to order the results. Each field can be suffixed with "ASC" or "DESC"
@@ -193,7 +196,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
      * @param int $num_items Number of continue rows to get as maximum in the results.
      * @return array Returns an array with all rows found using the criteria.
      */
-    public static function getFilteredSiteList($nb_customer, $q = null, $fields = null, $order = null, $offset = 0, $num_items = 0)
+    public static function getFilteredSiteList($nb_customer, $nb_messaging = null, $q = null, $fields = null, $order = null, $offset = 0, $num_items = 0)
     {
         $nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID);
         if (is_numeric($nb_customer_id)) {
@@ -504,6 +507,27 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setCommerceId(int $nb_commerce_id = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_id', $nb_commerce_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Messaging Id attribute value
+     * @return null|int Returns the Messaging Id value
+     */
+    public function getMessagingId()
+    {
+        return $this->getValue('nb_messaging_id');
+    }
+
+    /**
+     * Sets the Messaging Id attribute value.
+     * @param null|int $nb_messaging_id New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setMessagingId(int $nb_messaging_id = null) : CNabuDataObject
+    {
+        $this->setValue('nb_messaging_id', $nb_messaging_id);
         
         return $this;
     }
@@ -1479,27 +1503,6 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setDynamicCacheDefaultMaxAge(int $dynamic_cache_default_max_age = null) : CNabuDataObject
     {
         $this->setValue('nb_site_dynamic_cache_default_max_age', $dynamic_cache_default_max_age);
-        
-        return $this;
-    }
-
-    /**
-     * Get Emailing Id attribute value
-     * @return null|int Returns the Emailing Id value
-     */
-    public function getEmailingId()
-    {
-        return $this->getValue('nb_emailing_id');
-    }
-
-    /**
-     * Sets the Emailing Id attribute value.
-     * @param null|int $nb_emailing_id New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setEmailingId(int $nb_emailing_id = null) : CNabuDataObject
-    {
-        $this->setValue('nb_emailing_id', $nb_emailing_id);
         
         return $this;
     }
