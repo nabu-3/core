@@ -28,5 +28,47 @@ use nabu\data\icontact\base\CNabuIContactProspectBase;
  */
 class CNabuIContactProspect extends CNabuIContactProspectBase
 {
+    private $nb_icontact = null;
 
+    public function getIContact()
+    {
+        return $this->nb_icontact;
+    }
+
+    public function setIContact($nb_icontact)
+    {
+        $this->nb_icontact = $nb_icontact;
+        return $this;
+    }
+
+    static public function getProspectsOfUser($nb_icontact, $nb_user)
+    {
+        if (is_numeric($nb_icontact_id = nb_getMixedValue($nb_icontact, 'nb_icontact_id')) &&
+            is_numeric($nb_user_id = nb_getMixedValue($nb_user, 'nb_user_id'))
+        ) {
+            $retval = CNabuIContactProspect::buildObjectListFromSQL(
+                'nb_icontact_prospect_id',
+                "select ip.* "
+                . "from nb_icontact_prospect ip, nb_icontact i "
+               . "where ip.nb_icontact_id=i.nb_icontact_id "
+                 . "and i.nb_icontact_id=%cont_id\$d "
+                 . "and ip.nb_user_id=%user_id\$d "
+               . "order by ip.nb_icontact_prospect_creation_datetime desc",
+                array(
+                    'cont_id' => $nb_icontact_id,
+                    'user_id' => $nb_user_id
+                )
+            );
+            if ($nb_icontact instanceof CNabuIContact) {
+                $retval->iterate(function ($key, $nb_prospect) use($nb_icontact) {
+                    $nb_prospect->setIContact($nb_icontact);
+                    return true;
+                });
+            }
+        } else {
+            $retval = new CNabuIContactProspectList();
+        }
+
+        return $retval;
+    }
 }

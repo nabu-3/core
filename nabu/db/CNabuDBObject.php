@@ -323,7 +323,15 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
 
             if (count($fields) > 0) {
                 foreach ($fields as $field_name) {
-                    if ($this->isValueModified($field_name)) {
+                    if ($field_name === $table . '_creation_datetime') {
+                        if ($this->isNew) {
+                            $set_chain .= (strlen($set_chain) > 0 ? ', ' : '') . "$field_name=now()";
+                        }
+                    } elseif ($field_name === $table . '_update_datetime') {
+                        if ($this->isFetched) {
+                            $set_chain .= (strlen($set_chain) > 0 ? ', ' : '') . "$field_name=now()";
+                        }
+                    } elseif ($this->isValueModified($field_name)) {
                         $field = $this->storage_descriptor->getField($field_name);
                         $value = $this->storage_descriptor->buildFieldValue($field, $this->getValue($field_name));
                         if ($value !== false && strlen($value) > 0) {

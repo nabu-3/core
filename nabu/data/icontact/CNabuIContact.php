@@ -28,5 +28,29 @@ use nabu\data\icontact\base\CNabuIContactBase;
  */
 class CNabuIContact extends CNabuIContactBase
 {
-    
+    /** @var CNabuIContactProspectList List of prospects in this iContact. */
+    private $nb_icontact_prospect_list = null;
+
+    public function __construct($nb_icontact = false)
+    {
+        parent::__construct($nb_icontact);
+
+        $this->nb_icontact_prospect_list = new CNabuIContactProspectList($this);
+    }
+
+    public function getProspectsOfUser($nb_user)
+    {
+        $this->nb_icontact_prospect_list->clear();
+        $this->nb_icontact_prospect_list->merge(CNabuIContactProspect::getProspectsOfUser($this, $nb_user));
+
+        return $this->nb_icontact_prospect_list;
+    }
+
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $tdata = parent::getTreeData($nb_language, $dataonly);
+        $tdata['prospects'] = $this->nb_icontact_prospect_list;
+
+        return $tdata;
+    }
 }
