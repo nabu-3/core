@@ -26,7 +26,7 @@ use nabu\data\icontact\base\CNabuIContactProspectBase;
  * @version 3.0.12 Surface
  * @package \nabu\data\catalog
  */
-class CNabuIcontactProspect extends CNabuIContactProspectBase
+class CNabuIContactProspect extends CNabuIContactProspectBase
 {
-    
+
 }
