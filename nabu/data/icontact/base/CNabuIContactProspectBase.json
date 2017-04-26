@@ -1,0 +1,367 @@
+{
+    "schema": "nabu-3",
+    "name": "nb_icontact_prospect",
+    "engine": "MyISAM",
+    "type": "table",
+    "autoincrement": "1",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "comment": "",
+    "fields": {
+        "nb_icontact_prospect_id": {
+            "name": "nb_icontact_prospect_id",
+            "ordinal": "1",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": false,
+            "extra": "auto_increment",
+            "comment": ""
+        },
+        "nb_icontact_id": {
+            "name": "nb_icontact_id",
+            "ordinal": "2",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_id": {
+            "name": "nb_user_id",
+            "ordinal": "3",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_language_id": {
+            "name": "nb_language_id",
+            "ordinal": "4",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_status_id": {
+            "name": "nb_icontact_prospect_status_id",
+            "ordinal": "5",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_first_name": {
+            "name": "nb_icontact_prospect_first_name",
+            "ordinal": "6",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_last_name": {
+            "name": "nb_icontact_prospect_last_name",
+            "ordinal": "7",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_fiscal_number": {
+            "name": "nb_icontact_prospect_fiscal_number",
+            "ordinal": "8",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_address_1": {
+            "name": "nb_icontact_prospect_address_1",
+            "ordinal": "9",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_address_2": {
+            "name": "nb_icontact_prospect_address_2",
+            "ordinal": "10",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_zip_code": {
+            "name": "nb_icontact_prospect_zip_code",
+            "ordinal": "11",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(15)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_city_name": {
+            "name": "nb_icontact_prospect_city_name",
+            "ordinal": "12",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_province_name": {
+            "name": "nb_icontact_prospect_province_name",
+            "ordinal": "13",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_country_name": {
+            "name": "nb_icontact_prospect_country_name",
+            "ordinal": "14",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_enterprise": {
+            "name": "nb_icontact_prospect_enterprise",
+            "ordinal": "15",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(200)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_phone": {
+            "name": "nb_icontact_prospect_phone",
+            "ordinal": "16",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_telephone_prefix": {
+            "name": "nb_icontact_prospect_telephone_prefix",
+            "ordinal": "17",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_cellular": {
+            "name": "nb_icontact_prospect_cellular",
+            "ordinal": "18",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_cellular_prefix": {
+            "name": "nb_icontact_prospect_cellular_prefix",
+            "ordinal": "19",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_fax": {
+            "name": "nb_icontact_prospect_fax",
+            "ordinal": "20",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(20)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_email": {
+            "name": "nb_icontact_prospect_email",
+            "ordinal": "21",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_subject": {
+            "name": "nb_icontact_prospect_subject",
+            "ordinal": "22",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_notes": {
+            "name": "nb_icontact_prospect_notes",
+            "ordinal": "23",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_creation_datetime": {
+            "name": "nb_icontact_prospect_creation_datetime",
+            "ordinal": "24",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_status": {
+            "name": "nb_icontact_prospect_status",
+            "ordinal": "25",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('N','A','V','C')",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        }
+    },
+    "constraints": {
+        "PRIMARY": {
+            "name": "PRIMARY",
+            "primary": true,
+            "index_type": "BTREE",
+            "comments": "",
+            "fields": {
+                "nb_icontact_prospect_id": {
+                    "name": "nb_icontact_prospect_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_icontact_item_nb_icontact_fk": {
+            "name": "nb_icontact_item_nb_icontact_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_icontact_id": {
+                    "name": "nb_icontact_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_icontact_prospect_nb_language_fk": {
+            "name": "nb_icontact_prospect_nb_language_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_icontact_prospect_nb_user_fk": {
+            "name": "nb_icontact_prospect_nb_user_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_user_id": {
+                    "name": "nb_user_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_icontact_prospect_nb_icontact_prospect_status_fk": {
+            "name": "nb_icontact_prospect_nb_icontact_prospect_status_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_icontact_prospect_status_id": {
+                    "name": "nb_icontact_prospect_status_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        }
+    }
+}
