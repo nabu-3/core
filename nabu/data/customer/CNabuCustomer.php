@@ -586,4 +586,9 @@ class CNabuCustomer extends CNabuCustomerBase
 
         return $retval;
     }
+
+    public function getUsers()
+    {
+        return CNabuUser::getAllUsers($this);
+    }
 }

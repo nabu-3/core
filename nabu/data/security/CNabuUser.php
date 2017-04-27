@@ -69,10 +69,44 @@ class CNabuUser extends CNabuUserBase
         return md5(CNabuUser::PASS_PREF . $password . CNabuUser::PASS_SUFF);
     }
 
+    public function createStaticEncodedId()
+    {
+        return md5(self::ENC_ID_PREF . $this->getId() . self::ENC_ID_SUFF);
+    }
+
     public function createTemporalEncodedId(int $expires = self::TEMP_ENC_ID_EXPIRATION_TIME)
     {
         return md5(self::ENC_ID_PREF . $this->getId() . self::ENC_ID_SUFF) . sprintf("%x",time() + $expires);
     }
+
+    public static function findByStaticEncodedId($nb_customer, string $key)
+    {
+        $retval = null;
+
+        if (is_numeric($nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID)) &&
+            strlen($key) > 0
+        ) {
+            $retval = CNabuUser::buildObjectFromSQL(
+                'select * '
+                . 'from nb_user u, nb_customer c '
+               . 'where u.nb_customer_id=c.nb_customer_id '
+                 . 'and c.nb_customer_id=%cust_id$d '
+                 . "and md5(concat('%pref\$s', u.nb_user_id, '%suff\$s'))='%key\$s'",
+                 array(
+                     'pref' => self::ENC_ID_PREF,
+                     'suff' => self::ENC_ID_SUFF,
+                     'cust_id' => $nb_customer_id,
+                     'key' => $key
+                 )
+            );
+            if ($nb_customer instanceof CNabuCustomer && $retval !== null) {
+                $retval->setCustomer($nb_customer);
+            }
+        }
+
+        return $retval;
+    }
+
 
     public static function findByTemporalEncodedId($nb_customer, string $key, int $expires = self::TEMP_ENC_ID_EXPIRATION_TIME)
     {
