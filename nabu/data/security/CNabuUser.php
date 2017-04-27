@@ -21,54 +21,38 @@ namespace nabu\data\security;
 
 use \nabu\data\security\base\CNabuUserBase;
 use nabu\data\CNabuDataObject;
+use nabu\data\customer\CNabuCustomer;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
- * @version 3.0.0 Surface
- * @package name
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
+ * @package nabu\data\security
  */
 class CNabuUser extends CNabuUserBase
 {
-    /**
-     * User is active
-     * @var string
-     */
+    /** @var string USER_ACTIVE User is active */
     const USER_ACTIVE = 'T';
-    /**
-     * User is new and validation is pending.
-     * @var string
-     */
+    /** @var string USER_VALIDATION_PENDING User is new and validation is pending. */
     const USER_VALIDATION_PENDING = 'F';
-    /**
-     * User is new with invitation and validation is pending.
-     * @var string
-     */
+    /** @var string USER_VALIDATION_PENDING_WITH_INVITATION User is new with invitation and validation is pending. */
     const USER_VALIDATION_PENDING_WITH_INVITATION = 'P';
-    /**
-     * User is banned
-     * @var string
-     */
+    /** @var string USER_BANNED User is banned */
     const USER_BANNED = 'B';
-    /**
-     * User is disabled
-     * @var string
-     */
+    /** @var string USER_DISABLED User is disabled */
     const USER_DISABLED = 'D';
-    /**
-     * User is invited
-     * @var string
-     */
+    /** @var string USER_INVITED User is invited */
     const USER_INVITED = 'I';
-    /**
-     * Prefix to be used when build the encoded password.
-     * @var string
-     */
+    /** @var string PASS_PREF Prefix to be used when build the encoded password. */
     const PASS_PREF = 'nasn2293';
-    /**
-     * Suffix to be used when build the encoded password.
-     * @var string
-     */
+    /** @var string PASS_SUFF Suffix to be used when build the encoded password. */
     const PASS_SUFF = '935nkwnf';
+    /** @var int TEMP_ENC_ID_EXPIRATION_TIME Time to expire a temporal hash */
+    const TEMP_ENC_ID_EXPIRATION_TIME = 1800;
+    /** @var string ENC_ID_PREF Prefix to be used when build encoded IDs */
+    const ENC_ID_PREF = '#hKBFA7C';
+    /** @var string ENC_ID_SUFF Suffix to be used when build encoded IDs */
+    const ENC_ID_SUFF = 'v8YgA.tk';
 
     public function setPassword(string $password) : CNabuDataObject
     {
@@ -83,6 +67,43 @@ class CNabuUser extends CNabuUserBase
     static public function encodePassword($password)
     {
         return md5(CNabuUser::PASS_PREF . $password . CNabuUser::PASS_SUFF);
+    }
+
+    public function createTemporalEncodedId(int $expires = self::TEMP_ENC_ID_EXPIRATION_TIME)
+    {
+        return md5(self::ENC_ID_PREF . $this->getId() . self::ENC_ID_SUFF) . sprintf("%x",time() + $expires);
+    }
+
+    public static function findByTemporalEncodedId($nb_customer, string $key, int $expires = self::TEMP_ENC_ID_EXPIRATION_TIME)
+    {
+        $retval = null;
+
+        if (is_numeric($nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID)) &&
+            strlen($key) > 0
+        ) {
+            $hash_left = $hash_time = null;
+            sscanf($key, "%32s%x", $hash_left, $hash_time);
+            if ($hash_time >= time()) {
+                $retval = CNabuUser::buildObjectFromSQL(
+                    'select * '
+                    . 'from nb_user u, nb_customer c '
+                   . 'where u.nb_customer_id=c.nb_customer_id '
+                     . 'and c.nb_customer_id=%cust_id$d '
+                     . "and md5(concat('%pref\$s', u.nb_user_id, '%suff\$s'))='%key\$s'",
+                     array(
+                         'pref' => self::ENC_ID_PREF,
+                         'suff' => self::ENC_ID_SUFF,
+                         'cust_id' => $nb_customer_id,
+                         'key' => $hash_left
+                     )
+                );
+                if ($nb_customer instanceof CNabuCustomer && $retval !== null) {
+                    $retval->setCustomer($nb_customer);
+                }
+            }
+        }
+
+        return $retval;
     }
 
     /**
@@ -113,6 +134,36 @@ class CNabuUser extends CNabuUserBase
                         'site_id' => $nb_site_id
                     )
             );
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Find a user by email.
+     * @param mixed $nb_customer Customer that owns the User.
+     * @param string $email e-Mail to find.
+     * @return CNabuUser|null Returns a User instance if the email exists or null if not.
+     */
+    static public function findByEMail($nb_customer, string $email)
+    {
+        $retval = null;
+
+        if (is_numeric($nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID))) {
+            $retval = CNabuUser::buildObjectFromSQL(
+                'select u.* '
+                . 'from nb_user u, nb_customer c '
+               . 'where u.nb_customer_id=c.nb_customer_id '
+                 . 'and c.nb_customer_id=%cust_id$d '
+                 . 'and u.nb_user_email=\'%email$s\'',
+                array(
+                    'cust_id' => $nb_customer_id,
+                    'email' => $email
+                )
+            );
+            if ($nb_customer instanceof CNabuCustomer) {
+                $retval->setCustomer($nb_customer);
+            }
         }
 
         return $retval;
