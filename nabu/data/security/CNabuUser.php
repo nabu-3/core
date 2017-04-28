@@ -259,7 +259,6 @@ class CNabuUser extends CNabuUserBase
      */
     public function getActiveGroupsAsMember($nb_group_type = null)
     {
-        error_log(__METHOD__);
         return $this->getGroupsAsMemberByStatus($nb_group_type, 'E');
     }
 
@@ -284,7 +283,7 @@ class CNabuUser extends CNabuUserBase
                                     'type_id' => $nb_group_type->getValue('nb_user_group_type_id'),
                                     'customer_id' => $this->getValue('nb_customer_id'),
                                     'status' => $status
-                                ), null, true
+                                )
                 );
             } else if ($nb_group_type === null) {
                 $retval = CNabuUserGroup::buildObjectListFromSQL(
@@ -299,7 +298,7 @@ class CNabuUser extends CNabuUserBase
                                     'user_id' => $this->getValue('nb_user_id'),
                                     'customer_id' => $this->getValue('nb_customer_id'),
                                     'status' => $status
-                                ), null, true
+                                )
                 );
             }
         }
