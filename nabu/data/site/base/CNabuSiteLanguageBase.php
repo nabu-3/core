@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/26 14:47:42 UTC
+ * Created: 2017/04/30 15:16:22 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -226,20 +226,26 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Get Site Lang Enabled attribute value
-     * @return null|string Returns the Site Lang Enabled value
+     * @return string Returns the Site Lang Enabled value
      */
-    public function getEnabled()
+    public function getEnabled() : string
     {
         return $this->getValue('nb_site_lang_enabled');
     }
 
     /**
      * Sets the Site Lang Enabled attribute value.
-     * @param null|string $enabled New value for attribute
+     * @param string $enabled New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEnabled(string $enabled = "T") : CNabuDataObject
     {
+        if ($enabled === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$enabled")
+            );
+        }
         $this->setValue('nb_site_lang_enabled', $enabled);
         
         return $this;
@@ -247,42 +253,27 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Get Site Lang Translation Status attribute value
-     * @return null|string Returns the Site Lang Translation Status value
+     * @return string Returns the Site Lang Translation Status value
      */
-    public function getTranslationStatus()
+    public function getTranslationStatus() : string
     {
         return $this->getValue('nb_site_lang_translation_status');
     }
 
     /**
      * Sets the Site Lang Translation Status attribute value.
-     * @param null|string $translation_status New value for attribute
+     * @param string $translation_status New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTranslationStatus(string $translation_status = "D") : CNabuDataObject
     {
+        if ($translation_status === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$translation_status")
+            );
+        }
         $this->setValue('nb_site_lang_translation_status', $translation_status);
-        
-        return $this;
-    }
-
-    /**
-     * Get Site Lang Order attribute value
-     * @return null|int Returns the Site Lang Order value
-     */
-    public function getOrder()
-    {
-        return $this->getValue('nb_site_lang_order');
-    }
-
-    /**
-     * Sets the Site Lang Order attribute value.
-     * @param null|int $order New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setOrder(int $order = null) : CNabuDataObject
-    {
-        $this->setValue('nb_site_lang_order', $order);
         
         return $this;
     }
@@ -310,6 +301,27 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
             );
         }
         $this->setValue('nb_site_lang_editable', $editable);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Lang Order attribute value
+     * @return null|int Returns the Site Lang Order value
+     */
+    public function getOrder()
+    {
+        return $this->getValue('nb_site_lang_order');
+    }
+
+    /**
+     * Sets the Site Lang Order attribute value.
+     * @param null|int $order New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setOrder(int $order = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_lang_order', $order);
         
         return $this;
     }
@@ -436,6 +448,27 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
     public function setFullDateFormat(string $full_date_format = null) : CNabuDataObject
     {
         $this->setValue('nb_site_lang_full_date_format', $full_date_format);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Lang Short Time Format attribute value
+     * @return null|string Returns the Site Lang Short Time Format value
+     */
+    public function getShortTimeFormat()
+    {
+        return $this->getValue('nb_site_lang_short_time_format');
+    }
+
+    /**
+     * Sets the Site Lang Short Time Format attribute value.
+     * @param null|string $short_time_format New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setShortTimeFormat(string $short_time_format = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_lang_short_time_format', $short_time_format);
         
         return $this;
     }

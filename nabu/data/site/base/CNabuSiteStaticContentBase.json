@@ -30,9 +30,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_site_static_content_hash": {
+            "name": "nb_site_static_content_hash",
+            "ordinal": "3",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_site_static_content_key": {
             "name": "nb_site_static_content_key",
-            "ordinal": "3",
+            "ordinal": "4",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(30)",
@@ -43,7 +54,7 @@
         },
         "nb_site_static_content_type": {
             "name": "nb_site_static_content_type",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "enum",
             "precision": null,
             "type": "enum('H','P')",
@@ -54,7 +65,7 @@
         },
         "nb_site_static_content_use_alternative": {
             "name": "nb_site_static_content_use_alternative",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "enum",
             "precision": null,
             "type": "enum('D','E','B','S')",
@@ -65,7 +76,7 @@
         },
         "nb_site_static_content_notes": {
             "name": "nb_site_static_content_notes",
-            "ordinal": "6",
+            "ordinal": "7",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -90,8 +101,24 @@
                 }
             }
         },
-        "fk_nb_site_static_content_nb_site1_idx": {
-            "name": "fk_nb_site_static_content_nb_site1_idx",
+        "nb_site_static_content_hash_idx": {
+            "name": "nb_site_static_content_hash_idx",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_site_static_content_hash": {
+                    "name": "nb_site_static_content_hash",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_static_content_site_target_id_idx": {
+            "name": "nb_site_static_content_site_target_id_idx",
             "primary": false,
             "unique": false,
             "index_type": "BTREE",
@@ -106,8 +133,8 @@
                 }
             }
         },
-        "nb_site_static_content_site_target_id_idx": {
-            "name": "nb_site_static_content_site_target_id_idx",
+        "nb_site_static_content_nb_site_fk": {
+            "name": "nb_site_static_content_nb_site_fk",
             "primary": false,
             "unique": false,
             "index_type": "BTREE",

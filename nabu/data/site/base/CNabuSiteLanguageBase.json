@@ -37,7 +37,7 @@
             "precision": null,
             "type": "enum('T','F')",
             "default": "T",
-            "is_nullable": true,
+            "is_nullable": false,
             "extra": "",
             "comment": ""
         },
@@ -48,29 +48,29 @@
             "precision": null,
             "type": "enum('E','D')",
             "default": "D",
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_site_lang_order": {
-            "name": "nb_site_lang_order",
-            "ordinal": "5",
-            "data_type": "int",
-            "precision": "10",
-            "type": "int(11)",
-            "default": null,
-            "is_nullable": true,
+            "is_nullable": false,
             "extra": "",
             "comment": ""
         },
         "nb_site_lang_editable": {
             "name": "nb_site_lang_editable",
-            "ordinal": "6",
+            "ordinal": "5",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
             "default": "F",
             "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_lang_order": {
+            "name": "nb_site_lang_order",
+            "ordinal": "6",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
             "extra": "",
             "comment": ""
         },
@@ -140,9 +140,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_site_lang_short_time_format": {
+            "name": "nb_site_lang_short_time_format",
+            "ordinal": "13",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(100)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_site_lang_full_time_format": {
             "name": "nb_site_lang_full_time_format",
-            "ordinal": "13",
+            "ordinal": "14",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(100)",
@@ -153,7 +164,7 @@
         },
         "nb_site_lang_name": {
             "name": "nb_site_lang_name",
-            "ordinal": "14",
+            "ordinal": "15",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -164,7 +175,7 @@
         },
         "nb_site_lang_default_target_url": {
             "name": "nb_site_lang_default_target_url",
-            "ordinal": "15",
+            "ordinal": "16",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -175,7 +186,7 @@
         },
         "nb_site_lang_page_not_found_target_url": {
             "name": "nb_site_lang_page_not_found_target_url",
-            "ordinal": "16",
+            "ordinal": "17",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -186,7 +197,7 @@
         },
         "nb_site_lang_login_target_url": {
             "name": "nb_site_lang_login_target_url",
-            "ordinal": "17",
+            "ordinal": "18",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -197,7 +208,7 @@
         },
         "nb_site_lang_login_redirection_target_url": {
             "name": "nb_site_lang_login_redirection_target_url",
-            "ordinal": "18",
+            "ordinal": "19",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -208,7 +219,7 @@
         },
         "nb_site_lang_logout_redirection_target_url": {
             "name": "nb_site_lang_logout_redirection_target_url",
-            "ordinal": "19",
+            "ordinal": "20",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -219,7 +230,7 @@
         },
         "nb_site_lang_alias_not_found_target_url": {
             "name": "nb_site_lang_alias_not_found_target_url",
-            "ordinal": "20",
+            "ordinal": "21",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -230,7 +241,7 @@
         },
         "nb_site_lang_alias_locked_target_url": {
             "name": "nb_site_lang_alias_locked_target_url",
-            "ordinal": "21",
+            "ordinal": "22",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",

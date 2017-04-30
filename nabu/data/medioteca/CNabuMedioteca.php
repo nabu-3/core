@@ -140,6 +140,7 @@ class CNabuMedioteca extends CNabuMediotecaBase
     {
         $trdata = parent::getTreeData($nb_language, $dataonly);
 
+        $trdata['languages'] = $this->getLanguages();
         $this->getItems();
 
         $trdata['items'] = $this->nb_medioteca_item_list;

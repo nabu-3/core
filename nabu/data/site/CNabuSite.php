@@ -815,7 +815,7 @@ class CNabuSite extends CNabuSiteBase
                (!$cascade ||
                     (
                         $this->getSiteMaps($force) &&
-                        $this->getStaticContent($force) &&
+                        $this->getStaticContents($force) &&
                         $this->getTargets($force)
                     )
                )

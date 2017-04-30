@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/04/26 14:47:56 UTC
+ * Created: 2017/04/30 15:16:40 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\interfaces\INabuTranslated;
 use \nabu\data\lang\interfaces\INabuTranslation;
@@ -45,8 +47,9 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
  */
-abstract class CNabuSiteStaticContentBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuSiteStaticContentBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
+    use TNabuHashed;
     use TNabuSiteChild;
     use TNabuTranslated;
 
@@ -98,6 +101,23 @@ abstract class CNabuSiteStaticContentBase extends CNabuDBInternalObject implemen
                    . "where nb_site_static_content_id=%nb_site_static_content_id\$d "
               )
             : null;
+    }
+
+    /**
+     * Find an instance identified by nb_site_static_content_hash field.
+     * @param string $hash Hash to search
+     * @return CNabuDataObject Returns a valid instance if exists or null if not.
+     */
+    public static function findByHash(string $hash)
+    {
+        return CNabuSiteStaticContent::buildObjectFromSQL(
+                'select * '
+                . 'from nb_site_static_content '
+               . "where nb_site_static_content_hash='%hash\$s'",
+                array(
+                    'hash' => $hash
+                )
+        );
     }
 
     /**
@@ -333,6 +353,27 @@ abstract class CNabuSiteStaticContentBase extends CNabuDBInternalObject implemen
             );
         }
         $this->setValue('nb_site_id', $nb_site_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Static Content Hash attribute value
+     * @return null|string Returns the Site Static Content Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_site_static_content_hash');
+    }
+
+    /**
+     * Sets the Site Static Content Hash attribute value.
+     * @param null|string $hash New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setHash(string $hash = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_static_content_hash', $hash);
         
         return $this;
     }
