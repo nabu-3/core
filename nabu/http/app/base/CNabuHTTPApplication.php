@@ -275,6 +275,11 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
                 ->setKey('FILE')
                 ->setClassName('nabu\http\renders\CNabuHTTPResponseFileRender')
         );
+        $this->nb_http_renders_manager->registerRender(
+            (new CNabuHTTPRenderDescriptor())
+                ->setKey('XML')
+                ->setClassName('nabu\http\renders\CNabuHTTPResponseXMLRender')
+        );
     }
 
     protected function prepareMediotecasManager()
