@@ -8,8 +8,8 @@
     "collation": "utf8_general_ci",
     "comment": "",
     "fields": {
-        "nb_user_id": {
-            "name": "nb_user_id",
+        "nb_user_group_id": {
+            "name": "nb_user_group_id",
             "ordinal": "1",
             "data_type": "int",
             "precision": "10",
@@ -19,8 +19,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_user_group_id": {
-            "name": "nb_user_group_id",
+        "nb_user_id": {
+            "name": "nb_user_id",
             "ordinal": "2",
             "data_type": "int",
             "precision": "10",
@@ -115,14 +115,14 @@
             "index_type": "BTREE",
             "comments": "",
             "fields": {
-                "nb_user_id": {
-                    "name": "nb_user_id",
+                "nb_user_group_id": {
+                    "name": "nb_user_group_id",
                     "ordinal": "1",
                     "collation": "ASC",
                     "comments": ""
                 },
-                "nb_user_group_id": {
-                    "name": "nb_user_group_id",
+                "nb_user_id": {
+                    "name": "nb_user_id",
                     "ordinal": "2",
                     "collation": "ASC",
                     "comments": ""

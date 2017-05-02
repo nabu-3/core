@@ -86,6 +86,9 @@ define('NABU_CUSTOMER_FIELD_ID', 'nb_customer_id');
 define('NABU_ROLE_TABLE', 'nb_role');
 define('NABU_ROLE_FIELD_ID', 'nb_role_id');
 
+define('NABU_USER_TABLE', 'nb_user');
+define('NABU_USER_FIELD_ID', 'nb_user_id');
+
 define('NABU_SITE_TABLE', 'nb_site');
 define('NABU_SITE_FIELD_ID', 'nb_site_id');
 

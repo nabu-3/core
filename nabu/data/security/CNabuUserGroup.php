@@ -31,6 +31,15 @@ class CNabuUserGroup extends CNabuUserGroupBase
 {
     /** @var CNabuUser $nb_user User owner instance of this group. */
     private $nb_user = null;
+    /** @var CNabuUserGroupMemberList $nb_user_group_member_list List of members. */
+    private $nb_user_group_member_list = null;
+
+    public function __construct($nb_user_group = false)
+    {
+        parent::__construct($nb_user_group);
+
+        $this->nb_user_group_member_list = new CNabuUserGroupMemberList();
+    }
 
     public function getOwner(bool $force = false)
     {
@@ -43,4 +52,44 @@ class CNabuUserGroup extends CNabuUserGroupBase
 
         return $this->nb_user;
     }
+
+    /**
+     * Returns the full list of members in the group.
+     * @param bool $force If true, then force to reload from database the full list.
+     * @return mixed Return a list with members found.
+     */
+    public function getMembers($force = false)
+    {
+        if ($this->nb_user_group_member_list->isEmpty() || $force) {
+            $this->nb_user_group_member_list->clear();
+            if ($this->isValueNumeric('nb_user_group_id')) {
+                $this->nb_user_group_member_list->merge(CNabuUserGroupMember::getMembersOfGroup($this));
+            }
+        }
+
+        return $this->nb_user_group_member_list;
+    }
+
+    /**
+     * Returns the full list of admin members in the group.
+     * @param bool $force If true, then force to reload from database the full list.
+     * @return CNabuUserGroupMemberList Return an list with all members found.
+     */
+    public function getAdminMembers($force = false) : CNabuUserGroupMemberList
+    {
+        $this->getMembers($force);
+        $nb_admin_list = new CNabuUserGroupMemberList();
+
+        $this->nb_user_group_member_list->iterate(
+            function($key, CNabuUserGroupMember $nb_user_group_member) use ($nb_admin_list)
+            {
+                if ($nb_user_group_member->getAdmin() === 'T' && $nb_user_group_member->getStatus() === 'E') {
+                    $nb_admin_list->addItem($nb_user_group_member);
+                }
+            }
+        );
+
+        return $nb_admin_list;
+    }
+
 }

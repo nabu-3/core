@@ -265,6 +265,7 @@ class CNabuCustomer extends CNabuCustomerBase
     public function getSites($force = false)
     {
         if ($force) {
+            $this->nb_site_list->clear();
             $this->nb_site_list->merge(CNabuSite::getAllSites($this));
         }
 

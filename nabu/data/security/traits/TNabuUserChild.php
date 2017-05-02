@@ -19,55 +19,55 @@
 
 namespace nabu\data\security\traits;
 use nabu\data\CNabuDataObject;
-use nabu\data\security\CNabuRole;
+use nabu\data\security\CNabuUser;
 
 /**
- * This trait implements default actions to manage a Role child object in nabu-3.
+ * This trait implements default actions to manage a User child object in nabu-3.
  * You can apply this trait to your own classes to speed up your development,
  * or create your own management.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  * @package \nabu\data\security\traits;
  */
-trait TNabuRoleChild
+trait TNabuUserChild
 {
-    /**
-     * Role instance
-     * @var CNabuRole
-     */
-    private $nb_role = null;
+    /** @var CNabuUser $nb_user User instance */
+    private $nb_user = null;
 
     /**
-     * Gets the Role instance.
-     * @param bool $force If true, forces to load Role from storage.
-     * @return CNabuRole|null Returns the Role instance if setted or null if not.
+     * Gets the User instance.
+     * @param bool $force If true, forces to load User from storage.
+     * @return CNabuUser|null Returns the User instance if setted or null if not.
      */
-     public function getRole($force = false)
+     public function getUser($force = false)
      {
-         if ($this->nb_role === null || $force) {
-             $this->nb_role = null;
-             if ($this->isValueNumeric('nb_role_id')) {
-                 $nb_role = new CNabuRole($this);
-                 if ($nb_role->isFetched()) {
-                     $this->nb_role = $nb_role;
+         if ($force) {
+             $this->nb_user = null;
+             if ($this instanceof CNabuDataObject &&
+                 $this->contains(NABU_USER_FIELD_ID) &&
+                 $this->isValueNumeric(NABU_USER_FIELD_ID)
+             ) {
+                 $nb_user = new CNabuUser($this->getValue(NABU_USER_FIELD_ID));
+                 if ($nb_user->isFetched()) {
+                     $this->nb_user = $nb_user;
                  }
              }
          }
 
-         return $this->nb_role;
+         return $this->nb_user;
      }
 
     /**
-     * Sets the Role instance that owns this object and sets the field containing the Role id.
-     * @param CNabuRole $nb_role Role instance to be setted.
-     * @param string $field Field name where the Role id will be stored.
+     * Sets the User instance that owns this object and sets the field containing the User id.
+     * @param CNabuUser $nb_user User instance to be setted.
+     * @param string $field Field name where the User id will be stored.
      * @return mixed Returns $this to allow the cascade chain of setters.
      */
-    public function setRole(CNabuRole $nb_role)
+    public function setUser(CNabuUser $nb_user)
     {
-        $this->nb_role = $nb_role;
+        $this->nb_user = $nb_user;
         if ($this instanceof CNabuDataObject) {
-            $this->transferValue($nb_role, NABU_ROLE_FIELD_ID);
+            $this->transferValue($nb_user, NABU_USER_FIELD_ID);
         }
 
         return $this;

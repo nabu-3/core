@@ -64,11 +64,11 @@ trait TNabuSiteChild
      * @param string $field Field name where the site id will be stored.
      * @return CNabuDataObject Returns $this to allow the cascade chain of setters.
      */
-    public function setSite(CNabuSite $nb_site, $field = NABU_SITE_FIELD_ID)
+    public function setSite(CNabuSite $nb_site)
     {
         $this->nb_site = $nb_site;
         if ($this instanceof CNabuDataObject) {
-            $this->transferValue($nb_site, NABU_SITE_FIELD_ID, $field);
+            $this->transferValue($nb_site, NABU_SITE_FIELD_ID);
         }
 
         return $this;

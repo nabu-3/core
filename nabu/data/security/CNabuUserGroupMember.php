@@ -19,6 +19,7 @@
 
 namespace nabu\data\security;
 use nabu\data\security\base\CNabuUserGroupMemberBase;
+use nabu\data\security\traits\TNabuUserChild;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -28,5 +29,30 @@ use nabu\data\security\base\CNabuUserGroupMemberBase;
  */
 class CNabuUserGroupMember extends CNabuUserGroupMemberBase
 {
-    
+    use TNabuUserChild;
+
+    /**
+     * Gets all Members of a Group.
+     * @param mixed $nb_user_group A valid ID, an object containing a field called nb_user_group_id or a User Group instance.
+     * @return CNabuUserGroupMemberList Returns a list with available members.
+     */
+    public static function getMembersOfGroup($nb_user_group) : CNabuUserGroupMemberList
+    {
+        if (is_numeric($nb_user_group_id = nb_getMixedValue($nb_user_group, 'nb_user_group_id'))) {
+            $retval = CNabuUserGroupMember::buildObjectListFromSQL(
+                'nb_user_id',
+                "select ugm.* "
+                . "from nb_user_group_member ugm, nb_user_group ug "
+               . "where ugm.nb_user_group_id=ug.nb_user_group_id "
+                 . "and ugm.nb_user_group_id=%group_id\$d",
+                array(
+                    'group_id' => $nb_user_group_id
+                ), null, true
+            );
+        } else {
+            $retval = new CNabuUserGroupMemberList();
+        }
+
+        return $retval;
+    }
 }
