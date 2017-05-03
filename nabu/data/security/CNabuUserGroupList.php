@@ -28,5 +28,11 @@ use nabu\data\security\base\CNabuUserGroupListBase;
  */
 class CNabuUserGroupList extends CNabuUserGroupListBase
 {
-    
+    public function expandMembersAsUsers()
+    {
+        $this->iterate(function($key, CNabuUserGroup $nb_user_group) {
+            $nb_user_group->expandMembersAsUsers();
+            return true;
+        });
+    }
 }

@@ -70,6 +70,11 @@ class CNabuUserGroup extends CNabuUserGroupBase
         return $this->nb_user_group_member_list;
     }
 
+    public function expandMembersAsUsers()
+    {
+        $this->nb_user_group_member_list->expandMembersAsUsers();
+    }
+
     /**
      * Returns the full list of admin members in the group.
      * @param bool $force If true, then force to reload from database the full list.
@@ -92,4 +97,13 @@ class CNabuUserGroup extends CNabuUserGroupBase
         return $nb_admin_list;
     }
 
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $trdata = parent::getTreeData($nb_language, $dataonly);
+
+        $trdata['owner'] = $this->getOwner();
+        $trdata['members'] = $this->getMembers();
+
+        return $trdata;
+    }
 }

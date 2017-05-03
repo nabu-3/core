@@ -39,23 +39,23 @@ trait TNabuUserChild
      * @param bool $force If true, forces to load User from storage.
      * @return CNabuUser|null Returns the User instance if setted or null if not.
      */
-     public function getUser($force = false)
-     {
-         if ($force) {
-             $this->nb_user = null;
-             if ($this instanceof CNabuDataObject &&
-                 $this->contains(NABU_USER_FIELD_ID) &&
-                 $this->isValueNumeric(NABU_USER_FIELD_ID)
-             ) {
-                 $nb_user = new CNabuUser($this->getValue(NABU_USER_FIELD_ID));
-                 if ($nb_user->isFetched()) {
-                     $this->nb_user = $nb_user;
-                 }
-             }
-         }
+    public function getUser($force = false)
+    {
+        if ($this->nb_user === null || $force) {
+            $this->nb_user = null;
+            if ($this instanceof CNabuDataObject &&
+                $this->contains(NABU_USER_FIELD_ID) &&
+                $this->isValueNumeric(NABU_USER_FIELD_ID)
+            ) {
+                $nb_user = new CNabuUser($this->getValue(NABU_USER_FIELD_ID));
+                if ($nb_user->isFetched()) {
+                    $this->nb_user = $nb_user;
+                }
+            }
+        }
 
-         return $this->nb_user;
-     }
+        return $this->nb_user;
+    }
 
     /**
      * Sets the User instance that owns this object and sets the field containing the User id.

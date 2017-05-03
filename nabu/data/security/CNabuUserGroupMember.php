@@ -47,12 +47,21 @@ class CNabuUserGroupMember extends CNabuUserGroupMemberBase
                  . "and ugm.nb_user_group_id=%group_id\$d",
                 array(
                     'group_id' => $nb_user_group_id
-                ), null, true
+                )
             );
         } else {
             $retval = new CNabuUserGroupMemberList();
         }
 
         return $retval;
+    }
+
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $trdata = parent::getTreeData($nb_language, $dataonly);
+
+        $trdata['user'] = $this->getUser();
+
+        return $trdata;
     }
 }
