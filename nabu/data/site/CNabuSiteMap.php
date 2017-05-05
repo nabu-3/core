@@ -299,12 +299,14 @@ class CNabuSiteMap extends CNabuSiteMapBase implements INabuDataObjectTreeNode, 
                 )
             ) {
                 $user_signed = $additional[CNabuHTTPSecurityManager::ROLE_MASK_USER_SIGNED];
-                $work_customer = array_key_exists(CNabuHTTPSecurityManager::ROLE_MASK_WORK_CUSTOMER, $additional) &&
-                    $additional[CNabuHTTPSecurityManager::ROLE_MASK_WORK_CUSTOMER];
+                $work_customer =
+                    array_key_exists(CNabuHTTPSecurityManager::ROLE_MASK_WORK_CUSTOMER, $additional) &&
+                    $additional[CNabuHTTPSecurityManager::ROLE_MASK_WORK_CUSTOMER]
+                ;
                 if ((($user_signed && $nb_role_mask->isForPrivateZone()) ||
                     (!$user_signed && $nb_role_mask->isForPublicZone())) &&
                     (($work_customer && $this->isWorkCustomerRequired()) ||
-                     (!$work_customer && $this->isWorkCustomerNotRequired()))
+                    (!$work_customer && $this->isWorkCustomerNotRequired()))
                 ) {
                     $this->nb_site_map_role_list->addItem($nb_role_mask);
                     $this->nb_tree_child_list->applyRoleMask($nb_role, $additional);
