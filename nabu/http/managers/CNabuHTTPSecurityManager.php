@@ -39,7 +39,8 @@ use nabu\http\managers\base\CNabuHTTPManager;
 /**
  * Class to manage Security of HTTP requests.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\http\managers
  */
 class CNabuHTTPSecurityManager extends CNabuHTTPManager
@@ -72,11 +73,6 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
     public function __construct(CNabuHTTPApplication $nb_application)
     {
         parent::__construct($nb_application);
-    }
-
-    public function getVendorKey()
-    {
-        return 'nabu-3';
     }
 
     /**
@@ -450,7 +446,8 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                 }
 
                 if ($nb_site->getRequirePoliciesAfterLogin() === 'T' &&
-                    strlen($url = $nb_site->getPoliciesTargetLink()->getBestQualifiedURL()) > 0
+                    strlen($url = $nb_site->getPoliciesTargetLink()->getBestQualifiedURL()) > 0 &&
+                    $this->nb_user->getPoliciesAccepted() === 'F'
                 ) {
                     $after_login = $url;
                 } else {
@@ -509,6 +506,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         }
 
         if ($before !== false) {
+            /*
             $_SESSION = array_diff_key(
                     $_SESSION,
                     array(
@@ -519,6 +517,14 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                         self::VAR_SESSION_WORK_CUSTOMER => null
                     )
             );
+            */
+
+            unset($_SESSION[self::VAR_SESSION_USER]);
+            unset($_SESSION[self::VAR_SESSION_ROLE]);
+            unset($_SESSION[self::VAR_SESSION_SITE_USER]);
+            unset($_SESSION[self::VAR_SESSION_PRESERVED]);
+            unset($_SESSION[self::VAR_SESSION_WORK_CUSTOMER]);
+
             if ($nb_site->isValueEqualThan('cms_site_enable_session_strict_policies', 'T')) {
                 session_regenerate_id(true);
             }
@@ -531,16 +537,20 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
             }
         }
 
-        if ($before !== false) {
-            if ($before !== true) {
-                $nb_response->temporaryRedirect($before);
-            }
+        if ($before !== false && $before !== true) {
+            $nb_response->temporaryRedirect($before);
         }
 
         return $before;
     }
 
-    public function applyRoleMask(INabuRoleMask $object, array $params = null)
+    /**
+     * Applies a Role to an object, forcing to clean all related entities that does not share the same role.
+     * @param INabuRoleMask $object Role Mask entity to be applied.
+     * @param array $params Additional parameters to be applied when perform masking.
+     * @return bool Returns true if the cleaning is performed.
+     */
+    public function applyRoleMask(INabuRoleMask $object, array $params = null) : bool
     {
         return $object->applyRoleMask(
             $this->nb_role,
@@ -551,6 +561,13 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         );
     }
 
+    /**
+     * Call this method when a User accept the Policies of the Site. In consequence the lock for policies
+     * in all Targets is ignored.
+     * @param bool $save If true, the instance is updated in the storage synchronously. If false, then the instance
+     * is updated internally but changes will not be valid in other instances of the same object or in future requests.
+     * To have changes applied permanently when $save if false, you need to call the save method after this call.
+     */
     public function acceptPolicies(bool $save = true)
     {
         $nb_site = $this->nb_application->getHTTPServer()->getSite();

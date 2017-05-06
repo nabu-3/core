@@ -18,10 +18,11 @@
  */
 
 namespace nabu\data\security;
-
-use \nabu\data\security\base\CNabuUserBase;
 use nabu\data\CNabuDataObject;
 use nabu\data\customer\CNabuCustomer;
+use nabu\data\interfaces\INabuId;
+use nabu\data\security\base\CNabuUserBase;
+use nabu\data\traits\TNabuId;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -29,8 +30,10 @@ use nabu\data\customer\CNabuCustomer;
  * @version 3.0.12 Surface
  * @package nabu\data\security
  */
-class CNabuUser extends CNabuUserBase
+class CNabuUser extends CNabuUserBase implements INabuId
 {
+    use TNabuId;
+
     /** @var string USER_ACTIVE User is active */
     const USER_ACTIVE = 'T';
     /** @var string USER_VALIDATION_PENDING User is new and validation is pending. */
@@ -47,13 +50,24 @@ class CNabuUser extends CNabuUserBase
     const PASS_PREF = 'nasn2293';
     /** @var string PASS_SUFF Suffix to be used when build the encoded password. */
     const PASS_SUFF = '935nkwnf';
-    /** @var int TEMP_ENC_ID_EXPIRATION_TIME Time to expire a temporal hash */
-    const TEMP_ENC_ID_EXPIRATION_TIME = 1800;
-    /** @var string ENC_ID_PREF Prefix to be used when build encoded IDs */
-    const ENC_ID_PREF = '#hKBFA7C';
-    /** @var string ENC_ID_SUFF Suffix to be used when build encoded IDs */
-    const ENC_ID_SUFF = 'v8YgA.tk';
 
+    /**
+     * Overrides the method to convert to lowercase emails before store them in the object.
+     * @param string $email Email to be setted.
+     * @return CNabuDataObject Returns the self instance to grant cascade setters.
+     */
+    public function setEmail(string $email) : CNabuDataObject
+    {
+        $value = parent::setEmail(strtolower($email));
+
+        return $value;
+    }
+
+    /**
+     * Sets the password encoding it into a nabu-3 hashing algorithm.
+     * @param string $password Password string to be encoded and setted.
+     * @return CNabuDataObject Returns the self instance to grant cascade setters.
+     */
     public function setPassword(string $password) : CNabuDataObject
     {
         return parent::setPassword(CNabuUser::encodePassword($password));
@@ -69,16 +83,12 @@ class CNabuUser extends CNabuUserBase
         return md5(CNabuUser::PASS_PREF . $password . CNabuUser::PASS_SUFF);
     }
 
-    public function createStaticEncodedId()
-    {
-        return md5(self::ENC_ID_PREF . $this->getId() . self::ENC_ID_SUFF);
-    }
-
-    public function createTemporalEncodedId(int $expires = self::TEMP_ENC_ID_EXPIRATION_TIME)
-    {
-        return md5(self::ENC_ID_PREF . $this->getId() . self::ENC_ID_SUFF) . sprintf("%x",time() + $expires);
-    }
-
+    /**
+     * Find a User by an static encoded key.
+     * @param mixed $nb_customer A Customer ID, a Data Object containing a field nb_customer_id or a Customer instance.
+     * @param string $key Key encoded string value to find the User.
+     * @return mixed Returns a User instance if $key matches or null if not.
+     */
     public static function findByStaticEncodedId($nb_customer, string $key)
     {
         $retval = null;
@@ -93,8 +103,8 @@ class CNabuUser extends CNabuUserBase
                  . 'and c.nb_customer_id=%cust_id$d '
                  . "and md5(concat('%pref\$s', u.nb_user_id, '%suff\$s'))='%key\$s'",
                  array(
-                     'pref' => self::ENC_ID_PREF,
-                     'suff' => self::ENC_ID_SUFF,
+                     'pref' => NABU_ENC_ID_PREF,
+                     'suff' => NABU_ENC_ID_SUFF,
                      'cust_id' => $nb_customer_id,
                      'key' => $key
                  )
@@ -107,8 +117,14 @@ class CNabuUser extends CNabuUserBase
         return $retval;
     }
 
-
-    public static function findByTemporalEncodedId($nb_customer, string $key, int $expires = self::TEMP_ENC_ID_EXPIRATION_TIME)
+    /**
+     * Find a User by an temporal encoded key.
+     * @param mixed $nb_customer A Customer ID, a Data Object containing a field nb_customer_id or a Customer instance.
+     * @param string $key Key encoded string value to find the User.
+     * @param int $expires Time in seconds of the validity interval of encoded ID.
+     * @return mixed Returns a User instance if $key matches and is in time, or null if not.
+     */
+    public static function findByTemporalEncodedId($nb_customer, string $key, int $expires = NABU_TEMP_ENC_ID_EXPIRATION_TIME)
     {
         $retval = null;
 
@@ -125,8 +141,8 @@ class CNabuUser extends CNabuUserBase
                      . 'and c.nb_customer_id=%cust_id$d '
                      . "and md5(concat('%pref\$s', u.nb_user_id, '%suff\$s'))='%key\$s'",
                      array(
-                         'pref' => self::ENC_ID_PREF,
-                         'suff' => self::ENC_ID_SUFF,
+                         'pref' => NABU_ENC_ID_PREF,
+                         'suff' => NABU_ENC_ID_SUFF,
                          'cust_id' => $nb_customer_id,
                          'key' => $hash_left
                      )

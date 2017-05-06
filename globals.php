@@ -130,3 +130,8 @@ define('NABU_PROJECT_FIELD_ID', 'nb_project_id');
 
 /* Regular expression patterns */
 define('NABU_REGEXP_PATTERN_KEY', '^[a-zA-Z_][a-zA-Z0-9_]+$');
+
+/* Encoding algorithms */
+define('NABU_TEMP_ENC_ID_EXPIRATION_TIME', 1800);
+define('NABU_ENC_ID_PREF', '#hKBFA7C');
+define('NABU_ENC_ID_SUFF', 'v8YgA.tk');
