@@ -332,6 +332,15 @@ class CNabuSite extends CNabuSiteBase
     }
 
     /**
+     * Gets the Policies Target Link instance.
+     * @return CNabuSiteTargetLink Returns the Site Target Link generated instance.
+     */
+    public function getPoliciesTargetLink()
+    {
+        return $this->getReferredTargetLink('policies');
+    }
+
+    /**
      * Check if Default Target uses a Site Target object.
      * @return bool Returns true if the Default Site Target is a CNabuSiteTarget object.
      */

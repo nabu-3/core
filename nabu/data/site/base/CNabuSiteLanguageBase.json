@@ -249,6 +249,17 @@
             "is_nullable": true,
             "extra": "",
             "comment": ""
+        },
+        "nb_site_lang_policies_target_url": {
+            "name": "nb_site_lang_policies_target_url",
+            "ordinal": "23",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
         }
     },
     "constraints": {

@@ -27,6 +27,7 @@ use nabu\data\site\CNabuSiteTarget;
 use nabu\http\CNabuHTTPSession;
 use nabu\http\CNabuHTTPRequest;
 use nabu\http\CNabuHTTPResponse;
+use nabu\http\CNabuHTTPRedirection;
 use nabu\http\exceptions\ENabuRedirectionException;
 use nabu\http\interfaces\INabuHTTPServer;
 use nabu\http\interfaces\INabuHTTPResponseRender;
@@ -437,10 +438,15 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         global $NABU_HTTP_CODES;
 
         //throw new ENabuCoreException(ENabuCoreException::ERROR_METHOD_NOT_IMPLEMENTED, __METHOD__);
-        $this->nb_engine->traceLog("Redirect to", $location);
         header("HTTP/1.1 $code " . $NABU_HTTP_CODES[$code]);
-        header("Location: $location");
-        echo "Redirecting to... $location";
+        if (is_string($location)) {
+            $url = $location;
+        } elseif ($location instanceof CNabuHTTPRedirection) {
+            $url = $location->getURL();
+        }
+        $this->nb_engine->traceLog("Redirect to", $url);
+        header("Location: $url");
+        echo "Redirecting to... $url";
     }
 
     private function buildResponse()

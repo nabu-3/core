@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/05/02 20:30:21 UTC
+ * Created: 2017/05/05 23:27:38 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -718,6 +718,33 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
             );
         }
         $this->setValue('nb_site_target_php_trace', $php_trace);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Target Ignore Policies attribute value
+     * @return string Returns the Site Target Ignore Policies value
+     */
+    public function getIgnorePolicies() : string
+    {
+        return $this->getValue('nb_site_target_ignore_policies');
+    }
+
+    /**
+     * Sets the Site Target Ignore Policies attribute value.
+     * @param string $ignore_policies New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setIgnorePolicies(string $ignore_policies = "F") : CNabuDataObject
+    {
+        if ($ignore_policies === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$ignore_policies")
+            );
+        }
+        $this->setValue('nb_site_target_ignore_policies', $ignore_policies);
         
         return $this;
     }

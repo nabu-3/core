@@ -107,9 +107,20 @@
             "extra": "",
             "comment": "T = Enabled\nB = Banned\nF = Pending to enable without invitation\nD = Disabled\nI = Invited\nP = Pending to enable with invitation"
         },
+        "nb_user_policies_accepted": {
+            "name": "nb_user_policies_accepted",
+            "ordinal": "10",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
         "nb_user_tester": {
             "name": "nb_user_tester",
-            "ordinal": "10",
+            "ordinal": "11",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -120,23 +131,12 @@
         },
         "nb_user_creation_datetime": {
             "name": "nb_user_creation_datetime",
-            "ordinal": "11",
+            "ordinal": "12",
             "data_type": "datetime",
             "precision": null,
             "type": "datetime",
             "default": "CURRENT_TIMESTAMP",
             "is_nullable": false,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_user_activation_datetime": {
-            "name": "nb_user_activation_datetime",
-            "ordinal": "12",
-            "data_type": "datetime",
-            "precision": null,
-            "type": "datetime",
-            "default": null,
-            "is_nullable": true,
             "extra": "",
             "comment": ""
         },
@@ -148,12 +148,34 @@
             "type": "datetime",
             "default": null,
             "is_nullable": true,
+            "extra": "on update CURRENT_TIMESTAMP",
+            "comment": ""
+        },
+        "nb_user_activation_datetime": {
+            "name": "nb_user_activation_datetime",
+            "ordinal": "14",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_user_policies_datetime": {
+            "name": "nb_user_policies_datetime",
+            "ordinal": "15",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
             "extra": "",
             "comment": ""
         },
         "nb_user_alive": {
             "name": "nb_user_alive",
-            "ordinal": "14",
+            "ordinal": "16",
             "data_type": "mediumtext",
             "precision": null,
             "type": "mediumtext",
@@ -164,7 +186,7 @@
         },
         "wgeo_country_id": {
             "name": "wgeo_country_id",
-            "ordinal": "15",
+            "ordinal": "17",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -175,7 +197,7 @@
         },
         "nb_user_storage_id": {
             "name": "nb_user_storage_id",
-            "ordinal": "16",
+            "ordinal": "18",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -186,7 +208,7 @@
         },
         "nb_user_first_name": {
             "name": "nb_user_first_name",
-            "ordinal": "17",
+            "ordinal": "19",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(200)",
@@ -197,7 +219,7 @@
         },
         "nb_user_last_name": {
             "name": "nb_user_last_name",
-            "ordinal": "18",
+            "ordinal": "20",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(200)",
@@ -208,7 +230,7 @@
         },
         "nb_user_fiscal_number": {
             "name": "nb_user_fiscal_number",
-            "ordinal": "19",
+            "ordinal": "21",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -219,7 +241,7 @@
         },
         "nb_user_birth_date": {
             "name": "nb_user_birth_date",
-            "ordinal": "20",
+            "ordinal": "22",
             "data_type": "date",
             "precision": null,
             "type": "date",
@@ -230,7 +252,7 @@
         },
         "nb_user_address_1": {
             "name": "nb_user_address_1",
-            "ordinal": "21",
+            "ordinal": "23",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -241,7 +263,7 @@
         },
         "nb_user_address_2": {
             "name": "nb_user_address_2",
-            "ordinal": "22",
+            "ordinal": "24",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -252,7 +274,7 @@
         },
         "nb_user_zip_code": {
             "name": "nb_user_zip_code",
-            "ordinal": "23",
+            "ordinal": "25",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(15)",
@@ -263,7 +285,7 @@
         },
         "nb_user_city_name": {
             "name": "nb_user_city_name",
-            "ordinal": "24",
+            "ordinal": "26",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -274,7 +296,7 @@
         },
         "nb_user_province_name": {
             "name": "nb_user_province_name",
-            "ordinal": "25",
+            "ordinal": "27",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -285,7 +307,7 @@
         },
         "nb_user_country_name": {
             "name": "nb_user_country_name",
-            "ordinal": "26",
+            "ordinal": "28",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -296,7 +318,7 @@
         },
         "nb_user_telephone_prefix": {
             "name": "nb_user_telephone_prefix",
-            "ordinal": "27",
+            "ordinal": "29",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(5)",
@@ -307,7 +329,7 @@
         },
         "nb_user_telephone": {
             "name": "nb_user_telephone",
-            "ordinal": "28",
+            "ordinal": "30",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -318,7 +340,7 @@
         },
         "nb_user_cellular_prefix": {
             "name": "nb_user_cellular_prefix",
-            "ordinal": "29",
+            "ordinal": "31",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(5)",
@@ -329,7 +351,7 @@
         },
         "nb_user_cellular": {
             "name": "nb_user_cellular",
-            "ordinal": "30",
+            "ordinal": "32",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -340,7 +362,7 @@
         },
         "nb_user_fax_prefix": {
             "name": "nb_user_fax_prefix",
-            "ordinal": "31",
+            "ordinal": "33",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(5)",
@@ -351,7 +373,7 @@
         },
         "nb_user_fax": {
             "name": "nb_user_fax",
-            "ordinal": "32",
+            "ordinal": "34",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -362,7 +384,7 @@
         },
         "nb_user_cellular_push_key": {
             "name": "nb_user_cellular_push_key",
-            "ordinal": "33",
+            "ordinal": "35",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -373,7 +395,7 @@
         },
         "nb_user_email": {
             "name": "nb_user_email",
-            "ordinal": "34",
+            "ordinal": "36",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -384,7 +406,7 @@
         },
         "nb_user_work_centre": {
             "name": "nb_user_work_centre",
-            "ordinal": "35",
+            "ordinal": "37",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -395,7 +417,7 @@
         },
         "nb_user_work_position": {
             "name": "nb_user_work_position",
-            "ordinal": "36",
+            "ordinal": "38",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -406,7 +428,7 @@
         },
         "nb_user_work_city": {
             "name": "nb_user_work_city",
-            "ordinal": "37",
+            "ordinal": "39",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -417,7 +439,7 @@
         },
         "nb_user_about": {
             "name": "nb_user_about",
-            "ordinal": "38",
+            "ordinal": "40",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -428,7 +450,7 @@
         },
         "nb_user_new_email": {
             "name": "nb_user_new_email",
-            "ordinal": "39",
+            "ordinal": "41",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -439,7 +461,7 @@
         },
         "nb_user_allow_notification": {
             "name": "nb_user_allow_notification",
-            "ordinal": "40",
+            "ordinal": "42",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",

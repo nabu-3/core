@@ -31,7 +31,9 @@ use nabu\data\site\CNabuSiteUser;
 use nabu\data\site\CNabuSiteTarget;
 use nabu\http\CNabuHTTPRequest;
 use nabu\http\CNabuHTTPResponse;
+use nabu\http\CNabuHTTPRedirection;
 use nabu\http\app\base\CNabuHTTPApplication;
+use nabu\http\exceptions\ENabuRedirectionException;
 use nabu\http\managers\base\CNabuHTTPManager;
 
 /**
@@ -145,20 +147,11 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
     }
 
     /**
-     * Checks if a user is logged.
-     * @return bool Returns true if the user is logged
-     */
-    public function isUserLogged()
-    {
-        return ($this->nb_user instanceof CNabuUser);
-    }
-
-    /**
-     * Validate if current user or anonymous user (if none user is nogged in) can access to $nb_site_target.
+     * Validate if current user or anonymous user (if none user is logged in) can access to $nb_site_target.
      * @param CNabuSite $nb_site Current Site that owns the target.
      * @param CNabuSiteTarget $nb_site_target Current Site Target to evaluate.
      * @return bool Returns true if the target is visible.
-     * @throws ENabuCoreException Throws an exception no role is assigned.
+     * @throws ENabuCoreException Throws an exception when no role is assigned.
      */
     public function validateVisibility(CNabuSite $nb_site, CNabuSiteTarget $nb_site_target)
     {
@@ -219,6 +212,10 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
     {
         $nb_engine = CNabuEngine::getEngine();
 
+        if (!(($nb_site = $nb_site_target->getSite()) instanceof CNabuSite)) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_NOT_FOUND);
+        }
+
         $this->zone = ($this->nb_user !== null ? 'P' : 'O');
         $nb_engine->traceLog("Request Zone", ($this->zone === 'P' ? 'Private' : 'Public'));
 
@@ -228,8 +225,24 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                 ($site_target_zone === 'P' ? 'Private' : ($site_target_zone === 'O' ? 'Public' : 'Both'))
         );
 
-        return ($site_target_zone === 'B') ||
-               ($site_target_zone !== null && $site_target_zone === $this->zone);
+        $retval = ($site_target_zone === 'B') ||
+                  ($site_target_zone !== null && $site_target_zone === $this->zone);
+
+        if ($retval && $this->zone === 'P' && $nb_site->getRequirePoliciesAfterLogin() === 'T') {
+            if ($this->nb_user->getPoliciesAccepted() === 'T') {
+                $nb_engine->traceLog('Policies', 'Accepted');
+            } else {
+                $nb_engine->traceLog('Policies', 'Not accepted');
+                if ($nb_site_target->getIgnorePolicies() === 'F' &&
+                    ($link = $nb_site->getPoliciesTargetLink())->isLinkable() &&
+                    !($link->matchTarget($nb_site_target))
+                ) {
+                    throw new ENabuRedirectionException(428, new CNabuHTTPRedirection(428, $link->getBestQualifiedURL()));
+                }
+            }
+        }
+
+        return $retval;
     }
 
     /**
@@ -363,7 +376,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
      * Check if the user is logged.
      * @return bool Returns true if the user is logged.
      */
-    public function isLogged()
+    public function isUserLogged()
     {
         return ($this->nb_user !== null && $this->nb_role !== null && $this->nb_site_user !== null);
     }
@@ -435,10 +448,17 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                 if ($lang === null) {
                     $lang = $nb_site->getDefaultLanguageId();
                 }
-                $url = $nb_site->getLoginRedirectionTargetLink()->getBestQualifiedURL();
-                if (strlen($url) > 0) {
-                    $after_login = $url . "?logged";
+
+                if ($nb_site->getRequirePoliciesAfterLogin() === 'T' &&
+                    strlen($url = $nb_site->getPoliciesTargetLink()->getBestQualifiedURL()) > 0
+                ) {
+                    $after_login = $url;
+                } else {
+                    if (strlen($url = $nb_site->getLoginRedirectionTargetLink()->getBestQualifiedURL()) > 0) {
+                        $after_login = $url . "?logged";
+                    }
                 }
+                error_log($after_login);
 
                 $this->nb_site_user->logAccess();
                 //$nb_user->getStats(true);
@@ -482,7 +502,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
             throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_NOT_FOUND);
         }
 
-        if ($this->isLogged()) {
+        if ($this->isUserLogged()) {
             $before = $nb_plugin_manager->invoqueBeforeLogout();
         } else {
             $before = true;
@@ -525,9 +545,31 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         return $object->applyRoleMask(
             $this->nb_role,
             array(
-                self::ROLE_MASK_USER_SIGNED => $this->isLogged(),
+                self::ROLE_MASK_USER_SIGNED => $this->isUserLogged(),
                 self::ROLE_MASK_WORK_CUSTOMER => $this->hasWorkCustomer()
             )
         );
+    }
+
+    public function acceptPolicies(bool $save = true)
+    {
+        $nb_site = $this->nb_application->getHTTPServer()->getSite();
+        if ($nb_site === null || !($nb_site instanceof CNabuSite)) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_NOT_FOUND);
+        }
+
+        if ($this->isUserLogged()) {
+            $this->nb_user->setPoliciesAccepted('T');
+            $this->nb_user->setPoliciesDatetime(date('Y-m-d H:i:s', time()));
+
+            if ($save &&
+                $this->nb_user->save() &&
+                strlen($url = $nb_site->getLoginRedirectionTargetLink()->getBestQualifiedURL()) > 0
+            ) {
+
+                $after_login = $url . "?logged";
+                throw new ENabuRedirectionException(301, new CNabuHTTPRedirection(301, $url));
+            }
+        }
     }
 }

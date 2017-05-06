@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/05/02 20:30:11 UTC
+ * Created: 2017/05/05 23:27:28 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -381,6 +381,33 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
+     * Get User Policies Accepted attribute value
+     * @return string Returns the User Policies Accepted value
+     */
+    public function getPoliciesAccepted() : string
+    {
+        return $this->getValue('nb_user_policies_accepted');
+    }
+
+    /**
+     * Sets the User Policies Accepted attribute value.
+     * @param string $policies_accepted New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setPoliciesAccepted(string $policies_accepted = "F") : CNabuDataObject
+    {
+        if ($policies_accepted === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$policies_accepted")
+            );
+        }
+        $this->setValue('nb_user_policies_accepted', $policies_accepted);
+        
+        return $this;
+    }
+
+    /**
      * Get User Tester attribute value
      * @return string Returns the User Tester value
      */
@@ -435,6 +462,27 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
+     * Get User Last Update Datetime attribute value
+     * @return mixed Returns the User Last Update Datetime value
+     */
+    public function getLastUpdateDatetime()
+    {
+        return $this->getValue('nb_user_last_update_datetime');
+    }
+
+    /**
+     * Sets the User Last Update Datetime attribute value.
+     * @param mixed $last_update_datetime New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setLastUpdateDatetime($last_update_datetime) : CNabuDataObject
+    {
+        $this->setValue('nb_user_last_update_datetime', $last_update_datetime);
+        
+        return $this;
+    }
+
+    /**
      * Get User Activation Datetime attribute value
      * @return mixed Returns the User Activation Datetime value
      */
@@ -456,22 +504,22 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
     }
 
     /**
-     * Get User Last Update Datetime attribute value
-     * @return mixed Returns the User Last Update Datetime value
+     * Get User Policies Datetime attribute value
+     * @return mixed Returns the User Policies Datetime value
      */
-    public function getLastUpdateDatetime()
+    public function getPoliciesDatetime()
     {
-        return $this->getValue('nb_user_last_update_datetime');
+        return $this->getValue('nb_user_policies_datetime');
     }
 
     /**
-     * Sets the User Last Update Datetime attribute value.
-     * @param mixed $last_update_datetime New value for attribute
+     * Sets the User Policies Datetime attribute value.
+     * @param mixed $policies_datetime New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLastUpdateDatetime($last_update_datetime) : CNabuDataObject
+    public function setPoliciesDatetime($policies_datetime) : CNabuDataObject
     {
-        $this->setValue('nb_user_last_update_datetime', $last_update_datetime);
+        $this->setValue('nb_user_policies_datetime', $policies_datetime);
         
         return $this;
     }

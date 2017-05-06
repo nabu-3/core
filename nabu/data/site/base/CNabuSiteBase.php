@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/05/02 20:30:16 UTC
+ * Created: 2017/05/05 23:27:33 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -1074,6 +1074,81 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setAliasLockedTargetId(int $alias_locked_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_alias_locked_target_id', $alias_locked_target_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Policies Target Use URI attribute value
+     * @return mixed Returns the Site Policies Target Use URI value
+     */
+    public function getPoliciesTargetUseURI()
+    {
+        return $this->getValue('nb_site_policies_target_use_uri');
+    }
+
+    /**
+     * Sets the Site Policies Target Use URI attribute value.
+     * @param mixed $policies_target_use_uri New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setPoliciesTargetUseURI($policies_target_use_uri) : CNabuDataObject
+    {
+        if ($policies_target_use_uri === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$policies_target_use_uri")
+            );
+        }
+        $this->setValue('nb_site_policies_target_use_uri', $policies_target_use_uri);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Policies Target Id attribute value
+     * @return null|int Returns the Site Policies Target Id value
+     */
+    public function getPoliciesTargetId()
+    {
+        return $this->getValue('nb_site_policies_target_id');
+    }
+
+    /**
+     * Sets the Site Policies Target Id attribute value.
+     * @param null|int $policies_target_id New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setPoliciesTargetId(int $policies_target_id = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_policies_target_id', $policies_target_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Require Policies After Login attribute value
+     * @return string Returns the Site Require Policies After Login value
+     */
+    public function getRequirePoliciesAfterLogin() : string
+    {
+        return $this->getValue('nb_site_require_policies_after_login');
+    }
+
+    /**
+     * Sets the Site Require Policies After Login attribute value.
+     * @param string $require_policies_after_login New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setRequirePoliciesAfterLogin(string $require_policies_after_login = "F") : CNabuDataObject
+    {
+        if ($require_policies_after_login === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$require_policies_after_login")
+            );
+        }
+        $this->setValue('nb_site_require_policies_after_login', $require_policies_after_login);
         
         return $this;
     }
