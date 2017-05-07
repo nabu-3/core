@@ -567,6 +567,10 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
             $this->nb_user->setPoliciesAccepted('T');
             $this->nb_user->setPoliciesDatetime(date('Y-m-d H:i:s', time()));
 
+            if ($nb_site->getEnableSessionStrictPolicies() === 'T') {
+                session_regenerate_id(true);
+            }
+
             if ($save &&
                 $this->nb_user->save() &&
                 strlen($url = $nb_site->getLoginRedirectionTargetLink()->getBestQualifiedURL()) > 0
