@@ -423,7 +423,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                 $this->nb_role = $nb_role;
                 $this->nb_site_user = $nb_site_user;
 
-                if ($nb_site->isValueEqualThan('nb_site_enable_session_strict_policies', 'T')) {
+                if ($nb_site->getEnableSessionStrictPolicies() === 'T') {
                     session_regenerate_id(true);
                 }
 
@@ -474,10 +474,11 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
      * or if log out is performed, then if a redirection is configured in the site do the redirection
      * else return true.
      * Finally, if the user can't log out the method returns false.
+     * @param bool $silent If true, and the logout is confirmed, none redirection is performed if exists.
      * @return bool Return true if session is logged out or false if not
      * @throws ENabuCoreException
      */
-    public function logout()
+    public function logout(bool $silent = false)
     {
         $nb_plugin_manager = $this->nb_application->getPluginsManager();
         if ($nb_plugin_manager === null) {
@@ -506,31 +507,18 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         }
 
         if ($before !== false) {
-            /*
-            $_SESSION = array_diff_key(
-                    $_SESSION,
-                    array(
-                        self::VAR_SESSION_USER => null,
-                        self::VAR_SESSION_ROLE => null,
-                        self::VAR_SESSION_SITE_USER => null,
-                        self::VAR_SESSION_PRESERVED => null,
-                        self::VAR_SESSION_WORK_CUSTOMER => null
-                    )
-            );
-            */
-
             unset($_SESSION[self::VAR_SESSION_USER]);
             unset($_SESSION[self::VAR_SESSION_ROLE]);
             unset($_SESSION[self::VAR_SESSION_SITE_USER]);
             unset($_SESSION[self::VAR_SESSION_PRESERVED]);
             unset($_SESSION[self::VAR_SESSION_WORK_CUSTOMER]);
 
-            if ($nb_site->isValueEqualThan('cms_site_enable_session_strict_policies', 'T')) {
+            if ($nb_site->getEnableSessionStrictPolicies() === 'T') {
                 session_regenerate_id(true);
             }
         }
 
-        if ($before === true) {
+        if ($before === true && !$silent) {
             $url = $nb_site->getLogoutRedirectionTargetLink()->getBestQualifiedURL();
             if (strlen(trim($url)) > 0) {
                 $before = $url;
@@ -588,5 +576,10 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                 throw new ENabuRedirectionException(301, new CNabuHTTPRedirection(301, $url));
             }
         }
+    }
+
+    public function arePoliciesAccepted()
+    {
+        return $this->isUserLogged() && $this->nb_user->getPoliciesAccepted() === 'T';
     }
 }

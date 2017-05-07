@@ -66,47 +66,48 @@ class ENabuCoreException extends ENabuException
     const ERROR_SITE_NOT_FOUND                          = 0x1013;
     const ERROR_SITE_NOT_INSTANTIATED                   = 0x1014;
     const ERROR_SITE_NOT_PUBLISHED                      = 0x1015;
+    const ERROR_SITES_DOES_NOT_MATCH                    = 0x1016;
 
-    const ERROR_SITE_ALIAS_NOT_FOUND                    = 0x1016;
+    const ERROR_SITE_ALIAS_NOT_FOUND                    = 0x1017;
 
-    const ERROR_PLUGINS_MANAGER_REQUIRED                = 0x1017;
+    const ERROR_PLUGINS_MANAGER_REQUIRED                = 0x1018;
 
-    const ERROR_MODULES_MANAGER_REQUIRED                = 0x1018;
-    const ERROR_MODULES_MANAGER_INIT_ERROR              = 0x1019;
+    const ERROR_MODULES_MANAGER_REQUIRED                = 0x1019;
+    const ERROR_MODULES_MANAGER_INIT_ERROR              = 0x101a;
 
-    const ERROR_PLUGIN_REDIRECTION_NOT_ALLOWED          = 0x101a;
-    const ERROR_PLUGIN_COMMAND_INVALID_RETURN_VALUE     = 0x101b;
+    const ERROR_PLUGIN_REDIRECTION_NOT_ALLOWED          = 0x101b;
+    const ERROR_PLUGIN_COMMAND_INVALID_RETURN_VALUE     = 0x101c;
 
-    const ERROR_SITE_PLUGIN_ALREADY_ASSIGNED            = 0x101c;
-    const ERROR_SITE_PLUGIN_NOT_VALID                   = 0x101d;
-    const ERROR_SITE_PLUGIN_INIT_ERROR                  = 0x101e;
+    const ERROR_SITE_PLUGIN_ALREADY_ASSIGNED            = 0x101d;
+    const ERROR_SITE_PLUGIN_NOT_VALID                   = 0x101e;
+    const ERROR_SITE_PLUGIN_INIT_ERROR                  = 0x101f;
 
-    const ERROR_SITE_TARGET_PLUGIN_ALREADY_ASSIGNED     = 0x101f;
-    const ERROR_SITE_TARGET_PLUGIN_NOT_VALID            = 0x1020;
-    const ERROR_SITE_TARGET_PLUGIN_INIT_ERROR           = 0x1021;
+    const ERROR_SITE_TARGET_PLUGIN_ALREADY_ASSIGNED     = 0x1020;
+    const ERROR_SITE_TARGET_PLUGIN_NOT_VALID            = 0x1021;
+    const ERROR_SITE_TARGET_PLUGIN_INIT_ERROR           = 0x1022;
 
-    const ERROR_ROLE_NOT_ASSIGNED                       = 0x1022;
-    const ERROR_ROLE_NOT_VALID                          = 0x1023;
+    const ERROR_ROLE_NOT_ASSIGNED                       = 0x1023;
+    const ERROR_ROLE_NOT_VALID                          = 0x1024;
 
-    const ERROR_REQUEST_NOT_FOUND                       = 0x1024;
+    const ERROR_REQUEST_NOT_FOUND                       = 0x1025;
 
-    const ERROR_RESPONSE_NOT_FOUND                      = 0x1025;
+    const ERROR_RESPONSE_NOT_FOUND                      = 0x1026;
 
-    const ERROR_PAGE_URI_NOT_FOUND                      = 0x1026;
-    const ERROR_LANGUAGE_NOT_FOUND_FOR_PAGE_URI         = 0x1027;
+    const ERROR_PAGE_URI_NOT_FOUND                      = 0x1027;
+    const ERROR_LANGUAGE_NOT_FOUND_FOR_PAGE_URI         = 0x1028;
 
-    const ERROR_SITE_TARGET_NOT_FOUND                   = 0x1028;
-    const ERROR_SITE_TARGET_LOGIN_MISMATCH              = 0x1029;
-    const ERROR_SITE_TARGET_ERROR_MISMATCH              = 0x102a;
+    const ERROR_SITE_TARGET_NOT_FOUND                   = 0x1029;
+    const ERROR_SITE_TARGET_LOGIN_MISMATCH              = 0x102a;
+    const ERROR_SITE_TARGET_ERROR_MISMATCH              = 0x102b;
 
-    const ERROR_INVALID_HTTP_MANAGER_CLASS              = 0x102b;
-    const ERROR_ENABLING_HTTP_MANAGER                   = 0x202c;
+    const ERROR_INVALID_HTTP_MANAGER_CLASS              = 0x102c;
+    const ERROR_ENABLING_HTTP_MANAGER                   = 0x202d;
 
-    const ERROR_RENDER_NOT_SET                          = 0x102d;
-    const ERROR_INVALID_RENDER_DESCRIPTOR_CLASS         = 0x102e;
-    const ERROR_RENDER_NOT_FOUND                        = 0x102f;
+    const ERROR_RENDER_NOT_SET                          = 0x102e;
+    const ERROR_INVALID_RENDER_DESCRIPTOR_CLASS         = 0x102f;
+    const ERROR_RENDER_NOT_FOUND                        = 0x1030;
 
-    const ERROR_URL_FILTER_INVALID                      = 0X1030;
+    const ERROR_URL_FILTER_INVALID                      = 0X1031;
 
     /* Syntax and semantic error messages */
     const ERROR_CLASS_NOT_FOUND                         = 0x2000;
@@ -205,6 +206,8 @@ class ENabuCoreException extends ENabuException
             'Site not instantiated',
         ENabuCoreException::ERROR_SITE_NOT_PUBLISHED =>
             'Site [%s] not published',
+        ENabuCoreException::ERROR_SITES_DOES_NOT_MATCH =>
+            'The Site owner of this object and the running Site does not match',
 
         ENabuCoreException::ERROR_SITE_ALIAS_NOT_FOUND =>
             'Site alias [%s] not found in site [%s]',

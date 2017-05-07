@@ -535,7 +535,8 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
     }
 
     /**
-     * Gets the effective max-age value for Cache-Control HTTP Headers.
+     * Gets the effective max-age value for Cache-Control HTTP Headers. This method only returns a valid value
+     * it the Target is running inside their Application.
      * @return bool|int Returns false if no-cache or the max-age in seconds if cache is applicable.
      * @throws ENabuCoreException Raises an exception it the Site instance is not set.
      */
@@ -545,24 +546,37 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
             throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_NOT_FOUND);
         }
 
-        $site_cache_control = $nb_site->getDynamicCacheControl();
-        $site_max_age = $nb_site->getDynamicCacheDefaultMaxAge();
-        $target_cache_control = $this->getDynamicCacheControl();
-        $target_max_age = $this->getDynamicCacheMaxAge();
-
         $retval = false;
 
-        if ($target_cache_control === self::DYNAMIC_CACHE_CONTROL_INHERITED &&
-            $site_cache_control === CNabuSite::DYNAMIC_CACHE_CONTROL_ENABLED &&
-            is_numeric($site_max_age) &&
-            $site_max_age > 0
-        ) {
-            $retval = $site_max_age;
-        } elseif ($target_cache_control === self::DYNAMIC_CACHE_CONTROL_ENABLED &&
-                  is_numeric($target_max_age) &&
-                  $target_max_age > 0
-        ) {
-            $retval = $target_max_age;
+        if (($nb_application = CNabuEngine::getEngine()->getApplication()) !== null) {
+            if (($nb_running_site = $nb_application->getRequest()->getSite()) instanceof CNabuSite &&
+                ($nb_running_site->getId() === $nb_site->getId())
+            ) {
+                if (($nb_security_manager = $nb_application->getSecurityManager()) !== null &&
+                    (!$nb_security_manager->isUserLogged() || $nb_security_manager->arePoliciesAccepted())) {
+                    $site_cache_control = $nb_site->getDynamicCacheControl();
+                    $site_max_age = $nb_site->getDynamicCacheDefaultMaxAge();
+                    $target_cache_control = $this->getDynamicCacheControl();
+                    $target_max_age = $this->getDynamicCacheMaxAge();
+
+                    if ($target_cache_control === self::DYNAMIC_CACHE_CONTROL_INHERITED &&
+                        $site_cache_control === CNabuSite::DYNAMIC_CACHE_CONTROL_ENABLED &&
+                        is_numeric($site_max_age) &&
+                        $site_max_age > 0
+                    ) {
+                        $retval = $site_max_age;
+                    } elseif ($target_cache_control === self::DYNAMIC_CACHE_CONTROL_ENABLED &&
+                              is_numeric($target_max_age) &&
+                              $target_max_age > 0
+                    ) {
+                        $retval = $target_max_age;
+                    }
+                }
+            } else {
+                throw new ENabuCoreException(ENabuCoreException::ERROR_SITES_DOES_NOT_MATCH);
+            }
+        } else {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_APPLICATION_REQUIRED);
         }
 
         return $retval;
