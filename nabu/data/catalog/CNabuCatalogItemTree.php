@@ -53,12 +53,12 @@ class CNabuCatalogItemTree extends CNabuCatalogItemList
             {
                 $item_parent_id = $item->getParentId();
                 if (($item_parent_id === null && $nb_owner === null) ||
-                    ($nb_owner !== null && $item_parent_id === $nb_owner->getId())
+                    ($nb_owner !== null && is_numeric($item_parent_id) && ((int)$item_parent_id) === $nb_owner->getId())
                 ) {
                     $tree[$key] = $item;
                 } else {
                     $parent = $this->getItem($item->getParentId());
-                    if ($parent) {
+                    if ($parent !== null && $parent !== false) {
                         $parent->setChild($item);
                     }
                 }
