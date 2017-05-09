@@ -58,7 +58,7 @@ class CNabuCatalogItemTree extends CNabuCatalogItemList
                     $tree[$key] = $item;
                 } else {
                     $parent = $this->getItem($item->getParentId());
-                    if ($parent !== null) {
+                    if ($parent) {
                         $parent->setChild($item);
                     }
                 }
