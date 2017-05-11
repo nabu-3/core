@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/05/05 23:27:33 UTC
+ * Created: 2017/05/11 13:36:22 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -708,6 +708,27 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_creation_datetime', $creation_datetime);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Last Update Datetime attribute value
+     * @return mixed Returns the Site Last Update Datetime value
+     */
+    public function getLastUpdateDatetime()
+    {
+        return $this->getValue('nb_site_last_update_datetime');
+    }
+
+    /**
+     * Sets the Site Last Update Datetime attribute value.
+     * @param mixed $last_update_datetime New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setLastUpdateDatetime($last_update_datetime) : CNabuDataObject
+    {
+        $this->setValue('nb_site_last_update_datetime', $last_update_datetime);
         
         return $this;
     }
