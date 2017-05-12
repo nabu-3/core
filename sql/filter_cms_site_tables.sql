@@ -1,4 +1,7 @@
-select * from nb_site_target where nb_site_id=1
+select * from nb_site where nb_site_id=1
+;
+
+select * from nb_site_target where nb_site_id=1 order by nb_site_target_id
 ;
 
 select * from nb_site_target_lang where nb_site_target_id in (select nb_site_target_id from nb_site_target where nb_site_id=1)

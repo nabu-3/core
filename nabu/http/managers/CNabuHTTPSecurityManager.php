@@ -427,9 +427,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                     session_regenerate_id(true);
                 }
 
-                if ($nb_site_user->isValueEqualThan('nb_site_user_force_default_lang', 'T') &&
-                    $nb_site_user->isValueNumeric('nb_language_id')
-                ) {
+                if ($nb_site_user->getForceDefaultLang() === 'T' && $nb_site_user->isValueNumeric('nb_language_id')) {
                     $lang = $nb_site_user->getLanguageId();
                 } else {
                     $lang = null;
@@ -446,16 +444,15 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                 }
 
                 if ($nb_site->getRequirePoliciesAfterLogin() === 'T' &&
-                    strlen($url = $nb_site->getPoliciesTargetLink()->getBestQualifiedURL()) > 0 &&
+                    strlen($url = $nb_site->getPoliciesTargetLink()->getBestQualifiedURL(array($lang => $lang))) > 0 &&
                     $this->nb_user->getPoliciesAccepted() === 'F'
                 ) {
                     $after_login = $url;
                 } else {
-                    if (strlen($url = $nb_site->getLoginRedirectionTargetLink()->getBestQualifiedURL()) > 0) {
+                    if (strlen($url = $nb_site->getLoginRedirectionTargetLink()->getBestQualifiedURL(array($lang => $lang))) > 0) {
                         $after_login = $url . "?logged";
                     }
                 }
-                error_log($after_login);
 
                 $this->nb_site_user->logAccess();
                 //$nb_user->getStats(true);

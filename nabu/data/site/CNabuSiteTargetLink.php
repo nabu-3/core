@@ -221,7 +221,11 @@ class CNabuSiteTargetLink extends CNabuObject
             foreach ($lang_keys as $key) {
                 $nb_aux = $nb_languages->getItem($key);
                 if ($nb_aux->isEnabled() &&
-                    ($nb_aux->getISO6391() === $accept || $nb_aux->getDefaultCountryCode() === $accept)
+                    ($nb_aux->getId() == $accept ||
+                     $nb_aux->getISO6391() === $accept ||
+                     $nb_aux->getISO6392() === $accept ||
+                     $nb_aux->getDefaultCountryCode() === $accept
+                    )
                 ) {
                     $nb_language = $nb_aux;
                     break;
