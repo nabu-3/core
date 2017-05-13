@@ -18,6 +18,9 @@
  */
 
 namespace nabu\visual\site;
+use nabu\core\CNabuEngine;
+use nabu\data\site\CNabuSite;
+use nabu\data\site\traits\TNabuSiteChild;
 use nabu\visual\site\base\CNabuSiteVisualEditorItemListBase;
 
 /**
@@ -26,7 +29,26 @@ use nabu\visual\site\base\CNabuSiteVisualEditorItemListBase;
  * @version 3.0.12 Surface
  * @package \nabu\visual\site
  */
-class CNabuSiteVisualEditorItem extends CNabuSiteVisualEditorItemListBase
+class CNabuSiteVisualEditorItemList extends CNabuSiteVisualEditorItemListBase
 {
+    use TNabuSiteChild;
 
+    public function __construct(CNabuSite $nb_site)
+    {
+        $this->setSite($nb_site);
+    }
+
+    public function acquireItem($key, $index = false)
+    {
+        $retval = false;
+
+        if ($index === false && CNabuEngine::getEngine()->isMainDBAvailable()) {
+            $item = new CNabuSiteVisualEditorItem($this->getSite(), $key);
+            if ($item->isFetched()) {
+                $retval = $item;
+            }
+        }
+
+        return $retval;
+    }
 }

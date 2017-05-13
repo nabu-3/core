@@ -536,7 +536,19 @@ class CNabuHTTPRequest extends CNabuObject
     }
 
     /**
+     * If request have a body of any type, then this method returns the content. If contentType is application/json
+     * then the body is parsed as JSON and returned as a JSON array, else parsed as str and returned as an associative
+     * array of fields.
+     * @return mixed Retunrs the XDR Body.
+     */
+    public function getBody()
+    {
+        return $this->xdr_post;
+    }
+
+    /**
      * Check the request to identify and extract the query and page identifiers
+     * @param mixed $target Target reference
      * @return int Returns true if query and page identifiers found or false elsewhere
      */
     private function identifyRequest($target = false)

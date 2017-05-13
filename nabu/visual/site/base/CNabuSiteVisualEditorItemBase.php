@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/05/11 13:36:43 UTC
+ * Created: 2017/05/13 21:10:40 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -160,20 +160,20 @@ abstract class CNabuSiteVisualEditorItemBase extends CNabuDBInternalObject
     }
 
     /**
-     * Get Site Visual Editor Item Vr Id attribute value
-     * @return string Returns the Site Visual Editor Item Vr Id value
+     * Get Site Visual Editor Item VR Id attribute value
+     * @return string Returns the Site Visual Editor Item VR Id value
      */
-    public function getVrId() : string
+    public function getVRId() : string
     {
         return $this->getValue('nb_site_visual_editor_item_vr_id');
     }
 
     /**
-     * Sets the Site Visual Editor Item Vr Id attribute value.
+     * Sets the Site Visual Editor Item VR Id attribute value.
      * @param string $vr_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setVrId(string $vr_id) : CNabuDataObject
+    public function setVRId(string $vr_id) : CNabuDataObject
     {
         if ($vr_id === null) {
             throw new ENabuCoreException(
