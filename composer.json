@@ -13,7 +13,9 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/nabu-3/core/issues"
+        "issues": "https://github.com/nabu-3/core/issues",
+        "email": "contact@nabu-3.com",
+        "source": "https://github.com/nabu-3/core"
     },
     "config": {
         "bin-dir": "bin",
@@ -25,16 +27,6 @@
         "nabu-3/provider-mysql-driver": ">=0.0",
         "nabu-3/provider-apache-httpd": ">=0.0",
         "nabu-3/sdk": ">=3.0"
-    },
-    "require-dev": {
-        "php": ">=7.0",
-        "nabu-3/composer-installer-plugin": "dev-master",
-        "nabu-3/provider-mysql-driver": "dev-master",
-        "nabu-3/provider-apache-httpd": "dev-master",
-        "nabu-3/sdk": "dev-master"
-    },
-    "suggest": {
-        "nabu-3/provider-apache-apcu": "*"
     },
     "repositories": [
         {
