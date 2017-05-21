@@ -183,6 +183,17 @@ class CNabuSite extends CNabuSiteBase
     }
 
     /**
+     * Gets a CTA instance related with this Site instance.
+     * @param mixed $nb_site_target_cta A Site Target CTA instance, or a CNabuDataObject instance containing a field
+     * named nb_site_target_cta_id or an Id.
+     * @return CNabuSiteTargetCTA | null Returns an instance if found or null if not.
+     */
+    public function getCTA($nb_site_target_cta)
+    {
+        return CNabuSiteTargetCTA::getCTAOfSite($this, $nb_site_target_cta);
+    }
+
+    /**
      * Gets the Target list associated with this instance.
      * @param bool $force If true forces to reload entire list from database.
      * @return CNabuSiteTargetList Returns the list instance containing all associated contents.

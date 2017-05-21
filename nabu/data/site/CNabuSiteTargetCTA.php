@@ -20,6 +20,7 @@
 namespace nabu\data\site;
 
 use nabu\core\CNabuEngine;
+use nabu\data\CNabuDataObject;
 use nabu\data\security\CNabuRole;
 use nabu\data\security\interfaces\INabuRoleMask;
 use nabu\data\site\CNabuSiteTarget;
@@ -118,13 +119,33 @@ class CNabuSiteTargetCTA extends CNabuSiteTargetCTABase implements INabuRoleMask
         return $this->nb_site_target_destination;
     }
 
-    public function setCTATarget(CNabuSiteTarget $nb_site_target)
+    /**
+     * Sets the CTA Target object. Updates nb_site_target_cta_target_id and nb_site_target_cta_use_uri to proper values.
+     * @param CNabuSiteTarget|null $nb_site_target If $nb_site_target contains an instance then sets this instance
+     * as the CTA Target else sets the CTA Target as none.
+     * @return CNabuSiteTargetCTA Returns the self instance to grant cascade setters mechanism.
+     */
+    public function setCTATarget(CNabuSiteTarget $nb_site_target = null)
     {
-        $this->setTargetUseURI(CNabuSiteTargetLink::USE_URI_TRANSLATED);
-        $this->transferValue($nb_site_target, 'nb_site_target_cta_target_id', 'nb_site_target_id');
+        if ($nb_site_target instanceof CNabuSiteTarget) {
+            $this->setTargetUseURI(CNabuSiteTargetLink::USE_URI_TRANSLATED);
+            $this->transferValue($nb_site_target, 'nb_site_target_id', 'nb_site_target_cta_target_id');
+        } else {
+            $this->setTargetUseURI(CNabuSiteTargetLink::USE_URI_NONE);
+            $this->setTargetId(null);
+        }
         $this->nb_site_target_destination = $nb_site_target;
 
         return $this;
+    }
+
+    /**
+     * Empty the CTA Target destination. This is an ossia method to call setCTATarget(null).
+     * @return CNabuSiteTargetCTA Returns the self instance to grant cascade setters mechanism.
+     */
+    public function emptyCTATarget()
+    {
+        $this->setCTATarget(null);
     }
 
     public function isUsingURIAsTarget()
@@ -213,5 +234,36 @@ class CNabuSiteTargetCTA extends CNabuSiteTargetCTABase implements INabuRoleMask
         $trdata['roles'] = $this->nb_site_target_cta_role_list;
 
         return $trdata;
+    }
+
+    /**
+     * Gets a CTA instance related with a Site.
+     * @param mixed $nb_site A Site instance, or a CNabuDataObject instance containing a field named nb_site_id or an Id.
+     * @param mixed $nb_site_target_cta A Site Target CTA instance, or a CNabuDataObject instance containing a field
+     * named nb_site_target_cta_id or an Id.
+     * @return CNabuSiteTargetCTA | null Returns an instance if found or null if not.
+     */
+    public static function getCTAOfSite($nb_site, $nb_site_target_cta)
+    {
+        $retval = null;
+
+        if (is_numeric($nb_site_id = nb_getMixedValue($nb_site, NABU_SITE_FIELD_ID)) &&
+            is_numeric($nb_site_target_cta_id = nb_getMixedValue($nb_site_target_cta, NABU_SITE_TARGET_CTA_FIELD_ID))
+        ) {
+            $retval = CNabuSiteTargetCTA::buildObjectFromSQL(
+                'select stc.* '
+                . 'from nb_site s, nb_site_target st, nb_site_target_cta stc '
+               . 'where s.nb_site_id=st.nb_site_id '
+                 . 'and st.nb_site_target_id=stc.nb_site_target_id '
+                 . 'and s.nb_site_id=%site_id$d '
+                 . 'and stc.nb_site_target_cta_id=%cta_id$d',
+                array(
+                    'site_id' => $nb_site_id,
+                    'cta_id' => $nb_site_target_cta_id
+                )
+            );
+        }
+
+        return $retval;
     }
 }

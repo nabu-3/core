@@ -73,6 +73,17 @@
             "is_nullable": true,
             "extra": "",
             "comment": ""
+        },
+        "nb_site_visual_editor_item_points": {
+            "name": "nb_site_visual_editor_item_points",
+            "ordinal": "7",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
         }
     },
     "constraints": {

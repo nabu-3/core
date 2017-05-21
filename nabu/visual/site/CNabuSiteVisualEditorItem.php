@@ -18,6 +18,9 @@
  */
 
 namespace nabu\visual\site;
+use mxGeometry;
+use mxPoint;
+use mxCell;
 use nabu\visual\site\base\CNabuSiteVisualEditorItemBase;
 
 /**
@@ -28,5 +31,34 @@ use nabu\visual\site\base\CNabuSiteVisualEditorItemBase;
  */
 class CNabuSiteVisualEditorItem extends CNabuSiteVisualEditorItemBase
 {
+    public function applyGeometryToEdge(mxCell $edge)
+    {
+        $points = $this->getValueJSONDecoded('nb_site_visual_editor_item_points');
 
+        if ($points !== null) {
+            $geometry = $edge->getGeometry();
+            if ($points['source'] !== null) {
+                $point = new mxPoint();
+                $point->x = $points['source']['x'];
+                $point->y = $points['source']['y'];
+                $geometry->sourcePoint = $point;
+            }
+            if ($points['target'] !== null) {
+                $point = new mxPoint();
+                $point->x = $points['target']['x'];
+                $point->y = $points['target']['y'];
+                $geometry->targetPoint = $point;
+            }
+            if (count($points['intermediate']) > 0) {
+                $geometry->points = array();
+                foreach ($points['intermediate'] as $ep) {
+                    $point = new mxPoint();
+                    $point->x = $ep['x'];
+                    $point->y = $ep['y'];
+                    $geometry->points[] = $point;
+                }
+            }
+            $edge->setGeometry($geometry);
+        }
+    }
 }

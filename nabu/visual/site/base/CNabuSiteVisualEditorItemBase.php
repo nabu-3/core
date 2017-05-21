@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/05/13 21:10:40 UTC
+ * Created: 2017/05/21 20:47:24 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -266,6 +266,27 @@ abstract class CNabuSiteVisualEditorItemBase extends CNabuDBInternalObject
     public function setHeight(int $height = null) : CNabuDataObject
     {
         $this->setValue('nb_site_visual_editor_item_height', $height);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Visual Editor Item Points attribute value
+     * @return null|string Returns the Site Visual Editor Item Points value
+     */
+    public function getPoints()
+    {
+        return $this->getValue('nb_site_visual_editor_item_points');
+    }
+
+    /**
+     * Sets the Site Visual Editor Item Points attribute value.
+     * @param null|string $points New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setPoints(string $points = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_visual_editor_item_points', $points);
         
         return $this;
     }
