@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/05/21 20:47:06 UTC
+ * Created: 2017/05/23 16:33:06 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -601,6 +601,33 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     public function setMimetypeId(string $nb_mimetype_id = null) : CNabuDataObject
     {
         $this->setValue('nb_mimetype_id', $nb_mimetype_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Target Attachment attribute value
+     * @return string Returns the Site Target Attachment value
+     */
+    public function getAttachment() : string
+    {
+        return $this->getValue('nb_site_target_attachment');
+    }
+
+    /**
+     * Sets the Site Target Attachment attribute value.
+     * @param string $attachment New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setAttachment(string $attachment = "F") : CNabuDataObject
+    {
+        if ($attachment === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$attachment")
+            );
+        }
+        $this->setValue('nb_site_target_attachment', $attachment);
         
         return $this;
     }

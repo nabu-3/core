@@ -3,7 +3,7 @@
     "name": "nb_site_target",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "1030",
+    "autoincrement": "1058",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",
@@ -151,12 +151,23 @@
             "extra": "",
             "comment": ""
         },
+        "nb_site_target_attachment": {
+            "name": "nb_site_target_attachment",
+            "ordinal": "14",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
         "nb_site_target_smarty_display_file": {
             "name": "nb_site_target_smarty_display_file",
-            "ordinal": "14",
+            "ordinal": "15",
             "data_type": "varchar",
             "precision": null,
-            "type": "varchar(50)",
+            "type": "varchar(150)",
             "default": null,
             "is_nullable": true,
             "extra": "",
@@ -164,10 +175,10 @@
         },
         "nb_site_target_smarty_content_file": {
             "name": "nb_site_target_smarty_content_file",
-            "ordinal": "15",
+            "ordinal": "16",
             "data_type": "varchar",
             "precision": null,
-            "type": "varchar(50)",
+            "type": "varchar(150)",
             "default": null,
             "is_nullable": true,
             "extra": "",
@@ -175,7 +186,7 @@
         },
         "nb_site_target_smarty_debugging": {
             "name": "nb_site_target_smarty_debugging",
-            "ordinal": "16",
+            "ordinal": "17",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -186,7 +197,7 @@
         },
         "nb_site_target_plugin_name": {
             "name": "nb_site_target_plugin_name",
-            "ordinal": "17",
+            "ordinal": "18",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(150)",
@@ -197,7 +208,7 @@
         },
         "nb_site_target_php_trace": {
             "name": "nb_site_target_php_trace",
-            "ordinal": "18",
+            "ordinal": "19",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -208,7 +219,7 @@
         },
         "nb_site_target_ignore_policies": {
             "name": "nb_site_target_ignore_policies",
-            "ordinal": "19",
+            "ordinal": "20",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -219,7 +230,7 @@
         },
         "nb_site_target_use_commerce": {
             "name": "nb_site_target_use_commerce",
-            "ordinal": "20",
+            "ordinal": "21",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -230,7 +241,7 @@
         },
         "nb_site_target_use_apps": {
             "name": "nb_site_target_use_apps",
-            "ordinal": "21",
+            "ordinal": "22",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -241,7 +252,7 @@
         },
         "nb_site_target_dynamic_cache_control": {
             "name": "nb_site_target_dynamic_cache_control",
-            "ordinal": "22",
+            "ordinal": "23",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F','S')",
@@ -252,7 +263,7 @@
         },
         "nb_site_target_dynamic_cache_max_age": {
             "name": "nb_site_target_dynamic_cache_max_age",
-            "ordinal": "23",
+            "ordinal": "24",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -263,7 +274,7 @@
         },
         "nb_site_target_script_file": {
             "name": "nb_site_target_script_file",
-            "ordinal": "24",
+            "ordinal": "25",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(100)",
@@ -274,7 +285,7 @@
         },
         "nb_site_target_css_file": {
             "name": "nb_site_target_css_file",
-            "ordinal": "25",
+            "ordinal": "26",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(100)",
@@ -285,7 +296,7 @@
         },
         "nb_site_target_css_class": {
             "name": "nb_site_target_css_class",
-            "ordinal": "26",
+            "ordinal": "27",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(50)",
@@ -296,7 +307,7 @@
         },
         "nb_site_target_commands": {
             "name": "nb_site_target_commands",
-            "ordinal": "27",
+            "ordinal": "28",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -307,7 +318,7 @@
         },
         "nb_site_target_meta_robots": {
             "name": "nb_site_target_meta_robots",
-            "ordinal": "28",
+            "ordinal": "29",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -318,7 +329,7 @@
         },
         "nb_site_target_icon": {
             "name": "nb_site_target_icon",
-            "ordinal": "29",
+            "ordinal": "30",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -329,7 +340,7 @@
         },
         "nb_site_target_apps_slot": {
             "name": "nb_site_target_apps_slot",
-            "ordinal": "30",
+            "ordinal": "31",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -340,7 +351,7 @@
         },
         "nb_site_target_attributes": {
             "name": "nb_site_target_attributes",
-            "ordinal": "31",
+            "ordinal": "32",
             "data_type": "text",
             "precision": null,
             "type": "text",
