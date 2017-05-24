@@ -259,7 +259,7 @@ class CNabuCustomer extends CNabuCustomerBase
 
     /**
      * Gets available Site instances in the list.
-     * @param bool $force If true, forces to merge complete list form the storage.
+     * @param bool $force If true, forces to merge complete list from the storage.
      * @return array Returns an associative array where the index is the ID of each Site and the value is the instance.
      */
     public function getSites($force = false)
@@ -305,6 +305,10 @@ class CNabuCustomer extends CNabuCustomerBase
             $nb_site_id = nb_getMixedValue($nb_site, NABU_SITE_FIELD_ID);
             if (is_numeric($nb_site_id) || nb_isValidGUID($nb_site_id)) {
                 $retval = $this->nb_site_list->getItem($nb_site_id);
+                if ($retval instanceof CNabuSite && !$retval->validateCustomer($this)) {
+                    $this->nb_site_list->removeItem($retval);
+                    $retval = false;
+                }
             } elseif ($nb_site_id !== null && $nb_site_id !== false) {
                 throw new ENabuCoreException(
                     ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
