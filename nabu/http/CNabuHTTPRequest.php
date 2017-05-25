@@ -525,12 +525,16 @@ class CNabuHTTPRequest extends CNabuObject
 
     public function prepareBody()
     {
+        $nb_engine = CNabuEngine::getEngine();
         if ($this->request_content_length > 0) {
             $raw = file_get_contents('php://input');
             if ($this->request_content_type === 'application/json') {
                 $this->xdr_post = json_decode($raw, true);
             } else {
                 parse_str($raw, $this->xdr_post);
+            }
+            if (count($this->xdr_post) > 0) {
+                $nb_engine->traceLog("XDR params", $this->xdr_post);
             }
         }
     }
@@ -849,9 +853,17 @@ class CNabuHTTPRequest extends CNabuObject
         $keys = array();
 
         if (count($fields) > 0) {
-            foreach ($fields as $field) {
-                if (array_key_exists($field, $_POST) && is_array($_POST[$field])) {
-                    $keys = array_merge($keys, array_keys($_POST[$field]));
+            if (is_array($this->xdr_post)) {
+                foreach ($fields as $field) {
+                    if (array_key_exists($field, $this->xdr_post) && is_array($this->xdr_post[$field])) {
+                        $keys = array_merge($keys, array_keys($this->xdr_post[$field]));
+                    }
+                }
+            } elseif (is_array($_POST)) {
+                foreach ($fields as $field) {
+                    if (array_key_exists($field, $_POST) && is_array($_POST[$field])) {
+                        $keys = array_merge($keys, array_keys($_POST[$field]));
+                    }
                 }
             }
             $keys = array_unique($keys);
