@@ -416,6 +416,7 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
     public function getCTAs($force = false)
     {
         if ($this->nb_site_target_cta_list->isEmpty() || $force) {
+            $this->nb_site_target_cta_list->clear();
             $this->nb_site_target_cta_list->merge(CNabuSiteTargetCTA::getSiteTargetCTAs($this));
             $translations = CNabuSiteTargetCTALanguage::getCTATranslationsForSiteTarget($this);
             if (count($translations) > 0) {
@@ -496,6 +497,7 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
     public function getSections($force = false) {
 
         if ($this->nb_site_target_section_list->isEmpty() || $force) {
+            $this->nb_site_target_section_list->clear();
             $this->nb_site_target_section_list->merge(CNabuSiteTargetSection::getSiteTargetSections($this));
         }
 
@@ -528,7 +530,7 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
 
         $trdata['sections'] = $this->nb_site_target_section_list;
         $trdata['section_keys'] = $this->getSectionKeysIndex();
-        $trdata['ctas'] = $this->getCTAs();
+        $trdata['ctas'] = $this->nb_site_target_cta_list;
         $trdata['cta_keys'] = $this->getCTAKeysIndex();
 
         return $trdata;
@@ -585,5 +587,17 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
     public function applyRoleMask(CNabuRole $nb_role, array $additional = null)
     {
         return $this->nb_site_target_cta_list->applyRoleMask($nb_role, $additional);
+    }
+
+    public function refresh(bool $force = false, bool $cascade = false): bool
+    {
+        return parent::refresh($force, $cascade) &&
+            (!$cascade ||
+                (
+                    $this->getSections($force) &&
+                    $this->getCTAs($force)
+                )
+            )
+        ;
     }
 }

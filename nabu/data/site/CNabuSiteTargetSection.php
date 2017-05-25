@@ -48,10 +48,30 @@ class CNabuSiteTargetSection extends CNabuSiteTargetSectionBase
                     'target_id' => $nb_site_target_id
                 )
             );
+            if ($nb_site_target instanceof CNabuSiteTarget) {
+                $retval->iterate(function($key, $nb_site_target_section) use ($nb_site_target) {
+                    $nb_site_target_section->setSiteTarget($nb_site_target);
+                    return true;
+                });
+            }
         } else {
             $retval = new CNabuSiteTargetSectionList();
         }
 
         return $retval;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete()
+    {
+        $this->getTranslations(true)->iterate(function($key, $nb_translation) {
+            $this->removeTranslation($nb_translation);
+            return true;
+        });
+        $this->updateTranslations();
+
+        return parent::delete();
     }
 }

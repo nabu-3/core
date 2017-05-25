@@ -772,12 +772,16 @@ class CNabuHTTPRequest extends CNabuObject
 
     public function getPOSTFieldNames()
     {
-        return count($_POST) > 0 ? array_keys($_POST) : null;
+        return is_array($this->xdr_post)
+               ? array_keys($this->xdr_post)
+               : (count($_POST) > 0 ? array_keys($_POST) : null)
+        ;
     }
 
     public function hasREQUESTField($field_name)
     {
-        return array_key_exists($field_name, $_REQUEST);
+        return array_key_exists($field_name, $_REQUEST) ||
+               (is_array($this->xdr_post) && array_key_exists($field_name, $this->xdr_post));
     }
 
     public function getGETField($field_name)
@@ -787,7 +791,7 @@ class CNabuHTTPRequest extends CNabuObject
 
     public function getPOSTField($field_name)
     {
-        return $this->xdr_post !== null
+        return is_array($this->xdr_post)
                ? (array_key_exists($field_name, $this->xdr_post) ? $this->xdr_post[$field_name] : null)
                : filter_input(INPUT_POST, $field_name)
         ;
@@ -795,7 +799,10 @@ class CNabuHTTPRequest extends CNabuObject
 
     public function getREQUESTField($field_name)
     {
-        return filter_input(INPUT_REQUEST, $field_name);
+        return is_array($this->xdr_post)
+               ? (array_key_exists($field_name, $this->xdr_post) ? $this->xdr_post[$field_name] : null)
+               : filter_input(INPUT_REQUEST, $field_name)
+        ;
     }
 
     public function setGETField($field_name, $field_value)
