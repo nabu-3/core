@@ -49,15 +49,19 @@ trait TNabuSiteTargetChild
 
     /**
      * Sets the Site Target instance that owns this object and sets the field containing the site id.
-     * @param CNabuSiteTarget $nb_site_target Site instance to be setted.
-     * @param string $field Field name where the site id will be stored.
+     * @param CNabuSiteTarget|null $nb_site_target Site instance to be setted or null to be unsetted.
+     * @param string $field Field name where the Site Target Id will be stored.
      * @return mixed Returns $this to allow the cascade chain of setters.
      */
-    public function setSiteTarget(CNabuSiteTarget $nb_site_target, $field = NABU_SITE_TARGET_FIELD_ID)
+    public function setSiteTarget(CNabuSiteTarget $nb_site_target = null, $field = NABU_SITE_TARGET_FIELD_ID)
     {
         $this->nb_site_target = $nb_site_target;
         if ($this instanceof CNabuDataObject) {
-            $this->transferValue($nb_site_target, NABU_SITE_TARGET_FIELD_ID, $field);
+            if ($nb_site_target instanceof CNabuSiteTarget) {
+                $this->transferValue($nb_site_target, NABU_SITE_TARGET_FIELD_ID, $field);
+            } else {
+                $this->setValue($field, null);
+            }
         }
 
         return $this;

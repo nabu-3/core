@@ -394,7 +394,7 @@ class CNabuSite extends CNabuSiteBase
      * @param bool $cascade If true, the requested Site Map is searched exploring nested Site Maps.
      * @return null|CNabuSiteMap If a Site Map is found then returns the instance elsewhere returns null.
      */
-    public function getSitemap($nb_site_map, $cascade = false)
+    public function getSiteMap($nb_site_map, $cascade = false)
     {
         $retval = null;
 
@@ -732,7 +732,7 @@ class CNabuSite extends CNabuSiteBase
         return $vhosts;
     }
 
-    public function getSitemapKeysIndex()
+    public function getSiteMapKeysIndex()
     {
         $this->getSiteMaps();
 
@@ -759,7 +759,7 @@ class CNabuSite extends CNabuSiteBase
         $trdata = parent::getTreeData($nb_language, $dataonly);
 
         $trdata['languages'] = $this->getLanguages();
-        $trdata['sitemap_keys'] = $this->getSitemapKeysIndex();
+        $trdata['sitemap_keys'] = $this->getSiteMapKeysIndex();
         $trdata['static_content_keys'] = $this->getStaticContentKeysIndex();
 
         return $trdata;

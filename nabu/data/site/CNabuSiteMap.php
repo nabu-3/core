@@ -150,12 +150,14 @@ class CNabuSiteMap extends CNabuSiteMapBase implements INabuDataObjectTreeNode, 
                in_array($this->getValue('nb_site_map_customer_required'), array('B', 'F'));
     }
 
-    public function setSiteTarget(CNabuSiteTarget $nb_site_target, $field = NABU_SITE_TARGET_FIELD_ID)
+    public function setSiteTarget(CNabuSiteTarget $nb_site_target = null, $field = NABU_SITE_TARGET_FIELD_ID)
     {
-        $this->setUseURI(CNabuSiteTargetLink::USE_URI_TRANSLATED);
+        if ($nb_site_target === null) {
+            $this->setUseURI(CNabuSiteTargetLink::USE_URI_NONE);
+        } else {
+            $this->setUseURI(CNabuSiteTargetLink::USE_URI_TRANSLATED);
+        }
         return parent::setSiteTarget($nb_site_target, $field);
-
-        return $this;
     }
 
     public function addSiteMapForTarget(CNabuSiteTarget $nb_site_target, $order, CNabuRole $nb_role = null)
