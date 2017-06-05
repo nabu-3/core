@@ -84,6 +84,26 @@ class CNabuUser extends CNabuUserBase implements INabuId
     }
 
     /**
+     * Activates the User account.
+     * @param bool $save If true then saves the User record in the database storage before return.
+     * @return bool Returns true if the user was successfully activated.
+     */
+    public function activate(bool $save = false) : bool
+    {
+        $retval = false;
+        $current = $this->getValidationStatus();
+
+        if ($current === self::USER_VALIDATION_PENDING || $current === self::USER_VALIDATION_PENDING_WITH_INVITATION) {
+            $this->setActivationDatetime(date('Y-m-d H:i:s', time()));
+            $this->setValidationStatus(CNabuUser::USER_ACTIVE);
+
+            $retval = ($save ? $this->save() : true);
+        }
+
+        return $retval;
+    }
+
+    /**
      * Find a User by an static encoded key.
      * @param mixed $nb_customer A Customer ID, a Data Object containing a field nb_customer_id or a Customer instance.
      * @param string $key Key encoded string value to find the User.

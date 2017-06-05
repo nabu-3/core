@@ -52,9 +52,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_messaging_service_status": {
+            "name": "nb_messaging_service_status",
+            "ordinal": "5",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('E','D')",
+            "default": "D",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
         "nb_messaging_service_provider": {
             "name": "nb_messaging_service_provider",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(256)",
@@ -65,7 +76,7 @@
         },
         "nb_messaging_service_name": {
             "name": "nb_messaging_service_name",
-            "ordinal": "6",
+            "ordinal": "7",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(50)",
@@ -76,7 +87,7 @@
         },
         "nb_messaging_service_interface": {
             "name": "nb_messaging_service_interface",
-            "ordinal": "7",
+            "ordinal": "8",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(256)",
@@ -87,7 +98,7 @@
         },
         "nb_messaging_service_attributes": {
             "name": "nb_messaging_service_attributes",
-            "ordinal": "8",
+            "ordinal": "9",
             "data_type": "longtext",
             "precision": null,
             "type": "longtext",

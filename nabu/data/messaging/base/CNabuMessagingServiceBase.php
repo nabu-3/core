@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/05/23 16:33:52 UTC
+ * Created: 2017/06/05 11:14:56 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -303,6 +303,33 @@ abstract class CNabuMessagingServiceBase extends CNabuDBInternalObject implement
     public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_key', $key);
+        
+        return $this;
+    }
+
+    /**
+     * Get Messaging Service Status attribute value
+     * @return string Returns the Messaging Service Status value
+     */
+    public function getStatus() : string
+    {
+        return $this->getValue('nb_messaging_service_status');
+    }
+
+    /**
+     * Sets the Messaging Service Status attribute value.
+     * @param string $status New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setStatus(string $status = "D") : CNabuDataObject
+    {
+        if ($status === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$status")
+            );
+        }
+        $this->setValue('nb_messaging_service_status', $status);
         
         return $this;
     }
