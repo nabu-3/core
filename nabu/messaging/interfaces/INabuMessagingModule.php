@@ -19,7 +19,6 @@
 
 namespace nabu\messaging\interfaces;
 use nabu\messaging\exceptions\ENabuMessagingException;
-use nabu\provider\exceptions\ENabuProviderException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -43,4 +42,18 @@ interface INabuMessagingModule {
      * @throws ENabuMessagingException Raises an exception if $interface is not a candidate to be released.
      */
     public function releaseServiceInterface(INabuMessagingServiceInterface $interface);
+    /**
+     * Create a Template Render Interface to manage a Messaging Template Render.
+     * @param string $name Class name to be instantiated.
+     * @return INabuMessagingTemplateRenderInterface Returns a valid instance if $name is a valid name.
+     * @throws ENabuMessagingException Raises an exception if the interface name is invalid.
+     */
+    public function createTemplateRenderInterface(string $name);
+
+    /**
+     * This method is called to finish the use of a Template Render Interface instance.
+     * @param INabuMessagingTemplateRenderInterface $interface Interface instance to be released.
+     * @throws ENabuMessagingException Raises an exception if $interface is not a candidate to be released.
+     */
+    public function releaseTemplateRenderInterface(INabuMessagingTemplateRenderInterface $interface);
 }

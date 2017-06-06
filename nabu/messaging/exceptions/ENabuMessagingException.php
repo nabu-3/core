@@ -28,27 +28,43 @@ use nabu\core\exceptions\ENabuException;
  */
 class ENabuMessagingException extends ENabuException
 {
-    /** @var int Invalid Service Interface Instance. */
-    const ERROR_INVALID_SERVICE_INSTANCE            = 0x0001;
-    /** @var int Invalid Service Interface Class Name. Requires the Service Interface Class Name. */
-    const ERROR_INVALID_SERVICE_CLASS_NAME          = 0x0002;
-    /** @var int Service Interface already registered. Requires the Serice Interface Hash. */
-    const ERROR_SERVICE_INSTANCE_ALREADY_REGISTERED = 0x0003;
     /** @var int Service Interface cannot be instantiated. Requires the Service Interface Name. */
-    const ERROR_SERVICE_CANNOT_BE_INSTANTIATED      = 0x0004;
+    const ERROR_SERVICE_CANNOT_BE_INSTANTIATED                  = 0x0001;
+
+    /** @var int Invalid Service Interface Instance. */
+    const ERROR_INVALID_SERVICE_INSTANCE                        = 0x1001;
+    /** @var int Invalid Service Interface Class Name. Requires the Service Interface Class Name. */
+    const ERROR_INVALID_SERVICE_CLASS_NAME                      = 0x1002;
+    /** @var int Service Interface already registered. Requires the Serice Interface Hash. */
+    const ERROR_SERVICE_INSTANCE_ALREADY_REGISTERED             = 0x1003;
+
+    /** @var int Invalid Template Render Interface Instance. */
+    const ERROR_INVALID_TEMPLATE_RENDER_INSTANCE                = 0x2001;
+    /** @var int Invalid Template Render Interface Class Name. Requires the Service Template Render Class Name. */
+    const ERROR_INVALID_TEMPLATE_RENDER_CLASS_NAME              = 0X2002;
+    /** @var int Template Render Interface cannot be instantiated. Requires the Template Render Interface Name. */
+    const ERROR_TEMPLATE_RENDER_INSTANCE_ALREADY_REGISTERED     = 0x2003;
 
     /**
      * List of all error messages defined in this exception.
      * @var array
      */
     protected $error_messages = array(
+        ENabuMessagingException::ERROR_SERVICE_CANNOT_BE_INSTANTIATED =>
+            'Service Interface [%s] cannot be instantiated.',
+
         ENabuMessagingException::ERROR_INVALID_SERVICE_INSTANCE =>
             'Invalid Service Interface Instance',
         ENabuMessagingException::ERROR_INVALID_SERVICE_CLASS_NAME =>
             'Invalid Service Interface class name [%s]',
         ENabuMessagingException::ERROR_SERVICE_INSTANCE_ALREADY_REGISTERED =>
             'Service Interface instance [%s] already registered.',
-        ENabuMessagingException::ERROR_SERVICE_CANNOT_BE_INSTANTIATED =>
-            'Service Interface [%s] cannot be instantiated.'
+
+        ENabuMessagingException::ERROR_INVALID_TEMPLATE_RENDER_INSTANCE =>
+            'Invalid Template Render Interface Instance',
+        ENabuMessagingException::ERROR_INVALID_TEMPLATE_RENDER_CLASS_NAME =>
+            'Invalid Template Render Interface class name [%s]',
+        ENabuMessagingException::ERROR_TEMPLATE_RENDER_INSTANCE_ALREADY_REGISTERED =>
+            'Template Render Interface instance [%s] already registered.',
     );
 }

@@ -51,6 +51,28 @@
             "is_nullable": true,
             "extra": "",
             "comment": ""
+        },
+        "nb_messaging_template_render_provider": {
+            "name": "nb_messaging_template_render_provider",
+            "ordinal": "5",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(256)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_template_render_interface": {
+            "name": "nb_messaging_template_render_interface",
+            "ordinal": "6",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(256)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
         }
     },
     "constraints": {

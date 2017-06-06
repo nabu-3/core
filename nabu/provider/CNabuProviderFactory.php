@@ -37,8 +37,10 @@ use nabu\provider\interfaces\INabuProviderManager;
  */
 class CNabuProviderFactory extends CNabuObject implements INabuSingleton
 {
-    /** @var int INTERFACE_MESSAGING_SERVICE Messaging Account Interface identificator. */
-    const INTERFACE_MESSAGING_SERVICE       = 0x0001;
+    /** @var int INTERFACE_MESSAGING_SERVICE Messaging Service Interface identificator. */
+    const INTERFACE_MESSAGING_SERVICE           = 0x0001;
+    /** @var int INTERFACE_MESSAGING_TEMPLATE_RENDER Messaging Template Render Interface identificatior. */
+    const INTERFACE_MESSAGING_TEMPLATE_RENDER   = 0X0002;
 
     /** @var CNabuProviderFactory $nb_provider_factory Contains the singleton instance of class. */
     private static $nb_provider_factory = null;
@@ -63,7 +65,8 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
 
         $this->nb_manager_list = new CNabuProviderManagerList();
         $this->nb_interface_list = array(
-            self::INTERFACE_MESSAGING_SERVICE => new CNabuProviderInterfaceDescriptorList()
+            self::INTERFACE_MESSAGING_SERVICE => new CNabuProviderInterfaceDescriptorList(),
+            self::INTERFACE_MESSAGING_TEMPLATE_RENDER => new CNabuProviderInterfaceDescriptorList()
         );
     }
 
@@ -165,7 +168,7 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
         if (is_dir($basedir) && ($h = opendir($basedir))) {
             while (($filename = readdir($h))) {
                 $phpfile = $basedir . DIRECTORY_SEPARATOR . $filename;
-                if (preg_match('/^init_(.+)\.php$/', $filename) && file_exists($phpfile) && filesize($phpfile) > 0) {
+                if (preg_match('/^init[_|-](.+)\.php$/', $filename) && file_exists($phpfile) && filesize($phpfile) > 0) {
                     $folders[] = $phpfile;
                 }
             }

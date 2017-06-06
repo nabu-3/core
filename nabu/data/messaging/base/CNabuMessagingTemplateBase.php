@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/06/05 11:14:56 UTC
+ * Created: 2017/06/06 09:56:20 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -396,6 +396,48 @@ abstract class CNabuMessagingTemplateBase extends CNabuDBInternalObject implemen
     public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_key', $key);
+        
+        return $this;
+    }
+
+    /**
+     * Get Messaging Template Render Provider attribute value
+     * @return null|string Returns the Messaging Template Render Provider value
+     */
+    public function getRenderProvider()
+    {
+        return $this->getValue('nb_messaging_template_render_provider');
+    }
+
+    /**
+     * Sets the Messaging Template Render Provider attribute value.
+     * @param null|string $render_provider New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setRenderProvider(string $render_provider = null) : CNabuDataObject
+    {
+        $this->setValue('nb_messaging_template_render_provider', $render_provider);
+        
+        return $this;
+    }
+
+    /**
+     * Get Messaging Template Render Interface attribute value
+     * @return null|string Returns the Messaging Template Render Interface value
+     */
+    public function getRenderInterface()
+    {
+        return $this->getValue('nb_messaging_template_render_interface');
+    }
+
+    /**
+     * Sets the Messaging Template Render Interface attribute value.
+     * @param null|string $render_interface New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setRenderInterface(string $render_interface = null) : CNabuDataObject
+    {
+        $this->setValue('nb_messaging_template_render_interface', $render_interface);
         
         return $this;
     }
