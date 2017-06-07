@@ -28,29 +28,35 @@ use nabu\core\exceptions\ENabuException;
  */
 class ENabuMessagingException extends ENabuException
 {
+    /** @var int Invalid Messaging Pool Manager. */
+    const ERROR_INVALID_MESSAGING_POOL_MANAGER                  = 0x0001;
+
     /** @var int Service Interface cannot be instantiated. Requires the Service Interface Name. */
-    const ERROR_SERVICE_CANNOT_BE_INSTANTIATED                  = 0x0001;
+    const ERROR_SERVICE_CANNOT_BE_INSTANTIATED                  = 0x1001;
     /** @var int Invalid Service Interface Instance. */
-    const ERROR_INVALID_SERVICE_INSTANCE                        = 0x0001;
+    const ERROR_INVALID_SERVICE_INSTANCE                        = 0x1001;
     /** @var int Invalid Service Interface Class Name. Requires the Service Interface Class Name. */
-    const ERROR_INVALID_SERVICE_CLASS_NAME                      = 0x0002;
+    const ERROR_INVALID_SERVICE_CLASS_NAME                      = 0x1002;
     /** @var int Service Interface already registered. Requires the Serice Interface Hash. */
-    const ERROR_SERVICE_INSTANCE_ALREADY_REGISTERED             = 0x0003;
+    const ERROR_SERVICE_INSTANCE_ALREADY_REGISTERED             = 0x1003;
 
     /** @var int Template Render Interface cannot be instantiated. Requires the Template Render Interface Name. */
-    const ERROR_TEMPLATE_RENDER_CANNOT_BE_INSTANTIATED          = 0x1001;
+    const ERROR_TEMPLATE_RENDER_CANNOT_BE_INSTANTIATED          = 0x2001;
     /** @var int Invalid Template Render Interface Instance. */
-    const ERROR_INVALID_TEMPLATE_RENDER_INSTANCE                = 0x1002;
+    const ERROR_INVALID_TEMPLATE_RENDER_INSTANCE                = 0x2002;
     /** @var int Invalid Template Render Interface Class Name. Requires the Service Template Render Class Name. */
-    const ERROR_INVALID_TEMPLATE_RENDER_CLASS_NAME              = 0X1003;
+    const ERROR_INVALID_TEMPLATE_RENDER_CLASS_NAME              = 0X2003;
     /** @var int Template Render Interface cannot be instantiated. Requires the Template Render Interface Name. */
-    const ERROR_TEMPLATE_RENDER_INSTANCE_ALREADY_REGISTERED     = 0x1004;
+    const ERROR_TEMPLATE_RENDER_INSTANCE_ALREADY_REGISTERED     = 0x2004;
 
     /**
      * List of all error messages defined in this exception.
      * @var array
      */
     protected $error_messages = array(
+        ENabuMessagingException::ERROR_INVALID_MESSAGING_POOL_MANAGER =>
+            'Invalid Messaging Pool Manager.',
+            
         ENabuMessagingException::ERROR_SERVICE_CANNOT_BE_INSTANTIATED =>
             'Service Interface [%s] cannot be instantiated.',
         ENabuMessagingException::ERROR_INVALID_SERVICE_INSTANCE =>

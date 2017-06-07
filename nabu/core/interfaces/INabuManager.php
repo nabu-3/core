@@ -17,21 +17,24 @@
  *  limitations under the License.
  */
 
-namespace nabu\messaging;
-use nabu\provider\CNabuProviderFactory;
-use nabu\provider\base\CNabuProviderInterfaceDescriptor;
-use nabu\provider\interfaces\INabuProviderManager;
+namespace nabu\core\interfaces;
 
 /**
- * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
- * @since 3.0.12 Surface
+ * Empty interface to identify Singleton classes.
+ * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
+ * @since 3.0.12 Surfae
  * @version 3.0.12 Surface
- * @package \nabu\messaging\interfaces
  */
-class CNabuMessagingServiceInterfaceDescriptor extends CNabuProviderInterfaceDescriptor
+interface INabuManager
 {
-    public function __construct(INabuProviderManager $nb_manager, $key, $name)
-    {
-        parent::__construct($nb_manager, CNabuProviderFactory::INTERFACE_MESSAGING_SERVICE, $key, $name);
-    }
+    /**
+     * Initializes the Manager. This method can be called in the constructor or after instantiate the Manager.
+     * Each implementation have their own requirements.
+     * @return bool Returns true if the Manager was instantiated.
+     */
+    public function init() : bool;
+    /**
+     * Finish the Manager. This method can be called in the destructor or when they will be not longer used.
+     */
+    public function finish();
 }

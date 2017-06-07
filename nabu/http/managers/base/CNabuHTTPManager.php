@@ -20,7 +20,9 @@
 namespace nabu\http\managers\base;
 
 use nabu\core\CNabuObject;
+use nabu\core\exceptions\ENabuCoreException;
 use nabu\http\app\base\CNabuHTTPApplication;
+use nabu\http\managers\CNabuHTTPRenderDescriptor;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>

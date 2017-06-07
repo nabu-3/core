@@ -38,6 +38,8 @@ use nabu\data\site\builtin\CNabuBuiltInSiteAlias;
 use nabu\db\exceptions\ENabuDBException;
 use nabu\db\interfaces\INabuDBConnector;
 use nabu\http\interfaces\INabuHTTPServer;
+use nabu\messaging\exceptions\ENabuMessagingException;
+use nabu\messaging\managers\CNabuMessagingPoolManager;
 use nabu\provider\CNabuProviderFactory;
 use nabu\provider\CNabuProviderInterfaceDescriptorList;
 use nabu\provider\base\CNabuProviderInterfaceDescriptor;
@@ -98,6 +100,8 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     private $nb_application = null;
     /** @var CNabuProviderFactory Provider managers factory */
     private $nb_provider_factory = null;
+    /** @var CNabuMessagingPoolManager If the Engine was requested to run a Messaging pool here is the instance */
+    private $nb_messaging_pool_manager = null;
 
     /**
      * Default constructor. This object is singleton then, more than one instantiation throws a ENabuSingletonException.
@@ -306,6 +310,37 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     public function getApplication()
     {
         return $this->nb_application;
+    }
+
+    /**
+     * Gets current Messaging Pool Manager instance. If not defined, then creates one for the current Customer.
+     * @param bool $force Forces to set a new Messaging Pool Manager Instance.
+     * @return CNabuMessagingPoolManager Returns the Messaging Pool Manager.
+     * @throws ENabuMessagingException Raises an exception if Customer instance is not available or not matches with
+     * the existing Messaging Pool Manager.
+     */
+    public function getMessagingPoolManager(bool $force = false) : CNabuMessagingPoolManager
+    {
+        if ($this->nb_customer instanceof CNabuCustomer) {
+            if ($this->nb_messaging_pool_manager === null || $force) {
+                if ($this->nb_messaging_pool_manager instanceof CNabuMessagingPoolManager) {
+                    $this->nb_messaging_pool_manager->finish();
+                }
+                $this->nb_messaging_pool_manager = new CNabuMessagingPoolManager($this->nb_customer);
+                $this->nb_messaging_pool_manager->init();
+            } elseif (
+                ($nb_customer = $this->nb_messaging_pool_manager->getCustomer()) instanceof CNabuCustomer &&
+                $this->nb_customer->getId() === $nb_customer->getId()
+            ) {
+                $retval = $this->nb_messaging_pool_manager;
+            } else {
+                throw new ENabuMessagingException(ENabuMessagingException::ERROR_INVALID_MESSAGING_POOL_MANAGER);
+            }
+        } else {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_CUSTOMER_NOT_FOUND);
+        }
+
+        return $this->nb_messaging_pool_manager;
     }
 
     /**
@@ -670,14 +705,12 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
                     $this->registerMainDatabase();
                     $this->locateHTTPServer();
                     $this->createBuiltInServer();
-                    $this->locateRunningSite();
-                    $this->locateRunningCustomer();
+                    $this->locateRunningConfiguration();
                     break;
                 case CNabuEngine::ENGINE_MODE_CLUSTERED:
                     $this->registerMainDatabase();
                     $this->locateHTTPServer();
-                    $this->locateRunningSite();
-                    $this->locateRunningCustomer();
+                    $this->locateRunningConfiguration();
                     break;
             }
 
@@ -790,26 +823,9 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     /**
      * Locates the running configuration in the HTTP Server.
      */
-    private function locateRunningSite()
+    private function locateRunningConfiguration()
     {
         $this->nb_http_server->locateRunningConfiguration();
-    }
-
-    /**
-     * Locates current running Customer.
-     * @return CNabuCustomer Return the located Customer instance.
-     * @throws ENabuCoreException If no customer found, then raises an exception.
-     */
-    private function locateRunningCustomer()
-    {
-        $this->nb_customer = new CNabuCustomer($this->nb_http_server->getSite());
-        if ($this->nb_customer->isNew()) {
-            throw new ENabuCoreException(ENabuCoreException::ERROR_CUSTOMER_NOT_FOUND);
-        }
-        $this->traceLog(
-            "Customer",
-            $this->nb_customer->getVisibleName(). ' [' . $this->nb_customer->getValue('nb_customer_id') . ']'
-        );
     }
 
     /**

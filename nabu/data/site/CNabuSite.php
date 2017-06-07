@@ -21,6 +21,7 @@ namespace nabu\data\site;
 
 use nabu\cache\CNabuCacheNull;
 use nabu\cache\interfaces\INabuCacheStorage;
+use nabu\core\CNabuEngine;
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\CNabuDataObject;
 use nabu\data\cluster\CNabuServer;
@@ -29,9 +30,12 @@ use nabu\data\commerce\traits\TNabuCommerceChild;
 use nabu\data\customer\CNabuCustomer;
 use nabu\data\customer\traits\TNabuCustomerChild;
 use nabu\data\lang\CNabuLanguage;
+use nabu\data\messaging\CNabuMessaging;
+use nabu\data\security\CNabuUser;
 use nabu\data\security\CNabuRole;
 use nabu\data\security\CNabuRoleList;
 use nabu\data\site\base\CNabuSiteBase;
+use nabu\messaging\CNabuMessagingFactory;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -475,17 +479,6 @@ class CNabuSite extends CNabuSiteBase
         return $this;
     }
 
-    public function getMessaging(CNabuCustomer $nb_customer = null, $force = false)
-    {
-        if (($nb_messaging = parent::getMessaging($nb_customer === null ? $this->getCustomer() : null, $force)) === null || $force) {
-            if ($this->isValueNumeric(NABU_MESSAGING_FIELD_ID)) {
-                $nb_messaging = $this->getCustomer()->getMessaging($this);
-            }
-        }
-
-        return $nb_messaging;
-    }
-
     public function setAlias(CNabuSiteAlias $nb_site_alias)
     {
         $nb_site_alias->setSite($this);
@@ -863,5 +856,34 @@ class CNabuSite extends CNabuSiteBase
         }
 
         return $this->nb_role_list;
+    }
+
+    /*
+      __  __                           _
+     |  \/  | ___  ___ ___  __ _  __ _(_)_ __   __ _
+     | |\/| |/ _ \/ __/ __|/ _` |/ _` | | '_ \ / _` |
+     | |  | |  __/\__ \__ \ (_| | (_| | | | | | (_| |
+     |_|  |_|\___||___/___/\__,_|\__, |_|_| |_|\__, |
+                                 |___/         |___/
+    */
+
+    /**
+     * Send a New User double opt-in message to validate the account or communitate something to him.
+     * @param CNabuUser $nb_user User instance to be notified.
+     * @param array|null $params Array of additional parameters to be used. Depending on the Render used, this parameter
+     * can be applied or ignored.
+     * @return bool Returns true if the notification is sent or false if not.
+     */
+    public function sendNewUserNotification(CNabuUser $nb_user, array $params = null) : bool
+    {
+        $retval = false;
+        $nb_engine = CNabuEngine::getEngine();
+
+        return ($nb_messaging = $this->getMessaging($this->getCustomer())) instanceof CNabuMessaging &&
+               is_numeric($nb_template_id = $this->getEmailTemplateNewUser()) &&
+               ($nb_messaging_pool_manager = $nb_engine->getMessagingPoolManager($nb_messaging)) instanceof CNabuMessagingFactory &&
+               ($nb_messaging_factory = $nb_messaging_pool_manager->getFactory($nb_messaging)) &&
+               $nb_messaging_factory->postTemplateMessage($nb_template_id, $nb_user, null, null, $params)
+        ;
     }
 }

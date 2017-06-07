@@ -240,46 +240,13 @@ class CNabuCustomer extends CNabuCustomerBase
         return $this->nb_medioteca_list->getItem($key, CNabuMediotecaList::INDEX_KEY);
     }
 
-    /**
-     * Gets a Site instance using their key.
-     * @param string $key Key of the Site to be retrieved.
-     * @return CNabuSite Returns a Site instance if exists or false if not.
+    /*
+          ____  _ _
+         / ___|(_) |_ ___  ___
+         \___ \| | __/ _ \/ __|
+          ___) | | ||  __/\__ \
+         |____/|_|\__\___||___/
      */
-    public function getSiteByKey($key)
-    {
-        if (!is_string($key) || strlen($key) === 0) {
-            throw new ENabuCoreException(
-                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
-                array('$key', print_r($key, true))
-            );
-        }
-
-        return $this->nb_site_list->getItem($key, CNabuSiteList::INDEX_KEY);
-    }
-
-    /**
-     * Gets available Site instances in the list.
-     * @param bool $force If true, forces to merge complete list from the storage.
-     * @return array Returns an associative array where the index is the ID of each Site and the value is the instance.
-     */
-    public function getSites($force = false)
-    {
-        if ($force) {
-            $this->nb_site_list->clear();
-            $this->nb_site_list->merge(CNabuSite::getAllSites($this));
-        }
-
-        return $this->nb_site_list->getItems();
-    }
-
-    /**
-     * Get all languages used in the Site set.
-     * @return CNabuLanguageList Returns the list of unique languages used.
-     */
-    public function getSiteSetUsedLanguages()
-    {
-        return CNabuSite::getCustomerUsedLanguages($this);
-    }
 
     /**
      * Gets a Site by their ID.
@@ -305,9 +272,13 @@ class CNabuCustomer extends CNabuCustomerBase
             $nb_site_id = nb_getMixedValue($nb_site, NABU_SITE_FIELD_ID);
             if (is_numeric($nb_site_id) || nb_isValidGUID($nb_site_id)) {
                 $retval = $this->nb_site_list->getItem($nb_site_id);
-                if ($retval instanceof CNabuSite && !$retval->validateCustomer($this)) {
-                    $this->nb_site_list->removeItem($retval);
-                    $retval = false;
+                if ($retval instanceof CNabuSite) {
+                    if (!$retval->validateCustomer($this)) {
+                        $this->nb_site_list->removeItem($retval);
+                        $retval = false;
+                    } else {
+                        $retval->setCustomer($this);
+                    }
                 }
             } elseif ($nb_site_id !== null && $nb_site_id !== false) {
                 throw new ENabuCoreException(
@@ -318,6 +289,83 @@ class CNabuCustomer extends CNabuCustomerBase
         }
 
         return $retval;
+    }
+
+    /**
+     * Gets a Site instance using their key.
+     * @param string $key Key of the Site to be retrieved.
+     * @return CNabuSite|bool Returns a Site instance if exists or false if not.
+     */
+    public function getSiteByKey(string $key)
+    {
+        $retval = false;
+
+        if (strlen($key) === 0) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                array('$key', print_r($key, true))
+            );
+        }
+
+        $nb_site = $this->nb_site_list->getItem($key, CNabuSiteList::INDEX_KEY);
+
+        if ($nb_site instanceof CNabuSite) {
+            $nb_site->setCustomer($this);
+            $retval = $nb_site;
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Gets a Site instance using a possible alias.
+     * @param string $alias The full Alias host name to looking for.
+     * @return CNabuSite|bool Returns a Site instance if exists or false if not.
+     */
+    public function getSiteByAlias(string $alias)
+    {
+        $retval = false;
+
+        if (!is_string($alias) || strlen($alias) === 0) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                array('$alias', print_r($alias, true))
+            );
+        }
+
+        $nb_site = CNabuSite::findByAlias($alias);
+        if ($nb_site instanceof CNabuSite && $nb_site->validateCustomer($this)) {
+            if (!$this->nb_site_list->containsKey($nb_site->getId())) {
+                $this->nb_site_list->addItem($nb_site);
+            }
+            $retval = $nb_site;
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Gets available Site instances in the list.
+     * @param bool $force If true, forces to merge complete list from the storage.
+     * @return array Returns an associative array where the index is the ID of each Site and the value is the instance.
+     */
+    public function getSites($force = false)
+    {
+        if ($force) {
+            $this->nb_site_list->clear();
+            $this->nb_site_list->merge(CNabuSite::getAllSites($this));
+        }
+
+        return $this->nb_site_list->getItems();
+    }
+
+    /**
+     * Get all languages used in the Site set.
+     * @return CNabuLanguageList Returns the list of unique languages used.
+     */
+    public function getSiteSetUsedLanguages()
+    {
+        return CNabuSite::getCustomerUsedLanguages($this);
     }
 
     /**

@@ -41,13 +41,14 @@ trait TNabuMessagingChild
 
     /**
      * Gets the Messaging instance.
-     * @param null|CNabuCustomer If you want to get the Messaging in safe mode, you need to pass this parameter
-     * to grant the Customer that owns the Messaging where the Messaging is placed. In any other case,
-     * the Messaging could not be retrieved.
+     * @param null|CNabuCustomer $nb_customer If you want to get the Messaging in safe mode, you need to pass
+     * this parameter to grant the Customer that owns the Messaging where the Messaging is placed.
+     * In any other case, the Messaging could not be retrieved.
+     * @param string $field Field name where the site id will be stored.
      * @param bool $force If true, then tries to reload Messaging instance from their storage.
      * @return CNabuMessaging|null Returns the Messaging instance if setted or null if not.
      */
-    public function getMessaging(CNabuCustomer $nb_customer = null, $force = false)
+    public function getMessaging(CNabuCustomer $nb_customer, string $field = NABU_MESSAGING_FIELD_ID, bool $force = false)
     {
         if ($nb_customer !== null && ($this->nb_messaging === null || $force)) {
             $this->nb_messaging = null;
@@ -65,7 +66,7 @@ trait TNabuMessagingChild
      * @param string $field Field name where the site id will be stored.
      * @return CNabuDataObject Returns $this to allow the cascade chain of setters.
      */
-    public function setMessaging(CNabuMessaging $nb_messaging, $field = NABU_MESSAGING_FIELD_ID)
+    public function setMessaging(CNabuMessaging $nb_messaging, string $field = NABU_MESSAGING_FIELD_ID)
     {
         $this->nb_messaging = $nb_messaging;
         if ($this instanceof CNabuDataObject) {

@@ -17,7 +17,7 @@
  *  limitations under the License.
  */
 
-namespace nabu\messaging;
+namespace nabu\messaging\descriptors;
 use nabu\provider\CNabuProviderFactory;
 use nabu\provider\base\CNabuProviderInterfaceDescriptor;
 use nabu\provider\interfaces\INabuProviderManager;
@@ -26,7 +26,7 @@ use nabu\provider\interfaces\INabuProviderManager;
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\messaging\interfaces
+ * @package \nabu\messaging\descriptors
  */
 class CNabuMessagingTemplateRenderInterfaceDescriptor extends CNabuProviderInterfaceDescriptor
 {

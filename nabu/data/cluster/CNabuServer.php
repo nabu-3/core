@@ -98,10 +98,10 @@ class CNabuServer extends CNabuServerBase
         return CNabuServer::buildObjectFromSQL(
             "select se.*, sh.nb_server_host_id, cg.nb_cluster_group_id, cgs.nb_cluster_group_service_id, "
                  . "s.nb_customer_id, s.nb_site_id, sa.nb_site_alias_id, dzh.nb_domain_zone_id, "
-                 . "dzh.nb_domain_zone_host_id "
+                 . "dzh.nb_domain_zone_host_id, c.nb_customer_id "
             . "from nb_server se, nb_server_host sh, nb_ip i, nb_site s, nb_cluster_group cg, "
                  . "nb_cluster_group_service cgs, nb_site_alias_service sas, "
-                 . "nb_site_alias sa, nb_domain_zone_host dzh, nb_domain_zone dz "
+                 . "nb_site_alias sa, nb_domain_zone_host dzh, nb_domain_zone dz, nb_customer c "
            . "where se.nb_server_id=sh.nb_server_id "
              . "and sh.nb_ip_id=i.nb_ip_id "
              . "and i.nb_ip_ip='%addr\$s' "
@@ -116,7 +116,9 @@ class CNabuServer extends CNabuServerBase
              . "and sa.nb_domain_zone_host_id=dzh.nb_domain_zone_host_id "
              . "and dzh.nb_domain_zone_id=dz.nb_domain_zone_id "
              . "and dzh.nb_domain_zone_host_type in ('A', 'CNAME') "
-             . "and concat(dzh.nb_domain_zone_host_name, '.', dz.nb_domain_zone_name)='%server_name\$s'",
+             . "and concat(dzh.nb_domain_zone_host_name, '.', dz.nb_domain_zone_name)='%server_name\$s' "
+             . "and s.nb_customer_id=c.nb_customer_id "
+             . "and s.nb_customer_id=dz.nb_customer_id",
             array(
                 'addr' => $addr,
                 'port' => $port,
