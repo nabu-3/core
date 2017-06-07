@@ -27,6 +27,7 @@ namespace nabu\messaging\adapters;
 use nabu\messaging\exceptions\ENabuMessagingException;
 use nabu\messaging\interfaces\INabuMessagingModule;
 use nabu\messaging\interfaces\INabuMessagingServiceInterface;
+use nabu\messaging\interfaces\INabuMessagingTemplateRenderInterface;
 use nabu\provider\base\CNabuProviderModuleManagerAdapter;
 use nabu\provider\interfaces\INabuProviderManager;
 
@@ -40,6 +41,8 @@ abstract class CNabuMessagingModuleManagerAdapter extends CNabuProviderModuleMan
 {
     /** @var array Array of Service Interface instances */
     private $service_interface_list = null;
+    /** @var array Array of Template Render Interface instances */
+    private $template_render_interface_list = null;
 
     public function __construct(string $vendor_key, string $module_key)
     {
@@ -78,6 +81,43 @@ abstract class CNabuMessagingModuleManagerAdapter extends CNabuProviderModuleMan
         if (array_key_exists($hash, $this->service_interface_list)) {
             $interface->finish();
             unset($this->service_interface_list[$hash]);
+        }
+    }
+
+    /**
+     * Register a new Messaging Template Render Interface instance.
+     * @param INabuMessagingTemplateRenderInterface $interface Interface instance to be registered.
+     * @return bool Returns true if the instance is registered and initiated.
+     * @throws ENabuMessagingException Raises an exception if $interface is already registered.
+     */
+    protected function registerTemplateRenderInterface(INabuMessagingTemplateRenderInterface $interface)
+    {
+        $hash = $interface->getHash();
+        if (is_array($this->template_render_interface_list) &&
+            array_key_exists($hash, $this->template_render_interface_list)
+        ) {
+            throw new ENabuMessagingException(
+                ENabuMessagingException::ERROR_TEMPLATE_RENDER_INSTANCE_ALREADY_REGISTERED,
+                array($hash)
+            );
+        }
+
+        if ($this->template_render_interface_list === null) {
+            $this->template_render_interface_list = array($hash => $interface);
+        } else {
+            $this->template_render_interface_list[$hash] = $interface;
+        }
+
+        return $interface->init();
+    }
+
+    public function releaseTemplateRenderInterface(INabuMessagingTemplateRenderInterface $interface)
+    {
+        $hash = $interface->getHash();
+
+        if (array_key_exists($hash, $this->template_render_interface_list)) {
+            $interface->finish();
+            unset($this->template_render_interface_list[$hash]);
         }
     }
 }
