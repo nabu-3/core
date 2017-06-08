@@ -27,5 +27,20 @@ namespace nabu\provider\interfaces;
  */
 interface INabuProviderInterface
 {
-    
+    /**
+     * Gets the current hash and, if none exists, then creates it.
+     * @return string Retuns a valid unique hash (GUID) to identify this instance.
+     */
+    public function getHash();
+
+    /**
+     * Initialize the interface instance.
+     * @return bool Return true if the instance is initialized.
+     */
+    public function init();
+
+    /**
+     * Finish the interface instance.
+     */
+    public function finish();
 }

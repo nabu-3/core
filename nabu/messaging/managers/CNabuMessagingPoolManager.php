@@ -19,12 +19,14 @@
 
 namespace nabu\messaging\managers;
 use nabu\core\CNabuObject;
+use nabu\core\exceptions\ENabuCoreException;
 use nabu\core\interfaces\INabuManager;
 use nabu\data\customer\CNabuCustomer;
 use nabu\data\customer\traits\TNabuCustomerChild;
 use nabu\data\messaging\CNabuMessaging;
 use nabu\messaging\CNabuMessagingFactory;
 use nabu\messaging\CNabuMessagingFactoryList;
+use nabu\messaging\exceptions\ENabuMessagingException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -67,6 +69,20 @@ class CNabuMessagingPoolManager extends CNabuObject implements INabuManager
      */
     public function getFactory(CNabuMessaging $nb_messaging)
     {
-        return $this->nb_messaging_factory_list->getItem($nb_messaging->getId());
+        $retval = false;
+        $nb_customer = $this->getCustomer();
+
+        if ($nb_messaging->validateCustomer($nb_customer)) {
+            if (is_numeric($nb_messaging_id = nb_getMixedValue($nb_messaging, NABU_MESSAGING_FIELD_ID))) {
+                $retval = $this->nb_messaging_factory_list->getItem($nb_messaging_id);
+            }
+            if (!$retval) {
+                $retval = $this->nb_messaging_factory_list->addItem(new CNabuMessagingFactory($nb_messaging));
+            }
+        } else {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_CUSTOMERS_DOES_NOT_MATCH);
+        }
+
+        return $retval;
     }
 }

@@ -18,7 +18,9 @@
  */
 
 namespace nabu\messaging\interfaces;
-use nabu\data\messaging\CNabuMessagingService;
+use nabu\data\lang\CNabuLanguage;
+use nabu\data\messaging\CNabuMessagingTemplate;
+use nabu\messaging\exceptions\ENabuMessagingException;
 use nabu\provider\interfaces\INabuProviderInterface;
 
 /**
@@ -30,19 +32,29 @@ use nabu\provider\interfaces\INabuProviderInterface;
 interface INabuMessagingTemplateRenderInterface extends INabuProviderInterface
 {
     /**
-     * Gets the current hash and, if none exists, then creates it.
-     * @return string Retuns a valid unique hash (GUID) to identify this instance.
+     * Sets the template to be used to render the contents.
+     * @param CNabuMessagingTemplate $nb_messaging_template The template to be used.
+     * @return INabuMessagingTemplateRenderInterface Returns the self instance to grant cascade setters mechanism.
      */
-    public function getHash();
-
+    public function setTemplate(CNabuMessagingTemplate $nb_messaging_template) : INabuMessagingTemplateRenderInterface;
     /**
-     * Initialize the interface instance.
-     * @return bool Return true if the instance is initialized.
+     * Sets the language used to render the contents.
+     * @param CNabuLanguage $nb_language The language to be used.
+     * @return INabuMessagingTemplateRenderInterface Returns the self instance to grant cascade setters mechanism.
      */
-    public function init();
-
+    public function setLanguage(CNabuLanguage $nb_language) : INabuMessagingTemplateRenderInterface;
     /**
-     * Finish the interface instance.
+     * Creates the Subject of a message using this template instance.
+     * @param array $params Additional params in an associative array to use when build the Subject.
+     * @return string Returns the formed string.
+     * @throws ENabuMessagingException Raises an exception if Template or Language are not setted previously.
      */
-    public function finish();
+    public function createSubject(array $params) : string;
+    /**
+     * Creates the Body of a message using this template instance.
+     * @param array $params Additional params in an associative array to use when build the Body.
+     * @return string Returns the formed string.
+     * @throws ENabuMessagingException Raises an exception if Template or Language are not setted previously.
+     */
+    public function createBody(array $params) : string;
 }

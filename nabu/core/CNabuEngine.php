@@ -41,8 +41,8 @@ use nabu\http\interfaces\INabuHTTPServer;
 use nabu\messaging\exceptions\ENabuMessagingException;
 use nabu\messaging\managers\CNabuMessagingPoolManager;
 use nabu\provider\CNabuProviderFactory;
-use nabu\provider\CNabuProviderInterfaceDescriptorList;
 use nabu\provider\base\CNabuProviderInterfaceDescriptor;
+use nabu\provider\base\CNabuProviderInterfaceDescriptorList;
 use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
 use providers\apache\httpd\CApacheHTTPServer;
@@ -598,7 +598,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Get main database connection.
-     * @return \cms\core\interfaces\ICMSDBConnector Returns the database connector instance if active or null if not
+     * @return INabuDBConnector Returns the database connector instance if active or null if not
      */
     public function getMainDB()
     {
@@ -871,7 +871,8 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     }
 
     /**
-     * Gets a Manager instance. This method is intended normally to be used internally and inside provider modules.
+     * Gets a Provider Manager instance.
+     * This method is intended normally to be used internally and inside provider modules.
      * @param string $vendor_key Vendor Key to identify the Manager.
      * @param string $module_key Module Key to identify the Manager.
      * @return INabuProviderManager Returns the Manager instance if exists or false if not.

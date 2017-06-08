@@ -28,12 +28,13 @@ use nabu\provider\base\CNabuProviderInterfaceDescriptor;
 use nabu\provider\base\CNabuProviderInterfaceDescriptorList;
 use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
+use nabu\provider\interfaces\INabuProviderInterface;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.9 Surface
  * @version 3.0.12 Surface
- * @package \nabu\core\interfaces
+ * @package \nabu\provider
  */
 class CNabuProviderFactory extends CNabuObject implements INabuSingleton
 {

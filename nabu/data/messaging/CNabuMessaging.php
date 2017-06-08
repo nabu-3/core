@@ -81,6 +81,22 @@ class CNabuMessaging extends CNabuMessagingBase
     }
 
     /**
+     * Gets a Template by Id.
+     * @param mixed $nb_template A CNabuDataObject containing a field named nb_messaging_template_id or a valid Id.
+     * @return CNabuMessagingTemplate|bool Returns the Messaging Template instance if exists or false if not.
+     */
+    public function getTemplate($nb_template)
+    {
+        $retval = false;
+
+        if (is_numeric($nb_template_id = nb_getMixedValue($nb_template, NABU_MESSAGING_TEMPLATE_FIELD_ID))) {
+            $retval = $this->nb_messaging_template_list->getItem($nb_template_id);
+        }
+
+        return $retval;
+    }
+
+    /**
      * Overrides getTreeData method to add translations branch.
      * If $nb_language have a valid value, also adds a translation object
      * with current translation pointed by it.

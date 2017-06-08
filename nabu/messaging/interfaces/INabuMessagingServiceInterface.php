@@ -30,18 +30,6 @@ use nabu\provider\interfaces\INabuProviderInterface;
 interface INabuMessagingServiceInterface extends INabuProviderInterface
 {
     /**
-     * Gets the current hash and, if none exists, then creates it.
-     * @return string Retuns a valid unique hash (GUID) to identify this instance.
-     */
-    public function getHash();
-
-    /**
-     * Initialize the interface instance.
-     * @return bool Return true if the instance is initialized.
-     */
-    public function init();
-
-    /**
      * Open the connection of this interface.
      * @param CNabuMessagingService $nb_messaging_service Messaging Service instance with connection params.
      * @return bool Returns true if the connection is made.
@@ -52,9 +40,4 @@ interface INabuMessagingServiceInterface extends INabuProviderInterface
      * Close the connection of this interface.
      */
     public function disconnect();
-
-    /**
-     * Finish the interface instance.
-     */
-    public function finish();
 }

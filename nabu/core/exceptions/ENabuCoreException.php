@@ -32,6 +32,8 @@ class ENabuCoreException extends ENabuException
     const ERROR_BASEDIR_NOT_STABLISHED                  = 0x0001;
     const ERROR_HOST_PATH_NOT_FOUND                     = 0x0002;
     const ERROR_REDIRECTION_TARGET_NOT_VALID            = 0x0003;
+    /** @var int A Language instance is required. */
+    const ERROR_LANGUAGE_REQUIRED                       = 0x0004;
 
     const ERROR_FEATURE_NOT_IMPLEMENTED                 = 0x0fff;
 
@@ -145,184 +147,186 @@ class ENabuCoreException extends ENabuException
 
         /* General error messages */
         ENabuCoreException::ERROR_BASEDIR_NOT_STABLISHED =>
-            'PHP open_basedir directive [%s] does not contain host base directory',
+            'PHP open_basedir directive [%s] does not contain host base directory.',
         ENabuCoreException::ERROR_HOST_PATH_NOT_FOUND =>
-            'Host Path not found [%s]',
+            'Host Path not found [%s].',
         ENabuCoreException::ERROR_REDIRECTION_TARGET_NOT_VALID =>
             'Redirection target not valid',
+        ENabuCoreException::ERROR_LANGUAGE_REQUIRED =>
+            'A Language instance is required to perform this operation.',
 
         ENabuCoreException::ERROR_FEATURE_NOT_IMPLEMENTED =>
-            'Feature not implemented',
+            'Feature not implemented.',
 
         /* Engine error messages */
         ENabuCoreException::ERROR_ENGINE_NOT_FOUND =>
-            'Engine not found',
+            'Engine not found.',
         ENabuCoreException::ERROR_ENGINE_NOT_INSTANTIATED =>
-            'Engine not instantiated',
+            'Engine not instantiated.',
 
         ENabuCoreException::ERROR_MAIN_DB_NOT_FOUND =>
-            'Main Database not found or not available',
+            'Main Database not found or not available.',
         ENabuCoreException::ERROR_MAIN_DB_ALREADY_EXISTS =>
-            'Main database already exists',
+            'Main database already exists.',
 
         ENabuCoreException::ERROR_OPERATION_MODE_NOT_ALLOWED =>
-            'Operation mode selected is not valid',
+            'Operation mode selected is not valid.',
         ENabuCoreException::ERROR_OPERATION_MODE_CANNOT_BE_MODIFIED =>
-            'Operation mode cannot be modified after instantiate the Engine',
+            'Operation mode cannot be modified after instantiate the Engine.',
 
         ENabuCoreException::ERROR_APPLICATION_REQUIRED =>
-            'Application required',
+            'Application required.',
         ENabuCoreException::ERROR_RUNNING_APPLICATION =>
-            'You cannot continue. Another Application is already running',
+            'You cannot continue. Another Application is already running.',
 
         ENabuCoreException::ERROR_SERVER_NOT_FOUND =>
-            'Server not found for [%s] in [%s:%d]',
+            'Server not found for [%s] in [%s:%d].',
         ENabuCoreException::ERROR_SERVER_NOT_INITIALIZED =>
-            'Server instance not initialized',
+            'Server instance not initialized.',
 
         ENabuCoreException::ERROR_SERVER_HOST_NOT_FOUND =>
-            'Server host not found for [%s:%s]',
+            'Server host not found for [%s:%s].',
         ENabuCoreException::ERROR_SERVER_HOST_NOT_INITIALIZED  =>
-            'Server Host instance not initialized',
+            'Server Host instance not initialized.',
         ENabuCoreException::ERROR_SERVER_HOST_MISCONFIGURED =>
-            'Server host misconfigured',
+            'Server host misconfigured.',
 
         ENabuCoreException::ERROR_HTTP_SERVER_NOT_FOUND =>
-            'No HTTP Server found',
+            'No HTTP Server found.',
 
         ENabuCoreException::ERROR_CUSTOMER_NOT_FOUND =>
-            'Customer not found',
+            'Customer not found.',
         ENabuCoreException::ERROR_CUSTOMERS_DOES_NOT_MATCH =>
-            'Customers does not match',
+            'Customers does not match.',
         ENabuCoreException::ERROR_CUSTOMER_NOT_ALLOWED =>
-            'The user intends to access a forbidden customer',
+            'The user intends to access a forbidden customer.',
 
         ENabuCoreException::ERROR_DOMAIN_ZONE_NOT_FOUND =>
-            'Domain Zone not found',
+            'Domain Zone not found.',
 
         ENabuCoreException::ERROR_SITE_NOT_FOUND =>
-            'Site not found',
+            'Site not found.',
         ENabuCoreException::ERROR_SITE_NOT_INSTANTIATED =>
-            'Site not instantiated',
+            'Site not instantiated.',
         ENabuCoreException::ERROR_SITE_NOT_PUBLISHED =>
-            'Site [%s] not published',
+            'Site [%s] not published.',
         ENabuCoreException::ERROR_SITES_DOES_NOT_MATCH =>
-            'The Site owner of this object and the running Site does not match',
+            'The Site owner of this object and the running Site does not match.',
 
         ENabuCoreException::ERROR_SITE_ALIAS_NOT_FOUND =>
-            'Site alias [%s] not found in site [%s]',
+            'Site alias [%s] not found in site [%s].',
 
         ENabuCoreException::ERROR_PLUGINS_MANAGER_REQUIRED =>
-            'Plugins Manager required',
+            'Plugins Manager required.',
 
         ENabuCoreException::ERROR_MODULES_MANAGER_REQUIRED =>
-            'Modules Manager required',
+            'Modules Manager required.',
         ENabuCoreException::ERROR_MODULES_MANAGER_INIT_ERROR =>
-            'Modules Manager trap init error',
+            'Modules Manager trap init error.',
 
         ENabuCoreException::ERROR_PLUGIN_REDIRECTION_NOT_ALLOWED =>
-            'Plugin method redirection not allowed',
+            'Plugin method redirection not allowed.',
         ENabuCoreException::ERROR_PLUGIN_COMMAND_INVALID_RETURN_VALUE =>
-            'Plugin Command [%s] for plugin [%s] returns an invalid value',
+            'Plugin Command [%s] for plugin [%s] returns an invalid value.',
 
         ENabuCoreException::ERROR_SITE_PLUGIN_ALREADY_ASSIGNED =>
-            'Plugins Manager have a Site Plugin and cannot be reasigned',
+            'Plugins Manager have a Site Plugin and cannot be reasigned.',
         ENabuCoreException::ERROR_SITE_PLUGIN_NOT_VALID =>
-            'Site plugin [%s] is not valid',
+            'Site plugin [%s] is not valid.',
         ENabuCoreException::ERROR_SITE_PLUGIN_INIT_ERROR =>
-            'Site plugin trap init error',
+            'Site plugin trap init error.',
 
         ENabuCoreException::ERROR_SITE_TARGET_PLUGIN_ALREADY_ASSIGNED =>
-         'Plugin Manager have a Article Plugin and cannot be reasigned',
+         'Plugin Manager have a Article Plugin and cannot be reasigned.',
         ENabuCoreException::ERROR_SITE_TARGET_PLUGIN_NOT_VALID =>
-            'Site target plugin %s is not valid',
+            'Site target plugin %s is not valid.',
         ENabuCoreException::ERROR_SITE_TARGET_PLUGIN_INIT_ERROR =>
-            'Site Target plugin trap init error',
+            'Site Target plugin trap init error.',
 
         ENabuCoreException::ERROR_ROLE_NOT_ASSIGNED =>
-            'Role not assigned',
+            'Role not assigned.',
 
         ENabuCoreException::ERROR_REQUEST_NOT_FOUND =>
-            'Request not found',
+            'Request not found.',
 
         ENabuCoreException::ERROR_RESPONSE_NOT_FOUND =>
-            'Response not found',
+            'Response not found.',
 
         ENabuCoreException::ERROR_PAGE_URI_NOT_FOUND =>
-            'Page URI not found',
+            'Page URI not found.',
         ENabuCoreException::ERROR_LANGUAGE_NOT_FOUND_FOR_PAGE_URI =>
-            'Language not found for Page URI',
+            'Language not found for Page URI.',
 
         ENabuCoreException::ERROR_SITE_TARGET_NOT_FOUND =>
-            'Site target not found',
+            'Site target not found.',
         ENabuCoreException::ERROR_SITE_TARGET_LOGIN_MISMATCH =>
-            'Login target configuration mismatch',
+            'Login target configuration mismatch.',
         ENabuCoreException::ERROR_SITE_TARGET_ERROR_MISMATCH =>
-            'Error target configuration mismatch',
+            'Error target configuration mismatch.',
 
         ENabuCoreException::ERROR_INVALID_HTTP_MANAGER_CLASS =>
-            'Invalid HTTP Manager class [%s]',
+            'Invalid HTTP Manager class [%s].',
         ENabuCoreException::ERROR_ENABLING_HTTP_MANAGER =>
-            'HTTP Manager [%s] was returned an invalid status after being enabled',
+            'HTTP Manager [%s] was returned an invalid status after being enabled.',
 
         ENabuCoreException::ERROR_RENDER_NOT_SET =>
-            'Render not set',
+            'Render not set.',
         ENabuCoreException::ERROR_INVALID_RENDER_DESCRIPTOR_CLASS =>
-            'Render descriptor contains invalid class',
+            'Render descriptor contains invalid class.',
         ENabuCoreException::ERROR_RENDER_NOT_FOUND =>
-            'Render [%s] not found',
+            'Render [%s] not found.',
 
         ENabuCoreException::ERROR_URL_FILTER_INVALID =>
             'URL Filter not valid due to unknown type or in conflict with a previous filter setted.',
 
         /* Syntax and semantic error messages */
         ENabuCoreException::ERROR_CLASS_NOT_FOUND =>
-            'Class [%s] not found',
+            'Class [%s] not found.',
 
         ENabuCoreException::ERROR_OBJECT_EXPECTED =>
-            'Object instance expected',
+            'Object instance expected.',
         ENabuCoreException::ERROR_OBJECT_NOT_EXPECTED =>
-            'Object instance not expected[%s]',
+            'Object instance not expected[%s].',
 
         ENabuCoreException::ERROR_CONSTRUCTOR_PARAMETER_IS_EMPTY =>
-            'Constructor parameter %s is empty',
+            'Constructor parameter %s is empty.',
 
         ENabuCoreException::ERROR_METHOD_NOT_IMPLEMENTED =>
-            'The required method [%s] is not implemented',
+            'The required method [%s] is not implemented.',
         ENabuCoreException::ERROR_METHOD_NOT_AVAILABLE =>
-            'The required method [%s] is not available in this operation mode',
+            'The required method [%s] is not available in this operation mode.',
         ENabuCoreException::ERROR_METHOD_PARAMETER_IS_EMPTY =>
-            'Method %s has parameter %s empty',
+            'Method %s has parameter %s empty.',
         ENabuCoreException::ERROR_METHOD_PARAMETER_NOT_VALID =>
-            'Parameter [%s] has an invalid value [%s]',
+            'Parameter [%s] has an invalid value [%s].',
 
         ENabuCoreException::ERROR_UNEXPECTED_PARAM_CLASS_TYPE =>
-            'Unexpected object class type [%s] in param [%s]',
+            'Unexpected object class type [%s] in param [%s].',
         ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE =>
-            'Unexpected value[%s] in param [%s]',
+            'Unexpected value[%s] in param [%s].',
 
         ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN =>
-            'NULL value not allowed in %s',
+            'NULL value not allowed in %s.',
 
         ENabuCoreException::ERROR_FOLDER_NOT_FOUND =>
-            'Folder [%s] not found',
+            'Folder [%s] not found.',
         ENabuCoreException::ERROR_FILE_NOT_FOUND =>
-            'File [%s] not found',
+            'File [%s] not found.',
 
         ENabuCoreException::ERROR_INVALID_INDEX =>
-            'Invalid index [%s]',
+            'Invalid index [%s].',
 
         /* Devel builder error messages */
         ENabuCoreException::ERROR_CLASS_CANNOT_BE_BUILT =>
-            'Class [%s] cannot be built',
+            'Class [%s] cannot be built.',
 
         /* Install mode messages */
         ENabuCoreException::ERROR_INSTALL_MODE_LOCKED =>
-            'Install mode cannot be changed',
+            'Install mode cannot be changed.',
         ENabuCoreException::ERROR_INSTALL_MODE_REQUIRED =>
-            'Install mode required',
+            'Install mode required.',
         ENabuCoreException::ERROR_INSTALL_DB_NOT_FOUND =>
-            'Install database does not exists',
+            'Install database does not exists.',
     );
 
 

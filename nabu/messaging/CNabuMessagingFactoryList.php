@@ -34,7 +34,7 @@ class CNabuMessagingFactoryList extends CNabuDataObjectList
 
     public function __construct(CNabuCustomer $nb_customer)
     {
-        parent::construct('nb_messaging_id');
+        parent::__construct('nb_messaging_id');
         $this->setCustomer($nb_customer);
     }
 
@@ -46,13 +46,7 @@ class CNabuMessagingFactoryList extends CNabuDataObjectList
      */
     protected function acquireItem($key, $index = false)
     {
-        $retval = false;
-
-        if (!$index && is_numeric($key)) {
-            $retval = $this->getCustomer()->getMessaging($key);
-        }
-
-        return $retval;
+        return false;
     }
 
     protected function createSecondaryIndexes()

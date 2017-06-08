@@ -23,6 +23,7 @@ use nabu\cache\CNabuCacheNull;
 use nabu\cache\interfaces\INabuCacheStorage;
 use nabu\core\CNabuEngine;
 use nabu\core\exceptions\ENabuCoreException;
+use nabu\core\exceptions\ENabuSecurityException;
 use nabu\data\CNabuDataObject;
 use nabu\data\cluster\CNabuServer;
 use nabu\data\cluster\CNabuClusterUser;
@@ -36,6 +37,7 @@ use nabu\data\security\CNabuRole;
 use nabu\data\security\CNabuRoleList;
 use nabu\data\site\base\CNabuSiteBase;
 use nabu\messaging\CNabuMessagingFactory;
+use nabu\messaging\managers\CNabuMessagingPoolManager;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -879,11 +881,17 @@ class CNabuSite extends CNabuSiteBase
         $retval = false;
         $nb_engine = CNabuEngine::getEngine();
 
-        return ($nb_messaging = $this->getMessaging($this->getCustomer())) instanceof CNabuMessaging &&
-               is_numeric($nb_template_id = $this->getEmailTemplateNewUser()) &&
-               ($nb_messaging_pool_manager = $nb_engine->getMessagingPoolManager($nb_messaging)) instanceof CNabuMessagingFactory &&
-               ($nb_messaging_factory = $nb_messaging_pool_manager->getFactory($nb_messaging)) &&
-               $nb_messaging_factory->postTemplateMessage($nb_template_id, $nb_user, null, null, $params)
-        ;
+        if (($nb_profile = $this->getUserProfile($nb_user)) instanceof CNabuSiteUser &&
+            ($nb_language_id = $nb_profile->getDefaultLanguageId())
+        ) {
+            return ($nb_messaging = $this->getMessaging($this->getCustomer())) instanceof CNabuMessaging &&
+                   is_numeric($nb_template_id = $this->getEmailTemplateNewUser()) &&
+                   ($nb_messaging_pool_manager = $nb_engine->getMessagingPoolManager()) instanceof CNabuMessagingPoolManager &&
+                   ($nb_messaging_factory = $nb_messaging_pool_manager->getFactory($nb_messaging)) instanceof CNabuMessagingFactory &&
+                   $nb_messaging_factory->postTemplateMessage($nb_template_id, $nb_user, null, null, $params)
+            ;
+        } else {
+            throw new ENabuSecurityException(ENabuSecurityException::ERROR_USER_NOT_ALLOWED, array($nb_user->getId()));
+        }
     }
 }

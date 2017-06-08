@@ -31,10 +31,16 @@ class ENabuSecurityException extends ENabuException
     /** @var int Customer is not the owner of this object. */
     const ERROR_CUSTOMER_NOT_OWNER                      = 0x0001;
 
+    /** @var int User is not allowed here. Requires the User Id. */
+    const ERROR_USER_NOT_ALLOWED                        = 0x1001;
+
     /** @var array $error_messages Error array messages list. */
     private static $error_messages = array(
         ENabuSecurityException::ERROR_CUSTOMER_NOT_OWNER =>
-            'Customer is not the owner of this object.'
+            'Customer is not the owner of this object.',
+
+        ENabuSecurityException::ERROR_USER_NOT_ALLOWED =>
+            'User [%s] is not allowed in this context.'
     );
 
     public function __construct($code, $values = null)

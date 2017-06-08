@@ -48,6 +48,10 @@ class ENabuMessagingException extends ENabuException
     const ERROR_INVALID_TEMPLATE_RENDER_CLASS_NAME              = 0X2003;
     /** @var int Template Render Interface cannot be instantiated. Requires the Template Render Interface Name. */
     const ERROR_TEMPLATE_RENDER_INSTANCE_ALREADY_REGISTERED     = 0x2004;
+    /** @var int Invalid Messaging Template. */
+    const ERROR_INVALID_TEMPLATE                                = 0x2005;
+    /** @var int A Template is required. */
+    const ERROR_TEMPLATE_REQUIRED                               = 0x2006;
 
     /**
      * List of all error messages defined in this exception.
@@ -56,23 +60,29 @@ class ENabuMessagingException extends ENabuException
     protected $error_messages = array(
         ENabuMessagingException::ERROR_INVALID_MESSAGING_POOL_MANAGER =>
             'Invalid Messaging Pool Manager.',
-            
+
         ENabuMessagingException::ERROR_SERVICE_CANNOT_BE_INSTANTIATED =>
             'Service Interface [%s] cannot be instantiated.',
         ENabuMessagingException::ERROR_INVALID_SERVICE_INSTANCE =>
-            'Invalid Service Interface Instance',
+            'Invalid Service Interface Instance.',
         ENabuMessagingException::ERROR_INVALID_SERVICE_CLASS_NAME =>
-            'Invalid Service Interface class name [%s]',
+            'Invalid Service Interface class name [%s].',
         ENabuMessagingException::ERROR_SERVICE_INSTANCE_ALREADY_REGISTERED =>
             'Service Interface instance [%s] already registered.',
 
         ENabuMessagingException::ERROR_TEMPLATE_RENDER_CANNOT_BE_INSTANTIATED =>
             'Template Render Interface [%s] cannot be instantiated.',
         ENabuMessagingException::ERROR_INVALID_TEMPLATE_RENDER_INSTANCE =>
-            'Invalid Template Render Interface Instance',
+            'Invalid Template Render Interface Instance.',
         ENabuMessagingException::ERROR_INVALID_TEMPLATE_RENDER_CLASS_NAME =>
-            'Invalid Template Render Interface class name [%s]',
+            'Invalid Template Render Interface class name [%s].',
         ENabuMessagingException::ERROR_TEMPLATE_RENDER_INSTANCE_ALREADY_REGISTERED =>
             'Template Render Interface instance [%s] already registered.',
+        ENabuMessagingException::ERROR_INVALID_TEMPLATE =>
+            'The designated Template is not valid.',
+        ENabuMessagingException::ERROR_TEMPLATE_NOT_ALLOWED =>
+            'Template is not allowed under this Messaging instance.',
+        ENabuMessagingException::ERROR_TEMPLATE_REQUIRED =>
+            'A Template instance is required to perform this operation.'
     );
 }
