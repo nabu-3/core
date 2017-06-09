@@ -20,8 +20,6 @@
 namespace nabu\data\site;
 
 use \nabu\data\site\base\CNabuSiteUserBase;
-use nabu\core\exceptions\ENabuCoreException;
-use nabu\data\security\CNabuRole;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -31,42 +29,8 @@ use nabu\data\security\CNabuRole;
 class CNabuSiteUser extends CNabuSiteUserBase
 {
     /**
-     * Role instance
-     * @var CNabuRole
+     * Upate table to set las access datetime of the user.
      */
-    //private $nb_role = null;
-
-    /*
-    public function getRole($force = false)
-    {
-        if ($this->nb_role === null || $force) {
-            $this->nb_role = null;
-            if ($this->isValueNumeric('nb_role_id')) {
-                $nb_role = new CNabuRole($this);
-                if ($nb_role->isFetched()) {
-                    $this->nb_role = $nb_role;
-                }
-            }
-        }
-
-        return $this->nb_role;
-    }
-
-    public function setRole(CNabuRole $nb_role)
-    {
-        if ($this->isValueNumeric('nb_role_id') && $this->matchValue($nb_role, 'nb_role_id')) {
-            $this->nb_role = $nb_role;
-        } elseif (!$this->contains('nb_role_id')) {
-            $this->nb_role = $nb_role;
-            $this->transferValue($nb_role, 'nb_role_id');
-        } else {
-            throw new ENabuCoreException(ENabuCoreException::ERROR_ROLE_NOT_VALID);
-        }
-
-        return $this;
-    }
-    */
-
     public function logAccess()
     {
         $this->db->executeUpdate(
@@ -81,6 +45,5 @@ class CNabuSiteUser extends CNabuSiteUserBase
                     'user_id' => $this->getValue('nb_user_id')
                 )
         );
-
     }
 }

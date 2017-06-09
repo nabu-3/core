@@ -45,16 +45,16 @@ interface INabuMessagingTemplateRenderInterface extends INabuProviderInterface
     public function setLanguage(CNabuLanguage $nb_language) : INabuMessagingTemplateRenderInterface;
     /**
      * Creates the Subject of a message using this template instance.
-     * @param array $params Additional params in an associative array to use when build the Subject.
+     * @param array|null $params Additional params in an associative array to use when build the Subject.
      * @return string Returns the formed string.
      * @throws ENabuMessagingException Raises an exception if Template or Language are not setted previously.
      */
-    public function createSubject(array $params) : string;
+    public function createSubject(array $params = null) : string;
     /**
      * Creates the Body of a message using this template instance.
-     * @param array $params Additional params in an associative array to use when build the Body.
+     * @param array|null $params Additional params in an associative array to use when build the Body.
      * @return string Returns the formed string.
      * @throws ENabuMessagingException Raises an exception if Template or Language are not setted previously.
      */
-    public function createBody(array $params) : string;
+    public function createBody(array $params = null) : string;
 }

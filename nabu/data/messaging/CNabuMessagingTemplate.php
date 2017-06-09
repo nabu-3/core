@@ -28,5 +28,34 @@ use nabu\data\messaging\base\CNabuMessagingTemplateBase;
  */
 class CNabuMessagingTemplate extends CNabuMessagingTemplateBase
 {
+    /** @var CNabuMessagingServiceList $nb_messaging_service_list List of services connected to this Template. */
+    private $nb_messaging_service_list = null;
 
+    public function __construct($nb_messaging_template = false)
+    {
+        parent::__construct($nb_messaging_template);
+
+        $this->nb_messaging_service_list = new CNabuMessagingServiceList();
+
+        return $value;
+    }
+
+    public function getServices($force = false)
+    {
+        if ($this->nb_messaging_service_list->isEmpty() || $force) {
+            $this->nb_messaging_service_list->clear();
+            if (($nb_messaging = $this->getMessaging()) instanceof CNabuMessaging &&
+                !($nb_services_list = $nb_messaging->getServices())->isEmpty()
+            ) {
+                $nb_services_list->iterate(function($key, CNabuMessagingService $nb_service) {
+                    if ($nb_service->isTemplateConnected($this->getId())) {
+                        $this->nb_messaging_service_list->addItem($nb_service);
+                    }
+                    return true;
+                });
+            }
+        }
+
+        return $this->nb_messaging_service_list;
+    }
 }

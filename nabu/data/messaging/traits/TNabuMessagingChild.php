@@ -48,7 +48,7 @@ trait TNabuMessagingChild
      * @param bool $force If true, then tries to reload Messaging instance from their storage.
      * @return CNabuMessaging|null Returns the Messaging instance if setted or null if not.
      */
-    public function getMessaging(CNabuCustomer $nb_customer, string $field = NABU_MESSAGING_FIELD_ID, bool $force = false)
+    public function getMessaging(CNabuCustomer $nb_customer = null, string $field = NABU_MESSAGING_FIELD_ID, bool $force = false)
     {
         if ($nb_customer !== null && ($this->nb_messaging === null || $force)) {
             $this->nb_messaging = null;

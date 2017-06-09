@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/06/06 09:56:21 UTC
+ * Created: 2017/06/09 12:39:52 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -181,33 +181,6 @@ abstract class CNabuMessagingServiceTemplateBase extends CNabuDBInternalObject
             );
         }
         $this->setValue('nb_messaging_template_id', $nb_messaging_template_id);
-        
-        return $this;
-    }
-
-    /**
-     * Get Messaging Service Template Status attribute value
-     * @return string Returns the Messaging Service Template Status value
-     */
-    public function getStatus() : string
-    {
-        return $this->getValue('nb_messaging_service_template_status');
-    }
-
-    /**
-     * Sets the Messaging Service Template Status attribute value.
-     * @param string $status New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setStatus(string $status = "D") : CNabuDataObject
-    {
-        if ($status === null) {
-            throw new ENabuCoreException(
-                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
-                    array("\$status")
-            );
-        }
-        $this->setValue('nb_messaging_service_template_status', $status);
         
         return $this;
     }

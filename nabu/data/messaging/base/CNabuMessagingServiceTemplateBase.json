@@ -29,17 +29,6 @@
             "is_nullable": false,
             "extra": "",
             "comment": ""
-        },
-        "nb_messaging_service_template_status": {
-            "name": "nb_messaging_service_template_status",
-            "ordinal": "3",
-            "data_type": "enum",
-            "precision": null,
-            "type": "enum('E','D')",
-            "default": "D",
-            "is_nullable": false,
-            "extra": "",
-            "comment": "E: Enabled\nD: Disabled"
         }
     },
     "constraints": {

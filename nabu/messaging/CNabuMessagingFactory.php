@@ -19,15 +19,18 @@
 
 namespace nabu\messaging;
 use nabu\core\CNabuEngine;
+use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\CNabuDataObject;
+use nabu\data\lang\CNabuLanguage;
 use nabu\data\messaging\CNabuMessaging;
+use nabu\data\messaging\CNabuMessagingService;
 use nabu\data\messaging\CNabuMessagingTemplate;
+use nabu\data\messaging\CNabuMessagingServiceList;
 use nabu\data\security\CNabuUser;
 use nabu\data\security\CNabuUserList;
 use nabu\messaging\exceptions\ENabuMessagingException;
 use nabu\messaging\interfaces\INabuMessagingModule;
 use nabu\messaging\interfaces\INabuMessagingTemplateRenderInterface;
-use nabu\provider\interfaces\INabuProviderManager;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -39,6 +42,8 @@ class CNabuMessagingFactory extends CNabuDataObject
 {
     /** @var CNabuMessaging $nb_messaging Messaging instance used to post messages */
     private $nb_messaging = null;
+    /** @var array $nb_messaging_service_interface_list Array of Service Interfaces instantiated. */
+    private $nb_messaging_service_interface_list = null;
 
     /**
      * Instantiates the Factory using a Messaging instance
@@ -51,14 +56,13 @@ class CNabuMessagingFactory extends CNabuDataObject
     }
 
     /**
-     * Prepares the subject and body of a message using a template.
-     * @param CNabuMessagingTemplate|CNabuDataObject|string|int $nb_template A Template instance,
-     * a child of CNabuDataObject containing a field named nb_messaging_template_id or a valid Id.
-     * @param array $params An associative array with additional data for the template.
-     * @return array Retuns an array of two cells, where the first is the subject and the second is the body.
-     * @throws ENabuMessagingException Raises an exception if the designated template is not valid or applicable.
+     * Discover the Messaging Template instance beside a lazzy reference to it.
+     * @param mixed $nb_template A Template instance, a CNabuDataObject containing a field named
+     * nb_messaging_template_id or a valid Id.
+     * @return CNabuMessagingTemplate Returns the Messaging Template instance discovered.
+     * @throws ENabuMessagingException Raises an exception if the reference is not valid.
      */
-    private function prepareMessageUsingTemplate($nb_template, array $params)
+    private function discoverTemplate($nb_template) : CNabuMessagingTemplate
     {
         if (!($nb_template instanceof CNabuMessagingTemplate)) {
             if (is_numeric($nb_template_id = nb_getMixedValue($nb_template, NABU_MESSAGING_TEMPLATE_FIELD_ID))) {
@@ -74,6 +78,43 @@ class CNabuMessagingFactory extends CNabuDataObject
             throw new ENabuMessagingException(ENabuMessagingException::ERROR_TEMPLATE_NOT_ALLOWED);
         }
 
+        return $nb_template;
+    }
+
+    /**
+     * Discover the Language instance beside a lazzy reference to it.
+     * @param mixed $nb_language A Language instance, a CNabuDataObject containing a field named nb_language_id,
+     * or a valid Id.
+     * @return CNabuLanguage Returns the Language instance discovered.
+     * @throws ENabuCoreException Raises an exception if the reference is not valid.
+     */
+    private function discoverLanguage($nb_language) : CNabuLanguage
+    {
+        if (!($nb_language instanceof CNabuLanguage)) {
+            $nb_language = new CNabuLanguage(nb_getMixedValue($nb_language, NABU_LANG_FIELD_ID));
+        }
+
+        if (!($nb_language instanceof CNabuLanguage) || $nb_language->isNew()) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_LANGUAGE_REQUIRED);
+        }
+
+        return $nb_language;
+    }
+
+    /**
+     * Prepares the subject and body of a message using a template.
+     * @param CNabuMessagingTemplate $nb_template The Template instance to be used to render the message.
+     * @param CNabuLanguage $nb_language The Language instance to get valid fields.
+     * @param array|null $params An associative array with additional data for the template.
+     * @return array Retuns an array of two cells, where the first is the subject and the second is the body.
+     * @throws ENabuMessagingException Raises an exception if the designated template is not valid or applicable.
+     */
+    private function prepareMessageUsingTemplate(
+        CNabuMessagingTemplate $nb_template,
+        CNabuLanguage $nb_language,
+        array $params = null
+    ) : array
+    {
         $nb_engine = CNabuEngine::getEngine();
 
         if (is_string($interface_name = $nb_template->getRenderInterface()) &&
@@ -83,11 +124,9 @@ class CNabuMessagingFactory extends CNabuDataObject
             ($nb_interface = $nb_manager->createTemplateRenderInterface($interface_name)) instanceof INabuMessagingTemplateRenderInterface
         ) {
             $nb_interface->setTemplate($nb_template);
+            $nb_interface->setLanguage($nb_language);
             $subject = $nb_interface->createSubject($params);
             $body = $nb_interface->createBody($params);
-
-            error_log($subject);
-            error_log($body);
 
             return array($subject, $body);
         } else {
@@ -99,6 +138,8 @@ class CNabuMessagingFactory extends CNabuDataObject
      * Post a Message in the Messaging queue using a predefined template.
      * @param mixed $nb_template A Template instance, a child of CNabuDataObject containing a field named
      * nb_messaging_template_id or a valid Id.
+     * @param mixed $nb_language A Language instance, a child of CNabuDataObject containing a field named
+     * nb_language_id or a valid Id.
      * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an email as string or an array
      * of strings each one an email, to send TO.
      * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an email as string or an array
@@ -120,10 +161,11 @@ class CNabuMessagingFactory extends CNabuDataObject
         array $attachments = null
     ) : bool
     {
-        error_log(__METHOD__);
-        list($subject, $body) = $this->prepareMessageUsingTemplate($nb_template, $params);
+        $nb_template = $this->discoverTemplate($nb_template);
+        $nb_language = $this->discoverLanguage($nb_language);
+        list($subject, $body) = $this->prepareMessageUsingTemplate($nb_template, $nb_language, $params);
 
-        return $this->postMessage($to, $bc, $bcc, $subject, $body, $attachments);
+        return $this->postMessage($nb_template->getServices(), $to, $cc, $bcc, $subject, $body, $attachments);
     }
 
     /**
@@ -150,13 +192,16 @@ class CNabuMessagingFactory extends CNabuDataObject
         array $attachments = null
     ) : bool
     {
+        $nb_template = $this->discoverTemplate($nb_template);
+        $nb_language = $this->discoverLanguage($nb_language);
         list($subject, $body) = $this->prepareMessageUsingTemplate($nb_template, $params);
 
-        return $this->sendMessage($to, $bc, $bcc, $subject, $body, $attachments);
+        return $this->sendMessage($nb_template->getServices(), $to, $bc, $bcc, $subject, $body, $attachments);
     }
 
     /**
      * Post a Message in the Messaging queue.
+     * @param CNabuMessagingServiceList $nb_service_list List of Services to be used to post the message.
      * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an email as string or an array
      * of strings each one an email, to send TO.
      * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an email as string or an array
@@ -169,13 +214,14 @@ class CNabuMessagingFactory extends CNabuDataObject
      * @return bool Returns true if the message was posted.
      * @throws ENabuMessagingException Raises an exception if something is wrong.
      */
-    public function postMessage($to, $cc, $bcc, $subject, $body, $attachments)
+    public function postMessage(CNabuMessagingServiceList $nb_service_list, $to, $cc, $bcc, $subject, $body, $attachments)
     {
-        return $this->sendMessage($to, $cc, $bcc, $subject, $body, $attachments);
+        return $this->sendMessage($nb_service_list, $to, $cc, $bcc, $subject, $body, $attachments);
     }
 
     /**
      * Send a Message directly.
+     * @param CNabuMessagingServiceList $nb_service_list List of Services to be used to post the message.
      * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an email as string or an array
      * of strings each one an email, to send TO.
      * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an email as string or an array
@@ -188,8 +234,15 @@ class CNabuMessagingFactory extends CNabuDataObject
      * @return bool Returns true if the message was posted.
      * @throws ENabuMessagingException Raises an exception if something is wrong.
      */
-    public function sendMessage($to, $cc, $bcc, $subject, $body, $attachments)
+    public function sendMessage(CNabuMessagingServiceList $nb_service_list, $to, $cc, $bcc, $subject, $body, $attachments)
     {
-        return true;
+        $retval = false;
+
+        $nb_service_list->iterate(function($key, CNabuMessagingService $nb_service) use($retval)
+        {
+            return true;
+        });
+
+        return $retval;
     }
 }
