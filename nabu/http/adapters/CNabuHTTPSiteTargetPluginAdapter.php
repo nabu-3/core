@@ -34,6 +34,7 @@ use \nabu\http\CNabuHTTPRequest;
 use \nabu\http\CNabuHTTPResponse;
 use \nabu\http\CNabuHTTPSession;
 use \nabu\http\interfaces\INabuHTTPSiteTargetPlugin;
+use nabu\data\site\CNabuSiteRole;
 use nabu\http\app\base\CNabuHTTPApplication;
 
 /**
@@ -77,6 +78,8 @@ abstract class CNabuHTTPSiteTargetPluginAdapter implements INabuHTTPSiteTargetPl
     protected $nb_user = null;
     /** @var CNabuRole $nb_role Current Role instance. */
     protected $nb_role = null;
+    /** @var CNabuSiteRole $nb_site_role Current Site Role instance. */
+    protected $nb_site_role = null;
     /** @var CNabuSiteUser $nb_site_user Current Site User instance. */
     protected $nb_site_user = null;
     /* @var array \nabu\app\CNabuAppMorph
@@ -108,6 +111,7 @@ abstract class CNabuHTTPSiteTargetPluginAdapter implements INabuHTTPSiteTargetPl
             $this->nb_work_customer = $this->nb_application->getSecurityManager()->getWorkCustomer();
             $this->nb_user = $this->nb_application->getSecurityManager()->getUser();
             $this->nb_role = $this->nb_application->getSecurityManager()->getRole();
+            $this->nb_site_role = $this->nb_application->getSecurityManager()->getSiteRole();
             $this->nb_site_user = $this->nb_application->getSecurityManager()->getSiteUser();
             $this->nb_site_alias_role = $this->nb_request->getSiteAliasRole();
             $this->nb_commerce = $this->nb_request->getCommerce();

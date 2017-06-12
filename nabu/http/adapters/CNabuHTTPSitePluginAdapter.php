@@ -32,6 +32,7 @@ use \nabu\http\CNabuHTTPResponse;
 use \nabu\http\CNabuHTTPSession;
 use \nabu\http\interfaces\INabuHTTPSitePlugin;
 use nabu\data\commerce\CNabuCommerce;
+use nabu\data\site\CNabuSiteRole;
 use nabu\data\site\CNabuSiteUser;
 use nabu\http\app\base\CNabuHTTPApplication;
 
@@ -73,6 +74,8 @@ abstract class CNabuHTTPSitePluginAdapter implements INabuHTTPSitePlugin
     protected $nb_user = null;
     /** @var CNabuRole $nb_role Logged Role instance. */
     protected $nb_role = null;
+    /** @var CNabuSiteRole $nb_site_role Current Site Role instance. */
+    protected $nb_site_role = null;
     /** @var CNabuSiteUser $nb_site_user Site User instance. */
     protected $nb_site_user = null;
 
@@ -102,6 +105,7 @@ abstract class CNabuHTTPSitePluginAdapter implements INabuHTTPSitePlugin
             $this->nb_language = $this->nb_request->getLanguage();
             $this->nb_user = $this->nb_application->getSecurityManager()->getUser();
             $this->nb_role = $this->nb_application->getSecurityManager()->getRole();
+            $this->nb_site_role = $this->nb_application->getSecurityManager()->getSiteRole();
             $this->nb_site_user = $this->nb_application->getSecurityManager()->getSiteUser();
             $this->nb_commerce = $this->nb_request->getCommerce();
             $this->nb_site_alias = $this->nb_request->getSiteAlias();

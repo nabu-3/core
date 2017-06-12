@@ -28,5 +28,28 @@ use \nabu\data\site\base\CNabuSiteRoleBase;
  */
 class CNabuSiteRole extends CNabuSiteRoleBase
 {
-    //put your code here
+    public static function getSiteRolesForSite($nb_site) : CNabuSiteRoleList
+    {
+        if (is_numeric($nb_site_id = nb_getMixedValue($nb_site, NABU_SITE_FIELD_ID))) {
+            $retval = CNabuSiteRole::buildObjectListFromSQL(
+                'nb_role_id',
+                'select * '
+                . 'from nb_site_role '
+               . 'where nb_site_id=%site_id$d',
+                array(
+                    'site_id' => $nb_site_id
+                )
+            );
+            if ($nb_site instanceof CNabuSite) {
+                $retval->iterate(function($key, CNabuSiteRole $nb_site_role) use ($nb_site) {
+                    $nb_site_role->setSite($nb_site);
+                    return true;
+                });
+            }
+        } else {
+            $retval = new CNabuSiteRoleList();
+        }
+
+        return $retval;
+    }
 }

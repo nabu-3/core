@@ -93,8 +93,10 @@ class CNabuSite extends CNabuSiteBase
     private $nb_site_main_alias = null;
     /** @var CNabuSiteAliasList $nb_site_alias_list Site Alias List of this Site. */
     private $nb_site_alias_list = null;
-    /** @var CNabuRoleList $nb_role_list List or Roles availables in this Site. */
+    /** @var CNabuRoleList $nb_role_list List of Roles availables in this Site. */
     private $nb_role_list = null;
+    /** @var CNabuSiteRoleList $nb_site_role_list List of Site Roles availables in this Site. */
+    private $nb_site_role_list = null;
     /** @var CNabuRole $nb_default_role Default Role of this Site. */
     private $nb_default_role = null;
     /** @var CNabuClusterUser $nb_cluster_user Cluster User instance of this Site. */
@@ -109,6 +111,7 @@ class CNabuSite extends CNabuSiteBase
         $this->nb_site_target_list = new CNabuSiteTargetList();
         $this->nb_site_static_content_list = new CNabuSiteStaticContentList();
         $this->nb_role_list = new CNabuRoleList();
+        $this->nb_site_role_list = new CNabuSiteRoleList();
     }
 
     static public function findByAlias($alias)
@@ -848,8 +851,8 @@ class CNabuSite extends CNabuSiteBase
 
     /**
      * Gets a list of all Roles availables in this Site.
-     * @param bool $force If true, the list is reloaded from the storage.
-     * @return CNabuRoleList Returns the list of roles if any, of an empty list if none.
+     * @param bool $force If true, the list is reloaded from the database storage.
+     * @return CNabuRoleList Returns the list of roles if any, or an empty list if none.
      */
     public function getRoles(bool $force = false) : CNabuRoleList
     {
@@ -858,6 +861,37 @@ class CNabuSite extends CNabuSiteBase
         }
 
         return $this->nb_role_list;
+    }
+
+    /**
+     * Gets a list of all Site Roles availables in this Site.
+     * @param bool $force If true, the list is reloaded from the database storage.
+     * @return CNabuSiteRoleList Returns the list of Site Roles if any, or an empty list if none.
+     */
+    public function getSiteRoles(bool $force = false) : CNabuSiteRoleList
+    {
+        if ($this->nb_site_role_list->isEmpty() || $force) {
+            $this->nb_site_role_list->clear();
+            $this->nb_site_role_list->merge(CNabuSiteRole::getSiteRolesForSite($this));
+        }
+
+        return $this->nb_site_role_list;
+    }
+
+    /**
+     * Gets a Site Role by his Id.
+     * @param mixed $nb_site_role A CNabuDataObject containing a field named nb_role_id or a valid Id.
+     * @return CNabuSiteRole|bool Returns the Site Role instance if exists or false if not.
+     */
+    public function getSiteRole($nb_site_role)
+    {
+        if (is_numeric($nb_role_id = nb_getMixedValue($nb_site_role, NABU_ROLE_FIELD_ID))) {
+            $retval = $this->getSiteRoles()->getItem($nb_role_id);
+        } else {
+            $retval = false;
+        }
+
+        return $retval;
     }
 
     /*
@@ -899,8 +933,15 @@ class CNabuSite extends CNabuSiteBase
                 $params = array_merge($params, $target_params);
             }
 
-            return ($nb_messaging = $this->getMessaging($this->getCustomer())) instanceof CNabuMessaging &&
-                   is_numeric($nb_template_id = $this->getEmailTemplateNewUser()) &&
+            $nb_site_role = $this->getSiteRole($nb_profile);
+            $nb_template_id = $nb_site_role instanceof CNabuSiteRole &&
+                              $nb_site_role->isValueNumeric('nb_site_role_email_template_new_user')
+                            ? $nb_template_id = $nb_site_role->getEmailTemplateNewUser()
+                            : $this->getEmailTemplateNewUser()
+            ;
+
+            return is_numeric($nb_template_id) &&
+                   ($nb_messaging = $this->getMessaging($this->getCustomer())) instanceof CNabuMessaging &&
                    ($nb_messaging_pool_manager = $nb_engine->getMessagingPoolManager()) instanceof CNabuMessagingPoolManager &&
                    ($nb_messaging_factory = $nb_messaging_pool_manager->getFactory($nb_messaging)) instanceof CNabuMessagingFactory &&
                    $nb_messaging_factory->postTemplateMessage($nb_template_id, $nb_language, $nb_user, null, null, $params)

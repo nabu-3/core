@@ -27,6 +27,7 @@ use nabu\data\security\CNabuUser;
 use nabu\data\security\CNabuRole;
 use nabu\data\security\interfaces\INabuRoleMask;
 use nabu\data\site\CNabuSite;
+use nabu\data\site\CNabuSiteRole;
 use nabu\data\site\CNabuSiteUser;
 use nabu\data\site\CNabuSiteTarget;
 use nabu\http\CNabuHTTPRequest;
@@ -47,6 +48,8 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
 {
     /** @var string Session name for Role instance. */
     const VAR_SESSION_ROLE = 'nb_role';
+    /** @var string Session name for Site Role instance. */
+    const VAR_SESSION_SITE_ROLE = 'nb_site_role';
     /** @var string Session name for User instance. */
     const VAR_SESSION_USER = 'nb_user';
     /** @var string Session name for Site User instance. */
@@ -60,15 +63,17 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
     /** @var string Role Mask key for additional param work_customer */
     const ROLE_MASK_WORK_CUSTOMER = 'work_customer';
 
-    /** @var CNabuUser Contains the User instance that makes request. */
-    private $nb_user;
-    /** @var CNabuRole Contains the Role instance that pertains to $nb_user. */
-    private $nb_role;
-    /** @var CNabuSiteUser Contains the Site User (Profile) instance for $nb_user in the current Site. */
-    private $nb_site_user;
     /** @var CNabuCustomer Contains the Work Customer instance for $nb_user to allow it to manage an alternate
      * Customer. Normally this feature is intended only for nabu-3 CMS, but can be applied to other use cases. */
     private $nb_work_customer;
+    /** @var CNabuRole Contains the Role instance that pertains to $nb_user. */
+    private $nb_role;
+    /** @var CNabuSiteRole $nb_site_role Contains the Site Role instance that pertains to $nb_role in the current Site. */
+    protected $nb_site_role;
+    /** @var CNabuUser Contains the User instance that makes request. */
+    private $nb_user;
+    /** @var CNabuSiteUser Contains the Site User (Profile) instance for $nb_user in the current Site. */
+    private $nb_site_user;
 
     public function __construct(CNabuHTTPApplication $nb_application)
     {
@@ -91,6 +96,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
     {
         $nb_session = $this->nb_application->getSession();
         $this->nb_role = $nb_session->getVariable(self::VAR_SESSION_ROLE, null);
+        $this->nb_site_role = $nb_session->getVariable(self::VAR_SESSION_SITE_ROLE, null);
         $this->nb_user = $nb_session->getVariable(self::VAR_SESSION_USER, null);
         $this->nb_site_user = $nb_session->getVariable(self::VAR_SESSION_SITE_USER, null);
         $this->nb_work_customer = $nb_session->getVariable(self::VAR_SESSION_WORK_CUSTOMER, null);
@@ -98,11 +104,20 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
 
     /**
      * Gets current Role instance.
-     * @return CNabuRole Returns current Role instance if user is logged in or null if not.
+     * @return CNabuRole Returns current Role instance.
      */
     public function getRole()
     {
         return $this->nb_role;
+    }
+
+    /**
+     * Gets current Site Role instance.
+     * @return CNabuSiteRole Returns current Site Role instance.
+     */
+    public function getSiteRole()
+    {
+        return $this->nb_site_role;
     }
 
     /**
@@ -189,6 +204,13 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
             }
             if ($this->nb_role === null) {
                 throw new ENabuCoreException(ENabuCoreException::ERROR_ROLE_NOT_ASSIGNED);
+            }
+            $this->nb_site_role = $nb_session->getVariable(self::VAR_SESSION_SITE_ROLE, null);
+            if ($this->nb_site_role === null) {
+                $this->nb_site_role = $nb_site->getSiteRole($this->nb_role);
+            }
+            if ($this->nb_site_role === null) {
+                throw new ENabuCoreException(ENabuCoreException::ERROR_ROLE_NOT_VALID);
             }
             $nb_session->setVariable(self::VAR_SESSION_ROLE, $this->nb_role);
             $nb_engine->traceLog("Role", $this->nb_role->getKey());
@@ -405,7 +427,8 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         }
 
         if (($nb_site_user = $nb_site->getUserProfile($nb_user)) === null ||
-            ($nb_role = $nb_site_user->getRole()) === null
+            ($nb_role = $nb_site_user->getRole()) === null ||
+            ($nb_site_role = $nb_site->getSiteRole($nb_role)) === null
         ) {
             $after_login = false;
         } else {
@@ -414,13 +437,15 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                 $nb_user->setCustomer(CNabuEngine::getEngine()->getCustomer());
 
                 $nb_session = $this->nb_application->getSession();
-                $nb_session->setVariable(self::VAR_SESSION_USER, $nb_user);
                 $nb_session->setVariable(self::VAR_SESSION_ROLE, $nb_role);
+                $nb_session->setVariable(self::VAR_SESSION_SITE_ROLE, $nb_site_role);
+                $nb_session->setVariable(self::VAR_SESSION_USER, $nb_user);
                 $nb_session->setVariable(self::VAR_SESSION_SITE_USER, $nb_site_user);
                 $nb_session->setVariable(self::VAR_SESSION_PRESERVED, $preserve);
 
-                $this->nb_user = $nb_user;
                 $this->nb_role = $nb_role;
+                $this->nb_site_role = $nb_site_role;
+                $this->nb_user = $nb_user;
                 $this->nb_site_user = $nb_site_user;
 
                 if ($nb_site->getEnableSessionStrictPolicies() === 'T') {
