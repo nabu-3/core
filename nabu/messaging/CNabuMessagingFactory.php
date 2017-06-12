@@ -30,6 +30,7 @@ use nabu\data\security\CNabuUser;
 use nabu\data\security\CNabuUserList;
 use nabu\messaging\exceptions\ENabuMessagingException;
 use nabu\messaging\interfaces\INabuMessagingModule;
+use nabu\messaging\interfaces\INabuMessagingServiceInterface;
 use nabu\messaging\interfaces\INabuMessagingTemplateRenderInterface;
 
 /**
@@ -42,8 +43,8 @@ class CNabuMessagingFactory extends CNabuDataObject
 {
     /** @var CNabuMessaging $nb_messaging Messaging instance used to post messages */
     private $nb_messaging = null;
-    /** @var array $nb_messaging_service_interface_list Array of Service Interfaces instantiated. */
-    private $nb_messaging_service_interface_list = null;
+    /** @var array Service Interfaces instantiated. */
+    private $nb_service_interface_list = null;
 
     /**
      * Instantiates the Factory using a Messaging instance
@@ -53,6 +54,44 @@ class CNabuMessagingFactory extends CNabuDataObject
     {
         $this->nb_messaging = $nb_messaging;
         $this->setValue('nb_messaging_id', $nb_messaging->getId());
+    }
+
+    /**
+     * Discover the Service Interface.
+     * @param CNabuMessagingService $nb_service A Messaging Service instance mapped to required Service Interface.
+     * @return INabuMessagingServiceInterface If Service is mapped then returns a valid interface ready to use.
+     * @throws ENabuMessagingException Raises an exception if the designated Service is not valid or applicable.
+     */
+    private function discoverServiceInterface(CNabuMessagingService $nb_service) : INabuMessagingServiceInterface
+    {
+        $retval = false;
+        $nb_engine = CNabuEngine::getEngine();
+
+        if (is_string($interface_name = $nb_service->getInterface())) {
+            if (is_array($this->nb_service_interface_list) &&
+                array_key_exists($interface_name, $this->nb_service_interface_list)
+            ) {
+                $retval = $this->nb_service_interface_list[$interface_name];
+            } elseif (
+                is_string($provider_key = $nb_service->getProvider()) &&
+                count(list($vendor_key, $module_key) = preg_split("/:/", $provider_key)) === 2 &&
+                ($nb_manager = $nb_engine->getProviderManager($vendor_key, $module_key)) instanceof INabuMessagingModule &&
+                ($retval = $nb_manager->createServiceInterface($interface_name)) instanceof INabuMessagingServiceInterface
+            ) {
+                if (is_array($this->nb_service_interface_list)) {
+                    $this->nb_service_interface_list[$interface_name] = $retval;
+                } else {
+                    $this->nb_service_interface_list = array($interface_name => $retval);
+                }
+                $retval->connect($nb_service);
+            } else {
+                throw new ENabuMessagingException(ENabuMessagingException::ERROR_INVALID_SERVICE_INSTANCE);
+            }
+        } else {
+            throw new ENabuMessagingException(ENabuMessagingException::ERROR_INVALID_SERVICE_CLASS_NAME);
+        }
+
+        return $retval;
     }
 
     /**
@@ -75,7 +114,10 @@ class CNabuMessagingFactory extends CNabuDataObject
         if (!($nb_template instanceof CNabuMessagingTemplate)) {
             throw new ENabuMessagingException(ENabuMessagingException::ERROR_INVALID_TEMPLATE);
         } elseif ($nb_template->getMessagingId() !== $this->nb_messaging->getId()) {
-            throw new ENabuMessagingException(ENabuMessagingException::ERROR_TEMPLATE_NOT_ALLOWED);
+            throw new ENabuMessagingException(
+                ENabuMessagingException::ERROR_TEMPLATE_NOT_ALLOWED,
+                array($nb_template->getId())
+            );
         }
 
         return $nb_template;
@@ -106,7 +148,8 @@ class CNabuMessagingFactory extends CNabuDataObject
      * @param CNabuMessagingTemplate $nb_template The Template instance to be used to render the message.
      * @param CNabuLanguage $nb_language The Language instance to get valid fields.
      * @param array|null $params An associative array with additional data for the template.
-     * @return array Retuns an array of two cells, where the first is the subject and the second is the body.
+     * @return array Retuns an array of three cells, where the first is the subject, the second is the body in HTML
+     * and the third the body as text.
      * @throws ENabuMessagingException Raises an exception if the designated template is not valid or applicable.
      */
     private function prepareMessageUsingTemplate(
@@ -126,9 +169,10 @@ class CNabuMessagingFactory extends CNabuDataObject
             $nb_interface->setTemplate($nb_template);
             $nb_interface->setLanguage($nb_language);
             $subject = $nb_interface->createSubject($params);
-            $body = $nb_interface->createBody($params);
+            $body_html = $nb_interface->createBodyHTML($params);
+            $body_text = $nb_interface->createBodyText($params);
 
-            return array($subject, $body);
+            return array($subject, $body_html, $body_text);
         } else {
             throw new ENabuMessagingException(ENabuMessagingException::ERROR_INVALID_TEMPLATE_RENDER_INSTANCE);
         }
@@ -140,12 +184,12 @@ class CNabuMessagingFactory extends CNabuDataObject
      * nb_messaging_template_id or a valid Id.
      * @param mixed $nb_language A Language instance, a child of CNabuDataObject containing a field named
      * nb_language_id or a valid Id.
-     * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an email as string or an array
-     * of strings each one an email, to send TO.
-     * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an email as string or an array
-     * of strings each one an email, to send in Carbon Copy.
-     * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an email as string or an array
-     * of strings each one an email, to send in Blind Carbon Copy.
+     * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send TO.
+     * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Carbon Copy.
+     * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Blind Carbon Copy.
      * @param array $params An associative array with additional data for the template.
      * @param array $attachments An array of attached files to send in the message.
      * @return bool Returns true if the message was posted.
@@ -163,21 +207,21 @@ class CNabuMessagingFactory extends CNabuDataObject
     {
         $nb_template = $this->discoverTemplate($nb_template);
         $nb_language = $this->discoverLanguage($nb_language);
-        list($subject, $body) = $this->prepareMessageUsingTemplate($nb_template, $nb_language, $params);
+        list($subject, $body_html, $body_text) = $this->prepareMessageUsingTemplate($nb_template, $nb_language, $params);
 
-        return $this->postMessage($nb_template->getServices(), $to, $cc, $bcc, $subject, $body, $attachments);
+        return $this->postMessage($nb_template->getServices(), $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments);
     }
 
     /**
      * Send a Message directly using a predefined template.
      * @param mixed $nb_template A Template instance, a child of CNabuDataObject containing a field named
      * nb_messaging_template_id or a valid Id.
-     * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an email as string or an array
-     * of strings each one an email, to send TO.
-     * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an email as string or an array
-     * of strings each one an email, to send in Carbon Copy.
-     * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an email as string or an array
-     * of strings each one an email, to send in Blind Carbon Copy.
+     * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send TO.
+     * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Carbon Copy.
+     * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Blind Carbon Copy.
      * @param array $params An associative array with additional data for the template.
      * @param array $attachments An array of attached files to send in the message.
      * @return bool Returns true if the message was posted.
@@ -194,52 +238,68 @@ class CNabuMessagingFactory extends CNabuDataObject
     {
         $nb_template = $this->discoverTemplate($nb_template);
         $nb_language = $this->discoverLanguage($nb_language);
-        list($subject, $body) = $this->prepareMessageUsingTemplate($nb_template, $params);
+        list($subject, $body_html, $body_text) = $this->prepareMessageUsingTemplate($nb_template, $params);
 
-        return $this->sendMessage($nb_template->getServices(), $to, $bc, $bcc, $subject, $body, $attachments);
+        return $this->sendMessage($nb_template->getServices(), $to, $bc, $bcc, $subject, $body_html, $body_text, $attachments);
     }
 
     /**
      * Post a Message in the Messaging queue.
      * @param CNabuMessagingServiceList $nb_service_list List of Services to be used to post the message.
-     * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an email as string or an array
-     * of strings each one an email, to send TO.
-     * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an email as string or an array
-     * of strings each one an email, to send in Carbon Copy.
-     * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an email as string or an array
-     * of strings each one an email, to send in Blind Carbon Copy.
+     * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send TO.
+     * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Carbon Copy.
+     * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Blind Carbon Copy.
      * @param string $subject Subject of the message if any.
-     * @param string $body Body of the message.
+     * @param string $body_html Body of the message in HTML format.
+     * @param string $body_text Body of the message in text format.
      * @param array $attachments An array of attached files to send in the message.
      * @return bool Returns true if the message was posted.
      * @throws ENabuMessagingException Raises an exception if something is wrong.
      */
-    public function postMessage(CNabuMessagingServiceList $nb_service_list, $to, $cc, $bcc, $subject, $body, $attachments)
+    public function postMessage(CNabuMessagingServiceList $nb_service_list, $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments)
     {
-        return $this->sendMessage($nb_service_list, $to, $cc, $bcc, $subject, $body, $attachments);
+        $retval = false;
+
+        $nb_service_list->iterate(
+            function($key, CNabuMessagingService $nb_service)
+            use ($retval, $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments)
+            {
+                $nb_interface = $this->discoverServiceInterface($nb_service);
+                $nb_interface->post($to, $cc, $bcc, $subject, $body_html, $body_text, $attachments);
+                return true;
+            }
+        );
+
+        return $retval;
     }
 
     /**
      * Send a Message directly.
      * @param CNabuMessagingServiceList $nb_service_list List of Services to be used to post the message.
-     * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an email as string or an array
-     * of strings each one an email, to send TO.
-     * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an email as string or an array
-     * of strings each one an email, to send in Carbon Copy.
-     * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an email as string or an array
-     * of strings each one an email, to send in Blind Carbon Copy.
+     * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send TO.
+     * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Carbon Copy.
+     * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Blind Carbon Copy.
      * @param string $subject Subject of the message if any.
-     * @param string $body Body of the message.
+     * @param string $body_html Body of the message in HTML format.
+     * @param string $body_text Body of the message in text format.
      * @param array $attachments An array of attached files to send in the message.
-     * @return bool Returns true if the message was posted.
+     * @return bool Returns true if the message was sent.
      * @throws ENabuMessagingException Raises an exception if something is wrong.
      */
-    public function sendMessage(CNabuMessagingServiceList $nb_service_list, $to, $cc, $bcc, $subject, $body, $attachments)
+    public function sendMessage(CNabuMessagingServiceList $nb_service_list, $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments)
     {
         $retval = false;
 
         $nb_service_list->iterate(function($key, CNabuMessagingService $nb_service) use($retval)
         {
+            $nb_interface = $this->prepareServiceInterface($nb_service);
+            $nb_interface->send($to, $cc, $bcc, $subject, $body_html, $body_text, $attachments);
             return true;
         });
 

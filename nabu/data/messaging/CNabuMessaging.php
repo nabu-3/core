@@ -56,6 +56,10 @@ class CNabuMessaging extends CNabuMessagingBase
         if ($this->nb_messaging_service_list->isEmpty() || $force) {
             $this->nb_messaging_service_list->clear();
             $this->nb_messaging_service_list->merge(CNabuMessagingService::getAllMessagingServices($this));
+            $this->nb_messaging_service_list->iterate(function($key, CNabuMessagingService $nb_service) {
+                $nb_service->setMessaging($this);
+                return true;
+            });
         }
 
         return $this->nb_messaging_service_list;
@@ -75,6 +79,10 @@ class CNabuMessaging extends CNabuMessagingBase
         if ($this->nb_messaging_template_list->isEmpty() || $force) {
             $this->nb_messaging_template_list->clear();
             $this->nb_messaging_template_list->merge(CNabuMessagingTemplate::getAllMessagingTemplates($this));
+            $this->nb_messaging_template_list->iterate(function($key, CNabuMessagingTemplate $nb_template) {
+                $nb_template->setMessaging($this);
+                return true;
+            });
         }
 
         return $this->nb_messaging_template_list;
@@ -91,6 +99,9 @@ class CNabuMessaging extends CNabuMessagingBase
 
         if (is_numeric($nb_template_id = nb_getMixedValue($nb_template, NABU_MESSAGING_TEMPLATE_FIELD_ID))) {
             $retval = $this->nb_messaging_template_list->getItem($nb_template_id);
+            if ($retval instanceof CNabuMessagingTemplate && $retval->getMessaging() === null) {
+                $retval->setMessaging($this);
+            }
         }
 
         return $retval;

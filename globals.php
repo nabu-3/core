@@ -29,6 +29,9 @@ define('NABU_OWNER', 'nabu-3 group');
 define('NABU_LICENSE_TITLE', 'Licensed under the Apache License, Version 2.0');
 define('NABU_LICENSE_TARGET', 'http://www.apache.org/licenses/LICENSE-2.0');
 
+/* Locale and Charset defaults */
+define('NABU_CHARSET', 'utf8');
+
 /* File configuration names */
 define('NABU_DB_DEFAULT_FILENAME_CONFIG', 'nabu-db-config.php.conf');
 define('NABU_VHOST_CONFIG_FILENAME', 'httpd.include');

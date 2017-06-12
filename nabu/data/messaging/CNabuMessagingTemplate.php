@@ -36,11 +36,14 @@ class CNabuMessagingTemplate extends CNabuMessagingTemplateBase
         parent::__construct($nb_messaging_template);
 
         $this->nb_messaging_service_list = new CNabuMessagingServiceList();
-
-        return $value;
     }
 
-    public function getServices($force = false)
+    /**
+     * Get the list of all Service instances connected to this Template.
+     * @param bool $force If true, forces to refresh the list from the database storage.
+     * @return CNabuMessagingServiceList Returns the list of connected services.
+     */
+    public function getServices(bool $force = false) : CNabuMessagingServiceList
     {
         if ($this->nb_messaging_service_list->isEmpty() || $force) {
             $this->nb_messaging_service_list->clear();

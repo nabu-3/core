@@ -19,6 +19,8 @@
 
 namespace nabu\messaging\interfaces;
 use nabu\data\messaging\CNabuMessagingService;
+use nabu\data\security\CNabuUser;
+use nabu\data\security\CNabuUserList;
 use nabu\provider\interfaces\INabuProviderInterface;
 
 /**
@@ -35,7 +37,36 @@ interface INabuMessagingServiceInterface extends INabuProviderInterface
      * @return bool Returns true if the connection is made.
      */
     public function connect(CNabuMessagingService $nb_messaging_service);
-
+    /**
+     * Sends directly a message to one inbox or a list of them.
+     * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send TO.
+     * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Carbon Copy.
+     * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Blind Carbon Copy.
+     * @param string $subject Subject of the message if any.
+     * @param string $body_html Body of the message in HTML format.
+     * @param string $body_text Body of the message in text format.
+     * @param array $attachments An array of attached files to send in the message.
+     * @return int Returns the result integer code.
+     */
+    public function send($to, $cc, $bcc, $subject, $body_html, $body_text, $attachments) : int;
+    /**
+     * Sends directly a message to one inbox or a list of them.
+     * @param CNabuUser|CNabuUserList|string|array $to A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send TO.
+     * @param CNabuUser|CNabuUserList|string|array $cc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Carbon Copy.
+     * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an inbox as string or an array
+     * of strings each one an inbox, to send in Blind Carbon Copy.
+     * @param string $subject Subject of the message if any.
+     * @param string $body_html Body of the message in HTML format.
+     * @param string $body_text Body of the message in text format.
+     * @param array $attachments An array of attached files to send in the message.
+     * @return int Returns the result integer code.
+     */
+    public function post($to, $cc, $bcc, $subject, $body_html, $body_text, $attachments) : int;
     /**
      * Close the connection of this interface.
      */

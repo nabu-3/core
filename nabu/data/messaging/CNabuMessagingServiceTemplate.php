@@ -28,5 +28,35 @@ use nabu\data\messaging\base\CNabuMessagingServiceTemplateBase;
  */
 class CNabuMessagingServiceTemplate extends CNabuMessagingServiceTemplateBase
 {
+    /**
+     * Gets the list of Template Connections for a Service.
+     * @param mixed $nb_messaging_service A CNabuMessagingService instance, a CNabuDataObject inherited instance
+     * containing a field named nb_messaging_service_id or a valid Id.
+     * @return CNabuMessagingTemplateList Returns a list of all Template Connections found.
+     */
+    public static function getTemplatesForService($nb_messaging_service) : CNabuMessagingServiceTemplateList
+    {
+        if (is_numeric($nb_messaging_service_id = nb_getMixedValue($nb_messaging_service, NABU_MESSAGING_SERVICE_FIELD_ID))) {
+            $retval = CNabuMessagingServiceTemplate::buildObjectListFromSQL(
+                'nb_messaging_template_id',
+                'select * '
+                . 'from nb_messaging_service_template '
+               . 'where nb_messaging_service_id=%service_id$d',
+                array(
+                    'service_id' => $nb_messaging_service_id
+                )
+           );
 
+           if ($nb_messaging_service instanceof CNabuMessagingService) {
+               $retval->iterate(function($key, CNabuMessagingServiceTemplate $nb_template) use ($nb_messaging_service) {
+                   $nb_template->setMessagingService($nb_messaging_service);
+                   return true;
+               });
+           }
+       } else {
+           $retval = new CNabuMessagingServiceTemplateList();
+       }
+
+       return $retval;
+    }
 }

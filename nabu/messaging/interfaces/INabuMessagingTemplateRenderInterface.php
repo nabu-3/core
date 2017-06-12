@@ -51,10 +51,17 @@ interface INabuMessagingTemplateRenderInterface extends INabuProviderInterface
      */
     public function createSubject(array $params = null) : string;
     /**
-     * Creates the Body of a message using this template instance.
+     * Creates the Body of a message using this template instance as HTML.
      * @param array|null $params Additional params in an associative array to use when build the Body.
      * @return string Returns the formed string.
      * @throws ENabuMessagingException Raises an exception if Template or Language are not setted previously.
      */
-    public function createBody(array $params = null) : string;
+    public function createBodyHTML(array $params = null) : string;
+    /**
+     * Creates the Body of a message using this template instance as Text.
+     * @param array|null $params Additional params in an associative array to use when build the Body.
+     * @return string Returns the formed string.
+     * @throws ENabuMessagingException Raises an exception if Template or Language are not setted previously.
+     */
+    public function createBodyText(array $params = null) : string;
 }
