@@ -18,7 +18,6 @@
  */
 
 namespace nabu\data\messaging;
-use nabu\data\CNabuDataObject;
 use nabu\data\messaging\base\CNabuMessagingServiceBase;
 
 /**
