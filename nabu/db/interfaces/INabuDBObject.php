@@ -180,7 +180,7 @@ interface INabuDBObject
      * @param null|CNabuDataObject $parent If associated list requires a parent/owner instance then receives it
      * in this parameter.
      * @param bool $trace True if they want to trace the sentence in the Engine Log Handler
-     * @return array|null Returns an associative array if objects found or null elsewhere.
+     * @return CNabuDataObjectList Returns List with all instances found.
      */
     public static function buildObjectListFromSQL(
         $index_field,
@@ -188,7 +188,7 @@ interface INabuDBObject
         $params = null,
         CNabuDataObject $parent = null,
         $trace = false
-    );
+    ) : CNabuDataObjectList;
 
     /**
      * Creates a list of instances subclassing them from the database and returns it

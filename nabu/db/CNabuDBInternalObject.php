@@ -24,6 +24,7 @@ use \nabu\core\CNabuEngine;
 use \nabu\db\CNabuDBInternalObject;
 use \nabu\db\CNabuDBObject;
 use nabu\core\exceptions\ENabuCoreException;
+use nabu\data\CNabuDataObjectList;
 
 /**
  * Abstract Class to implement default management for Nabu core tables in MySQL.
@@ -92,7 +93,8 @@ abstract class CNabuDBInternalObject extends CNabuDBObject
         $params = null,
         CNabuDataObject $parent = null,
         $trace = false
-    ) {
+    ) : CNabuDataObjectList
+    {
         $called_class = get_called_class();
         $list_class = $called_class . 'List';
         $nb_engine = CNabuEngine::getEngine();
