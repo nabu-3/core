@@ -28,7 +28,6 @@ use nabu\data\CNabuDataObject;
 use nabu\data\cluster\CNabuServer;
 use nabu\data\cluster\CNabuClusterUser;
 use nabu\data\commerce\traits\TNabuCommerceChild;
-use nabu\data\customer\CNabuCustomer;
 use nabu\data\customer\traits\TNabuCustomerChild;
 use nabu\data\lang\CNabuLanguage;
 use nabu\data\messaging\CNabuMessaging;
@@ -906,13 +905,11 @@ class CNabuSite extends CNabuSiteBase
     /**
      * Send a New User double opt-in message to validate the account or communitate something to him.
      * @param CNabuUser $nb_user User instance to be notified.
-     * @param mixed $nb_language A Language instance, a child of CNabuDataObject containing a field named
-     * nb_language_id or a valid Id.
      * @param array|null $params Array of additional parameters to be used. Depending on the Render used, this parameter
      * can be applied or ignored.
      * @return bool Returns true if the notification is sent or false if not.
      */
-    public function sendNewUserNotification(CNabuUser $nb_user, $nb_language, array $params = null) : bool
+    public function sendNewUserNotification(CNabuUser $nb_user, array $params = null) : bool
     {
         $retval = false;
         $nb_engine = CNabuEngine::getEngine();
@@ -920,17 +917,13 @@ class CNabuSite extends CNabuSiteBase
         if (($nb_profile = $this->getUserProfile($nb_user)) instanceof CNabuSiteUser &&
             ($nb_language_id = $nb_profile->getLanguageId())
         ) {
-            $target_params = array();
-            foreach ($nb_user->getTreeData($nb_language, true) as $key => $item) {
-                if (is_scalar($item)) {
-                    $target_params["target_user_$key"] = $item;
-                }
-            }
-
             if (count($params) === 0) {
-                $params = $target_params;
-            } else {
-                $params = array_merge($params, $target_params);
+                $params = array();
+            }
+            foreach ($nb_user->getTreeData($nb_language_id, true) as $key => $item) {
+                if (is_scalar($item)) {
+                    $params["target_user_$key"] = $item;
+                }
             }
 
             $nb_site_role = $this->getSiteRole($nb_profile);
@@ -944,7 +937,7 @@ class CNabuSite extends CNabuSiteBase
                    ($nb_messaging = $this->getMessaging($this->getCustomer())) instanceof CNabuMessaging &&
                    ($nb_messaging_pool_manager = $nb_engine->getMessagingPoolManager()) instanceof CNabuMessagingPoolManager &&
                    ($nb_messaging_factory = $nb_messaging_pool_manager->getFactory($nb_messaging)) instanceof CNabuMessagingFactory &&
-                   $nb_messaging_factory->postTemplateMessage($nb_template_id, $nb_language, $nb_user, null, null, $params)
+                   $nb_messaging_factory->postTemplateMessage($nb_template_id, $nb_language_id, $nb_user, null, null, $params)
             ;
         } else {
             throw new ENabuSecurityException(ENabuSecurityException::ERROR_USER_NOT_ALLOWED, array($nb_user->getId()));
