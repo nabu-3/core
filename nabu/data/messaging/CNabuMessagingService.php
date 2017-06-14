@@ -74,4 +74,22 @@ class CNabuMessagingService extends CNabuMessagingServiceBase
 
         return $retval;
     }
+
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $trdata = parent::getTreeData($nb_language, $dataonly);
+
+        $trdata['templates'] = $this->getTemplateConnections();
+
+        return $trdata;
+    }
+
+    public function refresh(bool $force = false, bool $cascade = false): bool
+    {
+        return parent::refresh($force, $cascade) &&
+               (!$cascade || (
+                    $this->getTemplateConnections($force)
+               ))
+        ;
+    }
 }
