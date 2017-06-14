@@ -286,7 +286,7 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
         } elseif (is_array($statement)) {
             $this->data = $statement;
         } else {
-            $this->data = mysql_fetch_assoc($statement);
+            $this->data = mysqli_fetch_assoc($statement);
         }
 
         $this->push();
@@ -384,7 +384,7 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
             if ($this->getWherePrimaryFilter() === false || !is_string($this->where_primary_filter)) {
                 throw new ENabuDBException(ENabuDBException::ERROR_ATTEMPT_TO_DELETE_WITH_EMPTY_WHERE);
             }
-            $this->db->executeDelete("delete from $table where $this->where_primary_filter", null, true);
+            $this->db->executeDelete("delete from $table where $this->where_primary_filter");
             $this->isFetched = false;
             $this->isNew = false;
             $this->isDeleted = true;
