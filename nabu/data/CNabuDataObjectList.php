@@ -273,7 +273,7 @@ abstract class CNabuDataObjectList extends CNabuObject
         if (is_array($this->secondary_indexes)) {
             reset($this->secondary_indexes);
             while (list($key, $index) = each($this->secondary_indexes)) {
-                $index->removeItem($key);
+                $index->removeItem($item->getValue($this->index_field));
             }
         }
     }
@@ -356,6 +356,7 @@ abstract class CNabuDataObjectList extends CNabuObject
      * Removes an item from the list.
      * @param mixed $item A CNabuDataObject containing a field matching the main index field name
      * or a scalar variable containing the Id to be removed.
+     * @return CNabuDataObject|bool Returns the removed item if exists or false if not.
      */
     public function removeItem($item)
     {
