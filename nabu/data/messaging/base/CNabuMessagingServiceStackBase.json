@@ -74,9 +74,31 @@
             "extra": "",
             "comment": "N: New\nP: Pending\nS: Sent\nE: Error\n"
         },
+        "nb_messaging_service_stack_p2p_from_internal_id": {
+            "name": "nb_messaging_service_stack_p2p_from_internal_id",
+            "ordinal": "7",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_messaging_service_stack_p2p_to_internal_id": {
+            "name": "nb_messaging_service_stack_p2p_to_internal_id",
+            "ordinal": "8",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_messaging_service_stack_creation_datetime": {
             "name": "nb_messaging_service_stack_creation_datetime",
-            "ordinal": "7",
+            "ordinal": "9",
             "data_type": "datetime",
             "precision": null,
             "type": "datetime",
@@ -87,7 +109,7 @@
         },
         "nb_messaging_service_stack_sent_datetime": {
             "name": "nb_messaging_service_stack_sent_datetime",
-            "ordinal": "8",
+            "ordinal": "10",
             "data_type": "datetime",
             "precision": null,
             "type": "datetime",
@@ -98,7 +120,7 @@
         },
         "nb_messaging_service_stack_response_code": {
             "name": "nb_messaging_service_stack_response_code",
-            "ordinal": "9",
+            "ordinal": "11",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -109,7 +131,7 @@
         },
         "nb_messaging_service_stack_response_message": {
             "name": "nb_messaging_service_stack_response_message",
-            "ordinal": "10",
+            "ordinal": "12",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -120,7 +142,7 @@
         },
         "nb_messaging_service_stack_target": {
             "name": "nb_messaging_service_stack_target",
-            "ordinal": "11",
+            "ordinal": "13",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -131,7 +153,7 @@
         },
         "nb_messaging_service_stack_params": {
             "name": "nb_messaging_service_stack_params",
-            "ordinal": "12",
+            "ordinal": "14",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -142,7 +164,7 @@
         },
         "nb_messaging_service_stack_subject": {
             "name": "nb_messaging_service_stack_subject",
-            "ordinal": "13",
+            "ordinal": "15",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -153,7 +175,7 @@
         },
         "nb_messaging_service_stack_body_html": {
             "name": "nb_messaging_service_stack_body_html",
-            "ordinal": "14",
+            "ordinal": "16",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -164,7 +186,7 @@
         },
         "nb_messaging_service_stack_body_text": {
             "name": "nb_messaging_service_stack_body_text",
-            "ordinal": "15",
+            "ordinal": "17",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -248,6 +270,38 @@
                     "ordinal": "1",
                     "collation": "ASC",
                     "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_messaging_service_stack_nb_user_fk1_idx": {
+            "name": "nb_messaging_service_stack_nb_user_fk1_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_messaging_service_stack_p2p_from_internal_id": {
+                    "name": "nb_messaging_service_stack_p2p_from_internal_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_messaging_service_stack_nb_user_fk2_idx": {
+            "name": "nb_messaging_service_stack_nb_user_fk2_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_messaging_service_stack_p2p_to_internal_id": {
+                    "name": "nb_messaging_service_stack_p2p_to_internal_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
                     "subpart": null,
                     "comments": ""
                 }

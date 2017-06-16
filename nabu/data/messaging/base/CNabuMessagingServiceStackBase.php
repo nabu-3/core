@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/06/09 12:39:52 UTC
+ * Created: 2017/06/16 12:45:32 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -326,6 +326,48 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
             );
         }
         $this->setValue('nb_messaging_service_stack_status', $status);
+        
+        return $this;
+    }
+
+    /**
+     * Get Messaging Service Stack P2p From Internal Id attribute value
+     * @return null|int Returns the Messaging Service Stack P2p From Internal Id value
+     */
+    public function getP2pFromInternalId()
+    {
+        return $this->getValue('nb_messaging_service_stack_p2p_from_internal_id');
+    }
+
+    /**
+     * Sets the Messaging Service Stack P2p From Internal Id attribute value.
+     * @param null|int $p2p_from_internal_id New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setP2pFromInternalId(int $p2p_from_internal_id = null) : CNabuDataObject
+    {
+        $this->setValue('nb_messaging_service_stack_p2p_from_internal_id', $p2p_from_internal_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Messaging Service Stack P2p To Internal Id attribute value
+     * @return null|int Returns the Messaging Service Stack P2p To Internal Id value
+     */
+    public function getP2pToInternalId()
+    {
+        return $this->getValue('nb_messaging_service_stack_p2p_to_internal_id');
+    }
+
+    /**
+     * Sets the Messaging Service Stack P2p To Internal Id attribute value.
+     * @param null|int $p2p_to_internal_id New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setP2pToInternalId(int $p2p_to_internal_id = null) : CNabuDataObject
+    {
+        $this->setValue('nb_messaging_service_stack_p2p_to_internal_id', $p2p_to_internal_id);
         
         return $this;
     }
