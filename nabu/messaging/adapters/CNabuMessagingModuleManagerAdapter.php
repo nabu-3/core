@@ -24,11 +24,15 @@
   * @package \nabu\http\managers\base
   */
 namespace nabu\messaging\adapters;
+use nabu\core\CNabuEngine;
 use nabu\messaging\exceptions\ENabuMessagingException;
 use nabu\messaging\interfaces\INabuMessagingModule;
 use nabu\messaging\interfaces\INabuMessagingServiceInterface;
 use nabu\messaging\interfaces\INabuMessagingTemplateRenderInterface;
+use nabu\provider\CNabuProviderFactory;
+use nabu\provider\base\CNabuProviderInterfaceDescriptor;
 use nabu\provider\base\CNabuProviderModuleManagerAdapter;
+use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
 
 /**
@@ -74,6 +78,45 @@ abstract class CNabuMessagingModuleManagerAdapter extends CNabuProviderModuleMan
         return $interface->init();
     }
 
+    /**
+     * Create a Service Interface to manage a Messaging service.
+     * This method is intended to speed up the creation of Service Interfaces in descendant Messaging modules.
+     * @param string $class_name Class name to be instantiated.
+     * @return INabuMessagingServiceInterface Returns a valid instance if $name is a valid name.
+     * @throws ENabuMessagingException Raises an exception if the interface name is invalid.
+     */
+    public function createServiceInterface(string $class_name)
+    {
+        $nb_engine = CNabuEngine::getEngine();
+        $nb_descriptor = $nb_engine->getProviderInterfaceDescriptor(
+            $this->getVendorKey(), $this->getModuleKey(),
+            CNabuProviderFactory::INTERFACE_MESSAGING_SERVICE, $class_name
+        );
+
+        if ($nb_descriptor instanceof CNabuProviderInterfaceDescriptor) {
+            $fullname = $nb_descriptor->getNamespace() . "\\services\\$class_name";
+            if ($nb_engine->preloadClass($fullname)) {
+                $interface = new $fullname($this);
+                if ($this->registerServiceInterface($interface)) {
+                    return $interface;
+                } else {
+                    throw new ENabuMessagingException(
+                        ENabuMessagingException::ERROR_SERVICE_CANNOT_BE_INSTANTIATED,
+                        array($class_name)
+                    );
+                }
+            } else {
+                throw new ENabuMessagingException(
+                    ENabuMessagingException::ERROR_INVALID_SERVICE_CLASS_NAME, array($class_name)
+                );
+            }
+        } else {
+            throw new ENabuProviderException(
+                ENabuProviderException::ERROR_INTERFACE_DESCRIPTOR_NOT_FOUND, array($class_name)
+            );
+        }
+    }
+
     public function releaseServiceInterface(INabuMessagingServiceInterface $interface)
     {
         $hash = $interface->getHash();
@@ -109,6 +152,47 @@ abstract class CNabuMessagingModuleManagerAdapter extends CNabuProviderModuleMan
         }
 
         return $interface->init();
+    }
+
+    /**
+     * Create a Template Render Interface to manage a Messaging Template Render.
+     * This method is intended to speed up the creation of Template Render Interfaces in descendant Messaging Modules.
+     * @param string $class_name Class name to be instantiated.
+     * @return INabuMessagingTemplateRenderInterface Returns a valid instance if $name is a valid name.
+     * @throws ENabuMessagingException Raises an exception if the interface name is invalid.
+     */
+    public function createTemplateRenderInterface(string $class_name)
+    {
+        $nb_engine = CNabuEngine::getEngine();
+        $nb_descriptor = $nb_engine->getProviderInterfaceDescriptor(
+            $this->getVendorKey(), $this->getModuleKey(),
+            CNabuProviderFactory::INTERFACE_MESSAGING_TEMPLATE_RENDER, $class_name
+        );
+
+        if ($nb_descriptor instanceof CNabuProviderInterfaceDescriptor) {
+            $fullname = $nb_descriptor->getNamespace() . "\\templates\\renders\\$class_name";
+            if ($nb_engine->preloadClass($fullname)) {
+                $interface = new $fullname($this);
+                if ($this->registerTemplateRenderInterface($interface)) {
+                    return $interface;
+                } else {
+                    throw new ENabuMessagingException(
+                        ENabuMessagingException::ERROR_TEMPLATE_RENDER_CANNOT_BE_INSTANTIATED,
+                        array($class_name)
+                    );
+                }
+            } else {
+                throw new ENabuMessagingException(
+                    ENabuMessagingException::ERROR_INVALID_TEMPLATE_RENDER_CLASS_NAME,
+                    array($class_name)
+                );
+            }
+        } else {
+            throw new ENabuProviderException(
+                ENabuProviderException::ERROR_INTERFACE_DESCRIPTOR_NOT_FOUND,
+                array($class_name)
+            );
+        }
     }
 
     public function releaseTemplateRenderInterface(INabuMessagingTemplateRenderInterface $interface)

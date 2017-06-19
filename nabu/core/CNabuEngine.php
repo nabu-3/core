@@ -906,4 +906,17 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     {
         return $this->nb_provider_factory->getInterfaceDescriptors($interface_type);
     }
+
+    /**
+     * Gets a Provider Interface descriptor.
+     * @param string $vendor Vendor key.
+     * @param string $module Module key.
+     * @param int $interface_type Interface type.
+     * @param string $interface Interface name to be retrieved.
+     * @return CNabuProviderInterfaceDescriptor|null Returns the descriptor found if any, or null if not found.
+     */
+    public function getProviderInterfaceDescriptor(string $vendor, string $module, int $interface_type, string $interface)
+    {
+        return $this->nb_provider_factory->getInterfaceDescriptor($vendor, $module, $interface_type, $interface);
+    }
 }

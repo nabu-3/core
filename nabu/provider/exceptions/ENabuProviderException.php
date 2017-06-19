@@ -44,12 +44,14 @@ class ENabuProviderException extends ENabuException
     const ERROR_PROVIDER_MANAGER_FAIL           = 0x0007;
     /** @var int Provider Interface type does not exists. Requires interface type. */
     const ERROR_INTERFACE_TYPE_NOT_EXISTS       = 0x0008;
+    /** @var int Descriptor not found for interface. Requires interface name. */
+    const ERROR_INTERFACE_DESCRIPTOR_NOT_FOUND  = 0x0009;
 
     /**
      * List of all error messages defined in this exception.
      * @var array
      */
-    protected $error_messages = array(
+    protected static $error_messages = array(
         ENabuProviderException::ERROR_VENDOR_KEY_NOT_VALID =>
             'Vendor Key [%s] is not valid',
         ENabuProviderException::ERROR_MODULE_KEY_NOT_VALID =>
@@ -65,6 +67,13 @@ class ENabuProviderException extends ENabuException
         ENabuProviderException::ERROR_PROVIDER_MANAGER_FAIL,
             'Nabu Provider [%s] fails when instantiate it.',
         ENabuProviderException::ERROR_INTERFACE_TYPE_NOT_EXISTS =>
-            'Provider Interface type [%s] does not exists.'
+            'Provider Interface type [%s] does not exists.',
+        ENabuProviderException::ERROR_INTERFACE_DESCRIPTOR_NOT_FOUND =>
+            'The Interface Descriptor [%s] is not found.'
     );
+
+    public function __construct($code, $values = null)
+    {
+        parent::__construct(ENabuProviderException::$error_messages[$code], $code, $values);
+    }
 }

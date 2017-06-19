@@ -270,6 +270,46 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
     }
 
     /**
+     * Gets an Interface descriptor.
+     * @param string $vendor Vendor key.
+     * @param string $module Module key.
+     * @param int $interface_type Interface type.
+     * @param string $interface Interface name to be retrieved.
+     * @return CNabuProviderInterfaceDescriptor|null Returns the descriptor found if any, or null if not found.
+     */
+    public function getInterfaceDescriptor(string $vendor, string $module, int $interface_type, string $interface)
+    {
+        if (!array_key_exists($interface_type, $this->nb_interface_list)) {
+            throw new ENabuProviderException(
+                ENabuProviderException::ERROR_INTERFACE_TYPE_NOT_EXISTS,
+                array(print_r($interface_type, true))
+            );
+        }
+
+        $nb_descriptor = null;
+
+        if (count($this->nb_interface_list[$interface_type]) > 0) {
+            $this->nb_interface_list[$interface_type]->iterate(
+                function ($key, $nb_interface_desc) use ($vendor, $module, $interface, &$nb_descriptor)
+                {
+                    $retval = true;
+                    $nb_manager = $nb_interface_desc->getManager();
+                    if ($nb_manager->getVendorKey() === $vendor &&
+                        $nb_manager->getModuleKey() === $module &&
+                        $nb_interface_desc->getClassName() === $interface
+                    ) {
+                        $nb_descriptor = $nb_interface_desc;
+                        $retval = false;
+                    }
+                    return $retval;
+                }
+            );
+        }
+
+        return $nb_descriptor;
+    }
+
+    /**
      * Register the application to connect all available managers with it.
      * @param INabuApplication $nb_application Application instance to be registered.
      */

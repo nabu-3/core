@@ -32,14 +32,22 @@ class CNabuProviderInterfaceDescriptor extends CNabuDataObject
     /** @var INabuProviderManager $nb_manager Provider Manager that owns the interface. */
     private $nb_manager = null;
 
-    public function __construct(INabuProviderManager $nb_manager, $type, $key, $name)
-    {
+    public function __construct(
+        INabuProviderManager $nb_manager,
+        string $type,
+        string $key,
+        string $name,
+        string $namespace,
+        string $class_name
+    ) {
         parent::__construct();
 
         $this->setManager($nb_manager);
         $this->setType($type);
         $this->setKey($key);
         $this->setName($name);
+        $this->setNamespace($namespace);
+        $this->setClassName($class_name);
     }
 
     /**
@@ -95,7 +103,7 @@ class CNabuProviderInterfaceDescriptor extends CNabuDataObject
 
     /**
      * Sets the Interface key.
-     * @param string $name Interface key.
+     * @param string $key Interface key.
      * @return CNabuProviderInterfaceDescriptor Returns the self descriptor to grant cascade setter calls.
      */
     public function setKey(string $key)
@@ -122,6 +130,48 @@ class CNabuProviderInterfaceDescriptor extends CNabuDataObject
     public function setName(string $name)
     {
         $this->setValue('interface_name', $name);
+
+        return $this;
+    }
+
+    /**
+     * Gets the Interface namespace.
+     * @return string Returns the Interface namespace.
+     */
+    public function getNamespace()
+    {
+        return $this->getValue('interface_namespace');
+    }
+
+    /**
+     * Sets the Interface namespace.
+     * @param string $namespace Interface namespace.
+     * @return CNabuProviderInterfaceDescriptor Returns the self descriptor to grant cascade setter calls.
+     */
+    public function setNamespace($namespace)
+    {
+        $this->setValue('interface_namespace', $namespace);
+
+        return $this;
+    }
+
+    /**
+     * Gets the Interface Class name.
+     * @return string Returns the Interface Class name.
+     */
+    public function getClassName()
+    {
+        return $this->getValue('interface_class_name');
+    }
+
+    /**
+     * Sets the Interface Class name.
+     * @param string $class_name Interface Class name.
+     * @return CNabuProviderInterfaceDescriptor Returns the self descriptor to grant cascade setter calls.
+     */
+    public function setClassName($class_name)
+    {
+        $this->setValue('interface_class_name', $class_name);
 
         return $this;
     }

@@ -30,8 +30,15 @@ use nabu\provider\interfaces\INabuProviderManager;
  */
 class CNabuMessagingServiceInterfaceDescriptor extends CNabuProviderInterfaceDescriptor
 {
-    public function __construct(INabuProviderManager $nb_manager, $key, $name)
-    {
-        parent::__construct($nb_manager, CNabuProviderFactory::INTERFACE_MESSAGING_SERVICE, $key, $name);
+    public function __construct(
+        INabuProviderManager $nb_manager,
+        string $key,
+        string $name,
+        string $namespace,
+        string $class_name
+    ) {
+        parent::__construct(
+            $nb_manager, CNabuProviderFactory::INTERFACE_MESSAGING_SERVICE, $key, $name, $namespace, $class_name
+        );
     }
 }
