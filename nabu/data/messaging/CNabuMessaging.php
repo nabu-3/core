@@ -108,6 +108,22 @@ class CNabuMessaging extends CNabuMessagingBase
     }
 
     /**
+     * Gets a Template by Key.
+     * @param string $key A string Key representing the Template as defined in the database storage.
+     * @return CNabuMessagingTemplate|bool Returns the Messaging Template instance if exists or false if not.
+     */
+    public function getTemplateByKey(string $key)
+    {
+        $retval = false;
+
+        if (is_string($key) && strlen($key) > 0) {
+            $retval = $this->nb_messaging_template_list->getItem($key, CNabuMessagingTemplateList::INDEX_KEY);
+        }
+
+        return $retval;
+    }
+
+    /**
      * Overrides getTreeData method to add translations branch.
      * If $nb_language have a valid value, also adds a translation object
      * with current translation pointed by it.
