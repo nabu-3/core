@@ -411,7 +411,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
      * @throws ENabuCoreException Raises an exception if some parameter or HTTP Server / Application are invalids
      * or to force redirection.
      */
-    private function loginDecision(CNabuSite $nb_site, CNabuUser $nb_user, bool $preserve)
+    private function loginDecision(CNabuSite $nb_site, CNabuUser $nb_user, bool $preserve = false)
     {
         if (!($nb_site instanceof CNabuSite)) {
             throw new ENabuCoreException(ENabuCoreException::ERROR_METHOD_PARAMETER_NOT_VALID, array('$nb_site'));
