@@ -570,10 +570,7 @@ function nb_unpackDateInterval($date_interval)
         preg_match('/^([0-9]+)([SMHDNY]{1})$/', $date_interval, $match);
 
         if (count($match) === 3 && $date_interval == $match[0]) {
-            error_log(__FUNCTION__);
-            error_log(print_r($match, true));
             $seconds = (int)$match[1];
-            error_log($seconds);
             switch ($match[2]) {
                 case 'Y':
                 case 'N': $seconds *= ($match[2] === 'Y' ? 365 : 30);
@@ -581,7 +578,6 @@ function nb_unpackDateInterval($date_interval)
                 case 'H': $seconds *= 60;
                 case 'M': $seconds *= 60;
             }
-            error_log($seconds);
             $retval = array('value' => (int)$match[1], 'unit' => $match[2], 'seconds' => $seconds);
         } else {
             $retval = false;

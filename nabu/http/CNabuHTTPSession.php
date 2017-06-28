@@ -242,7 +242,6 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
         if (!isset($seconds)) {
             $date_interval = $nb_site->getValue('nb_site_session_timeout_interval');
             $ses_interval = nb_unpackDateInterval($date_interval);
-            error_log(print_r($ses_interval, true));
             if ($ses_interval !== null) {
                 $seconds = $ses_interval['seconds'];
             } else if ($ses_interval === false) {
