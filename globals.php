@@ -131,6 +131,9 @@ define('NABU_MESSAGING_SERVICE_FIELD_ID', 'nb_messaging_service_id');
 define('NABU_MESSAGING_TEMPLATE_TABLE', 'nb_messaging_template');
 define('NABU_MESSAGING_TEMPLATE_FIELD_ID', 'nb_messaging_template_id');
 
+define('NABU_ICONTACT_TABLE', 'nb_icontact');
+define('NABU_ICONTACT_FIELD_ID', 'nb_icontact_id');
+
 define('NABU_PROJECT_TABLE', 'nb_project');
 define('NABU_PROJECT_FIELD_ID', 'nb_project_id');
 

@@ -26,6 +26,8 @@ use nabu\data\catalog\CNabuCatalog;
 use nabu\data\catalog\CNabuCatalogList;
 use nabu\data\commerce\CNabuCommerce;
 use nabu\data\commerce\CNabuCommerceList;
+use nabu\data\icontact\CNabuIContact;
+use nabu\data\icontact\CNabuIContactList;
 use nabu\data\lang\CNabuLanguageList;
 use nabu\data\medioteca\CNabuMedioteca;
 use nabu\data\medioteca\CNabuMediotecaList;
@@ -63,6 +65,9 @@ class CNabuCustomer extends CNabuCustomerBase
     /** @var CNabuProject $nb_project_list List of Projects. This list can be filled only with requested Projects
      * (on demand) or with a full list. */
     private $nb_project_list;
+    /** @var CNabuIContactList $nb_icontact_list List of i-Contacts. This list can be filled only with requested
+     * i-Contacts (on demand) or with a full list. */
+    private $nb_icontact_list;
 
     /**
      * Creates the instance and initializes class variables.
@@ -79,6 +84,7 @@ class CNabuCustomer extends CNabuCustomerBase
         $this->nb_catalog_list = new CNabuCatalogList($this);
         $this->nb_messaging_list = new CNabuMessagingList($this);
         $this->nb_project_list = new CNabuProjectList($this);
+        $this->nb_icontact_list = new CNabuIContactList($this);
     }
 
     public function relinkDB()
@@ -163,6 +169,14 @@ class CNabuCustomer extends CNabuCustomerBase
             return '<nonamed>';
         }
     }
+
+    /*
+          __  __          _ _       _
+         |  \/  | ___  __| (_) ___ | |_ ___  ___ __ _ ___
+         | |\/| |/ _ \/ _` | |/ _ \| __/ _ \/ __/ _` / __|
+         | |  | |  __/ (_| | | (_) | ||  __/ (_| (_| \__ \
+         |_|  |_|\___|\__,_|_|\___/ \__\___|\___\__,_|___/
+     */
 
     /**
      * Gets available Medioteca instances in the list.
@@ -368,6 +382,14 @@ class CNabuCustomer extends CNabuCustomerBase
         return CNabuSite::getCustomerUsedLanguages($this);
     }
 
+    /*
+           ____
+          / ___|___  _ __ ___  _ __ ___   ___ _ __ ___ ___  ___
+         | |   / _ \| '_ ` _ \| '_ ` _ \ / _ \ '__/ __/ _ \/ __|
+         | |__| (_) | | | | | | | | | | |  __/ | | (_|  __/\__ \
+          \____\___/|_| |_| |_|_| |_| |_|\___|_|  \___\___||___/
+     */
+
     /**
      * Gets available Commerce instances in the list.
      * @param bool $force If true, forces to merge complete list from the storage.
@@ -426,6 +448,15 @@ class CNabuCustomer extends CNabuCustomerBase
 
         return $retval;
     }
+
+    /*
+           ____      _        _
+          / ___|__ _| |_ __ _| | ___   __ _ ___
+         | |   / _` | __/ _` | |/ _ \ / _` / __|
+         | |__| (_| | || (_| | | (_) | (_| \__ \
+          \____\__,_|\__\__,_|_|\___/ \__, |___/
+                                      |___/
+     */
 
     /**
      * Gets a Catalog by their ID.
@@ -503,6 +534,15 @@ class CNabuCustomer extends CNabuCustomerBase
         return CNabuCatalog::getCustomerUsedLanguages($this);
     }
 
+    /*
+          __  __                           _
+         |  \/  | ___  ___ ___  __ _  __ _(_)_ __   __ _
+         | |\/| |/ _ \/ __/ __|/ _` |/ _` | | '_ \ / _` |
+         | |  | |  __/\__ \__ \ (_| | (_| | | | | | (_| |
+         |_|  |_|\___||___/___/\__,_|\__, |_|_| |_|\__, |
+                                     |___/         |___/
+     */
+
     /**
      * Gets available Messaging instances in the list.
      * @param bool $force If true, foces to merge complete list from the storage.
@@ -561,6 +601,15 @@ class CNabuCustomer extends CNabuCustomerBase
 
         return $retval;
     }
+
+    /*
+          ____            _           _
+         |  _ \ _ __ ___ (_) ___  ___| |_ ___
+         | |_) | '__/ _ \| |/ _ \/ __| __/ __|
+         |  __/| | | (_) | |  __/ (__| |_\__ \
+         |_|   |_|  \___// |\___|\___|\__|___/
+                       |__/
+     */
 
     /**
      * Gets available Project instances in the list.
@@ -625,11 +674,19 @@ class CNabuCustomer extends CNabuCustomerBase
         return $retval;
     }
 
+    /*
+          _   _
+         | | | |___  ___ _ __ ___
+         | | | / __|/ _ \ '__/ __|
+         | |_| \__ \  __/ |  \__ \
+          \___/|___/\___|_|  |___/
+     */
+
     public function getUser($nb_user)
     {
         $retval = null;
 
-        $nb_user_id = nb_getMixedValue($nb_user, 'nb_user_id');
+        $nb_user_id = nb_getMixedValue($nb_user, NABU_USER_FIELD_ID);
         if (is_numeric($nb_user_id)) {
             $nb_new_user = new CNabuUser($nb_user_id);
             if ($nb_new_user->validateCustomer($this)) {
@@ -643,5 +700,65 @@ class CNabuCustomer extends CNabuCustomerBase
     public function getUsers()
     {
         return CNabuUser::getAllUsers($this);
+    }
+
+    /*
+           _        ____            _             _
+          (_)      / ___|___  _ __ | |_ __ _  ___| |_ ___
+          | |_____| |   / _ \| '_ \| __/ _` |/ __| __/ __|
+          | |_____| |__| (_) | | | | || (_| | (__| |_\__ \
+          |_|      \____\___/|_| |_|\__\__,_|\___|\__|___/
+     */
+
+     /**
+      * Gets an i-Contact by their ID.
+      * If the internal i-Contact List contains a instance with same ID returns this instance, else if not exists,
+      * tries to locate it in the storage and, if exits, the load it, add into i-Contact List and returns their
+      * instance as result.
+      * @param mixed $nb_icontact A CNabuDataObject instance containing a nb_icontact_id field or an ID.
+      * @return CNabuIContact Returns the i-Contact instance if exists or false if not.
+      * @throws ENabuCoreException Raises an exception if $nb_icontact has no valid value.
+      */
+    public function getIContact($nb_icontact)
+    {
+        $retval = false;
+
+        if (is_object($nb_icontact) && !($nb_icontact instanceof CNabuDataObject)) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_CLASS_TYPE,
+                array('$nb_icontact', get_class($nb_icontact))
+            );
+        }
+
+        if ($nb_icontact !== null) {
+            $nb_icontact_id = nb_getMixedValue($nb_icontact, NABU_ICONTACT_FIELD_ID);
+            if (is_numeric($nb_icontact_id) || nb_isValidGUID($nb_icontact_id)) {
+                $retval = $this->nb_icontact_list->getItem($nb_icontact_id);
+            } elseif ($nb_icontact_id !== null && $nb_icontact_id !== false) {
+                throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                    array('$nb_icontact', print_r($nb_icontact, true))
+                );
+            }
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Gets an i-Contact instance using their key.
+     * @param string $key Key of the i-Contact to be retrieved.
+     * @return CNabuIContact Returns an i-Contact instance if exists or false if not.
+     */
+    public function getIContactByKey($key)
+    {
+        if (!is_string($key) || strlen($key) === 0) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                array('$key', print_r($key, true))
+            );
+        }
+
+        return $this->nb_icontact_list->getItem($key, CNabuIContactList::INDEX_KEY);
     }
 }
