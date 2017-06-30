@@ -404,9 +404,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_user_web": {
+            "name": "nb_user_web",
+            "ordinal": "37",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_user_work_centre": {
             "name": "nb_user_work_centre",
-            "ordinal": "37",
+            "ordinal": "38",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -417,7 +428,7 @@
         },
         "nb_user_work_position": {
             "name": "nb_user_work_position",
-            "ordinal": "38",
+            "ordinal": "39",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -428,7 +439,7 @@
         },
         "nb_user_work_city": {
             "name": "nb_user_work_city",
-            "ordinal": "39",
+            "ordinal": "40",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -439,7 +450,7 @@
         },
         "nb_user_about": {
             "name": "nb_user_about",
-            "ordinal": "40",
+            "ordinal": "41",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -450,7 +461,7 @@
         },
         "nb_user_new_email": {
             "name": "nb_user_new_email",
-            "ordinal": "41",
+            "ordinal": "42",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -461,7 +472,7 @@
         },
         "nb_user_allow_notification": {
             "name": "nb_user_allow_notification",
-            "ordinal": "42",
+            "ordinal": "43",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",

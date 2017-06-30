@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/06/30 12:43:33 UTC
+ * Created: 2017/06/30 12:53:20 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -967,6 +967,27 @@ abstract class CNabuUserBase extends CNabuDBInternalObject
             );
         }
         $this->setValue('nb_user_email', $email);
+        
+        return $this;
+    }
+
+    /**
+     * Get User Web attribute value
+     * @return null|string Returns the User Web value
+     */
+    public function getWeb()
+    {
+        return $this->getValue('nb_user_web');
+    }
+
+    /**
+     * Sets the User Web attribute value.
+     * @param null|string $web New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setWeb(string $web = null) : CNabuDataObject
+    {
+        $this->setValue('nb_user_web', $web);
         
         return $this;
     }
