@@ -18,6 +18,8 @@
  */
 
 namespace nabu\data\icontact;
+use nabu\core\CNabuEngine;
+use nabu\data\customer\CNabuCustomer;
 use nabu\data\icontact\base\CNabuIContactListBase;
 
 /**
@@ -28,5 +30,39 @@ use nabu\data\icontact\base\CNabuIContactListBase;
  */
 class CNabuIContactList extends CNabuIContactListBase
 {
-    
+    /**
+     * Customer instance that owns this list
+     * @var CNabuCustomer
+     */
+    private $nb_customer = null;
+
+    public function __construct(CNabuCustomer $nb_customer = null)
+    {
+        parent::__construct();
+
+        $this->nb_customer = $nb_customer;
+    }
+
+    /**
+     * Gets the Customer instance that owns this list.
+     * @return CNabuCustomer Returns the instance.
+     */
+    public function getCustomer()
+    {
+        return $this->nb_customer;
+    }
+
+    public function acquireItem($key, $index = false)
+    {
+        if (!($item = parent::acquireItem($key, $index)) && CNabuEngine::getEngine()->isMainDBAvailable()) {
+            switch ($index) {
+                case self::INDEX_KEY:
+                    $item = CNabuIContact::findByKey($this->nb_customer, $key);
+                    break;
+            }
+        }
+
+        return $item;
+    }
+
 }

@@ -750,7 +750,7 @@ class CNabuCustomer extends CNabuCustomerBase
      * @param string $key Key of the i-Contact to be retrieved.
      * @return CNabuIContact Returns an i-Contact instance if exists or false if not.
      */
-    public function getIContactByKey($key)
+    public function getIContactByKey(string $key)
     {
         if (!is_string($key) || strlen($key) === 0) {
             throw new ENabuCoreException(
