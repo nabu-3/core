@@ -26,7 +26,7 @@
             "precision": "10",
             "type": "int(11)",
             "default": null,
-            "is_nullable": true,
+            "is_nullable": false,
             "extra": "",
             "comment": ""
         },
@@ -63,9 +63,31 @@
             "extra": "",
             "comment": ""
         },
+        "nb_icontact_prospect_creation_datetime": {
+            "name": "nb_icontact_prospect_creation_datetime",
+            "ordinal": "6",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": "CURRENT_TIMESTAMP",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_icontact_prospect_last_update_datetime": {
+            "name": "nb_icontact_prospect_last_update_datetime",
+            "ordinal": "7",
+            "data_type": "datetime",
+            "precision": null,
+            "type": "datetime",
+            "default": null,
+            "is_nullable": true,
+            "extra": "on update CURRENT_TIMESTAMP",
+            "comment": ""
+        },
         "nb_icontact_prospect_first_name": {
             "name": "nb_icontact_prospect_first_name",
-            "ordinal": "6",
+            "ordinal": "8",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(200)",
@@ -76,7 +98,7 @@
         },
         "nb_icontact_prospect_last_name": {
             "name": "nb_icontact_prospect_last_name",
-            "ordinal": "7",
+            "ordinal": "9",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(200)",
@@ -87,7 +109,7 @@
         },
         "nb_icontact_prospect_fiscal_number": {
             "name": "nb_icontact_prospect_fiscal_number",
-            "ordinal": "8",
+            "ordinal": "10",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -98,7 +120,7 @@
         },
         "nb_icontact_prospect_address_1": {
             "name": "nb_icontact_prospect_address_1",
-            "ordinal": "9",
+            "ordinal": "11",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -109,7 +131,7 @@
         },
         "nb_icontact_prospect_address_2": {
             "name": "nb_icontact_prospect_address_2",
-            "ordinal": "10",
+            "ordinal": "12",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -120,7 +142,7 @@
         },
         "nb_icontact_prospect_zip_code": {
             "name": "nb_icontact_prospect_zip_code",
-            "ordinal": "11",
+            "ordinal": "13",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(15)",
@@ -131,7 +153,7 @@
         },
         "nb_icontact_prospect_city_name": {
             "name": "nb_icontact_prospect_city_name",
-            "ordinal": "12",
+            "ordinal": "14",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -142,7 +164,7 @@
         },
         "nb_icontact_prospect_province_name": {
             "name": "nb_icontact_prospect_province_name",
-            "ordinal": "13",
+            "ordinal": "15",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -153,7 +175,7 @@
         },
         "nb_icontact_prospect_country_name": {
             "name": "nb_icontact_prospect_country_name",
-            "ordinal": "14",
+            "ordinal": "16",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -164,7 +186,7 @@
         },
         "nb_icontact_prospect_enterprise": {
             "name": "nb_icontact_prospect_enterprise",
-            "ordinal": "15",
+            "ordinal": "17",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(200)",
@@ -175,7 +197,7 @@
         },
         "nb_icontact_prospect_phone": {
             "name": "nb_icontact_prospect_phone",
-            "ordinal": "16",
+            "ordinal": "18",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -186,7 +208,7 @@
         },
         "nb_icontact_prospect_telephone_prefix": {
             "name": "nb_icontact_prospect_telephone_prefix",
-            "ordinal": "17",
+            "ordinal": "19",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -197,7 +219,7 @@
         },
         "nb_icontact_prospect_cellular": {
             "name": "nb_icontact_prospect_cellular",
-            "ordinal": "18",
+            "ordinal": "20",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -208,7 +230,7 @@
         },
         "nb_icontact_prospect_cellular_prefix": {
             "name": "nb_icontact_prospect_cellular_prefix",
-            "ordinal": "19",
+            "ordinal": "21",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -219,7 +241,7 @@
         },
         "nb_icontact_prospect_fax": {
             "name": "nb_icontact_prospect_fax",
-            "ordinal": "20",
+            "ordinal": "22",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(20)",
@@ -230,7 +252,7 @@
         },
         "nb_icontact_prospect_email": {
             "name": "nb_icontact_prospect_email",
-            "ordinal": "21",
+            "ordinal": "23",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -241,7 +263,7 @@
         },
         "nb_icontact_prospect_subject": {
             "name": "nb_icontact_prospect_subject",
-            "ordinal": "22",
+            "ordinal": "24",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -252,7 +274,7 @@
         },
         "nb_icontact_prospect_notes": {
             "name": "nb_icontact_prospect_notes",
-            "ordinal": "23",
+            "ordinal": "25",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -261,23 +283,12 @@
             "extra": "",
             "comment": ""
         },
-        "nb_icontact_prospect_creation_datetime": {
-            "name": "nb_icontact_prospect_creation_datetime",
-            "ordinal": "24",
-            "data_type": "datetime",
+        "nb_icontact_prospect_attributes": {
+            "name": "nb_icontact_prospect_attributes",
+            "ordinal": "26",
+            "data_type": "longtext",
             "precision": null,
-            "type": "datetime",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_icontact_prospect_status": {
-            "name": "nb_icontact_prospect_status",
-            "ordinal": "25",
-            "data_type": "set",
-            "precision": null,
-            "type": "set('N','A','V','C')",
+            "type": "longtext",
             "default": null,
             "is_nullable": true,
             "extra": "",
@@ -309,7 +320,7 @@
                     "name": "nb_icontact_id",
                     "ordinal": "1",
                     "collation": "ASC",
-                    "null": true,
+                    "null": false,
                     "subpart": null,
                     "comments": ""
                 }

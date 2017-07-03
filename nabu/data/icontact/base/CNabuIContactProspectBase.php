@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/06/30 12:53:53 UTC
+ * Created: 2017/07/03 10:56:51 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -164,20 +164,26 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Get Icontact Id attribute value
-     * @return null|int Returns the Icontact Id value
+     * @return int Returns the Icontact Id value
      */
-    public function getIcontactId()
+    public function getIcontactId() : int
     {
         return $this->getValue('nb_icontact_id');
     }
 
     /**
      * Sets the Icontact Id attribute value.
-     * @param null|int $nb_icontact_id New value for attribute
+     * @param int $nb_icontact_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setIcontactId(int $nb_icontact_id = null) : CNabuDataObject
+    public function setIcontactId(int $nb_icontact_id) : CNabuDataObject
     {
+        if ($nb_icontact_id === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$nb_icontact_id")
+            );
+        }
         $this->setValue('nb_icontact_id', $nb_icontact_id);
         
         return $this;
@@ -242,6 +248,54 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
     public function setStatusId(int $status_id = null) : CNabuDataObject
     {
         $this->setValue('nb_icontact_prospect_status_id', $status_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Icontact Prospect Creation Datetime attribute value
+     * @return mixed Returns the Icontact Prospect Creation Datetime value
+     */
+    public function getCreationDatetime()
+    {
+        return $this->getValue('nb_icontact_prospect_creation_datetime');
+    }
+
+    /**
+     * Sets the Icontact Prospect Creation Datetime attribute value.
+     * @param mixed $creation_datetime New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setCreationDatetime($creation_datetime) : CNabuDataObject
+    {
+        if ($creation_datetime === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$creation_datetime")
+            );
+        }
+        $this->setValue('nb_icontact_prospect_creation_datetime', $creation_datetime);
+        
+        return $this;
+    }
+
+    /**
+     * Get Icontact Prospect Last Update Datetime attribute value
+     * @return mixed Returns the Icontact Prospect Last Update Datetime value
+     */
+    public function getLastUpdateDatetime()
+    {
+        return $this->getValue('nb_icontact_prospect_last_update_datetime');
+    }
+
+    /**
+     * Sets the Icontact Prospect Last Update Datetime attribute value.
+     * @param mixed $last_update_datetime New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setLastUpdateDatetime($last_update_datetime) : CNabuDataObject
+    {
+        $this->setValue('nb_icontact_prospect_last_update_datetime', $last_update_datetime);
         
         return $this;
     }
@@ -625,44 +679,38 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
     }
 
     /**
-     * Get Icontact Prospect Creation Datetime attribute value
-     * @return mixed Returns the Icontact Prospect Creation Datetime value
+     * Get Icontact Prospect Attributes attribute value
+     * @return null|array Returns the Icontact Prospect Attributes value
      */
-    public function getCreationDatetime()
+    public function getAttributes()
     {
-        return $this->getValue('nb_icontact_prospect_creation_datetime');
+        return $this->getValueJSONDecoded('nb_icontact_prospect_attributes');
     }
 
     /**
-     * Sets the Icontact Prospect Creation Datetime attribute value.
-     * @param mixed $creation_datetime New value for attribute
+     * Sets the Icontact Prospect Attributes attribute value.
+     * @param null|string|array $attributes New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCreationDatetime($creation_datetime) : CNabuDataObject
+    public function setAttributes(string $attributes = null) : CNabuDataObject
     {
-        $this->setValue('nb_icontact_prospect_creation_datetime', $creation_datetime);
+        $this->setValueJSONEncoded('nb_icontact_prospect_attributes', $attributes);
         
         return $this;
     }
 
     /**
-     * Get Icontact Prospect Status attribute value
-     * @return mixed Returns the Icontact Prospect Status value
+     * Overrides this method to add support to traits and/or attributes.
+     * @param int|CNabuDataObject $nb_language Instance or Id of the language to be used.
+     * @param bool $dataonly Render only field values and ommit class control flags.
+     * @return array Returns a multilevel associative array with all data.
      */
-    public function getStatus()
+    public function getTreeData($nb_language = null, $dataonly = false)
     {
-        return $this->getValue('nb_icontact_prospect_status');
-    }
-
-    /**
-     * Sets the Icontact Prospect Status attribute value.
-     * @param mixed $status New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setStatus($status) : CNabuDataObject
-    {
-        $this->setValue('nb_icontact_prospect_status', $status);
+        $trdata = parent::getTreeData($nb_language, $dataonly);
         
-        return $this;
+        $trdata['attributes'] = $this->getAttributes();
+        
+        return $trdata;
     }
 }
