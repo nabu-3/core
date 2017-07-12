@@ -258,6 +258,15 @@ class CNabuHTTPRequest extends CNabuObject
     }
 
     /**
+     * Gets the calling Referer URL.
+     * @return string Returns calling Referer URL.
+     */
+    public function getReferer()
+    {
+        return $this->referer->getURL();
+    }
+
+    /**
      * Gets the HTTP Request path.
      * @return string Page URI requested without query string.
      */
