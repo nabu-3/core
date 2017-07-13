@@ -537,7 +537,7 @@ class CNabuHTTPRequest extends CNabuObject
         $nb_engine = CNabuEngine::getEngine();
         if ($this->request_content_length > 0) {
             $raw = file_get_contents('php://input');
-            if ($this->request_content_type === 'application/json') {
+            if (nb_strStartsWith($this->request_content_type, 'application/json')) {
                 $this->xdr_post = json_decode($raw, true);
             } else {
                 parse_str($raw, $this->xdr_post);
