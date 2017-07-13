@@ -324,10 +324,11 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
 
         $nb_language = $this->nb_request->getLanguage();
         if ($nb_language !== null) {
-            $this->nb_engine->traceLog("Locale", $nb_language->getDefaultCountryCode());
-            setlocale(
-                LC_TIME | LC_COLLATE | LC_MONETARY | LC_NUMERIC | LC_CTYPE,
-                $nb_language->getDefaultCountryCode()
+            $locale = str_replace('-', '_', $nb_language->getDefaultCountryCode());
+            $this->nb_engine->traceLog("Locale", $locale);
+            setlocale(LC_ALL,
+                //LC_TIME | LC_COLLATE | LC_MONETARY | LC_NUMERIC | LC_CTYPE,
+                $locale
             );
         }
     }
