@@ -263,7 +263,7 @@ class CNabuHTTPRequest extends CNabuObject
      */
     public function getReferer()
     {
-        return $this->referer->getURL();
+        return ($this->referer === null ? null : $this->referer->getURL());
     }
 
     /**
