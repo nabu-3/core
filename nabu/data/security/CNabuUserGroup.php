@@ -106,4 +106,16 @@ class CNabuUserGroup extends CNabuUserGroupBase
 
         return $trdata;
     }
+
+    public function refresh(bool $force = false, bool $cascade = false): bool
+    {
+        return parent::refresh($force, $cascade) &&
+               (!$cascade ||
+                    (
+                        $this->getOwner($force) !== false &&
+                        $this->getMembers($force) !== false
+                    )
+               )
+        ;
+    }
 }
