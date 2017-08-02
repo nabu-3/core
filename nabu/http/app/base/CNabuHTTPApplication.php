@@ -80,11 +80,6 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
      */
     private $nb_http_renders_manager = null;
     /**
-     * Messaging Accounts Manager instance
-     * @var
-     */
-    private $nb_messaging_accounts_manager = null;
-    /**
      * Contains the session instance
      * @var CNabuHTTPSession
      */
