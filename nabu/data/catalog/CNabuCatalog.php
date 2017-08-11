@@ -183,7 +183,7 @@ class CNabuCatalog extends CNabuCatalogBase
             'nb_catalog_item_id',
             $query,
             $params,
-            $this, true
+            $this
         );
 
         return $nb_catalog_item_tree;
