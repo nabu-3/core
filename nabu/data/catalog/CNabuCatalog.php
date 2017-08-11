@@ -95,8 +95,8 @@ class CNabuCatalog extends CNabuCatalogBase
     /**
      * Search a set of Items where the root items are in $roots arrays. If $nested is true, then search in the entire
      * branch of each root.
-     * @param array $roots Roots ID collection.
-     * @param string $q If setted, then the query uses the fulltext index to filter items.
+     * @param array|null $roots Roots ID collection.
+     * @param string|null $q If setted, then the query uses the fulltext index to filter items.
      * @param mixed $nb_language The language used to perform searches. If null, then all available languages are used.
      * @param int $nested If true, search in the entire branch of each root.
      * @param bool $query_expansion If true, the fulltext search uses query expansion feature.
@@ -125,7 +125,8 @@ class CNabuCatalog extends CNabuCatalogBase
                           . "and ci1.nb_catalog_item_id in ($use_roots) "
                           . 'and ci2.nb_catalog_id=ci1.nb_catalog_id '
                           . 'and ci2.nb_catalog_item_id=cil2.nb_catalog_item_id '
-                          . 'and ci2.nb_catalog_item_order between (ci1.nb_catalog_item_order + 1) and (ci1.nb_catalog_item_next_sibling - 1) '
+                          . 'and ((ci1.nb_catalog_item_next_sibling is null and ci2.nb_catalog_item_order > ci1.nb_catalog_item_order) or '
+                               . '(ci2.nb_catalog_item_order between (ci1.nb_catalog_item_order + 1) and (ci1.nb_catalog_item_next_sibling - 1)))'
                           . ($nested > 0 ? "and ci2.nb_catalog_item_level-ci1.nb_catalog_item_level between 1 and $nested " : '')
                 ;
             } else {
@@ -182,7 +183,7 @@ class CNabuCatalog extends CNabuCatalogBase
             'nb_catalog_item_id',
             $query,
             $params,
-            $this
+            $this, true
         );
 
         return $nb_catalog_item_tree;
@@ -192,12 +193,12 @@ class CNabuCatalog extends CNabuCatalogBase
      * Search a set of Items where the root items are in $roots arrays. If $nested is true, then search in the entire
      * branch of each root.
      * @param string $slug The slug to find.
-     * @param array $roots Roots ID collection.
+     * @param array|null $roots Roots ID collection.
      * @param mixed $nb_language The language used to perform searches. If null, then all available languages are used.
      * @param int $deep If $deep = 0 then the search is performed in the entire branch or tree, else if $deep > 0
      * then the search is applied only to the number of sublevels contained in $deep.
      * E.g. $deep = 1 looks on for primary children, $deep = 2 looks for childrens and grandchildrens.
-     * @return CNabuCatalogItemList Returns the list of Items in the Id collection with their respective branches to
+     * @return CNabuCatalogItem Returns the list of Items in the Id collection with their respective branches to
      * reach all located Items.
      */
     public function findItemBySlug(string $slug, array $roots = null, $nb_language = null, $deep = 0)
