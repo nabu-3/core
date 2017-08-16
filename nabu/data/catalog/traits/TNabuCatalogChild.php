@@ -68,7 +68,7 @@ trait TNabuCatalogChild
     public function setCatalog(CNabuCatalog $nb_catalog)
     {
         $this->nb_catalog = $nb_catalog;
-        if ($this instanceof CNabuDataObject && $this->contains(NABU_CATALOG_FIELD_ID)) {
+        if ($this instanceof CNabuDataObject && $nb_catalog->contains(NABU_CATALOG_FIELD_ID)) {
             $this->transferValue($nb_catalog, NABU_CATALOG_FIELD_ID);
         }
 
