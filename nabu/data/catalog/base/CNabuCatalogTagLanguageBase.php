@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/08/17 10:03:52 UTC
+ * Created: 2017/08/17 12:16:42 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -241,27 +241,6 @@ abstract class CNabuCatalogTagLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Get Catalog Tag Lang Title attribute value
-     * @return null|string Returns the Catalog Tag Lang Title value
-     */
-    public function getTitle()
-    {
-        return $this->getValue('nb_catalog_tag_lang_title');
-    }
-
-    /**
-     * Sets the Catalog Tag Lang Title attribute value.
-     * @param null|string $title New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setTitle(string $title = null) : CNabuDataObject
-    {
-        $this->setValue('nb_catalog_tag_lang_title', $title);
-        
-        return $this;
-    }
-
-    /**
      * Get Catalog Tag Lang Image attribute value
      * @return null|string Returns the Catalog Tag Lang Image value
      */
@@ -283,22 +262,43 @@ abstract class CNabuCatalogTagLanguageBase extends CNabuDBInternalObject impleme
     }
 
     /**
-     * Get Catalog Tag Lang Alternate attribute value
-     * @return null|string Returns the Catalog Tag Lang Alternate value
+     * Get Catalog Tag Lang Title attribute value
+     * @return null|string Returns the Catalog Tag Lang Title value
      */
-    public function getAlternate()
+    public function getTitle()
     {
-        return $this->getValue('nb_catalog_tag_lang_alternate');
+        return $this->getValue('nb_catalog_tag_lang_title');
     }
 
     /**
-     * Sets the Catalog Tag Lang Alternate attribute value.
-     * @param null|string $alternate New value for attribute
+     * Sets the Catalog Tag Lang Title attribute value.
+     * @param null|string $title New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAlternate(string $alternate = null) : CNabuDataObject
+    public function setTitle(string $title = null) : CNabuDataObject
     {
-        $this->setValue('nb_catalog_tag_lang_alternate', $alternate);
+        $this->setValue('nb_catalog_tag_lang_title', $title);
+        
+        return $this;
+    }
+
+    /**
+     * Get Catalog Tag Lang Subtitle attribute value
+     * @return null|string Returns the Catalog Tag Lang Subtitle value
+     */
+    public function getSubtitle()
+    {
+        return $this->getValue('nb_catalog_tag_lang_subtitle');
+    }
+
+    /**
+     * Sets the Catalog Tag Lang Subtitle attribute value.
+     * @param null|string $subtitle New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setSubtitle(string $subtitle = null) : CNabuDataObject
+    {
+        $this->setValue('nb_catalog_tag_lang_subtitle', $subtitle);
         
         return $this;
     }
@@ -322,5 +322,125 @@ abstract class CNabuCatalogTagLanguageBase extends CNabuDBInternalObject impleme
         $this->setValue('nb_catalog_tag_lang_anchor_text', $anchor_text);
         
         return $this;
+    }
+
+    /**
+     * Get Catalog Tag Lang Opening attribute value
+     * @return null|string Returns the Catalog Tag Lang Opening value
+     */
+    public function getOpening()
+    {
+        return $this->getValue('nb_catalog_tag_lang_opening');
+    }
+
+    /**
+     * Sets the Catalog Tag Lang Opening attribute value.
+     * @param null|string $opening New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setOpening(string $opening = null) : CNabuDataObject
+    {
+        $this->setValue('nb_catalog_tag_lang_opening', $opening);
+        
+        return $this;
+    }
+
+    /**
+     * Get Catalog Tag Lang Content attribute value
+     * @return null|string Returns the Catalog Tag Lang Content value
+     */
+    public function getContent()
+    {
+        return $this->getValue('nb_catalog_tag_lang_content');
+    }
+
+    /**
+     * Sets the Catalog Tag Lang Content attribute value.
+     * @param null|string $content New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setContent(string $content = null) : CNabuDataObject
+    {
+        $this->setValue('nb_catalog_tag_lang_content', $content);
+        
+        return $this;
+    }
+
+    /**
+     * Get Catalog Tag Lang Footer attribute value
+     * @return null|string Returns the Catalog Tag Lang Footer value
+     */
+    public function getFooter()
+    {
+        return $this->getValue('nb_catalog_tag_lang_footer');
+    }
+
+    /**
+     * Sets the Catalog Tag Lang Footer attribute value.
+     * @param null|string $footer New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setFooter(string $footer = null) : CNabuDataObject
+    {
+        $this->setValue('nb_catalog_tag_lang_footer', $footer);
+        
+        return $this;
+    }
+
+    /**
+     * Get Catalog Tag Lang Aside attribute value
+     * @return null|string Returns the Catalog Tag Lang Aside value
+     */
+    public function getAside()
+    {
+        return $this->getValue('nb_catalog_tag_lang_aside');
+    }
+
+    /**
+     * Sets the Catalog Tag Lang Aside attribute value.
+     * @param null|string $aside New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setAside(string $aside = null) : CNabuDataObject
+    {
+        $this->setValue('nb_catalog_tag_lang_aside', $aside);
+        
+        return $this;
+    }
+
+    /**
+     * Get Catalog Tag Lang Attributes attribute value
+     * @return null|array Returns the Catalog Tag Lang Attributes value
+     */
+    public function getAttributes()
+    {
+        return $this->getValueJSONDecoded('nb_catalog_tag_lang_attributes');
+    }
+
+    /**
+     * Sets the Catalog Tag Lang Attributes attribute value.
+     * @param null|string|array $attributes New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setAttributes(string $attributes = null) : CNabuDataObject
+    {
+        $this->setValueJSONEncoded('nb_catalog_tag_lang_attributes', $attributes);
+        
+        return $this;
+    }
+
+    /**
+     * Overrides this method to add support to traits and/or attributes.
+     * @param int|CNabuDataObject $nb_language Instance or Id of the language to be used.
+     * @param bool $dataonly Render only field values and ommit class control flags.
+     * @return array Returns a multilevel associative array with all data.
+     */
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $trdata = parent::getTreeData($nb_language, $dataonly);
+        
+        $trdata['attributes'] = $this->getAttributes();
+        
+        return $trdata;
     }
 }

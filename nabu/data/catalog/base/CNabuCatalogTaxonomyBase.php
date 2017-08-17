@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/08/17 10:03:49 UTC
+ * Created: 2017/08/17 12:16:40 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -448,6 +448,27 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
     }
 
     /**
+     * Get Catalog Taxonomy Attributes attribute value
+     * @return null|array Returns the Catalog Taxonomy Attributes value
+     */
+    public function getAttributes()
+    {
+        return $this->getValueJSONDecoded('nb_catalog_taxonomy_attributes');
+    }
+
+    /**
+     * Sets the Catalog Taxonomy Attributes attribute value.
+     * @param null|string|array $attributes New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setAttributes(string $attributes = null) : CNabuDataObject
+    {
+        $this->setValueJSONEncoded('nb_catalog_taxonomy_attributes', $attributes);
+        
+        return $this;
+    }
+
+    /**
      * Overrides this method to add support to traits and/or attributes.
      * @param int|CNabuDataObject $nb_language Instance or Id of the language to be used.
      * @param bool $dataonly Render only field values and ommit class control flags.
@@ -457,6 +478,7 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
     {
         $trdata = parent::getTreeData($nb_language, $dataonly);
         
+        $trdata['attributes'] = $this->getAttributes();
         $trdata = $this->appendTranslatedTreeData($trdata, $nb_language, $dataonly);
         
         return $trdata;

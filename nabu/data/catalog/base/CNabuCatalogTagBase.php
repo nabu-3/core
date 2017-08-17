@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/08/17 10:03:51 UTC
+ * Created: 2017/08/17 12:16:42 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -118,6 +118,33 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
                     'hash' => $hash
                 )
         );
+    }
+
+    /**
+     * Find an instance identified by nb_catalog_tag_key field.
+     * @param mixed $nb_catalog Catalog that owns Catalog Tag
+     * @param string $key Key to search
+     * @return CNabuCatalogTag Returns a valid instance if exists or null if not.
+     */
+    public static function findByKey($nb_catalog, $key)
+    {
+        $nb_catalog_id = nb_getMixedValue($nb_catalog, 'nb_catalog_id');
+        if (is_numeric($nb_catalog_id)) {
+            $retval = CNabuCatalogTag::buildObjectFromSQL(
+                    'select * '
+                    . 'from nb_catalog_tag '
+                   . 'where nb_catalog_id=%catalog_id$d '
+                     . "and nb_catalog_tag_key='%key\$s'",
+                    array(
+                        'catalog_id' => $nb_catalog_id,
+                        'key' => $key
+                    )
+            );
+        } else {
+            $retval = null;
+        }
+        
+        return $retval;
     }
 
     /**
@@ -351,6 +378,27 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
     }
 
     /**
+     * Get Catalog Tag Key attribute value
+     * @return null|string Returns the Catalog Tag Key value
+     */
+    public function getKey()
+    {
+        return $this->getValue('nb_catalog_tag_key');
+    }
+
+    /**
+     * Sets the Catalog Tag Key attribute value.
+     * @param null|string $key New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setKey(string $key = null) : CNabuDataObject
+    {
+        $this->setValue('nb_catalog_tag_key', $key);
+        
+        return $this;
+    }
+
+    /**
      * Get Catalog Tag Anchor attribute value
      * @return null|string Returns the Catalog Tag Anchor value
      */
@@ -372,6 +420,27 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
     }
 
     /**
+     * Get Catalog Tag Attributes attribute value
+     * @return null|array Returns the Catalog Tag Attributes value
+     */
+    public function getAttributes()
+    {
+        return $this->getValueJSONDecoded('nb_catalog_tag_attributes');
+    }
+
+    /**
+     * Sets the Catalog Tag Attributes attribute value.
+     * @param null|string|array $attributes New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setAttributes(string $attributes = null) : CNabuDataObject
+    {
+        $this->setValueJSONEncoded('nb_catalog_tag_attributes', $attributes);
+        
+        return $this;
+    }
+
+    /**
      * Overrides this method to add support to traits and/or attributes.
      * @param int|CNabuDataObject $nb_language Instance or Id of the language to be used.
      * @param bool $dataonly Render only field values and ommit class control flags.
@@ -381,6 +450,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
     {
         $trdata = parent::getTreeData($nb_language, $dataonly);
         
+        $trdata['attributes'] = $this->getAttributes();
         $trdata = $this->appendTranslatedTreeData($trdata, $nb_language, $dataonly);
         
         return $trdata;

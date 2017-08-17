@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/08/17 10:03:51 UTC
+ * Created: 2017/08/17 12:16:41 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -220,27 +220,6 @@ abstract class CNabuCatalogItemLanguageBase extends CNabuDBInternalObject implem
     }
 
     /**
-     * Get Catalog Item Lang Slug attribute value
-     * @return null|string Returns the Catalog Item Lang Slug value
-     */
-    public function getSlug()
-    {
-        return $this->getValue('nb_catalog_item_lang_slug');
-    }
-
-    /**
-     * Sets the Catalog Item Lang Slug attribute value.
-     * @param null|string $slug New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setSlug(string $slug = null) : CNabuDataObject
-    {
-        $this->setValue('nb_catalog_item_lang_slug', $slug);
-        
-        return $this;
-    }
-
-    /**
      * Get Catalog Item Lang SKU attribute value
      * @return null|string Returns the Catalog Item Lang SKU value
      */
@@ -257,6 +236,27 @@ abstract class CNabuCatalogItemLanguageBase extends CNabuDBInternalObject implem
     public function setSKU(string $sku = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_item_lang_sku', $sku);
+        
+        return $this;
+    }
+
+    /**
+     * Get Catalog Item Lang Slug attribute value
+     * @return null|string Returns the Catalog Item Lang Slug value
+     */
+    public function getSlug()
+    {
+        return $this->getValue('nb_catalog_item_lang_slug');
+    }
+
+    /**
+     * Sets the Catalog Item Lang Slug attribute value.
+     * @param null|string $slug New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setSlug(string $slug = null) : CNabuDataObject
+    {
+        $this->setValue('nb_catalog_item_lang_slug', $slug);
         
         return $this;
     }
@@ -320,6 +320,27 @@ abstract class CNabuCatalogItemLanguageBase extends CNabuDBInternalObject implem
     public function setSubtitle(string $subtitle = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_item_lang_subtitle', $subtitle);
+        
+        return $this;
+    }
+
+    /**
+     * Get Catalog Item Lang Anchor Text attribute value
+     * @return null|string Returns the Catalog Item Lang Anchor Text value
+     */
+    public function getAnchorText()
+    {
+        return $this->getValue('nb_catalog_item_lang_anchor_text');
+    }
+
+    /**
+     * Sets the Catalog Item Lang Anchor Text attribute value.
+     * @param null|string $anchor_text New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setAnchorText(string $anchor_text = null) : CNabuDataObject
+    {
+        $this->setValue('nb_catalog_item_lang_anchor_text', $anchor_text);
         
         return $this;
     }

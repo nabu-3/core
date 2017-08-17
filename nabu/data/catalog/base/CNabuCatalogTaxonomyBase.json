@@ -73,6 +73,17 @@
             "is_nullable": false,
             "extra": "",
             "comment": "Scope of the taxonomy related items:\n\nO = Open \/ Public\nP = Private"
+        },
+        "nb_catalog_taxonomy_attributes": {
+            "name": "nb_catalog_taxonomy_attributes",
+            "ordinal": "7",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
         }
     },
     "constraints": {
