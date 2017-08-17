@@ -259,10 +259,9 @@ class CNabuCatalog extends CNabuCatalogBase
     }
 
     /**
-     * Gets all taxonomy instances of the Catlog.
+     * Gets all taxonomy instances of the Catalog.
      * @param bool $force If true, then reloads the list from the storage.
-     * @return array Returns an associative array with the list of taxonomy instances where the index of the array
-     * is the ID of each taxonomy.
+     * @return CNabuCatalogTaxonomyList Returns the list of taxonomy instances.
      */
     public function getTaxonomies(bool $force = false)
     {
@@ -273,7 +272,7 @@ class CNabuCatalog extends CNabuCatalogBase
             );
         }
 
-        return $this->nb_catalog_taxonomy_list->getItems();
+        return $this->nb_catalog_taxonomy_list;
     }
 
     /**

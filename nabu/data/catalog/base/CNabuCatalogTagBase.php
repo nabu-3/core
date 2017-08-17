@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/07/03 10:56:43 UTC
+ * Created: 2017/08/17 10:03:51 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,8 +27,11 @@ namespace nabu\data\catalog\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\catalog\builtin\CNabuBuiltInCatalogTagLanguage;
 use \nabu\data\catalog\CNabuCatalog;
+use \nabu\data\catalog\CNabuCatalogTag;
 use \nabu\data\catalog\CNabuCatalogTagLanguage;
 use \nabu\data\catalog\CNabuCatalogTagLanguageList;
 use \nabu\data\catalog\CNabuCatalogTagList;
@@ -44,9 +47,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\catalog\base
  */
-abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
     use TNabuCatalogChild;
+    use TNabuHashed;
     use TNabuTranslated;
 
     /**
@@ -97,6 +101,23 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
                    . "where nb_catalog_tag_id=%nb_catalog_tag_id\$d "
               )
             : null;
+    }
+
+    /**
+     * Find an instance identified by nb_catalog_tag_hash field.
+     * @param string $hash Hash to search
+     * @return CNabuDataObject Returns a valid instance if exists or null if not.
+     */
+    public static function findByHash(string $hash)
+    {
+        return CNabuCatalogTag::buildObjectFromSQL(
+                'select * '
+                . 'from nb_catalog_tag '
+               . "where nb_catalog_tag_hash='%hash\$s'",
+                array(
+                    'hash' => $hash
+                )
+        );
     }
 
     /**
@@ -277,6 +298,27 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
             );
         }
         $this->setValue('nb_catalog_tag_id', $id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Catalog Tag Hash attribute value
+     * @return null|string Returns the Catalog Tag Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_catalog_tag_hash');
+    }
+
+    /**
+     * Sets the Catalog Tag Hash attribute value.
+     * @param null|string $hash New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setHash(string $hash = null) : CNabuDataObject
+    {
+        $this->setValue('nb_catalog_tag_hash', $hash);
         
         return $this;
     }

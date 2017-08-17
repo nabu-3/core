@@ -19,9 +19,20 @@
             "extra": "auto_increment",
             "comment": ""
         },
+        "nb_catalog_taxonomy_hash": {
+            "name": "nb_catalog_taxonomy_hash",
+            "ordinal": "2",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_catalog_id": {
             "name": "nb_catalog_id",
-            "ordinal": "2",
+            "ordinal": "3",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -32,7 +43,7 @@
         },
         "nb_catalog_taxonomy_key": {
             "name": "nb_catalog_taxonomy_key",
-            "ordinal": "3",
+            "ordinal": "4",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(30)",
@@ -43,7 +54,7 @@
         },
         "nb_catalog_taxonomy_level": {
             "name": "nb_catalog_taxonomy_level",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -54,7 +65,7 @@
         },
         "nb_catalog_taxonomy_scope": {
             "name": "nb_catalog_taxonomy_scope",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "enum",
             "precision": null,
             "type": "enum('O','P')",
@@ -75,6 +86,22 @@
                     "name": "nb_catalog_taxonomy_id",
                     "ordinal": "1",
                     "collation": "ASC",
+                    "comments": ""
+                }
+            }
+        },
+        "nb_catalog_taxonomy_hash_idx": {
+            "name": "nb_catalog_taxonomy_hash_idx",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_catalog_taxonomy_hash": {
+                    "name": "nb_catalog_taxonomy_hash",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
                     "comments": ""
                 }
             }
