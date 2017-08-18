@@ -285,6 +285,23 @@ class CNabuCatalog extends CNabuCatalogBase
     }
 
     /**
+     * Gets all tag instances of the Catalog.
+     * @param bool $force If true, then reloads the list from the storage.
+     * @return CNabuCatalogTagList Returns the list of tag instances.
+     */
+    public function getTags(bool $force = false)
+    {
+        if ($this->nb_catalog_tag_list->isEmpty() || $force) {
+            $this->nb_catalog_tag_list->clear();
+            $this->nb_catalog_tag_list->merge(
+                CNabuCatalogTag::getAllCatalogTags($this)
+            );
+        }
+
+        return $this->nb_catalog_tag_list;
+    }
+
+    /**
      * Overrides getTreeData method to add items and tag branches.
      * If $nb_language have a valid value, also adds a translation object
      * with current translation pointed by it.
@@ -299,10 +316,25 @@ class CNabuCatalog extends CNabuCatalogBase
         $trdata['languages'] = $this->getLanguages();
         $trdata['taxonomies'] = $this->nb_catalog_taxonomy_list;
         $trdata['taxonomy_keys'] = $this->getTaxonomyKeysIndex();
-        $trdata['items'] = $this->nb_catalog_item_tree;
         $trdata['tags'] = $this->nb_catalog_tag_list;
+        $trdata['items'] = $this->nb_catalog_item_tree;
 
         return $trdata;
     }
 
+    /**
+     * Overrides refresh method to allow catalog subentities to be refreshed.
+     * @param bool $force Forces to reload entities from the database storage.
+     * @param bool $cascade Forces to reload child entities from the database storage.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh(bool $force = false, bool $cascade = false) : bool
+    {
+        return parent::refresh($force, $cascade) &&
+               (!$cascade || (
+                   $this->getTaxonomies($force) &&
+                   $this->getTags($force)
+               ))
+        ;
+    }
 }

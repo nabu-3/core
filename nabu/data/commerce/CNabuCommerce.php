@@ -113,7 +113,7 @@ class CNabuCommerce extends CNabuCommerceBase
     }
 
     /**
-     * Overrides refresh method to add commerce subentities to be refreshed.
+     * Overrides refresh method to allow commerce subentities to be refreshed.
      * @param bool $force Forces to reload entities from the database storage.
      * @param bool $cascade Forces to reload child entities from the database storage.
      * @return bool Returns true if transations are empty or refreshed.

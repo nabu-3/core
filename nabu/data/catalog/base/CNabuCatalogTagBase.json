@@ -3,7 +3,7 @@
     "name": "nb_catalog_tag",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "1",
+    "autoincrement": "2",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",
@@ -52,20 +52,9 @@
             "extra": "",
             "comment": ""
         },
-        "nb_catalog_tag_anchor": {
-            "name": "nb_catalog_tag_anchor",
-            "ordinal": "5",
-            "data_type": "varchar",
-            "precision": null,
-            "type": "varchar(50)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
         "nb_catalog_tag_attributes": {
             "name": "nb_catalog_tag_attributes",
-            "ordinal": "6",
+            "ordinal": "5",
             "data_type": "text",
             "precision": null,
             "type": "text",
