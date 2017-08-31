@@ -338,4 +338,34 @@ class CNabuCatalog extends CNabuCatalogBase
                ))
         ;
     }
+
+    /**
+     * Move a Catalog Item to put it in front of a different Item.
+     * @param mixed $nb_catalog_item An Id or a CNabuDataObject instance containing a field named nb_catalog_item_id
+     * to be moved.
+     * @param mixed $nb_before_item An Id or a CNabuDataObject instance containing a field named nb_catalog_item_id
+     * representing the Item where $nb_catalog_item will be putted in front of.
+     * @return bool Returns true if the Item was moved or false if not.
+     * @throws ENabuCoreException Raises an exception if some of requested Items does not corresponding to this Catalog.
+     */
+    public function moveItemBefore($nb_catalog_item, $nb_before_item)
+    {
+        $nb_catalog_item_id = nb_getMixedValue($nb_catalog_item, NABU_CATALOG_ITEM_FIELD_ID);
+        if (is_numeric($nb_catalog_item_id)) {
+            $nb_catalog_before_id = nb_getMixedValue($nb_before_item, NABU_CATALOG_ITEM_FIELD_ID);
+            if (is_numeric($nb_catalog_before_id)) {
+                
+            } else {
+                throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                    array('$nb_before_item', print_r($nb_before_item, true))
+                );
+            }
+        } else {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                array('$nb_catalog_item', print_r($nb_catalog_item, true))
+            );
+        }
+    }
 }
