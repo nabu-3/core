@@ -20,6 +20,7 @@
 namespace nabu\data\catalog;
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\catalog\base\CNabuCatalogBase;
+use nabu\data\exceptions\ENabuDataException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -350,38 +351,6 @@ class CNabuCatalog extends CNabuCatalogBase
      */
     public function moveItemBefore($nb_catalog_item, $nb_before_item)
     {
-        $nb_catalog_item_id = nb_getMixedValue($nb_catalog_item, NABU_CATALOG_ITEM_FIELD_ID);
-        if (is_numeric($nb_catalog_item_id)) {
-            $nb_catalog_before_id = nb_getMixedValue($nb_before_item, NABU_CATALOG_ITEM_FIELD_ID);
-            if (is_numeric($nb_catalog_before_id)) {
-                $data = $this->db->getQueryAsAssoc(
-                    NABU_CATALOG_ITEM_FIELD_ID,
-                    'select nb_catalog_item_id, nb_catalog_item_order '
-                    . 'from nb_catalog_item '
-                   . 'where nb_catalog_item_id in (%item_id$d, %before_id$d) '
-                     . 'and nb_catalog_id = %cat_id$d',
-                    array(
-                        'cat_id' => $this->getId(),
-                        'item_id' => $nb_catalog_item_id,
-                        'before_id' => $nb_catalog_before_id
-                    )
-                );
-                if (count($data) === 2) {
-
-                } else {
-                    //TODO Throw ENabuCatalogException descending from ENabuDataException
-                }
-            } else {
-                throw new ENabuCoreException(
-                    ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
-                    array('$nb_before_item', print_r($nb_before_item, true))
-                );
-            }
-        } else {
-            throw new ENabuCoreException(
-                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
-                array('$nb_catalog_item', print_r($nb_catalog_item, true))
-            );
-        }
+        return CNabuCatalogItem::moveItemBeforeItem($this, $nb_catalog_item, $nb_before_item);
     }
 }

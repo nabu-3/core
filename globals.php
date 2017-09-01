@@ -122,7 +122,7 @@ define('NABU_MEDIOTECA_FIELD_ID', 'nb_medioteca_id');
 define('NABU_CATALOG_TABLE', 'nb_catalog');
 define('NABU_CATALOG_FIELD_ID', 'nb_catalog_id');
 define('NABU_CATALOG_ITEM_TABLE', 'nb_catalog_item');
-define('NABU_CATALOG_ITEM_FIELD_ID', 'nabu_catalog_item_id');
+define('NABU_CATALOG_ITEM_FIELD_ID', 'nb_catalog_item_id');
 
 define('NABU_MESSAGING_TABLE', 'nb_messaging');
 define('NABU_MESSAGING_FIELD_ID', 'nb_messaging_id');

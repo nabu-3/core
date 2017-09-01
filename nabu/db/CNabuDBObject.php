@@ -81,6 +81,15 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
         $this->load();
     }
 
+    /**
+     * Gets current Database Connector instance assigned to this object.
+     * @return INabuDBConnector If a Connector is assigned, then returns his instance else returns null.
+     */
+    public function getDB()
+    {
+        return $this->db;
+    }
+
     public function setDB(INabuDBConnector $connector)
     {
         if ($connector === null) {
