@@ -38,6 +38,7 @@ class CNabuCatalogItemTree extends CNabuCatalogItemList
         $nb_catalog = $this->getCatalog();
         if (is_object($nb_catalog)) {
             $nb_owner = $this->getOwner();
+            $this->clear();
             $this->merge($nb_catalog->searchItems(($nb_owner !== null ? array($this->getOwner()->getId()) : null), null, null, $deep));
             $this->buildTree();
         }

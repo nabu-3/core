@@ -335,7 +335,8 @@ class CNabuCatalog extends CNabuCatalogBase
         return parent::refresh($force, $cascade) &&
                (!$cascade || (
                    $this->getTaxonomies($force) &&
-                   $this->getTags($force)
+                   $this->getTags($force) &&
+                   $this->getItems($force)
                ))
         ;
     }

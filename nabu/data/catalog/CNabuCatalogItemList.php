@@ -47,6 +47,7 @@ class CNabuCatalogItemList extends CNabuCatalogItemListBase
     public function populate(int $deep = 0)
     {
         $nb_catalog = $this->getCatalog();
+        $this->clear();
         $this->merge(CNabuCatalogItem::getItemsForCatalog($nb_catalog, $deep));
         $translations = CNabuCatalogItem::getItemTranslationsForCatalog($nb_catalog, $deep);
         $translations->iterate(
