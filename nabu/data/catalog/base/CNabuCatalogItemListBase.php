@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/08/18 08:51:27 UTC
+ * Created: 2017/09/04 00:00:36 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -28,6 +28,7 @@ namespace nabu\data\catalog\base;
 use \nabu\core\CNabuEngine;
 use \nabu\data\catalog\CNabuCatalogItem;
 use \nabu\data\CNabuDataObjectList;
+use \nabu\data\CNabuDataObjectListIndex;
 
 /**
  * Class to manage a list of Catalog Item instances.
@@ -37,6 +38,12 @@ use \nabu\data\CNabuDataObjectList;
  */
 abstract class CNabuCatalogItemListBase extends CNabuDataObjectList
 {
+    /**
+     * Index the list using the nb_catalog_item_order field.
+     * @var int
+     */
+    const INDEX_ORDER = "order";
+
     /**
      * Instantiates the class.
      */
@@ -50,6 +57,9 @@ abstract class CNabuCatalogItemListBase extends CNabuDataObjectList
      */
     protected function createSecondaryIndexes()
     {
+        $this->addIndex(
+            new CNabuDataObjectListIndex($this, 'nb_catalog_item_order', 'nb_catalog_item_order', self::INDEX_ORDER)
+        );
     }
 
     /**

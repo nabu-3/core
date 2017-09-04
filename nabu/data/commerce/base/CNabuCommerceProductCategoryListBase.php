@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/08/18 08:51:23 UTC
+ * Created: 2017/09/04 00:00:28 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -39,10 +39,16 @@ use \nabu\data\commerce\CNabuCommerceProductCategory;
 abstract class CNabuCommerceProductCategoryListBase extends CNabuDataObjectList
 {
     /**
-     * Index the list using the key field.
+     * Index the list using the nb_commerce_product_category_key field.
      * @var string
      */
     const INDEX_KEY = "keys";
+
+    /**
+     * Index the list using the nb_commerce_product_category_order field.
+     * @var int
+     */
+    const INDEX_ORDER = "order";
 
     /**
      * Instantiates the class.
@@ -58,7 +64,10 @@ abstract class CNabuCommerceProductCategoryListBase extends CNabuDataObjectList
     protected function createSecondaryIndexes()
     {
         $this->addIndex(
-            new CNabuDataObjectListIndex($this, 'nb_commerce_product_category_key', null, self::INDEX_KEY)
+            new CNabuDataObjectListIndex($this, 'nb_commerce_product_category_key', 'nb_commerce_product_category_order', self::INDEX_KEY)
+        );
+        $this->addIndex(
+            new CNabuDataObjectListIndex($this, 'nb_commerce_product_category_order', 'nb_commerce_product_category_order', self::INDEX_ORDER)
         );
     }
 

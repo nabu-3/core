@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/08/18 08:51:32 UTC
+ * Created: 2017/09/04 00:00:57 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,8 +27,6 @@ namespace nabu\data\messaging\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
-use \nabu\core\interfaces\INabuHashed;
-use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\messaging\CNabuMessaging;
 use \nabu\data\messaging\CNabuMessagingService;
@@ -41,9 +39,8 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\messaging\base
  */
-abstract class CNabuMessagingServiceBase extends CNabuDBInternalObject implements INabuHashed
+abstract class CNabuMessagingServiceBase extends CNabuDBInternalObject
 {
-    use TNabuHashed;
     use TNabuMessagingChild;
 
     /**
@@ -92,23 +89,6 @@ abstract class CNabuMessagingServiceBase extends CNabuDBInternalObject implement
                    . "where nb_messaging_service_id=%nb_messaging_service_id\$d "
               )
             : null;
-    }
-
-    /**
-     * Find an instance identified by nb_messaging_service_hash field.
-     * @param string $hash Hash to search
-     * @return CNabuDataObject Returns a valid instance if exists or null if not.
-     */
-    public static function findByHash(string $hash)
-    {
-        return CNabuMessagingService::buildObjectFromSQL(
-                'select * '
-                . 'from nb_messaging_service '
-               . "where nb_messaging_service_hash='%hash\$s'",
-                array(
-                    'hash' => $hash
-                )
-        );
     }
 
     /**

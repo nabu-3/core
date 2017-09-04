@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/08/18 08:50:59 UTC
+ * Created: 2017/09/03 23:59:42 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -39,7 +39,7 @@ use \nabu\data\CNabuDataObjectListIndex;
 abstract class CNabuClusterGroupListBase extends CNabuDataObjectList
 {
     /**
-     * Index the list using the key field.
+     * Index the list using the nb_cluster_group_key field.
      * @var string
      */
     const INDEX_KEY = "keys";
@@ -58,7 +58,7 @@ abstract class CNabuClusterGroupListBase extends CNabuDataObjectList
     protected function createSecondaryIndexes()
     {
         $this->addIndex(
-            new CNabuDataObjectListIndex($this, 'nb_cluster_group_key', 'nb_cluster_group_order', self::INDEX_KEY)
+            new CNabuDataObjectListIndex($this, 'nb_cluster_group_key', 'nb_cluster_group_key', self::INDEX_KEY)
         );
     }
 

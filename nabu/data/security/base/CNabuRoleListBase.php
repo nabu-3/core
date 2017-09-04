@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/08/18 08:51:00 UTC
+ * Created: 2017/09/03 23:59:43 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -39,7 +39,7 @@ use \nabu\data\security\CNabuRole;
 abstract class CNabuRoleListBase extends CNabuDataObjectList
 {
     /**
-     * Index the list using the key field.
+     * Index the list using the nb_role_key field.
      * @var string
      */
     const INDEX_KEY = "keys";
@@ -58,7 +58,7 @@ abstract class CNabuRoleListBase extends CNabuDataObjectList
     protected function createSecondaryIndexes()
     {
         $this->addIndex(
-            new CNabuDataObjectListIndex($this, 'nb_role_key', 'nb_role_order', self::INDEX_KEY)
+            new CNabuDataObjectListIndex($this, 'nb_role_key', 'nb_role_key', self::INDEX_KEY)
         );
     }
 

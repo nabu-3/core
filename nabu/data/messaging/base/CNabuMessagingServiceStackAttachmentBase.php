@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/08/18 08:51:34 UTC
+ * Created: 2017/09/04 00:01:03 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,10 +27,7 @@ namespace nabu\data\messaging\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
-use \nabu\core\interfaces\INabuHashed;
-use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
-use \nabu\data\messaging\CNabuMessagingServiceStackAttachment;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -39,10 +36,8 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\messaging\base
  */
-abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalObject implements INabuHashed
+abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalObject
 {
-    use TNabuHashed;
-
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
      * the instance is deserialized from the storage.
@@ -90,23 +85,6 @@ abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalO
                    . "where nb_messaging_service_stack_attachment_id=%nb_messaging_service_stack_attachment_id\$d "
               )
             : null;
-    }
-
-    /**
-     * Find an instance identified by nb_messaging_service_stack_attachment_hash field.
-     * @param string $hash Hash to search
-     * @return CNabuDataObject Returns a valid instance if exists or null if not.
-     */
-    public static function findByHash(string $hash)
-    {
-        return CNabuMessagingServiceStackAttachment::buildObjectFromSQL(
-                'select * '
-                . 'from nb_messaging_service_stack_attachment '
-               . "where nb_messaging_service_stack_attachment_hash='%hash\$s'",
-                array(
-                    'hash' => $hash
-                )
-        );
     }
 
     /**

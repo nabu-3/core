@@ -3,19 +3,19 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/08/18 08:51:27 UTC
+ * Created: 2017/09/04 00:00:38 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  * Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  * Copyright 2017 nabu-3 Group
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -64,7 +64,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
         if ($nb_catalog_tag) {
             $this->transferMixedValue($nb_catalog_tag, 'nb_catalog_tag_id');
         }
-
+        
         parent::__construct();
         $this->__translatedConstruct();
         $this->translations_list = new CNabuCatalogTagLanguageList();
@@ -143,7 +143,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
         } else {
             $retval = null;
         }
-
+        
         return $retval;
     }
 
@@ -171,7 +171,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
         } else {
             $retval = new CNabuCatalogTagList();
         }
-
+        
         return $retval;
     }
 
@@ -194,13 +194,13 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
         if (is_numeric($nb_catalog_id)) {
             $fields_part = nb_prefixFieldList(CNabuCatalogTagBase::getStorageName(), $fields, false, true, '`');
             $order_part = nb_prefixFieldList(CNabuCatalogTagBase::getStorageName(), $fields, false, false, '`');
-
+        
             if ($num_items !== 0) {
                 $limit_part = ($offset > 0 ? $offset . ', ' : '') . $num_items;
             } else {
                 $limit_part = false;
             }
-
+        
             $nb_item_list = CNabuEngine::getEngine()->getMainDB()->getQueryAsArray(
                 "select " . ($fields_part ? $fields_part . ' ' : '* ')
                 . 'from nb_catalog_tag '
@@ -214,7 +214,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
         } else {
             $nb_item_list = null;
         }
-
+        
         return $nb_item_list;
     }
 
@@ -244,7 +244,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
         ) {
             $this->languages_list = CNabuCatalogTagLanguage::getLanguagesForTranslatedObject($this);
         }
-
+        
         return $this->languages_list;
     }
 
@@ -261,7 +261,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
         ) {
             $this->translations_list = CNabuCatalogTagLanguage::getTranslationsForTranslatedObject($this);
         }
-
+        
         return $this->translations_list;
     }
 
@@ -287,7 +287,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
         } else {
             $nb_translation = null;
         }
-
+        
         return $nb_translation;
     }
 
@@ -325,7 +325,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
             );
         }
         $this->setValue('nb_catalog_tag_id', $id);
-
+        
         return $this;
     }
 
@@ -346,7 +346,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
     public function setHash(string $hash = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_tag_hash', $hash);
-
+        
         return $this;
     }
 
@@ -373,7 +373,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
             );
         }
         $this->setValue('nb_catalog_id', $nb_catalog_id);
-
+        
         return $this;
     }
 
@@ -394,7 +394,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
     public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_catalog_tag_key', $key);
-
+        
         return $this;
     }
 
@@ -415,7 +415,7 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
     public function setAttributes(string $attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_catalog_tag_attributes', $attributes);
-
+        
         return $this;
     }
 
@@ -428,10 +428,10 @@ abstract class CNabuCatalogTagBase extends CNabuDBInternalObject implements INab
     public function getTreeData($nb_language = null, $dataonly = false)
     {
         $trdata = parent::getTreeData($nb_language, $dataonly);
-
+        
         $trdata['attributes'] = $this->getAttributes();
         $trdata = $this->appendTranslatedTreeData($trdata, $nb_language, $dataonly);
-
+        
         return $trdata;
     }
 }
