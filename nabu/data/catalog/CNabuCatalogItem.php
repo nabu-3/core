@@ -438,7 +438,7 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
                 } else {
                     throw new ENabuCatalogException(
                         ENabuCatalogException::ERROR_ITEM_NOT_INCLUDED_IN_CATALOG,
-                        array(implode(', ', $array_keys($data)))
+                        array(implode(', ', array_keys($data)))
                     );
                 }
             } else {
@@ -508,7 +508,7 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
                     if ($data[$nb_catalog_after_id]['nb_catalog_item_next_sibling'] !== $data[$nb_catalog_item_id]['nb_catalog_item_order']) {
                         if ($data[$nb_catalog_item_id]['nb_catalog_item_order'] < $data[$nb_catalog_after_id]['nb_catalog_item_order']) {
                             $db->executeUpdate(
-                                'update nb_catalog_item as ci1, nb_catalog_item as ci2, nb_catalog_item as ci3, '
+                                'update nb_catalog_item as ci1, nb_catalog_item AS ci2, nb_catalog_item as ci3, '
 	                                 . '(select nb_catalog_id, last_sibling '
                                         . 'from (select ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling '
                                                 . 'from nb_catalog_item ci10, nb_catalog_item ci11 '
@@ -588,16 +588,18 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
                             return true;
                         }
                     }
-                } elseif (count($data) === 1 && $nb_catalog_item_id !== $nb_catalog_before_id) {
-                    $id = array_keys($data)[0];
-                    throw new ENabuCatalogException(
-                        ENabuCatalogException::ERROR_ITEM_NOT_INCLUDED_IN_CATALOG,
-                        array($id === $nb_catalog_item_id ? $nb_catalog_after_id : $nb_catalog_item_id)
-                    );
+                } elseif (count($data) === 1) {
+                    if ($nb_catalog_item_id !== $nb_catalog_after_id) {
+                        $id = array_keys($data)[0];
+                        throw new ENabuCatalogException(
+                            ENabuCatalogException::ERROR_ITEM_NOT_INCLUDED_IN_CATALOG,
+                            array($id === $nb_catalog_item_id ? $nb_catalog_after_id : $nb_catalog_item_id)
+                        );
+                    }
                 } else {
                     throw new ENabuCatalogException(
                         ENabuCatalogException::ERROR_ITEM_NOT_INCLUDED_IN_CATALOG,
-                        array(implode(', ', $array_keys($data)))
+                        array(implode(', ', array_keys($data)))
                     );
                 }
             } else {
@@ -630,23 +632,24 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
                 $last_sibling_id = $this->db->getQueryAsSingleField(
                     'nb_catalog_item_id',
                     'select nb_catalog_item_id '
-                    . 'from nb_catalog '
+                    . 'from nb_catalog_item '
                    . 'where nb_catalog_id=%cat_id$d '
                      . 'and nb_catalog_item_level=1 '
                      . 'and nb_catalog_item_next_sibling is null',
                     array(
                         'cat_id' => $this->getCatalogId()
-                    )
+                    ), true
                 );
                 $this->db->executeUpdate(
-                    'update nb_catalog_item '
-                     . 'set nb_catalog_item_order = (select if(max(nb_catalog_item_order) is null, 1, 0) '
-                                                    . 'from nb_catalog_item '
-                                                   . 'where nb_catalog_id=%cat_id$),'
-                         . 'nb_catalog_item_next_sibling = (select min(nb_catalog_item_order) '
-                                                           . 'from nb_catalog_item '
-                                                          . 'where nb_catalog_id=%cat_id$d) '
-                   . 'where nb_catalog_item_id=%item_id$d',
+                    'update nb_catalog_item ci, '
+                         . '(select if(max(nb_catalog_item_order) is null, 1, 0) as item_order, '
+                                 . 'min(nb_catalog_item_order) as next_sibling '
+                            . 'from nb_catalog_item '
+                           . 'where nb_catalog_id=%cat_id$d '
+                             . 'and nb_catalog_item_order is not null) as x '
+                     . 'set ci.nb_catalog_item_order = x.item_order,'
+                         . 'ci.nb_catalog_item_next_sibling = x.next_sibling '
+                   . 'where ci.nb_catalog_item_id=%item_id$d',
                     array(
                         'cat_id' => $this->getCatalogId(),
                         'item_id' => $this->getId()
