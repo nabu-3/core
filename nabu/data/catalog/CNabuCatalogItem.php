@@ -628,39 +628,47 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
         $retval = false;
 
         if ($this->isNew() && !$this->contains('nb_catalog_item_order')) {
+            $last_sibling_id = $this->db->getQueryAsSingleField(
+                'nb_catalog_item_id',
+                'select nb_catalog_item_id '
+                . 'from nb_catalog_item '
+               . 'where nb_catalog_id=%cat_id$d '
+                 . 'and nb_catalog_item_level=1 '
+                 . 'and nb_catalog_item_next_sibling is null',
+                array(
+                    'cat_id' => $this->getCatalogId()
+                )
+            );
+            $next_order = $this->db->getQueryAsSingleField(
+                'next_order',
+                'select ifnull(next_order, def) + 1 as next_order '
+                . 'from (select max(nb_catalog_item_order) as next_order, def '
+                        . 'from nb_catalog_item ci1 '
+                       . 'right outer join (select 0 as def from dual) ci2 '
+                          . 'on nb_catalog_id=%cat_id$d'
+                     . ') as t',
+                array(
+                    'cat_id' => $this->getCatalogId()
+                )
+            );
+            $this->setOrder($next_order);
             if ($retval = parent::save($trace)) {
-                $last_sibling_id = $this->db->getQueryAsSingleField(
-                    'nb_catalog_item_id',
-                    'select nb_catalog_item_id '
-                    . 'from nb_catalog_item '
-                   . 'where nb_catalog_id=%cat_id$d '
-                     . 'and nb_catalog_item_level=1 '
-                     . 'and nb_catalog_item_next_sibling is null',
-                    array(
-                        'cat_id' => $this->getCatalogId()
-                    ), true
-                );
-                $this->db->executeUpdate(
-                    'update nb_catalog_item ci, '
-                         . '(select if(max(nb_catalog_item_order) is null, 1, 0) as item_order, '
-                                 . 'min(nb_catalog_item_order) as next_sibling '
-                            . 'from nb_catalog_item '
-                           . 'where nb_catalog_id=%cat_id$d '
-                             . 'and nb_catalog_item_order is not null) as x '
-                     . 'set ci.nb_catalog_item_order = x.item_order,'
-                         . 'ci.nb_catalog_item_next_sibling = x.next_sibling '
-                   . 'where ci.nb_catalog_item_id=%item_id$d',
-                    array(
-                        'cat_id' => $this->getCatalogId(),
-                        'item_id' => $this->getId()
-                    ), true
-                );
                 if (is_numeric($last_sibling_id)) {
-                    $this->moveAfter($last_sibling_id);
+                    $this->db->executeUpdate(
+                        'update nb_catalog_item ci '
+                         . 'set ci.nb_catalog_item_next_sibling = %next_sibling$d '
+                       . 'where ci.nb_catalog_item_id=%item_id$d',
+                        array(
+                            'item_id' => $last_sibling_id,
+                            'next_sibling' => $next_order
+                        ), true
+                    );
                 }
             }
         } else {
             $retval = parent::save($trace);
         }
+
+        return $retval;
     }
 }
