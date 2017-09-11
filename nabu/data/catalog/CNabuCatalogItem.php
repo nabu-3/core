@@ -672,3 +672,84 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
         return $retval;
     }
 }
+/*
+select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1.nb_catalog_item_order as i_order, ci1.nb_catalog_item_next_sibling as i_sibling, ci4.last_sibling as i_last,
+       ci2.nb_catalog_item_id as b_id, ci2.nb_catalog_item_level as b_level, ci2.nb_catalog_item_order as b_order, ci2.nb_catalog_item_next_sibling as b_sibling, ci5.last_sibling as b_last,
+       ci3.nb_catalog_item_id as n_id, ci3.nb_catalog_item_level as n_level, ci3.nb_catalog_item_order as n_order, ci3.nb_catalog_item_next_sibling as n_sibling,
+       ci3.nb_catalog_item_id as t_id,
+       if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ci4.last_sibling - 1,
+           ci2.nb_catalog_item_level + ci3.nb_catalog_item_level + 1 - ci1.nb_catalog_item_level,
+           ci3.nb_catalog_item_level
+		  ) as t_level,
+	   if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ci4.last_sibling - 1,
+           ci2.nb_catalog_item_order + ci3.nb_catalog_item_order - ci4.last_sibling,
+
+           if (ci3.nb_catalog_item_order between ci4.last_sibling and ci2.nb_catalog_item_order - 1,
+               ci3.nb_catalog_item_order + ci1.nb_catalog_item_order - ci4.last_sibling,
+			   if (ci3.nb_catalog_item_order > ci2.nb_catalog_item_order,
+				   ci3.nb_catalog_item_order + ci4.last_sibling - ci1.nb_catalog_item_order,
+				   ci3.nb_catalog_item_order
+				  )
+			  )
+		  ) as t_order,
+	   if (ci3.nb_catalog_item_next_sibling between ci1.nb_catalog_item_order + 1 and ci4.last_sibling - 1,
+           ci2.nb_catalog_item_order + ci3.nb_catalog_item_next_sibling + 1 - ci1.nb_catalog_item_order,
+           if (ci3.nb_catalog_item_next_sibling > ci2.nb_catalog_item_order,
+               ci3.nb_catalog_item_next_sibling + ci4.last_sibling - ci1.nb_catalog_item_order,
+               ci3.nb_catalog_item_next_sibling
+			  )
+		  ) as t_sibling
+
+
+
+
+
+
+
+
+  from nb_catalog_item as ci1, nb_catalog_item as ci2, nb_catalog_item as ci3,
+       (select nb_catalog_id, last_sibling
+          from (select ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling
+				  from nb_catalog_item ci10, nb_catalog_item ci11
+				 where ci10.nb_catalog_id=1
+                   and ci10.nb_catalog_id=ci11.nb_catalog_id
+                   and ci10.nb_catalog_item_id = 34
+                   and ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
+                   and ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
+                   and ci11.nb_catalog_item_next_sibling is not null
+                   and ci10.nb_catalog_item_order between ci11.nb_catalog_item_order and ci11.nb_catalog_item_next_sibling - 1
+				 group by ci11.nb_catalog_id, ci11.nb_catalog_item_level
+                 union all
+				select nb_catalog_id, max(nb_catalog_item_order) + 1
+                  from nb_catalog_item
+				 where nb_catalog_id=1
+                 group by nb_catalog_id) as t
+                 order by last_sibling asc
+                 limit 1) as ci4,
+			   (select nb_catalog_id, last_sibling
+                  from (select ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling
+						  from nb_catalog_item ci10, nb_catalog_item ci11
+						 where ci10.nb_catalog_id=1
+                           and ci10.nb_catalog_id=ci11.nb_catalog_id
+                           and ci10.nb_catalog_item_id = 10
+                           and ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
+                           and ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
+                           and ci11.nb_catalog_item_next_sibling is not null
+                           and ci10.nb_catalog_item_order between ci11.nb_catalog_item_order and ci11.nb_catalog_item_next_sibling - 1
+						 group by ci11.nb_catalog_id, ci11.nb_catalog_item_level
+                         union all
+						select nb_catalog_id, max(nb_catalog_item_order) + 1
+                          from nb_catalog_item
+						 where nb_catalog_id=1
+                         group by nb_catalog_id) as t
+				 order by last_sibling asc
+                 limit 1) as ci5
+
+ where ci1.nb_catalog_item_id=34
+   and ci2.nb_catalog_item_id=10
+   and ci1.nb_catalog_id=ci2.nb_catalog_id
+   and ci1.nb_catalog_id=ci3.nb_catalog_id
+   and ci1.nb_catalog_id=ci4.nb_catalog_id
+   and ci1.nb_catalog_id=ci5.nb_catalog_id
+ order by ci3.nb_catalog_item_order asc
+*/
