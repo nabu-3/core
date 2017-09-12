@@ -586,6 +586,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         }
 
         $this->main_database = new CMySQLConnector($filename);
+        $this->main_database->setSpaceOptimization(true);
         if ($this->main_database->connect()) {
             if (!$this->main_database->testConnection()) {
                 //throw new exceptions\ENabuCoreException(exceptions\ENabuCoreException::ERROR_M)

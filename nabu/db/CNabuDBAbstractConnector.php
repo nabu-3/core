@@ -40,6 +40,7 @@ abstract class CNabuDBAbstractConnector extends CNabuObject implements INabuDBCo
     protected $password = null;
     protected $trace = false;
     protected $charset = null;
+    protected $trailing_optimization = false;
 
     protected $duplicate_queries_trace = false;
     protected $duplicate_queries_list = null;
@@ -92,6 +93,16 @@ abstract class CNabuDBAbstractConnector extends CNabuObject implements INabuDBCo
     public function isTraced()
     {
         return $this->trace;
+    }
+
+    public function isSpaceOptimizationEnabled()
+    {
+        return $this->trailing_optimization;
+    }
+
+    public function setSpaceOptimization(bool $status)
+    {
+        $this->trailing_optimization = $status;
     }
 
     public function getUser()

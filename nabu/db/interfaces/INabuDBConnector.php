@@ -145,6 +145,18 @@ interface INabuDBConnector
     public function setTrace($trace_query);
 
     /**
+     * Check if connector optimizes leading and trailing spaces.
+     * @return bool Returns true if optimization is enabled.
+     */
+    public function isSpaceOptimizationEnabled();
+
+    /**
+     * Set leading and trailing spaces optimization.
+     * @param bool $status If true sets the optimization. False disables optimization.
+     */
+    public function setSpaceOptimization(bool $status);
+
+    /**
      * Get current database user name
      * @return string Returns current database user
      */
