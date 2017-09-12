@@ -218,49 +218,14 @@ class CNabuCatalogItem extends CNabuCatalogItemBase implements INabuDataObjectTr
                 if (count($data) === 2) {
                     if ($data[$nb_catalog_item_id]['nb_catalog_item_next_sibling'] !== $data[$nb_catalog_before_id]['nb_catalog_item_order']) {
                         if ($data[$nb_catalog_item_id]['nb_catalog_item_order'] < $data[$nb_catalog_before_id]['nb_catalog_item_order']) {
-/*
-select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1.nb_catalog_item_order as i_order, ci1.nb_catalog_item_next_sibling as i_sibling,
-       ci2.nb_catalog_item_id as b_id, ci2.nb_catalog_item_level as b_level, ci2.nb_catalog_item_order as b_order, ci2.nb_catalog_item_next_sibling as b_sibling,
-       ci4.nb_catalog_item_id as p_id, ci4.nb_catalog_item_level as p_level, ci4.nb_catalog_item_order as p_order, ci4.nb_catalog_item_next_sibling as p_sibling,
-       ci3.nb_catalog_item_id as n_id, ci3.nb_catalog_item_level as n_level, ci3.nb_catalog_item_order as n_order, ci3.nb_catalog_item_next_sibling as n_sibling,
-       ci3.nb_catalog_item_id as n_id,
-	   if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ci1.nb_catalog_item_next_sibling - 1,
-		   ci3.nb_catalog_item_level + ci2.nb_catalog_item_level - ci1.nb_catalog_item_level,
-           ci3.nb_catalog_item_level
-		  ) as t_level,
-       if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ci1.nb_catalog_item_next_sibling - 1,
-           ci2.nb_catalog_item_order + ci3.nb_catalog_item_order - ci1.nb_catalog_item_next_sibling,
-		   if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_next_sibling and ci2.nb_catalog_item_order - 1,
-			   ci3.nb_catalog_item_order + ci1.nb_catalog_item_order - ci1.nb_catalog_item_next_sibling,
-               ci3.nb_catalog_item_order
-			  )
-		  ) as t_order,
-	   if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
-           ci2.nb_catalog_item_order,
-           if (ci3.nb_catalog_item_id = ci4.nb_catalog_item_id,
-			   ci2.nb_catalog_item_order + ci1.nb_catalog_item_order - ci1.nb_catalog_item_next_sibling,
-  	           if (ci3.nb_catalog_item_next_sibling between ci1.nb_catalog_item_order + 1 and ci1.nb_catalog_item_next_sibling - 1,
-		           ci2.nb_catalog_item_order + ci3.nb_catalog_item_next_sibling - ci1.nb_catalog_item_next_sibling,
-                   if (ci3.nb_catalog_item_next_sibling between ci1.nb_catalog_item_next_sibling and ci2.nb_catalog_item_order - 1,
-			           ci3.nb_catalog_item_next_sibling + ci1.nb_catalog_item_order - ci1.nb_catalog_item_next_sibling,
-                       ci3.nb_catalog_item_next_sibling
-					  )
-			      )
-		      )
-		  )
-  from nb_catalog_item as ci1, nb_catalog_item as ci2, nb_catalog_item as ci3, nb_catalog_item as ci4
- where ci1.nb_catalog_item_id=2
-   and ci1.nb_catalog_id=ci2.nb_catalog_id
-   and ci2.nb_catalog_item_id=5
-   and ci1.nb_catalog_id=ci3.nb_catalog_id
-   and ci1.nb_catalog_id=ci4.nb_catalog_id
-   and ci4.nb_catalog_item_next_sibling=ci2.nb_catalog_item_order
-order by ci3.nb_catalog_item_order
-;
-*/
                             $db->executeUpdate(
                                 'update nb_catalog_item as ci1, nb_catalog_item as ci2, nb_catalog_item as ci3, nb_catalog_item as ci4 '
-                                 . 'set ci3.nb_catalog_item_level = '
+                                 . 'set ci3.nb_catalog_item_parent_id = '
+                                     . 'if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id, '
+                                         . 'ci2.nb_catalog_item_parent_id, '
+                                         . 'ci3.nb_catalog_item_parent_id'
+                                        . '),'
+                                     . 'ci3.nb_catalog_item_level = '
                                          . 'if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ci1.nb_catalog_item_next_sibling - 1, '
         		                             . 'ci3.nb_catalog_item_level + ci2.nb_catalog_item_level - ci1.nb_catalog_item_level, '
                                              . 'ci3.nb_catalog_item_level'
@@ -296,74 +261,10 @@ order by ci3.nb_catalog_item_order
                                 array(
                                     'item_id' => $nb_catalog_item_id,
                                     'before_id' => $nb_catalog_before_id
-                                ), true
+                                )
                             );
                             $retval = true;
                         } elseif ($data[$nb_catalog_item_id]['nb_catalog_item_order'] > $data[$nb_catalog_before_id]['nb_catalog_item_order']) {
-/*
-select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1.nb_catalog_item_order as i_order, ci1.nb_catalog_item_next_sibling as i_sibling,
-       ci2.nb_catalog_item_id as b_id, ci2.nb_catalog_item_level as b_level, ci2.nb_catalog_item_order as b_order, ci2.nb_catalog_item_next_sibling as b_sibling,
-       ci4.nb_catalog_item_id as p_id, ci4.nb_catalog_item_level as p_level, ci4.nb_catalog_item_order as p_order, ci4.nb_catalog_item_next_sibling as p_sibling,
-       ci3.nb_catalog_item_id as n_id, ci3.nb_catalog_item_level as n_level, ci3.nb_catalog_item_order as n_order, ci3.nb_catalog_item_next_sibling as n_sibling,
-       ci5.last_sibling,
-       ci3.nb_catalog_item_id as n_id,
-	   if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ifnull(ci1.nb_catalog_item_next_sibling, ci5.last_sibling) - 1,
-		   ci3.nb_catalog_item_level + ci2.nb_catalog_item_level - ci1.nb_catalog_item_level,
-           ci3.nb_catalog_item_level
-		  ) as t_level,
-       if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ifnull(ci1.nb_catalog_item_next_sibling, ci5.last_sibling) - 1,
-           ci2.nb_catalog_item_order + ci3.nb_catalog_item_order - ci1.nb_catalog_item_order,
-		   if (ci3.nb_catalog_item_order between ci2.nb_catalog_item_order and ci1.nb_catalog_item_order - 1,
-			   ci3.nb_catalog_item_order + ifnull(ci1.nb_catalog_item_next_sibling, ci5.last_sibling) - ci1.nb_catalog_item_order,
-               ci3.nb_catalog_item_order
-			  )
-		  ) as t_order,
-	   if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
-           ci2.nb_catalog_item_order + ifnull(ci1.nb_catalog_item_next_sibling, ci5.last_sibling) - ci1.nb_catalog_item_order,
-           if (ci3.nb_catalog_item_id = ci4.nb_catalog_item_id,
-			   ci1.nb_catalog_item_next_sibling,
-			   if (ci3.nb_catalog_item_next_sibling between ci1.nb_catalog_item_order and ifnull(ci1.nb_catalog_item_next_sibling, ci5.last_sibling) - 1,
-				   ci2.nb_catalog_item_order + ci3.nb_catalog_item_order - ci1.nb_catalog_item_order,
-				   if (ci3.nb_catalog_item_next_sibling > ci2.nb_catalog_item_order,
-					   ci3.nb_catalog_item_next_sibling + ifnull(ci1.nb_catalog_item_next_sibling, ci5.last_sibling) - ci1.nb_catalog_item_order,
-					   ci3.nb_catalog_item_next_sibling
-					  )
-				  )
-			  )
-		  ) as t_sibling
-
-
-
-  from nb_catalog_item as ci1, nb_catalog_item as ci2, nb_catalog_item as ci3, nb_catalog_item as ci4,
-	   (select nb_catalog_id, last_sibling
-          from (select ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling
-                  from nb_catalog_item ci10, nb_catalog_item ci11
-                 where ci10.nb_catalog_id=1
-                   and ci10.nb_catalog_id=ci11.nb_catalog_id
-                   and ci10.nb_catalog_item_id = 5
-                   and ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
-                   and ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
-                   and ci11.nb_catalog_item_next_sibling is not null
-                   and ci10.nb_catalog_item_order between ci11.nb_catalog_item_order and ifnull(ci11.nb_catalog_item_next_sibling, ci10.nb_catalog_item_order + 1) - 1
-                 group by ci11.nb_catalog_id, ci11.nb_catalog_item_level
-                 union all
-                select nb_catalog_id, max(nb_catalog_item_order) + 1
-                  from nb_catalog_item
-				 where nb_catalog_id=1
-                 group by nb_catalog_id) as t
-                 order by last_sibling asc
-                 limit 1) as ci5
- where ci1.nb_catalog_item_id=4
-   and ci1.nb_catalog_id=ci2.nb_catalog_id
-   and ci2.nb_catalog_item_id=2
-   and ci1.nb_catalog_id=ci3.nb_catalog_id
-   and ci1.nb_catalog_id=ci4.nb_catalog_id
-   and ci4.nb_catalog_item_next_sibling=ci1.nb_catalog_item_order
-   and ci1.nb_catalog_id=ci5.nb_catalog_id
-
- order by ci3.nb_catalog_item_order
-;
-*/
                             $db->executeUpdate(
                                 'update nb_catalog_item as ci1, nb_catalog_item as ci2, nb_catalog_item as ci3, nb_catalog_item as ci4, '
 	                                 . '(select nb_catalog_id, last_sibling '
@@ -384,7 +285,12 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
                                                . 'group by nb_catalog_id) as t '
                                                . 'order by last_sibling asc '
                                                . 'limit 1) as ci5 '
-                                 . 'set ci3.nb_catalog_item_level = '
+                                 . 'set ci3.nb_catalog_item_parent_id = '
+                                     . 'if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id, '
+                                         . 'ci2.nb_catalog_item_parent_id, '
+                                         . 'ci3.nb_catalog_item_parent_id'
+                                        . '),'
+                                     . 'ci3.nb_catalog_item_level = '
 		                                 . 'if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ifnull(ci1.nb_catalog_item_next_sibling, ci5.last_sibling) - 1, '
 			                                 . 'ci3.nb_catalog_item_level + ci2.nb_catalog_item_level - ci1.nb_catalog_item_level, '
 			                                 . 'ci3.nb_catalog_item_level '
@@ -444,7 +350,7 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
             } else {
                 throw new ENabuCoreException(
                     ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
-                    array(print_r($nb_catalog_item, true), '$nb_before_item')
+                    array(print_r($nb_before_item, true), '$nb_before_item')
                 );
             }
         } else {
@@ -494,98 +400,185 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
                 $db = $nb_catalog->getDB();
                 $data = $db->getQueryAsAssoc(
                     NABU_CATALOG_ITEM_FIELD_ID,
-                    'select nb_catalog_item_id, nb_catalog_item_order, nb_catalog_item_level, nb_catalog_item_next_sibling '
-                    . 'from nb_catalog_item '
-                   . 'where nb_catalog_item_id in (%item_id$d, %after_id$d) '
-                     . 'and nb_catalog_id = %cat_id$d',
+                    'SELECT nb_catalog_item_id, nb_catalog_item_order, nb_catalog_item_level, nb_catalog_item_next_sibling
+                       FROM nb_catalog_item
+                      WHERE nb_catalog_item_id IN (%item_id$d, %after_id$d)
+                        AND nb_catalog_id = %cat_id$d',
                     array(
                         'cat_id' => $nb_catalog_id,
                         'item_id' => $nb_catalog_item_id,
                         'after_id' => $nb_catalog_after_id
-                    ), true
+                    )
                 );
                 if (count($data) === 2) {
                     if ($data[$nb_catalog_after_id]['nb_catalog_item_next_sibling'] !== $data[$nb_catalog_item_id]['nb_catalog_item_order']) {
                         if ($data[$nb_catalog_item_id]['nb_catalog_item_order'] < $data[$nb_catalog_after_id]['nb_catalog_item_order']) {
                             $db->executeUpdate(
-                                'update nb_catalog_item as ci1, nb_catalog_item AS ci2, nb_catalog_item as ci3, '
-	                                 . '(select nb_catalog_id, last_sibling '
-                                        . 'from (select ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling '
-                                                . 'from nb_catalog_item ci10, nb_catalog_item ci11 '
-                                               . 'where ci10.nb_catalog_id=%cat_id$d '
-                                                 . 'and ci10.nb_catalog_id=ci11.nb_catalog_id '
-                                                 . 'and ci10.nb_catalog_item_id = %item_id$d '
-                                                 . 'and ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level '
-                                                 . 'and ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order '
-                                                 . 'and ci11.nb_catalog_item_next_sibling is not null '
-                                                 . 'and ci10.nb_catalog_item_order between ci11.nb_catalog_item_order and ci11.nb_catalog_item_next_sibling - 1 '
-                                               . 'group by ci11.nb_catalog_id, ci11.nb_catalog_item_level '
-                                               . 'union all '
-                                              . 'select nb_catalog_id, max(nb_catalog_item_order) + 1 '
-                                                . 'from nb_catalog_item '
-				                               . 'where nb_catalog_id=%cat_id$d '
-                                               . 'group by nb_catalog_id) as t '
-                                       . 'order by last_sibling asc '
-                                       . 'limit 1) as ci4, '
-	                                 . '(select nb_catalog_id, last_sibling '
-                                        . 'from (select ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling '
-                                                . 'from nb_catalog_item ci10, nb_catalog_item ci11 '
-                                               . 'where ci10.nb_catalog_id=%cat_id$d '
-                                                 . 'and ci10.nb_catalog_id=ci11.nb_catalog_id '
-                                                 . 'and ci10.nb_catalog_item_id = %after_id$d '
-                                                 . 'and ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level '
-                                                 . 'and ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order '
-                                                 . 'and ci11.nb_catalog_item_next_sibling is not null '
-                                                 . 'and ci10.nb_catalog_item_order between ci11.nb_catalog_item_order and ci11.nb_catalog_item_next_sibling - 1 '
-                                               . 'group by ci11.nb_catalog_id, ci11.nb_catalog_item_level '
-                                               . 'union all '
-                                              . 'select nb_catalog_id, max(nb_catalog_item_order) + 1 '
-                                                . 'from nb_catalog_item '
-				                               . 'where nb_catalog_id=%cat_id$d '
-                                               . 'group by nb_catalog_id) as t '
-                                       . 'order by last_sibling asc '
-                                       . 'limit 1) as ci5 '
-                                 . 'set ci3.nb_catalog_item_level = '
-                                     . 'if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ci4.last_sibling - 1, '
-		                                 . 'ci3.nb_catalog_item_level + ci2.nb_catalog_item_level - ci1.nb_catalog_item_level, '
-		                                 . 'ci3.nb_catalog_item_level'
-		                                . '), '
-	                             . 'ci3.nb_catalog_item_order = '
-                                     .'if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ci4.last_sibling - 1, '
-		                                 . 'ci5.last_sibling - ci4.last_sibling + ci3.nb_catalog_item_order, '
-		                                 . 'if (ci3.nb_catalog_item_order between ci4.last_sibling and ci5.last_sibling - 1, '
-			                                 . 'ci3.nb_catalog_item_order - ci4.last_sibling + ci1.nb_catalog_item_order, '
-			                                 . 'ci3.nb_catalog_item_order'
-			                                . ')'
-		                               . '), '
-	                             . 'ci3.nb_catalog_item_next_sibling = '
-                                     . 'if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id, '
-		                                 . 'ci2.nb_catalog_item_next_sibling, '
-		                                 . 'if (ci3.nb_catalog_item_id = ci2.nb_catalog_item_id, '
-			                                 . 'ci5.last_sibling - ci4.last_sibling + ci1.nb_catalog_item_order, '
-			                                 . 'if (ci3.nb_catalog_item_next_sibling between ci1.nb_catalog_item_order + 1 and ci4.last_sibling - 1, '
-				                                 . 'ci5.last_sibling - ci4.last_sibling + ci3.nb_catalog_item_next_sibling, '
-				                                 . 'if (ci3.nb_catalog_item_next_sibling between ci4.last_sibling and ci5.last_sibling - 1, '
-					                                 . 'ci3.nb_catalog_item_next_sibling - ci4.last_sibling + ci1.nb_catalog_item_order, '
-					                                 . 'ci3.nb_catalog_item_next_sibling'
-					                                . ')'
-				                                . ')'
-			                                . ')'
-		                                . ')'
-                               . 'where ci1.nb_catalog_item_id=%item_id$d '
-                                 . 'and ci1.nb_catalog_id=ci2.nb_catalog_id '
-                                 . 'and ci2.nb_catalog_item_id=%after_id$d '
-                                 . 'and ci1.nb_catalog_id=ci3.nb_catalog_id '
-                                 . 'and ci1.nb_catalog_id=ci4.nb_catalog_id',
+                                'UPDATE nb_catalog_item AS ci1, nb_catalog_item AS ci2, nb_catalog_item AS ci3,
+	                                    (SELECT nb_catalog_id, last_sibling
+                                           FROM (SELECT ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling
+                                                   FROM nb_catalog_item ci10, nb_catalog_item ci11
+                                                  WHERE ci10.nb_catalog_id=%cat_id$d
+                                                    AND ci10.nb_catalog_id=ci11.nb_catalog_id
+                                                    AND ci10.nb_catalog_item_id = %item_id$d
+                                                    AND ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
+                                                    AND ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
+                                                    AND ci11.nb_catalog_item_next_sibling IS NOT NULL
+                                                    AND ci10.nb_catalog_item_order BETWEEN ci11.nb_catalog_item_order AND ci11.nb_catalog_item_next_sibling - 1
+                                                  GROUP BY ci11.nb_catalog_id, ci11.nb_catalog_item_level
+                                                  UNION ALL
+                                                 SELECT nb_catalog_id, max(nb_catalog_item_order) + 1
+                                                   FROM nb_catalog_item
+				                                  WHERE nb_catalog_id=%cat_id$d
+                                                  GROUP BY nb_catalog_id) AS t
+                                          ORDER BY last_sibling ASC
+                                          LIMIT 1) AS ci4,
+	                                    (SELECT nb_catalog_id, last_sibling
+                                           FROM (SELECT ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling
+                                                   FROM nb_catalog_item ci10, nb_catalog_item ci11
+                                                  WHERE ci10.nb_catalog_id=%cat_id$d
+                                                    AND ci10.nb_catalog_id=ci11.nb_catalog_id
+                                                    AND ci10.nb_catalog_item_id = %after_id$d
+                                                    AND ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
+                                                    AND ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
+                                                    AND ci11.nb_catalog_item_next_sibling IS NOT NULL
+                                                    AND ci10.nb_catalog_item_order BETWEEN ci11.nb_catalog_item_order AND ci11.nb_catalog_item_next_sibling - 1
+                                                  GROUP BY ci11.nb_catalog_id, ci11.nb_catalog_item_level
+                                                  UNION ALL
+                                                 SELECT nb_catalog_id, max(nb_catalog_item_order) + 1
+                                                   FROM nb_catalog_item
+				                                  WHERE nb_catalog_id=%cat_id$d
+                                                  GROUP BY nb_catalog_id) AS t
+                                          ORDER BY last_sibling ASC
+                                          LIMIT 1) AS ci5
+                                    SET ci3.nb_catalog_item_parent_id =
+                                        if(ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
+                                            ci2.nb_catalog_item_parent_id,
+                                            ci3.nb_catalog_item_parent_id
+                                        ),
+                                        ci3.nb_catalog_item_level =
+                                        if (ci3.nb_catalog_item_order BETWEEN ci1.nb_catalog_item_order AND ci4.last_sibling - 1,
+                                            ci3.nb_catalog_item_level + ci2.nb_catalog_item_level - ci1.nb_catalog_item_level,
+                                            ci3.nb_catalog_item_level
+                                        ),
+	                                    ci3.nb_catalog_item_order =
+                                            if (ci3.nb_catalog_item_order BETWEEN ci1.nb_catalog_item_order AND ci4.last_sibling - 1,
+                                                ci5.last_sibling - ci4.last_sibling + ci3.nb_catalog_item_order,
+                                                if(ci3.nb_catalog_item_order BETWEEN ci4.last_sibling AND ci5.last_sibling - 1,
+                                                    ci3.nb_catalog_item_order - ci4.last_sibling + ci1.nb_catalog_item_order,
+                                                    ci3.nb_catalog_item_order
+                                                )
+                                            ),
+                                        ci3.nb_catalog_item_next_sibling =
+                                            if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
+                                                ci2.nb_catalog_item_next_sibling,
+                                                if (ci3.nb_catalog_item_id = ci2.nb_catalog_item_id,
+                                                    ci5.last_sibling - ci4.last_sibling + ci1.nb_catalog_item_order,
+                                                    if (ci3.nb_catalog_item_next_sibling BETWEEN ci1.nb_catalog_item_order + 1 AND ci4.last_sibling - 1,
+                                                        ci5.last_sibling - ci4.last_sibling + ci3.nb_catalog_item_next_sibling,
+                                                        if (ci3.nb_catalog_item_next_sibling between ci4.last_sibling and ci5.last_sibling - 1,
+                                                            ci3.nb_catalog_item_next_sibling - ci4.last_sibling + ci1.nb_catalog_item_order,
+                                                            ci3.nb_catalog_item_next_sibling
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                  WHERE ci1.nb_catalog_item_id=%item_id$d
+                                    AND ci1.nb_catalog_id=ci2.nb_catalog_id
+                                    AND ci2.nb_catalog_item_id=%after_id$d
+                                    AND ci1.nb_catalog_id=ci3.nb_catalog_id
+                                    AND ci1.nb_catalog_id=ci4.nb_catalog_id',
                                 array(
                                     'cat_id' => $nb_catalog_id,
                                     'item_id' => $nb_catalog_item_id,
                                     'after_id' => $nb_catalog_after_id
                                 )
                             );
-                            return true;
+                            $retval = true;
                         } elseif ($data[$nb_catalog_item_id]['nb_catalog_item_order'] > $data[$nb_catalog_after_id]['nb_catalog_item_order']) {
-                            return true;
+                            $db->executeUpdate(
+                                'UPDATE nb_catalog_item AS ci1, nb_catalog_item AS ci2, nb_catalog_item AS ci3,
+                                        (SELECT nb_catalog_id, last_sibling
+                                           FROM (SELECT ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) AS last_sibling
+				                                   FROM nb_catalog_item ci10, nb_catalog_item ci11
+				                                  WHERE ci10.nb_catalog_id=%cat_id$d
+                                                    AND ci10.nb_catalog_id=ci11.nb_catalog_id
+                                                    AND ci10.nb_catalog_item_id=%item_id$d
+                                                    AND ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
+                                                    AND ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
+                                                    AND ci11.nb_catalog_item_next_sibling IS NOT NULL
+                                                    AND ci10.nb_catalog_item_order BETWEEN ci11.nb_catalog_item_order AND ci11.nb_catalog_item_next_sibling - 1
+				                                  GROUP BY ci11.nb_catalog_id, ci11.nb_catalog_item_level
+                                                  UNION ALL
+		                                         SELECT nb_catalog_id, max(nb_catalog_item_order) + 1
+                                                   FROM nb_catalog_item
+				                                  WHERE nb_catalog_id=%cat_id$d
+                                                  GROUP BY nb_catalog_id) AS t
+                                                  ORDER BY last_sibling ASC
+                                                  LIMIT 1) AS ci4,
+			                            (SELECT nb_catalog_id, last_sibling
+                                           FROM (SELECT ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) AS last_sibling
+						                           FROM nb_catalog_item ci10, nb_catalog_item ci11
+			                                      WHERE ci10.nb_catalog_id=%cat_id$d
+                                                    AND ci10.nb_catalog_id=ci11.nb_catalog_id
+                                                    AND ci10.nb_catalog_item_id=%after_id$d
+                                                    AND ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
+                                                    AND ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
+                                                    AND ci11.nb_catalog_item_next_sibling IS NOT NULL
+                                                    AND ci10.nb_catalog_item_order BETWEEN ci11.nb_catalog_item_order AND ci11.nb_catalog_item_next_sibling - 1
+		                                          GROUP BY ci11.nb_catalog_id, ci11.nb_catalog_item_level
+                                                  UNION ALL
+	                                             SELECT nb_catalog_id, max(nb_catalog_item_order) + 1
+                                                   FROM nb_catalog_item
+		                                          WHERE nb_catalog_id=%cat_id$d
+                                                  GROUP BY nb_catalog_id) AS t
+                                           ORDER BY last_sibling ASC
+                                           LIMIT 1) AS ci5
+                                    SET ci3.nb_catalog_item_parent_id =
+                                            if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
+                                                ci2.nb_catalog_item_parent_id,
+                                                ci3.nb_catalog_item_parent_id
+                                            ),
+                                        ci3.nb_catalog_item_level =
+                                            if (ci3.nb_catalog_item_order BETWEEN ci1.nb_catalog_item_order AND ci4.last_sibling - 1,
+                                                ci2.nb_catalog_item_level + ci3.nb_catalog_item_level - ci1.nb_catalog_item_level,
+                                                ci3.nb_catalog_item_level
+                                            ),
+                                        ci3.nb_catalog_item_order =
+                                            if (ci3.nb_catalog_item_order BETWEEN ci1.nb_catalog_item_order AND ci4.last_sibling - 1,
+                                                ci5.last_sibling + ci3.nb_catalog_item_order - ci1.nb_catalog_item_order,
+                                                if (ci3.nb_catalog_item_order BETWEEN ci5.last_sibling AND ci1.nb_catalog_item_order - 1,
+                                                    ci3.nb_catalog_item_order + ci4.last_sibling - ci1.nb_catalog_item_order,
+                                                    ci3.nb_catalog_item_order
+                                                )
+                                            ),
+                                        ci3.nb_catalog_item_next_sibling =
+                                            if (ci3.nb_catalog_item_id = ci2.nb_catalog_item_id,
+                                                ci5.last_sibling,
+                                                if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
+                                                    ci2.nb_catalog_item_next_sibling,
+                                                    if (ci3.nb_catalog_item_next_sibling BETWEEN ci1.nb_catalog_item_order + 1 AND ci4.last_sibling,
+                                                        ci5.last_sibling + ci3.nb_catalog_item_next_sibling - ci1.nb_catalog_item_order,
+                                                        if (ci3.nb_catalog_item_next_sibling BETWEEN ci5.last_sibling AND ci4.last_sibling,
+                                                            ci3.nb_catalog_item_next_sibling + ci4.last_sibling - ci1.nb_catalog_item_order,
+                                                            ci3.nb_catalog_item_next_sibling
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                  WHERE ci1.nb_catalog_item_id=%item_id$d
+                                    AND ci2.nb_catalog_item_id=%after_id$d
+                                    AND ci1.nb_catalog_id=ci2.nb_catalog_id
+                                    AND ci1.nb_catalog_id=ci3.nb_catalog_id
+                                    AND ci1.nb_catalog_id=ci4.nb_catalog_id
+                                    AND ci1.nb_catalog_id=ci5.nb_catalog_id',
+                                array(
+                                    'cat_id' => $nb_catalog_id,
+                                    'item_id' => $nb_catalog_item_id,
+                                    'after_id' => $nb_catalog_after_id
+                                )
+                            );
+                            $retval = true;
                         }
                     }
                 } elseif (count($data) === 1) {
@@ -605,7 +598,233 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
             } else {
                 throw new ENabuCoreException(
                     ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
-                    array(print_r($nb_catalog_item, true), '$nb_after_item')
+                    array(print_r($nb_after_item, true), '$nb_after_item')
+                );
+            }
+        } else {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                array(print_r($nb_catalog_item, true), '$nb_catalog_item')
+            );
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Moves a Catalog Item to place it inside another Item that is empty in the same Catalog.
+     * @param mixed $nb_into_item An Id or a CNabuDataObject instance containing a field named nb_catalog_item_id
+     * representing the Item where $nb_catalog_item will be putted into.
+     * @return bool Returns true if the Item was moved or false if not.
+     * @throws ENabuCatalogException Raises an exception if some of requested Items does not corresponding to this Catalog.
+     * @throws ENabuCoreException Raises an exception if $nb_after_item have an invalid value.
+     */
+    public function moveInto($nb_into_item)
+    {
+        return CNabuCatalogItem::moveItemIntoItem($this->getCatalog(), $this, $nb_into_item);
+    }
+
+    /**
+     * Moves a Catalog Item to place it into another Item that is empty in the same Catalog.
+     * @param CNabuCatalog $nb_catalog The Catalog in which the movement will be made.
+     * @param mixed $nb_catalog_item An Id or a CNabuDataObject instance containing a field named nb_catalog_item_id
+     * to be moved.
+     * @param mixed $nb_into_item An Id or a CNabuDataObject instance containing a field named nb_catalog_item_id
+     * representing the Item where $nb_catalog_item will be putted into.
+     * @return bool Returns true if the Item was moved or false if not.
+     * @throws ENabuCatalogException Raises an exception if some of requested Items does not corresponding to this Catalog.
+     * @throws ENabuCoreException Raises an exception if $nb_catalog_item or $nb_after_item have an invalid value.
+     */
+    public static function moveItemIntoItem(CNabuCatalog $nb_catalog, $nb_catalog_item, $nb_into_item)
+    {
+        $retval = false;
+
+        $nb_catalog_id = $nb_catalog->getId();
+        $nb_catalog_item_id = nb_getMixedValue($nb_catalog_item, NABU_CATALOG_ITEM_FIELD_ID);
+        if (is_numeric($nb_catalog_item_id)) {
+            $nb_catalog_into_id = nb_getMixedValue($nb_into_item, NABU_CATALOG_ITEM_FIELD_ID);
+            if (is_numeric($nb_catalog_into_id)) {
+                $nb_catalog->relinkDB();
+                $db = $nb_catalog->getDB();
+                $data = $db->getQueryAsAssoc(
+                    NABU_CATALOG_ITEM_FIELD_ID,
+                    'SELECT nb_catalog_item_id, nb_catalog_item_order, nb_catalog_item_level, nb_catalog_item_next_sibling
+                       FROM nb_catalog_item
+                      WHERE nb_catalog_item_id IN (%item_id$d, %into_id$d)
+                        AND nb_catalog_id = %cat_id$d',
+                    array(
+                        'cat_id' => $nb_catalog_id,
+                        'item_id' => $nb_catalog_item_id,
+                        'into_id' => $nb_catalog_into_id
+                    )
+                );
+                if (count($data) === 2) {
+                    if ($data[$nb_catalog_item_id]['nb_catalog_item_order'] < $data[$nb_catalog_into_id]['nb_catalog_item_order']) {
+                        $db->executeUpdate(
+                            'UPDATE nb_catalog_item AS ci1, nb_catalog_item AS ci2, nb_catalog_item AS ci3,
+                                    (SELECT nb_catalog_id, last_sibling
+                                       FROM (SELECT ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling
+                               				   FROM nb_catalog_item ci10, nb_catalog_item ci11
+                            				  WHERE ci10.nb_catalog_id=%cat_id$d
+                                                AND ci10.nb_catalog_id=ci11.nb_catalog_id
+                                                AND ci10.nb_catalog_item_id = %item_id$d
+                                                AND ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
+                                                AND ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
+                                                AND ci11.nb_catalog_item_next_sibling IS NOT NULL
+                                                AND ci10.nb_catalog_item_order BETWEEN ci11.nb_catalog_item_order AND ci11.nb_catalog_item_next_sibling - 1
+                            				  GROUP BY ci11.nb_catalog_id, ci11.nb_catalog_item_level
+                                              UNION ALL
+                            				 SELECT nb_catalog_id, max(nb_catalog_item_order) + 1
+                                               FROM nb_catalog_item
+                            				  WHERE nb_catalog_id=%cat_id$d
+                                              GROUP BY nb_catalog_id) AS t
+                                              ORDER BY last_sibling ASC
+                                              LIMIT 1
+                                            ) AS ci4
+                                SET ci3.nb_catalog_item_parent_id =
+                                        if(ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
+                                           ci2.nb_catalog_item_id,
+                                           ci3.nb_catalog_item_parent_id
+                                        ),
+                                    ci3.nb_catalog_item_level =
+                            	 	    if(ci3.nb_catalog_item_order BETWEEN ci1.nb_catalog_item_order AND ci4.last_sibling - 1,
+                            			    ci2.nb_catalog_item_level + ci3.nb_catalog_item_level + 1 - ci1.nb_catalog_item_level,
+                            			    ci3.nb_catalog_item_level
+                            			),
+                            	    ci3.nb_catalog_item_order =
+                            		    if(ci3.nb_catalog_item_order BETWEEN ci1.nb_catalog_item_order AND ci4.last_sibling - 1,
+                            			    ci2.nb_catalog_item_order + ci3.nb_catalog_item_order + 1 - ci4.last_sibling,
+                            			    if(ci3.nb_catalog_item_order BETWEEN ci4.last_sibling AND ci2.nb_catalog_item_order,
+                            				    ci3.nb_catalog_item_order + ci1.nb_catalog_item_order - ci4.last_sibling,
+                            				    ci3.nb_catalog_item_order
+                            				)
+                            			),
+                            	    ci3.nb_catalog_item_next_sibling =
+                            		    if(ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
+                            			    NULL,
+                            			    if(ci3.nb_catalog_item_next_sibling BETWEEN ci1.nb_catalog_item_order + 1 AND ci4.last_sibling - 1,
+                            				    ci2.nb_catalog_item_order + ci3.nb_catalog_item_next_sibling + 1 - ci4.last_sibling,
+                            				    if(ci3.nb_catalog_item_next_sibling BETWEEN ci4.last_sibling AND ci2.nb_catalog_item_order,
+                            					    ci3.nb_catalog_item_next_sibling + ci1.nb_catalog_item_order - ci4.last_sibling,
+                            					    ci3.nb_catalog_item_next_sibling
+                            					)
+                            				)
+                            			)
+                              WHERE ci1.nb_catalog_item_id=%item_id$d
+                                AND ci2.nb_catalog_item_id=%into_id$d
+                                AND ci1.nb_catalog_id=ci2.nb_catalog_id
+                                AND ci1.nb_catalog_id=ci3.nb_catalog_id
+                                AND ci1.nb_catalog_id=ci4.nb_catalog_id',
+                            array(
+                                'cat_id' => $nb_catalog_id,
+                                'item_id' => $nb_catalog_item_id,
+                                'into_id' => $nb_catalog_into_id
+                            )
+                        );
+                        $retval = true;
+                    } elseif ($data[$nb_catalog_item_id]['nb_catalog_item_order'] > $data[$nb_catalog_into_id]['nb_catalog_item_order']) {
+                        $db->executeUpdate(
+                            'UPDATE nb_catalog_item AS ci1, nb_catalog_item AS ci2, nb_catalog_item AS ci3,
+                                    (SELECT nb_catalog_id, last_sibling
+                                       FROM (SELECT ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling
+				                               FROM nb_catalog_item ci10, nb_catalog_item ci11
+				                              WHERE ci10.nb_catalog_id=%cat_id$d
+                                                AND ci10.nb_catalog_id=ci11.nb_catalog_id
+                                                AND ci10.nb_catalog_item_id = %item_id$d
+                                                AND ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
+                                                AND ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
+                                                AND ci11.nb_catalog_item_next_sibling IS NOT NULL
+                                                AND ci10.nb_catalog_item_order BETWEEN ci11.nb_catalog_item_order AND ci11.nb_catalog_item_next_sibling - 1
+				                              GROUP BY ci11.nb_catalog_id, ci11.nb_catalog_item_level
+                                              UNION ALL
+				                             SELECT nb_catalog_id, max(nb_catalog_item_order) + 1
+                                               FROM nb_catalog_item
+				                              WHERE nb_catalog_id=%cat_id$d
+                                              GROUP BY nb_catalog_id) AS t
+                                              ORDER BY last_sibling ASC
+                                              LIMIT 1) AS ci4,
+                                    (SELECT nb_catalog_id, last_sibling
+                                       FROM (SELECT ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling
+						                       FROM nb_catalog_item ci10, nb_catalog_item ci11
+			                                  WHERE ci10.nb_catalog_id=%cat_id$d
+                                                AND ci10.nb_catalog_id=ci11.nb_catalog_id
+                                                AND ci10.nb_catalog_item_id = %into_id$d
+                                                AND ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
+                                                AND ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
+                                                AND ci11.nb_catalog_item_next_sibling IS NOT NULL
+                                                AND ci10.nb_catalog_item_order BETWEEN ci11.nb_catalog_item_order AND ci11.nb_catalog_item_next_sibling - 1
+	                                          GROUP BY ci11.nb_catalog_id, ci11.nb_catalog_item_level
+                                              UNION ALL
+		                                     SELECT nb_catalog_id, max(nb_catalog_item_order) + 1
+                                               FROM nb_catalog_item
+		                                      WHERE nb_catalog_id=%cat_id$d
+                                              GROUP BY nb_catalog_id) AS t
+	                                          ORDER BY last_sibling ASC
+                                              LIMIT 1) AS ci5
+                                SET ci3.nb_catalog_item_parent_id =
+                                        if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
+                                            ci2.nb_catalog_item_id,
+                                            ci3.nb_catalog_item_parent_id
+                                        ),
+	                                ci3.nb_catalog_item_level =
+                                        if (ci3.nb_catalog_item_order BETWEEN ci1.nb_catalog_item_order AND ci4.last_sibling - 1,
+                                            ci2.nb_catalog_item_level + ci3.nb_catalog_item_level + 1 - ci1.nb_catalog_item_level,
+                                            ci3.nb_catalog_item_level
+                                        ),
+                                    ci3.nb_catalog_item_order =
+                                        if (ci3.nb_catalog_item_order BETWEEN ci1.nb_catalog_item_order AND ci4.last_sibling - 1,
+                                            ci2.nb_catalog_item_order + ci3.nb_catalog_item_order + 1 - ci1.nb_catalog_item_order,
+                                            if (ci3.nb_catalog_item_order BETWEEN ci5.last_sibling AND ci1.nb_catalog_item_order - 1,
+                                                ci3.nb_catalog_item_order + ci4.last_sibling - ci1.nb_catalog_item_order,
+                                                ci3.nb_catalog_item_order
+                                            )
+                                        ),
+	                                ci3.nb_catalog_item_next_sibling =
+                                        if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
+                                            null,
+                                            if (ci3.nb_catalog_item_id = ci2.nb_catalog_item_id,
+                                                ci3.nb_catalog_item_order + 1 + ci4.last_sibling - ci1.nb_catalog_item_order,
+                                                if (ci3.nb_catalog_item_next_sibling BETWEEN ci1.nb_catalog_item_order + 1 AND ci4.last_sibling - 1,
+                                                    ci2.nb_catalog_item_order + ci3.nb_catalog_item_next_sibling + 1 - ci1.nb_catalog_item_order,
+                                                    if (ci3.nb_catalog_item_next_sibling between ci5.last_sibling and ci1.nb_catalog_item_order,
+                                                        ci3.nb_catalog_item_next_sibling + ci4.last_sibling - ci1.nb_catalog_item_order,
+                                                        ci3.nb_catalog_item_next_sibling
+                                                    )
+                                                )
+                                            )
+                                        )
+                          WHERE ci1.nb_catalog_item_id=%item_id$d
+                            AND ci2.nb_catalog_item_id=%into_id$d
+                            AND ci1.nb_catalog_id=ci2.nb_catalog_id
+                            AND ci1.nb_catalog_id=ci3.nb_catalog_id
+                            AND ci1.nb_catalog_id=ci4.nb_catalog_id
+                            AND ci1.nb_catalog_id=ci5.nb_catalog_id',
+                            array(
+                                'cat_id' => $nb_catalog_id,
+                                'item_id' => $nb_catalog_item_id,
+                                'into_id' => $nb_catalog_into_id
+                            )
+                        );
+                        $retval = true;
+                    }
+                } elseif (count($data) === 1) {
+                    if ($nb_catalog_item_id !== $nb_catalog_into_id) {
+                        $id = array_keys($data)[0];
+                        throw new ENabuCatalogException(
+                            ENabuCatalogException::ERROR_ITEM_NOT_INCLUDED_IN_CATALOG,
+                            array($id === $nb_catalog_item_id ? $nb_catalog_into_id : $nb_catalog_item_id)
+                        );
+                    }
+                } else {
+                    throw new ENabuCatalogException(
+                        ENabuCatalogException::ERROR_ITEM_NOT_INCLUDED_IN_CATALOG,
+                        array(implode(', ', array_keys($data)))
+                    );
+                }
+            } else {
+                throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                    array(print_r($nb_into_item, true), '$nb_into_item')
                 );
             }
         } else {
@@ -630,23 +849,23 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
         if ($this->isNew() && !$this->contains('nb_catalog_item_order')) {
             $last_sibling_id = $this->db->getQueryAsSingleField(
                 'nb_catalog_item_id',
-                'select nb_catalog_item_id '
-                . 'from nb_catalog_item '
-               . 'where nb_catalog_id=%cat_id$d '
-                 . 'and nb_catalog_item_level=1 '
-                 . 'and nb_catalog_item_next_sibling is null',
+                'SELECT nb_catalog_item_id
+                   FROM nb_catalog_item
+                  WHERE nb_catalog_id=%cat_id$d
+                    AND nb_catalog_item_level=1
+                    AND nb_catalog_item_next_sibling IS NULL',
                 array(
                     'cat_id' => $this->getCatalogId()
                 )
             );
             $next_order = $this->db->getQueryAsSingleField(
                 'next_order',
-                'select ifnull(next_order, def) + 1 as next_order '
-                . 'from (select max(nb_catalog_item_order) as next_order, def '
-                        . 'from nb_catalog_item ci1 '
-                       . 'right outer join (select 0 as def from dual) ci2 '
-                          . 'on nb_catalog_id=%cat_id$d'
-                     . ') as t',
+                'SELECT ifnull(next_order, def) + 1 AS next_order
+                   FROM (SELECT max(nb_catalog_item_order) AS next_order, def
+                           FROM nb_catalog_item ci1
+                          RIGHT OUTER JOIN (SELECT 0 AS def FROM dual) ci2
+                             ON nb_catalog_id=%cat_id$d
+                        ) AS t',
                 array(
                     'cat_id' => $this->getCatalogId()
                 )
@@ -655,9 +874,9 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
             if ($retval = parent::save($trace)) {
                 if (is_numeric($last_sibling_id)) {
                     $this->db->executeUpdate(
-                        'update nb_catalog_item ci '
-                         . 'set ci.nb_catalog_item_next_sibling = %next_sibling$d '
-                       . 'where ci.nb_catalog_item_id=%item_id$d',
+                        'UPDATE nb_catalog_item ci
+                            SET ci.nb_catalog_item_next_sibling = %next_sibling$d
+                          WHERE ci.nb_catalog_item_id=%item_id$d',
                         array(
                             'item_id' => $last_sibling_id,
                             'next_sibling' => $next_order
@@ -672,84 +891,3 @@ select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1
         return $retval;
     }
 }
-/*
-select ci1.nb_catalog_item_id as i_id, ci1.nb_catalog_item_level as i_level, ci1.nb_catalog_item_order as i_order, ci1.nb_catalog_item_next_sibling as i_sibling, ci4.last_sibling as i_last,
-       ci2.nb_catalog_item_id as b_id, ci2.nb_catalog_item_level as b_level, ci2.nb_catalog_item_order as b_order, ci2.nb_catalog_item_next_sibling as b_sibling, ci5.last_sibling as b_last,
-       ci3.nb_catalog_item_id as n_id, ci3.nb_catalog_item_level as n_level, ci3.nb_catalog_item_order as n_order, ci3.nb_catalog_item_next_sibling as n_sibling,
-       ci3.nb_catalog_item_id as t_id,
-       if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ci4.last_sibling - 1,
-           ci2.nb_catalog_item_level + ci3.nb_catalog_item_level + 1 - ci1.nb_catalog_item_level,
-           ci3.nb_catalog_item_level
-		  ) as t_level,
-	   if (ci3.nb_catalog_item_order between ci1.nb_catalog_item_order and ci4.last_sibling - 1,
-           ci2.nb_catalog_item_order + ci3.nb_catalog_item_order - ci4.last_sibling,
-
-           if (ci3.nb_catalog_item_order between ci4.last_sibling and ci2.nb_catalog_item_order - 1,
-               ci3.nb_catalog_item_order + ci1.nb_catalog_item_order - ci4.last_sibling,
-			   if (ci3.nb_catalog_item_order > ci2.nb_catalog_item_order,
-				   ci3.nb_catalog_item_order + ci4.last_sibling - ci1.nb_catalog_item_order,
-				   ci3.nb_catalog_item_order
-				  )
-			  )
-		  ) as t_order,
-	   if (ci3.nb_catalog_item_next_sibling between ci1.nb_catalog_item_order + 1 and ci4.last_sibling - 1,
-           ci2.nb_catalog_item_order + ci3.nb_catalog_item_next_sibling + 1 - ci1.nb_catalog_item_order,
-           if (ci3.nb_catalog_item_next_sibling > ci2.nb_catalog_item_order,
-               ci3.nb_catalog_item_next_sibling + ci4.last_sibling - ci1.nb_catalog_item_order,
-               ci3.nb_catalog_item_next_sibling
-			  )
-		  ) as t_sibling
-
-
-
-
-
-
-
-
-  from nb_catalog_item as ci1, nb_catalog_item as ci2, nb_catalog_item as ci3,
-       (select nb_catalog_id, last_sibling
-          from (select ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling
-				  from nb_catalog_item ci10, nb_catalog_item ci11
-				 where ci10.nb_catalog_id=1
-                   and ci10.nb_catalog_id=ci11.nb_catalog_id
-                   and ci10.nb_catalog_item_id = 34
-                   and ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
-                   and ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
-                   and ci11.nb_catalog_item_next_sibling is not null
-                   and ci10.nb_catalog_item_order between ci11.nb_catalog_item_order and ci11.nb_catalog_item_next_sibling - 1
-				 group by ci11.nb_catalog_id, ci11.nb_catalog_item_level
-                 union all
-				select nb_catalog_id, max(nb_catalog_item_order) + 1
-                  from nb_catalog_item
-				 where nb_catalog_id=1
-                 group by nb_catalog_id) as t
-                 order by last_sibling asc
-                 limit 1) as ci4,
-			   (select nb_catalog_id, last_sibling
-                  from (select ci11.nb_catalog_id, max(ci11.nb_catalog_item_next_sibling) last_sibling
-						  from nb_catalog_item ci10, nb_catalog_item ci11
-						 where ci10.nb_catalog_id=1
-                           and ci10.nb_catalog_id=ci11.nb_catalog_id
-                           and ci10.nb_catalog_item_id = 10
-                           and ci10.nb_catalog_item_level >= ci11.nb_catalog_item_level
-                           and ci10.nb_catalog_item_order >= ci11.nb_catalog_item_order
-                           and ci11.nb_catalog_item_next_sibling is not null
-                           and ci10.nb_catalog_item_order between ci11.nb_catalog_item_order and ci11.nb_catalog_item_next_sibling - 1
-						 group by ci11.nb_catalog_id, ci11.nb_catalog_item_level
-                         union all
-						select nb_catalog_id, max(nb_catalog_item_order) + 1
-                          from nb_catalog_item
-						 where nb_catalog_id=1
-                         group by nb_catalog_id) as t
-				 order by last_sibling asc
-                 limit 1) as ci5
-
- where ci1.nb_catalog_item_id=34
-   and ci2.nb_catalog_item_id=10
-   and ci1.nb_catalog_id=ci2.nb_catalog_id
-   and ci1.nb_catalog_id=ci3.nb_catalog_id
-   and ci1.nb_catalog_id=ci4.nb_catalog_id
-   and ci1.nb_catalog_id=ci5.nb_catalog_id
- order by ci3.nb_catalog_item_order asc
-*/
