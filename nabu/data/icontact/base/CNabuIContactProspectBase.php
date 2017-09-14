@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/09/04 00:01:06 UTC
+ * Created: 2017/09/14 16:48:04 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -227,6 +227,27 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
     public function setLanguageId(int $nb_language_id = null) : CNabuDataObject
     {
         $this->setValue('nb_language_id', $nb_language_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Icontact Prospect Email Hash attribute value
+     * @return null|string Returns the Icontact Prospect Email Hash value
+     */
+    public function getEmailHash()
+    {
+        return $this->getValue('nb_icontact_prospect_email_hash');
+    }
+
+    /**
+     * Sets the Icontact Prospect Email Hash attribute value.
+     * @param null|string $email_hash New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setEmailHash(string $email_hash = null) : CNabuDataObject
+    {
+        $this->setValue('nb_icontact_prospect_email_hash', $email_hash);
         
         return $this;
     }
