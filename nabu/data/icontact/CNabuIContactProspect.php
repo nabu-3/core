@@ -18,6 +18,7 @@
  */
 
 namespace nabu\data\icontact;
+use nabu\data\CNabuDataObject;
 use nabu\data\icontact\base\CNabuIContactProspectBase;
 
 /**
@@ -28,32 +29,55 @@ use nabu\data\icontact\base\CNabuIContactProspectBase;
  */
 class CNabuIContactProspect extends CNabuIContactProspectBase
 {
+    /** @var string Prefix to be used when build the encoded email. */
+    const EMAIL_PREF = 'nasn2293';
+    /** @var string Suffix to be used when build the encoded email. */
+    const EMAIL_SUFF = '935nkwnf';
+
+    /** @var CNabuIContact Nabu IContact owner instance of this Prospect. */
     private $nb_icontact = null;
 
+    /**
+     * Gets the IContact owner instance.
+     * @return CNabuIContact|null Returns the IContact assigned owner instance.
+     **/
     public function getIContact()
     {
         return $this->nb_icontact;
     }
 
-    public function setIContact($nb_icontact)
+    /**
+     * Sets the IContact owner instance.
+     * @param CNabuIContact|null $nb_icontact The IContact Owner to be setted or null to unset current Owner.
+     * @return CNabuIContactProspect Returns self instance to grant chained setters mechanism.
+     */
+    public function setIContact(CNabuIContact $nb_icontact = null) : CNabuIContactProspect
     {
         $this->nb_icontact = $nb_icontact;
         return $this;
     }
 
-    static public function getProspectsOfUser($nb_icontact, $nb_user)
+    /**
+     * Get related Prospects of a User.
+     * @param mixed $nb_icontact IContact instance where to find Prospects or a CNabuDataObject containing a field
+     * called nb_icontact_prospect_id or an ID.
+     * @param mixed $nb_user User instance that holds Prospects or a CNabuDataObject containing a field called
+     * nb_user_id or an ID.
+     * @return CNabuIContactProspectList Returns a Prospect List containing all Prospects found.
+     */
+    static public function getProspectsOfUser($nb_icontact, $nb_user) : CNabuIContactProspectList
     {
         if (is_numeric($nb_icontact_id = nb_getMixedValue($nb_icontact, 'nb_icontact_id')) &&
             is_numeric($nb_user_id = nb_getMixedValue($nb_user, 'nb_user_id'))
         ) {
             $retval = CNabuIContactProspect::buildObjectListFromSQL(
                 'nb_icontact_prospect_id',
-                "select ip.* "
-                . "from nb_icontact_prospect ip, nb_icontact i "
-               . "where ip.nb_icontact_id=i.nb_icontact_id "
-                 . "and i.nb_icontact_id=%cont_id\$d "
-                 . "and ip.nb_user_id=%user_id\$d "
-               . "order by ip.nb_icontact_prospect_creation_datetime desc",
+                'SELECT ip.*
+                   FROM nb_icontact_prospect ip, nb_icontact i
+                  WHERE ip.nb_icontact_id=i.nb_icontact_id
+                    AND i.nb_icontact_id=%cont_id$d
+                    AND ip.nb_user_id=%user_id$d
+                  ORDER BY ip.nb_icontact_prospect_creation_datetime DESC',
                 array(
                     'cont_id' => $nb_icontact_id,
                     'user_id' => $nb_user_id
@@ -70,5 +94,26 @@ class CNabuIContactProspect extends CNabuIContactProspectBase
         }
 
         return $retval;
+    }
+
+    /**
+     * Encodes a clear email using the nabu-3 algorithm. This algorithm is not reversible.
+     * @param string $email Email string to be encoded.
+     * @return string Returns the encoded Email as string.
+     */
+    static public function encodeEmail(string $email) : string
+    {
+        return md5(self::EMAIL_PREF . $email . self::EMAIL_SUFF);
+    }
+
+    /**
+     * Sets the Email and encoding it into a nabu-3 hashing algorithm.
+     * @param string $email Email string to be encoded and setted.
+     * @return CNabuDataObject Returns the self instance to grant cascade setters.
+     */
+    public function setEmail(string $email) : CNabuDataObject
+    {
+        parent::setEmail($email);
+        return parent::setEmailHash(self::encodeEmail($email));
     }
 }
