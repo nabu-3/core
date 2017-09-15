@@ -95,12 +95,12 @@ class CNabuCatalogItem extends CNabuCatalogItemBase implements INabuDataObjectTr
         if (is_numeric($nb_catalog_id)) {
             $retval = CNabuCatalogItemLanguage::buildObjectListFromSQL(
                 null,
-                'select cil.* '
-                . 'from nb_catalog_item ci, nb_catalog_item_lang cil '
-               . 'where ci.nb_catalog_item_id=cil.nb_catalog_item_id '
-                 . 'and ci.nb_catalog_id=%catalog_id$d '
+                'SELECT cil.*
+                   FROM nb_catalog_item ci, nb_catalog_item_lang cil
+                  WHERE ci.nb_catalog_item_id=cil.nb_catalog_item_id
+                    AND ci.nb_catalog_id=%catalog_id$d '
                  . ($level > 0 ? 'and ci.nb_catalog_item_level<=%level$d ' : '')
-               . 'order by ci.nb_catalog_item_order, cil.nb_language_id',
+               . 'ORDER BY ci.nb_catalog_item_order, cil.nb_language_id',
                 array(
                     'catalog_id' => $nb_catalog_id,
                     'level' => $level
@@ -113,7 +113,12 @@ class CNabuCatalogItem extends CNabuCatalogItemBase implements INabuDataObjectTr
         return $retval;
     }
 
-    public function getItems($force = false)
+    /**
+     * Get children items of this Item.
+     * @param bool $force If true, then refresh the list from the database storage.
+     * @return CNabuCatalogItemList Returns a Catalog Item List object with children items.
+     */
+    public function getItems(bool $force = false) : CNabuCatalogItemList
     {
         if ($this->nb_tree_child_list->isEmpty() || $force) {
             $this->nb_tree_child_list->merge(
