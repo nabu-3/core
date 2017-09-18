@@ -53,4 +53,14 @@ class CNabuIContact extends CNabuIContactBase
 
         return $tdata;
     }
+
+    /**
+     * To find a list of Prospects related by the same Email hash.
+     * @param string $hash Hash that identifies the Email.
+     * @return CNabuIContactProspectList The list of Prospects found.
+     */
+    public function findProspectsByEmailHash(string $hash) : CNabuIContactProspectList
+    {
+        return CNabuIContactProspect::findIContactProspectsByEmailHash($this, $hash);
+    }
 }

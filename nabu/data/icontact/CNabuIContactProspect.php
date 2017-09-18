@@ -18,6 +18,7 @@
  */
 
 namespace nabu\data\icontact;
+use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\CNabuDataObject;
 use nabu\data\icontact\base\CNabuIContactProspectBase;
 
@@ -103,17 +104,46 @@ class CNabuIContactProspect extends CNabuIContactProspectBase
      */
     static public function encodeEmail(string $email) : string
     {
-        return md5(self::EMAIL_PREF . $email . self::EMAIL_SUFF);
+        return md5(self::EMAIL_PREF . preg_replace('/\\s/', '', mb_strtolower($email)) . self::EMAIL_SUFF);
     }
 
     /**
      * Sets the Email and encoding it into a nabu-3 hashing algorithm.
-     * @param string $email Email string to be encoded and setted.
+     * @param string|null $email Email string to be encoded and setted.
      * @return CNabuDataObject Returns the self instance to grant cascade setters.
      */
-    public function setEmail(string $email) : CNabuDataObject
+    public function setEmail(string $email = null) : CNabuDataObject
     {
         parent::setEmail($email);
-        return parent::setEmailHash(self::encodeEmail($email));
+        return parent::setEmailHash(is_string($email) ? self::encodeEmail($email) : null);
+    }
+
+    /**
+     * To find a list of Prospects related by the same Email hash.
+     * @param CNabuIContact $nb_icontact IContact instance that contains requested Prospects.
+     * @param string $hash Hash that identifies the Email.
+     * @return CNabuIContactProspectList The list of Prospects found.
+     */
+    static public function findIContactProspectsByEmailHash(CNabuIContact $nb_icontact, string $hash) : CNabuIContactProspectList
+    {
+        if (is_numeric($nb_icontact_id = nb_getMixedValue($nb_icontact, 'nb_icontact_id')) &&
+            strlen($hash) === 32
+        ) {
+            $list = CNabuIContactProspect::buildObjectListFromSQL(
+                'nb_icontact_prospect_id',
+                'SELECT *
+                   FROM nb_icontact_prospect
+                  WHERE nb_icontact_id=%icontact_id$d
+                    AND nb_icontact_prospect_email_hash=\'%hash$s\'',
+                array(
+                    'icontact_id' => $nb_icontact_id,
+                    'hash' => $hash
+                )
+            );
+        } else {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE, array('$hash'));
+        }
+
+        return $list;
     }
 }
