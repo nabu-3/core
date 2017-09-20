@@ -123,6 +123,22 @@
                 }
             }
         },
+        "nb_messaging_service_hash_idx": {
+            "name": "nb_messaging_service_hash_idx",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_messaging_service_hash": {
+                    "name": "nb_messaging_service_hash",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
         "nb_messaging_service_nb_messaging_fk": {
             "name": "nb_messaging_service_nb_messaging_fk",
             "primary": false,
