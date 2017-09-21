@@ -242,7 +242,7 @@ class CNabuCatalogItem extends CNabuCatalogItemBase implements INabuDataObjectTr
                                                   WHERE nb_catalog_id=%cat_id$d
                                                   GROUP BY nb_catalog_id) AS t
                                           ORDER BY last_sibling ASC
-                                          LIMIT 1) AS ci4,
+                                          LIMIT 1) AS ci4
                                     SET ci3.nb_catalog_item_parent_id =
                                             if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
                                                 ci2.nb_catalog_item_parent_id,
@@ -281,6 +281,7 @@ class CNabuCatalogItem extends CNabuCatalogItemBase implements INabuDataObjectTr
                                     AND ci1.nb_catalog_id=ci3.nb_catalog_id
                                     AND ci1.nb_catalog_id=ci4.nb_catalog_id',
                                 array(
+                                    'cat_id' => $nb_catalog_id,
                                     'item_id' => $nb_catalog_item_id,
                                     'before_id' => $nb_catalog_before_id
                                 )
@@ -483,9 +484,9 @@ class CNabuCatalogItem extends CNabuCatalogItemBase implements INabuDataObjectTr
                                         ),
 	                                    ci3.nb_catalog_item_order =
                                             if (ci3.nb_catalog_item_order BETWEEN ci1.nb_catalog_item_order AND ci4.last_sibling - 1,
-                                                ci5.last_sibling - ci4.last_sibling + ci3.nb_catalog_item_order,
+                                                ci5.last_sibling + ci3.nb_catalog_item_order - ci4.last_sibling,
                                                 if(ci3.nb_catalog_item_order BETWEEN ci4.last_sibling AND ci5.last_sibling - 1,
-                                                    ci3.nb_catalog_item_order - ci4.last_sibling + ci1.nb_catalog_item_order,
+                                                    ci3.nb_catalog_item_order + ci1.nb_catalog_item_order - ci4.last_sibling,
                                                     ci3.nb_catalog_item_order
                                                 )
                                             ),
@@ -495,9 +496,9 @@ class CNabuCatalogItem extends CNabuCatalogItemBase implements INabuDataObjectTr
                                                 if (ci3.nb_catalog_item_id = ci2.nb_catalog_item_id,
                                                     ci5.last_sibling - ci4.last_sibling + ci1.nb_catalog_item_order,
                                                     if (ci3.nb_catalog_item_next_sibling BETWEEN ci1.nb_catalog_item_order + 1 AND ci4.last_sibling - 1,
-                                                        ci5.last_sibling - ci4.last_sibling + ci3.nb_catalog_item_next_sibling,
-                                                        if (ci3.nb_catalog_item_next_sibling between ci4.last_sibling and ci5.last_sibling - 1,
-                                                            ci3.nb_catalog_item_next_sibling - ci4.last_sibling + ci1.nb_catalog_item_order,
+                                                        ci5.last_sibling + ci3.nb_catalog_item_next_sibling - ci4.last_sibling,
+                                                        if (ci3.nb_catalog_item_next_sibling BETWEEN ci4.last_sibling AND ci5.last_sibling - 1,
+                                                            ci3.nb_catalog_item_next_sibling + ci1.nb_catalog_item_order - ci4.last_sibling,
                                                             ci3.nb_catalog_item_next_sibling
                                                         )
                                                     )
@@ -575,16 +576,16 @@ class CNabuCatalogItem extends CNabuCatalogItemBase implements INabuDataObjectTr
                                         ci3.nb_catalog_item_next_sibling =
                                             if (ci3.nb_catalog_item_id = ci2.nb_catalog_item_id,
                                                 ci5.last_sibling,
-                                                if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
-                                                    ci2.nb_catalog_item_next_sibling,
-                                                    if (ci3.nb_catalog_item_next_sibling BETWEEN ci1.nb_catalog_item_order + 1 AND ci4.last_sibling,
+                                                /*if (ci3.nb_catalog_item_id = ci1.nb_catalog_item_id,
+                                                    ci2.nb_catalog_item_next_sibling,*/
+                                                    if (ci3.nb_catalog_item_next_sibling BETWEEN ci1.nb_catalog_item_order AND ci4.last_sibling,
                                                         ci5.last_sibling + ci3.nb_catalog_item_next_sibling - ci1.nb_catalog_item_order,
                                                         if (ci3.nb_catalog_item_next_sibling BETWEEN ci5.last_sibling AND ci4.last_sibling,
                                                             ci3.nb_catalog_item_next_sibling + ci4.last_sibling - ci1.nb_catalog_item_order,
                                                             ci3.nb_catalog_item_next_sibling
                                                         )
                                                     )
-                                                )
+                                                /*)*/
                                             )
                                   WHERE ci1.nb_catalog_item_id=%item_id$d
                                     AND ci2.nb_catalog_item_id=%after_id$d
@@ -713,7 +714,7 @@ class CNabuCatalogItem extends CNabuCatalogItemBase implements INabuDataObjectTr
                             			),
                             	    ci3.nb_catalog_item_order =
                             		    if(ci3.nb_catalog_item_order BETWEEN ci1.nb_catalog_item_order AND ci4.last_sibling - 1,
-                            			    ci2.nb_catalog_item_order + ci3.nb_catalog_item_order + 1 - ci4.last_sibling,
+                            			    ci2.nb_catalog_item_order + ci3.nb_catalog_item_order + 1 - ci1.nb_catalog_item_order,
                             			    if(ci3.nb_catalog_item_order BETWEEN ci4.last_sibling AND ci2.nb_catalog_item_order,
                             				    ci3.nb_catalog_item_order + ci1.nb_catalog_item_order - ci4.last_sibling,
                             				    ci3.nb_catalog_item_order
