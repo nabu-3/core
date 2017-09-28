@@ -17,13 +17,8 @@
  *  limitations under the License.
  */
 
- /**
-  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
-  * @since 3.0.9 Surface
-  * @version 3.0.9 Surface
-  * @package \nabu\http\managers\base
-  */
 namespace nabu\messaging\adapters;
+
 use nabu\core\CNabuEngine;
 use nabu\messaging\exceptions\ENabuMessagingException;
 use nabu\messaging\interfaces\INabuMessagingModule;
@@ -33,15 +28,15 @@ use nabu\provider\CNabuProviderFactory;
 use nabu\provider\base\CNabuProviderInterfaceDescriptor;
 use nabu\provider\base\CNabuProviderModuleManagerAdapter;
 use nabu\provider\exceptions\ENabuProviderException;
-use nabu\provider\interfaces\INabuProviderManager;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
- * @version 3.0.0 Surface
+ * @since 3.0.9 Surface
+ * @version 3.0.9 Surface
  * @package \nabu\http\managers\base
  */
 abstract class CNabuMessagingModuleManagerAdapter extends CNabuProviderModuleManagerAdapter
-    implements INabuProviderManager, INabuMessagingModule
+    implements INabuMessagingModule
 {
     /** @var array Array of Service Interface instances */
     private $service_interface_list = null;

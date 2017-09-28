@@ -38,6 +38,7 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
 
     const OUTPUT_TYPE_HTML = 'HTML';
     const OUTPUT_TYPE_JSON = 'JSON';
+    const OUTPUT_TYPE_PDF  = 'PDF';
 
     const URL_TYPE_PATH = 'U';
     const URL_TYPE_REGEXP = 'R';

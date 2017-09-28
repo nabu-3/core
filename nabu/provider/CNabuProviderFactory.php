@@ -28,7 +28,6 @@ use nabu\provider\base\CNabuProviderInterfaceDescriptor;
 use nabu\provider\base\CNabuProviderInterfaceDescriptorList;
 use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
-use nabu\provider\interfaces\INabuProviderInterface;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -38,10 +37,12 @@ use nabu\provider\interfaces\INabuProviderInterface;
  */
 class CNabuProviderFactory extends CNabuObject implements INabuSingleton
 {
-    /** @var int INTERFACE_MESSAGING_SERVICE Messaging Service Interface identificator. */
+    /** @var int Messaging Service Interface identificator. */
     const INTERFACE_MESSAGING_SERVICE           = 0x0001;
-    /** @var int INTERFACE_MESSAGING_TEMPLATE_RENDER Messaging Template Render Interface identificatior. */
-    const INTERFACE_MESSAGING_TEMPLATE_RENDER   = 0X0002;
+    /** @var int Messaging Template Render Interface identificatior. */
+    const INTERFACE_MESSAGING_TEMPLATE_RENDER   = 0x0002;
+    /** @var int Render Interface identificator. */
+    const INTERFACE_RENDER                      = 0x0003;
 
     /** @var CNabuProviderFactory $nb_provider_factory Contains the singleton instance of class. */
     private static $nb_provider_factory = null;

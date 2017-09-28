@@ -23,6 +23,7 @@ use nabu\core\CNabuOS;
 use nabu\core\CNabuObject;
 use nabu\core\CNabuEngine;
 use nabu\core\CNabuErrorHandler;
+use nabu\core\exceptions\ENabuException;
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\core\exceptions\ENabuSingletonException;
 use nabu\core\interfaces\INabuSingleton;
@@ -526,8 +527,17 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         $this->microtime_start = microtime(true);
         $this->nb_os = CNabuOS::getOS();
 
-        $this->registerHandlers();
-        $this->registerProviderFactory();
+        try {
+            $this->registerHandlers();
+            $this->registerProviderFactory();
+        } catch (ENabuException $nb_exception) {
+            if ($this->isCLIEnvironment()) {
+                throw $nb_exception;
+            } else {
+                nb_displayErrorPage(500, $nb_exception);
+                die;
+            }
+        }
     }
 
     /**
