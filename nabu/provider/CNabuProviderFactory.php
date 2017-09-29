@@ -68,7 +68,8 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
         $this->nb_manager_list = new CNabuProviderManagerList();
         $this->nb_interface_list = array(
             self::INTERFACE_MESSAGING_SERVICE => new CNabuProviderInterfaceDescriptorList(),
-            self::INTERFACE_MESSAGING_TEMPLATE_RENDER => new CNabuProviderInterfaceDescriptorList()
+            self::INTERFACE_MESSAGING_TEMPLATE_RENDER => new CNabuProviderInterfaceDescriptorList(),
+            self::INTERFACE_RENDER => new CNabuProviderInterfaceDescriptorList()
         );
     }
 
