@@ -44,11 +44,11 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
     /** @var int Render Interface identificator. */
     const INTERFACE_RENDER                      = 0x0003;
 
-    /** @var CNabuProviderFactory $nb_provider_factory Contains the singleton instance of class. */
+    /** @var CNabuProviderFactory Contains the singleton instance of class. */
     private static $nb_provider_factory = null;
-    /** @var CNabuProviderManagerList $nb_manager_list List of all registered managers. */
+    /** @var CNabuProviderManagerList List of all registered managers. */
     private $nb_manager_list = null;
-    /** @var array $nb_interface_list Index of interfaces. */
+    /** @var array Index of interfaces. */
     private $nb_interface_list = null;
 
     /**

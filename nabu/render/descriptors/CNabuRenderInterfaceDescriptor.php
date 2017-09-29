@@ -30,15 +30,30 @@ use nabu\provider\interfaces\INabuProviderManager;
  */
 class CNabuRenderInterfaceDescriptor extends CNabuProviderInterfaceDescriptor
 {
+    /** @var string MIME Type of this Descriptor. */
+    private $mimetype;
+
     public function __construct(
         INabuProviderManager $nb_manager,
         string $key,
         string $name,
         string $namespace,
-        string $class_name
+        string $class_name,
+        string $mimetype
     ) {
         parent::__construct(
             $nb_manager, CNabuProviderFactory::INTERFACE_RENDER, $key, $name, $namespace, $class_name
         );
+
+        $this->mimetype = $mimetype;
+    }
+
+    /**
+     * Gets the MIME Type of this descriptor.
+     * @return string Returns the MIME Type.
+     */
+    public function getMIMEType(): string
+    {
+        return $this->mimetype;
     }
 }

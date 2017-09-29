@@ -18,7 +18,9 @@
  */
 
 namespace nabu\core;
+use Pool;
 use Exception;
+use MongoDB\Driver\WriteError;
 use nabu\core\CNabuOS;
 use nabu\core\CNabuObject;
 use nabu\core\CNabuEngine;
@@ -46,6 +48,8 @@ use nabu\provider\base\CNabuProviderInterfaceDescriptor;
 use nabu\provider\base\CNabuProviderInterfaceDescriptorList;
 use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
+use nabu\render\exceptions\ENabuRenderException;
+use nabu\render\managers\CNabuRenderPoolManager;
 use providers\apache\httpd\CApacheHTTPServer;
 use providers\mysql\driver\CMySQLConnector;
 
@@ -103,6 +107,8 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     private $nb_provider_factory = null;
     /** @var CNabuMessagingPoolManager If the Engine was requested to run a Messaging pool here is the instance */
     private $nb_messaging_pool_manager = null;
+    /** @var CNabuRenderPoolManager If the Engine was requested to run a Render pool here is the instance */
+    private $nb_render_pool_manager = null;
 
     /**
      * Default constructor. This object is singleton then, more than one instantiation throws a ENabuSingletonException.
@@ -317,7 +323,8 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      * Gets current Messaging Pool Manager instance. If not defined, then creates one for the current Customer.
      * @param bool $force Forces to set a new Messaging Pool Manager Instance.
      * @return CNabuMessagingPoolManager Returns the Messaging Pool Manager.
-     * @throws ENabuMessagingException Raises an exception if Customer instance is not available or not matches with
+     * @throws ENabuCoreException Raises an exception if Customer instance is not available or not matches with
+     * @throws ENabuMessagingException Raises an exception if none Pool Manager available.
      * the existing Messaging Pool Manager.
      */
     public function getMessagingPoolManager(bool $force = false) : CNabuMessagingPoolManager
@@ -342,6 +349,38 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         }
 
         return $this->nb_messaging_pool_manager;
+    }
+
+    /**
+     * Gets current Render Pool Manager instance. If not defined, then creates one for the current Customer.
+     * @param bool $force Forces to set a new Render Pool Manager instance.
+     * @return CNabuRenderPoolManager Returns the Render Pool manager.
+     * @throws ENabuCoreException Raises an exception if Customer instance is not available or not matches with
+     * the existing Render Pool Manager.
+     * @throws ENabuRenderException Raises an exception none Pool Manager available.
+     */
+    public function getRenderPoolManager(bool $force = false) : CNabuRenderPoolManager
+    {
+        if ($this->nb_customer instanceof CNabuCustomer) {
+            if ($this->nb_render_pool_manager === null || $force) {
+                if ($this->nb_render_pool_manager instanceof CNabuRenderPoolManager) {
+                    $this->nb_render_pool_manager->finish();
+                }
+                $this->nb_render_pool_manager = new CNabuRenderPoolManager($this->nb_customer);
+                $this->nb_render_pool_manager->init();
+            } elseif (
+                ($nb_customer = $this->nb_render_pool_manager->getCustomer()) instanceof CNabuCustomer &&
+                $this->nb_customer->getId() === $nb_customer->getId()
+            ) {
+                $retval = $this->nb_render_pool_manager;
+            } else {
+                throw new ENabuRenderException(ENabuRenderException::ERROR_INVALID_RENDER_POOL_MANAGER);
+            }
+        } else {
+            throw new ENabuCoreException(ENabuCoreException::EROR_CUSTOMER_NOT_FOUND);
+        }
+
+        return $this->nb_render_pool_manager;
     }
 
     /**

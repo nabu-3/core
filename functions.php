@@ -192,7 +192,7 @@ function nb_vnsprintf($format, array $data)
  * @return bool Returns true if $value is between the range limits.
  * @throws ENabuCoreException Raises an exception if $value is not numeric and not string.
  */
-function nb_isBetween($value, $left, $right)
+function nb_isBetween($value, $left, $right) : bool
 {
     if (is_numeric($value) && is_numeric($left) && is_numeric($right)) {
         $retval = ($value >= $left && $value <= $right);
@@ -211,9 +211,32 @@ function nb_isBetween($value, $left, $right)
  * @param string $key
  * @return bool Returns true if the key is valid of false if not.
  */
-function nb_isValidKey($key)
+function nb_isValidKey(string $key) : bool
 {
     return nb_isBetween(strlen($key), 2, 30) && preg_match('/' . NABU_REGEXP_PATTERN_KEY . '/', $key);
+}
+
+/**
+ * Validates a MIME type to know if is a valid string conform to syntax rule defined in RFC6838.
+ * @param string $mimetype MIME type to evaluate.
+ * @return bool Returns true if it is valid.
+ */
+function nb_isMIMEType(string $mimetype) : bool
+{
+    $retval = false;
+
+    $parts = preg_split('////', $mimetype);
+    $retval = count($parts) === 2 &&
+              preg_match('/[a-zA-Z0-9]{1}[a-zA-Z0-9!#$&\-\^_.]*/', $parts[0]) &&
+              preg_match('/[a-zA-Z0-9]{1}[a-zA-Z0-9!#$&\-\^_.]*/', $parts[1]) &&
+              in_array($parts[0],
+                       array(
+                           'application', 'audio', 'font', 'example', 'image', 'message', 'model', 'multipart',
+                           'text', 'video')
+                       )
+    ;
+
+    return $retval;
 }
 
 /*

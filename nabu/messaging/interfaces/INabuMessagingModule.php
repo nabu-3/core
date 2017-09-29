@@ -26,8 +26,8 @@ use nabu\messaging\exceptions\ENabuMessagingException;
  * @version 3.0.12 Surface
  * @package \nabu\messaging\interfaces
  */
-interface INabuMessagingModule {
-
+interface INabuMessagingModule
+{
     /**
      * Create a Service Interface to manage a Messaging service.
      * @param string $name Class name to be instantiated.

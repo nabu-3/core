@@ -52,6 +52,7 @@ class CNabuMessagingFactory extends CNabuDataObject
      */
     public function __construct(CNabuMessaging $nb_messaging)
     {
+        parent::__construct();
         $this->nb_messaging = $nb_messaging;
         $this->setValue('nb_messaging_id', $nb_messaging->getId());
     }
@@ -190,8 +191,8 @@ class CNabuMessagingFactory extends CNabuDataObject
      * of strings each one an inbox, to send in Carbon Copy.
      * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an inbox as string or an array
      * of strings each one an inbox, to send in Blind Carbon Copy.
-     * @param array $params An associative array with additional data for the template.
-     * @param array $attachments An array of attached files to send in the message.
+     * @param array|null $params An associative array with additional data for the template.
+     * @param array|null $attachments An array of attached files to send in the message.
      * @return bool Returns true if the message was posted.
      * @throws ENabuMessagingException Raises an exception if something is wrong.
      */
@@ -222,8 +223,8 @@ class CNabuMessagingFactory extends CNabuDataObject
      * of strings each one an inbox, to send in Carbon Copy.
      * @param CNabuUser|CNabuUserList|string|array $bcc A User or User List instance, an inbox as string or an array
      * of strings each one an inbox, to send in Blind Carbon Copy.
-     * @param array $params An associative array with additional data for the template.
-     * @param array $attachments An array of attached files to send in the message.
+     * @param array|null $params An associative array with additional data for the template.
+     * @param array|null $attachments An array of attached files to send in the message.
      * @return bool Returns true if the message was posted.
      * @throws ENabuMessagingException Raises an exception if something is wrong.
      */
