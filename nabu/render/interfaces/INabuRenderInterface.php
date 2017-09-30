@@ -18,6 +18,7 @@
  */
 
 namespace nabu\render\interfaces;
+use nabu\provider\interfaces\INabuProviderInterface;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -25,7 +26,7 @@ namespace nabu\render\interfaces;
  * @version 3.0.12 Surface
  * @package \nabu\render\interfaces
  */
-interface INabuRenderInterface
+interface INabuRenderInterface extends INabuProviderInterface
 {
-    
+
 }

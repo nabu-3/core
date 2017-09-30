@@ -54,7 +54,7 @@ abstract class CNabuMessagingModuleManagerAdapter extends CNabuProviderModuleMan
      * @return bool Returns true if the instance is registered and initiated.
      * @throws ENabuMessagingException Raises an exception if $interface is already registered.
      */
-    protected function registerServiceInterface(INabuMessagingServiceInterface $interface)
+    protected function registerServiceInterface(INabuMessagingServiceInterface $interface) : bool
     {
         $hash = $interface->getHash();
         if (is_array($this->service_interface_list) && array_key_exists($hash, $this->service_interface_list)) {
@@ -80,7 +80,7 @@ abstract class CNabuMessagingModuleManagerAdapter extends CNabuProviderModuleMan
      * @return INabuMessagingServiceInterface Returns a valid instance if $name is a valid name.
      * @throws ENabuMessagingException Raises an exception if the interface name is invalid.
      */
-    public function createServiceInterface(string $class_name)
+    public function createServiceInterface(string $class_name) : INabuMessagingServiceInterface
     {
         $nb_engine = CNabuEngine::getEngine();
         $nb_descriptor = $nb_engine->getProviderInterfaceDescriptor(
@@ -128,7 +128,7 @@ abstract class CNabuMessagingModuleManagerAdapter extends CNabuProviderModuleMan
      * @return bool Returns true if the instance is registered and initiated.
      * @throws ENabuMessagingException Raises an exception if $interface is already registered.
      */
-    protected function registerTemplateRenderInterface(INabuMessagingTemplateRenderInterface $interface)
+    protected function registerTemplateRenderInterface(INabuMessagingTemplateRenderInterface $interface) : bool
     {
         $hash = $interface->getHash();
         if (is_array($this->template_render_interface_list) &&
@@ -156,7 +156,7 @@ abstract class CNabuMessagingModuleManagerAdapter extends CNabuProviderModuleMan
      * @return INabuMessagingTemplateRenderInterface Returns a valid instance if $name is a valid name.
      * @throws ENabuMessagingException Raises an exception if the interface name is invalid.
      */
-    public function createTemplateRenderInterface(string $class_name)
+    public function createTemplateRenderInterface(string $class_name) : INabuMessagingTemplateRenderInterface
     {
         $nb_engine = CNabuEngine::getEngine();
         $nb_descriptor = $nb_engine->getProviderInterfaceDescriptor(
