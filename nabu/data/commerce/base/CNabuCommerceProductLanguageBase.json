@@ -62,6 +62,17 @@
             "is_nullable": true,
             "extra": "",
             "comment": ""
+        },
+        "nb_commerce_product_lang_attributes": {
+            "name": "nb_commerce_product_lang_attributes",
+            "ordinal": "6",
+            "data_type": "longtext",
+            "precision": null,
+            "type": "longtext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
         }
     },
     "constraints": {

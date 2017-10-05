@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/09/20 17:30:20 UTC
+ * Created: 2017/10/05 10:40:12 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -280,5 +280,41 @@ abstract class CNabuCommerceProductLanguageBase extends CNabuDBInternalObject im
         $this->setValue('nb_commerce_product_lang_description', $description);
         
         return $this;
+    }
+
+    /**
+     * Get Commerce Product Lang Attributes attribute value
+     * @return null|array Returns the Commerce Product Lang Attributes value
+     */
+    public function getAttributes()
+    {
+        return $this->getValueJSONDecoded('nb_commerce_product_lang_attributes');
+    }
+
+    /**
+     * Sets the Commerce Product Lang Attributes attribute value.
+     * @param null|string|array $attributes New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setAttributes(string $attributes = null) : CNabuDataObject
+    {
+        $this->setValueJSONEncoded('nb_commerce_product_lang_attributes', $attributes);
+        
+        return $this;
+    }
+
+    /**
+     * Overrides this method to add support to traits and/or attributes.
+     * @param int|CNabuDataObject $nb_language Instance or Id of the language to be used.
+     * @param bool $dataonly Render only field values and ommit class control flags.
+     * @return array Returns a multilevel associative array with all data.
+     */
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $trdata = parent::getTreeData($nb_language, $dataonly);
+        
+        $trdata['attributes'] = $this->getAttributes();
+        
+        return $trdata;
     }
 }

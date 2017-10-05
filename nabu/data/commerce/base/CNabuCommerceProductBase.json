@@ -271,6 +271,17 @@
             "is_nullable": true,
             "extra": "",
             "comment": ""
+        },
+        "nb_commerce_product_attributes": {
+            "name": "nb_commerce_product_attributes",
+            "ordinal": "25",
+            "data_type": "longtext",
+            "precision": null,
+            "type": "longtext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
         }
     },
     "constraints": {
