@@ -76,7 +76,12 @@ class CNabuCommerce extends CNabuCommerceBase
         return $this->nb_commerce_product_category_list->getItem($nb_commerce_product_category_id);
     }
 
-    public function getProductCategories($force = false)
+    /**
+     * Gets the full list of all Product Categories in this Commerce instance.
+     * @param bool $force If true, forces to reload list form the database storage.
+     * @return CNabuCommerceProductCategoryList Returns a Product Category List with all Categories.
+     */
+    public function getProductCategories(bool $force = false) : CNabuCommerceProductCategoryList
     {
         if ($this->nb_commerce_product_category_list->isEmpty() || $force) {
             $this->nb_commerce_product_category_list->clear();
@@ -87,6 +92,23 @@ class CNabuCommerce extends CNabuCommerceBase
         return $this->nb_commerce_product_category_list;
     }
 
+    /**
+     * Find a Product Category using their key.
+     * @param string $key Key of Product Category to find.
+     * @return CNabuCommerceProductCategory|false Returns the Product Category instance if exists or false if not.
+     */
+    public function findProductCategoryByKey(string $key)
+    {
+        return $this->nb_commerce_product_category_list->getItem(
+            $key, CNabuCommerceProductCategoryList::INDEX_KEY
+        );
+    }
+
+    /**
+     * Find a Product Category using their slug.
+     * @param string $slug Slug of Product Category to find.
+     * @return CNabuCommerceProductCategory|false Returns the Product Category instance if exists or false if not.
+     */
     public function findProductCategoryBySlug($slug)
     {
         return $this->nb_commerce_product_category_list->getItem(
