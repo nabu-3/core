@@ -34,7 +34,7 @@ interface INabuMessagingModule
      * @return INabuMessagingServiceInterface Returns a valid instance if $name is a valid name.
      * @throws ENabuMessagingException Raises an exception if the interface name is invalid.
      */
-    public function createServiceInterface(string $name);
+    public function createServiceInterface(string $name) : INabuMessagingServiceInterface;
 
     /**
      * This method is called to finish the use of a Service Interface instance.
@@ -48,7 +48,7 @@ interface INabuMessagingModule
      * @return INabuMessagingTemplateRenderInterface Returns a valid instance if $name is a valid name.
      * @throws ENabuMessagingException Raises an exception if the interface name is invalid.
      */
-    public function createTemplateRenderInterface(string $name);
+    public function createTemplateRenderInterface(string $name) : INabuMessagingTemplateRenderInterface;
 
     /**
      * This method is called to finish the use of a Template Render Interface instance.

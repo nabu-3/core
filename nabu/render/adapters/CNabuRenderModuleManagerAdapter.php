@@ -18,8 +18,14 @@
  */
 
 namespace nabu\render\adapters;
+use nabu\core\CNabuEngine;
+use nabu\provider\CNabuProviderFactory;
 use nabu\provider\base\CNabuProviderModuleManagerAdapter;
+use nabu\provider\exceptions\ENabuProviderException;
+use nabu\render\descriptors\CNabuRenderInterfaceDescriptor;
+use nabu\render\exceptions\ENabuRenderException;
 use nabu\render\interfaces\INabuRenderModule;
+use nabu\render\interfaces\INabuRenderInterface;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -30,5 +36,73 @@ use nabu\render\interfaces\INabuRenderModule;
 abstract class CNabuRenderModuleManagerAdapter extends CNabuProviderModuleManagerAdapter
     implements INabuRenderModule
 {
+    /** @var array Array of Render Interface instances */
+    private $render_interface_list = null;
 
+    /**
+     * Register a new Messaging Interface instance.
+     * @param INabuRenderInterface $interface Interface instance to be registered.
+     * @return bool Returns true if the instance is registered and initiated.
+     * @throws ENabuRenderException Raises an exception if $interface is already registered.
+     */
+    protected function registerRenderInterface(INabuRenderInterface $interface) : bool
+    {
+        $hash = $interface->getHash();
+        if (is_array($this->render_interface_list) && array_key_exists($hash, $this->render_interface_list)) {
+            throw new ENabuRenderException(
+                ENabuRenderException::ERROR_RENDER_INSTANCE_ALREADY_REGISTERED,
+                array(get_class($interface))
+            );
+        }
+
+        if ($this->render_interface_list === null) {
+            $this->render_interface_list = array($hash => $interface);
+        } else {
+            $this->render_interface_list[$hash] = $interface;
+        }
+
+        return $interface->init();
+    }
+
+    public function createRenderInterface(string $class_name) : INabuRenderInterface
+    {
+        $nb_engine = CNabuEngine::getEngine();
+        $nb_descriptor = $nb_engine->getProviderInterfaceDescriptor(
+            $this->getVendorKey(), $this->getModuleKey(),
+            CNabuProviderFactory::INTERFACE_RENDER, $class_name
+        );
+
+        if ($nb_descriptor instanceof CNabuRenderInterfaceDescriptor) {
+            $fullname = $nb_descriptor->getNamespace() . "\\renders\\$class_name";
+            if ($nb_engine->preloadClass($fullname)) {
+                $interface = new $fullname($this);
+                if ($this->registerRenderInterface($interface)) {
+                    return $interface;
+                } else {
+                    throw new ENabuRenderException(
+                        ENabuRenderException::ERROR_RENDER_CANNOT_BE_INSTANTIATED,
+                        array($class_name)
+                    );
+                }
+            } else {
+                throw new ENabuRenderException(
+                    ENabuRenderException::ERROR_INVALID_SERVICE_CLASS_NAME, array($class_name)
+                );
+            }
+        } else {
+            throw new ENabuProviderException(
+                ENabuProviderException::ERROR_INTERFACE_DESCRIPTOR_NOT_FOUND, array($class_name)
+            );
+        }
+    }
+
+    public function releaseRenderInterface(INabuRenderInterface $interface)
+    {
+        $hash = $interface->getHash();
+
+        if (array_key_exists($hash, $this->render_interface_list)) {
+            $interface->finish();
+            unset($this->render_interface_list[$hash]);
+        }
+    }
 }

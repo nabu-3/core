@@ -34,6 +34,12 @@ class ENabuRenderException extends ENabuException
     const ERROR_INVALID_MIME_TYPE                               = 0x0002;
     /** @var int Invalid vendor and module combination. Requires the vendor key and the module key. */
     const ERROR_INVALID_VENDOR_MODULE_KEYS                      = 0x0003;
+    /** @var int Render cannot be instantiated. Requires Render class name. */
+    const ERROR_RENDER_CANNOT_BE_INSTANTIATED                   = 0x0004;
+    /** @var int Invalid Render Class Name. Requires the Class Name. */
+    const ERROR_INVALID_SERVICE_CLASS_NAME                      = 0x0005;
+    /** @var int Render already instantiated. Requires the Class Name. */
+    const ERROR_RENDER_INSTANCE_ALREADY_REGISTERED              = 0x0006;
 
     /** @var array List of all error messages defined in this exception. */
     private static $error_messages = array(
@@ -42,7 +48,13 @@ class ENabuRenderException extends ENabuException
         ENabuRenderException::ERROR_INVALID_MIME_TYPE =>
             'Invalid MIME Type %s.',
         ENabuRenderException::ERROR_INVALID_VENDOR_MODULE_KEYS =>
-            'Vendor Module Keys are invalid [%s, %s]'
+            'Vendor Module Keys are invalid [%s, %s].',
+        ENabuRenderException::ERROR_RENDER_CANNOT_BE_INSTANTIATED =>
+            'The Render [%s] cannot be instantiated.',
+        ENabuRenderException::ERROR_INVALID_SERVICE_CLASS_NAME =>
+            'Render Class name is invalid or does not exists.',
+        ENabuRenderException::ERROR_RENDER_INSTANCE_ALREADY_REGISTERED =>
+            'Render instance of [%s] already registered.'
     );
 
     public function __construct($code, $values = null)

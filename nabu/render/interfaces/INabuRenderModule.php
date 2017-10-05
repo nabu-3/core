@@ -30,11 +30,11 @@ interface INabuRenderModule
 {
     /**
      * Create a Render Interface to manage a MIME Type output.
-     * @param string $name Class name to be instantiated.
+     * @param string $class_name Class name to be instantiated.
      * @return INabuRenderInterface Returns a valid instance if $name is a valid name.
      * @throws ENabuRenderException Raises an exception if the interface name is invalid.
      */
-    public function createRenderInterface(string $name);
+    public function createRenderInterface(string $class_name) : INabuRenderInterface;
 
     /**
      * This method is called to finish the use of a Render Interface instance.

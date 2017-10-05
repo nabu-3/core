@@ -208,34 +208,36 @@ function nb_isBetween($value, $left, $right) : bool
 /**
  * Validates a key according to key definition in nabu-3. The pattern is stored in a defined constant to be available
  * for other purposes.
- * @param string $key
+ * @param string|null $key The key to be validated.
  * @return bool Returns true if the key is valid of false if not.
  */
-function nb_isValidKey(string $key) : bool
+function nb_isValidKey(string $key = null) : bool
 {
-    return nb_isBetween(strlen($key), 2, 30) && preg_match('/' . NABU_REGEXP_PATTERN_KEY . '/', $key);
+    return is_string($key) && nb_isBetween(strlen($key), 2, 30) && preg_match('/' . NABU_REGEXP_PATTERN_KEY . '/', $key);
 }
 
 /**
  * Validates a MIME type to know if is a valid string conform to syntax rule defined in RFC6838.
- * @param string $mimetype MIME type to evaluate.
+ * @param string|null $mimetype MIME type to evaluate.
  * @return bool Returns true if it is valid.
  */
-function nb_isMIMEType(string $mimetype) : bool
+function nb_isMIMEType(string $mimetype = null) : bool
 {
     $retval = false;
 
-    $parts = preg_split('////', $mimetype);
-    $retval = count($parts) === 2 &&
-              preg_match('/[a-zA-Z0-9]{1}[a-zA-Z0-9!#$&\-\^_.]*/', $parts[0]) &&
-              preg_match('/[a-zA-Z0-9]{1}[a-zA-Z0-9!#$&\-\^_.]*/', $parts[1]) &&
-              in_array($parts[0],
-                       array(
-                           'application', 'audio', 'font', 'example', 'image', 'message', 'model', 'multipart',
-                           'text', 'video')
-                       )
-    ;
-
+    if (is_string($mimetype)) {
+        $parts = preg_split('////', $mimetype);
+        $retval = count($parts) === 2 &&
+                  preg_match('/[a-zA-Z0-9]{1}[a-zA-Z0-9!#$&\-\^_.]*/', $parts[0]) &&
+                  preg_match('/[a-zA-Z0-9]{1}[a-zA-Z0-9!#$&\-\^_.]*/', $parts[1]) &&
+                  in_array($parts[0],
+                           array(
+                               'application', 'audio', 'font', 'example', 'image', 'message', 'model', 'multipart',
+                               'text', 'video')
+                           )
+        ;
+    }
+    
     return $retval;
 }
 
