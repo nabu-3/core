@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:22 UTC
+ * Created: 2017/10/06 08:00:30 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -349,7 +349,7 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Icontact Hash attribute value.
-     * @param null|string $hash New value for attribute
+     * @param string|null $hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHash(string $hash = null) : CNabuDataObject
@@ -370,7 +370,7 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Customer Id attribute value.
-     * @param null|int $nb_customer_id New value for attribute
+     * @param int|null $nb_customer_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCustomerId(int $nb_customer_id = null) : CNabuDataObject
@@ -391,7 +391,7 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the User Id attribute value.
-     * @param null|int $nb_user_id New value for attribute
+     * @param int|null $nb_user_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setUserId(int $nb_user_id = null) : CNabuDataObject
@@ -412,7 +412,7 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Icontact Key attribute value.
-     * @param null|string $key New value for attribute
+     * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
@@ -433,7 +433,7 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Icontact Name attribute value.
-     * @param null|string $name New value for attribute
+     * @param string|null $name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setName(string $name = null) : CNabuDataObject
@@ -454,7 +454,7 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Emailing Id attribute value.
-     * @param null|int $nb_emailing_id New value for attribute
+     * @param int|null $nb_emailing_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailingId(int $nb_emailing_id = null) : CNabuDataObject
@@ -475,7 +475,7 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Icontact Email Template Acknowledge attribute value.
-     * @param null|int $email_template_acknowledge New value for attribute
+     * @param int|null $email_template_acknowledge New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateAcknowledge(int $email_template_acknowledge = null) : CNabuDataObject
@@ -496,7 +496,7 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Icontact Email Template Arrival attribute value.
-     * @param null|int $email_template_arrival New value for attribute
+     * @param int|null $email_template_arrival New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateArrival(int $email_template_arrival = null) : CNabuDataObject
@@ -517,7 +517,7 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Icontact Target Email attribute value.
-     * @param null|string $target_email New value for attribute
+     * @param string|null $target_email New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTargetEmail(string $target_email = null) : CNabuDataObject
@@ -538,7 +538,7 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Icontact Base Path attribute value.
-     * @param null|string $base_path New value for attribute
+     * @param string|null $base_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setBasePath(string $base_path = null) : CNabuDataObject
@@ -559,7 +559,7 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Icontact Internal Path attribute value.
-     * @param null|string $internal_path New value for attribute
+     * @param string|null $internal_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setInternalPath(string $internal_path = null) : CNabuDataObject

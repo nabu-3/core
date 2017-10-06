@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:39:51 UTC
+ * Created: 2017/10/06 08:00:00 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -199,7 +199,7 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
 
     /**
      * Sets the Customer Id attribute value.
-     * @param null|int $nb_customer_id New value for attribute
+     * @param int|null $nb_customer_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCustomerId(int $nb_customer_id = null) : CNabuDataObject
@@ -559,7 +559,7 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
 
     /**
      * Sets the Domain Zone Dns 03 attribute value.
-     * @param null|string $dns_03 New value for attribute
+     * @param string|null $dns_03 New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDns03(string $dns_03 = null) : CNabuDataObject
@@ -580,7 +580,7 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
 
     /**
      * Sets the Domain Zone Dns 04 attribute value.
-     * @param null|string $dns_04 New value for attribute
+     * @param string|null $dns_04 New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDns04(string $dns_04 = null) : CNabuDataObject
@@ -601,7 +601,7 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
 
     /**
      * Sets the Domain Zone Dns 05 attribute value.
-     * @param null|string $dns_05 New value for attribute
+     * @param string|null $dns_05 New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDns05(string $dns_05 = null) : CNabuDataObject
@@ -622,7 +622,7 @@ abstract class CNabuDomainZoneBase extends CNabuDBInternalObject
 
     /**
      * Sets the Domain Zone Dns 06 attribute value.
-     * @param null|string $dns_06 New value for attribute
+     * @param string|null $dns_06 New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDns06(string $dns_06 = null) : CNabuDataObject

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:39:52 UTC
+ * Created: 2017/10/06 08:00:01 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -375,7 +375,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Hash attribute value.
-     * @param null|string $hash New value for attribute
+     * @param string|null $hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHash(string $hash = null) : CNabuDataObject
@@ -396,7 +396,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Key attribute value.
-     * @param null|string $key New value for attribute
+     * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
@@ -417,7 +417,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Cluster Group Id attribute value.
-     * @param null|int $nb_cluster_group_id New value for attribute
+     * @param int|null $nb_cluster_group_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setClusterGroupId(int $nb_cluster_group_id = null) : CNabuDataObject
@@ -438,7 +438,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Cluster User Id attribute value.
-     * @param null|int $nb_cluster_user_id New value for attribute
+     * @param int|null $nb_cluster_user_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setClusterUserId(int $nb_cluster_user_id = null) : CNabuDataObject
@@ -459,7 +459,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Customer Id attribute value.
-     * @param null|int $nb_customer_id New value for attribute
+     * @param int|null $nb_customer_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCustomerId(int $nb_customer_id = null) : CNabuDataObject
@@ -480,7 +480,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Project Id attribute value.
-     * @param null|int $nb_project_id New value for attribute
+     * @param int|null $nb_project_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setProjectId(int $nb_project_id = null) : CNabuDataObject
@@ -501,7 +501,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Commerce Id attribute value.
-     * @param null|int $nb_commerce_id New value for attribute
+     * @param int|null $nb_commerce_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCommerceId(int $nb_commerce_id = null) : CNabuDataObject
@@ -522,7 +522,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Messaging Id attribute value.
-     * @param null|int $nb_messaging_id New value for attribute
+     * @param int|null $nb_messaging_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setMessagingId(int $nb_messaging_id = null) : CNabuDataObject
@@ -543,7 +543,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the App OS Id attribute value.
-     * @param null|int $nb_app_os_id New value for attribute
+     * @param int|null $nb_app_os_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAppOSId(int $nb_app_os_id = null) : CNabuDataObject
@@ -564,7 +564,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Delegate For Role attribute value.
-     * @param null|int $delegate_for_role New value for attribute
+     * @param int|null $delegate_for_role New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDelegateForRole(int $delegate_for_role = null) : CNabuDataObject
@@ -585,7 +585,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Default Role Id attribute value.
-     * @param null|int $default_role_id New value for attribute
+     * @param int|null $default_role_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDefaultRoleId(int $default_role_id = null) : CNabuDataObject
@@ -606,7 +606,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Default Language Id attribute value.
-     * @param null|int $default_language_id New value for attribute
+     * @param int|null $default_language_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDefaultLanguageId(int $default_language_id = null) : CNabuDataObject
@@ -627,7 +627,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Api Language Id attribute value.
-     * @param null|int $api_language_id New value for attribute
+     * @param int|null $api_language_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setApiLanguageId(int $api_language_id = null) : CNabuDataObject
@@ -648,7 +648,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Main Alias Id attribute value.
-     * @param null|int $main_alias_id New value for attribute
+     * @param int|null $main_alias_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setMainAliasId(int $main_alias_id = null) : CNabuDataObject
@@ -792,7 +792,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Default Target Id attribute value.
-     * @param null|int $default_target_id New value for attribute
+     * @param int|null $default_target_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDefaultTargetId(int $default_target_id = null) : CNabuDataObject
@@ -840,7 +840,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Page Not Found Target Id attribute value.
-     * @param null|int $page_not_found_target_id New value for attribute
+     * @param int|null $page_not_found_target_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setPageNotFoundTargetId(int $page_not_found_target_id = null) : CNabuDataObject
@@ -909,7 +909,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Login Target Id attribute value.
-     * @param null|int $login_target_id New value for attribute
+     * @param int|null $login_target_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setLoginTargetId(int $login_target_id = null) : CNabuDataObject
@@ -951,7 +951,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Login Redirection Target Id attribute value.
-     * @param null|int $login_redirection_target_id New value for attribute
+     * @param int|null $login_redirection_target_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setLoginRedirectionTargetId(int $login_redirection_target_id = null) : CNabuDataObject
@@ -993,7 +993,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Logout Redirection Target Id attribute value.
-     * @param null|int $logout_redirection_target_id New value for attribute
+     * @param int|null $logout_redirection_target_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setLogoutRedirectionTargetId(int $logout_redirection_target_id = null) : CNabuDataObject
@@ -1041,7 +1041,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Alias Not Found Target Id attribute value.
-     * @param null|int $alias_not_found_target_id New value for attribute
+     * @param int|null $alias_not_found_target_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAliasNotFoundTargetId(int $alias_not_found_target_id = null) : CNabuDataObject
@@ -1089,7 +1089,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Alias Locked Target Id attribute value.
-     * @param null|int $alias_locked_target_id New value for attribute
+     * @param int|null $alias_locked_target_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAliasLockedTargetId(int $alias_locked_target_id = null) : CNabuDataObject
@@ -1137,7 +1137,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Policies Target Id attribute value.
-     * @param null|int $policies_target_id New value for attribute
+     * @param int|null $policies_target_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setPoliciesTargetId(int $policies_target_id = null) : CNabuDataObject
@@ -1212,7 +1212,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Cache Handler attribute value.
-     * @param null|string $cache_handler New value for attribute
+     * @param string|null $cache_handler New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCacheHandler(string $cache_handler = null) : CNabuDataObject
@@ -1254,7 +1254,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Smarty Error Reporting attribute value.
-     * @param null|int $smarty_error_reporting New value for attribute
+     * @param int|null $smarty_error_reporting New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSmartyErrorReporting(int $smarty_error_reporting = null) : CNabuDataObject
@@ -1296,7 +1296,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Smarty Template Path attribute value.
-     * @param null|string $smarty_template_path New value for attribute
+     * @param string|null $smarty_template_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSmartyTemplatePath(string $smarty_template_path = null) : CNabuDataObject
@@ -1317,7 +1317,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Smarty Compile Path attribute value.
-     * @param null|string $smarty_compile_path New value for attribute
+     * @param string|null $smarty_compile_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSmartyCompilePath(string $smarty_compile_path = null) : CNabuDataObject
@@ -1338,7 +1338,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Smarty Cache Path attribute value.
-     * @param null|string $smarty_cache_path New value for attribute
+     * @param string|null $smarty_cache_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSmartyCachePath(string $smarty_cache_path = null) : CNabuDataObject
@@ -1359,7 +1359,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Smarty Configs Path attribute value.
-     * @param null|string $smarty_configs_path New value for attribute
+     * @param string|null $smarty_configs_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSmartyConfigsPath(string $smarty_configs_path = null) : CNabuDataObject
@@ -1380,7 +1380,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Smarty Models Path attribute value.
-     * @param null|string $smarty_models_path New value for attribute
+     * @param string|null $smarty_models_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSmartyModelsPath(string $smarty_models_path = null) : CNabuDataObject
@@ -1401,7 +1401,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Plugin Name attribute value.
-     * @param null|string $plugin_name New value for attribute
+     * @param string|null $plugin_name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setPluginName(string $plugin_name = null) : CNabuDataObject
@@ -1476,7 +1476,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Google WMR Domain Id attribute value.
-     * @param null|string $google_wmr_domain_id New value for attribute
+     * @param string|null $google_wmr_domain_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setGoogleWMRDomainId(string $google_wmr_domain_id = null) : CNabuDataObject
@@ -1497,7 +1497,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Google WMR Site Id attribute value.
-     * @param null|string $google_wmr_site_id New value for attribute
+     * @param string|null $google_wmr_site_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setGoogleWMRSiteId(string $google_wmr_site_id = null) : CNabuDataObject
@@ -1545,7 +1545,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Local Path attribute value.
-     * @param null|string $local_path New value for attribute
+     * @param string|null $local_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setLocalPath(string $local_path = null) : CNabuDataObject
@@ -1593,7 +1593,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Dynamic Cache Default Max Age attribute value.
-     * @param null|int $dynamic_cache_default_max_age New value for attribute
+     * @param int|null $dynamic_cache_default_max_age New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDynamicCacheDefaultMaxAge(int $dynamic_cache_default_max_age = null) : CNabuDataObject
@@ -1614,7 +1614,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Email Template New User attribute value.
-     * @param null|int $email_template_new_user New value for attribute
+     * @param int|null $email_template_new_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateNewUser(int $email_template_new_user = null) : CNabuDataObject
@@ -1635,7 +1635,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Email Template Lost Password attribute value.
-     * @param null|int $email_template_lost_password New value for attribute
+     * @param int|null $email_template_lost_password New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateLostPassword(int $email_template_lost_password = null) : CNabuDataObject
@@ -1656,7 +1656,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Email Template Notify New User attribute value.
-     * @param null|int $email_template_notify_new_user New value for attribute
+     * @param int|null $email_template_notify_new_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateNotifyNewUser(int $email_template_notify_new_user = null) : CNabuDataObject
@@ -1677,7 +1677,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Email Template Remember New User attribute value.
-     * @param null|int $email_template_remember_new_user New value for attribute
+     * @param int|null $email_template_remember_new_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateRememberNewUser(int $email_template_remember_new_user = null) : CNabuDataObject
@@ -1698,7 +1698,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Email Template Invite User attribute value.
-     * @param null|int $email_template_invite_user New value for attribute
+     * @param int|null $email_template_invite_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateInviteUser(int $email_template_invite_user = null) : CNabuDataObject
@@ -1719,7 +1719,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Email Template Invite Friend attribute value.
-     * @param null|int $email_template_invite_friend New value for attribute
+     * @param int|null $email_template_invite_friend New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateInviteFriend(int $email_template_invite_friend = null) : CNabuDataObject
@@ -1740,7 +1740,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Email Template New Message attribute value.
-     * @param null|int $email_template_new_message New value for attribute
+     * @param int|null $email_template_new_message New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateNewMessage(int $email_template_new_message = null) : CNabuDataObject
@@ -1899,7 +1899,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Session Timeout Interval attribute value.
-     * @param null|string $session_timeout_interval New value for attribute
+     * @param string|null $session_timeout_interval New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSessionTimeoutInterval(string $session_timeout_interval = null) : CNabuDataObject
@@ -1920,7 +1920,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Session Preserve Interval attribute value.
-     * @param null|string $session_preserve_interval New value for attribute
+     * @param string|null $session_preserve_interval New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSessionPreserveInterval(string $session_preserve_interval = null) : CNabuDataObject
@@ -1941,7 +1941,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Enable Session Strict Policies attribute value.
-     * @param null|string $enable_session_strict_policies New value for attribute
+     * @param string|null $enable_session_strict_policies New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEnableSessionStrictPolicies(string $enable_session_strict_policies = "F") : CNabuDataObject
@@ -1989,7 +1989,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Base Path attribute value.
-     * @param null|string $base_path New value for attribute
+     * @param string|null $base_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setBasePath(string $base_path = null) : CNabuDataObject
@@ -2010,7 +2010,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Modules Slots attribute value.
-     * @param null|string $modules_slots New value for attribute
+     * @param string|null $modules_slots New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setModulesSlots(string $modules_slots = null) : CNabuDataObject
@@ -2031,7 +2031,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Notification Email attribute value.
-     * @param null|string $notification_email New value for attribute
+     * @param string|null $notification_email New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setNotificationEmail(string $notification_email = null) : CNabuDataObject

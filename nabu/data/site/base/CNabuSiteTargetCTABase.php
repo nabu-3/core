@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:00 UTC
+ * Created: 2017/10/06 08:00:09 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -307,7 +307,7 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Site Target CTA Hash attribute value.
-     * @param null|string $hash New value for attribute
+     * @param string|null $hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHash(string $hash = null) : CNabuDataObject
@@ -355,7 +355,7 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Site Target CTA Key attribute value.
-     * @param null|string $key New value for attribute
+     * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
@@ -403,7 +403,7 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Site Target CTA Target Id attribute value.
-     * @param null|int $target_id New value for attribute
+     * @param int|null $target_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTargetId(int $target_id = null) : CNabuDataObject
@@ -451,7 +451,7 @@ abstract class CNabuSiteTargetCTABase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Site Target CTA CSS Class attribute value.
-     * @param null|string $css_class New value for attribute
+     * @param string|null $css_class New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCSSClass(string $css_class = null) : CNabuDataObject

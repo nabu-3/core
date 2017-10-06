@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:39:52 UTC
+ * Created: 2017/10/06 08:00:01 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -227,7 +227,7 @@ abstract class CNabuDomainZoneHostBase extends CNabuDBInternalObject
 
     /**
      * Sets the Domain Zone Host Type attribute value.
-     * @param null|string $type New value for attribute
+     * @param string|null $type New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setType(string $type = null) : CNabuDataObject
@@ -248,7 +248,7 @@ abstract class CNabuDomainZoneHostBase extends CNabuDBInternalObject
 
     /**
      * Sets the Domain Zone Host Target attribute value.
-     * @param null|string $target New value for attribute
+     * @param string|null $target New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTarget(string $target = null) : CNabuDataObject

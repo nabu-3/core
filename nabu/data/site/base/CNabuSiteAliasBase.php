@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:39:54 UTC
+ * Created: 2017/10/06 08:00:03 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -199,7 +199,7 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
 
     /**
      * Sets the User Id attribute value.
-     * @param null|int $nb_user_id New value for attribute
+     * @param int|null $nb_user_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setUserId(int $nb_user_id = null) : CNabuDataObject
@@ -274,7 +274,7 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
 
     /**
      * Sets the Cluster Group Service Id attribute value.
-     * @param null|int $nb_cluster_group_service_id New value for attribute
+     * @param int|null $nb_cluster_group_service_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setClusterGroupServiceId(int $nb_cluster_group_service_id = null) : CNabuDataObject
@@ -349,7 +349,7 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Alias Parent attribute value.
-     * @param null|int $parent New value for attribute
+     * @param int|null $parent New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setParent(int $parent = null) : CNabuDataObject
@@ -370,7 +370,7 @@ abstract class CNabuSiteAliasBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Alias Storage Id attribute value.
-     * @param null|string $storage_id New value for attribute
+     * @param string|null $storage_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setStorageId(string $storage_id = null) : CNabuDataObject

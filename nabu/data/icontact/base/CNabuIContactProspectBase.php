@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:23 UTC
+ * Created: 2017/10/06 08:00:31 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -200,7 +200,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the User Id attribute value.
-     * @param null|int $nb_user_id New value for attribute
+     * @param int|null $nb_user_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setUserId(int $nb_user_id = null) : CNabuDataObject
@@ -221,7 +221,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Language Id attribute value.
-     * @param null|int $nb_language_id New value for attribute
+     * @param int|null $nb_language_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setLanguageId(int $nb_language_id = null) : CNabuDataObject
@@ -242,7 +242,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Email Hash attribute value.
-     * @param null|string $email_hash New value for attribute
+     * @param string|null $email_hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailHash(string $email_hash = null) : CNabuDataObject
@@ -263,7 +263,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Status Id attribute value.
-     * @param null|int $status_id New value for attribute
+     * @param int|null $status_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setStatusId(int $status_id = null) : CNabuDataObject
@@ -332,7 +332,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect First Name attribute value.
-     * @param null|string $first_name New value for attribute
+     * @param string|null $first_name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setFirstName(string $first_name = null) : CNabuDataObject
@@ -353,7 +353,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Last Name attribute value.
-     * @param null|string $last_name New value for attribute
+     * @param string|null $last_name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setLastName(string $last_name = null) : CNabuDataObject
@@ -374,7 +374,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Fiscal Number attribute value.
-     * @param null|string $fiscal_number New value for attribute
+     * @param string|null $fiscal_number New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setFiscalNumber(string $fiscal_number = null) : CNabuDataObject
@@ -395,7 +395,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Address 1 attribute value.
-     * @param null|string $address_1 New value for attribute
+     * @param string|null $address_1 New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAddress1(string $address_1 = null) : CNabuDataObject
@@ -416,7 +416,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Address 2 attribute value.
-     * @param null|string $address_2 New value for attribute
+     * @param string|null $address_2 New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAddress2(string $address_2 = null) : CNabuDataObject
@@ -437,7 +437,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect ZIP Code attribute value.
-     * @param null|string $zip_code New value for attribute
+     * @param string|null $zip_code New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setZIPCode(string $zip_code = null) : CNabuDataObject
@@ -458,7 +458,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect City Name attribute value.
-     * @param null|string $city_name New value for attribute
+     * @param string|null $city_name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCityName(string $city_name = null) : CNabuDataObject
@@ -479,7 +479,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Province Name attribute value.
-     * @param null|string $province_name New value for attribute
+     * @param string|null $province_name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setProvinceName(string $province_name = null) : CNabuDataObject
@@ -500,7 +500,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Country Name attribute value.
-     * @param null|string $country_name New value for attribute
+     * @param string|null $country_name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCountryName(string $country_name = null) : CNabuDataObject
@@ -521,7 +521,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Enterprise attribute value.
-     * @param null|string $enterprise New value for attribute
+     * @param string|null $enterprise New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEnterprise(string $enterprise = null) : CNabuDataObject
@@ -542,7 +542,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Phone attribute value.
-     * @param null|string $phone New value for attribute
+     * @param string|null $phone New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setPhone(string $phone = null) : CNabuDataObject
@@ -563,7 +563,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Telephone Prefix attribute value.
-     * @param null|string $telephone_prefix New value for attribute
+     * @param string|null $telephone_prefix New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTelephonePrefix(string $telephone_prefix = null) : CNabuDataObject
@@ -584,7 +584,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Cellular attribute value.
-     * @param null|string $cellular New value for attribute
+     * @param string|null $cellular New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCellular(string $cellular = null) : CNabuDataObject
@@ -605,7 +605,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Cellular Prefix attribute value.
-     * @param null|string $cellular_prefix New value for attribute
+     * @param string|null $cellular_prefix New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCellularPrefix(string $cellular_prefix = null) : CNabuDataObject
@@ -626,7 +626,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Fax attribute value.
-     * @param null|string $fax New value for attribute
+     * @param string|null $fax New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setFax(string $fax = null) : CNabuDataObject
@@ -647,7 +647,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Email attribute value.
-     * @param null|string $email New value for attribute
+     * @param string|null $email New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmail(string $email = null) : CNabuDataObject
@@ -668,7 +668,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Subject attribute value.
-     * @param null|string $subject New value for attribute
+     * @param string|null $subject New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSubject(string $subject = null) : CNabuDataObject
@@ -689,7 +689,7 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Notes attribute value.
-     * @param null|string $notes New value for attribute
+     * @param string|null $notes New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setNotes(string $notes = null) : CNabuDataObject
@@ -710,10 +710,10 @@ abstract class CNabuIContactProspectBase extends CNabuDBInternalObject
 
     /**
      * Sets the Icontact Prospect Attributes attribute value.
-     * @param null|string|array $attributes New value for attribute
+     * @param string|array|null $attributes New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAttributes(string $attributes = null) : CNabuDataObject
+    public function setAttributes($attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_icontact_prospect_attributes', $attributes);
         

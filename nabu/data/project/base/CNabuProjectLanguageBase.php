@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:24 UTC
+ * Created: 2017/10/06 08:00:32 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -232,7 +232,7 @@ abstract class CNabuProjectLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Project Lang Title attribute value.
-     * @param null|string $title New value for attribute
+     * @param string|null $title New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTitle(string $title = null) : CNabuDataObject
@@ -253,7 +253,7 @@ abstract class CNabuProjectLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Project Lang Subtitle attribute value.
-     * @param null|string $subtitle New value for attribute
+     * @param string|null $subtitle New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSubtitle(string $subtitle = null) : CNabuDataObject
@@ -274,7 +274,7 @@ abstract class CNabuProjectLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Project Lang Opening attribute value.
-     * @param null|string $opening New value for attribute
+     * @param string|null $opening New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setOpening(string $opening = null) : CNabuDataObject

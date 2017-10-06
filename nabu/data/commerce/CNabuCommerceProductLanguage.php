@@ -26,7 +26,7 @@ use \nabu\data\commerce\base\CNabuCommerceProductLanguageBase;
  * @version 3.0.0 Surface
  * @package \nabu\data\commerce
  */
-class CNabuCommerceProductLanguage extends CNabuCommerceProductLanguageBase;
+class CNabuCommerceProductLanguage extends CNabuCommerceProductLanguageBase
 {
     //put your code here
 }

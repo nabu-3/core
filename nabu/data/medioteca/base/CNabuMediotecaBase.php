@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:17 UTC
+ * Created: 2017/10/06 08:00:25 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -396,7 +396,7 @@ abstract class CNabuMediotecaBase extends CNabuDBInternalObject implements INabu
 
     /**
      * Sets the Medioteca Type Id attribute value.
-     * @param null|int $type_id New value for attribute
+     * @param int|null $type_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTypeId(int $type_id = null) : CNabuDataObject
@@ -417,7 +417,7 @@ abstract class CNabuMediotecaBase extends CNabuDBInternalObject implements INabu
 
     /**
      * Sets the Medioteca Hash attribute value.
-     * @param null|string $hash New value for attribute
+     * @param string|null $hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHash(string $hash = null) : CNabuDataObject
@@ -438,7 +438,7 @@ abstract class CNabuMediotecaBase extends CNabuDBInternalObject implements INabu
 
     /**
      * Sets the Medioteca Key attribute value.
-     * @param null|string $key New value for attribute
+     * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
@@ -459,7 +459,7 @@ abstract class CNabuMediotecaBase extends CNabuDBInternalObject implements INabu
 
     /**
      * Sets the User Id attribute value.
-     * @param null|int $nb_user_id New value for attribute
+     * @param int|null $nb_user_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setUserId(int $nb_user_id = null) : CNabuDataObject
@@ -480,7 +480,7 @@ abstract class CNabuMediotecaBase extends CNabuDBInternalObject implements INabu
 
     /**
      * Sets the Medioteca Default Language Id attribute value.
-     * @param null|int $default_language_id New value for attribute
+     * @param int|null $default_language_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDefaultLanguageId(int $default_language_id = null) : CNabuDataObject
@@ -501,7 +501,7 @@ abstract class CNabuMediotecaBase extends CNabuDBInternalObject implements INabu
 
     /**
      * Sets the Medioteca Base Path attribute value.
-     * @param null|string $base_path New value for attribute
+     * @param string|null $base_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setBasePath(string $base_path = null) : CNabuDataObject
@@ -522,7 +522,7 @@ abstract class CNabuMediotecaBase extends CNabuDBInternalObject implements INabu
 
     /**
      * Sets the Medioteca Internal Path attribute value.
-     * @param null|string $internal_path New value for attribute
+     * @param string|null $internal_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setInternalPath(string $internal_path = null) : CNabuDataObject
@@ -543,7 +543,7 @@ abstract class CNabuMediotecaBase extends CNabuDBInternalObject implements INabu
 
     /**
      * Sets the Medioteca Notes attribute value.
-     * @param null|string $notes New value for attribute
+     * @param string|null $notes New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setNotes(string $notes = null) : CNabuDataObject

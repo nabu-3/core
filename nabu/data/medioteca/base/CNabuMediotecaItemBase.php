@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:18 UTC
+ * Created: 2017/10/06 08:00:26 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -341,7 +341,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Medioteca Id attribute value.
-     * @param null|int $nb_medioteca_id New value for attribute
+     * @param int|null $nb_medioteca_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setMediotecaId(int $nb_medioteca_id = null) : CNabuDataObject
@@ -362,7 +362,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Medioteca Item Hash attribute value.
-     * @param null|string $hash New value for attribute
+     * @param string|null $hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHash(string $hash = null) : CNabuDataObject
@@ -383,7 +383,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Medioteca Item Key attribute value.
-     * @param null|string $key New value for attribute
+     * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
@@ -431,7 +431,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Medioteca Item Visible attribute value.
-     * @param null|string $visible New value for attribute
+     * @param string|null $visible New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setVisible(string $visible = "F") : CNabuDataObject
@@ -494,7 +494,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Medioteca Item Have Original attribute value.
-     * @param null|string $have_original New value for attribute
+     * @param string|null $have_original New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHaveOriginal(string $have_original = "F") : CNabuDataObject
@@ -515,7 +515,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Medioteca Item Original Path attribute value.
-     * @param null|string $original_path New value for attribute
+     * @param string|null $original_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setOriginalPath(string $original_path = null) : CNabuDataObject
@@ -536,7 +536,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Medioteca Item CSS Class attribute value.
-     * @param null|string $css_class New value for attribute
+     * @param string|null $css_class New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCSSClass(string $css_class = null) : CNabuDataObject
@@ -557,7 +557,7 @@ abstract class CNabuMediotecaItemBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the Medioteca Item Icon attribute value.
-     * @param null|string $icon New value for attribute
+     * @param string|null $icon New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setIcon(string $icon = null) : CNabuDataObject

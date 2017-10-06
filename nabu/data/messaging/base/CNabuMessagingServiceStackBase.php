@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:21 UTC
+ * Created: 2017/10/06 08:00:30 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -341,7 +341,7 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
 
     /**
      * Sets the Messaging Service Stack P2p From Internal Id attribute value.
-     * @param null|int $p2p_from_internal_id New value for attribute
+     * @param int|null $p2p_from_internal_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setP2pFromInternalId(int $p2p_from_internal_id = null) : CNabuDataObject
@@ -362,7 +362,7 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
 
     /**
      * Sets the Messaging Service Stack P2p To Internal Id attribute value.
-     * @param null|int $p2p_to_internal_id New value for attribute
+     * @param int|null $p2p_to_internal_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setP2pToInternalId(int $p2p_to_internal_id = null) : CNabuDataObject
@@ -425,7 +425,7 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
 
     /**
      * Sets the Messaging Service Stack Response Code attribute value.
-     * @param null|int $response_code New value for attribute
+     * @param int|null $response_code New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setResponseCode(int $response_code = null) : CNabuDataObject
@@ -446,7 +446,7 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
 
     /**
      * Sets the Messaging Service Stack Response Message attribute value.
-     * @param null|string $response_message New value for attribute
+     * @param string|null $response_message New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setResponseMessage(string $response_message = null) : CNabuDataObject
@@ -467,7 +467,7 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
 
     /**
      * Sets the Messaging Service Stack Target attribute value.
-     * @param null|string $target New value for attribute
+     * @param string|null $target New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTarget(string $target = null) : CNabuDataObject
@@ -488,7 +488,7 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
 
     /**
      * Sets the Messaging Service Stack Params attribute value.
-     * @param null|string $params New value for attribute
+     * @param string|null $params New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setParams(string $params = null) : CNabuDataObject
@@ -509,7 +509,7 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
 
     /**
      * Sets the Messaging Service Stack Subject attribute value.
-     * @param null|string $subject New value for attribute
+     * @param string|null $subject New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSubject(string $subject = null) : CNabuDataObject
@@ -530,7 +530,7 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
 
     /**
      * Sets the Messaging Service Stack Body Html attribute value.
-     * @param null|string $body_html New value for attribute
+     * @param string|null $body_html New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setBodyHtml(string $body_html = null) : CNabuDataObject
@@ -551,7 +551,7 @@ abstract class CNabuMessagingServiceStackBase extends CNabuDBInternalObject
 
     /**
      * Sets the Messaging Service Stack Body Text attribute value.
-     * @param null|string $body_text New value for attribute
+     * @param string|null $body_text New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setBodyText(string $body_text = null) : CNabuDataObject

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:12 UTC
+ * Created: 2017/10/06 08:00:21 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -259,7 +259,7 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Catalog Lang Slug attribute value.
-     * @param null|string $slug New value for attribute
+     * @param string|null $slug New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSlug(string $slug = null) : CNabuDataObject
@@ -280,7 +280,7 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Catalog Lang Image attribute value.
-     * @param null|string $image New value for attribute
+     * @param string|null $image New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setImage(string $image = null) : CNabuDataObject
@@ -301,7 +301,7 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Catalog Lang Title attribute value.
-     * @param null|string $title New value for attribute
+     * @param string|null $title New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTitle(string $title = null) : CNabuDataObject
@@ -322,7 +322,7 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Catalog Lang Subtitle attribute value.
-     * @param null|string $subtitle New value for attribute
+     * @param string|null $subtitle New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSubtitle(string $subtitle = null) : CNabuDataObject
@@ -343,7 +343,7 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Catalog Lang Anchor Text attribute value.
-     * @param null|string $anchor_text New value for attribute
+     * @param string|null $anchor_text New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAnchorText(string $anchor_text = null) : CNabuDataObject
@@ -364,7 +364,7 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Catalog Lang Opening attribute value.
-     * @param null|string $opening New value for attribute
+     * @param string|null $opening New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setOpening(string $opening = null) : CNabuDataObject
@@ -385,7 +385,7 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Catalog Lang Content attribute value.
-     * @param null|string $content New value for attribute
+     * @param string|null $content New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setContent(string $content = null) : CNabuDataObject
@@ -406,7 +406,7 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Catalog Lang Footer attribute value.
-     * @param null|string $footer New value for attribute
+     * @param string|null $footer New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setFooter(string $footer = null) : CNabuDataObject
@@ -427,7 +427,7 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Catalog Lang Aside attribute value.
-     * @param null|string $aside New value for attribute
+     * @param string|null $aside New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAside(string $aside = null) : CNabuDataObject
@@ -448,10 +448,10 @@ abstract class CNabuCatalogLanguageBase extends CNabuDBInternalObject implements
 
     /**
      * Sets the Catalog Lang Attributes attribute value.
-     * @param null|string|array $attributes New value for attribute
+     * @param string|array|null $attributes New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAttributes(string $attributes = null) : CNabuDataObject
+    public function setAttributes($attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_catalog_lang_attributes', $attributes);
         

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:01 UTC
+ * Created: 2017/10/06 08:00:09 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -230,7 +230,7 @@ abstract class CNabuSiteTargetCTALanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Site Target CTA Lang Target URL attribute value.
-     * @param null|string $target_url New value for attribute
+     * @param string|null $target_url New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTargetURL(string $target_url = null) : CNabuDataObject
@@ -251,7 +251,7 @@ abstract class CNabuSiteTargetCTALanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Site Target CTA Lang Title attribute value.
-     * @param null|string $title New value for attribute
+     * @param string|null $title New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTitle(string $title = null) : CNabuDataObject
@@ -272,7 +272,7 @@ abstract class CNabuSiteTargetCTALanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Site Target CTA Lang Alternate attribute value.
-     * @param null|string $alternate New value for attribute
+     * @param string|null $alternate New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAlternate(string $alternate = null) : CNabuDataObject
@@ -293,7 +293,7 @@ abstract class CNabuSiteTargetCTALanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Site Target CTA Lang Image attribute value.
-     * @param null|string $image New value for attribute
+     * @param string|null $image New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setImage(string $image = null) : CNabuDataObject
@@ -314,7 +314,7 @@ abstract class CNabuSiteTargetCTALanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Site Target CTA Lang Anchor Text attribute value.
-     * @param null|string $anchor_text New value for attribute
+     * @param string|null $anchor_text New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAnchorText(string $anchor_text = null) : CNabuDataObject

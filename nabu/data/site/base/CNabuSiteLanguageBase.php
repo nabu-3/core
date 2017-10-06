@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:39:53 UTC
+ * Created: 2017/10/06 08:00:01 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -316,7 +316,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Order attribute value.
-     * @param null|int $order New value for attribute
+     * @param int|null $order New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setOrder(int $order = null) : CNabuDataObject
@@ -337,7 +337,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Short Datetime Format attribute value.
-     * @param null|string $short_datetime_format New value for attribute
+     * @param string|null $short_datetime_format New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setShortDatetimeFormat(string $short_datetime_format = null) : CNabuDataObject
@@ -358,7 +358,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Middle Datetime Format attribute value.
-     * @param null|string $middle_datetime_format New value for attribute
+     * @param string|null $middle_datetime_format New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setMiddleDatetimeFormat(string $middle_datetime_format = null) : CNabuDataObject
@@ -379,7 +379,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Full Datetime Format attribute value.
-     * @param null|string $full_datetime_format New value for attribute
+     * @param string|null $full_datetime_format New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setFullDatetimeFormat(string $full_datetime_format = null) : CNabuDataObject
@@ -400,7 +400,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Short Date Format attribute value.
-     * @param null|string $short_date_format New value for attribute
+     * @param string|null $short_date_format New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setShortDateFormat(string $short_date_format = null) : CNabuDataObject
@@ -421,7 +421,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Middle Date Format attribute value.
-     * @param null|string $middle_date_format New value for attribute
+     * @param string|null $middle_date_format New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setMiddleDateFormat(string $middle_date_format = null) : CNabuDataObject
@@ -442,7 +442,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Full Date Format attribute value.
-     * @param null|string $full_date_format New value for attribute
+     * @param string|null $full_date_format New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setFullDateFormat(string $full_date_format = null) : CNabuDataObject
@@ -463,7 +463,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Short Time Format attribute value.
-     * @param null|string $short_time_format New value for attribute
+     * @param string|null $short_time_format New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setShortTimeFormat(string $short_time_format = null) : CNabuDataObject
@@ -484,7 +484,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Full Time Format attribute value.
-     * @param null|string $full_time_format New value for attribute
+     * @param string|null $full_time_format New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setFullTimeFormat(string $full_time_format = null) : CNabuDataObject
@@ -505,7 +505,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Name attribute value.
-     * @param null|string $name New value for attribute
+     * @param string|null $name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setName(string $name = null) : CNabuDataObject
@@ -526,7 +526,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Default Target URL attribute value.
-     * @param null|string $default_target_url New value for attribute
+     * @param string|null $default_target_url New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDefaultTargetURL(string $default_target_url = null) : CNabuDataObject
@@ -547,7 +547,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Page Not Found Target URL attribute value.
-     * @param null|string $page_not_found_target_url New value for attribute
+     * @param string|null $page_not_found_target_url New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setPageNotFoundTargetURL(string $page_not_found_target_url = null) : CNabuDataObject
@@ -568,7 +568,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Login Target URL attribute value.
-     * @param null|string $login_target_url New value for attribute
+     * @param string|null $login_target_url New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setLoginTargetURL(string $login_target_url = null) : CNabuDataObject
@@ -589,7 +589,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Login Redirection Target URL attribute value.
-     * @param null|string $login_redirection_target_url New value for attribute
+     * @param string|null $login_redirection_target_url New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setLoginRedirectionTargetURL(string $login_redirection_target_url = null) : CNabuDataObject
@@ -610,7 +610,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Logout Redirection Target URL attribute value.
-     * @param null|string $logout_redirection_target_url New value for attribute
+     * @param string|null $logout_redirection_target_url New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setLogoutRedirectionTargetURL(string $logout_redirection_target_url = null) : CNabuDataObject
@@ -631,7 +631,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Alias Not Found Target URL attribute value.
-     * @param null|string $alias_not_found_target_url New value for attribute
+     * @param string|null $alias_not_found_target_url New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAliasNotFoundTargetURL(string $alias_not_found_target_url = null) : CNabuDataObject
@@ -652,7 +652,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Alias Locked Target URL attribute value.
-     * @param null|string $alias_locked_target_url New value for attribute
+     * @param string|null $alias_locked_target_url New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAliasLockedTargetURL(string $alias_locked_target_url = null) : CNabuDataObject
@@ -673,7 +673,7 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
 
     /**
      * Sets the Site Lang Policies Target URL attribute value.
-     * @param null|string $policies_target_url New value for attribute
+     * @param string|null $policies_target_url New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setPoliciesTargetURL(string $policies_target_url = null) : CNabuDataObject

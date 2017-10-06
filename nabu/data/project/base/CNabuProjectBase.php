@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:23 UTC
+ * Created: 2017/10/06 08:00:32 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -372,7 +372,7 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Project Hash attribute value.
-     * @param null|string $hash New value for attribute
+     * @param string|null $hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHash(string $hash = null) : CNabuDataObject
@@ -393,7 +393,7 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Project Default Language Id attribute value.
-     * @param null|int $default_language_id New value for attribute
+     * @param int|null $default_language_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDefaultLanguageId(int $default_language_id = null) : CNabuDataObject
@@ -414,7 +414,7 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Project Current Version Id attribute value.
-     * @param null|int $current_version_id New value for attribute
+     * @param int|null $current_version_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCurrentVersionId(int $current_version_id = null) : CNabuDataObject
@@ -435,7 +435,7 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Medioteca Id attribute value.
-     * @param null|int $nb_medioteca_id New value for attribute
+     * @param int|null $nb_medioteca_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setMediotecaId(int $nb_medioteca_id = null) : CNabuDataObject
@@ -456,7 +456,7 @@ abstract class CNabuProjectBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Project Front Image Id attribute value.
-     * @param null|int $front_image_id New value for attribute
+     * @param int|null $front_image_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setFrontImageId(int $front_image_id = null) : CNabuDataObject

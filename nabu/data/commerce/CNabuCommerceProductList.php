@@ -20,7 +20,7 @@
 namespace nabu\data\commerce;
 use nabu\core\CNabuEngine;
 use nabu\core\exceptions\ENabuCoreException;
-use nabu\data\commerce\base\CNabuCommerceProductCategoryListBase;
+use nabu\data\commerce\base\CNabuCommerceProductListBase;
 use nabu\data\commerce\traits\TNabuCommerceChild;
 use nabu\data\lang\CNabuDataObjectListIndexLanguage;
 
@@ -29,7 +29,7 @@ use nabu\data\lang\CNabuDataObjectListIndexLanguage;
  * @version 3.0.0 Surface
  * @package \nabu\data\lang
  */
-class CNabuCommerceProductCategoryList extends CNabuCommerceProductCategoryListBase
+class CNabuCommerceProductList extends CNabuCommerceProductListBase
 {
     use TNabuCommerceChild;
 
@@ -68,7 +68,7 @@ class CNabuCommerceProductCategoryList extends CNabuCommerceProductCategoryListB
     /**
      * Sets the parent Commerce instance.
      * @param CNabuCommerce $nb_commerce Commerce instance to be setted.
-     * @return CNabuCommerceProductCategoryList Returns $this to grant chained calls.
+     * @return CNabuCommerceProductList Returns $this to grant chained calls.
      */
     public function setCommerce(CNabuCommerce $nb_commerce)
     {
@@ -83,7 +83,7 @@ class CNabuCommerceProductCategoryList extends CNabuCommerceProductCategoryListB
 
         $this->addIndex(
             new CNabuDataObjectListIndexLanguage(
-                $this, 'nb_commerce_product_category_lang_slug', null, self::INDEX_SLUG
+                $this, 'nb_commerce_product_lang_slug', null, self::INDEX_SLUG
             )
         );
     }
@@ -98,7 +98,7 @@ class CNabuCommerceProductCategoryList extends CNabuCommerceProductCategoryListB
                     throw new ENabuCoreException(ENabuCoreException::ERROR_FEATURE_NOT_IMPLEMENTED);
                     break;
                 case self::INDEX_SLUG:
-                    $item = CNabuCommerceProductCategory::findBySlug($this->nb_commerce, $key);
+                    $item = CNabuCommerceProduct::findBySlug($this->nb_commerce, $key);
                     break;
             }
         }

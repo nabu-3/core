@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:08 UTC
+ * Created: 2017/10/06 08:00:17 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -195,7 +195,7 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Role Email Template New User attribute value.
-     * @param null|int $email_template_new_user New value for attribute
+     * @param int|null $email_template_new_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateNewUser(int $email_template_new_user = null) : CNabuDataObject
@@ -216,7 +216,7 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Role Email Template Lost Password attribute value.
-     * @param null|int $email_template_lost_password New value for attribute
+     * @param int|null $email_template_lost_password New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateLostPassword(int $email_template_lost_password = null) : CNabuDataObject
@@ -237,7 +237,7 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Role Email Template Notify New User attribute value.
-     * @param null|int $email_template_notify_new_user New value for attribute
+     * @param int|null $email_template_notify_new_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateNotifyNewUser(int $email_template_notify_new_user = null) : CNabuDataObject
@@ -258,7 +258,7 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Role Email Template Remember New User attribute value.
-     * @param null|int $email_template_remember_new_user New value for attribute
+     * @param int|null $email_template_remember_new_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateRememberNewUser(int $email_template_remember_new_user = null) : CNabuDataObject
@@ -279,7 +279,7 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Role Email Template Invite User attribute value.
-     * @param null|int $email_template_invite_user New value for attribute
+     * @param int|null $email_template_invite_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateInviteUser(int $email_template_invite_user = null) : CNabuDataObject
@@ -300,7 +300,7 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Role Email Template Invite Friend attribute value.
-     * @param null|int $email_template_invite_friend New value for attribute
+     * @param int|null $email_template_invite_friend New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateInviteFriend(int $email_template_invite_friend = null) : CNabuDataObject
@@ -321,7 +321,7 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Role Email Template New Message attribute value.
-     * @param null|int $email_template_new_message New value for attribute
+     * @param int|null $email_template_new_message New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateNewMessage(int $email_template_new_message = null) : CNabuDataObject

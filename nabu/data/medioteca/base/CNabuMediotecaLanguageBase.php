@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:17 UTC
+ * Created: 2017/10/06 08:00:26 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -259,7 +259,7 @@ abstract class CNabuMediotecaLanguageBase extends CNabuDBInternalObject implemen
 
     /**
      * Sets the Medioteca Lang Title attribute value.
-     * @param null|string $title New value for attribute
+     * @param string|null $title New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTitle(string $title = null) : CNabuDataObject
@@ -280,7 +280,7 @@ abstract class CNabuMediotecaLanguageBase extends CNabuDBInternalObject implemen
 
     /**
      * Sets the Medioteca Lang Subtitle attribute value.
-     * @param null|string $subtitle New value for attribute
+     * @param string|null $subtitle New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSubtitle(string $subtitle = null) : CNabuDataObject
@@ -301,7 +301,7 @@ abstract class CNabuMediotecaLanguageBase extends CNabuDBInternalObject implemen
 
     /**
      * Sets the Medioteca Lang Content attribute value.
-     * @param null|string $content New value for attribute
+     * @param string|null $content New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setContent(string $content = null) : CNabuDataObject

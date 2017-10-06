@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:09 UTC
+ * Created: 2017/10/06 08:00:18 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -376,7 +376,7 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Commerce Default Language Id attribute value.
-     * @param null|int $default_language_id New value for attribute
+     * @param int|null $default_language_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDefaultLanguageId(int $default_language_id = null) : CNabuDataObject
@@ -397,7 +397,7 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the User Id attribute value.
-     * @param null|int $nb_user_id New value for attribute
+     * @param int|null $nb_user_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setUserId(int $nb_user_id = null) : CNabuDataObject
@@ -418,7 +418,7 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Commerce Key attribute value.
-     * @param null|string $key New value for attribute
+     * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
@@ -439,7 +439,7 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Commerce Admin User attribute value.
-     * @param null|int $admin_user New value for attribute
+     * @param int|null $admin_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAdminUser(int $admin_user = null) : CNabuDataObject
@@ -460,7 +460,7 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Emailing Id attribute value.
-     * @param null|int $nb_emailing_id New value for attribute
+     * @param int|null $nb_emailing_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailingId(int $nb_emailing_id = null) : CNabuDataObject
@@ -481,7 +481,7 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
 
     /**
      * Sets the Commerce Email Template Admin Error attribute value.
-     * @param null|int $email_template_admin_error New value for attribute
+     * @param int|null $email_template_admin_error New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEmailTemplateAdminError(int $email_template_admin_error = null) : CNabuDataObject

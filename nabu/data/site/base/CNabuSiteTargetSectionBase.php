@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:39:58 UTC
+ * Created: 2017/10/06 08:00:07 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -344,7 +344,7 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
 
     /**
      * Sets the Site Target Section Hash attribute value.
-     * @param null|string $hash New value for attribute
+     * @param string|null $hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHash(string $hash = null) : CNabuDataObject
@@ -392,7 +392,7 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
 
     /**
      * Sets the Site Target Section Parent Id attribute value.
-     * @param null|int $parent_id New value for attribute
+     * @param int|null $parent_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setParentId(int $parent_id = null) : CNabuDataObject
@@ -413,7 +413,7 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
 
     /**
      * Sets the Site Target Section Key attribute value.
-     * @param null|string $key New value for attribute
+     * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
@@ -461,7 +461,7 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
 
     /**
      * Sets the Site Target CTA Id attribute value.
-     * @param null|int $nb_site_target_cta_id New value for attribute
+     * @param int|null $nb_site_target_cta_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSiteTargetCTAId(int $nb_site_target_cta_id = null) : CNabuDataObject
@@ -482,7 +482,7 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
 
     /**
      * Sets the Medioteca Id attribute value.
-     * @param null|int $nb_medioteca_id New value for attribute
+     * @param int|null $nb_medioteca_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setMediotecaId(int $nb_medioteca_id = null) : CNabuDataObject
@@ -503,7 +503,7 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
 
     /**
      * Sets the Site Target Section CSS Class attribute value.
-     * @param null|string $css_class New value for attribute
+     * @param string|null $css_class New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCSSClass(string $css_class = null) : CNabuDataObject
@@ -524,7 +524,7 @@ abstract class CNabuSiteTargetSectionBase extends CNabuDBInternalObject implemen
 
     /**
      * Sets the Site Target Section Anchor attribute value.
-     * @param null|string $anchor New value for attribute
+     * @param string|null $anchor New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAnchor(string $anchor = null) : CNabuDataObject

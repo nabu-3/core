@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:39:55 UTC
+ * Created: 2017/10/06 08:00:04 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -195,7 +195,7 @@ abstract class CNabuSiteMediotecaBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Medioteca Alias Path attribute value.
-     * @param null|string $alias_path New value for attribute
+     * @param string|null $alias_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAliasPath(string $alias_path = null) : CNabuDataObject

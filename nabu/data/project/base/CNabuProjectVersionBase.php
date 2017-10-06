@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:24 UTC
+ * Created: 2017/10/06 08:00:33 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -341,7 +341,7 @@ abstract class CNabuProjectVersionBase extends CNabuDBInternalObject implements 
 
     /**
      * Sets the Project Version Hash attribute value.
-     * @param null|string $hash New value for attribute
+     * @param string|null $hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHash(string $hash = null) : CNabuDataObject
@@ -362,7 +362,7 @@ abstract class CNabuProjectVersionBase extends CNabuDBInternalObject implements 
 
     /**
      * Sets the Project Version Code attribute value.
-     * @param null|string $code New value for attribute
+     * @param string|null $code New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCode(string $code = null) : CNabuDataObject

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:39:56 UTC
+ * Created: 2017/10/06 08:00:05 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -367,7 +367,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Hash attribute value.
-     * @param null|string $hash New value for attribute
+     * @param string|null $hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHash(string $hash = null) : CNabuDataObject
@@ -457,7 +457,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target URL Filter attribute value.
-     * @param null|string $url_filter New value for attribute
+     * @param string|null $url_filter New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setURLFilter(string $url_filter = null) : CNabuDataObject
@@ -478,7 +478,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Key attribute value.
-     * @param null|string $key New value for attribute
+     * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
@@ -499,7 +499,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Zone attribute value.
-     * @param null|string $zone New value for attribute
+     * @param string|null $zone New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setZone(string $zone = "B") : CNabuDataObject
@@ -574,7 +574,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Output Type attribute value.
-     * @param null|string $output_type New value for attribute
+     * @param string|null $output_type New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setOutputType(string $output_type = "HTML") : CNabuDataObject
@@ -595,7 +595,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Mimetype Id attribute value.
-     * @param null|string $nb_mimetype_id New value for attribute
+     * @param string|null $nb_mimetype_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setMimetypeId(string $nb_mimetype_id = null) : CNabuDataObject
@@ -643,7 +643,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Smarty Display File attribute value.
-     * @param null|string $smarty_display_file New value for attribute
+     * @param string|null $smarty_display_file New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSmartyDisplayFile(string $smarty_display_file = null) : CNabuDataObject
@@ -664,7 +664,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Smarty Content File attribute value.
-     * @param null|string $smarty_content_file New value for attribute
+     * @param string|null $smarty_content_file New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSmartyContentFile(string $smarty_content_file = null) : CNabuDataObject
@@ -712,7 +712,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Plugin Name attribute value.
-     * @param null|string $plugin_name New value for attribute
+     * @param string|null $plugin_name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setPluginName(string $plugin_name = null) : CNabuDataObject
@@ -868,7 +868,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Dynamic Cache Max Age attribute value.
-     * @param null|int $dynamic_cache_max_age New value for attribute
+     * @param int|null $dynamic_cache_max_age New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDynamicCacheMaxAge(int $dynamic_cache_max_age = null) : CNabuDataObject
@@ -889,7 +889,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Script File attribute value.
-     * @param null|string $script_file New value for attribute
+     * @param string|null $script_file New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setScriptFile(string $script_file = null) : CNabuDataObject
@@ -910,7 +910,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target CSS File attribute value.
-     * @param null|string $css_file New value for attribute
+     * @param string|null $css_file New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCSSFile(string $css_file = null) : CNabuDataObject
@@ -931,7 +931,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target CSS Class attribute value.
-     * @param null|string $css_class New value for attribute
+     * @param string|null $css_class New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCSSClass(string $css_class = null) : CNabuDataObject
@@ -952,7 +952,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Commands attribute value.
-     * @param null|string $commands New value for attribute
+     * @param string|null $commands New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCommands(string $commands = null) : CNabuDataObject
@@ -973,7 +973,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Meta Robots attribute value.
-     * @param null|string $meta_robots New value for attribute
+     * @param string|null $meta_robots New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setMetaRobots(string $meta_robots = null) : CNabuDataObject
@@ -994,7 +994,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Icon attribute value.
-     * @param null|string $icon New value for attribute
+     * @param string|null $icon New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setIcon(string $icon = null) : CNabuDataObject
@@ -1015,7 +1015,7 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Apps Slot attribute value.
-     * @param null|string $apps_slot New value for attribute
+     * @param string|null $apps_slot New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setAppsSlot(string $apps_slot = null) : CNabuDataObject
@@ -1036,10 +1036,10 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
 
     /**
      * Sets the Site Target Attributes attribute value.
-     * @param null|string|array $attributes New value for attribute
+     * @param string|array|null $attributes New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAttributes(string $attributes = null) : CNabuDataObject
+    public function setAttributes($attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_site_target_attributes', $attributes);
         

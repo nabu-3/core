@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:18 UTC
+ * Created: 2017/10/06 08:00:27 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -305,7 +305,7 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Medioteca Item Lang Mime Type attribute value.
-     * @param null|string $mime_type New value for attribute
+     * @param string|null $mime_type New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setMimeType(string $mime_type = null) : CNabuDataObject
@@ -326,7 +326,7 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Medioteca Item Lang Title attribute value.
-     * @param null|string $title New value for attribute
+     * @param string|null $title New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTitle(string $title = null) : CNabuDataObject
@@ -347,7 +347,7 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Medioteca Item Lang Subtitle attribute value.
-     * @param null|string $subtitle New value for attribute
+     * @param string|null $subtitle New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSubtitle(string $subtitle = null) : CNabuDataObject
@@ -368,7 +368,7 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Medioteca Item Lang Opening attribute value.
-     * @param null|string $opening New value for attribute
+     * @param string|null $opening New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setOpening(string $opening = null) : CNabuDataObject
@@ -389,7 +389,7 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Medioteca Item Lang Content attribute value.
-     * @param null|string $content New value for attribute
+     * @param string|null $content New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setContent(string $content = null) : CNabuDataObject
@@ -410,7 +410,7 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Medioteca Item Lang Footer attribute value.
-     * @param null|string $footer New value for attribute
+     * @param string|null $footer New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setFooter(string $footer = null) : CNabuDataObject
@@ -431,7 +431,7 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Medioteca Item Lang URL attribute value.
-     * @param null|string $url New value for attribute
+     * @param string|null $url New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setURL(string $url = null) : CNabuDataObject
@@ -452,7 +452,7 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Medioteca Item Lang Html Object attribute value.
-     * @param null|string $html_object New value for attribute
+     * @param string|null $html_object New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHtmlObject(string $html_object = null) : CNabuDataObject
@@ -473,7 +473,7 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Medioteca Item Lang Public Path attribute value.
-     * @param null|string $public_path New value for attribute
+     * @param string|null $public_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setPublicPath(string $public_path = null) : CNabuDataObject
@@ -494,7 +494,7 @@ abstract class CNabuMediotecaItemLanguageBase extends CNabuDBInternalObject impl
 
     /**
      * Sets the Medioteca Item Lang Original Path attribute value.
-     * @param null|string $original_path New value for attribute
+     * @param string|null $original_path New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setOriginalPath(string $original_path = null) : CNabuDataObject

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:10 UTC
+ * Created: 2017/10/06 08:00:19 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -345,7 +345,7 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
 
     /**
      * Sets the Commerce Product Category Hash attribute value.
-     * @param null|string $hash New value for attribute
+     * @param string|null $hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHash(string $hash = null) : CNabuDataObject
@@ -393,7 +393,7 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
 
     /**
      * Sets the Medioteca Id attribute value.
-     * @param null|int $nb_medioteca_id New value for attribute
+     * @param int|null $nb_medioteca_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setMediotecaId(int $nb_medioteca_id = null) : CNabuDataObject
@@ -414,7 +414,7 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
 
     /**
      * Sets the Commerce Product Category Parent Id attribute value.
-     * @param null|int $parent_id New value for attribute
+     * @param int|null $parent_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setParentId(int $parent_id = null) : CNabuDataObject
@@ -462,7 +462,7 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
 
     /**
      * Sets the Commerce Product Category Key attribute value.
-     * @param null|string $key New value for attribute
+     * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
@@ -483,10 +483,10 @@ abstract class CNabuCommerceProductCategoryBase extends CNabuDBInternalObject im
 
     /**
      * Sets the Commerce Product Category Attributes attribute value.
-     * @param null|string|array $attributes New value for attribute
+     * @param string|array|null $attributes New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAttributes(string $attributes = null) : CNabuDataObject
+    public function setAttributes($attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_commerce_product_category_attributes', $attributes);
         

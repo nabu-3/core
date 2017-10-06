@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:09 UTC
+ * Created: 2017/10/06 08:00:18 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -197,7 +197,7 @@ abstract class CNabuSiteVisualEditorItemBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Visual Editor Item X attribute value.
-     * @param null|int $x New value for attribute
+     * @param int|null $x New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setX(int $x = null) : CNabuDataObject
@@ -218,7 +218,7 @@ abstract class CNabuSiteVisualEditorItemBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Visual Editor Item Y attribute value.
-     * @param null|int $y New value for attribute
+     * @param int|null $y New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setY(int $y = null) : CNabuDataObject
@@ -239,7 +239,7 @@ abstract class CNabuSiteVisualEditorItemBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Visual Editor Item Width attribute value.
-     * @param null|int $width New value for attribute
+     * @param int|null $width New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setWidth(int $width = null) : CNabuDataObject
@@ -260,7 +260,7 @@ abstract class CNabuSiteVisualEditorItemBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Visual Editor Item Height attribute value.
-     * @param null|int $height New value for attribute
+     * @param int|null $height New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHeight(int $height = null) : CNabuDataObject
@@ -281,7 +281,7 @@ abstract class CNabuSiteVisualEditorItemBase extends CNabuDBInternalObject
 
     /**
      * Sets the Site Visual Editor Item Points attribute value.
-     * @param null|string $points New value for attribute
+     * @param string|null $points New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setPoints(string $points = null) : CNabuDataObject

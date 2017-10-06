@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:39:51 UTC
+ * Created: 2017/10/06 07:59:59 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -257,7 +257,7 @@ abstract class CNabuUserGroupLanguageBase extends CNabuDBInternalObject implemen
 
     /**
      * Sets the User Group Lang Description attribute value.
-     * @param null|string $description New value for attribute
+     * @param string|null $description New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDescription(string $description = null) : CNabuDataObject

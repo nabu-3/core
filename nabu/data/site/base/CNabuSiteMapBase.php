@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:03 UTC
+ * Created: 2017/10/06 08:00:12 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -342,7 +342,7 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Site Map Hash attribute value.
-     * @param null|string $hash New value for attribute
+     * @param string|null $hash New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setHash(string $hash = null) : CNabuDataObject
@@ -390,7 +390,7 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Site Map Parent Id attribute value.
-     * @param null|int $parent_id New value for attribute
+     * @param int|null $parent_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setParentId(int $parent_id = null) : CNabuDataObject
@@ -492,7 +492,7 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Site Map Next Sibling attribute value.
-     * @param null|int $next_sibling New value for attribute
+     * @param int|null $next_sibling New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setNextSibling(int $next_sibling = null) : CNabuDataObject
@@ -513,7 +513,7 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Site Target Id attribute value.
-     * @param null|int $nb_site_target_id New value for attribute
+     * @param int|null $nb_site_target_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSiteTargetId(int $nb_site_target_id = null) : CNabuDataObject
@@ -588,7 +588,7 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Site Map Key attribute value.
-     * @param null|string $key New value for attribute
+     * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
@@ -663,7 +663,7 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Site Map Tree Position attribute value.
-     * @param null|int $tree_position New value for attribute
+     * @param int|null $tree_position New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setTreePosition(int $tree_position = 1) : CNabuDataObject
@@ -684,7 +684,7 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Site Map Icon attribute value.
-     * @param null|string $icon New value for attribute
+     * @param string|null $icon New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setIcon(string $icon = null) : CNabuDataObject
@@ -705,7 +705,7 @@ abstract class CNabuSiteMapBase extends CNabuDBInternalObject implements INabuTr
 
     /**
      * Sets the Site Map CSS Class attribute value.
-     * @param null|string $css_class New value for attribute
+     * @param string|null $css_class New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setCSSClass(string $css_class = null) : CNabuDataObject

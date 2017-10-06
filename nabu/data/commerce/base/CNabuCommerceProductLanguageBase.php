@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:40:12 UTC
+ * Created: 2017/10/06 08:00:20 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -230,7 +230,7 @@ abstract class CNabuCommerceProductLanguageBase extends CNabuDBInternalObject im
 
     /**
      * Sets the Commerce Product Lang Name attribute value.
-     * @param null|string $name New value for attribute
+     * @param string|null $name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setName(string $name = null) : CNabuDataObject
@@ -251,7 +251,7 @@ abstract class CNabuCommerceProductLanguageBase extends CNabuDBInternalObject im
 
     /**
      * Sets the Commerce Product Lang Slug attribute value.
-     * @param null|string $slug New value for attribute
+     * @param string|null $slug New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setSlug(string $slug = null) : CNabuDataObject
@@ -272,7 +272,7 @@ abstract class CNabuCommerceProductLanguageBase extends CNabuDBInternalObject im
 
     /**
      * Sets the Commerce Product Lang Description attribute value.
-     * @param null|string $description New value for attribute
+     * @param string|null $description New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setDescription(string $description = null) : CNabuDataObject
@@ -293,10 +293,10 @@ abstract class CNabuCommerceProductLanguageBase extends CNabuDBInternalObject im
 
     /**
      * Sets the Commerce Product Lang Attributes attribute value.
-     * @param null|string|array $attributes New value for attribute
+     * @param string|array|null $attributes New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAttributes(string $attributes = null) : CNabuDataObject
+    public function setAttributes($attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_commerce_product_lang_attributes', $attributes);
         

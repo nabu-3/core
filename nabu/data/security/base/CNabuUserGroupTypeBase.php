@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/05 10:39:49 UTC
+ * Created: 2017/10/06 07:59:58 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -377,7 +377,7 @@ abstract class CNabuUserGroupTypeBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the User Group Type Key attribute value.
-     * @param null|string $key New value for attribute
+     * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
@@ -398,7 +398,7 @@ abstract class CNabuUserGroupTypeBase extends CNabuDBInternalObject implements I
 
     /**
      * Sets the User Group Type Name attribute value.
-     * @param null|string $name New value for attribute
+     * @param string|null $name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setName(string $name = null) : CNabuDataObject
