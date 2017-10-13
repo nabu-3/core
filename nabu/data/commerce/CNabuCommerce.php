@@ -162,6 +162,10 @@ class CNabuCommerce extends CNabuCommerceBase
     public function refresh(bool $force = false, bool $cascade = false) : bool
     {
         return parent::refresh($force, $cascade) &&
-               (!$cascade || $this->getProductCategories($force) || $this->getProducts($force));
+               (!$cascade || (
+                   $this->getProductCategories($force) &&
+                   $this->getProducts($force)
+               ))
+        );
     }
 }
