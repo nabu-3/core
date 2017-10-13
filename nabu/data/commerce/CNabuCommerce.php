@@ -166,6 +166,6 @@ class CNabuCommerce extends CNabuCommerceBase
                    $this->getProductCategories($force) &&
                    $this->getProducts($force)
                ))
-        );
+        ;
     }
 }
