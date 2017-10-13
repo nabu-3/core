@@ -127,7 +127,7 @@ class CNabuCommerce extends CNabuCommerceBase
         if ($this->nb_commerce_product_list->isEmpty() || $force) {
             $this->nb_commerce_product_list->clear();
             $this->nb_commerce_product_list->merge(
-                CNabuCommerceProduct::getProductsFromCommerce($this)
+                CNabuCommerceProduct::getProductsForCommerce($this)
             );
         }
 
