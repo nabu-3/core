@@ -33,17 +33,17 @@ class CNabuCommerce extends CNabuCommerceBase
 {
     use TNabuCustomerChild;
 
-    /**
-     * Product categories list
-     * @var CNabuCommerceProductCategoryList
-     */
+    /** @var CNabuCommerceProductCategoryList Product categories list */
     private $nb_commerce_product_category_list = null;
+    /** @var CNabuCommerceProductList Product list */
+    private $nb_commerce_product_list = null;
 
     public function __construct($nb_commerce = false)
     {
         parent::__construct($nb_commerce);
 
         $this->nb_commerce_product_category_list = new CNabuCommerceProductCategoryList($this);
+        $this->nb_commerce_product_list = new CNabuCommerceProductList($this);
     }
 
     public function sortAll()
@@ -89,6 +89,7 @@ class CNabuCommerce extends CNabuCommerceBase
                 CNabuCommerceProductCategory::getCategoriesForCommerce($this)
             );
         }
+
         return $this->nb_commerce_product_category_list;
     }
 
@@ -117,6 +118,23 @@ class CNabuCommerce extends CNabuCommerceBase
     }
 
     /**
+     * Gets the full list of all Products in this Commerce instance.
+     * @param bool $force If true, forces to reload list from the database storage.
+     * @return CNabuCommerceProductList Returns a Product List with all Categories.
+     */
+    public function getProducts(bool $force = false) : CNabuCommerceProductList
+    {
+        if ($this->nb_commerce_product_list->isEmpty() || $force) {
+            $this->nb_commerce_product_list->clear();
+            $this->nb_commerce_product_list->merge(
+                CNabuCommerceProduct::getProductsFromCommerce($this)
+            );
+        }
+
+        return $this->nb_commerce_product_list;
+    }
+
+    /**
      * Overrides getTreeData method to add products and categories branches.
      * If $nb_language have a valid value, also adds a translation object
      * with current translation pointed by it.
@@ -130,6 +148,7 @@ class CNabuCommerce extends CNabuCommerceBase
 
         $trdata['languages'] = $this->getLanguages();
         $trdata['categories'] = $this->nb_commerce_product_category_list;
+        $trdata['products'] = $this->nb_commerce_product_list;
 
         return $trdata;
     }
@@ -143,6 +162,6 @@ class CNabuCommerce extends CNabuCommerceBase
     public function refresh(bool $force = false, bool $cascade = false) : bool
     {
         return parent::refresh($force, $cascade) &&
-               (!$cascade || $this->getProductCategories($force));
+               (!$cascade || $this->getProductCategories($force) || $this->getProducts($force));
     }
 }

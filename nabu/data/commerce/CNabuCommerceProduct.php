@@ -28,5 +28,30 @@ use nabu\data\commerce\base\CNabuCommerceProductBase;
  */
 class CNabuCommerceProduct extends CNabuCommerceProductBase
 {
-    //put your code here
+    /**
+     * Get all Products of a Commerce.
+     * @param mixed $nb_commerce
+     */
+    static public function getProductsForCommerce($nb_commerce)
+    {
+        $nb_commerce_id = nb_getMixedValue($nb_commerce, NABU_COMMERCE_FIELD_ID);
+        if (is_numeric($nb_commerce_id)) {
+            $retval = CNabuCommerceProduct::buildObjectListFromSQL(
+                'nb_commerce_product_id',
+                'select * '
+                . 'from nb_commerce_product '
+                . 'where nb_commerce_id=%commerce_id$d',
+                array(
+                    'commerce_id' => $nb_commerce_id
+                )
+            );
+            if ($nb_commerce instanceof CNabuCommerce) {
+                $retval->setCommerce($nb_commerce);
+            }
+        } else {
+            $retval = new CNabuCommerceProductCategoryList($nb_commerce instanceof CNabuCommerce ? $nb_commerce : null);
+        }
+
+        return $retval;
+    }
 }
