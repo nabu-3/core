@@ -24,6 +24,7 @@ use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\CNabuDataObject;
 use nabu\data\catalog\CNabuCatalog;
 use nabu\data\catalog\CNabuCatalogList;
+use nabu\data\catalog\CNabuCatalogLanguage;
 use nabu\data\commerce\CNabuCommerce;
 use nabu\data\commerce\CNabuCommerceList;
 use nabu\data\icontact\CNabuIContact;
@@ -36,6 +37,7 @@ use nabu\data\messaging\CNabuMessagingList;
 use nabu\data\project\CNabuProject;
 use nabu\data\project\CNabuProjectList;
 use nabu\data\security\CNabuUser;
+use nabu\data\security\CNabuUserList;
 use nabu\data\site\CNabuSite;
 use nabu\data\site\CNabuSiteList;
 
@@ -496,7 +498,7 @@ class CNabuCustomer extends CNabuCustomerBase
     /**
      * Gets a Catalog instance using their key.
      * @param string $key Key of the Catalog to be retrieved.
-     * @return CNabuCatalog Returns a Catalog instance if exists or false if not.
+     * @return CNabuCatalog|false Returns a Catalog instance if exists or false if not.
      */
     public function getCatalogByKey($key)
     {
@@ -508,6 +510,42 @@ class CNabuCustomer extends CNabuCustomerBase
         }
 
         return $this->nb_catalog_list->getItem($key, CNabuCatalogList::INDEX_KEY);
+    }
+
+    /**
+     * Gets a Catalog instance using their slug.
+     * @param string $slug Slug of the Catalog to be retrieved.
+     * @return CNabuCatalog|false Returns a Catalog instance if exists or false if not.
+     */
+    public function getCatalogBySlug($slug)
+    {
+        if (!is_string($slug) || strlen($slug) === 0) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                array('$slug', print_r($slug, true))
+            );
+        }
+
+        $nb_final_catalog = null;
+
+        $this->nb_catalog_list->iterate(
+            function($key, CNabuCatalog $nb_catalog) use ($slug, $nb_final_catalog)
+            {
+                $nb_catalog->getTranslations(true)->iterate(
+                    function ($key, CNabuCatalogLanguage $nb_catalog_language)
+                         use ($slug, $nb_catalog, $nb_final_catalog)
+                    {
+                        if ($nb_catalog_language->getSlug() === $slug) {
+                            $nb_final_catalog = $nb_catalog;
+                        }
+                        return ($nb_final_catalog === null);
+                    }
+                );
+                return ($nb_final_catalog === null);
+            }
+        );
+
+        return ($nb_final_catalog === null ? false : $nb_final_catalog);
     }
 
     /**
@@ -682,6 +720,11 @@ class CNabuCustomer extends CNabuCustomerBase
           \___/|___/\___|_|  |___/
      */
 
+    /**
+     * Gets a User instance owned by this Customer.
+     * @param mixed $nb_user A CNabuDataObject containing a nb_user_id field or an ID.
+     * @return CNabuUser|null Returns the required User instance if exists or null if not.
+     */
     public function getUser($nb_user)
     {
         $retval = null;
@@ -697,6 +740,10 @@ class CNabuCustomer extends CNabuCustomerBase
         return $retval;
     }
 
+    /**
+     * Gets a User List of all users owned by this Customer.
+     * @return CNabuUserList Returns the list of users.
+     */
     public function getUsers()
     {
         return CNabuUser::getAllUsers($this);

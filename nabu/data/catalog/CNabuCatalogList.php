@@ -34,7 +34,7 @@ class CNabuCatalogList extends CNabuCatalogListBase
 
     /**
      * Creates the instance. Receives as parameter the Customer instance that owns this Catalog List.
-     * @param CNabuCustomer $nb_customer Customer owner instance.
+     * @param CNabuCustomer|null $nb_customer Customer owner instance.
      */
     public function __construct(CNabuCustomer $nb_customer = null)
     {
@@ -56,7 +56,7 @@ class CNabuCatalogList extends CNabuCatalogListBase
         if (is_object($item)) {
             $item->setCustomer($this->getCustomer());
         }
-        
+
         return $item;
     }
 
