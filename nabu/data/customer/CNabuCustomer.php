@@ -515,9 +515,10 @@ class CNabuCustomer extends CNabuCustomerBase
     /**
      * Gets a Catalog instance using their slug.
      * @param string $slug Slug of the Catalog to be retrieved.
+     * @param mixed $nb_language A CNabuDataObject containing a field named nb_language_id or an ID.
      * @return CNabuCatalog|false Returns a Catalog instance if exists or false if not.
      */
-    public function getCatalogBySlug($slug)
+    public function getCatalogBySlug($slug, $nb_language = null)
     {
         if (!is_string($slug) || strlen($slug) === 0) {
             throw new ENabuCoreException(
@@ -527,20 +528,31 @@ class CNabuCustomer extends CNabuCustomerBase
         }
 
         $nb_final_catalog = null;
+        $nb_language_id = nb_getMixedValue($nb_language, NABU_LANG_FIELD_ID);
 
         $this->nb_catalog_list->iterate(
-            function($key, CNabuCatalog $nb_catalog) use ($slug, $nb_final_catalog)
+            function ($key, CNabuCatalog $nb_catalog)
+                 use ($slug, &$nb_final_catalog, $nb_language_id)
             {
-                $nb_catalog->getTranslations(true)->iterate(
-                    function ($key, CNabuCatalogLanguage $nb_catalog_language)
-                         use ($slug, $nb_catalog, $nb_final_catalog)
-                    {
-                        if ($nb_catalog_language->getSlug() === $slug) {
-                            $nb_final_catalog = $nb_catalog;
-                        }
-                        return ($nb_final_catalog === null);
+                if (is_numeric($nb_language_id)) {
+                    $nb_translation = $nb_catalog->getTranslation($nb_language_id);
+                    if ($nb_translation instanceof CNabuCatalogLanguage &&
+                        $nb_translation->getSlug() === $slug
+                    ) {
+                        $nb_final_catalog = $nb_catalog;
                     }
-                );
+                } else {
+                    $nb_catalog->getTranslations(true)->iterate(
+                        function ($key, CNabuCatalogLanguage $nb_catalog_language)
+                             use ($slug, $nb_catalog, &$nb_final_catalog)
+                        {
+                            if ($nb_catalog_language->getSlug() === $slug) {
+                                $nb_final_catalog = $nb_catalog;
+                            }
+                            return ($nb_final_catalog === null);
+                        }
+                    );
+                }
                 return ($nb_final_catalog === null);
             }
         );
@@ -556,7 +568,8 @@ class CNabuCustomer extends CNabuCustomerBase
      */
     public function getCatalogs($force = false)
     {
-        if ($force) {
+        if ($this->nb_catalog_list->isEmpty() || $force) {
+            $this->nb_catalog_list->clear();
             $this->nb_catalog_list->merge(CNabuCatalog::getAllCatalogs($this));
         }
 
