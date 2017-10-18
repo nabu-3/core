@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/06 08:00:17 UTC
+ * Created: 2017/10/18 10:47:36 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -301,5 +301,41 @@ abstract class CNabuSiteUserBase extends CNabuDBInternalObject
         $this->setValue('nb_site_user_notification_sended_datetime', $notification_sended_datetime);
         
         return $this;
+    }
+
+    /**
+     * Get Site User Attributes attribute value
+     * @return null|array Returns the Site User Attributes value
+     */
+    public function getAttributes()
+    {
+        return $this->getValueJSONDecoded('nb_site_user_attributes');
+    }
+
+    /**
+     * Sets the Site User Attributes attribute value.
+     * @param string|array|null $attributes New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setAttributes($attributes = null) : CNabuDataObject
+    {
+        $this->setValueJSONEncoded('nb_site_user_attributes', $attributes);
+        
+        return $this;
+    }
+
+    /**
+     * Overrides this method to add support to traits and/or attributes.
+     * @param int|CNabuDataObject $nb_language Instance or Id of the language to be used.
+     * @param bool $dataonly Render only field values and ommit class control flags.
+     * @return array Returns a multilevel associative array with all data.
+     */
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $trdata = parent::getTreeData($nb_language, $dataonly);
+        
+        $trdata['attributes'] = $this->getAttributes();
+        
+        return $trdata;
     }
 }

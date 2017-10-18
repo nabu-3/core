@@ -84,6 +84,17 @@
             "is_nullable": true,
             "extra": "",
             "comment": ""
+        },
+        "nb_site_user_attributes": {
+            "name": "nb_site_user_attributes",
+            "ordinal": "8",
+            "data_type": "longtext",
+            "precision": null,
+            "type": "longtext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
         }
     },
     "constraints": {

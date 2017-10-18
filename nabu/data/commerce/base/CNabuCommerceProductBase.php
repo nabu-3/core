@@ -3,19 +3,19 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/06 08:00:20 UTC
+ * Created: 2017/10/18 10:47:39 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  * Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  * Copyright 2017 nabu-3 Group
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -60,7 +60,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
         if ($nb_commerce_product) {
             $this->transferMixedValue($nb_commerce_product, 'nb_commerce_product_id');
         }
-
+        
         parent::__construct();
         $this->__translatedConstruct();
         $this->translations_list = new CNabuCommerceProductLanguageList();
@@ -123,7 +123,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
         } else {
             $retval = new CNabuCommerceProductList();
         }
-
+        
         return $retval;
     }
 
@@ -146,13 +146,13 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
         if (is_numeric($nb_commerce_id)) {
             $fields_part = nb_prefixFieldList(CNabuCommerceProductBase::getStorageName(), $fields, false, true, '`');
             $order_part = nb_prefixFieldList(CNabuCommerceProductBase::getStorageName(), $fields, false, false, '`');
-
+        
             if ($num_items !== 0) {
                 $limit_part = ($offset > 0 ? $offset . ', ' : '') . $num_items;
             } else {
                 $limit_part = false;
             }
-
+        
             $nb_item_list = CNabuEngine::getEngine()->getMainDB()->getQueryAsArray(
                 "select " . ($fields_part ? $fields_part . ' ' : '* ')
                 . 'from nb_commerce_product '
@@ -166,7 +166,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
         } else {
             $nb_item_list = null;
         }
-
+        
         return $nb_item_list;
     }
 
@@ -196,7 +196,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
         ) {
             $this->languages_list = CNabuCommerceProductLanguage::getLanguagesForTranslatedObject($this);
         }
-
+        
         return $this->languages_list;
     }
 
@@ -213,7 +213,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
         ) {
             $this->translations_list = CNabuCommerceProductLanguage::getTranslationsForTranslatedObject($this);
         }
-
+        
         return $this->translations_list;
     }
 
@@ -239,7 +239,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
         } else {
             $nb_translation = null;
         }
-
+        
         return $nb_translation;
     }
 
@@ -277,7 +277,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
             );
         }
         $this->setValue('nb_commerce_product_id', $id);
-
+        
         return $this;
     }
 
@@ -298,7 +298,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setCategoryId(int $category_id = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_category_id', $category_id);
-
+        
         return $this;
     }
 
@@ -325,7 +325,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
             );
         }
         $this->setValue('nb_commerce_id', $nb_commerce_id);
-
+        
         return $this;
     }
 
@@ -346,7 +346,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setCommerceTaxId(int $nb_commerce_tax_id = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_tax_id', $nb_commerce_tax_id);
-
+        
         return $this;
     }
 
@@ -367,7 +367,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setProviderId(int $nb_provider_id = null) : CNabuDataObject
     {
         $this->setValue('nb_provider_id', $nb_provider_id);
-
+        
         return $this;
     }
 
@@ -388,7 +388,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setMediotecaId(int $nb_medioteca_id = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_id', $nb_medioteca_id);
-
+        
         return $this;
     }
 
@@ -409,7 +409,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setMediotecaItemId(int $nb_medioteca_item_id = null) : CNabuDataObject
     {
         $this->setValue('nb_medioteca_item_id', $nb_medioteca_item_id);
-
+        
         return $this;
     }
 
@@ -436,7 +436,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
             );
         }
         $this->setValue('nb_commerce_product_type', $type);
-
+        
         return $this;
     }
 
@@ -457,7 +457,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setSKU(string $sku = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_sku', $sku);
-
+        
         return $this;
     }
 
@@ -478,7 +478,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setUnitsRange(string $units_range = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_units_range', $units_range);
-
+        
         return $this;
     }
 
@@ -499,7 +499,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setCostAmount($cost_amount) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_cost_amount', $cost_amount);
-
+        
         return $this;
     }
 
@@ -520,7 +520,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setCostMoney(string $cost_money = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_cost_money', $cost_money);
-
+        
         return $this;
     }
 
@@ -541,7 +541,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setPriceAmount($price_amount) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_price_amount', $price_amount);
-
+        
         return $this;
     }
 
@@ -562,7 +562,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setPriceMoney(string $price_money = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_price_money', $price_money);
-
+        
         return $this;
     }
 
@@ -583,7 +583,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setProviderReference(string $provider_reference = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_provider_reference', $provider_reference);
-
+        
         return $this;
     }
 
@@ -604,7 +604,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setSingleUnitSuffix(string $single_unit_suffix = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_single_unit_suffix', $single_unit_suffix);
-
+        
         return $this;
     }
 
@@ -625,7 +625,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setMultiUnitSuffix(string $multi_unit_suffix = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_multi_unit_suffix', $multi_unit_suffix);
-
+        
         return $this;
     }
 
@@ -652,7 +652,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
             );
         }
         $this->setValue('nb_commerce_product_tax_percentage', $tax_percentage);
-
+        
         return $this;
     }
 
@@ -679,7 +679,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
             );
         }
         $this->setValue('nb_commerce_product_tax_amount', $tax_amount);
-
+        
         return $this;
     }
 
@@ -706,7 +706,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
             );
         }
         $this->setValue('nb_commerce_product_price_with_tax', $price_with_tax);
-
+        
         return $this;
     }
 
@@ -733,7 +733,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
             );
         }
         $this->setValue('nb_commerce_product_is_upselling', $is_upselling);
-
+        
         return $this;
     }
 
@@ -760,7 +760,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
             );
         }
         $this->setValue('nb_commerce_product_sold_individually', $sold_individually);
-
+        
         return $this;
     }
 
@@ -787,7 +787,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
             );
         }
         $this->setValue('nb_commerce_product_is_virtual', $is_virtual);
-
+        
         return $this;
     }
 
@@ -808,7 +808,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setTimeToLive(string $time_to_live = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_product_time_to_live', $time_to_live);
-
+        
         return $this;
     }
 
@@ -829,7 +829,7 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function setAttributes($attributes = null) : CNabuDataObject
     {
         $this->setValueJSONEncoded('nb_commerce_product_attributes', $attributes);
-
+        
         return $this;
     }
 
@@ -842,10 +842,10 @@ abstract class CNabuCommerceProductBase extends CNabuDBInternalObject implements
     public function getTreeData($nb_language = null, $dataonly = false)
     {
         $trdata = parent::getTreeData($nb_language, $dataonly);
-
+        
         $trdata['attributes'] = $this->getAttributes();
         $trdata = $this->appendTranslatedTreeData($trdata, $nb_language, $dataonly);
-
+        
         return $trdata;
     }
 }
