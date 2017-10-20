@@ -92,7 +92,7 @@ final class CNabuHTTPResponse extends CNabuObject
     /**
      * Default constructor.
      * @param CNabuHTTPPluginsManager $nb_plugins_manager nabu-3 HTTP Plugins Manager.
-     * @param CNabuHTTPRequest $nb_request nabu-3 HTTP Request.
+     * @param CNabuHTTPRequest|null $nb_request nabu-3 HTTP Request.
      * @throws ENabuCoreException Throws an exception if Plugins Manager is invalid.
      */
     public function __construct($nb_plugins_manager, CNabuHTTPRequest $nb_request = null)
@@ -218,7 +218,7 @@ final class CNabuHTTPResponse extends CNabuObject
     /**
      * Set the render for this response. Calls of this methods after call
      * to {@see CCMSEngine::buildResponse()} has no effect.
-     * @param INabuHTTPResponseRender $render New render.
+     * @param INabuHTTPResponseRender|null $render New render.
      * @throws ENabuCoreException
      */
     public function setRender(INabuHTTPResponseRender $render = null) {

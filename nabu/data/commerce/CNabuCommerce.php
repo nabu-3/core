@@ -135,6 +135,45 @@ class CNabuCommerce extends CNabuCommerceBase
     }
 
     /**
+     * Find a Product using their slug.
+     * @param string $slug Slug of Product to find.
+     * @param mixed|null $nb_language Language to search the Slug.
+     * @return CNabuCommerceProduct|false Returns the Product instance if exists or false if not.
+     */
+    public function findProductBySlug(string $slug, $nb_language = null)
+    {
+        $retval = false;
+        $nb_language_id = nb_getMixedValue($nb_language, NABU_LANG_FIELD_ID);
+
+        $this->getProducts()->iterate(
+            function ($key, CNabuCommerceProduct $nb_product)
+                 use (&$retval, $slug, $nb_language_id)
+            {
+                if (is_numeric($nb_language_id) &&
+                    ($nb_translation = $nb_product->getTranslation($nb_language_id)) instanceof CNabuCommerceProductLanguage &&
+                    $nb_translation->getSlug() === $slug
+                ) {
+                    $retval = $nb_product;
+                } else {
+                    $nb_product->getTranslations()->iterate(
+                        function ($key, CNabuCommerceProductLanguage $nb_translation)
+                             use (&$retval, $nb_product, $slug)
+                        {
+                            if ($nb_translation->getSlug() === $slug) {
+                                $retval = $nb_product;
+                            }
+                            return !$retval;
+                        }
+                    );
+                }
+                return !$retval;
+            }
+        );
+
+        return $retval;
+    }
+
+    /**
      * Overrides getTreeData method to add products and categories branches.
      * If $nb_language have a valid value, also adds a translation object
      * with current translation pointed by it.
