@@ -118,9 +118,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_catalog_item_css_class": {
+            "name": "nb_catalog_item_css_class",
+            "ordinal": "11",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(50)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_catalog_item_attributes": {
             "name": "nb_catalog_item_attributes",
-            "ordinal": "11",
+            "ordinal": "12",
             "data_type": "text",
             "precision": null,
             "type": "text",

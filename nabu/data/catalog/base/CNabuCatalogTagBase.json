@@ -52,9 +52,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_catalog_tag_css_class": {
+            "name": "nb_catalog_tag_css_class",
+            "ordinal": "5",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(50)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_catalog_tag_attributes": {
             "name": "nb_catalog_tag_attributes",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "text",
             "precision": null,
             "type": "text",

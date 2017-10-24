@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/10/18 10:47:41 UTC
+ * Created: 2017/10/24 16:11:13 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -353,20 +353,26 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
 
     /**
      * Get Catalog Id attribute value
-     * @return null|int Returns the Catalog Id value
+     * @return int Returns the Catalog Id value
      */
-    public function getCatalogId()
+    public function getCatalogId() : int
     {
         return $this->getValue('nb_catalog_id');
     }
 
     /**
      * Sets the Catalog Id attribute value.
-     * @param int|null $nb_catalog_id New value for attribute
+     * @param int $nb_catalog_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setCatalogId(int $nb_catalog_id = null) : CNabuDataObject
+    public function setCatalogId(int $nb_catalog_id) : CNabuDataObject
     {
+        if ($nb_catalog_id === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$nb_catalog_id")
+            );
+        }
         $this->setValue('nb_catalog_id', $nb_catalog_id);
         
         return $this;
@@ -443,6 +449,27 @@ abstract class CNabuCatalogTaxonomyBase extends CNabuDBInternalObject implements
             );
         }
         $this->setValue('nb_catalog_taxonomy_scope', $scope);
+        
+        return $this;
+    }
+
+    /**
+     * Get Catalog Taxonomy CSS Class attribute value
+     * @return null|string Returns the Catalog Taxonomy CSS Class value
+     */
+    public function getCSSClass()
+    {
+        return $this->getValue('nb_catalog_taxonomy_css_class');
+    }
+
+    /**
+     * Sets the Catalog Taxonomy CSS Class attribute value.
+     * @param string|null $css_class New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setCSSClass(string $css_class = null) : CNabuDataObject
+    {
+        $this->setValue('nb_catalog_taxonomy_css_class', $css_class);
         
         return $this;
     }
