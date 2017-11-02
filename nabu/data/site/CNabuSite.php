@@ -251,6 +251,17 @@ class CNabuSite extends CNabuSiteBase
     }
 
     /**
+     * Gets a Static Content identified by its key.
+     * @param string $key The key to looking for.
+     * @return CNabuSiteStaticContent|null Returns a valid CNabuSiteStaticContent instance if $key matches or null
+     * elsewhere.
+     */
+    public function getStaticContentByKey(string $key)
+    {
+        return $this->nb_site_static_content_list->getItem($key, CNabuSiteStaticContentList::INDEX_KEY);
+    }
+
+    /**
      * Gets the Static Content list associated with this instance.
      * @param bool $force If true forces to reload entire list from database.
      * @return CNabuSiteStaticContentList Returns the list instance containing all associated contents.
