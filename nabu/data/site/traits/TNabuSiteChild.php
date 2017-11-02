@@ -41,8 +41,9 @@ trait TNabuSiteChild
 
     /**
      * Gets the Site instance.
-     * @param null|CNabuCustomer If you want to get the Site in safe mode, you need to pass this parameter to grant
-     * the Customer that owns the Site where the Site Map is placed. In any other case, the Site could not be retrieved.
+     * @param CNabuCustomer|null $nb_customer If you want to get the Site in safe mode, you need to pass this parameter
+     * to grant the Customer that owns the Site where the Site Map is placed. In any other case, the Site could not be
+     * retrieved.
      * @param bool $force If true, then tries to reload Site instance from their storage.
      * @return CNabuSite|null Returns the Site instance if setted or null if not.
      */
@@ -60,15 +61,15 @@ trait TNabuSiteChild
 
     /**
      * Sets the Site instance that owns this object and sets the field containing the site id.
-     * @param CNabuSite $nb_site Site instance to be setted.
+     * @param CNabuSite|null $nb_site Site instance to be setted.
      * @param string $field Field name where the site id will be stored.
      * @return CNabuDataObject Returns $this to allow the cascade chain of setters.
      */
-    public function setSite(CNabuSite $nb_site)
+    public function setSite(CNabuSite $nb_site = null, $field = NABU_SITE_FIELD_ID)
     {
         $this->nb_site = $nb_site;
         if ($this instanceof CNabuDataObject) {
-            $this->transferValue($nb_site, NABU_SITE_FIELD_ID);
+            $this->transferValue($nb_site, $field);
         }
 
         return $this;

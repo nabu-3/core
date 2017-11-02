@@ -36,7 +36,12 @@ class CNabuSiteStaticContent extends CNabuSiteStaticContentBase
     const USE_ALTERNATIVE_DEFAULT = 'E';
     const USE_ALTERNATIVE_AVAILABLE = 'B';
 
-    static public function getStaticContentsForSite($nb_site)
+    /**
+     * Gets a list of all Static Contents for a Site.
+     * @param mixed $nb_site A CNabuDataObject containing a field named nb_site_id or a valid ID.
+     * @return CNabuSiteStaticContentList Returns a Static Content List with statics found.
+     */
+    static public function getStaticContentsForSite($nb_site) : CNabuSiteStaticContentList
     {
         $nb_site_id = nb_getMixedValue($nb_site, NABU_SITE_FIELD_ID);
         if (is_numeric($nb_site_id)) {
@@ -47,7 +52,8 @@ class CNabuSiteStaticContent extends CNabuSiteStaticContentBase
                . 'where nb_site_id=%site_id$d',
                 array(
                     'site_id' => $nb_site_id
-                )
+                ),
+                $nb_site
             );
             if ($nb_site instanceof CNabuSite) {
                 $retval->iterate(function($key, $nb_static) use ($nb_site) {

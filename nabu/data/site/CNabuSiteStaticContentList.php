@@ -20,6 +20,7 @@
 namespace nabu\data\site;
 
 use nabu\data\site\base\CNabuSiteStaticContentListBase;
+use nabu\data\site\traits\TNabuSiteChild;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -28,4 +29,27 @@ use nabu\data\site\base\CNabuSiteStaticContentListBase;
  */
 class CNabuSiteStaticContentList extends CNabuSiteStaticContentListBase
 {
+    use TNabuSiteChild;
+
+    public function __construct(CNabuSite $nb_site)
+    {
+        parent::__construct();
+        $this->setSite($nb_site);
+    }
+
+    public function acquireItem($key, $index = false)
+    {
+        $value = parent::acquireItem($key, $index);
+
+        if ($value === false &&
+            is_string($index) &&
+            ($nb_site = $this->getSite()) instanceof CNabuSite
+        ) {
+            if ($index === CNabuSiteStaticContentList::INDEX_KEY) {
+                $value = CNabuSiteStaticContent::findByKey($nb_site, $key);
+            }
+        }
+
+        return $value;
+    }
 }

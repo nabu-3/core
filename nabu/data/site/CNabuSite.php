@@ -108,7 +108,7 @@ class CNabuSite extends CNabuSiteBase
         $this->nb_site_alias_list = new CNabuSiteAliasList();
         $this->nb_site_map_tree = new CNabuSiteMapTree($this);
         $this->nb_site_target_list = new CNabuSiteTargetList();
-        $this->nb_site_static_content_list = new CNabuSiteStaticContentList();
+        $this->nb_site_static_content_list = new CNabuSiteStaticContentList($this);
         $this->nb_role_list = new CNabuRoleList();
         $this->nb_site_role_list = new CNabuSiteRoleList();
     }
