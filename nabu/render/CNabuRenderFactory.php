@@ -42,7 +42,7 @@ class CNabuRenderFactory extends CNabuDataObject
     /** @var string The Module Key identifier to force interfaces on it. */
     private $module_key;
 
-    /** @var string Valid Render Interface. */
+    /** @var INabuRenderInterface Valid Render Interface. */
     private $nb_render_interface = null;
 
     /**
@@ -117,41 +117,38 @@ class CNabuRenderFactory extends CNabuDataObject
 
     /**
      * Discover the Render Interface.
-     * @return INabuRenderInterface If Service is mapped then returns a valid interface ready to use.
+     * @return bool If Service is mapped then returns true.
      * @throws ENabuRenderException Raises an exception if the designated Render is not valid or applicable.
      */
-    private function discoverRenderInterface() : INabuRenderInterface
+    private function discoverRenderInterface() : bool
     {
-        $retval = false;
         $nb_engine = CNabuEngine::getEngine();
 
         if (!($this->nb_render_interface instanceof INabuRenderInterface)) {
-            $nb_engine  ->getProvidersInterfaceDescriptors(CNabuProviderFactory::INTERFACE_RENDER)
-                        ->iterate(
-                            function($key, CNabuRenderInterfaceDescriptor $descriptor)
-                            {
-                                if ($descriptor->getMIMEType() === $this->mimetype) {
-                                    if ($this->vendor_key !== null) {
-                                        $nb_manager = $descriptor->getManager();
-                                        if ($this->vendor_key === $nb_manager->getVendorKey() &&
-                                            ($this->module_key === null || $this->module_key === $nb_manager->getModuleKey())
-                                        ) {
-                                            $this->nb_render_interface = $nb_manager->createRenderInterface($descriptor->getName());
-                                        }
-                                    } else {
-                                        $this->nb_render_interface = $nb_manager->createRenderInterface($descriptor->getName());
-                                    }
+            $nb_engine
+                ->getProvidersInterfaceDescriptors(CNabuProviderFactory::INTERFACE_RENDER)
+                ->iterate(
+                    function($key, CNabuRenderInterfaceDescriptor $descriptor)
+                    {
+                        if ($descriptor->getMIMEType() === $this->mimetype) {
+                            if ($this->vendor_key !== null) {
+                                $nb_manager = $descriptor->getManager();
+                                if ($this->vendor_key === $nb_manager->getVendorKey() &&
+                                    ($this->module_key === null || $this->module_key === $nb_manager->getModuleKey())
+                                ) {
+                                    $this->nb_render_interface = $nb_manager->createRenderInterface($descriptor->getName());
                                 }
-                                return ($this->nb_render_interface === null);
+                            } else {
+                                $this->nb_render_interface = $nb_manager->createRenderInterface($descriptor->getName());
                             }
-                        )
+                        }
+                    }
+                )
             ;
-            if ($select_descriptor !== null) {
-                $this->nb_render_interface = $select_descriptor->
-            }
         }
 
-        return $retval;
+        return ($this->nb_render_interface instanceof INabuRenderInterface);
+
     }
 
     /**
@@ -161,6 +158,8 @@ class CNabuRenderFactory extends CNabuDataObject
      */
     public function buildStringAsHTTPResponse(string $string, array $params = null)
     {
-        $this->discoverRenderInterface();
+        if ($this->discoverRenderInterface()) {
+            $this->nb_render_interface->init();
+        }
     }
 }

@@ -54,7 +54,7 @@ class CNabuProviderInterfaceDescriptor extends CNabuDataObject
      * Gets the Manager instance.
      * @return INabuProviderManager Returns the Manager instance.
      */
-    public function getManager()
+    public function getManager() : INabuProviderManager
     {
         return $this->nb_manager;
     }
