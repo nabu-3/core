@@ -224,7 +224,7 @@ class CNabuCommerce extends CNabuCommerceBase
      */
     public function findProductBySKU(string $sku)
     {
-        return $this->nb_commerce_product_list->getItem(CNabuCommerceProductList::INDEX_SKU, $sku);
+        return $this->nb_commerce_product_list->getItem($sku, CNabuCommerceProductList::INDEX_SKU);
     }
 
     /**

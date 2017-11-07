@@ -67,10 +67,10 @@ class CNabuCommerceProduct extends CNabuCommerceProductBase
         $retval = false;
         $nb_commerce_id = nb_getMixedValue($nb_commerce, NABU_COMMERCE_FIELD_ID);
         if (is_numeric($nb_commerce_id)) {
-            $retval = CNabuCommerceProduct::buildObjectFormSQL(
+            $retval = CNabuCommerceProduct::buildObjectFromSQL(
                 'SELECT *
                    from nb_commerce_product
-                  where nb_commerce_id=%commerce_id\$d
+                  where nb_commerce_id=%commerce_id$d
                     and nb_commerce_product_sku=\'%sku$s\'
                 ',
                 array(

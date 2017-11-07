@@ -170,7 +170,7 @@ if (!function_exists('params2string')) {
                 echo $exception->getMessage();
                 //echo str_replace("\n", "<br>", print_r($exception));
             } else { ?>
-            <h2>Exception: <span class="symbol"><?php echo get_class($exception);?></symbol></h2>
+            <h2>Exception: <span class="symbol"><?php echo get_class($exception);?></span></h2>
 <?php           if ($exception->getCode() > 0) { ?>
             Code&nbsp;&nbsp;&nbsp;&nbsp;: <?php echo $exception->getCode();?><br>
 <?php           } ?>

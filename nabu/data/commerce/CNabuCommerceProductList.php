@@ -98,11 +98,6 @@ class CNabuCommerceProductList extends CNabuCommerceProductListBase
     {
         if (!($item = parent::acquireItem($key, $index)) && CNabuEngine::getEngine()->isMainDBAvailable()) {
             switch ($index) {
-                case self::INDEX_KEY:
-                    /** @todo: Check creation of findByKey method in the Nabu PHP Table Builder class to use parent entities */
-                    //$item = CNabuCommerceProductCategory::findByKey($this->nb_commerce, $key);
-                    throw new ENabuCoreException(ENabuCoreException::ERROR_FEATURE_NOT_IMPLEMENTED);
-                    break;
                 case self::INDEX_SLUG:
                     $item = CNabuCommerceProduct::findBySlug($this->nb_commerce, $key);
                     break;

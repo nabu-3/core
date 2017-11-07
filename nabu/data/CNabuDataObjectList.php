@@ -98,6 +98,7 @@ abstract class CNabuDataObjectList extends CNabuObject
 
     /**
      * Sets the owner of this list.
+     * @param CNabuDataObject|null $nb_owner The Owner instance to be setted or null to remove owner.
      * @return CNabuDataObjectList Returns the Self pointer to grant chained setters calls.
      */
     public function setOwner(CNabuDataObject $nb_owner = null)
@@ -296,6 +297,7 @@ abstract class CNabuDataObjectList extends CNabuObject
                     array('$index', get_class($index))
                 );
             } elseif (!is_array($this->secondary_indexes) || !array_key_exists($index, $this->secondary_indexes)) {
+                error_log(print_r(array_keys($this->secondary_indexes), true));
                 throw new ENabuCoreException(ENabuCoreException::ERROR_INVALID_INDEX, array($index));
             }
         }
@@ -425,7 +427,7 @@ abstract class CNabuDataObjectList extends CNabuObject
 
     /**
      * Merges items included in an array.
-     * @param array $array Array of items to merge.
+     * @param array|null $array Array of items to merge.
      * @return int Returns the count of items merged.
      */
     public function mergeArray(array $array = null)
