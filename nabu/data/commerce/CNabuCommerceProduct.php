@@ -3,6 +3,7 @@
 /*  Copyright 2009-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
+ *  Copyright 2017 nabu-3 Group
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -38,9 +39,9 @@ class CNabuCommerceProduct extends CNabuCommerceProductBase
         if (is_numeric($nb_commerce_id)) {
             $retval = CNabuCommerceProduct::buildObjectListFromSQL(
                 'nb_commerce_product_id',
-                'select * '
-                . 'from nb_commerce_product '
-                . 'where nb_commerce_id=%commerce_id$d',
+                'SELECT *
+                   FROM nb_commerce_product
+                  WHERE nb_commerce_id=%commerce_id$d',
                 array(
                     'commerce_id' => $nb_commerce_id
                 )
@@ -50,6 +51,33 @@ class CNabuCommerceProduct extends CNabuCommerceProductBase
             }
         } else {
             $retval = new CNabuCommerceProductCategoryList($nb_commerce instanceof CNabuCommerce ? $nb_commerce : null);
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Find a product in a Commerce by its SKU.
+     * @param mixed $nb_commerce A CNabuDataObject instance containing a field named nb_commerce_id or a valid ID.
+     * @param string $sku The SKU to be found.
+     * @return CNabuCommerceProduct|false Returns a valid instance if found, or false if not found.
+     */
+    static public function findBySKU($nb_commerce, string $sku)
+    {
+        $retval = false;
+        $nb_commerce_id = nb_getMixedValue($nb_commerce, NABU_COMMERCE_FIELD_ID);
+        if (is_numeric($nb_commerce_id)) {
+            $retval = CNabuCommerceProduct::buildObjectFormSQL(
+                'SELECT *
+                   from nb_commerce_product
+                  where nb_commerce_id=%commerce_id\$d
+                    and nb_commerce_product_sku=\'%sku$s\'
+                ',
+                array(
+                    'commerce_id' => $nb_commerce_id,
+                    'sku' => $sku
+                )
+            );
         }
 
         return $retval;

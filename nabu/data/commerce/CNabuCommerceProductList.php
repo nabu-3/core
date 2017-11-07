@@ -3,6 +3,7 @@
 /*  Copyright 2009-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
+ *  Copyright 2017 nabu-3 Group
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -20,6 +21,7 @@
 namespace nabu\data\commerce;
 use nabu\core\CNabuEngine;
 use nabu\core\exceptions\ENabuCoreException;
+use nabu\data\CNabuDataObjectListIndex;
 use nabu\data\commerce\base\CNabuCommerceProductListBase;
 use nabu\data\commerce\traits\TNabuCommerceChild;
 use nabu\data\lang\CNabuDataObjectListIndexLanguage;
@@ -33,11 +35,10 @@ class CNabuCommerceProductList extends CNabuCommerceProductListBase
 {
     use TNabuCommerceChild;
 
-    /**
-     * Index categories by Slug
-     * @var string
-     */
+    /** @var string Index Products by Slug */
     const INDEX_SLUG = 'slugs';
+    /** @var string Index Products by SKU */
+    const INDEX_SKU = 'skus';
 
     /**
      * Commerce parent instance
@@ -86,6 +87,11 @@ class CNabuCommerceProductList extends CNabuCommerceProductListBase
                 $this, 'nb_commerce_product_lang_slug', null, self::INDEX_SLUG
             )
         );
+        $this->addIndex(
+            new CNabuDataObjectListIndex(
+                $this, 'nb_commerce_product_sku', null, self::INDEX_SKU
+            )
+        );
     }
 
     public function acquireItem($key, $index = false)
@@ -99,6 +105,9 @@ class CNabuCommerceProductList extends CNabuCommerceProductListBase
                     break;
                 case self::INDEX_SLUG:
                     $item = CNabuCommerceProduct::findBySlug($this->nb_commerce, $key);
+                    break;
+                case self::INDEX_SKU:
+                    $item = CNabuCommerceProduct::findBySKU($this->nb_commerce, $key);
                     break;
             }
         }

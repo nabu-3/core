@@ -3,6 +3,7 @@
 /*  Copyright 2009-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
+ *  Copyright 2017 nabu-3 Group
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -46,12 +47,22 @@ class CNabuCommerce extends CNabuCommerceBase
         $this->nb_commerce_product_list = new CNabuCommerceProductList($this);
     }
 
+    /**
+     * Sort all lists (Categories and Products) using sorting criteria of each list defined in their classes.
+     */
     public function sortAll()
     {
         $this->nb_commerce_product_category_list->sort();
+        $this->nb_commerce_product_list->sort();
     }
 
-    public function newProductCategory($key, $order)
+    /**
+     * Creates a new Product Category instance.
+     * @param string|null $key Key to identify the Category.
+     * @param int $order Order of the Category.
+     * @return CNabuCommerceProductCategory Returns a valid instance.
+     */
+    public function newProductCategory(string $key = null, int $order = 1) : CNabuCommerceProductCategory
     {
         $nb_commerce_product_category = $this->isBuiltIn()
                                       ? new CNabuBuiltInCommerceProductCategory()
@@ -64,6 +75,11 @@ class CNabuCommerce extends CNabuCommerceBase
         return $this->addProductCategoryObject($nb_commerce_product_category);
     }
 
+    /**
+     * Adds a Product Category object to this Commerce.
+     * @param CNabuCommerceProductCategory $nb_commerce_product_category A Product Category object to be added.
+     * @return CNabuCommerceProductCategory|false Returns the inserted object nor false if is not inserted.
+     */
     public function addProductCategoryObject(CNabuCommerceProductCategory $nb_commerce_product_category)
     {
         $nb_commerce_product_category->setCommerce($this);
@@ -71,9 +87,21 @@ class CNabuCommerce extends CNabuCommerceBase
         return $this->nb_commerce_product_category_list->addItem($nb_commerce_product_category);
     }
 
-    public function getProductCategory($nb_commerce_product_category_id)
+    /**
+     * Gets a Product Category by Id.
+     * @param mixed $nb_commerce_product_category A CNabuDataObject containing a field named nb_commerce_product_category_id
+     * or a valid ID.
+     * @return CNabuCommerceProductCategory|false Returns a valid instance if exists or false if not.
+     */
+    public function getProductCategory($nb_commerce_product_category)
     {
-        return $this->nb_commerce_product_category_list->getItem($nb_commerce_product_category_id);
+        $nb_category = false;
+        $nb_category_id = nb_getMixedValue($nb_commerce_product_category, NABU_COMMERCE_PRODUCT_CATEGORY_FIELD_ID);
+        if (is_numeric($nb_category_id)) {
+            $nb_category = $this->nb_commerce_product_category_list->getItem($nb_category_id);
+        }
+
+        return $nb_category;
     }
 
     /**
@@ -135,6 +163,22 @@ class CNabuCommerce extends CNabuCommerceBase
     }
 
     /**
+     * Gets a Product by Id.
+     * @param mixed $nb_commerce_product A CNabuDataObject containing a field named nb_commerce_product_id or a valid ID.
+     * @return CNabuCommerceProduct|false Returns a valid instance if exists or false if not.
+     */
+    public function getProduct($nb_commerce_product)
+    {
+        $nb_product = false;
+        $nb_product_id = nb_getMixedValue($nb_commerce_product, NABU_COMMERCE_PRODUCT_FIELD_ID);
+        if (is_numeric($nb_product_id)) {
+            $nb_product = $this->nb_commerce_product_list->getItem($nb_product_id);
+        }
+
+        return $nb_product;
+    }
+
+    /**
      * Find a Product using their slug.
      * @param string $slug Slug of Product to find.
      * @param mixed|null $nb_language Language to search the Slug.
@@ -171,6 +215,16 @@ class CNabuCommerce extends CNabuCommerceBase
         );
 
         return $retval;
+    }
+
+    /**
+     * Find a product by its SKU.
+     * @param string $sku SKU to looking for the Product.
+     * @return CNabuCommerceProduct|false Returns the Product instance that matches with the SKU or false if none found.
+     */
+    public function findProductBySKU(string $sku)
+    {
+        return $this->nb_commerce_product_list->getItem(CNabuCommerceProductList::INDEX_SKU, $sku);
     }
 
     /**

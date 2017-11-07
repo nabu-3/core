@@ -299,6 +299,30 @@
                 }
             }
         },
+        "nb_commerce_product_sku_unq": {
+            "name": "nb_commerce_product_sku_unq",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_commerce_id": {
+                    "name": "nb_commerce_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_commerce_product_sku": {
+                    "name": "nb_commerce_product_sku",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
         "nb_commerce_product_provider_reference_idx": {
             "name": "nb_commerce_product_provider_reference_idx",
             "primary": false,
