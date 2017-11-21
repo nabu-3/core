@@ -57,7 +57,7 @@ class CNabuUserGroup extends CNabuUserGroupBase
     /**
      * Returns the full list of members in the group.
      * @param bool $force If true, then force to reload from database the full list.
-     * @return mixed Return a list with members found.
+     * @return CNabuUserGroupMemberList Return a list with members found.
      */
     public function getMembers($force = false)
     {
