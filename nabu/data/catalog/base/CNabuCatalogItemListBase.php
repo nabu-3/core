@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/11/07 11:03:30 UTC
+ * Created: 2017/11/21 01:19:45 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -39,6 +39,12 @@ use \nabu\data\CNabuDataObjectListIndex;
 abstract class CNabuCatalogItemListBase extends CNabuDataObjectList
 {
     /**
+     * Index the list using the nb_catalog_item_key field.
+     * @var string
+     */
+    const INDEX_KEY = "keys";
+
+    /**
      * Index the list using the nb_catalog_item_order field.
      * @var int
      */
@@ -57,6 +63,9 @@ abstract class CNabuCatalogItemListBase extends CNabuDataObjectList
      */
     protected function createSecondaryIndexes()
     {
+        $this->addIndex(
+            new CNabuDataObjectListIndex($this, 'nb_catalog_item_key', 'nb_catalog_item_order', self::INDEX_KEY)
+        );
         $this->addIndex(
             new CNabuDataObjectListIndex($this, 'nb_catalog_item_order', 'nb_catalog_item_order', self::INDEX_ORDER)
         );

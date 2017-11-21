@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/11/07 11:03:30 UTC
+ * Created: 2017/11/21 01:19:45 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -120,6 +120,33 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
                     'hash' => $hash
                 )
         );
+    }
+
+    /**
+     * Find an instance identified by nb_catalog_item_key field.
+     * @param mixed $nb_catalog Catalog that owns Catalog Item
+     * @param string $key Key to search
+     * @return CNabuCatalogItem Returns a valid instance if exists or null if not.
+     */
+    public static function findByKey($nb_catalog, $key)
+    {
+        $nb_catalog_id = nb_getMixedValue($nb_catalog, 'nb_catalog_id');
+        if (is_numeric($nb_catalog_id)) {
+            $retval = CNabuCatalogItem::buildObjectFromSQL(
+                    'select * '
+                    . 'from nb_catalog_item '
+                   . 'where nb_catalog_id=%catalog_id$d '
+                     . "and nb_catalog_item_key='%key\$s'",
+                    array(
+                        'catalog_id' => $nb_catalog_id,
+                        'key' => $key
+                    )
+            );
+        } else {
+            $retval = null;
+        }
+        
+        return $retval;
     }
 
     /**
@@ -349,6 +376,27 @@ abstract class CNabuCatalogItemBase extends CNabuDBInternalObject implements INa
             );
         }
         $this->setValue('nb_catalog_id', $nb_catalog_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Catalog Item Key attribute value
+     * @return null|string Returns the Catalog Item Key value
+     */
+    public function getKey()
+    {
+        return $this->getValue('nb_catalog_item_key');
+    }
+
+    /**
+     * Sets the Catalog Item Key attribute value.
+     * @param string|null $key New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setKey(string $key = null) : CNabuDataObject
+    {
+        $this->setValue('nb_catalog_item_key', $key);
         
         return $this;
     }
