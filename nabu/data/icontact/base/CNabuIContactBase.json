@@ -219,6 +219,30 @@
                     "comments": ""
                 }
             }
+        },
+        "nb_icontact_key_idx": {
+            "name": "nb_icontact_key_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_customer_id": {
+                    "name": "nb_customer_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_icontact_key": {
+                    "name": "nb_icontact_key",
+                    "ordinal": "2",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
         }
     }
 }
