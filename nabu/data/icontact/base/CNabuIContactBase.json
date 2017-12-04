@@ -156,6 +156,22 @@
                 }
             }
         },
+        "nb_icontact_hash_unq": {
+            "name": "nb_icontact_hash_unq",
+            "primary": false,
+            "unique": true,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_icontact_hash": {
+                    "name": "nb_icontact_hash",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
         "nb_icontact_nb_customer_fk": {
             "name": "nb_icontact_nb_customer_fk",
             "primary": false,

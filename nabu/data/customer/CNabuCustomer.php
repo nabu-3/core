@@ -772,6 +772,30 @@ class CNabuCustomer extends CNabuCustomerBase
      */
 
      /**
+      * Gets available i-Contact instances in the list.
+      * @param bool $force If true, forces to merge complete list from the storage.
+      * @return array Returns an associative array where the index is the ID of each i-Contact and the value
+      * is the instance.
+      */
+     public function getIContacts($force = false)
+     {
+         if ($force) {
+             $this->nb_icontact_list->merge(CNabuIContact::getAlliContacts($this));
+         }
+
+         return $this->nb_icontact_list->getItems();
+     }
+
+     /**
+      * Get all languages used in the i-Contact set.
+      * @return CNabuLanguageList Returns the list of unique languages used.
+      */
+     public function getIContactSetUsedLanguages()
+     {
+         return CNabuIContact::getCustomerUsedLanguages($this);
+     }
+
+     /**
       * Gets an i-Contact by their ID.
       * If the internal i-Contact List contains a instance with same ID returns this instance, else if not exists,
       * tries to locate it in the storage and, if exits, the load it, add into i-Contact List and returns their
@@ -822,4 +846,5 @@ class CNabuCustomer extends CNabuCustomerBase
 
         return $this->nb_icontact_list->getItem($key, CNabuIContactList::INDEX_KEY);
     }
+
 }

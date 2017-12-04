@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/11/21 01:19:58 UTC
+ * Created: 2017/12/04 11:22:29 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\icontact\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\customer\CNabuCustomer;
 use \nabu\data\customer\traits\TNabuCustomerChild;
@@ -47,9 +49,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\icontact\base
  */
-abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuTranslated
+abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
     use TNabuCustomerChild;
+    use TNabuHashed;
     use TNabuTranslated;
 
     /**
@@ -100,6 +103,23 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
                    . "where nb_icontact_id=%nb_icontact_id\$d "
               )
             : null;
+    }
+
+    /**
+     * Find an instance identified by nb_icontact_hash field.
+     * @param string $hash Hash to search
+     * @return CNabuDataObject Returns a valid instance if exists or null if not.
+     */
+    public static function findByHash(string $hash)
+    {
+        return CNabuIContact::buildObjectFromSQL(
+                'select * '
+                . 'from nb_icontact '
+               . "where nb_icontact_hash='%hash\$s'",
+                array(
+                    'hash' => $hash
+                )
+        );
     }
 
     /**
