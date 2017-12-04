@@ -40,6 +40,17 @@
             "is_nullable": true,
             "extra": "",
             "comment": ""
+        },
+        "nb_icontact_lang_status": {
+            "name": "nb_icontact_lang_status",
+            "ordinal": "4",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('E','D')",
+            "default": "D",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
         }
     },
     "constraints": {

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/12/04 11:58:33 UTC
+ * Created: 2017/12/04 14:48:33 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -422,22 +422,22 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
     }
 
     /**
-     * Get Icontact Key attribute value
-     * @return null|string Returns the Icontact Key value
+     * Get Icontact Default Language Id attribute value
+     * @return null|int Returns the Icontact Default Language Id value
      */
-    public function getKey()
+    public function getDefaultLanguageId()
     {
-        return $this->getValue('nb_icontact_key');
+        return $this->getValue('nb_icontact_default_language_id');
     }
 
     /**
-     * Sets the Icontact Key attribute value.
-     * @param string|null $key New value for attribute
+     * Sets the Icontact Default Language Id attribute value.
+     * @param int|null $default_language_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setKey(string $key = null) : CNabuDataObject
+    public function setDefaultLanguageId(int $default_language_id = null) : CNabuDataObject
     {
-        $this->setValue('nb_icontact_key', $key);
+        $this->setValue('nb_icontact_default_language_id', $default_language_id);
         
         return $this;
     }
@@ -459,6 +459,27 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
     public function setEmailingId(int $nb_emailing_id = null) : CNabuDataObject
     {
         $this->setValue('nb_emailing_id', $nb_emailing_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Icontact Key attribute value
+     * @return null|string Returns the Icontact Key value
+     */
+    public function getKey()
+    {
+        return $this->getValue('nb_icontact_key');
+    }
+
+    /**
+     * Sets the Icontact Key attribute value.
+     * @param string|null $key New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setKey(string $key = null) : CNabuDataObject
+    {
+        $this->setValue('nb_icontact_key', $key);
         
         return $this;
     }

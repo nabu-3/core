@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/12/04 11:58:33 UTC
+ * Created: 2017/12/04 14:48:34 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -236,6 +236,33 @@ abstract class CNabuIContactLanguageBase extends CNabuDBInternalObject implement
     public function setName(string $name = null) : CNabuDataObject
     {
         $this->setValue('nb_icontact_lang_name', $name);
+        
+        return $this;
+    }
+
+    /**
+     * Get Icontact Lang Status attribute value
+     * @return string Returns the Icontact Lang Status value
+     */
+    public function getStatus() : string
+    {
+        return $this->getValue('nb_icontact_lang_status');
+    }
+
+    /**
+     * Sets the Icontact Lang Status attribute value.
+     * @param string $status New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setStatus(string $status = "D") : CNabuDataObject
+    {
+        if ($status === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$status")
+            );
+        }
+        $this->setValue('nb_icontact_lang_status', $status);
         
         return $this;
     }
