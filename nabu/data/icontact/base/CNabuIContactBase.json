@@ -3,7 +3,7 @@
     "name": "nb_icontact",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "1",
+    "autoincrement": "2",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",
@@ -63,20 +63,9 @@
             "extra": "",
             "comment": ""
         },
-        "nb_icontact_name": {
-            "name": "nb_icontact_name",
-            "ordinal": "6",
-            "data_type": "varchar",
-            "precision": null,
-            "type": "varchar(100)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
         "nb_emailing_id": {
             "name": "nb_emailing_id",
-            "ordinal": "7",
+            "ordinal": "6",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -87,7 +76,7 @@
         },
         "nb_icontact_email_template_acknowledge": {
             "name": "nb_icontact_email_template_acknowledge",
-            "ordinal": "8",
+            "ordinal": "7",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -98,7 +87,7 @@
         },
         "nb_icontact_email_template_arrival": {
             "name": "nb_icontact_email_template_arrival",
-            "ordinal": "9",
+            "ordinal": "8",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -109,7 +98,7 @@
         },
         "nb_icontact_target_email": {
             "name": "nb_icontact_target_email",
-            "ordinal": "10",
+            "ordinal": "9",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -120,7 +109,7 @@
         },
         "nb_icontact_base_path": {
             "name": "nb_icontact_base_path",
-            "ordinal": "11",
+            "ordinal": "10",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -131,7 +120,7 @@
         },
         "nb_icontact_internal_path": {
             "name": "nb_icontact_internal_path",
-            "ordinal": "12",
+            "ordinal": "11",
             "data_type": "text",
             "precision": null,
             "type": "text",

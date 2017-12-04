@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/12/04 11:40:39 UTC
+ * Created: 2017/12/04 11:58:33 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -438,27 +438,6 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
     public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_icontact_key', $key);
-        
-        return $this;
-    }
-
-    /**
-     * Get Icontact Name attribute value
-     * @return null|string Returns the Icontact Name value
-     */
-    public function getName()
-    {
-        return $this->getValue('nb_icontact_name');
-    }
-
-    /**
-     * Sets the Icontact Name attribute value.
-     * @param string|null $name New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setName(string $name = null) : CNabuDataObject
-    {
-        $this->setValue('nb_icontact_name', $name);
         
         return $this;
     }
