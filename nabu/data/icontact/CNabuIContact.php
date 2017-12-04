@@ -50,6 +50,7 @@ class CNabuIContact extends CNabuIContactBase
     public function getTreeData($nb_language = null, $dataonly = false)
     {
         $tdata = parent::getTreeData($nb_language, $dataonly);
+        $tdata['languages'] = $this->getLanguages();
         $tdata['prospects'] = $this->nb_icontact_prospect_list;
 
         return $tdata;
