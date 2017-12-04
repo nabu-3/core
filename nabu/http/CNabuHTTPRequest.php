@@ -579,7 +579,7 @@ class CNabuHTTPRequest extends CNabuObject
 
         if ($target) {
             $temp_target = CNabuSiteTarget::findByURL($this->nb_site, $this->page_uri);
-            if ($temp_target !== null && $temp_target->isValueNumeric('nb_language_id')) {
+            if ($temp_target instanceof CNabuSiteTarget && $temp_target->isValueNumeric('nb_language_id')) {
                 $nb_language = new CNabuLanguage($temp_target);
                 if ($nb_language->isFetched()) {
                     $this->nb_language = $nb_language;

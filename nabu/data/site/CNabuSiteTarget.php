@@ -93,50 +93,52 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
     public static function findByURL($nb_site, $target_url)
     {
         $retval = CNabuSiteTarget::buildObjectFromSQL(
-                "select ca.*, cal.nb_language_id, cal.nb_site_target_lang_url "
-                . "from nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl "
-               . "where ca.nb_site_target_id = cal.nb_site_target_id "
-                 . "and ca.nb_site_id=%site_id\$d "
-                 . "and ca.nb_site_id=sl.nb_site_id "
-                 . "and sl.nb_site_lang_enabled='T' "
-                 . "and cal.nb_language_id=sl.nb_language_id "
-                 . "and ca.nb_site_target_url_filter='U' "
-                 . "and cal.nb_site_target_lang_url='%url\$s' "
-               . "limit 1",
+                "SELECT ca.*, cal.nb_language_id, cal.nb_site_target_lang_url
+                   FROM nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl
+                  WHERE ca.nb_site_target_id = cal.nb_site_target_id
+                    AND ca.nb_site_id=%site_id\$d
+                    AND ca.nb_site_id=sl.nb_site_id
+                    AND sl.nb_site_lang_enabled='T'
+                    AND cal.nb_language_id=sl.nb_language_id
+                    AND ca.nb_site_target_url_filter='U'
+                    AND cal.nb_site_target_lang_url='%url\$s'
+                  LIMIT 1",
                 array('site_id' => $nb_site->getId(), 'url' => $target_url)
             )
 
             ??
 
             CNabuSiteTarget::buildObjectFromSQL(
-                "select ca.*, cal.nb_language_id, cal.nb_site_target_lang_url "
-                . "from nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl "
-               . "where ca.nb_site_target_id = cal.nb_site_target_id "
-                 . "and ca.nb_site_id=%site_id\$d "
-                 . "and ca.nb_site_id=sl.nb_site_id "
-                 . "and sl.nb_site_lang_enabled='T' "
-                 . "and cal.nb_language_id=sl.nb_language_id "
-                 . "and ca.nb_site_target_url_filter='R' "
-                 . "and '%url\$s' regexp cal.nb_site_target_lang_url "
-               . "order by ca.nb_site_target_order asc "
-               . "limit 1",
+                "SELECT ca.*, cal.nb_language_id, cal.nb_site_target_lang_url
+                   FROM nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl
+                  WHERE ca.nb_site_target_id = cal.nb_site_target_id
+                    AND ca.nb_site_id=%site_id\$d
+                    AND ca.nb_site_id=sl.nb_site_id
+                    AND sl.nb_site_lang_enabled='T'
+                    AND cal.nb_language_id=sl.nb_language_id
+                    AND ca.nb_site_target_url_filter='R'
+                    AND length(cal.nb_site_target_lang_url)>0
+                    AND '%url\$s' REGEXP cal.nb_site_target_lang_url
+                  ORDER BY ca.nb_site_target_order ASC
+                  LIMIT 1",
                 array('site_id' => $nb_site->getValue('nb_site_id'), 'url' => $target_url)
             )
 
             ??
 
             CNabuSiteTarget::buildObjectFromSQL(
-                "select ca.*, cal.nb_language_id, cal.nb_site_target_lang_url "
-                . "from nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl "
-               . "where ca.nb_site_target_id = cal.nb_site_target_id "
-                 . "and ca.nb_site_id=%site_id\$d "
-                 . "and ca.nb_site_id=sl.nb_site_id "
-                 . "and sl.nb_site_lang_enabled='T' "
-                 . "and cal.nb_language_id=sl.nb_language_id "
-                 . "and ca.nb_site_target_url_filter='L' "
-                 . "and '%url\$s' like cal.nb_site_target_lang_url "
-               . "order by ca.nb_site_target_order asc "
-               . "limit 1",
+                "SELECT ca.*, cal.nb_language_id, cal.nb_site_target_lang_url
+                   FROM nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl
+                  WHERE ca.nb_site_target_id = cal.nb_site_target_id
+                    AND ca.nb_site_id=%site_id\$d
+                    AND ca.nb_site_id=sl.nb_site_id
+                    AND sl.nb_site_lang_enabled='T'
+                    AND cal.nb_language_id=sl.nb_language_id
+                    AND ca.nb_site_target_url_filter='L'
+                    AND length(cal.nb_site_target_lang_url)>0
+                    AND '%url\$s' LIKE cal.nb_site_target_lang_url
+                  ORDER BY ca.nb_site_target_order ASC
+                  LIMIT 1",
                 array('site_id' => $nb_site->getId(), 'url' => $target_url)
             )
         ;

@@ -96,7 +96,7 @@ class CNabuSiteTargetList extends CNabuSiteTargetListBase
     /**
      * Search in the collection to find targets that matches $url.
      * @param string $url URL to looking for.
-     * @return CNabuSiteTarget Returns the found instance if any, or null if none.
+     * @return CNabuSiteTarget Returns the found instance if any, or false if none.
      */
     public function findURL($url)
     {
