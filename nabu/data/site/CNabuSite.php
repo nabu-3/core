@@ -830,6 +830,20 @@ class CNabuSite extends CNabuSiteBase
         return $nb_server->getVirtualCachePath() . DIRECTORY_SEPARATOR . $this->getBasePath();
     }
 
+    public function getUsedMimeTypes()
+    {
+        return $this->getDB()->getQueryAsArrayOfSingleField(
+            'nb_mimetype_id',
+            "SELECT DISTINCT nb_mimetype_id
+               FROM nb_site_target
+              WHERE nb_site_id=%site_id\$d
+              ORDER BY nb_mimetype_id",
+            array(
+                'site_id' => $this->getId()
+            )
+        );
+    }
+
     /*
      __  ____  __ _       _____                      _                      _
      \ \/ /  \/  | |     | ____|_  ___ __   ___ _ __(_)_ __ ___   ___ _ __ | |_

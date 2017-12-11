@@ -155,7 +155,7 @@ class CNabuRenderFactory extends CNabuDataObject
     /**
      * Render a string using the default Render of this factory.
      * @param string $string String to be rended.
-     * @param array|null $params Optiona parameters to be passed to the render.
+     * @param array|null $params Optional parameters to be passed to the render.
      */
     public function buildStringAsHTTPResponse(string $string, array $params = null)
     {

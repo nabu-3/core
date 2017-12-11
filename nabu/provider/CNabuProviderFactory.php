@@ -44,6 +44,8 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
     const INTERFACE_MESSAGING_TEMPLATE_RENDER   = 0x0002;
     /** @var int Render Interface identificator. */
     const INTERFACE_RENDER                      = 0x0003;
+    /** @var int Render Transform Interface identificator. */
+    const INTERFACE_RENDER_TRANSFORM            = 0x0004;
 
     /** @var CNabuProviderFactory Contains the singleton instance of class. */
     private static $nb_provider_factory = null;
@@ -70,7 +72,8 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
         $this->nb_interface_list = array(
             self::INTERFACE_MESSAGING_SERVICE => new CNabuProviderInterfaceDescriptorList(),
             self::INTERFACE_MESSAGING_TEMPLATE_RENDER => new CNabuProviderInterfaceDescriptorList(),
-            self::INTERFACE_RENDER => new CNabuProviderInterfaceDescriptorList()
+            self::INTERFACE_RENDER => new CNabuProviderInterfaceDescriptorList(),
+            self::INTERFACE_RENDER_TRANSFORM => new CNabuProviderInterfaceDescriptorList()
         );
     }
 
