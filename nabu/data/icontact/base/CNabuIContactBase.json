@@ -3,7 +3,7 @@
     "name": "nb_icontact",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "2",
+    "autoincrement": "3",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",

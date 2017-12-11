@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2017/12/04 14:48:01 UTC
+ * Created: 2017/12/11 10:39:48 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -405,6 +405,54 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
+     * Get Site Target Creation Datetime attribute value
+     * @return mixed Returns the Site Target Creation Datetime value
+     */
+    public function getCreationDatetime()
+    {
+        return $this->getValue('nb_site_target_creation_datetime');
+    }
+
+    /**
+     * Sets the Site Target Creation Datetime attribute value.
+     * @param mixed $creation_datetime New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setCreationDatetime($creation_datetime) : CNabuDataObject
+    {
+        if ($creation_datetime === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$creation_datetime")
+            );
+        }
+        $this->setValue('nb_site_target_creation_datetime', $creation_datetime);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Target Last Update Datetime attribute value
+     * @return mixed Returns the Site Target Last Update Datetime value
+     */
+    public function getLastUpdateDatetime()
+    {
+        return $this->getValue('nb_site_target_last_update_datetime');
+    }
+
+    /**
+     * Sets the Site Target Last Update Datetime attribute value.
+     * @param mixed $last_update_datetime New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setLastUpdateDatetime($last_update_datetime) : CNabuDataObject
+    {
+        $this->setValue('nb_site_target_last_update_datetime', $last_update_datetime);
+        
+        return $this;
+    }
+
+    /**
      * Get Site Target Begin Date attribute value
      * @return mixed Returns the Site Target Begin Date value
      */
@@ -421,27 +469,6 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     public function setBeginDate($begin_date) : CNabuDataObject
     {
         $this->setValue('nb_site_target_begin_date', $begin_date);
-        
-        return $this;
-    }
-
-    /**
-     * Get Site Target Modif Date attribute value
-     * @return mixed Returns the Site Target Modif Date value
-     */
-    public function getModifDate()
-    {
-        return $this->getValue('nb_site_target_modif_date');
-    }
-
-    /**
-     * Sets the Site Target Modif Date attribute value.
-     * @param mixed $modif_date New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setModifDate($modif_date) : CNabuDataObject
-    {
-        $this->setValue('nb_site_target_modif_date', $modif_date);
         
         return $this;
     }
@@ -564,27 +591,6 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Get Site Target Output Type attribute value
-     * @return null|string Returns the Site Target Output Type value
-     */
-    public function getOutputType()
-    {
-        return $this->getValue('nb_site_target_output_type');
-    }
-
-    /**
-     * Sets the Site Target Output Type attribute value.
-     * @param string|null $output_type New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setOutputType(string $output_type = "HTML") : CNabuDataObject
-    {
-        $this->setValue('nb_site_target_output_type', $output_type);
-        
-        return $this;
-    }
-
-    /**
      * Get Mimetype Id attribute value
      * @return null|string Returns the Mimetype Id value
      */
@@ -628,6 +634,69 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
             );
         }
         $this->setValue('nb_site_target_attachment', $attachment);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Target Output Type attribute value
+     * @return null|string Returns the Site Target Output Type value
+     */
+    public function getOutputType()
+    {
+        return $this->getValue('nb_site_target_output_type');
+    }
+
+    /**
+     * Sets the Site Target Output Type attribute value.
+     * @param string|null $output_type New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setOutputType(string $output_type = "HTML") : CNabuDataObject
+    {
+        $this->setValue('nb_site_target_output_type', $output_type);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Target Transform Provider attribute value
+     * @return null|string Returns the Site Target Transform Provider value
+     */
+    public function getTransformProvider()
+    {
+        return $this->getValue('nb_site_target_transform_provider');
+    }
+
+    /**
+     * Sets the Site Target Transform Provider attribute value.
+     * @param string|null $transform_provider New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setTransformProvider(string $transform_provider = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_target_transform_provider', $transform_provider);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Target Transform Interface attribute value
+     * @return null|string Returns the Site Target Transform Interface value
+     */
+    public function getTransformInterface()
+    {
+        return $this->getValue('nb_site_target_transform_interface');
+    }
+
+    /**
+     * Sets the Site Target Transform Interface attribute value.
+     * @param string|null $transform_interface New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setTransformInterface(string $transform_interface = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_target_transform_interface', $transform_interface);
         
         return $this;
     }
