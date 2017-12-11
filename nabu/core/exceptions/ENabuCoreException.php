@@ -108,7 +108,6 @@ class ENabuCoreException extends ENabuException
 
     const ERROR_RENDER_NOT_SET                          = 0x102e;
     const ERROR_INVALID_RENDER_DESCRIPTOR_CLASS         = 0x102f;
-    const ERROR_RENDER_NOT_FOUND                        = 0x1030;
 
     const ERROR_URL_FILTER_INVALID                      = 0X1031;
 
@@ -274,8 +273,6 @@ class ENabuCoreException extends ENabuException
             'Render not set.',
         ENabuCoreException::ERROR_INVALID_RENDER_DESCRIPTOR_CLASS =>
             'Render descriptor contains invalid class.',
-        ENabuCoreException::ERROR_RENDER_NOT_FOUND =>
-            'Render [%s] not found.',
 
         ENabuCoreException::ERROR_URL_FILTER_INVALID =>
             'URL Filter not valid due to unknown type or in conflict with a previous filter setted.',

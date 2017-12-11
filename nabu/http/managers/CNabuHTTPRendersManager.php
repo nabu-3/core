@@ -20,11 +20,16 @@
 
 namespace nabu\http\managers;
 
+use nabu\core\CNabuEngine;
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\http\CNabuHTTPResponse;
 use nabu\http\app\base\CNabuHTTPApplication;
 use nabu\http\managers\CNabuHTTPRenderDescriptor;
 use nabu\http\managers\base\CNabuHTTPManager;
+use nabu\provider\CNabuProviderFactory;
+use nabu\render\descriptors\CNabuRenderTransformInterfaceDescriptor;
+use nabu\render\exceptions\ENabuRenderException;
+use nabu\render\interfaces\INabuRenderTransformInterface;
 
 /**
  * This class manages renders instantiation and access to interfased methods.
@@ -74,7 +79,35 @@ final class CNabuHTTPRendersManager extends CNabuHTTPManager
         if ($nb_descriptor instanceof CNabuHTTPRenderDescriptor) {
             $nb_response->setRender($nb_descriptor->createRender($this->nb_application));
         } else {
-            throw new ENabuCoreException(ENabuCoreException::ERROR_RENDER_NOT_FOUND, array($descriptor_key));
+            throw new ENabuRenderException(ENabuRenderException::ERROR_RENDER_NOT_FOUND, array($descriptor_key));
         }
+
+        return $this;
+    }
+
+    /**
+     * Sets the Response Render Transform Interface using their Interface Name.
+     * @param CNabuHTTPResponse $nb_response HTTP Response instance.
+     * @param string $interface_name Response Render Interface Name to search.
+     * @return CNabuHTTPRendersManager Returns self pointer to grant setters chain.
+     */
+    public function setResponseTransform(CNabuHTTPResponse $nb_response, $interface_name)
+    {
+        $nb_engine = CNabuEngine::getEngine();
+        $nb_descriptor = $nb_engine->getProviderInterfaceDescriptorByType(
+            CNabuProviderFactory::INTERFACE_RENDER_TRANSFORM,
+            $interface_name
+        );
+
+        if ($nb_descriptor instanceof CNabuRenderTransformInterfaceDescriptor) {
+            //$nb_response->setTransform($nb_descriptor->createTransform());
+        } else {
+            throw new ENabuRenderException(
+                ENabuRenderException::ERROR_RENDER_TRANSFORM_NOT_FOUND,
+                array($descriptor_interface_name)
+            );
+        }
+
+        return $this;
     }
 }

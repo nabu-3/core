@@ -41,6 +41,10 @@ class ENabuRenderException extends ENabuException
     const ERROR_INVALID_SERVICE_CLASS_NAME                      = 0x0005;
     /** @var int Render already instantiated. Requires the Class Name. */
     const ERROR_RENDER_INSTANCE_ALREADY_REGISTERED              = 0x0006;
+    /** @var int Render not found. Requires the descriptor key. */
+    const ERROR_RENDER_NOT_FOUND                                = 0x0007;
+    /** @var int Render Transform not found. Requires the interface class name. */
+    const ERROR_RENDER_TRANSFORM_NOT_FOUND                      = 0x0008;
 
     /** @var array List of all error messages defined in this exception. */
     private static $error_messages = array(
@@ -55,7 +59,11 @@ class ENabuRenderException extends ENabuException
         ENabuRenderException::ERROR_INVALID_SERVICE_CLASS_NAME =>
             'Render Class name is invalid or does not exists.',
         ENabuRenderException::ERROR_RENDER_INSTANCE_ALREADY_REGISTERED =>
-            'Render instance of [%s] already registered.'
+            'Render instance of [%s] already registered.',
+        ENabuRenderException::ERROR_RENDER_NOT_FOUND =>
+            'Render [%s] not found.',
+        ENabuRenderException::ERROR_RENDER_TRANSFORM_NOT_FOUND =>
+            'Render Transform [%s] not found.'
     );
 
     public function __construct($code, $values = null)

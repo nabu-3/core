@@ -39,6 +39,7 @@ use nabu\http\managers\CNabuHTTPRendersManager;
 use nabu\http\managers\CNabuHTTPPluginsManager;
 use nabu\http\managers\CNabuHTTPSecurityManager;
 use nabu\http\managers\CNabuHTTPRenderDescriptor;
+use providers\nabu\pdf\renders\CNabuPDFRenderTransformInterface;
 
 /**
  * Abstract base class to implement Web based applications.
@@ -152,7 +153,6 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
                         $this->processMethods() &&
                         $this->processCommands())
                     {
-                        //$this->prepareHeaders();
                         if ($method !== 'OPTIONS' && $method !== 'HEAD') {
                             $this->buildResponse();
                         } else {
@@ -484,7 +484,16 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
                 /*
                 $this->nb_apps_manager->render();
                  */
+                ob_start();
                 $render->render();
+                $render_content = ob_get_clean();
+
+                $transform = $this->nb_response->getTransform();
+                if ($transform instanceof CNabuPDFRenderTransformInterface) {
+                    $transform->render($render_content);
+                } else {
+                    echo $render_content;
+                }
             }
         } else {
             throw new ENabuCoreException(ENabuCoreException::ERROR_RENDER_NOT_SET);

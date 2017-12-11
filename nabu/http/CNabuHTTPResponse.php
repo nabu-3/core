@@ -29,6 +29,7 @@ use \nabu\http\CNabuHTTPRequest;
 use \nabu\http\exceptions\ENabuRedirectionException;
 use \nabu\http\interfaces\INabuHTTPResponseRender;
 use \nabu\http\managers\CNabuHTTPPluginsManager;
+use nabu\render\interfaces\INabuRenderTransformInterface;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -69,6 +70,11 @@ final class CNabuHTTPResponse extends CNabuObject
      * @var INabuHTTPResponseRender
      */
     private $render = null;
+    /**
+     * Render Transform subsystem to build the Response
+     * @var INabuRenderTransformInterface
+     */
+    private $transform = null;
     /**
      * Headers list
      * @var array
@@ -208,22 +214,32 @@ final class CNabuHTTPResponse extends CNabuObject
     }
 
     /**
-     * Get the current render for this response.
-     * @return INabuHTTPResponseRender Returns render
+     * Get the current Render for this response.
+     * @return INabuHTTPResponseRender Returns tge Render instance.
      */
-    public function getRender() {
+    public function getRender()
+    {
 
         return $this->render;
     }
 
     /**
-     * Set the render for this response. Calls of this methods after call
+     * Get the current Render Transform for this response.
+     * @return INabuRenderTransformInterface Returns the Render Transform instance.
+     */
+    public function getTransform()
+    {
+        return $this->transform;
+    }
+
+    /**
+     * Set the Render for this response. Calls of this method after call
      * to {@see CCMSEngine::buildResponse()} has no effect.
-     * @param INabuHTTPResponseRender|null $render New render.
+     * @param INabuHTTPResponseRender|null $render New Render instance.
      * @throws ENabuCoreException
      */
-    public function setRender(INabuHTTPResponseRender $render = null) {
-
+    public function setRender(INabuHTTPResponseRender $render = null)
+    {
         if ($render instanceof INabuHTTPResponseRender) {
             $this->render = $render;
         } else if ($render === null) {
@@ -232,6 +248,26 @@ final class CNabuHTTPResponse extends CNabuObject
             throw new ENabuCoreException(
                 ENabuCoreException::ERROR_METHOD_PARAMETER_IS_EMPTY,
                 array('setRender', '$render')
+            );
+        }
+    }
+
+    /**
+     * Set the Render Transform for this response. Calls of this metho after call
+     * to {@seee CCMSEngine::buildResponse()} has no effect.
+     * @param INabuRenderTransformInterface|null $transform New Render Transform.
+     * @throws ENabuCoreException
+     */
+    public function setTransform(INabuRenderTransformInterface $transform = null)
+    {
+        if ($transform instanceof INabuRenderTransformInterface) {
+            $this->transform = $transform;
+        } elseif ($transform === null) {
+            $this->transform = null;
+        } else {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_METHOD_PARAMETER_IS_EMPTY,
+                array('setTransform', '$transform')
             );
         }
     }
