@@ -29,7 +29,7 @@ use \nabu\http\CNabuHTTPRequest;
 use \nabu\http\exceptions\ENabuRedirectionException;
 use \nabu\http\interfaces\INabuHTTPResponseRender;
 use \nabu\http\managers\CNabuHTTPPluginsManager;
-use nabu\render\interfaces\INabuRenderTransformInterface;
+use nabu\render\CNabuRenderTransformFactory;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -71,10 +71,10 @@ final class CNabuHTTPResponse extends CNabuObject
      */
     private $render = null;
     /**
-     * Render Transform subsystem to build the Response
-     * @var INabuRenderTransformInterface
+     * Render Transform Factory to transform the Response
+     * @var CNabuRenderTransformFactory
      */
-    private $transform = null;
+    private $transform_factory = null;
     /**
      * Headers list
      * @var array
@@ -224,15 +224,6 @@ final class CNabuHTTPResponse extends CNabuObject
     }
 
     /**
-     * Get the current Render Transform for this response.
-     * @return INabuRenderTransformInterface Returns the Render Transform instance.
-     */
-    public function getTransform()
-    {
-        return $this->transform;
-    }
-
-    /**
      * Set the Render for this response. Calls of this method after call
      * to {@see CCMSEngine::buildResponse()} has no effect.
      * @param INabuHTTPResponseRender|null $render New Render instance.
@@ -253,23 +244,22 @@ final class CNabuHTTPResponse extends CNabuObject
     }
 
     /**
+     * Get the current Render Transform Factory for this response.
+     * @return CNabuRenderTransformFactory Returns the Render Transform instance.
+     */
+    public function getTransformFactory()
+    {
+        return $this->transform_factory;
+    }
+
+    /**
      * Set the Render Transform for this response. Calls of this metho after call
      * to {@seee CCMSEngine::buildResponse()} has no effect.
-     * @param INabuRenderTransformInterface|null $transform New Render Transform.
-     * @throws ENabuCoreException
+     * @param CNabuRenderTransformFactory|null $factory New Render Transform Factory.
      */
-    public function setTransform(INabuRenderTransformInterface $transform = null)
+    public function setTransformFactory(CNabuRenderTransformFactory $factory = null)
     {
-        if ($transform instanceof INabuRenderTransformInterface) {
-            $this->transform = $transform;
-        } elseif ($transform === null) {
-            $this->transform = null;
-        } else {
-            throw new ENabuCoreException(
-                ENabuCoreException::ERROR_METHOD_PARAMETER_IS_EMPTY,
-                array('setTransform', '$transform')
-            );
-        }
+        $this->transform_factory = $factory;
     }
 
     public function movedPermanentlyRedirect($target, $nb_language = null, $params = null)

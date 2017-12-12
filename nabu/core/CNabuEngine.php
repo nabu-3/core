@@ -19,9 +19,7 @@
  */
 
 namespace nabu\core;
-use Pool;
 use Exception;
-use MongoDB\Driver\WriteError;
 use nabu\core\CNabuOS;
 use nabu\core\CNabuObject;
 use nabu\core\CNabuEngine;
@@ -49,12 +47,10 @@ use nabu\provider\base\CNabuProviderInterfaceDescriptor;
 use nabu\provider\base\CNabuProviderInterfaceDescriptorList;
 use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
-use nabu\render\descriptors\CNabuRenderTransformInterfaceDescriptor;
 use nabu\render\exceptions\ENabuRenderException;
 use nabu\render\managers\CNabuRenderPoolManager;
 use providers\apache\httpd\CApacheHTTPServer;
 use providers\mysql\driver\CMySQLConnector;
-use providers\nabu\pdf\renders\CNabuPDFRenderInterface;
 
 /**
  * CNabuEngine class governs core functionalities of Nabu: the Engine.
@@ -974,31 +970,13 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     }
 
     /**
-     * Gets a Provider Interface Descriptor by his interface name and type.
+     * Gets a Provider Interface Descriptor by his interface type and key.
      * @param int $interface_type Interface Type.
-     * @param string $interface_name Interface Name.
+     * @param string $interface_key Interface Key as assigned in the descriptor by his manager.
      * @return CNabuProviderInterfaceDescriptor|false Returns the located interface if found, or false if not found.
      */
-    public function getProviderInterfaceDescriptorByType(int $interface_type, string $interface_name)
+    public function getProviderInterfaceDescriptorByKey(int $interface_type, string $interface_key)
     {
-        $main_descriptor = false;
-
-        $this->nb_provider_factory->getInterfaceDescriptors($interface_type)
-            ->iterate(
-                function ($key, CNabuProviderInterfaceDescriptor $nb_descriptor)
-                     use (&$main_descriptor, $interface_name)
-                {
-                    $retval = true;
-                    if ($nb_descriptor->getName() === $interface_name) {
-                        $main_descriptor = $nb_descriptor;
-                        $retval = false;
-                    }
-
-                    return $retval;
-                }
-            )
-        ;
-
-        return $main_descriptor;
+        return $this->nb_provider_factory->getInterfaceDescriptors($interface_type)->getItem($interface_key);
     }
 }

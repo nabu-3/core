@@ -39,6 +39,7 @@ use nabu\http\managers\CNabuHTTPRendersManager;
 use nabu\http\managers\CNabuHTTPPluginsManager;
 use nabu\http\managers\CNabuHTTPSecurityManager;
 use nabu\http\managers\CNabuHTTPRenderDescriptor;
+use nabu\render\CNabuRenderTransformFactory;
 use providers\nabu\pdf\renders\CNabuPDFRenderTransformInterface;
 
 /**
@@ -354,6 +355,9 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
                 $this->nb_http_renders_manager->setResponseRender(
                     $this->nb_response, $nb_site_target->getOutputType()
                 );
+                $this->nb_http_renders_manager->setResponseTransform(
+                    $this->nb_response, $nb_site_target->getTransformInterface()
+                );
             }
 
             return
@@ -488,9 +492,10 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
                 $render->render();
                 $render_content = ob_get_clean();
 
-                $transform = $this->nb_response->getTransform();
-                if ($transform instanceof CNabuPDFRenderTransformInterface) {
-                    $transform->render($render_content);
+                $transform_factory = $this->nb_response->getTransformFactory();
+                if ($transform_factory instanceof CNabuRenderTransformFactory) {
+                    $transform_factory->setLanguage($this->nb_request->getLanguage());
+                    $transform_factory->transform($render_content);
                 } else {
                     echo $render_content;
                 }

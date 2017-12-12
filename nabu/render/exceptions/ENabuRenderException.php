@@ -38,13 +38,19 @@ class ENabuRenderException extends ENabuException
     /** @var int Render cannot be instantiated. Requires Render class name. */
     const ERROR_RENDER_CANNOT_BE_INSTANTIATED                   = 0x0004;
     /** @var int Invalid Render Class Name. Requires the Class Name. */
-    const ERROR_INVALID_SERVICE_CLASS_NAME                      = 0x0005;
+    const ERROR_INVALID_RENDER_CLASS_NAME                       = 0x0005;
     /** @var int Render already instantiated. Requires the Class Name. */
     const ERROR_RENDER_INSTANCE_ALREADY_REGISTERED              = 0x0006;
     /** @var int Render not found. Requires the descriptor key. */
     const ERROR_RENDER_NOT_FOUND                                = 0x0007;
     /** @var int Render Transform not found. Requires the interface class name. */
     const ERROR_RENDER_TRANSFORM_NOT_FOUND                      = 0x0008;
+    /** @var int Render Transform already instantiated. Requires the Class Name. */
+    const ERROR_RENDER_TRANSFORM_INSTANCE_ALREADY_REGISTERED    = 0x0009;
+    /** @var int Render Transform cannot be instantiated. Requires Render class name. */
+    const ERROR_RENDER_TRANSFORM_CANNOT_BE_INSTANTIATED         = 0x000a;
+    /** @var int Invalid Render Transform Class Name. Requires the Class Name. */
+    const ERROR_INVALID_RENDER_TRANSFORM_CLASS_NAME             = 0x000b;
 
     /** @var array List of all error messages defined in this exception. */
     private static $error_messages = array(
@@ -56,14 +62,20 @@ class ENabuRenderException extends ENabuException
             'Vendor Module Keys are invalid [%s, %s].',
         ENabuRenderException::ERROR_RENDER_CANNOT_BE_INSTANTIATED =>
             'The Render [%s] cannot be instantiated.',
-        ENabuRenderException::ERROR_INVALID_SERVICE_CLASS_NAME =>
+        ENabuRenderException::ERROR_INVALID_RENDER_CLASS_NAME =>
             'Render Class name is invalid or does not exists.',
         ENabuRenderException::ERROR_RENDER_INSTANCE_ALREADY_REGISTERED =>
             'Render instance of [%s] already registered.',
         ENabuRenderException::ERROR_RENDER_NOT_FOUND =>
             'Render [%s] not found.',
         ENabuRenderException::ERROR_RENDER_TRANSFORM_NOT_FOUND =>
-            'Render Transform [%s] not found.'
+            'Render Transform [%s] not found.',
+        ENabuRenderException::ERROR_RENDER_TRANSFORM_INSTANCE_ALREADY_REGISTERED =>
+            'Render Transform instance of [%s] already registered.',
+        ENabuRenderException::ERROR_RENDER_TRANSFORM_CANNOT_BE_INSTANTIATED =>
+            'The Render Transform [%s] cannot be instantiated.',
+        ENabuRenderException::ERROR_INVALID_RENDER_TRANSFORM_CLASS_NAME =>
+            'Render Transform Class name is invalid or does not exists.'
     );
 
     public function __construct($code, $values = null)

@@ -18,33 +18,41 @@
  *  limitations under the License.
  */
 
-namespace nabu\render\interfaces;
+namespace nabu\render\adapters;
+use nabu\core\CNabuObject;
 use nabu\data\lang\CNabuLanguage;
-use nabu\provider\interfaces\INabuProviderInterface;
+use nabu\render\interfaces\INabuRenderTransformInterface;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\render\interfaces
+ * @package \nabu\render\adapters
  */
-interface INabuRenderTransformInterface extends INabuProviderInterface
+abstract class CNabuRenderTransformInterfaceAdapter extends CNabuObject implements INabuRenderTransformInterface
 {
-    /**
-     * Gets current Language.
-     * @return CNabuLanguage|null Returns the assigned language or null if none.
-     */
-    public function getLanguage();
-    /**
-     * Sets current Language.
-     * @param CNabuLanguage $nb_language Language instance to be setted.
-     * @return INabuRenderTransformInterface Returns self instance to grant setter cascade.
-     */
-    public function setLanguage(CNabuLanguage $nb_language);
-    /**
-     * Abstract method to be inherited and implemented.
-     * This method transform the content passed as parameter and exposes the result in the default output stream.
-     * @param mixed $source Source content to be transformed.
-     */
-    public function transform($source);
+    /** @var CNabuLanguage Language to the output. */
+    protected $nb_language = null;
+
+    public function init()
+    {
+        return true;
+    }
+
+    public function finish()
+    {
+        return true;
+    }
+
+    public function getLanguage()
+    {
+        return $this->nb_language;
+    }
+
+    public function setLanguage(CNabuLanguage $nb_language)
+    {
+        $this->nb_language = $nb_language;
+
+        return $this;
+    }
 }

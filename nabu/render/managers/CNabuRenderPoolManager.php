@@ -25,6 +25,10 @@ use nabu\data\customer\CNabuCustomer;
 use nabu\data\customer\traits\TNabuCustomerChild;
 use nabu\render\CNabuRenderFactory;
 use nabu\render\CNabuRenderFactoryList;
+use nabu\render\CNabuRenderTransformFactory;
+use nabu\render\CNabuRenderTransformFactoryList;
+use nabu\render\descriptors\CNabuRenderInterfaceDescriptor;
+use nabu\render\descriptors\CNabuRenderTransformInterfaceDescriptor;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -36,8 +40,11 @@ class CNabuRenderPoolManager extends CNabuObject implements INabuManager
 {
     use TNabuCustomerChild;
 
-    /** @var CNabuRenderFactoryList List of factories instantiated, each one for a Messaging instance. */
+    /** @var CNabuRenderFactoryList List of Render factories instantiated, each one for a Render instance. */
     private $nb_render_factory_list = null;
+    /** @var CNabuRenderTransformFactoryList List of Render Transform factories instantiated, each one for a Render
+     * Transform instance. */
+    private $nb_render_transform_factory_list = null;
 
     public function __construct(CNabuCustomer $nb_customer)
     {
@@ -45,6 +52,7 @@ class CNabuRenderPoolManager extends CNabuObject implements INabuManager
 
         $this->setCustomer($nb_customer);
         $this->nb_render_factory_list = new CNabuRenderFactoryList($nb_customer);
+        $this->nb_render_transform_factory_list = new CNabuRenderTransformFactoryList($nb_customer);
     }
 
     public function init(): bool
@@ -57,19 +65,29 @@ class CNabuRenderPoolManager extends CNabuObject implements INabuManager
     }
 
     /**
-     * Gets a Render Factory instance for a mimetype. If Factory instance already exists then returns it.
-     * @param string $nb_mimetype Render instance to locate the Factory required.
+     * Gets a Render Factory instance for a Descriptor. If Factory instance already exists then returns it.
+     * @param CNabuRenderInterfaceDescriptor $nb_descriptor Render Descriptor instance to locate the required Factory.
      * @return CNabuRenderFactory|false Returns the Factory if $nb_mimetype exists, or false if not.
      */
-    public function getFactory(string $nb_mimetype)
+    public function getRenderFactory(CNabuRenderInterfaceDescriptor $nb_descriptor)
     {
-        $retval = false;
-
-        if (nb_isMIMEType($nb_mimetype)) {
-            $retval = $this->nb_messaging_factory_list->getItem($nb_mimetype);
+        if (!($retval = $this->nb_render_factory_list->getItem($nb_descriptor->getKey()))) {
+            $retval = $this->nb_render_factory_list->addItem(new CNabuRenderFactory($nb_descriptor));
         }
-        if (!$retval) {
-            $retval = $this->nb_messaging_factory_list->addItem(new CNabuRenderFactory($nb_mimetype));
+
+        return $retval;
+    }
+
+    /**
+     * Gets a Render Transform Factory instance for a Descriptor. If Factory instance already exists then returns it.
+     * @param CNabuRenderTransformInterfaceDescriptor $nb_descriptor Render Transform Descriptor instance to locate
+     * the required Factory.
+     * @return CNabuRenderTransformFactory|false Returns the Factory if exists, or false if not.
+     */
+    public function getTransformFactory(CNabuRenderTransformInterfaceDescriptor $nb_descriptor)
+    {
+        if (!($retval = $this->nb_render_transform_factory_list->getItem($nb_descriptor->getKey()))) {
+            $retval = $this->nb_render_transform_factory_list->addItem(new CNabuRenderTransformFactory($nb_descriptor));
         }
 
         return $retval;
