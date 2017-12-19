@@ -37,7 +37,9 @@ use nabu\data\messaging\CNabuMessaging;
 use nabu\data\messaging\CNabuMessagingList;
 use nabu\data\project\CNabuProject;
 use nabu\data\project\CNabuProjectList;
+use nabu\data\security\CNabuRole;
 use nabu\data\security\CNabuUser;
+use nabu\data\security\CNabuRoleList;
 use nabu\data\security\CNabuUserList;
 use nabu\data\site\CNabuSite;
 use nabu\data\site\CNabuSiteList;
@@ -763,6 +765,14 @@ class CNabuCustomer extends CNabuCustomerBase
         return CNabuUser::getAllUsers($this);
     }
 
+    /**
+     * Gets a Role List of all roles owned by this Customer.
+     * @return CNabuRoleList Returns the list of roles.
+     */
+    public function getRoles()
+    {
+        return CNabuRole::getAllRoles($this);
+    }
     /*
            _        ____            _             _
           (_)      / ___|___  _ __ | |_ __ _  ___| |_ ___

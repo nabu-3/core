@@ -768,6 +768,7 @@ class CNabuSite extends CNabuSiteBase
         $trdata = parent::getTreeData($nb_language, $dataonly);
 
         $trdata['languages'] = $this->getLanguages();
+        $trdata['roles'] = $this->getRoles();
         $trdata['sitemap_keys'] = $this->getSiteMapKeysIndex();
         $trdata['static_content_keys'] = $this->getStaticContentKeysIndex();
 
