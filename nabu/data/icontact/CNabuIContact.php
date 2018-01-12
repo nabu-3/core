@@ -25,7 +25,7 @@ use nabu\data\icontact\base\CNabuIContactBase;
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\data\catalog
+ * @package \nabu\data\icontact
  */
 class CNabuIContact extends CNabuIContactBase
 {
