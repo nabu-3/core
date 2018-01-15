@@ -19,7 +19,7 @@
  */
 
 namespace nabu\data\icontact;
-use nabu\data\icontact\base\CNabuIContactProspectStatusLanguageListBase;
+use nabu\data\icontact\base\CNabuIContactProspectStatusTypeLanguageBase;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -27,7 +27,7 @@ use nabu\data\icontact\base\CNabuIContactProspectStatusLanguageListBase;
  * @version 3.0.12 Surface
  * @package \nabu\data\icontact
  */
-class CNabuIContactProspectStatusLanguageList extends CNabuIContactProspectStatusLanguageListBase
+class CNabuIContactProspectStatusTypeLanguage extends CNabuIContactProspectStatusTypeLanguageBase
 {
 
 }

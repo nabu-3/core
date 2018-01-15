@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/01/15 16:18:38 UTC
+ * Created: 2018/01/15 16:19:26 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -23,31 +23,33 @@
  * limitations under the License.
  */
 
-namespace nabu\data\cluster\base;
+namespace nabu\data\icontact\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
-use \nabu\data\cluster\CNabuServer;
 use \nabu\data\CNabuDataObject;
+use \nabu\data\icontact\CNabuIContactProspectStatusType;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
- * Class to manage the entity Server stored in the storage named nb_server.
+ * Class to manage the entity iContact Prospect Status Type stored in the storage named
+ * nb_icontact_prospect_status_type.
  * @version 3.0.12 Surface
- * @package \nabu\data\cluster\base
+ * @package \nabu\data\icontact\base
  */
-abstract class CNabuServerBase extends CNabuDBInternalObject
+abstract class CNabuIContactProspectStatusTypeBase extends CNabuDBInternalObject
 {
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
      * the instance is deserialized from the storage.
-     * @param mixed $nb_server An instance of CNabuServerBase or another object descending from
-     * \nabu\data\CNabuDataObject which contains a field named nb_server_id, or a valid ID.
+     * @param mixed $nb_icontact_prospect_status_type An instance of CNabuIContactProspectStatusTypeBase or another
+     * object descending from \nabu\data\CNabuDataObject which contains a field named
+     * nb_icontact_prospect_status_type_id, or a valid ID.
      */
-    public function __construct($nb_server = false)
+    public function __construct($nb_icontact_prospect_status_type = false)
     {
-        if ($nb_server) {
-            $this->transferMixedValue($nb_server, 'nb_server_id');
+        if ($nb_icontact_prospect_status_type) {
+            $this->transferMixedValue($nb_icontact_prospect_status_type, 'nb_icontact_prospect_status_type_id');
         }
         
         parent::__construct();
@@ -68,7 +70,7 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
      */
     public static function getStorageName()
     {
-        return 'nb_server';
+        return 'nb_icontact_prospect_status_type';
     }
 
     /**
@@ -77,26 +79,26 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
      */
     public function getSelectRegister()
     {
-        return ($this->isValueNumeric('nb_server_id'))
+        return ($this->isValueNumeric('nb_icontact_prospect_status_type_id'))
             ? $this->buildSentence(
                     'select * '
-                    . 'from nb_server '
-                   . "where nb_server_id=%nb_server_id\$d "
+                    . 'from nb_icontact_prospect_status_type '
+                   . "where nb_icontact_prospect_status_type_id=%nb_icontact_prospect_status_type_id\$d "
               )
             : null;
     }
 
     /**
-     * Find an instance identified by nb_server_key field.
+     * Find an instance identified by nb_icontact_prospect_status_type_key field.
      * @param string $key Key to search
-     * @return CNabuServer Returns a valid instance if exists or null if not.
+     * @return CNabuIContactProspectStatusType Returns a valid instance if exists or null if not.
      */
     public static function findByKey($key)
     {
-        return CNabuServer::buildObjectFromSQL(
+        return CNabuIContactProspectStatusType::buildObjectFromSQL(
                 'select * '
-                . 'from nb_server '
-               . "where nb_server_key='%key\$s'",
+                . 'from nb_icontact_prospect_status_type '
+               . "where nb_icontact_prospect_status_type_key='%key\$s'",
                 array(
                     'key' => $key
                 )
@@ -104,22 +106,23 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Get all items in the storage as an associative array where the field 'nb_server_id' is the index, and each value
-     * is an instance of class CNabuServerBase.
+     * Get all items in the storage as an associative array where the field 'nb_icontact_prospect_status_type_id' is
+     * the index, and each value is an instance of class CNabuIContactProspectStatusTypeBase.
      * @return mixed Returns and array with all items.
      */
-    public static function getAllServers()
+    public static function getAlliContactProspectStatusTypes()
     {
         return forward_static_call(
                 array(get_called_class(), 'buildObjectListFromSQL'),
-                'nb_server_id',
-                'select * from nb_server'
+                'nb_icontact_prospect_status_type_id',
+                'select * from nb_icontact_prospect_status_type'
         );
     }
 
     /**
-     * Gets a filtered list of Server instances represented as an array. Params allows the capability of select a
-     * subset of fields, order by concrete fields, or truncate the list by a number of rows starting in an offset.
+     * Gets a filtered list of iContact Prospect Status Type instances represented as an array. Params allows the
+     * capability of select a subset of fields, order by concrete fields, or truncate the list by a number of rows
+     * starting in an offset.
      * @throws \nabu\core\exceptions\ENabuCoreException Raises an exception if $fields or $order have invalid values.
      * @param string $q Query string to filter results using a context index.
      * @param string|array $fields List of fields to put in the results.
@@ -129,10 +132,10 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
      * @param int $num_items Number of continue rows to get as maximum in the results.
      * @return array Returns an array with all rows found using the criteria.
      */
-    public static function getFilteredServerList($q = null, $fields = null, $order = null, $offset = 0, $num_items = 0)
+    public static function getFilterediContactProspectStatusTypeList($q = null, $fields = null, $order = null, $offset = 0, $num_items = 0)
     {
-        $fields_part = nb_prefixFieldList(CNabuServerBase::getStorageName(), $fields, false, true, '`');
-        $order_part = nb_prefixFieldList(CNabuServerBase::getStorageName(), $fields, false, false, '`');
+        $fields_part = nb_prefixFieldList(CNabuIContactProspectStatusTypeBase::getStorageName(), $fields, false, true, '`');
+        $order_part = nb_prefixFieldList(CNabuIContactProspectStatusTypeBase::getStorageName(), $fields, false, false, '`');
         
         if ($num_items !== 0) {
             $limit_part = ($offset > 0 ? $offset . ', ' : '') . $num_items;
@@ -142,7 +145,7 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
         
         $nb_item_list = CNabuEngine::getEngine()->getMainDB()->getQueryAsArray(
             "select " . ($fields_part ? $fields_part . ' ' : '* ')
-            . 'from nb_server '
+            . 'from nb_icontact_prospect_status_type '
             . ($order_part ? "order by $order_part " : '')
             . ($limit_part ? "limit $limit_part" : ''),
             array(
@@ -153,16 +156,16 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
     }
 
     /**
-     * Get Server Id attribute value
-     * @return int Returns the Server Id value
+     * Get Icontact Prospect Status Type Id attribute value
+     * @return int Returns the Icontact Prospect Status Type Id value
      */
     public function getId() : int
     {
-        return $this->getValue('nb_server_id');
+        return $this->getValue('nb_icontact_prospect_status_type_id');
     }
 
     /**
-     * Sets the Server Id attribute value.
+     * Sets the Icontact Prospect Status Type Id attribute value.
      * @param int $id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
@@ -174,112 +177,91 @@ abstract class CNabuServerBase extends CNabuDBInternalObject
                     array("\$id")
             );
         }
-        $this->setValue('nb_server_id', $id);
+        $this->setValue('nb_icontact_prospect_status_type_id', $id);
         
         return $this;
     }
 
     /**
-     * Get Server Admin User Id attribute value
-     * @return null|int Returns the Server Admin User Id value
+     * Get Icontact Id attribute value
+     * @return null|int Returns the Icontact Id value
      */
-    public function getAdminUserId()
+    public function getIcontactId()
     {
-        return $this->getValue('nb_server_admin_user_id');
+        return $this->getValue('nb_icontact_id');
     }
 
     /**
-     * Sets the Server Admin User Id attribute value.
-     * @param int|null $admin_user_id New value for attribute
+     * Sets the Icontact Id attribute value.
+     * @param int|null $nb_icontact_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAdminUserId(int $admin_user_id = null) : CNabuDataObject
+    public function setIcontactId(int $nb_icontact_id = null) : CNabuDataObject
     {
-        $this->setValue('nb_server_admin_user_id', $admin_user_id);
+        $this->setValue('nb_icontact_id', $nb_icontact_id);
         
         return $this;
     }
 
     /**
-     * Get Cluster User Group Id attribute value
-     * @return null|int Returns the Cluster User Group Id value
-     */
-    public function getClusterUserGroupId()
-    {
-        return $this->getValue('nb_cluster_user_group_id');
-    }
-
-    /**
-     * Sets the Cluster User Group Id attribute value.
-     * @param int|null $nb_cluster_user_group_id New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setClusterUserGroupId(int $nb_cluster_user_group_id = null) : CNabuDataObject
-    {
-        $this->setValue('nb_cluster_user_group_id', $nb_cluster_user_group_id);
-        
-        return $this;
-    }
-
-    /**
-     * Get Server Key attribute value
-     * @return null|string Returns the Server Key value
+     * Get Icontact Prospect Status Type Key attribute value
+     * @return null|string Returns the Icontact Prospect Status Type Key value
      */
     public function getKey()
     {
-        return $this->getValue('nb_server_key');
+        return $this->getValue('nb_icontact_prospect_status_type_key');
     }
 
     /**
-     * Sets the Server Key attribute value.
+     * Sets the Icontact Prospect Status Type Key attribute value.
      * @param string|null $key New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setKey(string $key = null) : CNabuDataObject
     {
-        $this->setValue('nb_server_key', $key);
+        $this->setValue('nb_icontact_prospect_status_type_key', $key);
         
         return $this;
     }
 
     /**
-     * Get Server Name attribute value
-     * @return null|string Returns the Server Name value
+     * Get Icontact Prospect Status Type Template Acknowledge attribute value
+     * @return null|int Returns the Icontact Prospect Status Type Template Acknowledge value
      */
-    public function getName()
+    public function getTemplateAcknowledge()
     {
-        return $this->getValue('nb_server_name');
+        return $this->getValue('nb_icontact_prospect_status_type_template_acknowledge');
     }
 
     /**
-     * Sets the Server Name attribute value.
-     * @param string|null $name New value for attribute
+     * Sets the Icontact Prospect Status Type Template Acknowledge attribute value.
+     * @param int|null $template_acknowledge New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setName(string $name = null) : CNabuDataObject
+    public function setTemplateAcknowledge(int $template_acknowledge = null) : CNabuDataObject
     {
-        $this->setValue('nb_server_name', $name);
+        $this->setValue('nb_icontact_prospect_status_type_template_acknowledge', $template_acknowledge);
         
         return $this;
     }
 
     /**
-     * Get Server Notes attribute value
-     * @return null|string Returns the Server Notes value
+     * Get Icontact Prospect Status Type Template Arrival attribute value
+     * @return null|int Returns the Icontact Prospect Status Type Template Arrival value
      */
-    public function getNotes()
+    public function getTemplateArrival()
     {
-        return $this->getValue('nb_server_notes');
+        return $this->getValue('nb_icontact_prospect_status_type_template_arrival');
     }
 
     /**
-     * Sets the Server Notes attribute value.
-     * @param string|null $notes New value for attribute
+     * Sets the Icontact Prospect Status Type Template Arrival attribute value.
+     * @param int|null $template_arrival New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setNotes(string $notes = null) : CNabuDataObject
+    public function setTemplateArrival(int $template_arrival = null) : CNabuDataObject
     {
-        $this->setValue('nb_server_notes', $notes);
+        $this->setValue('nb_icontact_prospect_status_type_template_arrival', $template_arrival);
         
         return $this;
     }

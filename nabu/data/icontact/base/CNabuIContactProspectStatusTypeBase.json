@@ -1,6 +1,6 @@
 {
     "schema": "nabu-3",
-    "name": "nb_icontact_prospect_status",
+    "name": "nb_icontact_prospect_status_type",
     "engine": "MyISAM",
     "type": "table",
     "autoincrement": "1",
@@ -8,8 +8,8 @@
     "collation": "utf8_general_ci",
     "comment": "",
     "fields": {
-        "nb_icontact_prospect_status_id": {
-            "name": "nb_icontact_prospect_status_id",
+        "nb_icontact_prospect_status_type_id": {
+            "name": "nb_icontact_prospect_status_type_id",
             "ordinal": "1",
             "data_type": "int",
             "precision": "10",
@@ -30,8 +30,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_icontact_prospect_status_key": {
-            "name": "nb_icontact_prospect_status_key",
+        "nb_icontact_prospect_status_type_key": {
+            "name": "nb_icontact_prospect_status_type_key",
             "ordinal": "3",
             "data_type": "varchar",
             "precision": null,
@@ -41,8 +41,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_icontact_prospect_status_template_acknowledge": {
-            "name": "nb_icontact_prospect_status_template_acknowledge",
+        "nb_icontact_prospect_status_type_template_acknowledge": {
+            "name": "nb_icontact_prospect_status_type_template_acknowledge",
             "ordinal": "4",
             "data_type": "int",
             "precision": "10",
@@ -52,8 +52,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_icontact_prospect_status_template_arrival": {
-            "name": "nb_icontact_prospect_status_template_arrival",
+        "nb_icontact_prospect_status_type_template_arrival": {
+            "name": "nb_icontact_prospect_status_type_template_arrival",
             "ordinal": "5",
             "data_type": "int",
             "precision": "10",
@@ -71,8 +71,8 @@
             "index_type": "BTREE",
             "comments": "",
             "fields": {
-                "nb_icontact_prospect_status_id": {
-                    "name": "nb_icontact_prospect_status_id",
+                "nb_icontact_prospect_status_type_id": {
+                    "name": "nb_icontact_prospect_status_type_id",
                     "ordinal": "1",
                     "collation": "ASC",
                     "comments": ""

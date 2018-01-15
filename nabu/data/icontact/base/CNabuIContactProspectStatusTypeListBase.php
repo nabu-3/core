@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/01/12 12:35:20 UTC
+ * Created: 2018/01/15 16:19:26 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -28,18 +28,18 @@ namespace nabu\data\icontact\base;
 use \nabu\core\CNabuEngine;
 use \nabu\data\CNabuDataObjectList;
 use \nabu\data\CNabuDataObjectListIndex;
-use \nabu\data\icontact\CNabuIContactProspectStatus;
+use \nabu\data\icontact\CNabuIContactProspectStatusType;
 
 /**
- * Class to manage a list of iContact Prospect Status instances.
+ * Class to manage a list of iContact Prospect Status Type instances.
  * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\icontact\base
  */
-abstract class CNabuIContactProspectStatusListBase extends CNabuDataObjectList
+abstract class CNabuIContactProspectStatusTypeListBase extends CNabuDataObjectList
 {
     /**
-     * Index the list using the nb_icontact_prospect_status_key field.
+     * Index the list using the nb_icontact_prospect_status_type_key field.
      * @var string
      */
     const INDEX_KEY = "keys";
@@ -49,7 +49,7 @@ abstract class CNabuIContactProspectStatusListBase extends CNabuDataObjectList
      */
     public function __construct()
     {
-        parent::__construct('nb_icontact_prospect_status_id');
+        parent::__construct('nb_icontact_prospect_status_type_id');
     }
 
     /**
@@ -58,12 +58,12 @@ abstract class CNabuIContactProspectStatusListBase extends CNabuDataObjectList
     protected function createSecondaryIndexes()
     {
         $this->addIndex(
-            new CNabuDataObjectListIndex($this, 'nb_icontact_prospect_status_key', 'nb_icontact_prospect_status_key', self::INDEX_KEY)
+            new CNabuDataObjectListIndex($this, 'nb_icontact_prospect_status_type_key', 'nb_icontact_prospect_status_type_key', self::INDEX_KEY)
         );
     }
 
     /**
-     * Acquires an instance of class CNabuIContactProspectStatus from the database.
+     * Acquires an instance of class CNabuIContactProspectStatusType from the database.
      * @param string $key Id or reference field in the instance to acquire.
      * @param string $index Secondary index to be used if needed.
      * @return mixed Returns the unserialized instance if exists or false if not.
@@ -73,7 +73,7 @@ abstract class CNabuIContactProspectStatusListBase extends CNabuDataObjectList
         $retval = false;
         
         if ($index === false && CNabuEngine::getEngine()->isMainDBAvailable()) {
-            $item = new CNabuIContactProspectStatus($key);
+            $item = new CNabuIContactProspectStatusType($key);
             if ($item->isFetched()) {
                 $retval = $item;
             }
