@@ -41,9 +41,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_icontact_prospect_status_type_hash": {
+            "name": "nb_icontact_prospect_status_type_hash",
+            "ordinal": "4",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_icontact_prospect_status_type_template_acknowledge": {
             "name": "nb_icontact_prospect_status_type_template_acknowledge",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -54,7 +65,7 @@
         },
         "nb_icontact_prospect_status_type_template_arrival": {
             "name": "nb_icontact_prospect_status_type_template_arrival",
-            "ordinal": "5",
+            "ordinal": "6",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -79,14 +90,30 @@
                 }
             }
         },
-        "nb_icontact_prospect_status_nb_icontact_fk": {
-            "name": "nb_icontact_prospect_status_nb_icontact_fk",
+        "nb_icontact_prospect_status_type_nb_icontact_fk": {
+            "name": "nb_icontact_prospect_status_type_nb_icontact_fk",
             "primary": false,
             "unique": false,
             "index_type": "BTREE",
             "fields": {
                 "nb_icontact_id": {
                     "name": "nb_icontact_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_icontact_prospect_status_type_hash_idx": {
+            "name": "nb_icontact_prospect_status_type_hash_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_icontact_prospect_status_type_hash": {
+                    "name": "nb_icontact_prospect_status_type_hash",
                     "ordinal": "1",
                     "collation": "ASC",
                     "null": true,

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/01/15 16:19:26 UTC
+ * Created: 2018/01/16 16:28:45 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,6 +27,8 @@ namespace nabu\data\icontact\base;
 
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
+use \nabu\core\interfaces\INabuHashed;
+use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
 use \nabu\data\icontact\CNabuIContactProspectStatusType;
 use \nabu\db\CNabuDBInternalObject;
@@ -37,8 +39,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\icontact\base
  */
-abstract class CNabuIContactProspectStatusTypeBase extends CNabuDBInternalObject
+abstract class CNabuIContactProspectStatusTypeBase extends CNabuDBInternalObject implements INabuHashed
 {
+    use TNabuHashed;
+
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
      * the instance is deserialized from the storage.
@@ -86,6 +90,23 @@ abstract class CNabuIContactProspectStatusTypeBase extends CNabuDBInternalObject
                    . "where nb_icontact_prospect_status_type_id=%nb_icontact_prospect_status_type_id\$d "
               )
             : null;
+    }
+
+    /**
+     * Find an instance identified by nb_icontact_prospect_status_type_hash field.
+     * @param string $hash Hash to search
+     * @return CNabuDataObject Returns a valid instance if exists or null if not.
+     */
+    public static function findByHash(string $hash)
+    {
+        return CNabuIContactProspectStatusType::buildObjectFromSQL(
+                'select * '
+                . 'from nb_icontact_prospect_status_type '
+               . "where nb_icontact_prospect_status_type_hash='%hash\$s'",
+                array(
+                    'hash' => $hash
+                )
+        );
     }
 
     /**
@@ -220,6 +241,27 @@ abstract class CNabuIContactProspectStatusTypeBase extends CNabuDBInternalObject
     public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_icontact_prospect_status_type_key', $key);
+        
+        return $this;
+    }
+
+    /**
+     * Get Icontact Prospect Status Type Hash attribute value
+     * @return null|string Returns the Icontact Prospect Status Type Hash value
+     */
+    public function getHash()
+    {
+        return $this->getValue('nb_icontact_prospect_status_type_hash');
+    }
+
+    /**
+     * Sets the Icontact Prospect Status Type Hash attribute value.
+     * @param string|null $hash New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setHash(string $hash = null) : CNabuDataObject
+    {
+        $this->setValue('nb_icontact_prospect_status_type_hash', $hash);
         
         return $this;
     }
