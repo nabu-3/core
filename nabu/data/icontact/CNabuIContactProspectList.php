@@ -20,6 +20,7 @@
 
 namespace nabu\data\icontact;
 use nabu\data\icontact\base\CNabuIContactProspectListBase;
+use nabu\data\icontact\traits\TNabuIContactChild;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -29,5 +30,5 @@ use nabu\data\icontact\base\CNabuIContactProspectListBase;
  */
 class CNabuIContactProspectList extends CNabuIContactProspectListBase
 {
-
+    use TNabuIContactChild;
 }

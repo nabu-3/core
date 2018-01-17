@@ -20,6 +20,7 @@
 
 namespace nabu\data\icontact;
 use nabu\data\icontact\base\CNabuIContactProspectStatusTypeBase;
+use nabu\data\icontact\traits\TNabuIContactChild;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -29,5 +30,42 @@ use nabu\data\icontact\base\CNabuIContactProspectStatusTypeBase;
  */
 class CNabuIContactProspectStatusType extends CNabuIContactProspectStatusTypeBase
 {
+    use TNabuIContactChild;
+    
+    /**
+     * Gets all Types associated with an iContact.
+     * @param mixed $nb_icontact A CNabuIContact instance, or a CNabuDataObject instance containing
+     * a field named nb_icontact_id or a valid iContact Id.
+     * @return CNabuIContactProspectStatusTypeList Returns a list with existing types.
+     */
+    public static function getTypesForIContact($nb_icontact)
+    {
+        if (is_numeric($nb_icontact_id = nb_getMixedValue($nb_icontact, 'nb_icontact_id'))) {
+            $retval = CNabuIContactProspectStatusType::buildObjectListFromSQL(
+                'nb_icontact_prospect_status_type_id',
+                'SELECT ipst.*
+                   FROM nb_icontact_prospect_status_type ipst, nb_icontact i
+                  WHERE ipst.nb_icontact_id=i.nb_icontact_id
+                    AND i.nb_icontact_id=%cont_id$d
+                  ORDER BY ipst.nb_icontact_prospect_status_type_creation_datetime',
+                array(
+                    'cont_id' => $nb_icontact_id
+                ),
+                ($nb_icontact instanceof CNabuIContact ? $nb_icontact : null)
+            );
 
+            if ($nb_icontact instanceof CNabuIContact) {
+                $retval->iterate(function($key, CNabuIContactProspectStatusType $nb_status) {
+                    $nb_status->setIContact($nb_icontact);
+                    return true;
+                });
+            }
+        } else {
+            if ($nb_icontact instanceof CNabuIContact) {
+                $retval = new CNabuIContactProspectStatusTypeList($nb_icontact);
+            } else {
+                $retval = new CNabuIContactProspectStatusTypeList();
+            }
+        }
+    }
 }

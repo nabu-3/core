@@ -22,6 +22,7 @@ namespace nabu\data\icontact;
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\CNabuDataObject;
 use nabu\data\icontact\base\CNabuIContactProspectBase;
+use nabu\data\icontact\traits\TNabuIContactChild;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -31,6 +32,8 @@ use nabu\data\icontact\base\CNabuIContactProspectBase;
  */
 class CNabuIContactProspect extends CNabuIContactProspectBase
 {
+    use TNabuIContactChild;
+    
     /** @var string Prefix to be used when build the encoded email. */
     const EMAIL_PREF = 'nasn2293';
     /** @var string Suffix to be used when build the encoded email. */

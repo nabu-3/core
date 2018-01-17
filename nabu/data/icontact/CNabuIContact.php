@@ -31,12 +31,15 @@ class CNabuIContact extends CNabuIContactBase
 {
     /** @var CNabuIContactProspectList List of prospects in this iContact. */
     private $nb_icontact_prospect_list = null;
+    /** @var CNabuIContactProspectStatusTypeList List of Prospect Status Types in this iContact. */
+    private $nb_icontact_prospect_status_type_list = null;
 
     public function __construct($nb_icontact = false)
     {
         parent::__construct($nb_icontact);
 
         $this->nb_icontact_prospect_list = new CNabuIContactProspectList($this);
+        $this->nb_icontact_prospect_status_type_list = new CNabuIContactProspectStatusTypeList($this);
     }
 
     public function getProspectsOfUser($nb_user)
@@ -47,11 +50,27 @@ class CNabuIContact extends CNabuIContactBase
         return $this->nb_icontact_prospect_list;
     }
 
+    /**
+     * Get Prospect Status Types of this instance.
+     * @param bool $force If true then force to reload complete list from database storage.
+     * @return CNabuIContactProspectStatusTypeList Returns a list instance with all types found.
+     */
+    public function getProspectStatusTypes(bool $force)
+    {
+        if ($this->nb_icontact_prospect_status_type_list->isEmpty() || $force) {
+            $this->nb_icontact_prospect_status_type_list->clear();
+            $this->nb_icontact_prospect_status_type_list->merge(CNabuIContactProspectStatusType::getTypesForIContact($this));
+        }
+
+        return $this->nb_icontact_prospect_status_type_list;
+    }
+
     public function getTreeData($nb_language = null, $dataonly = false)
     {
         $tdata = parent::getTreeData($nb_language, $dataonly);
         $tdata['languages'] = $this->getLanguages();
         $tdata['prospects'] = $this->nb_icontact_prospect_list;
+        $tdata['prospect_status_types'] = $this->getProspectStatusTypes();
 
         return $tdata;
     }

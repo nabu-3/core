@@ -22,6 +22,7 @@ namespace nabu\data\icontact;
 use nabu\core\CNabuEngine;
 use nabu\data\customer\CNabuCustomer;
 use nabu\data\icontact\base\CNabuIContactListBase;
+use nabu\data\icontact\traits\TNabuIContactChild;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -31,6 +32,8 @@ use nabu\data\icontact\base\CNabuIContactListBase;
  */
 class CNabuIContactList extends CNabuIContactListBase
 {
+    use TNabuIContactChild;
+    
     /**
      * Customer instance that owns this list
      * @var CNabuCustomer
