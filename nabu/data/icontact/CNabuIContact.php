@@ -65,6 +65,22 @@ class CNabuIContact extends CNabuIContactBase
         return $this->nb_icontact_prospect_status_type_list;
     }
 
+    /**
+     * Get a specific Prospect Status Type of this instance.
+     * @param mixed $type A CNabuDataObject containing a field named nb_icontact_prospect_status_type_id or a valid Id.
+     * @return CNabuIContactProspectStatusType|false Returns the status type instance if exists of false if not.
+     */
+    public function getProspectStatusType($type)
+    {
+        $retval = false;
+
+        if (is_numeric($nb_type_id = nb_getMixedValue($type, 'nb_icontact_prospect_status_type_id'))) {
+            $retval = $this->nb_icontact_prospect_status_type_list->getItem($nb_type_id);
+        }
+
+        return $retval;
+    }
+
     public function getTreeData($nb_language = null, $dataonly = false)
     {
         $tdata = parent::getTreeData($nb_language, $dataonly);
@@ -73,6 +89,21 @@ class CNabuIContact extends CNabuIContactBase
         $tdata['prospect_status_types'] = $this->getProspectStatusTypes();
 
         return $tdata;
+    }
+
+    /**
+     * Overrides refresh method to allow iContact subentities to be refreshed.
+     * @param bool $force Forces to reload entities from the database storage.
+     * @param bool $cascade Forces to reload child entities from the database storage.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh(bool $force = false, bool $cascade = false) : bool
+    {
+        return parent::refresh($force, $cascade) &&
+               (!$cascade || (
+                   $this->getProspectStatusTypes($force)
+               ))
+        ;
     }
 
     /**

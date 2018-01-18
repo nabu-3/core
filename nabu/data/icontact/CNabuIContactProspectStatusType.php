@@ -54,7 +54,7 @@ class CNabuIContactProspectStatusType extends CNabuIContactProspectStatusTypeBas
             );
 
             if ($nb_icontact instanceof CNabuIContact) {
-                $retval->iterate(function($key, CNabuIContactProspectStatusType $nb_status) {
+                $retval->iterate(function($key, CNabuIContactProspectStatusType $nb_status) use($nb_icontact) {
                     $nb_status->setIContact($nb_icontact);
                     return true;
                 });
