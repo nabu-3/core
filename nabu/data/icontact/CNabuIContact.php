@@ -55,7 +55,7 @@ class CNabuIContact extends CNabuIContactBase
      * @param bool $force If true then force to reload complete list from database storage.
      * @return CNabuIContactProspectStatusTypeList Returns a list instance with all types found.
      */
-    public function getProspectStatusTypes(bool $force)
+    public function getProspectStatusTypes(bool $force = false)
     {
         if ($this->nb_icontact_prospect_status_type_list->isEmpty() || $force) {
             $this->nb_icontact_prospect_status_type_list->clear();

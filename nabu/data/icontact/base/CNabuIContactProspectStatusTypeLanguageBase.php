@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/01/12 12:35:21 UTC
+ * Created: 2018/01/18 10:51:32 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -27,8 +27,8 @@ namespace nabu\data\icontact\base;
 
 use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\data\CNabuDataObject;
-use \nabu\data\icontact\CNabuIContactProspectStatusLanguage;
-use \nabu\data\icontact\CNabuIContactProspectStatusLanguageList;
+use \nabu\data\icontact\CNabuIContactProspectStatusTypeLanguage;
+use \nabu\data\icontact\CNabuIContactProspectStatusTypeLanguageList;
 use \nabu\data\lang\CNabuLanguage;
 use \nabu\data\lang\CNabuLanguageList;
 use \nabu\data\lang\interfaces\INabuTranslated;
@@ -37,28 +37,28 @@ use \nabu\data\lang\traits\TNabuTranslation;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
- * Class to manage the entity iContact Prospect Status Language stored in the storage named
- * nb_icontact_prospect_status_lang.
+ * Class to manage the entity iContact Prospect Status Type Language stored in the storage named
+ * nb_icontact_prospect_status_type_lang.
  * @version 3.0.12 Surface
  * @package \nabu\data\icontact\base
  */
-abstract class CNabuIContactProspectStatusLanguageBase extends CNabuDBInternalObject implements INabuTranslation
+abstract class CNabuIContactProspectStatusTypeLanguageBase extends CNabuDBInternalObject implements INabuTranslation
 {
     use TNabuTranslation;
 
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
      * the instance is deserialized from the storage.
-     * @param mixed $nb_icontact_prospect_status An instance of CNabuIContactProspectStatusLanguageBase or another
-     * object descending from \nabu\data\CNabuDataObject which contains a field named nb_icontact_prospect_status_id,
-     * or a valid ID.
-     * @param mixed $nb_language An instance of CNabuIContactProspectStatusLanguageBase or another object descending
-     * from \nabu\data\CNabuDataObject which contains a field named nb_language_id, or a valid ID.
+     * @param mixed $nb_icontact_prospect_status_type An instance of CNabuIContactProspectStatusTypeLanguageBase or
+     * another object descending from \nabu\data\CNabuDataObject which contains a field named
+     * nb_icontact_prospect_status_type_id, or a valid ID.
+     * @param mixed $nb_language An instance of CNabuIContactProspectStatusTypeLanguageBase or another object
+     * descending from \nabu\data\CNabuDataObject which contains a field named nb_language_id, or a valid ID.
      */
-    public function __construct($nb_icontact_prospect_status = false, $nb_language = false)
+    public function __construct($nb_icontact_prospect_status_type = false, $nb_language = false)
     {
-        if ($nb_icontact_prospect_status) {
-            $this->transferMixedValue($nb_icontact_prospect_status, 'nb_icontact_prospect_status_id');
+        if ($nb_icontact_prospect_status_type) {
+            $this->transferMixedValue($nb_icontact_prospect_status_type, 'nb_icontact_prospect_status_type_id');
         }
         
         if ($nb_language) {
@@ -83,7 +83,7 @@ abstract class CNabuIContactProspectStatusLanguageBase extends CNabuDBInternalOb
      */
     public static function getStorageName()
     {
-        return 'nb_icontact_prospect_status_lang';
+        return 'nb_icontact_prospect_status_type_lang';
     }
 
     /**
@@ -92,11 +92,11 @@ abstract class CNabuIContactProspectStatusLanguageBase extends CNabuDBInternalOb
      */
     public function getSelectRegister()
     {
-        return ($this->isValueNumeric('nb_icontact_prospect_status_id') && $this->isValueNumeric('nb_language_id'))
+        return ($this->isValueNumeric('nb_icontact_prospect_status_type_id') && $this->isValueNumeric('nb_language_id'))
             ? $this->buildSentence(
                     'select * '
-                    . 'from nb_icontact_prospect_status_lang '
-                   . "where nb_icontact_prospect_status_id=%nb_icontact_prospect_status_id\$d "
+                    . 'from nb_icontact_prospect_status_type_lang '
+                   . "where nb_icontact_prospect_status_type_id=%nb_icontact_prospect_status_type_id\$d "
                      . "and nb_language_id=%nb_language_id\$d "
               )
             : null;
@@ -110,17 +110,17 @@ abstract class CNabuIContactProspectStatusLanguageBase extends CNabuDBInternalOb
      */
     public static function getLanguagesForTranslatedObject($translated)
     {
-        $nb_icontact_prospect_status_id = nb_getMixedValue($translated, 'nb_icontact_prospect_status_id');
-        if (is_numeric($nb_icontact_prospect_status_id)) {
+        $nb_icontact_prospect_status_type_id = nb_getMixedValue($translated, 'nb_icontact_prospect_status_type_id');
+        if (is_numeric($nb_icontact_prospect_status_type_id)) {
             $retval = CNabuLanguage::buildObjectListFromSQL(
                     'nb_language_id',
                     'select l.* '
-                    . 'from nb_language l, nb_icontact_prospect_status t1, nb_icontact_prospect_status_lang t2 '
-                   . 'where t1.nb_icontact_prospect_status_id=t2.nb_icontact_prospect_status_id '
-                     . 'and t1.nb_icontact_prospect_status_id=%nb_icontact_prospect_status_id$d '
+                    . 'from nb_language l, nb_icontact_prospect_status_type t1, nb_icontact_prospect_status_type_lang t2 '
+                   . 'where t1.nb_icontact_prospect_status_type_id=t2.nb_icontact_prospect_status_type_id '
+                     . 'and t1.nb_icontact_prospect_status_type_id=%nb_icontact_prospect_status_type_id$d '
                      . 'and l.nb_language_id=t2.nb_language_id ',
                     array(
-                        'nb_icontact_prospect_status_id' => $nb_icontact_prospect_status_id
+                        'nb_icontact_prospect_status_type_id' => $nb_icontact_prospect_status_type_id
                     )
             );
         } else {
@@ -134,22 +134,22 @@ abstract class CNabuIContactProspectStatusLanguageBase extends CNabuDBInternalOb
      * Query the storage to retrieve the full list of available translations for $translated and returns a list with
      * all translations.
      * @param mixed $translated Translated object or Id to retrieve translations.
-     * @return CNabuIContactProspectStatusLanguageList Returns a list of translations. If no translations are
+     * @return CNabuIContactProspectStatusTypeLanguageList Returns a list of translations. If no translations are
      * available, the list is empty.
      */
     public static function getTranslationsForTranslatedObject($translated)
     {
-        $nb_icontact_prospect_status_id = nb_getMixedValue($translated, 'nb_icontact_prospect_status_id');
-        if (is_numeric($nb_icontact_prospect_status_id)) {
-            $retval = CNabuIContactProspectStatusLanguage::buildObjectListFromSQL(
+        $nb_icontact_prospect_status_type_id = nb_getMixedValue($translated, 'nb_icontact_prospect_status_type_id');
+        if (is_numeric($nb_icontact_prospect_status_type_id)) {
+            $retval = CNabuIContactProspectStatusTypeLanguage::buildObjectListFromSQL(
                     'nb_language_id',
                     'select t2.* '
-                    . 'from nb_language l, nb_icontact_prospect_status t1, nb_icontact_prospect_status_lang t2 '
-                   . 'where t1.nb_icontact_prospect_status_id=t2.nb_icontact_prospect_status_id '
-                     . 'and t1.nb_icontact_prospect_status_id=%nb_icontact_prospect_status_id$d '
+                    . 'from nb_language l, nb_icontact_prospect_status_type t1, nb_icontact_prospect_status_type_lang t2 '
+                   . 'where t1.nb_icontact_prospect_status_type_id=t2.nb_icontact_prospect_status_type_id '
+                     . 'and t1.nb_icontact_prospect_status_type_id=%nb_icontact_prospect_status_type_id$d '
                      . 'and l.nb_language_id=t2.nb_language_id ',
                     array(
-                        'nb_icontact_prospect_status_id' => $nb_icontact_prospect_status_id
+                        'nb_icontact_prospect_status_type_id' => $nb_icontact_prospect_status_type_id
                     )
             );
             if ($translated instanceof INabuTranslated) {
@@ -161,35 +161,35 @@ abstract class CNabuIContactProspectStatusLanguageBase extends CNabuDBInternalOb
                 );
             }
         } else {
-            $retval = new CNabuIContactProspectStatusLanguageList();
+            $retval = new CNabuIContactProspectStatusTypeLanguageList();
         }
         
         return $retval;
     }
 
     /**
-     * Get Icontact Prospect Status Id attribute value
-     * @return int Returns the Icontact Prospect Status Id value
+     * Get Icontact Prospect Status Type Id attribute value
+     * @return int Returns the Icontact Prospect Status Type Id value
      */
-    public function getIcontactProspectStatusId() : int
+    public function getIcontactProspectStatusTypeId() : int
     {
-        return $this->getValue('nb_icontact_prospect_status_id');
+        return $this->getValue('nb_icontact_prospect_status_type_id');
     }
 
     /**
-     * Sets the Icontact Prospect Status Id attribute value.
-     * @param int $nb_icontact_prospect_status_id New value for attribute
+     * Sets the Icontact Prospect Status Type Id attribute value.
+     * @param int $nb_icontact_prospect_status_type_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setIcontactProspectStatusId(int $nb_icontact_prospect_status_id) : CNabuDataObject
+    public function setIcontactProspectStatusTypeId(int $nb_icontact_prospect_status_type_id) : CNabuDataObject
     {
-        if ($nb_icontact_prospect_status_id === null) {
+        if ($nb_icontact_prospect_status_type_id === null) {
             throw new ENabuCoreException(
                     ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
-                    array("\$nb_icontact_prospect_status_id")
+                    array("\$nb_icontact_prospect_status_type_id")
             );
         }
-        $this->setValue('nb_icontact_prospect_status_id', $nb_icontact_prospect_status_id);
+        $this->setValue('nb_icontact_prospect_status_type_id', $nb_icontact_prospect_status_type_id);
         
         return $this;
     }
@@ -222,22 +222,22 @@ abstract class CNabuIContactProspectStatusLanguageBase extends CNabuDBInternalOb
     }
 
     /**
-     * Get Icontact Prospect Status Lang Name attribute value
-     * @return null|string Returns the Icontact Prospect Status Lang Name value
+     * Get Icontact Prospect Status Type Lang Name attribute value
+     * @return null|string Returns the Icontact Prospect Status Type Lang Name value
      */
     public function getName()
     {
-        return $this->getValue('nb_icontact_prospect_status_lang_name');
+        return $this->getValue('nb_icontact_prospect_status_type_lang_name');
     }
 
     /**
-     * Sets the Icontact Prospect Status Lang Name attribute value.
+     * Sets the Icontact Prospect Status Type Lang Name attribute value.
      * @param string|null $name New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setName(string $name = null) : CNabuDataObject
     {
-        $this->setValue('nb_icontact_prospect_status_lang_name', $name);
+        $this->setValue('nb_icontact_prospect_status_type_lang_name', $name);
         
         return $this;
     }

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/01/16 16:28:45 UTC
+ * Created: 2018/01/18 10:51:31 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -30,7 +30,13 @@ use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\core\interfaces\INabuHashed;
 use \nabu\core\traits\TNabuHashed;
 use \nabu\data\CNabuDataObject;
+use \nabu\data\icontact\builtin\CNabuBuiltInIContactProspectStatusTypeLanguage;
 use \nabu\data\icontact\CNabuIContactProspectStatusType;
+use \nabu\data\icontact\CNabuIContactProspectStatusTypeLanguage;
+use \nabu\data\icontact\CNabuIContactProspectStatusTypeLanguageList;
+use \nabu\data\lang\interfaces\INabuTranslated;
+use \nabu\data\lang\interfaces\INabuTranslation;
+use \nabu\data\lang\traits\TNabuTranslated;
 use \nabu\db\CNabuDBInternalObject;
 
 /**
@@ -39,9 +45,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\icontact\base
  */
-abstract class CNabuIContactProspectStatusTypeBase extends CNabuDBInternalObject implements INabuHashed
+abstract class CNabuIContactProspectStatusTypeBase extends CNabuDBInternalObject implements INabuTranslated, INabuHashed
 {
     use TNabuHashed;
+    use TNabuTranslated;
 
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
@@ -57,6 +64,8 @@ abstract class CNabuIContactProspectStatusTypeBase extends CNabuDBInternalObject
         }
         
         parent::__construct();
+        $this->__translatedConstruct();
+        $this->translations_list = new CNabuIContactProspectStatusTypeLanguageList();
     }
 
     /**
@@ -174,6 +183,90 @@ abstract class CNabuIContactProspectStatusTypeBase extends CNabuDBInternalObject
         );
         
         return $nb_item_list;
+    }
+
+    /**
+     * Check if the instance passed as parameter $translation is a valid child translation for this object
+     * @param INabuTranslation $translation Translation instance to check
+     * @return bool Return true if a valid object is passed as instance or false elsewhere
+     */
+    protected function checkForValidTranslationInstance($translation)
+    {
+        return ($translation !== null &&
+                $translation instanceof CNabuIContactProspectStatusTypeLanguage &&
+                $translation->matchValue($this, 'nb_icontact_prospect_status_type_id')
+        );
+    }
+
+    /**
+     * Get all language instances corresponding to available translations.
+     * @param bool $force If true force to reload languages list from storage.
+     * @return null|array Return an array of \nabu\data\lang\CNabuLanguage instances if they have translations or null
+     * if not.
+     */
+    public function getLanguages($force = false)
+    {
+        if (!CNabuEngine::getEngine()->isOperationModeStandalone() &&
+            ($this->languages_list->getSize() === 0 || $force)
+        ) {
+            $this->languages_list = CNabuIContactProspectStatusTypeLanguage::getLanguagesForTranslatedObject($this);
+        }
+        
+        return $this->languages_list;
+    }
+
+    /**
+     * Gets available translation instances.
+     * @param bool $force If true force to reload translations list from storage.
+     * @return null|array Return an array of \nabu\data\icontact\CNabuIContactProspectStatusTypeLanguage instances if
+     * they have translations or null if not.
+     */
+    public function getTranslations($force = false)
+    {
+        if (!CNabuEngine::getEngine()->isOperationModeStandalone() &&
+            ($this->translations_list->getSize() === 0 || $force)
+        ) {
+            $this->translations_list = CNabuIContactProspectStatusTypeLanguage::getTranslationsForTranslatedObject($this);
+        }
+        
+        return $this->translations_list;
+    }
+
+    /**
+     * Creates a new translation instance. I the translation already exists then replaces ancient translation with this
+     * new.
+     * @param int|string|CNabuDataObject $nb_language A valid Id or object containing a nb_language_id field to
+     * identify the language of new translation.
+     * @return CNabuIContactProspectStatusTypeLanguage Returns the created instance to store translation or null if not
+     * valid language was provided.
+     */
+    public function newTranslation($nb_language)
+    {
+        $nb_language_id = nb_getMixedValue($nb_language, NABU_LANG_FIELD_ID);
+        if (is_numeric($nb_language_id) || nb_isValidGUID($nb_language_id)) {
+            $nb_translation = $this->isBuiltIn()
+                            ? new CNabuBuiltInIContactProspectStatusTypeLanguage()
+                            : new CNabuIContactProspectStatusTypeLanguage()
+            ;
+            $nb_translation->transferValue($this, 'nb_icontact_prospect_status_type_id');
+            $nb_translation->transferValue($nb_language, NABU_LANG_FIELD_ID);
+            $this->setTranslation($nb_translation);
+        } else {
+            $nb_translation = null;
+        }
+        
+        return $nb_translation;
+    }
+
+    /**
+     * Overrides refresh method to add translations branch to refresh.
+     * @param bool $force Forces to reload entities from the database storage.
+     * @param bool $cascade Forces to reload child entities from the database storage.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh(bool $force = false, bool $cascade = false) : bool
+    {
+        return parent::refresh($force, $cascade) && $this->appendTranslatedRefresh($force);
     }
 
     /**
@@ -306,5 +399,20 @@ abstract class CNabuIContactProspectStatusTypeBase extends CNabuDBInternalObject
         $this->setValue('nb_icontact_prospect_status_type_template_arrival', $template_arrival);
         
         return $this;
+    }
+
+    /**
+     * Overrides this method to add support to traits and/or attributes.
+     * @param int|CNabuDataObject $nb_language Instance or Id of the language to be used.
+     * @param bool $dataonly Render only field values and ommit class control flags.
+     * @return array Returns a multilevel associative array with all data.
+     */
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $trdata = parent::getTreeData($nb_language, $dataonly);
+        
+        $trdata = $this->appendTranslatedTreeData($trdata, $nb_language, $dataonly);
+        
+        return $trdata;
     }
 }

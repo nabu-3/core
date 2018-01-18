@@ -31,7 +31,7 @@ use nabu\data\icontact\traits\TNabuIContactChild;
 class CNabuIContactProspectStatusType extends CNabuIContactProspectStatusTypeBase
 {
     use TNabuIContactChild;
-    
+
     /**
      * Gets all Types associated with an iContact.
      * @param mixed $nb_icontact A CNabuIContact instance, or a CNabuDataObject instance containing
@@ -46,8 +46,7 @@ class CNabuIContactProspectStatusType extends CNabuIContactProspectStatusTypeBas
                 'SELECT ipst.*
                    FROM nb_icontact_prospect_status_type ipst, nb_icontact i
                   WHERE ipst.nb_icontact_id=i.nb_icontact_id
-                    AND i.nb_icontact_id=%cont_id$d
-                  ORDER BY ipst.nb_icontact_prospect_status_type_creation_datetime',
+                    AND i.nb_icontact_id=%cont_id$d',
                 array(
                     'cont_id' => $nb_icontact_id
                 ),
@@ -67,5 +66,7 @@ class CNabuIContactProspectStatusType extends CNabuIContactProspectStatusTypeBas
                 $retval = new CNabuIContactProspectStatusTypeList();
             }
         }
+
+        return $retval;
     }
 }
