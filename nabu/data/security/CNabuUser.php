@@ -23,6 +23,9 @@ use nabu\data\CNabuDataObject;
 use nabu\data\customer\CNabuCustomer;
 use nabu\data\interfaces\INabuId;
 use nabu\data\security\base\CNabuUserBase;
+use nabu\data\site\CNabuSiteList;
+use nabu\data\site\CNabuSiteUser;
+use nabu\data\site\CNabuSiteUserList;
 use nabu\data\traits\TNabuId;
 
 /**
@@ -51,6 +54,16 @@ class CNabuUser extends CNabuUserBase implements INabuId
     const PASS_PREF = 'nasn2293';
     /** @var string PASS_SUFF Suffix to be used when build the encoded password. */
     const PASS_SUFF = '935nkwnf';
+
+    /** @var CNabuSiteUserList List of Profiles of this User instance. */
+    private $nb_site_user_list = null;
+
+    public function __construct($nb_user = false)
+    {
+        parent::__construct($nb_user);
+
+        $this->nb_site_user_list = new CNabuSiteUserList();
+    }
 
     /**
      * Overrides the method to convert to lowercase emails before store them in the object.
@@ -238,6 +251,30 @@ class CNabuUser extends CNabuUserBase implements INabuId
         }
 
         return $retval;
+    }
+
+    /**
+     * Get the Profiles list of this user instance (CNabuSiteUserList).
+     * @param bool $force If true forces to reload list from database storage.
+     * @return CNabuSiteUserList Returns the list of Profiles found.
+     */
+    public function getProfiles(bool $force = false) : CNabuSiteUserList
+    {
+        if ($this->nb_site_user_list->isEmpty() || $force) {
+            $this->nb_site_user_list->clear();
+            $this->nb_site_user_list->merge(CNabuSiteUser::getSitesForUser($this));
+        }
+
+        return $this->nb_site_user_list;
+    }
+
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $tdata = parent::getTreeData($nb_language, $dataonly);
+
+        $tdata['profiles'] = $this->nb_site_user_list;
+
+        return $tdata;
     }
 
     /**

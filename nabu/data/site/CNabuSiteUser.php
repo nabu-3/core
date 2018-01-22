@@ -21,6 +21,7 @@
 namespace nabu\data\site;
 
 use \nabu\data\site\base\CNabuSiteUserBase;
+use nabu\data\security\CNabuUser;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -46,5 +47,32 @@ class CNabuSiteUser extends CNabuSiteUserBase
                     'user_id' => $this->getValue('nb_user_id')
                 )
         );
+    }
+
+    /**
+     * Get the list of Profiles of a User.
+     * @param mixed $nb_user A CNabuDataObject that contains a nb_user_id field or a valid Id.
+     * @return CNabuSiteUserList Returns the list of all profiles found.
+     */
+    public static function getSitesForUser($nb_user)
+    {
+        if (is_numeric ($nb_user_id = nb_getMixedValue($nb_user, NABU_USER_FIELD_ID))) {
+            $retval = CNabuSiteUser::buildObjectListFromSQL(
+                'nb_user_id',
+                'SELECT su.*
+                   FROM nb_site_user su, nb_user u, nb_site s
+                  WHERE su.nb_user_id=u.nb_user_id
+                    AND su.nb_site_id=s.nb_site_id
+                    AND su.nb_user_id=%user_id$d',
+                array(
+                    'user_id' => $nb_user_id
+                ),
+                ($nb_user instanceof CNabuUser ? $nb_user : null)
+            );
+        } else {
+            $retval = new CNabuSiteUserList();
+        }
+
+        return $retval;
     }
 }
