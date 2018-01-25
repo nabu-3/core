@@ -21,6 +21,8 @@
 namespace nabu\data\site;
 
 use \nabu\data\site\base\CNabuSiteUserBase;
+use nabu\core\exceptions\ENabuSecurityException;
+use nabu\data\customer\CNabuCustomer;
 use nabu\data\security\CNabuUser;
 
 /**
@@ -71,6 +73,43 @@ class CNabuSiteUser extends CNabuSiteUserBase
             );
         } else {
             $retval = new CNabuSiteUserList();
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Get not subscribed available Sites for a User.
+     * @param CNabuCustomer $nb_customer The Customer that owns Sites and User.
+     * @param mixed $nb_user The User to looking for.
+     * @return CNabuSiteList The list of Sites availables for requested User.
+     * @throws ENabuSecurityException Raises an exception if the User is not owned by the Customer.
+     */
+    public static function getAvailableSitesForUser(CNabuCustomer $nb_customer, $nb_user)
+    {
+        if ($nb_customer->isFetched() &&
+            is_numeric($nb_user_id = nb_getMixedValue($nb_user, NABU_USER_FIELD_ID))
+        ) {
+            if (!($nb_user = $nb_customer->getUser($nb_user_id))) {
+                throw new ENabuSecurityException(ENabuSecurityException::ERROR_USER_NOT_ALLOWED);
+            }
+            $retval = CNabuSite::buildObjectListFromSQL(
+                'nb_site_id',
+                'SELECT s.*, su.nb_user_id
+                   FROM nb_site s
+                   LEFT OUTER JOIN nb_site_user su
+                     ON s.nb_site_id=su.nb_site_id
+                    AND su.nb_user_id=%user_id$d
+                  WHERE s.nb_customer_id=%cust_id$d
+                 HAVING su.nb_user_id IS NULL',
+                array(
+                    'cust_id' => $nb_customer->getId(),
+                    'user_id' => $nb_user->getId()
+                ),
+                $nb_customer
+            );
+        } else {
+            $retval = new CNabuSiteList($nb_customer);
         }
 
         return $retval;

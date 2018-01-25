@@ -23,7 +23,6 @@ use nabu\data\CNabuDataObject;
 use nabu\data\customer\CNabuCustomer;
 use nabu\data\interfaces\INabuId;
 use nabu\data\security\base\CNabuUserBase;
-use nabu\data\site\CNabuSiteList;
 use nabu\data\site\CNabuSiteUser;
 use nabu\data\site\CNabuSiteUserList;
 use nabu\data\traits\TNabuId;
@@ -253,6 +252,24 @@ class CNabuUser extends CNabuUserBase implements INabuId
         return $retval;
     }
 
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $tdata = parent::getTreeData($nb_language, $dataonly);
+
+        $tdata['profiles'] = $this->nb_site_user_list;
+
+        return $tdata;
+    }
+
+    /**
+     *   ____  _ _
+     *  / ___|(_) |_ ___  ___
+     *  \___ \| | __/ _ \/ __|
+     *   ___) | | ||  __/\__ \
+     *  |____/|_|\__\___||___/
+     *
+     */
+
     /**
      * Get the Profiles list of this user instance (CNabuSiteUserList).
      * @param bool $force If true forces to reload list from database storage.
@@ -266,15 +283,6 @@ class CNabuUser extends CNabuUserBase implements INabuId
         }
 
         return $this->nb_site_user_list;
-    }
-
-    public function getTreeData($nb_language = null, $dataonly = false)
-    {
-        $tdata = parent::getTreeData($nb_language, $dataonly);
-
-        $tdata['profiles'] = $this->nb_site_user_list;
-
-        return $tdata;
     }
 
     /**

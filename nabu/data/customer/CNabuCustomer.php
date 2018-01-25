@@ -22,6 +22,7 @@ namespace nabu\data\customer;
 
 use \nabu\data\customer\base\CNabuCustomerBase;
 use nabu\core\exceptions\ENabuCoreException;
+use nabu\core\exceptions\ENabuSecurityException;
 use nabu\data\CNabuDataObject;
 use nabu\data\catalog\CNabuCatalog;
 use nabu\data\catalog\CNabuCatalogList;
@@ -73,6 +74,9 @@ class CNabuCustomer extends CNabuCustomerBase
     /** @var CNabuIContactList $nb_icontact_list List of i-Contacts. This list can be filled only with requested
      * i-Contacts (on demand) or with a full list. */
     private $nb_icontact_list;
+    /** @var CNabuRoleList $nb_role_list List of all Roles. This list can be filled only with requested Roles
+     * (on demand) or with a full list. */
+    private $nb_role_list;
 
     /**
      * Creates the instance and initializes class variables.
@@ -90,6 +94,7 @@ class CNabuCustomer extends CNabuCustomerBase
         $this->nb_messaging_list = new CNabuMessagingList($this);
         $this->nb_project_list = new CNabuProjectList($this);
         $this->nb_icontact_list = new CNabuIContactList($this);
+        $this->nb_role_list = new CNabuRoleList($this);
     }
 
     public function relinkDB()
@@ -155,10 +160,29 @@ class CNabuCustomer extends CNabuCustomerBase
                         $this->getCommerces($force) &&
                         $this->getCatalogs($force) &&
                         $this->getMessagings($force) &&
-                        $this->getProjects($force)
+                        $this->getProjects($force) &&
+                        $this->getRoles($force)
                     )
                )
         ;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $tdata = parent::getTreeData($nb_language, $dataonly);
+
+        $tdata['roles'] = $this->nb_role_list;
+        $tdata['mediotecas'] = $this->nb_medioteca_list;
+        $tdata['sites'] = $this->nb_site_list;
+        $tdata['commerces'] = $this->nb_commerce_list;
+        $tdata['catalogs'] = $this->nb_catalog_list;
+        $tdata['messagings'] = $this->nb_messaging_list;
+        $tdata['projects'] = $this->nb_project_list;
+
+        return $tdata;
     }
 
     /**
@@ -385,6 +409,17 @@ class CNabuCustomer extends CNabuCustomerBase
     public function getSiteSetUsedLanguages()
     {
         return CNabuSite::getCustomerUsedLanguages($this);
+    }
+
+    /**
+     * Get not subscribed available Sites for a User.
+     * @param mixed $nb_user The User to looking for.
+     * @return CNabuSiteList The list of Sites availables for requested User.
+     * @throws ENabuSecurityException Raises an exception if the User is not owned by the Customer.
+     */
+    public function getAvailableSitesForUser($nb_user)
+    {
+        return CNabuUser::getAvailableSitesForUser($this, $nb_user);
     }
 
     /*
@@ -767,11 +802,17 @@ class CNabuCustomer extends CNabuCustomerBase
 
     /**
      * Gets a Role List of all roles owned by this Customer.
+     * @param bool $force If true forces to reload Role list form the database storage.
      * @return CNabuRoleList Returns the list of roles.
      */
-    public function getRoles()
+    public function getRoles(bool $force = false)
     {
-        return CNabuRole::getAllRoles($this);
+        if ($this->nb_role_list->isEmpty() || $force) {
+            $this->nb_role_list->clear();
+            $this->nb_role_list->merge(CNabuRole::getAllRoles($this));
+        }
+
+        return $this->nb_role_list;
     }
     /*
            _        ____            _             _
