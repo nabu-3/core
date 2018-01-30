@@ -92,6 +92,7 @@ class CNabuUserGroup extends CNabuUserGroupBase
                 if ($nb_user_group_member->getAdmin() === 'T' && $nb_user_group_member->getStatus() === 'E') {
                     $nb_admin_list->addItem($nb_user_group_member);
                 }
+                return true;
             }
         );
 
