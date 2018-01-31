@@ -814,6 +814,16 @@ class CNabuCustomer extends CNabuCustomerBase
 
         return $this->nb_role_list;
     }
+
+    /**
+     * Get all languages used in the Role set.
+     * @return CNabuLanguageList Returns the list of unique languages used.
+     */
+    public function getRoleSetUsedLanguages()
+    {
+        return CNabuRole::getCustomerUsedLanguages($this);
+    }
+
     /*
            _        ____            _             _
           (_)      / ___|___  _ __ | |_ __ _  ___| |_ ___
