@@ -824,6 +824,49 @@ class CNabuCustomer extends CNabuCustomerBase
         return CNabuRole::getCustomerUsedLanguages($this);
     }
 
+    /**
+     * Gets a Role by their ID.
+     * If the internal Role List contains a instance with same ID returns this instance, else if not exists,
+     * tries to locate it in the storage and, if exists, then load it, add into Role List and returns their
+     * instance as result.
+     * @param mixed $nb_role A CNabuDataObject instance containing a nb_role_id field or an ID.
+     * @return CNabuRole Returns the Role instance if exists or false if not.
+     * @throws ENabuCoreException Raises an exception if $nb_role has no valid value.
+     */
+    public function getRole($nb_role)
+    {
+        $retval = false;
+
+        if (is_object($nb_role) && !($nb_role instanceof CNabuDataObject)) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_CLASS_TYPE,
+                array('$nb_role', get_class($nb_role))
+            );
+        }
+
+        if ($nb_role !== null) {
+            $nb_role_id = nb_getMixedValue($nb_role, NABU_ROLE_FIELD_ID);
+            if (is_numeric($nb_role_id) || nb_isValidGUID($nb_role_id)) {
+                $retval = $this->nb_role_list->getItem($nb_role_id);
+                if ($retval instanceof CNabuRole) {
+                    if (!$retval->validateCustomer($this)) {
+                        $this->nb_role_list->removeItem($retval);
+                        $retval = false;
+                    } else {
+                        $retval->setCustomer($this);
+                    }
+                }
+            } elseif ($nb_role_id !== null && $nb_role_id !== false) {
+                throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                    array('$nb_role', print_r($nb_role, true))
+                );
+            }
+        }
+
+        return $retval;
+    }
+
     /*
            _        ____            _             _
           (_)      / ___|___  _ __ | |_ __ _  ___| |_ ___

@@ -67,4 +67,13 @@ class CNabuRole extends CNabuRoleBase
 
         return $retval;
     }
+
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $tdata = parent::getTreeData($nb_language, $dataonly);
+
+        $tdata['languages'] = $this->getLanguages();
+
+        return $tdata;
+    }
 }
