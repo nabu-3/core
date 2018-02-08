@@ -42,12 +42,45 @@ class CNabuIContact extends CNabuIContactBase
         $this->nb_icontact_prospect_status_type_list = new CNabuIContactProspectStatusTypeList($this);
     }
 
-    public function getProspectsOfUser($nb_user)
+    /**
+     * Get a Prospect by his Id.
+     * @param mixed $nb_prospect A CNabuDataObject containing a field named nb_icontact_prospect_id or a valid Id.
+     * @return CNabuIContactProspect|false Returns a valid instance if found or false if none exists.
+     */
+    public function getProspect($nb_prospect)
+    {
+        $retval = false;
+
+        if (is_numeric($nb_prospect_id = nb_getMixedValue($nb_prospect, NABU_ICONTACT_PROSPECT_FIELD_ID))) {
+            $retval = $this->nb_icontact_prospect_list->getItem($nb_prospect_id);
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Get a list with all Prospects owned by a User.
+     * @param mixed $nb_user A CNabuDataObject containing a field named nb_user_id or a valid Id.
+     * @param CNabuIContactProspectStatusType|null $nb_status_type If setted, the list is filtered using this status.
+     * @return CNabuIContactProspectList Returns a list instance with all types found.
+     */
+    public function getProspectsOfUser($nb_user, CNabuIContactProspectStatusType $nb_status_type = null) : CNabuIContactProspectList
     {
         $this->nb_icontact_prospect_list->clear();
-        $this->nb_icontact_prospect_list->merge(CNabuIContactProspect::getProspectsOfUser($this, $nb_user));
+        $this->nb_icontact_prospect_list->merge(CNabuIContactProspect::getProspectsOfUser($this, $nb_user, $nb_status_type));
 
         return $this->nb_icontact_prospect_list;
+    }
+
+    /**
+     * Get the number of Prospects owned by a User.
+     * @param mixed $nb_user A CNabuDataObject containing a field named nb_user_id or a valid Id.
+     * @param CNabuIContactProspectStatusType|null $nb_status_type If setted, the list is filtered using this status.
+     * @return int Returns the count of all types found.
+     */
+    public function getCountProspectsOfUser($nb_user, CNabuIContactProspectStatusType $nb_status_type = null) : int
+    {
+        return CNabuIContactProspect::getCountProspectsOfUser($this, $nb_user, $nb_status_type);
     }
 
     /**
@@ -55,7 +88,7 @@ class CNabuIContact extends CNabuIContactBase
      * @param bool $force If true then force to reload complete list from database storage.
      * @return CNabuIContactProspectStatusTypeList Returns a list instance with all types found.
      */
-    public function getProspectStatusTypes(bool $force = false)
+    public function getProspectStatusTypes(bool $force = false) : CNabuIContactProspectStatusTypeList
     {
         if ($this->nb_icontact_prospect_status_type_list->isEmpty() || $force) {
             $this->nb_icontact_prospect_status_type_list->clear();
@@ -68,7 +101,7 @@ class CNabuIContact extends CNabuIContactBase
     /**
      * Get a specific Prospect Status Type of this instance.
      * @param mixed $type A CNabuDataObject containing a field named nb_icontact_prospect_status_type_id or a valid Id.
-     * @return CNabuIContactProspectStatusType|false Returns the status type instance if exists of false if not.
+     * @return CNabuIContactProspectStatusType|false Returns the status type instance if exists or false if not.
      */
     public function getProspectStatusType($type)
     {
@@ -76,6 +109,23 @@ class CNabuIContact extends CNabuIContactBase
 
         if (is_numeric($nb_type_id = nb_getMixedValue($type, 'nb_icontact_prospect_status_type_id'))) {
             $retval = $this->nb_icontact_prospect_status_type_list->getItem($nb_type_id);
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Get a specific Prospect Status Type of this instance identified by his key.
+     * @param string $key A key to looking for.
+     * @return CNabuIContactProspectStatusType|false Returns the status type instance if exists or false if not.
+     */
+    public function getProspectStatusTypeByKey(string $key)
+    {
+        $retval = false;
+
+        if (is_string($key)) {
+            $this->getProspectStatusTypes();
+            $retval = $this->nb_icontact_prospect_status_type_list->getItem($key, CNabuIContactProspectStatusTypeList::INDEX_KEY);
         }
 
         return $retval;

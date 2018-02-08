@@ -19,6 +19,8 @@
  */
 
 namespace nabu\data\icontact;
+use nabu\core\CNabuEngine;
+
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\CNabuDataObject;
 use nabu\data\icontact\base\CNabuIContactProspectBase;
@@ -33,7 +35,7 @@ use nabu\data\icontact\traits\TNabuIContactChild;
 class CNabuIContactProspect extends CNabuIContactProspectBase
 {
     use TNabuIContactChild;
-    
+
     /** @var string Prefix to be used when build the encoded email. */
     const EMAIL_PREF = 'nasn2293';
     /** @var string Suffix to be used when build the encoded email. */
@@ -68,25 +70,33 @@ class CNabuIContactProspect extends CNabuIContactProspectBase
      * called nb_icontact_prospect_id or an ID.
      * @param mixed $nb_user User instance that holds Prospects or a CNabuDataObject containing a field called
      * nb_user_id or an ID.
+     * @param CNabuIContactProspectStatusType|null $nb_status_type If setted, the list is filtered using this status.
      * @return CNabuIContactProspectList Returns a Prospect List containing all Prospects found.
      */
-    static public function getProspectsOfUser($nb_icontact, $nb_user) : CNabuIContactProspectList
+    static public function getProspectsOfUser(
+        $nb_icontact, $nb_user,
+        CNabuIContactProspectStatusType $nb_status_type = null
+    ) : CNabuIContactProspectList
     {
         if (is_numeric($nb_icontact_id = nb_getMixedValue($nb_icontact, 'nb_icontact_id')) &&
             is_numeric($nb_user_id = nb_getMixedValue($nb_user, 'nb_user_id'))
         ) {
+            $status_id = nb_getMixedValue($nb_status_type, 'nb_icontact_prospect_status_type_id');
             $retval = CNabuIContactProspect::buildObjectListFromSQL(
                 'nb_icontact_prospect_id',
                 'SELECT ip.*
                    FROM nb_icontact_prospect ip, nb_icontact i
                   WHERE ip.nb_icontact_id=i.nb_icontact_id
                     AND i.nb_icontact_id=%cont_id$d
-                    AND ip.nb_user_id=%user_id$d
-                  ORDER BY ip.nb_icontact_prospect_creation_datetime DESC',
+                    AND ip.nb_user_id=%user_id$d '
+                . (is_numeric($status_id) ? 'AND ip.nb_icontact_prospect_status_id=%status_id$d ' : '')
+               . 'ORDER BY ip.nb_icontact_prospect_creation_datetime DESC',
                 array(
                     'cont_id' => $nb_icontact_id,
-                    'user_id' => $nb_user_id
-                )
+                    'user_id' => $nb_user_id,
+                    'status_id' => $status_id
+                ),
+                ($nb_icontact instanceof CNabuIContact ? $nb_icontact : null)
             );
             if ($nb_icontact instanceof CNabuIContact) {
                 $retval->iterate(function ($key, $nb_prospect) use($nb_icontact) {
@@ -100,6 +110,38 @@ class CNabuIContactProspect extends CNabuIContactProspectBase
 
         return $retval;
     }
+
+    /**
+     * Get the count of related Prospects of a User.
+     * @param mixed $nb_icontact A CNabuDataObject containing a field called nb_icontact_prospect_id or an ID
+     * where to count Prospects.
+     * @param mixed $nb_user User instance that holds Prospects or a CNabuDataObject containing a field called
+     * nb_user_id or an ID.
+     * @param CNabuIContactProspectStatusType|null $nb_status_type If setted, the list is filtered using this status.
+     * @return int Returns the count of all Prospects found.
+     */
+    static public function getCountProspectsOfUser(
+        $nb_icontact, $nb_user,
+        CNabuIContactProspectStatusType $nb_status_type = null
+    ) : int
+    {
+        if (is_numeric($nb_icontact_id = nb_getMixedValue($nb_icontact, 'nb_icontact_id')) &&
+            is_numeric($nb_user_id = nb_getMixedValue($nb_user, 'nb_user_id'))
+        ) {
+            $status_id = nb_getMixedValue($nb_status_type, 'nb_icontact_prospect_status_type_id');
+            $retval = CNabuEngine::getEngine()->getMainDB()->getQueryAsCount(
+                'nb_icontact_prospect ip, nb_icontact i',
+                "ip.nb_icontact_id=i.nb_icontact_id AND i.nb_icontact_id=$nb_icontact_id"
+                ." AND ip.nb_user_id=$nb_user_id"
+                . (is_numeric($status_id) ? " AND ip.nb_icontact_prospect_status_id=$status_id " : '')
+            );
+        } else {
+            $retval = 0;
+        }
+
+        return $retval;
+    }
+
 
     /**
      * Encodes a clear email using the nabu-3 algorithm. This algorithm is not reversible.

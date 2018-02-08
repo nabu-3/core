@@ -117,6 +117,13 @@ class CNabuSiteTargetCTA extends CNabuSiteTargetCTABase implements INabuRoleMask
      */
     public function getCTATarget()
     {
+        if (!($this->nb_site_target_destination instanceof CNabuSiteTarget) &&
+            $this->getTargetUseURI() === CNabuSiteTargetLink::USE_URI_TRANSLATED &&
+            is_numeric($this->getTargetId())
+        ) {
+            $this->nb_site_target_destination = $this->nb_site_target->getSite()->getTarget($this->getTargetId());
+        }
+
         return $this->nb_site_target_destination;
     }
 

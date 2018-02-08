@@ -445,6 +445,19 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
         return $this->nb_site_target_cta_list;
     }
 
+    /**
+     * Gets a CTA from the list of CTAs using their key.
+     * @param string $key Key of CTA to looking for.
+     * @param bool $force If true, forces to reload CTA from database storage.
+     * @return CNabuSiteTargetCTA Returns the requested target if exists or null if not.
+     */
+    public function getCTAByKey($key, $force = false)
+    {
+        $this->getCTAs($force);
+
+        return $this->nb_site_target_cta_list->getItem($key, CNabuSiteTargetCTAList::INDEX_KEY);
+    }
+
     public function indexCTAs()
     {
         $this->nb_site_target_cta_list->sort();
