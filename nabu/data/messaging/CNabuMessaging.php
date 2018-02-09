@@ -19,7 +19,12 @@
  */
 
 namespace nabu\data\messaging;
+use nabu\core\CNabuEngine;
+use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\CNabuDataObject;
+use nabu\messaging\CNabuMessagingFactory;
+use nabu\messaging\managers\CNabuMessagingPoolManager;
+use nabu\messaging\exceptions\ENabuMessagingException;
 use nabu\data\messaging\base\CNabuMessagingBase;
 
 /**
@@ -30,10 +35,15 @@ use nabu\data\messaging\base\CNabuMessagingBase;
  */
 class CNabuMessaging extends CNabuMessagingBase
 {
-    /** @var CNabuMessagingServiceList $nb_messaging_service_list List of services of this instance. */
+    /** @var CNabuMessagingServiceList List of services of this instance. */
     private $nb_messaging_service_list = null;
-    /** @var CNabuMessagingTemplateList $nb_messaging_template_list List of templates of this instance. */
+    /** @var CNabuMessagingTemplateList List of templates of this instance. */
     private $nb_messaging_template_list = null;
+    /** @var CNabuMessagingFactory Factory to produce messages. */
+    private $nb_messaging_factory = null;
+    /** @var CNabuMessagingPoolManager Pool Manager to send messages. */
+    private $nb_messaging_pool_manager = null;
+
 
     public function __construct($nb_messaging = false)
     {
@@ -118,6 +128,7 @@ class CNabuMessaging extends CNabuMessagingBase
         $retval = false;
 
         if (is_string($key) && strlen($key) > 0) {
+            $this->getTemplates();
             $retval = $this->nb_messaging_template_list->getItem($key, CNabuMessagingTemplateList::INDEX_KEY);
         }
 
@@ -157,5 +168,26 @@ class CNabuMessaging extends CNabuMessagingBase
                    $this->getTemplates($force)
                ))
         ;
+    }
+
+    /**
+     * Get the Factory to produce and send messages. If she is not instantiates, then instantiates one and catches it.
+     * @return CNabuMessagingFactory Returns the instance of the Factory.
+     * @throws ENabuCoreException Raises an exception if Customer instance is not available or not matches with
+     * @throws ENabuMessagingException Raises an exception if none Pool Manager available.
+     */
+    public function getFactory()
+    {
+        $nb_engine = CNabuEngine::getEngine();
+
+        if (!($this->nb_messaging_pool_manager instanceof CNabuMessagingPoolManager)) {
+            $this->nb_messaging_pool_manager = CNabuEngine::getEngine()->getMessagingPoolManager();
+        }
+
+        if (!($this->nb_messaging_factory instanceof CNabuMessagingFactory)) {
+            $this->nb_messaging_factory = $this->nb_messaging_pool_manager->getFactory($this);
+        }
+
+        return $this->nb_messaging_factory;
     }
 }
