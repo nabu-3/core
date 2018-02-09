@@ -44,7 +44,9 @@ class CNabuHTTPResponseFileRender extends CNabuHTTPResponseRenderAdapter
             is_file($this->source_filename)
         ) {
             $this->dumpFile($this->source_filename);
-            unlink($this->source_filename);
+            if ($this->unlink_source_file_after_render) {
+                unlink($this->source_filename);
+            }
         } elseif ($this->contentBuilder instanceof CNabuAbstractBuilder) {
             echo $this->contentBuilder->create();
         }
