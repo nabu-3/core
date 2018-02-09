@@ -898,6 +898,9 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
             if (is_dir(NABU_LIB_PATH)) {
                 $this->framework_folders[] = realpath(NABU_LIB_PATH);
             }
+            if (is_dir(NABU_ICONTACT_PATH)) {
+                $this->framework_folders[] = realpath(NABU_ICONTACT_PATH);
+            }
             if (count($this->framework_folders) === 0) {
                 $this->framework_folders = null;
             }
