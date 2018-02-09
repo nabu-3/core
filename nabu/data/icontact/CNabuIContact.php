@@ -100,14 +100,14 @@ class CNabuIContact extends CNabuIContactBase
 
     /**
      * Get a specific Prospect Status Type of this instance.
-     * @param mixed $type A CNabuDataObject containing a field named nb_icontact_prospect_status_type_id or a valid Id.
+     * @param mixed $nb_type A CNabuDataObject containing a field named nb_icontact_prospect_status_type_id or a valid Id.
      * @return CNabuIContactProspectStatusType|false Returns the status type instance if exists or false if not.
      */
-    public function getProspectStatusType($type)
+    public function getProspectStatusType($nb_type)
     {
         $retval = false;
 
-        if (is_numeric($nb_type_id = nb_getMixedValue($type, 'nb_icontact_prospect_status_type_id'))) {
+        if (is_numeric($nb_type_id = nb_getMixedValue($nb_type, 'nb_icontact_prospect_status_type_id'))) {
             $retval = $this->nb_icontact_prospect_status_type_list->getItem($nb_type_id);
         }
 
