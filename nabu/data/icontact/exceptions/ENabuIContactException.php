@@ -35,6 +35,8 @@ class ENabuIContactException extends ENabuDataException
     const ERROR_MAIN_PATH_CANNOT_BE_CREATED = 0x8001;
     /** @var int iContact needs to be saved or fetched before add attachments. */
     const ERROR_ICONTACT_NOT_FETCHED        = 0x8002;
+    /** @var int iContact instance not found. */
+    const ERROR_ICONTACT_NOT_FOUND          = 0x8003;
 
     protected function overloadMessages()
     {
@@ -43,5 +45,7 @@ class ENabuIContactException extends ENabuDataException
             'The main folder %s for this iContact cannot be created.';
         $this->error_messages[ENabuIContactException::ERROR_ICONTACT_NOT_FETCHED] =
             'iContact needs to be saved or fetched before add attachments.';
+        $this->error_messages[ENabuIContactException::ERROR_ICONTACT_NOT_FOUND] =
+            'iContact instance not found.';
     }
 }

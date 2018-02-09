@@ -147,6 +147,8 @@ define('NABU_ICONTACT_TABLE', 'nb_icontact');
 define('NABU_ICONTACT_FIELD_ID', 'nb_icontact_id');
 define('NABU_ICONTACT_PROSPECT_TABLE', 'nb_icontact_prospect');
 define('NABU_ICONTACT_PROSPECT_FIELD_ID', 'nb_icontact_prospect_id');
+define('NABU_ICONTACT_PROSPECT_ATTACHMENT_TABLE', 'nb_icontact_prospect_attachment');
+define('NABU_ICONTACT_PROSPECT_ATTACHMENT_FIELD_ID', 'nb_icontact_prospect_attachment_id');
 
 define('NABU_PROJECT_TABLE', 'nb_project');
 define('NABU_PROJECT_FIELD_ID', 'nb_project_id');

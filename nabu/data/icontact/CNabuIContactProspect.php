@@ -207,6 +207,21 @@ public function __construct($nb_icontact_prospect = false)
     }
 
     /**
+     * Get the list of all attachments associated with this instance.
+     * @param bool $force If true then force to refresh list from the database storage.
+     * @return CNabuIContactProspectAttachmentList Returns a list with attachments found.
+     */
+    public function getAttachments(bool $force = false) : CNabuIContactProspectAttachmentList
+    {
+        if ($this->nb_attachment_list->isEmpty() || $force) {
+            $this->nb_attachment_list->clear();
+            $this->nb_attachment_list->merge(CNabuIContactProspectAttachment::getAttachmentsForProspect($this));
+        }
+
+        return $this->nb_attachment_list;
+    }
+
+    /**
      * Add an Attachment file to this Prospect.
      * @param string $name Name of the attachment
      * @param string $mimetype Mime Type of the attachement
@@ -221,11 +236,12 @@ public function __construct($nb_icontact_prospect = false)
             $nb_icontact = $this->getIContact();
             $base_path = $nb_icontact->getBasePath();
             $retval = $nb_attachment = new CNabuIContactProspectAttachment();
-            $nb_attachment->setIcontactProspectId($this->getId());
+            $nb_attachment->setIcontactProspect($this);
             $nb_attachment->setIcontactProspectDiaryId($nb_diary instanceof CNabuIContactProspectDiary ? $nb_diary->getId() : null);
             $nb_attachment->setName($name);
             $nb_attachment->setMimetype($mimetype);
             $nb_attachment->grantHash();
+            $nb_attachment->putFile($file);
 
             if ($save) {
                 $nb_attachment->save();
@@ -236,6 +252,31 @@ public function __construct($nb_icontact_prospect = false)
         } else {
             throw new ENabuIContactException(ENabuIContactException::ERROR_ICONTACT_NOT_FETCHED);
         }
+    }
+
+    /**
+     * Delete an Attachment from the list if exists.
+     * @param mixed $nb_attachment A CNabuDataObject containing a field named nb_icontact_prospect_attachment_id
+     * or a valid Id.
+     * @return bool Returns true if the Attachment exists and was deleted.
+     * @throws ENabuIContactException Raises an exception if something happens while delete the attachment in the storage.
+     */
+    public function deleteAttachment($nb_attachment) : bool
+    {
+        $retval = false;
+
+        if (is_numeric($nb_attachment_id = nb_getMixedValue($nb_attachment, NABU_ICONTACT_PROSPECT_ATTACHMENT_FIELD_ID))) {
+            $nb_attachment = $this->nb_attachment_list->getItem($nb_attachment_id);
+            if ($nb_attachment->getIContactProspectId() == $this->getId()) {
+                $nb_attachment->deleteFile();
+                $this->nb_attachment_list->removeItem($nb_attachment);
+                $nb_attachment->delete();
+
+                $retval = true;
+            }
+        }
+
+        return $retval;
     }
 
     /**
@@ -256,5 +297,23 @@ public function __construct($nb_icontact_prospect = false)
         );
 
         return $retval;
+    }
+
+    public function refresh(bool $force = false, bool $cascade = false) : bool
+    {
+        return parent::refresh($force, $cascade) &&
+               (!$cascade || (
+                   $this->getAttachments($force)
+               ))
+        ;
+    }
+
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $tdata = parent::getTreeData($nb_language, $dataonly);
+
+        $tdata['attachments'] = $this->getAttachments();
+
+        return $tdata;
     }
 }
