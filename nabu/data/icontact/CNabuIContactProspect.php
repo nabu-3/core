@@ -26,6 +26,8 @@ use nabu\data\CNabuDataObject;
 use nabu\data\icontact\base\CNabuIContactProspectBase;
 use nabu\data\icontact\traits\TNabuIContactChild;
 
+use nabu\data\icontact\exceptions\ENabuIContactException;
+
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
@@ -43,7 +45,18 @@ class CNabuIContactProspect extends CNabuIContactProspectBase
 
     /** @var CNabuIContact Nabu IContact owner instance of this Prospect. */
     private $nb_icontact = null;
+    /** @var CNabuIContactProspectAttachmentList Attachments of this Prospect. */
+    private $nb_attachment_list = null;
 
+/**
+ * @inheritDoc
+ */
+public function __construct($nb_icontact_prospect = false)
+{
+    parent::__construct($nb_icontact_prospect);
+
+    $this->nb_attachment_list = new CNabuIContactProspectAttachmentList();
+}
     /**
      * Gets the IContact owner instance.
      * @return CNabuIContact|null Returns the IContact assigned owner instance.
@@ -191,5 +204,57 @@ class CNabuIContactProspect extends CNabuIContactProspectBase
         }
 
         return $list;
+    }
+
+    /**
+     * Add an Attachment file to this Prospect.
+     * @param string $name Name of the attachment
+     * @param string $mimetype Mime Type of the attachement
+     * @param string $file Full File path and name where the Attachment is originaly stored. I.E. the temporary folder.
+     * @param bool $save If true, the Attachment is inmediately saved in the database storage.
+     * @param CNabuIContactProspectDiary|null $nb_diary If needed the Diary annotation instance related with this attachment.
+     * @return CNabuIContactProspectAttachment Returns a instance object descriptor of created Attachemnt.
+     */
+    public function addAttachment(string $name, string $mimetype, string $file, CNabuIContactProspectDiary $nb_diary = null, bool $save = true)
+    {
+        if ($this->isFetched()) {
+            $nb_icontact = $this->getIContact();
+            $base_path = $nb_icontact->getBasePath();
+            $retval = $nb_attachment = new CNabuIContactProspectAttachment();
+            $nb_attachment->setIcontactProspectId($this->getId());
+            $nb_attachment->setIcontactProspectDiaryId($nb_diary instanceof CNabuIContactProspectDiary ? $nb_diary->getId() : null);
+            $nb_attachment->setName($name);
+            $nb_attachment->setMimetype($mimetype);
+            $nb_attachment->grantHash();
+
+            if ($save) {
+                $nb_attachment->save();
+                $this->nb_attachment_list->addItem($nb_attachment);
+            }
+
+            return $retval;
+        } else {
+            throw new ENabuIContactException(ENabuIContactException::ERROR_ICONTACT_NOT_FETCHED);
+        }
+    }
+
+    /**
+     * Overrides the parent method to save modified subordinated instances.
+     * @param bool $trace If true, traces the query.
+     * @return bool Returns true if success
+     */
+    public function save($trace = false)
+    {
+        $retval = parent::save($trace);
+
+        $this->nb_attachment_list->iterate(
+            function($key, CNabuIContactProspectAttachment $nb_attachment) use($retval)
+            {
+                $retval |= $nb_attachment->save();
+                return true;
+            }
+        );
+
+        return $retval;
     }
 }

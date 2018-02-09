@@ -19,7 +19,11 @@
  */
 
 namespace nabu\data\icontact;
+use nabu\core\exceptions\ENabuCoreException;
+
 use nabu\data\icontact\base\CNabuIContactBase;
+
+use nabu\data\icontact\exceptions\ENabuIContactException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -164,5 +168,28 @@ class CNabuIContact extends CNabuIContactBase
     public function findProspectsByEmailHash(string $hash) : CNabuIContactProspectList
     {
         return CNabuIContactProspect::findIContactProspectsByEmailHash($this, $hash);
+    }
+
+    /**
+     * Check if the main storage folder for this IContact exists and if not, then create it.
+     * @param bool $save If true, applies now the changes to instance in the database storage.
+     * @throws ENabuIContactException Raises an exception if the folder cannot be created.
+     */
+    public function grantStorageFolder(bool $save = true)
+    {
+        $base_path = $this->getBasePath();
+
+        if (!is_string($base_path) || strlen($base_path) === 0 || !file_exists($base_path)) {
+            $hash = mb_strtolower(str_replace(array('{', '}'), '', $this->grantHash()));
+            $base_path = NABU_ICONTACT_PATH . DIRECTORY_SEPARATOR . $hash;
+            if (!file_exists($base_path) && (!mkdir($base_path) || !file_exists($base_path))) {
+                throw new ENabuIContactException(
+                    ENabuIContactException::ERROR_MAIN_PATH_CANNOT_BE_CREATED,
+                    array($base_path)
+                );
+            }
+            $this->setBasePath($base_path);
+            if ($save) $this->save();
+        }
     }
 }

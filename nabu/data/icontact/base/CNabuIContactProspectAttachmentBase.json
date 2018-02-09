@@ -41,9 +41,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_icontact_prospect_attachment_hash": {
+            "name": "nb_icontact_prospect_attachment_hash",
+            "ordinal": "4",
+            "data_type": "varchar",
+            "precision": null,
+            "type": "varchar(38)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_icontact_prospect_attachment_name": {
             "name": "nb_icontact_prospect_attachment_name",
-            "ordinal": "4",
+            "ordinal": "5",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -54,21 +65,10 @@
         },
         "nb_icontact_prospect_attachment_mimetype": {
             "name": "nb_icontact_prospect_attachment_mimetype",
-            "ordinal": "5",
-            "data_type": "varchar",
-            "precision": null,
-            "type": "varchar(50)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_icontact_prospect_attachment_hash": {
-            "name": "nb_icontact_prospect_attachment_hash",
             "ordinal": "6",
             "data_type": "varchar",
             "precision": null,
-            "type": "varchar(32)",
+            "type": "varchar(50)",
             "default": null,
             "is_nullable": true,
             "extra": "",
@@ -114,6 +114,22 @@
             "fields": {
                 "nb_icontact_prospect_diary_id": {
                     "name": "nb_icontact_prospect_diary_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_icontact_prospect_attachment_hash": {
+            "name": "nb_icontact_prospect_attachment_hash",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_icontact_prospect_attachment_hash": {
+                    "name": "nb_icontact_prospect_attachment_hash",
                     "ordinal": "1",
                     "collation": "ASC",
                     "null": true,

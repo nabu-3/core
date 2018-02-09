@@ -784,6 +784,22 @@ class CNabuHTTPRequest extends CNabuObject
                (is_array($this->xdr_post) && array_key_exists($field_name, $this->xdr_post));
     }
 
+    public function hasREQUESTField($field_name)
+    {
+        return array_key_exists($field_name, $_REQUEST) ||
+               (is_array($this->xdr_post) && array_key_exists($field_name, $this->xdr_post));
+    }
+
+    public function hasFILESField($field_name)
+    {
+        return array_key_exists($field_name, $_FILES);
+    }
+
+    public function getGETFieldNames()
+    {
+        return count($_GET) > 0 ? array_keys($_GET) : null;
+    }
+
     public function getPOSTFieldNames()
     {
         return is_array($this->xdr_post)
@@ -792,10 +808,14 @@ class CNabuHTTPRequest extends CNabuObject
         ;
     }
 
-    public function hasREQUESTField($field_name)
+    public function getREQUESTFieldNames()
     {
-        return array_key_exists($field_name, $_REQUEST) ||
-               (is_array($this->xdr_post) && array_key_exists($field_name, $this->xdr_post));
+        return count($_REQUEST) > 0 ? array_keys($_REQUEST) : null;
+    }
+
+    public function getFILESFieldNames()
+    {
+        return count($_FILES) > 0 ? array_keys($_FILES) : null;
     }
 
     public function getGETField($field_name)
@@ -817,6 +837,11 @@ class CNabuHTTPRequest extends CNabuObject
                ? (array_key_exists($field_name, $this->xdr_post) ? $this->xdr_post[$field_name] : null)
                : filter_input(INPUT_REQUEST, $field_name)
         ;
+    }
+
+    public function getFILESField($field_name)
+    {
+        return $_FILES[$field_name];
     }
 
     public function setGETField($field_name, $field_value)
@@ -845,6 +870,13 @@ class CNabuHTTPRequest extends CNabuObject
     public function setREQUESTField($field_name, $field_value)
     {
         $_REQUEST[$field_name] = $field_value;
+
+        return $this;
+    }
+
+    public function setFILESField($field_name, $field_value)
+    {
+        $_FILES[$field_name] = $field_value;
 
         return $this;
     }
