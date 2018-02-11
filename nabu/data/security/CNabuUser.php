@@ -62,6 +62,7 @@ class CNabuUser extends CNabuUserBase implements INabuId
         parent::__construct($nb_user);
 
         $this->nb_site_user_list = new CNabuSiteUserList();
+        $this->nb_site_user_list->setIndexedFieldName('nb_site_id');
     }
 
     /**
@@ -448,5 +449,10 @@ class CNabuUser extends CNabuUserBase implements INabuId
         }
 
         return $retval;
+    }
+
+    public function refresh(bool $force = false, bool $cascade = false) : bool
+    {
+        return parent::refresh($force, $cascade) && (!$cascade || $this->getProfiles($force));
     }
 }

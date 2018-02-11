@@ -106,6 +106,7 @@ abstract class CNabuDBInternalObject extends CNabuDBObject
             } else {
                 $list = new $list_class($parent);
             }
+            $list->setIndexedFieldName($index_field);
             $list->mergeArray(
                 CNabuEngine::getEngine()
                     ->getMainDB()

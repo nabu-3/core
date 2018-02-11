@@ -27,13 +27,14 @@ use nabu\data\security\CNabuUser;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\data\site
  */
 class CNabuSiteUser extends CNabuSiteUserBase
 {
     /**
-     * Upate table to set las access datetime of the user.
+     * Upate table to set last access datetime of the user.
      */
     public function logAccess()
     {
@@ -60,7 +61,7 @@ class CNabuSiteUser extends CNabuSiteUserBase
     {
         if (is_numeric ($nb_user_id = nb_getMixedValue($nb_user, NABU_USER_FIELD_ID))) {
             $retval = CNabuSiteUser::buildObjectListFromSQL(
-                'nb_user_id',
+                'nb_site_id',
                 'SELECT su.*
                    FROM nb_site_user su, nb_user u, nb_site s
                   WHERE su.nb_user_id=u.nb_user_id

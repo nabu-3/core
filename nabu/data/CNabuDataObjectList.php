@@ -118,6 +118,18 @@ abstract class CNabuDataObjectList extends CNabuObject
     }
 
     /**
+     * Sets the main Indexed Field Name.
+     * @param string $index_field The field name to act as main Indexed Field Name.
+     * @return CNabuDataObjectList Returns the self instance to grant cascade setters.
+     */
+    public function setIndexedFieldName(string $index_field)
+    {
+        $this->index_field = $index_field;
+
+        return $this;
+    }
+
+    /**
      * Gets the size (number of items) in the list.
      * @return int Returns the number of items.
      */
