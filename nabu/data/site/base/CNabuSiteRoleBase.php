@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/09 10:35:54 UTC
+ * Created: 2018/02/11 20:35:50 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -28,6 +28,12 @@ namespace nabu\data\site\base;
 use \nabu\core\CNabuEngine;
 use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\data\CNabuDataObject;
+use \nabu\data\lang\interfaces\INabuTranslated;
+use \nabu\data\lang\interfaces\INabuTranslation;
+use \nabu\data\lang\traits\TNabuTranslated;
+use \nabu\data\site\builtin\CNabuBuiltInSiteRoleLanguage;
+use \nabu\data\site\CNabuSiteRoleLanguage;
+use \nabu\data\site\CNabuSiteRoleLanguageList;
 use \nabu\data\site\traits\TNabuSiteChild;
 use \nabu\db\CNabuDBInternalObject;
 
@@ -36,9 +42,10 @@ use \nabu\db\CNabuDBInternalObject;
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
  */
-abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
+abstract class CNabuSiteRoleBase extends CNabuDBInternalObject implements INabuTranslated
 {
     use TNabuSiteChild;
+    use TNabuTranslated;
 
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
@@ -59,6 +66,8 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
         }
         
         parent::__construct();
+        $this->__translatedConstruct();
+        $this->translations_list = new CNabuSiteRoleLanguageList();
     }
 
     /**
@@ -131,6 +140,92 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
     }
 
     /**
+     * Check if the instance passed as parameter $translation is a valid child translation for this object
+     * @param INabuTranslation $translation Translation instance to check
+     * @return bool Return true if a valid object is passed as instance or false elsewhere
+     */
+    protected function checkForValidTranslationInstance($translation)
+    {
+        return ($translation !== null &&
+                $translation instanceof CNabuSiteRoleLanguage &&
+                $translation->matchValue($this, 'nb_site_id') &&
+                $translation->matchValue($this, 'nb_role_id')
+        );
+    }
+
+    /**
+     * Get all language instances corresponding to available translations.
+     * @param bool $force If true force to reload languages list from storage.
+     * @return null|array Return an array of \nabu\data\lang\CNabuLanguage instances if they have translations or null
+     * if not.
+     */
+    public function getLanguages($force = false)
+    {
+        if (!CNabuEngine::getEngine()->isOperationModeStandalone() &&
+            ($this->languages_list->getSize() === 0 || $force)
+        ) {
+            $this->languages_list = CNabuSiteRoleLanguage::getLanguagesForTranslatedObject($this);
+        }
+        
+        return $this->languages_list;
+    }
+
+    /**
+     * Gets available translation instances.
+     * @param bool $force If true force to reload translations list from storage.
+     * @return null|array Return an array of \nabu\data\site\CNabuSiteRoleLanguage instances if they have translations
+     * or null if not.
+     */
+    public function getTranslations($force = false)
+    {
+        if (!CNabuEngine::getEngine()->isOperationModeStandalone() &&
+            ($this->translations_list->getSize() === 0 || $force)
+        ) {
+            $this->translations_list = CNabuSiteRoleLanguage::getTranslationsForTranslatedObject($this);
+        }
+        
+        return $this->translations_list;
+    }
+
+    /**
+     * Creates a new translation instance. I the translation already exists then replaces ancient translation with this
+     * new.
+     * @param int|string|CNabuDataObject $nb_language A valid Id or object containing a nb_language_id field to
+     * identify the language of new translation.
+     * @return CNabuSiteRoleLanguage Returns the created instance to store translation or null if not valid language
+     * was provided.
+     */
+    public function newTranslation($nb_language)
+    {
+        $nb_language_id = nb_getMixedValue($nb_language, NABU_LANG_FIELD_ID);
+        if (is_numeric($nb_language_id) || nb_isValidGUID($nb_language_id)) {
+            $nb_translation = $this->isBuiltIn()
+                            ? new CNabuBuiltInSiteRoleLanguage()
+                            : new CNabuSiteRoleLanguage()
+            ;
+            $nb_translation->transferValue($this, 'nb_site_id');
+            $nb_translation->transferValue($this, 'nb_role_id');
+            $nb_translation->transferValue($nb_language, NABU_LANG_FIELD_ID);
+            $this->setTranslation($nb_translation);
+        } else {
+            $nb_translation = null;
+        }
+        
+        return $nb_translation;
+    }
+
+    /**
+     * Overrides refresh method to add translations branch to refresh.
+     * @param bool $force Forces to reload entities from the database storage.
+     * @param bool $cascade Forces to reload child entities from the database storage.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh(bool $force = false, bool $cascade = false) : bool
+    {
+        return parent::refresh($force, $cascade) && $this->appendTranslatedRefresh($force);
+    }
+
+    /**
      * Get Site Id attribute value
      * @return int Returns the Site Id value
      */
@@ -180,6 +275,54 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
             );
         }
         $this->setValue('nb_role_id', $nb_role_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Role Login Redirection Target Use URI attribute value
+     * @return mixed Returns the Site Role Login Redirection Target Use URI value
+     */
+    public function getLoginRedirectionTargetUseURI()
+    {
+        return $this->getValue('nb_site_role_login_redirection_target_use_uri');
+    }
+
+    /**
+     * Sets the Site Role Login Redirection Target Use URI attribute value.
+     * @param mixed $login_redirection_target_use_uri New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setLoginRedirectionTargetUseURI($login_redirection_target_use_uri) : CNabuDataObject
+    {
+        if ($login_redirection_target_use_uri === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$login_redirection_target_use_uri")
+            );
+        }
+        $this->setValue('nb_site_role_login_redirection_target_use_uri', $login_redirection_target_use_uri);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Role Login Redirection Target Id attribute value
+     * @return null|int Returns the Site Role Login Redirection Target Id value
+     */
+    public function getLoginRedirectionTargetId()
+    {
+        return $this->getValue('nb_site_role_login_redirection_target_id');
+    }
+
+    /**
+     * Sets the Site Role Login Redirection Target Id attribute value.
+     * @param int|null $login_redirection_target_id New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setLoginRedirectionTargetId(int $login_redirection_target_id = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_role_login_redirection_target_id', $login_redirection_target_id);
         
         return $this;
     }
@@ -329,5 +472,20 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject
         $this->setValue('nb_site_role_email_template_new_message', $email_template_new_message);
         
         return $this;
+    }
+
+    /**
+     * Overrides this method to add support to traits and/or attributes.
+     * @param int|CNabuDataObject $nb_language Instance or Id of the language to be used.
+     * @param bool $dataonly Render only field values and ommit class control flags.
+     * @return array Returns a multilevel associative array with all data.
+     */
+    public function getTreeData($nb_language = null, $dataonly = false)
+    {
+        $trdata = parent::getTreeData($nb_language, $dataonly);
+        
+        $trdata = $this->appendTranslatedTreeData($trdata, $nb_language, $dataonly);
+        
+        return $trdata;
     }
 }

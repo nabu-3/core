@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/11 20:34:57 UTC
+ * Created: 2018/02/11 20:35:51 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -23,26 +23,26 @@
  * limitations under the License.
  */
 
-namespace nabu\data\cluster\base;
+namespace nabu\data\site\base;
 
 use \nabu\core\CNabuEngine;
-use \nabu\data\cluster\CNabuIP;
 use \nabu\data\CNabuDataObjectList;
+use \nabu\data\site\CNabuSiteRole;
 
 /**
- * Class to manage a list of IP instances.
+ * Class to manage a list of Site Role Language instances.
  * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
- * @package \nabu\data\cluster\base
+ * @package \nabu\data\site\base
  */
-abstract class CNabuIPListBase extends CNabuDataObjectList
+abstract class CNabuSiteRoleLanguageListBase extends CNabuDataObjectList
 {
     /**
      * Instantiates the class.
      */
     public function __construct()
     {
-        parent::__construct('nb_ip_id');
+        parent::__construct('nb_language_id');
     }
 
     /**
@@ -53,7 +53,7 @@ abstract class CNabuIPListBase extends CNabuDataObjectList
     }
 
     /**
-     * Acquires an instance of class CNabuIP from the database.
+     * Acquires an instance of class CNabuSiteRole from the database.
      * @param string $key Id or reference field in the instance to acquire.
      * @param string $index Secondary index to be used if needed.
      * @return mixed Returns the unserialized instance if exists or false if not.
@@ -63,7 +63,7 @@ abstract class CNabuIPListBase extends CNabuDataObjectList
         $retval = false;
         
         if ($index === false && CNabuEngine::getEngine()->isMainDBAvailable()) {
-            $item = new CNabuIP($key);
+            $item = new CNabuSiteRole($key);
             if ($item->isFetched()) {
                 $retval = $item;
             }
