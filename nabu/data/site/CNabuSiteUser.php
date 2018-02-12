@@ -20,6 +20,10 @@
 
 namespace nabu\data\site;
 
+use nabu\data\CNabuDataObject;
+
+use nabu\data\security\CNabuUserList;
+
 use \nabu\data\site\base\CNabuSiteUserBase;
 use nabu\core\exceptions\ENabuSecurityException;
 use nabu\data\customer\CNabuCustomer;
@@ -111,6 +115,39 @@ class CNabuSiteUser extends CNabuSiteUserBase
             );
         } else {
             $retval = new CNabuSiteList($nb_customer);
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Get a list of Active Users for a Site.
+     * @param mixed $nb_site A CNabuDataObject instance containing a field called nb_site_id or a valid Site Id.
+     * @return CNabuUserList Returns the list of Users found.
+     */
+    public static function getActiveUsersForSite($nb_site) : CNabuUserList
+    {
+        if (is_numeric($nb_site_id = nb_getMixedValue($nb_site, NABU_SITE_FIELD_ID))) {
+            $retval = CNabuUser::buildObjectListFromSQL(
+                'nb_user_id',
+                'SELECT u.*
+                  FROM nb_user u, nb_site_user su
+                 WHERE u.nb_user_id=su.nb_user_id
+                   AND su.nb_site_id=%site_id$d',
+                array(
+                    'site_id' => $nb_site_id
+                ),
+                ($nb_site instanceof CNabuSite ? $nb_site : null)
+            );
+            if ($nb_site instanceof CNabuSite) {
+                $retval->iterate(function($key, CNabuUser $nb_user) use ($nb_site)
+                {
+                    $nb_user->setCustomer($nb_site->getCustomer());
+                    return true;
+                });
+            }
+        } else {
+            $retval = new CNabuUserList();
         }
 
         return $retval;

@@ -21,6 +21,8 @@
 namespace nabu\data\site;
 
 use nabu\cache\CNabuCacheNull;
+use nabu\data\security\CNabuUserList;
+
 use nabu\cache\interfaces\INabuCacheStorage;
 use nabu\core\CNabuEngine;
 use nabu\core\exceptions\ENabuCoreException;
@@ -101,6 +103,8 @@ class CNabuSite extends CNabuSiteBase
     private $nb_default_role = null;
     /** @var CNabuClusterUser $nb_cluster_user Cluster User instance of this Site. */
     private $nb_cluster_user = null;
+    /** @var CNabuUserList List of Users. This list can be a partial list depending of the method called to fill it. */
+    private $nb_user_list = null;
 
     public function __construct($nb_site = false)
     {
@@ -112,6 +116,7 @@ class CNabuSite extends CNabuSiteBase
         $this->nb_site_static_content_list = new CNabuSiteStaticContentList($this);
         $this->nb_role_list = new CNabuRoleList();
         $this->nb_site_role_list = new CNabuSiteRoleList();
+        $this->nb_user_list = new CNabuUserList();
     }
 
     static public function findByAlias($alias)
@@ -283,20 +288,35 @@ class CNabuSite extends CNabuSiteBase
      * Generic creation of a CNabuSiteTargetLink from a link descriptor contained in their fields.
      * Some of these descriptors can be the "Default" Target, or "Page Not Found" Target.
      * @param string $kind Infix fragment of names of fields involved in referred descriptor.
+     * @param CNabuSiteRole|null $nb_site_role Role to check variant of the target link.
      * @return CNabuSiteTargetLink Returns the formed link instance.
      */
-    private function getReferredTargetLink($kind)
+    private function getReferredTargetLink(string $kind, CNabuSiteRole $nb_site_role = null)
     {
         $field_use_uri = 'nb_site_' . $kind . '_target_use_uri';
         $field_target_id = 'nb_site_' . $kind . '_target_id';
         $field_lang_url = 'nb_site_lang_' . $kind . '_target_url';
 
-        return ($this->contains($field_use_uri) && $this->contains($field_target_id))
-               ? CNabuSiteTargetLink::buildLinkFromReferredInstance(
-                   $this, $this, $field_use_uri, $field_target_id, $field_lang_url
-                 )
-               : new CNabuSiteTargetLink()
-        ;
+        $retval = false;
+
+        if ($nb_site_role instanceof CNabuSiteRole) {
+            $nb_link = $nb_site_role->getReferredTargetLink($kind);
+
+            if ($nb_link->isLinkable()) {
+                $retval = $nb_link;
+            }
+        }
+
+        if (!$retval) {
+            $retval = ($this->contains($field_use_uri) && $this->contains($field_target_id))
+                    ? CNabuSiteTargetLink::buildLinkFromReferredInstance(
+                        $this, $this, $field_use_uri, $field_target_id, $field_lang_url
+                      )
+                    : new CNabuSiteTargetLink()
+            ;
+        }
+
+        return $retval;
     }
 
     /**
@@ -328,11 +348,13 @@ class CNabuSite extends CNabuSiteBase
 
     /**
      * Gets the Login Redirection Target Link instance.
+     * @param CNabuSiteRole $nb_site_role The Site Role entity to discern if target is in the role or applies
+     * general configuration.
      * @return CNabuSiteTargetLink Returns the Site Target Link generated instance.
      */
-    public function getLoginRedirectionTargetLink()
+    public function getLoginRedirectionTargetLink(CNabuSiteRole $nb_site_role)
     {
-        return $this->getReferredTargetLink('login_redirection');
+        return $this->getReferredTargetLink('login_redirection', $nb_site_role);
     }
 
     /**
@@ -845,14 +867,6 @@ class CNabuSite extends CNabuSiteBase
         );
     }
 
-    /*
-     __  ____  __ _       _____                      _                      _
-     \ \/ /  \/  | |     | ____|_  ___ __   ___ _ __(_)_ __ ___   ___ _ __ | |_
-      \  /| |\/| | |     |  _| \ \/ / '_ \ / _ \ '__| | '_ ` _ \ / _ \ '_ \| __|
-      /  \| |  | | |___  | |___ >  <| |_) |  __/ |  | | | | | | |  __/ | | | |_
-     /_/\_\_|  |_|_____| |_____/_/\_\ .__/ \___|_|  |_|_| |_| |_|\___|_| |_|\__|
-                                    |_|
-    */
     public function refresh(bool $force = false, bool $cascade = false) : bool
     {
         return parent::refresh($force, $cascade) &&
@@ -918,6 +932,21 @@ class CNabuSite extends CNabuSiteBase
         }
 
         return $retval;
+    }
+
+    /**
+     * Get the full list of active Users.
+     * @param bool $force If true forces to reload the list from the database storage.
+     * @return CNabuUserList Return a list with found users.
+     */
+    public function getActiveUsers(bool $force = false) : CNabuUserList
+    {
+        if ($this->nb_user_list->isEmpty() || $force) {
+            $this->nb_user_list->clear();
+            $this->nb_user_list->merge(CNabuSiteUser::getActiveUsersForSite($this));
+        }
+
+        return $this->nb_user_list;
     }
 
     /*

@@ -859,13 +859,32 @@ class CNabuCustomer extends CNabuCustomerBase
             } elseif ($nb_role_id !== null && $nb_role_id !== false) {
                 throw new ENabuCoreException(
                     ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
-                    array('$nb_role', print_r($nb_role, true))
+                    array(print_r($nb_role, true), '$nb_role')
                 );
             }
         }
 
         return $retval;
     }
+
+    /**
+     * Gets a Role instance using their key.
+     * @param string $key Key of the Role to be retrieved.
+     * @return CNabuIContact Returns a Role instance if exists or false if not.
+     */
+    public function getRoleByKey(string $key)
+    {
+        if (!is_string($key) || strlen($key) === 0) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                array('$key', print_r($key, true))
+            );
+        }
+
+        return $this->nb_role_list->getItem($key, CNabuRoleList::INDEX_KEY);
+    }
+
+
 
     /*
            _        ____            _             _
@@ -926,7 +945,7 @@ class CNabuCustomer extends CNabuCustomerBase
             } elseif ($nb_icontact_id !== null && $nb_icontact_id !== false) {
                 throw new ENabuCoreException(
                     ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
-                    array('$nb_icontact', print_r($nb_icontact, true))
+                    array(print_r($nb_icontact, true), '$nb_icontact')
                 );
             }
         }

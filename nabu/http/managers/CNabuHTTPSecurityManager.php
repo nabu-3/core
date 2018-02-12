@@ -475,7 +475,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                 ) {
                     $after_login = $url;
                 } else {
-                    if (strlen($url = $nb_site->getLoginRedirectionTargetLink()->getBestQualifiedURL(array($lang => $lang))) > 0) {
+                    if (strlen($url = $nb_site->getLoginRedirectionTargetLink($this->nb_site_role)->getBestQualifiedURL(array($lang => $lang))) > 0) {
                         $after_login = $url . "?logged";
                     }
                 }
@@ -596,7 +596,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
 
             if ($save &&
                 $this->nb_user->save() &&
-                strlen($url = $nb_site->getLoginRedirectionTargetLink()->getBestQualifiedURL()) > 0
+                strlen($url = $nb_site->getLoginRedirectionTargetLink($this->nb_site_role)->getBestQualifiedURL()) > 0
             ) {
 
                 $after_login = $url . "?logged";
@@ -605,6 +605,10 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         }
     }
 
+    /**
+     * Check if Site Policies are accepted or not.
+     * @return bool Returns true if they are accepted.
+     */
     public function arePoliciesAccepted()
     {
         return $this->isUserLogged() && $this->nb_user->getPoliciesAccepted() === 'T';

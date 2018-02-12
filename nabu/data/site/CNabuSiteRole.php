@@ -20,6 +20,8 @@
 
 namespace nabu\data\site;
 
+use nabu\data\CNabuDataObject;
+
 use \nabu\data\site\base\CNabuSiteRoleBase;
 
 /**
@@ -29,6 +31,42 @@ use \nabu\data\site\base\CNabuSiteRoleBase;
  */
 class CNabuSiteRole extends CNabuSiteRoleBase
 {
+    /**
+     * Generic creation of a CNabuSiteTargetLink from a link descriptor contained in their fields.
+     * Some of these descriptors can be the "Default" Target, or "Page Not Found" Target.
+     * @param string $kind Infix fragment of names of fields involved in referred descriptor.
+     * @return CNabuSiteTargetLink Returns the formed link instance.
+     */
+    public function getReferredTargetLink(string $kind)
+    {
+        $field_use_uri = 'nb_site_role_' . $kind . '_target_use_uri';
+        $field_target_id = 'nb_site_role_' . $kind . '_target_id';
+        $field_lang_url = 'nb_site_role_lang_' . $kind . '_target_url';
+
+        return ($this->contains($field_use_uri) && $this->contains($field_target_id))
+               ? CNabuSiteTargetLink::buildLinkFromReferredInstance(
+                     $this->getSite(), $this, $field_use_uri, $field_target_id, $field_lang_url
+                 )
+               : new CNabuSiteTargetLink()
+        ;
+    }
+
+    /**
+     * Gets the Login Redirection Target Link instance.
+     * @param CNabuSiteRole $nb_site_role The Site Role entity to discern if target is in the role or applies
+     * general configuration.
+     * @return CNabuSiteTargetLink Returns the Site Target Link generated instance.
+     */
+    public function getLoginRedirectionTargetLink(CNabuSiteRole $nb_site_role)
+    {
+        return $this->getReferredTargetLink('login_redirection', $nb_site_role);
+    }
+
+    /**
+     * Get the list of all Roles assigned to a Site.
+     * @param mixed $nb_site A CNabuDataObject containing a field named nb_site_id or a valid Site Id.
+     * @return CNabuSiteRoleList Returns a list with all Site Role instances found.
+     */
     public static function getSiteRolesForSite($nb_site) : CNabuSiteRoleList
     {
         if (is_numeric($nb_site_id = nb_getMixedValue($nb_site, NABU_SITE_FIELD_ID))) {
