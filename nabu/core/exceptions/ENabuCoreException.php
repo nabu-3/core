@@ -301,7 +301,7 @@ class ENabuCoreException extends ENabuException
         ENabuCoreException::ERROR_UNEXPECTED_PARAM_CLASS_TYPE =>
             'Unexpected object class type [%s] in param [%s].',
         ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE =>
-            'Unexpected value[%s] in param [%s].',
+            'Unexpected value [%s] in param [%s].',
 
         ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN =>
             'NULL value not allowed in %s.',
