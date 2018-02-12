@@ -825,16 +825,16 @@ class CNabuHTTPRequest extends CNabuObject
 
     public function getPOSTField($field_name)
     {
-        return is_array($this->xdr_post)
-               ? (array_key_exists($field_name, $this->xdr_post) ? $this->xdr_post[$field_name] : null)
+        return is_array($this->xdr_post) && array_key_exists($field_name, $this->xdr_post)
+               ? $this->xdr_post[$field_name]
                : filter_input(INPUT_POST, $field_name)
         ;
     }
 
     public function getREQUESTField($field_name)
     {
-        return is_array($this->xdr_post)
-               ? (array_key_exists($field_name, $this->xdr_post) ? $this->xdr_post[$field_name] : null)
+        return is_array($this->xdr_post) && array_key_exists($field_name, $this->xdr_post)
+               ? $this->xdr_post[$field_name]
                : filter_input(INPUT_REQUEST, $field_name)
         ;
     }
