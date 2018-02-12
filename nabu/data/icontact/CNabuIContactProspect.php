@@ -81,6 +81,47 @@ public function __construct($nb_icontact_prospect = false)
      * Get related Prospects of a User.
      * @param mixed $nb_icontact IContact instance where to find Prospects or a CNabuDataObject containing a field
      * called nb_icontact_prospect_id or an ID.
+     * @param CNabuIContactProspectStatusType|null $nb_status_type If setted, the list is filtered using this status.
+     * @return CNabuIContactProspectList Returns a Prospect List containing all Prospects found.
+     */
+    static public function getProspectsForIContact(
+        $nb_icontact,
+        CNabuIContactProspectStatusType $nb_status_type = null
+    ) : CNabuIContactProspectList
+    {
+        if (is_numeric($nb_icontact_id = nb_getMixedValue($nb_icontact, 'nb_icontact_id'))) {
+            $status_id = nb_getMixedValue($nb_status_type, 'nb_icontact_prospect_status_type_id');
+            $retval = CNabuIContactProspect::buildObjectListFromSQL(
+                'nb_icontact_prospect_id',
+                'SELECT ip.*
+                   FROM nb_icontact_prospect ip, nb_icontact i
+                  WHERE ip.nb_icontact_id=i.nb_icontact_id
+                    AND i.nb_icontact_id=%cont_id$d '
+                . (is_numeric($status_id) ? 'AND ip.nb_icontact_prospect_status_id=%status_id$d ' : '')
+               . 'ORDER BY ip.nb_icontact_prospect_creation_datetime DESC',
+                array(
+                    'cont_id' => $nb_icontact_id,
+                    'status_id' => $status_id
+                ),
+                ($nb_icontact instanceof CNabuIContact ? $nb_icontact : null)
+            );
+            if ($nb_icontact instanceof CNabuIContact) {
+                $retval->iterate(function ($key, $nb_prospect) use($nb_icontact) {
+                    $nb_prospect->setIContact($nb_icontact);
+                    return true;
+                });
+            }
+        } else {
+            $retval = new CNabuIContactProspectList();
+        }
+
+        return $retval;
+    }
+
+    /**
+     * Get related Prospects of a User.
+     * @param mixed $nb_icontact IContact instance where to find Prospects or a CNabuDataObject containing a field
+     * called nb_icontact_prospect_id or an ID.
      * @param mixed $nb_user User instance that holds Prospects or a CNabuDataObject containing a field called
      * nb_user_id or an ID.
      * @param CNabuIContactProspectStatusType|null $nb_status_type If setted, the list is filtered using this status.

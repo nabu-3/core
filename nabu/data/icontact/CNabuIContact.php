@@ -88,6 +88,18 @@ class CNabuIContact extends CNabuIContactBase
     }
 
     /**
+     * Get all prospects of an IContact.
+     * @param CNabuIContactProspectStatusType|null $nb_status_type If setted, the list is filtered using this status.
+     * @return CNabuIContactProspectList Returns a list instance with all types found.
+     */
+    public function getProspects(CNabuIContactProspectStatusType $nb_status_type = null) : CNabuIContactProspectList
+    {
+        $this->nb_icontact_prospect_list->clear();
+        $this->nb_icontact_prospect_list->merge(CNabuIContactProspect::getProspectsForIContact($this, $nb_status_type));
+
+        return $this->nb_icontact_prospect_list;
+    }
+    /**
      * Get Prospect Status Types of this instance.
      * @param bool $force If true then force to reload complete list from database storage.
      * @return CNabuIContactProspectStatusTypeList Returns a list instance with all types found.
