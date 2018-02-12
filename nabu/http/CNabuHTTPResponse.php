@@ -95,6 +95,11 @@ final class CNabuHTTPResponse extends CNabuObject
      * @var bool
      */
     private $cors_with_credentials = false;
+    /**
+     * Attachment filename
+     * @var string
+     */
+    private $attachment_filename = null;
 
     /**
      * Default constructor.
@@ -176,7 +181,31 @@ final class CNabuHTTPResponse extends CNabuObject
         }
     }
 
+    /**
+     * Get current Attachment File Name setted.
+     * @return string|null Returns current File Name if setted or null if none.
+     */
+    public function getAttachmentFilename()
+    {
+        return $this->attachment_filename;
+    }
+
+    /**
+     * Set the Attachment File Name.
+     * @param string|null $filename File Name to be setted or null to remove.
+     * @return CNabuHTTPResponse Returns the self pointer to grant cascade setter calls.
+     */
+    public function setAttachmentFilename(string $filename = null) : CNabuHTTPResponse
+    {
+        $this->attachment_filename = $filename;
+
+        return $this;
+    }
+
     // Headers index at http://www.iana.org/assignments/message-headers/message-headers.xhtml
+    /**
+     * Build HTTP Headers.
+     */
     public function buildHeaders()
     {
         if ($this->use_cors) {
@@ -192,18 +221,26 @@ final class CNabuHTTPResponse extends CNabuObject
 
         // Cache Control RFC: https://tools.ietf.org/html/rfc7234
         if ($this->nb_request instanceof CNabuHTTPRequest &&
-            ($nb_site_target = $this->nb_request->getSiteTarget()) instanceof CNabuSiteTarget &&
-            ($max_age = $nb_site_target->getDynamicCacheEffectiveMaxAge()) !== false
+            ($nb_site_target = $this->nb_request->getSiteTarget()) instanceof CNabuSiteTarget
         ) {
-            $expire_date = gmdate("D, d M Y H:i:s", time() + $max_age);
-            $this->setHeader('Expires', $expire_date . 'GMT');
-            $this->setHeader('Cache-Control', "max-age=$max_age");
-            $this->setHeader('User-Cache-Control', "max-age=$max_age");
-            $this->setHeader('Pragma', 'cache');
-        } else {
-            $this->setHeader('Expires', 'Thu, 1 Jan 1981 00:00:00 GMT');
-            $this->setheader('Cache-Control', 'no-store, no-cache, must-revalidate');
-            $this->setHeader('Pragma', 'no-cache');
+            if (($max_age = $nb_site_target->getDynamicCacheEffectiveMaxAge()) !== false) {
+                $expire_date = gmdate("D, d M Y H:i:s", time() + $max_age);
+                $this->setHeader('Expires', $expire_date . 'GMT');
+                $this->setHeader('Cache-Control', "max-age=$max_age");
+                $this->setHeader('User-Cache-Control', "max-age=$max_age");
+                $this->setHeader('Pragma', 'cache');
+            } else {
+                $this->setHeader('Expires', 'Thu, 1 Jan 1981 00:00:00 GMT');
+                $this->setheader('Cache-Control', 'no-store, no-cache, must-revalidate');
+                $this->setHeader('Pragma', 'no-cache');
+            }
+            if ($nb_site_target->getAttachment() === 'T') {
+                if (is_string($this->attachment_filename) && strlen($this->attachment_filename) > 0) {
+                    $this->setHeader('Content-Disposition', 'attachment; filename=' . $this->attachment_filename);
+                } else {
+                    $this->setHeader('Content-Disposition', 'attachment');
+                }
+            }
         }
 
         if (count($this->header_list) > 0) {
