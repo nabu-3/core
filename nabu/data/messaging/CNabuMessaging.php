@@ -162,12 +162,12 @@ class CNabuMessaging extends CNabuMessagingBase
      */
     public function refresh(bool $force = false, bool $cascade = false) : bool
     {
-        return parent::refresh($force, $cascade) &&
-               (!$cascade || (
-                   $this->getServices($force) &&
-                   $this->getTemplates($force)
-               ))
-        ;
+        if ($retval = parent::refresh($force, $cascade) && $cascade) {
+            $this->getServices($force);
+            $this->getTemplates($force);
+        }
+
+        return $retval;
     }
 
     /**

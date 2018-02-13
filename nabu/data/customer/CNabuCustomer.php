@@ -152,19 +152,17 @@ class CNabuCustomer extends CNabuCustomerBase
      */
     public function refresh(bool $force = false, bool $cascade = false) : bool
     {
-        return parent::refresh($force, $cascade) &&
-               (!$cascade ||
-                    (
-                        $this->getMediotecas($force) &&
-                        $this->getSites($force) &&
-                        $this->getCommerces($force) &&
-                        $this->getCatalogs($force) &&
-                        $this->getMessagings($force) &&
-                        $this->getProjects($force) &&
-                        $this->getRoles($force)
-                    )
-               )
-        ;
+        if ($retval = parent::refresh($force, $cascade) && $cascade) {
+            $this->getMediotecas($force);
+            $this->getSites($force);
+            $this->getCommerces($force);
+            $this->getCatalogs($force);
+            $this->getMessagings($force);
+            $this->getProjects($force);
+            $this->getRoles($force);
+        }
+
+        return $retval;
     }
 
     /**
@@ -215,7 +213,8 @@ class CNabuCustomer extends CNabuCustomerBase
      */
     public function getMediotecas($force = false)
     {
-        if ($force) {
+        if ($this->nb_medioteca_list->isEmpty() || $force) {
+            $this->nb_medioteca_list->clear();
             $this->nb_medioteca_list->merge(CNabuMedioteca::getAllMediotecas($this));
         }
 
@@ -438,7 +437,8 @@ class CNabuCustomer extends CNabuCustomerBase
      */
     public function getCommerces($force = false)
     {
-        if ($force) {
+        if ($this->nb_commerce_list->isEmpty() || $force) {
+            $this->nb_commerce_list->clear();
             $this->nb_commerce_list->merge(CNabuCommerce::getAllCommerces($this));
         }
 
@@ -640,7 +640,8 @@ class CNabuCustomer extends CNabuCustomerBase
      */
     public function getMessagings($force = false)
     {
-        if ($force) {
+        if ($this->nb_messaging_list->isEmpty() || $force) {
+            $this->nb_messaging_list->clear();
             $this->nb_messaging_list->merge(CNabuMessaging::getAllMessagings($this));
         }
 
@@ -713,6 +714,7 @@ class CNabuCustomer extends CNabuCustomerBase
         }
 
         if ($force) {
+            $this->nb_role_list->clear();
             $this->nb_project_list->merge(CNabuProject::getAllProjects($this));
         }
 
@@ -902,7 +904,8 @@ class CNabuCustomer extends CNabuCustomerBase
       */
      public function getIContacts($force = false)
      {
-         if ($force) {
+         if ($this->nb_icontact_list->isEmpty() || $force) {
+             $this->nb_icontact_list->clear();
              $this->nb_icontact_list->merge(CNabuIContact::getAlliContacts($this));
          }
 
