@@ -85,8 +85,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_icontact_email_template_acknowledge": {
-            "name": "nb_icontact_email_template_acknowledge",
+        "nb_messaging_template_acknowledge": {
+            "name": "nb_messaging_template_acknowledge",
             "ordinal": "8",
             "data_type": "int",
             "precision": "10",
@@ -96,8 +96,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_icontact_email_template_arrival": {
-            "name": "nb_icontact_email_template_arrival",
+        "nb_messaging_template_arrival": {
+            "name": "nb_messaging_template_arrival",
             "ordinal": "9",
             "data_type": "int",
             "precision": "10",
@@ -220,6 +220,22 @@
                 }
             }
         },
+        "nb_icontact_nb_language_fk1_idx": {
+            "name": "nb_icontact_nb_language_fk1_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_icontact_default_language_id": {
+                    "name": "nb_icontact_default_language_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
         "nb_icontact_key_idx": {
             "name": "nb_icontact_key_idx",
             "primary": false,
@@ -237,22 +253,6 @@
                 "nb_icontact_key": {
                     "name": "nb_icontact_key",
                     "ordinal": "2",
-                    "collation": "ASC",
-                    "null": true,
-                    "subpart": null,
-                    "comments": ""
-                }
-            }
-        },
-        "nb_icontact_nb_language_fk1_idx": {
-            "name": "nb_icontact_nb_language_fk1_idx",
-            "primary": false,
-            "unique": false,
-            "index_type": "BTREE",
-            "fields": {
-                "nb_icontact_default_language_id": {
-                    "name": "nb_icontact_default_language_id",
-                    "ordinal": "1",
                     "collation": "ASC",
                     "null": true,
                     "subpart": null,

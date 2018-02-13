@@ -79,6 +79,38 @@
                     "comments": ""
                 }
             }
+        },
+        "nb_site_role_lang_nb_language_fk": {
+            "name": "nb_site_role_lang_nb_language_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_language_id": {
+                    "name": "nb_language_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_site_role_lang_nb_role_fk": {
+            "name": "nb_site_role_lang_nb_role_fk",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_role_id": {
+                    "name": "nb_role_id",
+                    "ordinal": "1",
+                    "collation": "ASC",
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
         }
     }
 }

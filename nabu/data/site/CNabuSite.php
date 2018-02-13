@@ -985,14 +985,54 @@ class CNabuSite extends CNabuSiteBase
             $nb_site_role = $this->getSiteRole($nb_profile);
             $nb_template_id = $nb_site_role instanceof CNabuSiteRole &&
                               $nb_site_role->isValueNumeric('nb_site_role_email_template_new_user')
-                            ? $nb_template_id = $nb_site_role->getEmailTemplateNewUser()
-                            : $this->getEmailTemplateNewUser()
+                            ? $nb_template_id = $nb_site_role->getMessagingTemplateNewUser()
+                            : $this->getMessagingTemplateNewUser()
             ;
 
             return is_numeric($nb_template_id) &&
                    ($nb_messaging = $this->getMessaging($this->getCustomer())) instanceof CNabuMessaging &&
-                   ($nb_messaging_pool_manager = $nb_engine->getMessagingPoolManager()) instanceof CNabuMessagingPoolManager &&
-                   ($nb_messaging_factory = $nb_messaging_pool_manager->getFactory($nb_messaging)) instanceof CNabuMessagingFactory &&
+                   ($nb_messaging_factory = $nb_messaging->getFactory()) instanceof CNabuMessagingFactory &&
+                   $nb_messaging_factory->postTemplateMessage($nb_template_id, $nb_language_id, $nb_user, null, null, $params)
+            ;
+        } else {
+            throw new ENabuSecurityException(ENabuSecurityException::ERROR_USER_NOT_ALLOWED, array($nb_user->getId()));
+        }
+    }
+
+    /**
+     * Send a Forgot Password message to change the password.
+     * @param CNabuUser $nb_user User instance to be notified.
+     * @param array|null $params Array of additional parameters to be used. Depending on the Render used, this parameter
+     * can be applied or ignored.
+     * @return bool Returns true if the notification is sent or false if not.
+     */
+    public function sendForgotPassword(CNabuUser $nb_user, array $params = null) : bool
+    {
+        $retval = false;
+        $nb_engine = CNabuEngine::getEngine();
+
+        if (($nb_profile = $this->getUserProfile($nb_user)) instanceof CNabuSiteUser &&
+            ($nb_language_id = $nb_profile->getLanguageId())
+        ) {
+            if (count($params) === 0) {
+                $params = array();
+            }
+            foreach ($nb_user->getTreeData($nb_language_id, true) as $key => $item) {
+                if (is_scalar($item)) {
+                    $params["target_user_$key"] = $item;
+                }
+            }
+
+            $nb_site_role = $this->getSiteRole($nb_profile);
+            $nb_template_id = $nb_site_role instanceof CNabuSiteRole &&
+                              $nb_site_role->isValueNumeric('nb_site_role_email_template_forgot_password')
+                            ? $nb_template_id = $nb_site_role->getMessagingTemplateForgotPassword()
+                            : $this->getMessagingTemplateForgotPassword()
+            ;
+
+            return is_numeric($nb_template_id) &&
+                   ($nb_messaging = $this->getMessaging($this->getCustomer())) instanceof CNabuMessaging &&
+                   ($nb_messaging_factory = $nb_messaging->getFactory()) instanceof CNabuMessagingFactory &&
                    $nb_messaging_factory->postTemplateMessage($nb_template_id, $nb_language_id, $nb_user, null, null, $params)
             ;
         } else {

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/11 20:36:19 UTC
+ * Created: 2018/02/13 10:22:02 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -485,43 +485,43 @@ abstract class CNabuIContactBase extends CNabuDBInternalObject implements INabuT
     }
 
     /**
-     * Get Icontact Email Template Acknowledge attribute value
-     * @return null|int Returns the Icontact Email Template Acknowledge value
+     * Get Messaging Template Acknowledge attribute value
+     * @return null|int Returns the Messaging Template Acknowledge value
      */
-    public function getEmailTemplateAcknowledge()
+    public function getMessagingTemplateAcknowledge()
     {
-        return $this->getValue('nb_icontact_email_template_acknowledge');
+        return $this->getValue('nb_messaging_template_acknowledge');
     }
 
     /**
-     * Sets the Icontact Email Template Acknowledge attribute value.
-     * @param int|null $email_template_acknowledge New value for attribute
+     * Sets the Messaging Template Acknowledge attribute value.
+     * @param int|null $nb_messaging_template_acknowledge New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateAcknowledge(int $email_template_acknowledge = null) : CNabuDataObject
+    public function setMessagingTemplateAcknowledge(int $nb_messaging_template_acknowledge = null) : CNabuDataObject
     {
-        $this->setValue('nb_icontact_email_template_acknowledge', $email_template_acknowledge);
+        $this->setValue('nb_messaging_template_acknowledge', $nb_messaging_template_acknowledge);
         
         return $this;
     }
 
     /**
-     * Get Icontact Email Template Arrival attribute value
-     * @return null|int Returns the Icontact Email Template Arrival value
+     * Get Messaging Template Arrival attribute value
+     * @return null|int Returns the Messaging Template Arrival value
      */
-    public function getEmailTemplateArrival()
+    public function getMessagingTemplateArrival()
     {
-        return $this->getValue('nb_icontact_email_template_arrival');
+        return $this->getValue('nb_messaging_template_arrival');
     }
 
     /**
-     * Sets the Icontact Email Template Arrival attribute value.
-     * @param int|null $email_template_arrival New value for attribute
+     * Sets the Messaging Template Arrival attribute value.
+     * @param int|null $nb_messaging_template_arrival New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateArrival(int $email_template_arrival = null) : CNabuDataObject
+    public function setMessagingTemplateArrival(int $nb_messaging_template_arrival = null) : CNabuDataObject
     {
-        $this->setValue('nb_icontact_email_template_arrival', $email_template_arrival);
+        $this->setValue('nb_messaging_template_arrival', $nb_messaging_template_arrival);
         
         return $this;
     }

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/11 20:35:53 UTC
+ * Created: 2018/02/13 10:21:46 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -471,22 +471,22 @@ abstract class CNabuCommerceBase extends CNabuDBInternalObject implements INabuT
     }
 
     /**
-     * Get Commerce Email Template Admin Error attribute value
-     * @return null|int Returns the Commerce Email Template Admin Error value
+     * Get Messaging Template Admin Error attribute value
+     * @return null|int Returns the Messaging Template Admin Error value
      */
-    public function getEmailTemplateAdminError()
+    public function getMessagingTemplateAdminError()
     {
-        return $this->getValue('nb_commerce_email_template_admin_error');
+        return $this->getValue('nb_messaging_template_admin_error');
     }
 
     /**
-     * Sets the Commerce Email Template Admin Error attribute value.
-     * @param int|null $email_template_admin_error New value for attribute
+     * Sets the Messaging Template Admin Error attribute value.
+     * @param int|null $nb_messaging_template_admin_error New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateAdminError(int $email_template_admin_error = null) : CNabuDataObject
+    public function setMessagingTemplateAdminError(int $nb_messaging_template_admin_error = null) : CNabuDataObject
     {
-        $this->setValue('nb_commerce_email_template_admin_error', $email_template_admin_error);
+        $this->setValue('nb_messaging_template_admin_error', $nb_messaging_template_admin_error);
         
         return $this;
     }

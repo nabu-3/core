@@ -624,8 +624,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_site_email_template_new_user": {
-            "name": "nb_site_email_template_new_user",
+        "nb_messaging_template_new_user": {
+            "name": "nb_messaging_template_new_user",
             "ordinal": "57",
             "data_type": "int",
             "precision": "10",
@@ -635,8 +635,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_site_email_template_lost_password": {
-            "name": "nb_site_email_template_lost_password",
+        "nb_messaging_template_forgot_password": {
+            "name": "nb_messaging_template_forgot_password",
             "ordinal": "58",
             "data_type": "int",
             "precision": "10",
@@ -646,8 +646,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_site_email_template_notify_new_user": {
-            "name": "nb_site_email_template_notify_new_user",
+        "nb_messaging_template_notify_new_user": {
+            "name": "nb_messaging_template_notify_new_user",
             "ordinal": "59",
             "data_type": "int",
             "precision": "10",
@@ -657,8 +657,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_site_email_template_remember_new_user": {
-            "name": "nb_site_email_template_remember_new_user",
+        "nb_messaging_template_remember_new_user": {
+            "name": "nb_messaging_template_remember_new_user",
             "ordinal": "60",
             "data_type": "int",
             "precision": "10",
@@ -668,8 +668,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_site_email_template_invite_user": {
-            "name": "nb_site_email_template_invite_user",
+        "nb_messaging_template_invite_user": {
+            "name": "nb_messaging_template_invite_user",
             "ordinal": "61",
             "data_type": "int",
             "precision": "10",
@@ -679,8 +679,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_site_email_template_invite_friend": {
-            "name": "nb_site_email_template_invite_friend",
+        "nb_messaging_template_invite_friend": {
+            "name": "nb_messaging_template_invite_friend",
             "ordinal": "62",
             "data_type": "int",
             "precision": "10",
@@ -690,8 +690,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_site_email_template_new_message": {
-            "name": "nb_site_email_template_new_message",
+        "nb_messaging_template_new_message": {
+            "name": "nb_messaging_template_new_message",
             "ordinal": "63",
             "data_type": "int",
             "precision": "10",

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/11 20:35:50 UTC
+ * Created: 2018/02/13 10:21:45 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -328,148 +328,148 @@ abstract class CNabuSiteRoleBase extends CNabuDBInternalObject implements INabuT
     }
 
     /**
-     * Get Site Role Email Template New User attribute value
-     * @return null|int Returns the Site Role Email Template New User value
+     * Get Messaging Template New User attribute value
+     * @return null|int Returns the Messaging Template New User value
      */
-    public function getEmailTemplateNewUser()
+    public function getMessagingTemplateNewUser()
     {
-        return $this->getValue('nb_site_role_email_template_new_user');
+        return $this->getValue('nb_messaging_template_new_user');
     }
 
     /**
-     * Sets the Site Role Email Template New User attribute value.
-     * @param int|null $email_template_new_user New value for attribute
+     * Sets the Messaging Template New User attribute value.
+     * @param int|null $nb_messaging_template_new_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateNewUser(int $email_template_new_user = null) : CNabuDataObject
+    public function setMessagingTemplateNewUser(int $nb_messaging_template_new_user = null) : CNabuDataObject
     {
-        $this->setValue('nb_site_role_email_template_new_user', $email_template_new_user);
+        $this->setValue('nb_messaging_template_new_user', $nb_messaging_template_new_user);
         
         return $this;
     }
 
     /**
-     * Get Site Role Email Template Lost Password attribute value
-     * @return null|int Returns the Site Role Email Template Lost Password value
+     * Get Messaging Template Forgot Password attribute value
+     * @return null|int Returns the Messaging Template Forgot Password value
      */
-    public function getEmailTemplateLostPassword()
+    public function getMessagingTemplateForgotPassword()
     {
-        return $this->getValue('nb_site_role_email_template_lost_password');
+        return $this->getValue('nb_messaging_template_forgot_password');
     }
 
     /**
-     * Sets the Site Role Email Template Lost Password attribute value.
-     * @param int|null $email_template_lost_password New value for attribute
+     * Sets the Messaging Template Forgot Password attribute value.
+     * @param int|null $nb_messaging_template_forgot_password New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateLostPassword(int $email_template_lost_password = null) : CNabuDataObject
+    public function setMessagingTemplateForgotPassword(int $nb_messaging_template_forgot_password = null) : CNabuDataObject
     {
-        $this->setValue('nb_site_role_email_template_lost_password', $email_template_lost_password);
+        $this->setValue('nb_messaging_template_forgot_password', $nb_messaging_template_forgot_password);
         
         return $this;
     }
 
     /**
-     * Get Site Role Email Template Notify New User attribute value
-     * @return null|int Returns the Site Role Email Template Notify New User value
+     * Get Messaging Template Notify New User attribute value
+     * @return null|int Returns the Messaging Template Notify New User value
      */
-    public function getEmailTemplateNotifyNewUser()
+    public function getMessagingTemplateNotifyNewUser()
     {
-        return $this->getValue('nb_site_role_email_template_notify_new_user');
+        return $this->getValue('nb_messaging_template_notify_new_user');
     }
 
     /**
-     * Sets the Site Role Email Template Notify New User attribute value.
-     * @param int|null $email_template_notify_new_user New value for attribute
+     * Sets the Messaging Template Notify New User attribute value.
+     * @param int|null $nb_messaging_template_notify_new_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateNotifyNewUser(int $email_template_notify_new_user = null) : CNabuDataObject
+    public function setMessagingTemplateNotifyNewUser(int $nb_messaging_template_notify_new_user = null) : CNabuDataObject
     {
-        $this->setValue('nb_site_role_email_template_notify_new_user', $email_template_notify_new_user);
+        $this->setValue('nb_messaging_template_notify_new_user', $nb_messaging_template_notify_new_user);
         
         return $this;
     }
 
     /**
-     * Get Site Role Email Template Remember New User attribute value
-     * @return null|int Returns the Site Role Email Template Remember New User value
+     * Get Messaging Template Remember New User attribute value
+     * @return null|int Returns the Messaging Template Remember New User value
      */
-    public function getEmailTemplateRememberNewUser()
+    public function getMessagingTemplateRememberNewUser()
     {
-        return $this->getValue('nb_site_role_email_template_remember_new_user');
+        return $this->getValue('nb_messaging_template_remember_new_user');
     }
 
     /**
-     * Sets the Site Role Email Template Remember New User attribute value.
-     * @param int|null $email_template_remember_new_user New value for attribute
+     * Sets the Messaging Template Remember New User attribute value.
+     * @param int|null $nb_messaging_template_remember_new_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateRememberNewUser(int $email_template_remember_new_user = null) : CNabuDataObject
+    public function setMessagingTemplateRememberNewUser(int $nb_messaging_template_remember_new_user = null) : CNabuDataObject
     {
-        $this->setValue('nb_site_role_email_template_remember_new_user', $email_template_remember_new_user);
+        $this->setValue('nb_messaging_template_remember_new_user', $nb_messaging_template_remember_new_user);
         
         return $this;
     }
 
     /**
-     * Get Site Role Email Template Invite User attribute value
-     * @return null|int Returns the Site Role Email Template Invite User value
+     * Get Messaging Template Invite User attribute value
+     * @return null|int Returns the Messaging Template Invite User value
      */
-    public function getEmailTemplateInviteUser()
+    public function getMessagingTemplateInviteUser()
     {
-        return $this->getValue('nb_site_role_email_template_invite_user');
+        return $this->getValue('nb_messaging_template_invite_user');
     }
 
     /**
-     * Sets the Site Role Email Template Invite User attribute value.
-     * @param int|null $email_template_invite_user New value for attribute
+     * Sets the Messaging Template Invite User attribute value.
+     * @param int|null $nb_messaging_template_invite_user New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateInviteUser(int $email_template_invite_user = null) : CNabuDataObject
+    public function setMessagingTemplateInviteUser(int $nb_messaging_template_invite_user = null) : CNabuDataObject
     {
-        $this->setValue('nb_site_role_email_template_invite_user', $email_template_invite_user);
+        $this->setValue('nb_messaging_template_invite_user', $nb_messaging_template_invite_user);
         
         return $this;
     }
 
     /**
-     * Get Site Role Email Template Invite Friend attribute value
-     * @return null|int Returns the Site Role Email Template Invite Friend value
+     * Get Messaging Template Invite Friend attribute value
+     * @return null|int Returns the Messaging Template Invite Friend value
      */
-    public function getEmailTemplateInviteFriend()
+    public function getMessagingTemplateInviteFriend()
     {
-        return $this->getValue('nb_site_role_email_template_invite_friend');
+        return $this->getValue('nb_messaging_template_invite_friend');
     }
 
     /**
-     * Sets the Site Role Email Template Invite Friend attribute value.
-     * @param int|null $email_template_invite_friend New value for attribute
+     * Sets the Messaging Template Invite Friend attribute value.
+     * @param int|null $nb_messaging_template_invite_friend New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateInviteFriend(int $email_template_invite_friend = null) : CNabuDataObject
+    public function setMessagingTemplateInviteFriend(int $nb_messaging_template_invite_friend = null) : CNabuDataObject
     {
-        $this->setValue('nb_site_role_email_template_invite_friend', $email_template_invite_friend);
+        $this->setValue('nb_messaging_template_invite_friend', $nb_messaging_template_invite_friend);
         
         return $this;
     }
 
     /**
-     * Get Site Role Email Template New Message attribute value
-     * @return null|int Returns the Site Role Email Template New Message value
+     * Get Messaging Template New Message attribute value
+     * @return null|int Returns the Messaging Template New Message value
      */
-    public function getEmailTemplateNewMessage()
+    public function getMessagingTemplateNewMessage()
     {
-        return $this->getValue('nb_site_role_email_template_new_message');
+        return $this->getValue('nb_messaging_template_new_message');
     }
 
     /**
-     * Sets the Site Role Email Template New Message attribute value.
-     * @param int|null $email_template_new_message New value for attribute
+     * Sets the Messaging Template New Message attribute value.
+     * @param int|null $nb_messaging_template_new_message New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setEmailTemplateNewMessage(int $email_template_new_message = null) : CNabuDataObject
+    public function setMessagingTemplateNewMessage(int $nb_messaging_template_new_message = null) : CNabuDataObject
     {
-        $this->setValue('nb_site_role_email_template_new_message', $email_template_new_message);
+        $this->setValue('nb_messaging_template_new_message', $nb_messaging_template_new_message);
         
         return $this;
     }

@@ -85,8 +85,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_commerce_email_template_admin_error": {
-            "name": "nb_commerce_email_template_admin_error",
+        "nb_messaging_template_admin_error": {
+            "name": "nb_messaging_template_admin_error",
             "ordinal": "8",
             "data_type": "int",
             "precision": "10",
