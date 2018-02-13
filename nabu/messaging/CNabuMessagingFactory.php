@@ -261,16 +261,18 @@ class CNabuMessagingFactory extends CNabuDataObject
      * @return bool Returns true if the message was posted.
      * @throws ENabuMessagingException Raises an exception if something is wrong.
      */
-    public function postMessage(CNabuMessagingServiceList $nb_service_list, $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments)
+    public function postMessage(CNabuMessagingServiceList $nb_service_list, $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments) : bool
     {
         $retval = false;
 
         $nb_service_list->iterate(
             function($key, CNabuMessagingService $nb_service)
-            use ($retval, $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments)
+            use (&$retval, $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments)
             {
                 $nb_interface = $this->discoverServiceInterface($nb_service);
                 $nb_interface->post($to, $cc, $bcc, $subject, $body_html, $body_text, $attachments);
+                $retval |= true;
+
                 return true;
             }
         );
@@ -298,10 +300,14 @@ class CNabuMessagingFactory extends CNabuDataObject
     {
         $retval = false;
 
-        $nb_service_list->iterate(function($key, CNabuMessagingService $nb_service) use($retval)
+        $nb_service_list->iterate(
+            function($key, CNabuMessagingService $nb_service)
+            use (&$retval, $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments)
         {
             $nb_interface = $this->prepareServiceInterface($nb_service);
             $nb_interface->send($to, $cc, $bcc, $subject, $body_html, $body_text, $attachments);
+            $retval |= true;
+
             return true;
         });
 
