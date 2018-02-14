@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/13 10:21:25 UTC
+ * Created: 2018/02/14 15:54:52 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -1746,69 +1746,6 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setMessagingTemplateNewMessage(int $nb_messaging_template_new_message = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_new_message', $nb_messaging_template_new_message);
-        
-        return $this;
-    }
-
-    /**
-     * Get Site Apache Personalized attribute value
-     * @return mixed Returns the Site Apache Personalized value
-     */
-    public function getApachePersonalized()
-    {
-        return $this->getValue('nb_site_apache_personalized');
-    }
-
-    /**
-     * Sets the Site Apache Personalized attribute value.
-     * @param mixed $apache_personalized New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setApachePersonalized($apache_personalized) : CNabuDataObject
-    {
-        $this->setValue('nb_site_apache_personalized', $apache_personalized);
-        
-        return $this;
-    }
-
-    /**
-     * Get Site Apache Last Update attribute value
-     * @return mixed Returns the Site Apache Last Update value
-     */
-    public function getApacheLastUpdate()
-    {
-        return $this->getValue('nb_site_apache_last_update');
-    }
-
-    /**
-     * Sets the Site Apache Last Update attribute value.
-     * @param mixed $apache_last_update New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setApacheLastUpdate($apache_last_update) : CNabuDataObject
-    {
-        $this->setValue('nb_site_apache_last_update', $apache_last_update);
-        
-        return $this;
-    }
-
-    /**
-     * Get Site Apache Last Update Error attribute value
-     * @return mixed Returns the Site Apache Last Update Error value
-     */
-    public function getApacheLastUpdateError()
-    {
-        return $this->getValue('nb_site_apache_last_update_error');
-    }
-
-    /**
-     * Sets the Site Apache Last Update Error attribute value.
-     * @param mixed $apache_last_update_error New value for attribute
-     * @return CNabuDataObject Returns self instance to grant chained setters call.
-     */
-    public function setApacheLastUpdateError($apache_last_update_error) : CNabuDataObject
-    {
-        $this->setValue('nb_site_apache_last_update_error', $apache_last_update_error);
         
         return $this;
     }
