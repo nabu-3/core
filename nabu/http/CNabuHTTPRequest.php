@@ -818,24 +818,24 @@ class CNabuHTTPRequest extends CNabuObject
         return count($_FILES) > 0 ? array_keys($_FILES) : null;
     }
 
-    public function getGETField($field_name)
+    public function getGETField($field_name, int $filter = FILTER_DEFAULT, bool $scalar = true)
     {
-        return filter_input(INPUT_GET, $field_name);
+        return filter_input(INPUT_GET, $field_name, $filter, $scalar ? FILTER_REQUIRE_SCALAR : FILTER_REQUIRE_ARRAY);
     }
 
-    public function getPOSTField($field_name)
+    public function getPOSTField($field_name, int $filter = FILTER_DEFAULT, bool $scalar = true)
     {
         return is_array($this->xdr_post) && array_key_exists($field_name, $this->xdr_post)
                ? $this->xdr_post[$field_name]
-               : filter_input(INPUT_POST, $field_name)
+               : filter_input(INPUT_POST, $field_name, $filter, $scalar ? FILTER_REQUIRE_SCALAR : FILTER_REQUIRE_ARRAY)
         ;
     }
 
-    public function getREQUESTField($field_name)
+    public function getREQUESTField($field_name, int $filter = FILTER_DEFAULT, bool $scalar = true)
     {
         return is_array($this->xdr_post) && array_key_exists($field_name, $this->xdr_post)
                ? $this->xdr_post[$field_name]
-               : filter_input(INPUT_REQUEST, $field_name)
+               : filter_input(INPUT_REQUEST, $field_name, $filter, $scalar ? FILTER_REQUIRE_SCALAR : FILTER_REQUIRE_ARRAY)
         ;
     }
 

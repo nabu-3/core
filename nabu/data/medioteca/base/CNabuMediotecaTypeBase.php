@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/14 15:55:22 UTC
+ * Created: 2018/02/15 12:54:05 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -67,6 +67,28 @@ abstract class CNabuMediotecaTypeBase extends CNabuDBInternalObject implements I
         parent::__construct();
         $this->__translatedConstruct();
         $this->translations_list = new CNabuMediotecaTypeLanguageList();
+    }
+
+    /**
+     * Overrides refresh method to add translations branch to refresh.
+     * @param bool $force Forces to reload entities from the database storage.
+     * @param bool $cascade Forces to reload child entities from the database storage.
+     * @return bool Returns true if transations are empty or refreshed.
+     */
+    public function refresh(bool $force = false, bool $cascade = false) : bool
+    {
+        return parent::refresh($force, $cascade) && $this->appendTranslatedRefresh($force);
+    }
+
+    /**
+     * Overrides delete method to delete translations when delete the this instance.
+     * @return bool Returns true if the entity and their translations are deleted.
+     */
+    public function delete() : bool
+    {
+        $this->deleteTranslations(true);
+        
+        return parent::delete();
     }
 
     /**
@@ -298,17 +320,6 @@ abstract class CNabuMediotecaTypeBase extends CNabuDBInternalObject implements I
         }
         
         return $nb_language_list;
-    }
-
-    /**
-     * Overrides refresh method to add translations branch to refresh.
-     * @param bool $force Forces to reload entities from the database storage.
-     * @param bool $cascade Forces to reload child entities from the database storage.
-     * @return bool Returns true if transations are empty or refreshed.
-     */
-    public function refresh(bool $force = false, bool $cascade = false) : bool
-    {
-        return parent::refresh($force, $cascade) && $this->appendTranslatedRefresh($force);
     }
 
     /**

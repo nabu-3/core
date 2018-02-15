@@ -212,6 +212,37 @@ trait TNabuTranslated
     }
 
     /**
+     * Removes all translations of this instance. If $force is false deletes only catched translations, but if true,
+     * deletes all database stored translations.
+     * @param bool $force If true delete all translations from database else delete only catched translations.
+     * @return int Returns the number of translations deleted.
+     */
+    public function deleteTranslations(bool $force = false)
+    {
+        $retval = $this->translations_list->getSize();
+
+        $this->updateTranslations();
+
+        if ($force) {
+            $this->getTranslations(true);
+        }
+
+        $retval += $this->translations_list->getSize();
+
+        $this->translations_list->iterate(
+            function ($key, $nb_translation)
+            {
+                $nb_translation->delete();
+                return true;
+            }
+        );
+
+        $this->translations_list->clear();
+
+        return $retval;
+    }
+
+    /**
      * Calls internally all translation child objects stocked inside this entity to add / update them in the database.
      * @return int|false Return the number of childs updated or false if no childs found
      */
@@ -230,6 +261,7 @@ trait TNabuTranslated
                 return $nb_translation->delete();
             }
         );
+        $this->translations_removed->clear();
     }
 
     /**
