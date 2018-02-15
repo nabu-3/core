@@ -61,18 +61,4 @@ class CNabuSiteTargetSection extends CNabuSiteTargetSectionBase
 
         return $retval;
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function delete()
-    {
-        $this->getTranslations(true)->iterate(function($key, $nb_translation) {
-            $this->removeTranslation($nb_translation);
-            return true;
-        });
-        $this->updateTranslations();
-
-        return parent::delete();
-    }
 }
