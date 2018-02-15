@@ -152,7 +152,7 @@ class CNabuCustomer extends CNabuCustomerBase
      */
     public function refresh(bool $force = false, bool $cascade = false) : bool
     {
-        if ($retval = parent::refresh($force, $cascade) && $cascade) {
+        if (($retval = parent::refresh($force, $cascade))===true && $cascade) {
             $this->getMediotecas($force);
             $this->getSites($force);
             $this->getCommerces($force);
