@@ -792,6 +792,7 @@ class CNabuSite extends CNabuSiteBase
         $trdata['languages'] = $this->getLanguages();
         $trdata['roles'] = $this->getRoles();
         $trdata['sitemap_keys'] = $this->getSiteMapKeysIndex();
+        $trdata['targets'] = $this->nb_site_target_list;
         $trdata['static_content_keys'] = $this->getStaticContentKeysIndex();
 
         return $trdata;
