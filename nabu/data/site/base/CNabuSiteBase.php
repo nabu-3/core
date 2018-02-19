@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/15 12:53:35 UTC
+ * Created: 2018/02/19 18:02:05 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -1985,6 +1985,27 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setNotificationEmail(string $notification_email = null) : CNabuDataObject
     {
         $this->setValue('nb_site_notification_email', $notification_email);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site X Frame Options attribute value
+     * @return null|string Returns the Site X Frame Options value
+     */
+    public function getXFrameOptions()
+    {
+        return $this->getValue('nb_site_x_frame_options');
+    }
+
+    /**
+     * Sets the Site X Frame Options attribute value.
+     * @param string|null $x_frame_options New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setXFrameOptions(string $x_frame_options = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_x_frame_options', $x_frame_options);
         
         return $this;
     }

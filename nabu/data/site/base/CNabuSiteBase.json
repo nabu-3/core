@@ -810,6 +810,17 @@
             "is_nullable": true,
             "extra": "",
             "comment": ""
+        },
+        "nb_site_x_frame_options": {
+            "name": "nb_site_x_frame_options",
+            "ordinal": "74",
+            "data_type": "text",
+            "precision": null,
+            "type": "text",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
         }
     },
     "constraints": {
