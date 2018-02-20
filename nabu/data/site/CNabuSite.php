@@ -39,7 +39,6 @@ use nabu\data\security\CNabuRole;
 use nabu\data\security\CNabuRoleList;
 use nabu\data\site\base\CNabuSiteBase;
 use nabu\messaging\CNabuMessagingFactory;
-use nabu\messaging\managers\CNabuMessagingPoolManager;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -119,7 +118,12 @@ class CNabuSite extends CNabuSiteBase
         $this->nb_user_list = new CNabuUserList();
     }
 
-    static public function findByAlias($alias)
+    /**
+     * Find a Site by some of their aliases.
+     * @param string $alias Alias DNS name to search.
+     * @return CNabuSite|null Returns a valid Site if found or null if not.
+     */
+    static public function findByAlias(string $alias)
     {
         return CNabuSite::buildObjectFromSQL(
             "select s.*, sa.nb_site_alias_id, dzh.nb_domain_zone_id, dzh.nb_domain_zone_host_id "
@@ -135,7 +139,13 @@ class CNabuSite extends CNabuSiteBase
         );
     }
 
-    public function getCacheStorage($force = false)
+    /**
+     * Get the Cache Storage instance of this Site instance. If Cache is not instantiated or $force is true,
+     * then force to create a new Cache instance.
+     * @param bool $force If true forces to create the Cache Storage.
+     * @return INabuCacheStorage Returns the Cache Storage instance.
+     */
+    public function getCacheStorage(bool $force = false)
     {
         if ($this->cache_storage === null || $force) {
             $this->cache_storage = null;

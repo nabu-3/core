@@ -832,6 +832,28 @@
             "is_nullable": true,
             "extra": "",
             "comment": ""
+        },
+        "nb_site_force_cookie_as_secure": {
+            "name": "nb_site_force_cookie_as_secure",
+            "ordinal": "76",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_max_signin_retries": {
+            "name": "nb_site_max_signin_retries",
+            "ordinal": "77",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "0",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
         }
     },
     "constraints": {

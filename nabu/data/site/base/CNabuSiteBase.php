@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/20 04:20:35 UTC
+ * Created: 2018/02/20 09:38:56 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -2027,6 +2027,60 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setXFrameOptionsURL(string $x_frame_options_url = null) : CNabuDataObject
     {
         $this->setValue('nb_site_x_frame_options_url', $x_frame_options_url);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Force Cookie As Secure attribute value
+     * @return string Returns the Site Force Cookie As Secure value
+     */
+    public function getForceCookieAsSecure() : string
+    {
+        return $this->getValue('nb_site_force_cookie_as_secure');
+    }
+
+    /**
+     * Sets the Site Force Cookie As Secure attribute value.
+     * @param string $force_cookie_as_secure New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setForceCookieAsSecure(string $force_cookie_as_secure = "F") : CNabuDataObject
+    {
+        if ($force_cookie_as_secure === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$force_cookie_as_secure")
+            );
+        }
+        $this->setValue('nb_site_force_cookie_as_secure', $force_cookie_as_secure);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Max SignIn Retries attribute value
+     * @return int Returns the Site Max SignIn Retries value
+     */
+    public function getMaxSignInRetries() : int
+    {
+        return $this->getValue('nb_site_max_signin_retries');
+    }
+
+    /**
+     * Sets the Site Max SignIn Retries attribute value.
+     * @param int $max_signin_retries New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setMaxSignInRetries(int $max_signin_retries = 0) : CNabuDataObject
+    {
+        if ($max_signin_retries === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$max_signin_retries")
+            );
+        }
+        $this->setValue('nb_site_max_signin_retries', $max_signin_retries);
         
         return $this;
     }
