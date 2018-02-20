@@ -222,7 +222,8 @@ final class CNabuHTTPResponse extends CNabuObject
                 $retval = 'SAMEORIGIN';
                 break;
             case 'A':
-                if (is_string($url = $nb_site->getXFrameOptionsURL())) {
+                if (is_string($url = $nb_site->getXFrameOptionsURL()) &&
+                    strlen($url = preg_replace(array('/^\s*/', '/\s*$/'), '', $url)) > 0) {
                     $retval = 'ALLOW-FROM ' . $url;
                 } else {
                     throw new ENabuHTTPException(ENabuHTTPException::ERROR_X_FRAME_OPTIONS_URL_NOT_FOUND);
