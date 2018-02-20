@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/20 16:43:44 UTC
+ * Created: 2018/02/20 17:26:14 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -809,6 +809,33 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setDefaultTargetId(int $default_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_default_target_id', $default_target_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Default Error Code attribute value
+     * @return int Returns the Site Default Error Code value
+     */
+    public function getDefaultErrorCode() : int
+    {
+        return $this->getValue('nb_site_default_error_code');
+    }
+
+    /**
+     * Sets the Site Default Error Code attribute value.
+     * @param int $default_error_code New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setDefaultErrorCode(int $default_error_code = 301) : CNabuDataObject
+    {
+        if ($default_error_code === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$default_error_code")
+            );
+        }
+        $this->setValue('nb_site_default_error_code', $default_error_code);
         
         return $this;
     }
