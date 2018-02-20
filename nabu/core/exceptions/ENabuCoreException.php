@@ -92,22 +92,24 @@ class ENabuCoreException extends ENabuException
     const ERROR_ROLE_NOT_ASSIGNED                       = 0x1023;
     const ERROR_ROLE_NOT_VALID                          = 0x1024;
 
-    const ERROR_REQUEST_NOT_FOUND                       = 0x1025;
+    const ERROR_SESSION_NOT_FOUND                       = 0x1025;
 
-    const ERROR_RESPONSE_NOT_FOUND                      = 0x1026;
+    const ERROR_REQUEST_NOT_FOUND                       = 0x1026;
 
-    const ERROR_PAGE_URI_NOT_FOUND                      = 0x1027;
-    const ERROR_LANGUAGE_NOT_FOUND_FOR_PAGE_URI         = 0x1028;
+    const ERROR_RESPONSE_NOT_FOUND                      = 0x1027;
 
-    const ERROR_SITE_TARGET_NOT_FOUND                   = 0x1029;
-    const ERROR_SITE_TARGET_LOGIN_MISMATCH              = 0x102a;
-    const ERROR_SITE_TARGET_ERROR_MISMATCH              = 0x102b;
+    const ERROR_PAGE_URI_NOT_FOUND                      = 0x1028;
+    const ERROR_LANGUAGE_NOT_FOUND_FOR_PAGE_URI         = 0x1029;
 
-    const ERROR_INVALID_HTTP_MANAGER_CLASS              = 0x102c;
-    const ERROR_ENABLING_HTTP_MANAGER                   = 0x202d;
+    const ERROR_SITE_TARGET_NOT_FOUND                   = 0x102a;
+    const ERROR_SITE_TARGET_LOGIN_MISMATCH              = 0x102b;
+    const ERROR_SITE_TARGET_ERROR_MISMATCH              = 0x102c;
 
-    const ERROR_RENDER_NOT_SET                          = 0x102e;
-    const ERROR_INVALID_RENDER_DESCRIPTOR_CLASS         = 0x102f;
+    const ERROR_INVALID_HTTP_MANAGER_CLASS              = 0x102d;
+    const ERROR_ENABLING_HTTP_MANAGER                   = 0x202e;
+
+    const ERROR_RENDER_NOT_SET                          = 0x102f;
+    const ERROR_INVALID_RENDER_DESCRIPTOR_CLASS         = 0x1030;
 
     const ERROR_URL_FILTER_INVALID                      = 0X1031;
 
@@ -246,6 +248,9 @@ class ENabuCoreException extends ENabuException
         ENabuCoreException::ERROR_ROLE_NOT_ASSIGNED =>
             'Role not assigned.',
 
+        ENabuCoreException::ERROR_SESSION_NOT_FOUND =>
+            'Session not found.',
+            
         ENabuCoreException::ERROR_REQUEST_NOT_FOUND =>
             'Request not found.',
 

@@ -22,6 +22,8 @@ namespace nabu\http\managers;
 
 use Exception;
 use nabu\core\CNabuEngine;
+use nabu\http\CNabuHTTPSession;
+
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\customer\CNabuCustomer;
 use nabu\data\security\CNabuUser;
@@ -328,6 +330,11 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
             throw new ENabuCoreException(ENabuCoreException::ERROR_PLUGINS_MANAGER_REQUIRED);
         }
 
+        $nb_session = $this->nb_application->getSession();
+        if ($nb_session === null || !($nb_session instanceof CNabuHTTPSession)) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_SESSION_NOT_FOUND);
+        }
+
         $nb_request = $this->nb_application->getRequest();
         if ($nb_request === null || !($nb_request instanceof CNabuHTTPRequest)) {
             throw new ENabuCoreException(ENabuCoreException::ERROR_REQUEST_NOT_FOUND);
@@ -344,6 +351,15 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         }
 
         $retval = false;
+
+        $signin_retries = $nb_session->getVariable('signin_retries', 0);
+        $max_signin_retries = $nb_site->getMaxSignInRetries();
+
+        /*
+        if ($signin_retries === $max_signin_retries) {
+            throw new ENabuRedirectionException()
+        }
+        */
 
         $nb_user = CNabuUser::findBySiteLogin($nb_site, $user, $passwd);
         if ($nb_user !== null) {
