@@ -814,6 +814,17 @@
         "nb_site_x_frame_options": {
             "name": "nb_site_x_frame_options",
             "ordinal": "74",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('D','S','A')",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": "D: DENY\nS: SAMEORIGIN\nA: ALLOW-FROM"
+        },
+        "nb_site_x_frame_options_url": {
+            "name": "nb_site_x_frame_options_url",
+            "ordinal": "75",
             "data_type": "text",
             "precision": null,
             "type": "text",

@@ -26,6 +26,7 @@ use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\core\utils\CNabuURL;
 use \nabu\data\site\CNabuSiteTarget;
 use \nabu\http\CNabuHTTPRequest;
+use nabu\http\exceptions\ENabuHTTPException;
 use \nabu\http\exceptions\ENabuRedirectionException;
 use \nabu\http\interfaces\INabuHTTPResponseRender;
 use \nabu\http\managers\CNabuHTTPPluginsManager;
@@ -202,6 +203,35 @@ final class CNabuHTTPResponse extends CNabuObject
         return $this;
     }
 
+    /**
+     * Calculates the X-Frame-Options value if setted.
+     * @return string|null If X-Frame-Options is setted returns the proper value, else if not is setted then returns null.
+     * @throws ENabuHTTPException Raises an exception if kind is ALLOW-FROM and none URL is setted.
+     */
+    private function calculateFrameOptions()
+    {
+        $retval = null;
+
+        $nb_site = $this->nb_request->getSite();
+
+        switch ($nb_site->getXFrameOptions()) {
+            case 'D':
+                $retval = 'DENY';
+                break;
+            case 'S':
+                $retval = 'SAMEORIGIN';
+                break;
+            case 'A':
+                if (is_string($url = $nb_site->getXFrameOptionsURL())) {
+                    $retval = 'ALLOW-FROM ' . $url;
+                } else {
+                    throw new ENabuHTTPException(ENabuHTTPException::ERROR_X_FRAME_OPTIONS_URL_NOT_FOUND);
+                }
+        }
+
+        return $retval;
+    }
+
     // Headers index at http://www.iana.org/assignments/message-headers/message-headers.xhtml
     /**
      * Build HTTP Headers.
@@ -241,6 +271,10 @@ final class CNabuHTTPResponse extends CNabuObject
                     $this->setHeader('Content-Disposition', 'attachment');
                 }
             }
+        }
+
+        if (($frame_options = $this->calculateFrameOptions()) !== null) {
+            $this->setHeader('X-Frame-Options', $frame_options);
         }
 
         if (count($this->header_list) > 0) {
