@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/20 09:38:57 UTC
+ * Created: 2018/02/20 12:54:53 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -616,6 +616,27 @@ abstract class CNabuSiteLanguageBase extends CNabuDBInternalObject implements IN
     public function setLogoutRedirectionTargetURL(string $logout_redirection_target_url = null) : CNabuDataObject
     {
         $this->setValue('nb_site_lang_logout_redirection_target_url', $logout_redirection_target_url);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Lang Login Max Fails Target URL attribute value
+     * @return null|string Returns the Site Lang Login Max Fails Target URL value
+     */
+    public function getLoginMaxFailsTargetURL()
+    {
+        return $this->getValue('nb_site_lang_login_max_fails_target_url');
+    }
+
+    /**
+     * Sets the Site Lang Login Max Fails Target URL attribute value.
+     * @param string|null $login_max_fails_target_url New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setLoginMaxFailsTargetURL(string $login_max_fails_target_url = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_lang_login_max_fails_target_url', $login_max_fails_target_url);
         
         return $this;
     }

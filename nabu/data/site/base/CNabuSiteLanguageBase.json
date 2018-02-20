@@ -228,9 +228,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_site_lang_login_max_fails_target_url": {
+            "name": "nb_site_lang_login_max_fails_target_url",
+            "ordinal": "21",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_site_lang_alias_not_found_target_url": {
             "name": "nb_site_lang_alias_not_found_target_url",
-            "ordinal": "21",
+            "ordinal": "22",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -241,7 +252,7 @@
         },
         "nb_site_lang_alias_locked_target_url": {
             "name": "nb_site_lang_alias_locked_target_url",
-            "ordinal": "22",
+            "ordinal": "23",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -252,7 +263,7 @@
         },
         "nb_site_lang_policies_target_url": {
             "name": "nb_site_lang_policies_target_url",
-            "ordinal": "23",
+            "ordinal": "24",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/20 09:38:56 UTC
+ * Created: 2018/02/20 12:54:52 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -1010,6 +1010,75 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setLogoutRedirectionTargetId(int $logout_redirection_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_logout_redirection_target_id', $logout_redirection_target_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Login Max Fails Target URI attribute value
+     * @return mixed Returns the Site Login Max Fails Target URI value
+     */
+    public function getLoginMaxFailsTargetURI()
+    {
+        return $this->getValue('nb_site_login_max_fails_target_uri');
+    }
+
+    /**
+     * Sets the Site Login Max Fails Target URI attribute value.
+     * @param mixed $login_max_fails_target_uri New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setLoginMaxFailsTargetURI($login_max_fails_target_uri) : CNabuDataObject
+    {
+        if ($login_max_fails_target_uri === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$login_max_fails_target_uri")
+            );
+        }
+        $this->setValue('nb_site_login_max_fails_target_uri', $login_max_fails_target_uri);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Login Max Fails Target Id attribute value
+     * @return null|int Returns the Site Login Max Fails Target Id value
+     */
+    public function getLoginMaxFailsTargetId()
+    {
+        return $this->getValue('nb_site_login_max_fails_target_id');
+    }
+
+    /**
+     * Sets the Site Login Max Fails Target Id attribute value.
+     * @param int|null $login_max_fails_target_id New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setLoginMaxFailsTargetId(int $login_max_fails_target_id = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_login_max_fails_target_id', $login_max_fails_target_id);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Login Max Fails Error Code attribute value
+     * @return null|int Returns the Site Login Max Fails Error Code value
+     */
+    public function getLoginMaxFailsErrorCode()
+    {
+        return $this->getValue('nb_site_login_max_fails_error_code');
+    }
+
+    /**
+     * Sets the Site Login Max Fails Error Code attribute value.
+     * @param int|null $login_max_fails_error_code New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setLoginMaxFailsErrorCode(int $login_max_fails_error_code = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_login_max_fails_error_code', $login_max_fails_error_code);
         
         return $this;
     }
