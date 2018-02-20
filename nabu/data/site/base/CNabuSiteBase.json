@@ -338,8 +338,8 @@
             "extra": "",
             "comment": ""
         },
-        "nb_site_login_max_fails_target_uri": {
-            "name": "nb_site_login_max_fails_target_uri",
+        "nb_site_login_max_fails_target_use_uri": {
+            "name": "nb_site_login_max_fails_target_use_uri",
             "ordinal": "31",
             "data_type": "set",
             "precision": null,

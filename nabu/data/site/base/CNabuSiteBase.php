@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/20 12:54:52 UTC
+ * Created: 2018/02/20 16:43:44 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -1015,28 +1015,28 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     }
 
     /**
-     * Get Site Login Max Fails Target URI attribute value
-     * @return mixed Returns the Site Login Max Fails Target URI value
+     * Get Site Login Max Fails Target Use URI attribute value
+     * @return mixed Returns the Site Login Max Fails Target Use URI value
      */
-    public function getLoginMaxFailsTargetURI()
+    public function getLoginMaxFailsTargetUseURI()
     {
-        return $this->getValue('nb_site_login_max_fails_target_uri');
+        return $this->getValue('nb_site_login_max_fails_target_use_uri');
     }
 
     /**
-     * Sets the Site Login Max Fails Target URI attribute value.
-     * @param mixed $login_max_fails_target_uri New value for attribute
+     * Sets the Site Login Max Fails Target Use URI attribute value.
+     * @param mixed $login_max_fails_target_use_uri New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLoginMaxFailsTargetURI($login_max_fails_target_uri) : CNabuDataObject
+    public function setLoginMaxFailsTargetUseURI($login_max_fails_target_use_uri) : CNabuDataObject
     {
-        if ($login_max_fails_target_uri === null) {
+        if ($login_max_fails_target_use_uri === null) {
             throw new ENabuCoreException(
                     ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
-                    array("\$login_max_fails_target_uri")
+                    array("\$login_max_fails_target_use_uri")
             );
         }
-        $this->setValue('nb_site_login_max_fails_target_uri', $login_max_fails_target_uri);
+        $this->setValue('nb_site_login_max_fails_target_use_uri', $login_max_fails_target_use_uri);
         
         return $this;
     }
