@@ -191,6 +191,40 @@ class CNabuUser extends CNabuUserBase implements INabuId
     }
 
     /**
+     * Find a User instance owned by $nb_customer identifier. If $nb_customer is an instanceof CNabuCustomer then
+     * sets it as the Customer Owner instance of the found object.
+     * @param mixed $nb_customer A CNabuDataObject instance containing a field named nb_customer_id or a valid Id.
+     * @param string $login The login to looking for.
+     * @return CNabuUser|null Returns a valid User if found or null elsewhere.
+     */
+    public static function findByLogin($nb_customer, string $login)
+    {
+        $retval = null;
+
+        if (is_numeric($nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID)) &&
+            strlen($login) > 0) {
+            $retval = CNabuUser::buildObjectFromSQL(
+                'SELECT *
+                   FROM nb_user u, nb_customer c
+                  WHERE u.nb_customer_id=c.nb_customer_id
+                    AND c.nb_customer_id=%cust_id$d
+                    AND u.nb_user_login=\'%login$s\'',
+                array(
+                    'cust_id' => $nb_customer_id,
+                    'login' => $login
+                )
+            );
+            if ($nb_customer instanceof CNabuCustomer &&
+                $retval instanceof CNabuUser
+            ) {
+                $retval->setCustomer($nb_customer);
+            }
+        }
+
+        return $retval;
+    }
+
+    /**
      * Find a user by his login data in a site.
      * @param mixed $nb_site Site instance, object containing a Site Id field or an Id.
      * @param string $login Login name

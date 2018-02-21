@@ -794,6 +794,24 @@ class CNabuCustomer extends CNabuCustomerBase
     }
 
     /**
+     * Get a User instance owned by this Customer and identified by his login attribute.
+     * @param string $login A login string to looking for.
+     * @return CNabuUser|null Returns a User instance if found or false if not.
+     */
+    public function getUserByLogin(string $login)
+    {
+        $retval = null;
+
+        if (strlen($login) > 0) {
+            $nb_user = CNabuUser::findByLogin($this, $login);
+            if ($nb_user instanceof CNabuUser && $nb_user->validateCustomer($this)) {
+                $retval = $nb_user;
+            }
+        }
+        return $retval;
+    }
+
+    /**
      * Gets a User List of all users owned by this Customer.
      * @return CNabuUserList Returns the list of users.
      */
@@ -876,7 +894,7 @@ class CNabuCustomer extends CNabuCustomerBase
      */
     public function getRoleByKey(string $key)
     {
-        if (!is_string($key) || strlen($key) === 0) {
+        if (strlen($key) === 0) {
             throw new ENabuCoreException(
                 ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
                 array('$key', print_r($key, true))
