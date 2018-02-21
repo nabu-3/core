@@ -377,6 +377,15 @@ class CNabuSite extends CNabuSiteBase
     }
 
     /**
+     * Get the Max Login Fails Redirection Target Link instance.
+     * @return CNabuSiteTargetLink Returns the Site Target Link generated instance.
+     */
+    public function getLoginMaxFailsTargetLink()
+    {
+        return $this->getReferredTargetLink('login_max_fails');
+    }
+    
+    /**
      * Gets the Alias Not Found Target Link instance.
      * @return CNabuSiteTargetLink Returns the Site Target Link generated instance.
      */

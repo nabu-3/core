@@ -712,14 +712,17 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * If a Error Handler is defined, then propagates the trace log to the handler elsewhere do nothing.
-     * @param string $key Categorized data key identifier
-     * @param string $message Text message to log
+     * @param string $key Categorized data key identifier.
+     * @param string $message Text message to log.
+     * @return CNabuEngine Returns the self pointer to grant cascade calls.
      */
     public function traceLog($key, $message)
     {
         if ($this->nb_error_handler) {
             $this->nb_error_handler->traceLog($key, $message);
         }
+
+        return $this;
     }
 
     /**

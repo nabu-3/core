@@ -355,15 +355,35 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         $signin_retries = $nb_session->getVariable('signin_retries', 0);
         $max_signin_retries = $nb_site->getMaxSignInRetries();
 
-        /*
-        if ($signin_retries === $max_signin_retries) {
-            throw new ENabuRedirectionException()
-        }
-        */
+        CNabuEngine::getEngine()
+            ->traceLog('Max sign-in retries', $max_signin_retries)
+            ->traceLog('Sign-in retries', $signin_retries)
+        ;
 
         $nb_user = CNabuUser::findBySiteLogin($nb_site, $user, $passwd);
         if ($nb_user !== null) {
             $retval = $this->loginDecision($nb_site, $nb_user, $remember);
+        }
+
+        if (!$retval && $max_signin_retries > 0) {
+            if ($signin_retries >= $max_signin_retries) {
+                try {
+                    $lang = $this->nb_application->getRequest()->getLanguage()->getId();
+                } catch (Exception $e) {
+                    $lang = null;
+                }
+                if ($lang === null) {
+                    $lang = $nb_site->getDefaultLanguageId();
+                }
+
+                if (is_string($link = $nb_site->getLoginMaxFailsTargetLink()->getBestQualifiedURL(array($lang => $lang)))) {
+                    $retval = $nb_plugin_manager->pluginRedirectToPage($link);
+                } else {
+                    $retval = false;
+                }
+            } else {
+                $nb_session->setVariable('signin_retries', ++$signin_retries);
+            }
         }
 
         return $retval;
