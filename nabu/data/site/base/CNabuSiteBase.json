@@ -898,6 +898,17 @@
             "is_nullable": false,
             "extra": "",
             "comment": ""
+        },
+        "nb_site_signin_lock_delay": {
+            "name": "nb_site_signin_lock_delay",
+            "ordinal": "82",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": "0",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
         }
     },
     "constraints": {

@@ -360,7 +360,7 @@ final class CNabuHTTPResponse extends CNabuObject
      * @return bool If redirection is not allowed, then returns false.
      * In another case, the function makes exit internally and breaks the program flow.
      */
-    private function redirect($code, $nb_site_target, $nb_language = null, $params = null)
+    public function redirect($code, $nb_site_target, $nb_language = null, $params = null)
     {
         global $NABU_HTTP_CODES;
 

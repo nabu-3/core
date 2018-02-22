@@ -248,7 +248,7 @@ class CNabuSiteTargetLink extends CNabuObject
             $this->kind === self::USE_URI_TRANSLATED &&
             $this->nb_translated instanceof CNabuSiteTarget
         ) {
-            $retval = $target->matchValue($this->nb_translated, 'nb_site_target_id');
+            $retval = $target->matchValue($this->nb_translated, NABU_SITE_TARGET_FIELD_ID);
         } elseif (is_string($target) &&
             $this->kind === self::USE_URI_URL &&
             is_string($this->url)

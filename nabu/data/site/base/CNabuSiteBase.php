@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/20 17:26:14 UTC
+ * Created: 2018/02/22 05:37:11 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -2177,6 +2177,33 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_max_signin_retries', $max_signin_retries);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site SignIn Lock Delay attribute value
+     * @return int Returns the Site SignIn Lock Delay value
+     */
+    public function getSignInLockDelay() : int
+    {
+        return $this->getValue('nb_site_signin_lock_delay');
+    }
+
+    /**
+     * Sets the Site SignIn Lock Delay attribute value.
+     * @param int $signin_lock_delay New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setSignInLockDelay(int $signin_lock_delay = 0) : CNabuDataObject
+    {
+        if ($signin_lock_delay === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$signin_lock_delay")
+            );
+        }
+        $this->setValue('nb_site_signin_lock_delay', $signin_lock_delay);
         
         return $this;
     }

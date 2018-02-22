@@ -159,7 +159,7 @@ final class CNabuHTTPPluginsManager extends CNabuHTTPManager
 
         $nb_response = $this->nb_application->getResponse();
         if ($nb_response === null) {
-            throw ENabuCoreException(ENabuCoreException::ERROR_RESPONSE_NOT_FOUND);
+            throw new ENabuCoreException(ENabuCoreException::ERROR_RESPONSE_NOT_FOUND);
         }
 
         $nb_site = $nb_request->getSite();

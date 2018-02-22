@@ -25,6 +25,8 @@ use nabu\core\CNabuEngine;
 use nabu\http\CNabuHTTPSession;
 
 use nabu\core\exceptions\ENabuCoreException;
+use nabu\data\lang\CNabuLanguage;
+
 use nabu\data\customer\CNabuCustomer;
 use nabu\data\security\CNabuUser;
 use nabu\data\security\CNabuRole;
@@ -164,10 +166,11 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
      * Validate if current user or anonymous user (if none user is logged in) can access to $nb_site_target.
      * @param CNabuSite $nb_site Current Site that owns the target.
      * @param CNabuSiteTarget $nb_site_target Current Site Target to evaluate.
+     * @param CNabuLanguage $nb_language Current Language used when Target is called.
      * @return bool Returns true if the target is visible.
      * @throws ENabuCoreException Throws an exception when no role is assigned.
      */
-    public function validateVisibility(CNabuSite $nb_site, CNabuSiteTarget $nb_site_target)
+    public function validateVisibility(CNabuSite $nb_site, CNabuSiteTarget $nb_site_target, CNabuLanguage $nb_language)
     {
         $retval = false;
 
@@ -219,6 +222,24 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
             $nb_engine->traceLog("Role", $this->nb_role->getKey());
 
             $retval = true;
+        }
+
+        $nb_response = $this->nb_application->getResponse();
+
+        if ($retval) {
+            $signin_retries = $nb_session->getVariable('signin_retries', 0);
+            $max_signin_retries = $nb_site->getMaxSignInRetries();
+            $link = $nb_site->getLoginMaxFailsTargetLink();
+            $login = $nb_site->getLoginTargetLink();
+            if ($this->isSignInLocked() &&
+                $login->isLinkable() &&
+                $login->matchTarget($nb_site_target) &&
+                $link->isLinkable()
+            ) {
+                $nb_response->redirect($nb_site->getLoginMaxFailsErrorCode(), $link->getBestQualifiedURL($nb_language));
+            }
+        } else {
+            $nb_response->movedPermanentlyRedirect($this->nb_site_target, $this->nb_language);
         }
 
         return $retval;
@@ -360,24 +381,30 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
             ->traceLog('Sign-in retries', $signin_retries)
         ;
 
+        try {
+            $lang = $this->nb_application->getRequest()->getLanguage()->getId();
+        } catch (Exception $e) {
+            $lang = null;
+        }
+        if ($lang === null) {
+            $lang = $nb_site->getDefaultLanguageId();
+        }
+
+        if ($this->isSignInLocked() &&
+            is_string($link = $nb_site->getLoginMaxFailsTargetLink()->getBestQualifiedURL(array($lang => $lang)))
+        ) {
+            $nb_response->redirect($nb_site->getLoginMaxFailsErrorCode(), $link);
+        }
+
         $nb_user = CNabuUser::findBySiteLogin($nb_site, $user, $passwd);
         if ($nb_user !== null) {
             $retval = $this->loginDecision($nb_site, $nb_user, $remember);
         }
 
-        if (!$retval && $max_signin_retries > 0) {
-            if ($signin_retries >= $max_signin_retries) {
-                try {
-                    $lang = $this->nb_application->getRequest()->getLanguage()->getId();
-                } catch (Exception $e) {
-                    $lang = null;
-                }
-                if ($lang === null) {
-                    $lang = $nb_site->getDefaultLanguageId();
-                }
-
-                if (is_string($link = $nb_site->getLoginMaxFailsTargetLink()->getBestQualifiedURL(array($lang => $lang)))) {
-                    $retval = $nb_plugin_manager->pluginRedirectToPage($link);
+        if (!$retval && $nb_site->getMaxSignInRetries() > 0) {
+            if ($this->isSignInLocked()) {
+                if (is_string($link)) {
+                    $nb_response->redirect($nb_site->getLoginMaxFailsErrorCode(), $link);
                 } else {
                     $retval = false;
                 }
@@ -387,6 +414,29 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         }
 
         return $retval;
+    }
+
+    /**
+     * Check if the Sign-in is enabled or locked by an excess of retries.
+     * @return bool Return true if Sign-in is locked.
+     * @throws ENabuCoreException Raises an exception if Session or Site instances are not available.
+     */
+    public function isSignInLocked()
+    {
+        $nb_session = $this->nb_application->getSession();
+        if ($nb_session === null || !($nb_session instanceof CNabuHTTPSession)) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_SESSION_NOT_FOUND);
+        }
+
+        $nb_site = $this->nb_application->getHTTPServer()->getSite();
+        if ($nb_site === null || !($nb_site instanceof CNabuSite)) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_NOT_FOUND);
+        }
+
+        $signin_retries = $nb_session->getVariable('signin_retries', 0);
+        $max_signin_retries = $nb_site->getMaxSignInRetries();
+
+        return $max_signin_retries > 0 && $signin_retries >= $max_signin_retries;
     }
 
     /**

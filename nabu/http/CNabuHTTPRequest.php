@@ -640,11 +640,7 @@ class CNabuHTTPRequest extends CNabuObject
 
     public function checkSecurity()
     {
-        if (!$this->nb_security_manager->validateVisibility($this->nb_site, $this->nb_site_target)) {
-            $this->nb_response->movedPermanentlyRedirect($this->nb_site_target, $this->nb_language);
-        }
-
-        return true;
+        return $this->nb_security_manager->validateVisibility($this->nb_site, $this->nb_site_target, $this->nb_language);
     }
 
     private function findTargetByURL($url)
