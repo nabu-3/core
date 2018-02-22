@@ -53,6 +53,7 @@ final class CNabuHTTPPluginsManager extends CNabuHTTPManager
 
     /**
      * Default constructor.
+     * @param CNabuHTTPApplication $nb_application The application instance that owns this instance.
      */
     public function __construct(CNabuHTTPApplication $nb_application)
     {

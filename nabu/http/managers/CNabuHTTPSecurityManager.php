@@ -417,8 +417,6 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         $signin_last_fail_timestamp = $nb_session->getVariable('signin_last_fail_timestamp', 0);
         $now = time() - $signin_last_fail_timestamp;
 
-        error_log("++++++++> $max_signin_retries $signin_retries $signin_locked_delay $signin_last_fail_timestamp $now");
-
         if ($now > $signin_locked_delay) {
             $this->resetSignInLock();
             $retval = false;
@@ -450,8 +448,6 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
      */
     public function lockSignIn()
     {
-        error_log(__METHOD__);
-
         $retval = false;
 
         $nb_session = $this->nb_application->getSession();
@@ -484,23 +480,16 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         $signin_last_fail_timestamp = $nb_session->getVariable('signin_last_fail_timestamp', 0);
         $now = time() - $signin_last_fail_timestamp;
 
-        error_log("********> $max_signin_retries $signin_retries $signin_locked_delay $signin_last_fail_timestamp $now");
-
         if ($max_signin_retries > 0) {
-            error_log("********> HOLA 1");
             if ($this->isSignInLocked()) {
-                error_log("********> HOLA 2");
             } else {
-                error_log("********> HOLA 5");
                 $nb_session->setVariable('signin_retries', $signin_retries < $max_signin_retries ? ++$signin_retries : $max_signin_retries);
                 $nb_session->setVariable('signin_last_fail_timestamp', time());
             }
             if ($this->isSignInLocked()) {
                 if (is_string($link = $nb_site->getLoginMaxFailsTargetLink()->getBestQualifiedURL(array($lang => $lang)))) {
-                    error_log("********> HOLA 3");
                     $nb_response->redirect($nb_site->getLoginMaxFailsErrorCode(), $link);
                 } else {
-                    error_log("********> HOLA 4");
                     $retval = true;
                 }
             }
@@ -715,7 +704,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
     /**
      * Applies a Role to an object, forcing to clean all related entities that does not share the same role.
      * @param INabuRoleMask $object Role Mask entity to be applied.
-     * @param array $params Additional parameters to be applied when perform masking.
+     * @param array|null $params Additional parameters to be applied when perform masking.
      * @return bool Returns true if the cleaning is performed.
      */
     public function applyRoleMask(INabuRoleMask $object, array $params = null) : bool
