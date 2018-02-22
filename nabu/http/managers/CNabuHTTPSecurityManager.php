@@ -431,6 +431,8 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         $signin_last_fail_timestamp = $nb_session->getVariable('signin_last_fail_timestamp', 0);
         $now = time() - $signin_last_fail_timestamp;
 
+        error_log("++++++++> $max_signin_retries $signin_locked_delay $signin_last_fail_timestamp $now");
+
         if ($now > $signin_locked_delay) {
             $this->resetSignInLock();
             $retval = false;
@@ -454,6 +456,8 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
 
     public function lockSignIn()
     {
+        error_log(__METHOD__);
+
         $retval = false;
 
         $nb_session = $this->nb_application->getSession();
@@ -467,21 +471,28 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         }
 
         $max_signin_retries = $nb_site->getMaxSignInRetries();
-        $signin_locked_delay = $nb_site->getSingInLockDelay();
+        $signin_locked_delay = $nb_site->getSignInLockDelay();
+        $signin_retries = $nb_session->getVariable('signin_retries', 0);
         $signin_last_fail_timestamp = $nb_session->getVariable('signin_last_fail_timestamp', 0);
         $now = time() - $signin_last_fail_timestamp;
 
-        if (!$retval && $max_signin_retries > 0) {
+        error_log("********> $max_signin_retries $signin_locked_delay $signin_last_fail_timestamp $now");
+
+        if ($max_signin_retries > 0) {
+            error_log("********> HOLA 1");
             if ($this->isSignInLocked()) {
+                error_log("********> HOLA 2");
                 if (is_string($link)) {
+                    error_log("********> HOLA 3");
                     $nb_response->redirect($nb_site->getLoginMaxFailsErrorCode(), $link);
                 } else {
+                    error_log("********> HOLA 4");
                     $retval = true;
                 }
             } else {
-                $signin_retries = $nb_session->getVariable('signin_retries', 0);
-                $nb_session->setVariable('signin_retries', $signin_retries >= $max_signin_retries ? $signin_retries + 1 : $max_signin_retries);
-                $nb_session->setVariable('sigin_last_fail_timestamp', time());
+                error_log("********> HOLA 5");
+                $nb_session->setVariable('signin_retries', $signin_retries < $max_signin_retries ? $signin_retries + 1 : $max_signin_retries);
+                $nb_session->setVariable('signin_last_fail_timestamp', time());
             }
         }
 
