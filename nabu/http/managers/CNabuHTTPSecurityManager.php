@@ -176,6 +176,13 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
 
         $nb_engine = CNabuEngine::getEngine();
         $nb_http_server = $nb_engine->getHTTPServer();
+        $nb_session = $this->nb_application->getSession();
+
+        CNabuEngine::getEngine()
+            ->traceLog('Sign-in healty', $this->isSignInLocked() ? 'Locked' : 'Enabled')
+            ->traceLog('Sign-in max retries', $nb_site->getMaxSignInRetries())
+            ->traceLog('Sign-in current retries', $nb_session->getVariable('signin_retries', 0))
+        ;
 
         $nb_engine->traceLog(
             "HTTP Support",
@@ -373,28 +380,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
 
         $retval = false;
 
-        $signin_retries = $nb_session->getVariable('signin_retries', 0);
-        $max_signin_retries = $nb_site->getMaxSignInRetries();
-
-        CNabuEngine::getEngine()
-            ->traceLog('Max sign-in retries', $max_signin_retries)
-            ->traceLog('Sign-in retries', $signin_retries)
-        ;
-
-        try {
-            $lang = $this->nb_application->getRequest()->getLanguage()->getId();
-        } catch (Exception $e) {
-            $lang = null;
-        }
-        if ($lang === null) {
-            $lang = $nb_site->getDefaultLanguageId();
-        }
-
-        if ($this->isSignInLocked() &&
-            is_string($link = $nb_site->getLoginMaxFailsTargetLink()->getBestQualifiedURL(array($lang => $lang)))
-        ) {
-            $nb_response->redirect($nb_site->getLoginMaxFailsErrorCode(), $link);
-        }
+        $this->isSignInLocked() && $this->lockSignIn();
 
         $nb_user = CNabuUser::findBySiteLogin($nb_site, $user, $passwd);
         if ($nb_user !== null) {
@@ -431,7 +417,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         $signin_last_fail_timestamp = $nb_session->getVariable('signin_last_fail_timestamp', 0);
         $now = time() - $signin_last_fail_timestamp;
 
-        error_log("++++++++> $max_signin_retries $signin_locked_delay $signin_last_fail_timestamp $now");
+        error_log("++++++++> $max_signin_retries $signin_retries $signin_locked_delay $signin_last_fail_timestamp $now");
 
         if ($now > $signin_locked_delay) {
             $this->resetSignInLock();
@@ -443,6 +429,9 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         return $retval;
     }
 
+    /**
+     * Reset sign-in counters to 0
+     */
     public function resetSignInLock()
     {
         $nb_session = $this->nb_application->getSession();
@@ -454,6 +443,11 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         $nb_session->unsetVariable('signin_last_fail_timestamp');
     }
 
+    /**
+     * Tries to lock the sign-in. If counter is less than the max, then increases the counter. If elapsed time between
+     * now and last retry failed is great than the max lock delay, then resets the counter.
+     * @return bool Returns true if sign-in is locked.
+     */
     public function lockSignIn()
     {
         error_log(__METHOD__);
@@ -465,9 +459,23 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
             throw new ENabuCoreException(ENabuCoreException::ERROR_SESSION_NOT_FOUND);
         }
 
+        $nb_response = $this->nb_application->getResponse();
+        if ($nb_response === null || !($nb_response instanceof CNabuHTTPResponse)) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_RESPONSE_NOT_FOUND);
+        }
+
         $nb_site = $this->nb_application->getHTTPServer()->getSite();
         if ($nb_site === null || !($nb_site instanceof CNabuSite)) {
             throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_NOT_FOUND);
+        }
+
+        try {
+            $lang = $this->nb_application->getRequest()->getLanguage()->getId();
+        } catch (Exception $e) {
+            $lang = null;
+        }
+        if ($lang === null) {
+            $lang = $nb_site->getDefaultLanguageId();
         }
 
         $max_signin_retries = $nb_site->getMaxSignInRetries();
@@ -476,23 +484,25 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         $signin_last_fail_timestamp = $nb_session->getVariable('signin_last_fail_timestamp', 0);
         $now = time() - $signin_last_fail_timestamp;
 
-        error_log("********> $max_signin_retries $signin_locked_delay $signin_last_fail_timestamp $now");
+        error_log("********> $max_signin_retries $signin_retries $signin_locked_delay $signin_last_fail_timestamp $now");
 
         if ($max_signin_retries > 0) {
             error_log("********> HOLA 1");
             if ($this->isSignInLocked()) {
                 error_log("********> HOLA 2");
-                if (is_string($link)) {
+            } else {
+                error_log("********> HOLA 5");
+                $nb_session->setVariable('signin_retries', $signin_retries < $max_signin_retries ? ++$signin_retries : $max_signin_retries);
+                $nb_session->setVariable('signin_last_fail_timestamp', time());
+            }
+            if ($this->isSignInLocked()) {
+                if (is_string($link = $nb_site->getLoginMaxFailsTargetLink()->getBestQualifiedURL(array($lang => $lang)))) {
                     error_log("********> HOLA 3");
                     $nb_response->redirect($nb_site->getLoginMaxFailsErrorCode(), $link);
                 } else {
                     error_log("********> HOLA 4");
                     $retval = true;
                 }
-            } else {
-                error_log("********> HOLA 5");
-                $nb_session->setVariable('signin_retries', $signin_retries < $max_signin_retries ? $signin_retries + 1 : $max_signin_retries);
-                $nb_session->setVariable('signin_last_fail_timestamp', time());
             }
         }
 
