@@ -401,16 +401,8 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
             $retval = $this->loginDecision($nb_site, $nb_user, $remember);
         }
 
-        if (!$retval && $nb_site->getMaxSignInRetries() > 0) {
-            if ($this->isSignInLocked()) {
-                if (is_string($link)) {
-                    $nb_response->redirect($nb_site->getLoginMaxFailsErrorCode(), $link);
-                } else {
-                    $retval = false;
-                }
-            } else {
-                $nb_session->setVariable('signin_retries', ++$signin_retries);
-            }
+        if (!$retval) {
+            $this->lockSignIn();
         }
 
         return $retval;
@@ -433,10 +425,67 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
             throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_NOT_FOUND);
         }
 
-        $signin_retries = $nb_session->getVariable('signin_retries', 0);
         $max_signin_retries = $nb_site->getMaxSignInRetries();
+        $signin_locked_delay = $nb_site->getSignInLockDelay();
+        $signin_retries = $nb_session->getVariable('signin_retries', 0);
+        $signin_last_fail_timestamp = $nb_session->getVariable('signin_last_fail_timestamp', 0);
+        $now = time() - $signin_last_fail_timestamp;
 
-        return $max_signin_retries > 0 && $signin_retries >= $max_signin_retries;
+        if ($now > $signin_locked_delay) {
+            $this->resetSignInLock();
+            $retval = false;
+        } else {
+            $retval = $max_signin_retries > 0 && $signin_retries >= $max_signin_retries && $now < $signin_locked_delay;
+        }
+
+        return $retval;
+    }
+
+    public function resetSignInLock()
+    {
+        $nb_session = $this->nb_application->getSession();
+        if ($nb_session === null || !($nb_session instanceof CNabuHTTPSession)) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_SESSION_NOT_FOUND);
+        }
+
+        $nb_session->unsetVariable('signin_retries');
+        $nb_session->unsetVariable('signin_last_fail_timestamp');
+    }
+
+    public function lockSignIn()
+    {
+        $retval = false;
+
+        $nb_session = $this->nb_application->getSession();
+        if ($nb_session === null || !($nb_session instanceof CNabuHTTPSession)) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_SESSION_NOT_FOUND);
+        }
+
+        $nb_site = $this->nb_application->getHTTPServer()->getSite();
+        if ($nb_site === null || !($nb_site instanceof CNabuSite)) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_NOT_FOUND);
+        }
+
+        $max_signin_retries = $nb_site->getMaxSignInRetries();
+        $signin_locked_delay = $nb_site->getSingInLockDelay();
+        $signin_last_fail_timestamp = $nb_session->getVariable('signin_last_fail_timestamp', 0);
+        $now = time() - $signin_last_fail_timestamp;
+
+        if (!$retval && $max_signin_retries > 0) {
+            if ($this->isSignInLocked()) {
+                if (is_string($link)) {
+                    $nb_response->redirect($nb_site->getLoginMaxFailsErrorCode(), $link);
+                } else {
+                    $retval = true;
+                }
+            } else {
+                $signin_retries = $nb_session->getVariable('signin_retries', 0);
+                $nb_session->setVariable('signin_retries', $signin_retries >= $max_signin_retries ? $signin_retries + 1 : $max_signin_retries);
+                $nb_session->setVariable('sigin_last_fail_timestamp', time());
+            }
+        }
+
+        return $retval;
     }
 
     /**
@@ -530,6 +579,8 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                 $nb_session->setVariable(self::VAR_SESSION_SITE_USER, $nb_site_user);
                 $nb_session->setVariable(self::VAR_SESSION_PRESERVED, $preserve);
 
+                $this->resetSignInLock();
+
                 $this->nb_role = $nb_role;
                 $this->nb_site_role = $nb_site_role;
                 $this->nb_user = $nb_user;
@@ -567,7 +618,6 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
                 }
 
                 $this->nb_site_user->logAccess();
-                //$nb_user->getStats(true);
             }
 
             return $nb_plugins_manager->pluginRedirectToPage($after_login);
