@@ -96,6 +96,12 @@ define('NABU_ROLE_FIELD_ID', 'nb_role_id');
 define('NABU_USER_TABLE', 'nb_user');
 define('NABU_USER_FIELD_ID', 'nb_user_id');
 
+define('NABU_USER_GROUP_TABLE', 'nb_user_group');
+define('NABU_USER_GROUP_FIELD_ID', 'nb_user_group_id');
+
+define('NABU_USER_GROUP_TYPE_TABLE', 'nb_user_group_type');
+define('NABU_USER_GROUP_TYPE_FIELD_ID', 'nb_user_group_type_id');
+
 define('NABU_SITE_TABLE', 'nb_site');
 define('NABU_SITE_FIELD_ID', 'nb_site_id');
 

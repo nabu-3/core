@@ -20,6 +20,10 @@
 
 namespace nabu\data\customer;
 
+use nabu\data\security\CNabuUserGroup;
+use nabu\data\security\CNabuUserGroupList;
+use nabu\data\security\CNabuUserGroupType;
+
 use \nabu\data\customer\base\CNabuCustomerBase;
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\core\exceptions\ENabuSecurityException;
@@ -820,6 +824,14 @@ class CNabuCustomer extends CNabuCustomerBase
         return CNabuUser::getAllUsers($this);
     }
 
+    /*
+          ____       _
+         |  _ \ ___ | | ___  ___
+         | |_) / _ \| |/ _ \/ __|
+         |  _ < (_) | |  __/\__ \
+         |_| \_\___/|_|\___||___/
+     */
+
     /**
      * Gets a Role List of all roles owned by this Customer.
      * @param bool $force If true forces to reload Role list form the database storage.
@@ -904,7 +916,36 @@ class CNabuCustomer extends CNabuCustomerBase
         return $this->nb_role_list->getItem($key, CNabuRoleList::INDEX_KEY);
     }
 
+    /*
+          _   _                  ____
+         | | | |___  ___ _ __   / ___|_ __ ___  _   _ _ __  ___
+         | | | / __|/ _ \ '__| | |  _| '__/ _ \| | | | '_ \/ __|
+         | |_| \__ \  __/ |    | |_| | | | (_) | |_| | |_) \__ \
+          \___/|___/\___|_|     \____|_|  \___/ \__,_| .__/|___/
+                                                     |_|
+     */
 
+    /**
+     * Get a User Group Type by his key.
+     * @param string $key A key to looking for.
+     * @return CNabuUserGroupType|null Returns a User Group Type instance if found or null elsewhere.
+     */
+    public function getUserGroupTypeByKey(string $key)
+    {
+        return CNabuUserGroupType::findByKey($this, $key);
+    }
+
+     /**
+      * Get all User Groups instances of a Type, where a User is member (without consider his status).
+      * @param mixed $nb_user_group_type A CNabuDataObject instance containing a field named nb_user_group_type_id
+      * or a valid Id.
+      * @param mixed $nb_user_group_member A CNabuDataObject instance containing a field named nb_user_id or a valid Id.
+      * @return CNabuUserGroupList Returns a list with all User Group instances found.
+      */
+    public function getUserGroupsWithMember($nb_user_group_type, $nb_user_group_member)
+    {
+        return CNabuUserGroup::getGroupsWithMember($this, $nb_user_group_type, $nb_user_group_member);
+    }
 
     /*
            _        ____            _             _

@@ -121,24 +121,44 @@ class CNabuSiteUser extends CNabuSiteUserBase
     }
 
     /**
-     * Get a list of Active Users for a Site.
+     * Get the full list of active Users. If $nb_role is defined, then filters the list by the represented Role.
      * @param mixed $nb_site A CNabuDataObject instance containing a field called nb_site_id or a valid Site Id.
+     * @param mixed $nb_role If defined, then will be a CNabuDataObject instance containing a field named nb_role_id
+     * or a valid Id.
      * @return CNabuUserList Returns the list of Users found.
      */
-    public static function getActiveUsersForSite($nb_site) : CNabuUserList
+    public static function getActiveUsersForSite($nb_site, $nb_role) : CNabuUserList
     {
         if (is_numeric($nb_site_id = nb_getMixedValue($nb_site, NABU_SITE_FIELD_ID))) {
-            $retval = CNabuUser::buildObjectListFromSQL(
-                'nb_user_id',
-                'SELECT u.*
-                  FROM nb_user u, nb_site_user su
-                 WHERE u.nb_user_id=su.nb_user_id
-                   AND su.nb_site_id=%site_id$d',
-                array(
-                    'site_id' => $nb_site_id
-                ),
-                ($nb_site instanceof CNabuSite ? $nb_site : null)
-            );
+            if (is_numeric($nb_role_id = nb_getMixedValue($nb_role, NABU_ROLE_FIELD_ID))) {
+                $retval = CNabuUser::buildObjectListFromSQL(
+                    'nb_user_id',
+                    'SELECT u.*
+                      FROM nb_user u, nb_site_user su
+                     WHERE u.nb_user_id=su.nb_user_id
+                       AND u.nb_user_validation_status=\'T\'
+                       AND su.nb_site_id=%site_id$d
+                       AND su.nb_role_id=%role_id$d',
+                    array(
+                        'site_id' => $nb_site_id,
+                        'role_id' => $nb_role_id
+                    ),
+                    ($nb_site instanceof CNabuSite ? $nb_site : null)
+                );
+            } else {
+                $retval = CNabuUser::buildObjectListFromSQL(
+                    'nb_user_id',
+                    'SELECT u.*
+                      FROM nb_user u, nb_site_user su
+                     WHERE u.nb_user_id=su.nb_user_id
+                       AND u.nb_user_validation_status=\'T\'
+                       AND su.nb_site_id=%site_id$d',
+                    array(
+                        'site_id' => $nb_site_id
+                    ),
+                    ($nb_site instanceof CNabuSite ? $nb_site : null)
+                );
+            }
             if ($nb_site instanceof CNabuSite) {
                 $retval->iterate(function($key, CNabuUser $nb_user) use ($nb_site)
                 {

@@ -384,7 +384,7 @@ class CNabuSite extends CNabuSiteBase
     {
         return $this->getReferredTargetLink('login_max_fails');
     }
-    
+
     /**
      * Gets the Alias Not Found Target Link instance.
      * @return CNabuSiteTargetLink Returns the Site Target Link generated instance.
@@ -955,15 +955,17 @@ class CNabuSite extends CNabuSiteBase
     }
 
     /**
-     * Get the full list of active Users.
+     * Get the full list of active Users. If $nb_role is defined, then filters the list by the represented Role.
+     * @param mixed $nb_role If defined, then will be a CNabuDataObject instance containing a field named nb_role_id
+     * or a valid Id.
      * @param bool $force If true forces to reload the list from the database storage.
      * @return CNabuUserList Return a list with found users.
      */
-    public function getActiveUsers(bool $force = false) : CNabuUserList
+    public function getActiveUsers($nb_role = null, bool $force = false) : CNabuUserList
     {
         if ($this->nb_user_list->isEmpty() || $force) {
             $this->nb_user_list->clear();
-            $this->nb_user_list->merge(CNabuSiteUser::getActiveUsersForSite($this));
+            $this->nb_user_list->merge(CNabuSiteUser::getActiveUsersForSite($this, $nb_role));
         }
 
         return $this->nb_user_list;

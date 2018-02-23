@@ -42,6 +42,44 @@ class CNabuUserGroup extends CNabuUserGroupBase
         $this->nb_user_group_member_list = new CNabuUserGroupMemberList();
     }
 
+    /**
+     * Get all User Groups instances of a Type, where a User is member (without consider his status).
+     * @param mixed $nb_customer A CNabuDataObject instance containing a field named nb_customer_id or a valid Id.
+     * @param mixed $nb_user_group_type A CNabuDataObject instance containing a field named nb_user_group_type_id
+     * or a valid Id.
+     * @param mixed $nb_user_group_member A CNabuDataObject instance containing a field named nb_user_id or a valid Id.
+     * @return CNabuUserGroupList Returns a list with all User Group instances found.
+     */
+    public static function getGroupsWithMember($nb_customer, $nb_user_group_type, $nb_user_group_member) : CNabuUserGroupList
+    {
+        if (is_numeric($nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID)) &&
+            is_numeric($nb_user_group_type_id = nb_getMixedValue($nb_user_group_type, NABU_USER_GROUP_TYPE_FIELD_ID)) &&
+            is_numeric($nb_user_id = nb_getMixedValue($nb_user_group_member, NABU_USER_FIELD_ID))
+        ) {
+            $retval = CNabuUserGroup::buildObjectListFromSQL(
+                'nb_user_group_id',
+                'SELECT ug.*
+                   FROM nb_customer c, nb_user_group_type ugt, nb_user_group ug, nb_user_group_member ugm
+                  WHERE c.nb_customer_id=ug.nb_customer_id
+                    AND c.nb_customer_id=ugt.nb_customer_id
+                    AND ug.nb_user_group_id=ugm.nb_user_group_id
+                    AND c.nb_customer_id=%cust_id$d
+                    AND ugt.nb_user_group_type_id=%type_id$d
+                    AND ugm.nb_user_id=%user_id$d',
+                    array(
+                        'cust_id' => $nb_customer_id,
+                        'type_id' => $nb_user_group_type_id,
+                        'user_id' => $nb_user_id
+                    ),
+                ($nb_user_group_member instanceof CNabuUser ? $nb_user : null)
+            );
+        } else {
+            $retval = new CNabuUserGroupList();
+        }
+
+        return $retval;
+    }
+
     public function getOwner(bool $force = false)
     {
         if ($this->nb_user === null || $this->getUserId() !== $this->nb_user->getId() || $force) {
@@ -119,5 +157,17 @@ class CNabuUserGroup extends CNabuUserGroupBase
                     )
                )
         ;
+    }
+
+    public function delete() : bool
+    {
+        $this->getMembers(true)->iterate(
+            function($key, CNabuUserGroupMember $nb_member) {
+                $nb_member->delete();
+                return true;
+            }
+        );
+
+        return parent::delete();
     }
 }
