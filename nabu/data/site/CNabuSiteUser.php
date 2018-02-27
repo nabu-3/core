@@ -22,6 +22,8 @@ namespace nabu\data\site;
 
 use nabu\data\CNabuDataObject;
 
+use nabu\core\exceptions\ENabuCoreException;
+
 use nabu\data\security\CNabuUserList;
 
 use \nabu\data\site\base\CNabuSiteUserBase;
@@ -145,7 +147,7 @@ class CNabuSiteUser extends CNabuSiteUserBase
                     ),
                     ($nb_site instanceof CNabuSite ? $nb_site : null)
                 );
-            } else {
+            } elseif ($nb_role === null) {
                 $retval = CNabuUser::buildObjectListFromSQL(
                     'nb_user_id',
                     'SELECT u.*
@@ -158,6 +160,8 @@ class CNabuSiteUser extends CNabuSiteUserBase
                     ),
                     ($nb_site instanceof CNabuSite ? $nb_site : null)
                 );
+            } else {
+                throw new ENabuCoreException(ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE, array(print_r($nb_role, true), '$nb_role'));
             }
             if ($nb_site instanceof CNabuSite) {
                 $retval->iterate(function($key, CNabuUser $nb_user) use ($nb_site)
