@@ -420,7 +420,16 @@ interface INabuDBConnector
         $subclassing_default = null,
         $trace = false
     );
-
+    /**
+     * Get row count of a table with distinct and where conditions
+     * @param string $table Name of table or tables separated by commas
+     * @param string|null $distinct Distinct into the count expression in SQL syntax
+     * @param string|null $where Where filter in SQL syntax
+     * @param array|null $params Query params
+     * @param bool $trace If true trace query in error log
+     * @return mixed Returns the number of rows if success or false if not
+     */
+    public function getQueryAsCount($table, $distinct = null, $where = null, $params = null, $trace = false);
     /**
      * Return true if this instance is intended for loggin database that store all logs
      * @return bool
@@ -442,15 +451,6 @@ interface INabuDBConnector
 
 
 
-    /**
-     * Get row count of a table with distinct and where conditions
-     * @param string $table Name of table or tables separated by commas
-     * @param string $where Where filter in SQL syntax
-     * @param string $distinct Distinct into the count expression in SQL syntax
-     * @param bool $trace If true trace query in error log
-     * @return mixed Returns the number of rows if success or false if not
-     */
-    public function getQueryAsCount($table, $where = null, $distinct = null, $trace = false);
     /**
      * Get ID generated in last insert or replace in an autonumeric field
      * @return mixed Returns the ID if success or false if not
