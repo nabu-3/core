@@ -383,7 +383,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         $mimetype = $this->nb_response->getMimetype();
         $this->nb_engine->traceLog("Mimetype", $mimetype);
         if (strlen($mimetype) > 0 && $mimetype != -1) {
-            $this->nb_response->setHeader('Content-Type', "$mimetype; charset=UTF-8");
+            $this->nb_response->setHeader('Content-Type', "$mimetype; charset=utf-8");
         }
 
         $this->nb_response->buildHeaders();
