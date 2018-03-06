@@ -19,8 +19,6 @@
  */
 
 namespace nabu\xml\site;
-use nabu\data\CNabuDataObject;
-use nabu\xml\CNabuXMLDataObject;
 use nabu\xml\site\base\CNabuXMLSiteTargetListBase;
 
 /**
@@ -32,8 +30,4 @@ use nabu\xml\site\base\CNabuXMLSiteTargetListBase;
  */
 class CNabuXMLSiteTargetList extends CNabuXMLSiteTargetListBase
 {
-    protected function createXMLChildObject(CNabuDataObject $nb_child): CNabuXMLDataObject
-    {
-        return parent::createXMLChildObject($nb_child);
-    }
 }
