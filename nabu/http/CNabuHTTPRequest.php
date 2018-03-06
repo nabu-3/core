@@ -24,6 +24,8 @@ use nabu\core\CNabuObject;
 use nabu\core\CNabuEngine;
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\CNabuDataObject;
+use nabu\data\site\CNabuSiteTargetLanguage;
+
 use nabu\data\commerce\CNabuCommerce;
 use nabu\data\lang\CNabuLanguage;
 use nabu\data\security\CNabuRole;
@@ -630,9 +632,26 @@ class CNabuHTTPRequest extends CNabuObject
             $retval = true;
         }
 
-        $nb_engine->traceLog('Page Status', 'Not found');
-        if (!$retval && $this->nb_response->getHTTPResponseCode() === 0) {
-            $this->nb_response->setHTTPResponseCode(404);
+        if (!($this->nb_site_target instanceof CNabuSiteTarget) || !$retval) {
+            $nb_engine->traceLog('Page Status', 'Not found');
+            $link = $this->nb_site->getPageNotFoundTargetLink();
+            if ($link->isLinkable()) {
+                if ($link->isTranslatedTarget()) {
+                    $this->nb_language = $this->nb_site->getDefaultLanguage();
+                    if ($this->nb_language instanceof CNabuLanguage &&
+                        ($nb_site_target = $link->getTranslatedObject()) instanceof CNabuSiteTarget &&
+                        ($nb_site_target->getTranslation($this->nb_language) instanceof CNabuSiteTargetLanguage)
+                    ) {
+                        error_log(print_r($nb_site_target, true));
+                        $this->nb_site_target = $nb_site_target;
+                        $retval = true;
+                    }
+                }
+            }
+
+            if ($this->nb_response->getHTTPResponseCode() === 0) {
+                $this->nb_response->setHTTPResponseCode(404);
+            }
         }
 
         return $retval;

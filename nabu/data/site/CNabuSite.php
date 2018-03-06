@@ -191,7 +191,7 @@ class CNabuSite extends CNabuSiteBase
         $nb_site_target_id = nb_getMixedValue($nb_site_target, 'nb_site_target_id');
 
         return (is_numeric($nb_site_target_id) || nb_isValidGUID($nb_site_target_id))
-               ? $this->nb_site_target_list->getItem($nb_site_target_id)
+               ? $this->nb_site_target_list->getItem($nb_site_target_id)->setSite($this)
                : null
         ;
     }
