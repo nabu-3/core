@@ -52,9 +52,31 @@
             "extra": "",
             "comment": ""
         },
+        "nb_site_role_policies_target_use_uri": {
+            "name": "nb_site_role_policies_target_use_uri",
+            "ordinal": "5",
+            "data_type": "set",
+            "precision": null,
+            "type": "set('T','U','N')",
+            "default": "N",
+            "is_nullable": false,
+            "extra": "",
+            "comment": ""
+        },
+        "nb_site_role_policies_target_id": {
+            "name": "nb_site_role_policies_target_id",
+            "ordinal": "6",
+            "data_type": "int",
+            "precision": "10",
+            "type": "int(11)",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_messaging_template_new_user": {
             "name": "nb_messaging_template_new_user",
-            "ordinal": "5",
+            "ordinal": "7",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -65,7 +87,7 @@
         },
         "nb_messaging_template_forgot_password": {
             "name": "nb_messaging_template_forgot_password",
-            "ordinal": "6",
+            "ordinal": "8",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -76,7 +98,7 @@
         },
         "nb_messaging_template_notify_new_user": {
             "name": "nb_messaging_template_notify_new_user",
-            "ordinal": "7",
+            "ordinal": "9",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -87,7 +109,7 @@
         },
         "nb_messaging_template_remember_new_user": {
             "name": "nb_messaging_template_remember_new_user",
-            "ordinal": "8",
+            "ordinal": "10",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -98,7 +120,7 @@
         },
         "nb_messaging_template_invite_user": {
             "name": "nb_messaging_template_invite_user",
-            "ordinal": "9",
+            "ordinal": "11",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -109,7 +131,7 @@
         },
         "nb_messaging_template_invite_friend": {
             "name": "nb_messaging_template_invite_friend",
-            "ordinal": "10",
+            "ordinal": "12",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -120,7 +142,7 @@
         },
         "nb_messaging_template_new_message": {
             "name": "nb_messaging_template_new_message",
-            "ordinal": "11",
+            "ordinal": "13",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",

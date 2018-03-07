@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/22 05:37:28 UTC
+ * Created: 2018/03/07 10:44:26 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -25,11 +25,13 @@
 
 namespace nabu\xml\site\base;
 
+use \nabu\data\CNabuDataObject;
 use \nabu\data\lang\interfaces\INabuTranslation;
 use \nabu\data\site\CNabuSiteTargetCTALanguageList;
 use \nabu\xml\lang\CNabuXMLTranslation;
 use \nabu\xml\lang\CNabuXMLTranslationsList;
 use \nabu\xml\site\CNabuXMLSiteTargetCTALanguage;
+use \SimpleXMLElement;
 
 /**
  * Class to manage the Site Target CTA List as a XML branch.
@@ -57,5 +59,33 @@ abstract class CNabuXMLSiteTargetCTALanguageListBase extends CNabuXMLTranslation
     protected function createXMLTranslationsObject(INabuTranslation $nb_translation) : CNabuXMLTranslation
     {
         return new CNabuXMLSiteTargetCTALanguage($nb_translation);
+    }
+
+    /**
+     * Locate a Data Object.
+     * @param SimpleXMLElement $element Element to locate the Data Object.
+     * @param CNabuDataObject $data_parent Data Parent object.
+     * @return bool Returns true if the Data Object found or false if not.
+     */
+    protected function locateDataObject(SimpleXMLElement $element, CNabuDataObject $data_parent = null) : bool
+    {
+        $retval = false;
+        
+        if (isset($element['GUID'])) {
+            $guid = (string)$element['GUID'];
+            if (!($this->nb_data_object instanceof CNabuSiteTargetCTALanguageList)) {
+                $this->nb_data_object = CNabuSiteTargetCTALanguageList::findByHash($guid);
+            } else {
+                $this->nb_data_object = null;
+            }
+        
+            if (!($this->nb_data_object instanceof CNabuSiteTargetCTALanguageList)) {
+                $this->nb_data_object = new CNabuSiteTargetCTALanguageList();
+                $this->nb_data_object->setHash($guid);
+            }
+            $retval = true;
+        }
+        
+        return $retval;
     }
 }

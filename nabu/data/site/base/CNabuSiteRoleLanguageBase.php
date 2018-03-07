@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/22 05:37:40 UTC
+ * Created: 2018/03/07 10:44:34 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -272,22 +272,43 @@ abstract class CNabuSiteRoleLanguageBase extends CNabuDBInternalObject implement
     }
 
     /**
-     * Get Site Role Lang Login Target URL attribute value
-     * @return null|string Returns the Site Role Lang Login Target URL value
+     * Get Site Role Lang Login Redirection Target URL attribute value
+     * @return null|string Returns the Site Role Lang Login Redirection Target URL value
      */
-    public function getLoginTargetURL()
+    public function getLoginRedirectionTargetURL()
     {
-        return $this->getValue('nb_site_role_lang_login_target_url');
+        return $this->getValue('nb_site_role_lang_login_redirection_target_url');
     }
 
     /**
-     * Sets the Site Role Lang Login Target URL attribute value.
-     * @param string|null $login_target_url New value for attribute
+     * Sets the Site Role Lang Login Redirection Target URL attribute value.
+     * @param string|null $login_redirection_target_url New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLoginTargetURL(string $login_target_url = null) : CNabuDataObject
+    public function setLoginRedirectionTargetURL(string $login_redirection_target_url = null) : CNabuDataObject
     {
-        $this->setValue('nb_site_role_lang_login_target_url', $login_target_url);
+        $this->setValue('nb_site_role_lang_login_redirection_target_url', $login_redirection_target_url);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Role Lang Policies Target URL attribute value
+     * @return null|string Returns the Site Role Lang Policies Target URL value
+     */
+    public function getPoliciesTargetURL()
+    {
+        return $this->getValue('nb_site_role_lang_policies_target_url');
+    }
+
+    /**
+     * Sets the Site Role Lang Policies Target URL attribute value.
+     * @param string|null $policies_target_url New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setPoliciesTargetURL(string $policies_target_url = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_role_lang_policies_target_url', $policies_target_url);
         
         return $this;
     }

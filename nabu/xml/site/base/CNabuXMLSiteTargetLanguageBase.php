@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/22 05:37:22 UTC
+ * Created: 2018/03/07 10:44:21 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -74,6 +74,17 @@ abstract class CNabuXMLSiteTargetLanguageBase extends CNabuXMLTranslation
         }
         
         return $retval;
+    }
+
+    /**
+     * Get default attributes of Site Target Language from XML Element.
+     * @param SimpleXMLElement $element XML Element to get attributes
+     */
+    protected function getAttributes(SimpleXMLElement $element)
+    {
+        $this->getAttributesFromList($element, array(
+            'nb_site_target_lang_main_image' => 'image'
+        ), false);
     }
 
     /**

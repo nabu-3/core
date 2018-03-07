@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/02/22 05:37:13 UTC
+ * Created: 2018/03/07 10:44:16 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -30,6 +30,7 @@ use \nabu\data\site\CNabuSiteList;
 use \nabu\xml\CNabuXMLDataObject;
 use \nabu\xml\CNabuXMLDataObjectList;
 use \nabu\xml\site\CNabuXMLSite;
+use \SimpleXMLElement;
 
 /**
  * Class to manage the Site List as a XML branch.
@@ -66,5 +67,33 @@ abstract class CNabuXMLSiteListBase extends CNabuXMLDataObjectList
     protected function createXMLChildObject(CNabuDataObject $nb_child = null) : CNabuXMLDataObject
     {
         return new CNabuXMLSite($nb_child);
+    }
+
+    /**
+     * Locate a Data Object.
+     * @param SimpleXMLElement $element Element to locate the Data Object.
+     * @param CNabuDataObject $data_parent Data Parent object.
+     * @return bool Returns true if the Data Object found or false if not.
+     */
+    protected function locateDataObject(SimpleXMLElement $element, CNabuDataObject $data_parent = null) : bool
+    {
+        $retval = false;
+        
+        if (isset($element['GUID'])) {
+            $guid = (string)$element['GUID'];
+            if (!($this->nb_data_object instanceof CNabuSiteList)) {
+                $this->nb_data_object = CNabuSiteList::findByHash($guid);
+            } else {
+                $this->nb_data_object = null;
+            }
+        
+            if (!($this->nb_data_object instanceof CNabuSiteList)) {
+                $this->nb_data_object = new CNabuSiteList();
+                $this->nb_data_object->setHash($guid);
+            }
+            $retval = true;
+        }
+        
+        return $retval;
     }
 }
