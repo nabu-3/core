@@ -114,6 +114,8 @@ abstract class CNabuDBAbstractConnector extends CNabuObject implements INabuDBCo
     public function setCharset($charset)
     {
         $this->charset = $charset;
+
+        return true;
     }
 
     public function setHost($host)
