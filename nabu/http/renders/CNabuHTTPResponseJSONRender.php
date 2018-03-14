@@ -20,6 +20,8 @@
 
 namespace nabu\http\renders;
 
+use nabu\core\CNabuEngine;
+
 use \nabu\http\renders\base\CNabuHTTPResponseRenderAdapter;
 
 /**
@@ -41,7 +43,11 @@ class CNabuHTTPResponseJSONRender extends CNabuHTTPResponseRenderAdapter
         if ($this->nb_render_data->isEmpty()) {
             echo "{}";
         } else {
-            echo json_encode($this->nb_render_data->getTreeData(null, true));
+            if (($json = json_encode($this->nb_render_data->getTreeData(null, true))) !== false) {
+                echo $json;
+            } else {
+                CNabuEngine::getEngine()->errorLog(json_last_error_msg());
+            }
         }
     }
 }
