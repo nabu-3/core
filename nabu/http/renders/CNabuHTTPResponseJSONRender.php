@@ -38,6 +38,11 @@ class CNabuHTTPResponseJSONRender extends CNabuHTTPResponseRenderAdapter
         parent::__construct($main_render);
     }
 
+    public function setArrayValues($array)
+    {
+        $this->nb_render_data->setArrayValues($array);
+    }
+
     public function render()
     {
         if ($this->nb_render_data->isEmpty()) {
