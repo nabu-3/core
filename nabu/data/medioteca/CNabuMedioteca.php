@@ -101,6 +101,45 @@ class CNabuMedioteca extends CNabuMediotecaBase
     }
 
     /**
+     * Find a Item using their url.
+     * @param string $url Slug of Product to find.
+     * @param mixed|null $nb_language Language to search the Slug.
+     * @return CNabuMediotecaItem|false Returns the Product instance if exists or false if not.
+     */
+    public function findItemByURL(string $url, $nb_language = null)
+    {
+        $retval = false;
+        $nb_language_id = nb_getMixedValue($nb_language, NABU_LANG_FIELD_ID);
+
+        $this->getItems()->iterate(
+            function ($key, CNabuMediotecaItem $nb_item)
+                 use (&$retval, $url, $nb_language_id)
+            {
+                if (is_numeric($nb_language_id) &&
+                    ($nb_translation = $nb_item->getTranslation($nb_language_id)) instanceof CNabuMediotecaItemLanguage &&
+                    $nb_translation->getURL() === $url
+                ) {
+                    $retval = $nb_item;
+                } else {
+                    $nb_item->getTranslations()->iterate(
+                        function ($key, CNabuMediotecaItemLanguage $nb_translation)
+                             use (&$retval, $nb_item, $url)
+                        {
+                            if ($nb_translation->getURL() === $url) {
+                                $retval = $nb_item;
+                            }
+                            return !$retval;
+                        }
+                    );
+                }
+                return !$retval;
+            }
+        );
+
+        return $retval;
+    }
+
+    /**
      * Add an Item instance to the list.
      * @param CNabuMediotecaItem $nb_medioteca_item Item instance to be added.
      * @return CNabuMediotecaItem Returns the item added.
