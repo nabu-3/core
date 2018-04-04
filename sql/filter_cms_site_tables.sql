@@ -1,6 +1,9 @@
 select * from nb_site where nb_site_id=1
 ;
 
+select * from nb_site_lang where nb_site_id=1 order by nb_language_id
+;
+
 select * from nb_site_target where nb_site_id=1 order by nb_site_target_id
 ;
 

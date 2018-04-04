@@ -717,24 +717,24 @@ class CNabuSite extends CNabuSiteBase
         if ($this->isValueNumeric('nb_site_id')) {
 
             $list = $this->db->getQueryAsArray(
-                    "select sh.nb_server_id, sh.nb_server_host_id, cgs.nb_cluster_group_id, "
-                         . "cgs.nb_cluster_group_service_id, i.nb_ip_id, sa.nb_site_alias_id, "
-                         . "sa.nb_site_id, sa.nb_site_alias_parent, dz.nb_domain_zone_id, sa.nb_domain_zone_host_id, "
-                         . "dzh.nb_domain_zone_host_name, dz.nb_domain_zone_name, sa.nb_site_alias_type, "
-                         . "cgs.nb_cluster_group_service_use_ssl, i.nb_ip_ip, sh.nb_server_host_port "
-                    . "from nb_site_alias sa, nb_site_alias_service sas, nb_cluster_group_service cgs, "
-                         . "nb_server_host sh, nb_domain_zone_host dzh, nb_domain_zone dz, nb_ip i "
-                   . "where sa.nb_site_alias_id=sas.nb_site_alias_id "
-                     . "and sas.nb_cluster_group_service_id=cgs.nb_cluster_group_service_id "
-                     . "and cgs.nb_cluster_group_service_id=sh.nb_cluster_group_service_id "
-                     . "and sa.nb_domain_zone_host_id=dzh.nb_domain_zone_host_id "
-                     . "and dzh.nb_domain_zone_id=dz.nb_domain_zone_id "
-                     . "and sh.nb_ip_id=i.nb_ip_id "
-                     . "and sa.nb_site_alias_status='E' "
-                     . "and sh.nb_server_host_status='E' "
-                     . "and sh.nb_server_id=%server_id\$d "
-                     . "and sa.nb_site_id=%site_id\$d "
-                   . "order by sa.nb_site_alias_parent is not null",
+                    "SELECT sh.nb_server_id, sh.nb_server_host_id, cgs.nb_cluster_group_id,
+                            cgs.nb_cluster_group_service_id, i.nb_ip_id, sa.nb_site_alias_id,
+                            sa.nb_site_id, sa.nb_site_alias_parent, dz.nb_domain_zone_id, sa.nb_domain_zone_host_id,
+                            dzh.nb_domain_zone_host_name, dz.nb_domain_zone_name, sa.nb_site_alias_type,
+                            cgs.nb_cluster_group_service_use_ssl, i.nb_ip_ip, sh.nb_server_host_port
+                       FROM nb_site_alias sa, nb_site_alias_service sas, nb_cluster_group_service cgs,
+                            nb_server_host sh, nb_domain_zone_host dzh, nb_domain_zone dz, nb_ip i
+                      WHERE sa.nb_site_alias_id=sas.nb_site_alias_id
+                        AND sas.nb_cluster_group_service_id=cgs.nb_cluster_group_service_id
+                        AND cgs.nb_cluster_group_service_id=sh.nb_cluster_group_service_id
+                        AND sa.nb_domain_zone_host_id=dzh.nb_domain_zone_host_id
+                        AND dzh.nb_domain_zone_id=dz.nb_domain_zone_id
+                        AND sh.nb_ip_id=i.nb_ip_id
+                        AND sa.nb_site_alias_status='E'
+                        AND sh.nb_server_host_status='E'
+                        AND sh.nb_server_id=%server_id\$d
+                        AND sa.nb_site_id=%site_id\$d
+                      ORDER BY sa.nb_site_alias_parent IS NOT NULL",
                     array(
                         'server_id' => $nb_server->getId(),
                         'site_id' => $this->getId()

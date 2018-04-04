@@ -44,20 +44,20 @@ class CNabuServer extends CNabuServerBase
 
         if ($this->isValueNumeric('nb_server_id')) {
             $retval = CNabuSite::buildObjectListFromSQL('nb_site_id',
-                    "select distinct si.* "
-                    . "from nb_site si "
-                   . "inner join nb_cluster_group cg "
-                      . "on si.nb_cluster_group_id=cg.nb_cluster_group_id "
-                   . "inner join nb_cluster_group_service cgs "
-                      . "on cg.nb_cluster_group_id=cgs.nb_cluster_group_id "
-                   . "inner join nb_server_host sh "
-                      . "on cgs.nb_cluster_group_service_id=sh.nb_cluster_group_service_id "
-                   . "inner join nb_server se "
-                      . "on sh.nb_server_id=se.nb_server_id "
-                     . "and se.nb_server_id=%server_id\$d "
-                   . "inner join nb_site_alias sa "
-                      . "on si.nb_site_id=sa.nb_site_id "
-                   . "order by si.nb_site_mounting_order asc",
+                    "SELECT distinct si.*
+                       FROM nb_site si
+                      INNER JOIN nb_cluster_group cg
+                         ON si.nb_cluster_group_id=cg.nb_cluster_group_id
+                      INNER JOIN nb_cluster_group_service cgs
+                         ON cg.nb_cluster_group_id=cgs.nb_cluster_group_id
+                      INNER JOIN nb_server_host sh
+                         ON cgs.nb_cluster_group_service_id=sh.nb_cluster_group_service_id
+                      INNER JOIN nb_server se
+                         ON sh.nb_server_id=se.nb_server_id
+                        AND se.nb_server_id=%server_id\$d
+                      INNER JOIN nb_site_alias sa
+                         ON si.nb_site_id=sa.nb_site_id
+                      ORDER BY si.nb_site_mounting_order ASC",
                     array('server_id' => $this->getValue('nb_server_id'))
             );
         } else {
