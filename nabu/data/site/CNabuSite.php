@@ -746,12 +746,12 @@ class CNabuSite extends CNabuSiteBase
                 foreach($list as $host) {
                     switch ($host['nb_site_alias_type']) {
                         case 'F': {
-                            $id = $host['nb_site_alias_id'].'-'.$host['nb_cluster_group_service_id'];
+                            $id = $host['nb_site_alias_id'].'-'.$host['nb_cluster_group_service_id'].'-'.$host['nb_ip_id'];
                             $vhosts[$id] = array('host' => $host);
                             break;
                         }
                         case 'T': {
-                            $parent = $host['nb_site_alias_parent'].'-'.$host['nb_cluster_group_service_id'];
+                            $parent = $host['nb_site_alias_parent'].'-'.$host['nb_cluster_group_service_id'].'-'.$host['nb_ip_id'];
                             if (array_key_exists($parent, $vhosts)) {
                                 if (!array_key_exists('aliases', $vhosts[$parent])) {
                                     $vhosts[$parent]['aliases'] = array();
@@ -761,7 +761,7 @@ class CNabuSite extends CNabuSiteBase
                             break;
                         }
                         case 'R': {
-                            $parent = $host['nb_site_alias_parent'].'-'.$host['nb_cluster_group_service_id'];
+                            $parent = $host['nb_site_alias_parent'].'-'.$host['nb_cluster_group_service_id'].'-'.$host['nb_ip_id'];
                             if (array_key_exists($parent, $vhosts)) {
                                 if (!array_key_exists('redirections', $vhosts[$parent])) {
                                     $vhosts[$parent]['redirections'] = array();

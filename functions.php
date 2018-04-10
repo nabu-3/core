@@ -238,7 +238,7 @@ function nb_isMIMEType(string $mimetype = null) : bool
                            )
         ;
     }
-    
+
     return $retval;
 }
 
