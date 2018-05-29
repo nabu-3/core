@@ -48,4 +48,10 @@ interface INabuApplication
      * @return mixed Returns the value returned internally by the run method.
      */
     public static function launch();
+
+    /**
+     * Gets the base path for the application.
+     * @return string Returns the base path.
+     */
+    public function getBasePath();
 }

@@ -20,6 +20,8 @@
 
 namespace nabu\http\app\base;
 
+use nabu\core\CNabuEngine;
+
 use nabu\core\base\CNabuAbstractApplication;
 use nabu\core\exceptions\ENabuCoreException;
 use nabu\data\CNabuDataObject;
@@ -171,6 +173,16 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         }
 
         return true;
+    }
+
+    public function getBasePath()
+    {
+        $nb_server = CNabuEngine::getEngine()->getHTTPServer()->getServer();
+        $nb_site = $this->nb_request instanceof CNabuHTTPRequest ? $this->nb_request->getSite() : null;
+
+        return $nb_site === null || $nb_server === null
+               ? getcwd()
+               : $nb_server->getVirtualHostsPath() . DIRECTORY_SEPARATOR . $nb_site->getBasePath();
     }
 
     public function getSession()

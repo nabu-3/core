@@ -55,4 +55,9 @@ abstract class CNabuCLIApplication extends CNabuAbstractApplication
         $instance->prepareEnvironment();
         return $instance->run();
     }
+
+    public function getBasePath()
+    {
+        return getcwd();
+    }
 }
