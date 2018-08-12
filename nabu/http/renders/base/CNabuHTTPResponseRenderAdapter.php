@@ -55,7 +55,7 @@ abstract class CNabuHTTPResponseRenderAdapter extends CNabuObject implements INa
     /**
      * Constructor.
      * @param CNabuHTTPApplication $nb_application HTTP Application instance to run this render.
-     * @param INabuHTTPResponseRender $main_render HTTP Main render related with this render or null if not needed.
+     * @param INabuHTTPResponseRender|null $main_render HTTP Main render related with this render or null if not needed.
      */
     public function __construct(CNabuHTTPApplication $nb_application, INabuHTTPResponseRender $main_render = null)
     {
