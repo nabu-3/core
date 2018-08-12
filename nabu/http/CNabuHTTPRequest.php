@@ -642,7 +642,6 @@ class CNabuHTTPRequest extends CNabuObject
                         ($nb_site_target = $link->getTranslatedObject()) instanceof CNabuSiteTarget &&
                         ($nb_site_target->getTranslation($this->nb_language) instanceof CNabuSiteTargetLanguage)
                     ) {
-                        error_log(print_r($nb_site_target, true));
                         $this->nb_site_target = $nb_site_target;
                         $retval = true;
                     }
