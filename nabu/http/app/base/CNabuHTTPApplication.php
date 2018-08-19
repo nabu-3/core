@@ -42,7 +42,6 @@ use nabu\http\managers\CNabuHTTPPluginsManager;
 use nabu\http\managers\CNabuHTTPSecurityManager;
 use nabu\http\managers\CNabuHTTPRenderDescriptor;
 use nabu\render\CNabuRenderTransformFactory;
-use providers\nabu\pdf\renders\CNabuPDFRenderTransformInterface;
 
 /**
  * Abstract base class to implement Web based applications.
@@ -300,6 +299,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
     private function prepareCookies()
     {
         $this->nb_session->refreshCookies($this->nb_request->getSite());
+        $this->nb_security_manager->applySecurityToSession();
     }
 
     public function prepareRequest()
@@ -311,11 +311,12 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
             $this->nb_modules_manager
         );
         $this->nb_response = $this->nb_request->getResponse();
-        $this->nb_security_manager->initSecurity();
         $this->nb_request->prepareHeaders();
         $this->nb_request->prepareBody();
         $this->nb_request->locateSite();
         $this->nb_request->locateSiteAlias();
+        $this->nb_security_manager->initSecurity();
+        $this->nb_security_manager->applySecurityToSession();
 
         $retval = false;
 

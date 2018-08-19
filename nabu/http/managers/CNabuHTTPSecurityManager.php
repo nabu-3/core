@@ -99,12 +99,26 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
      */
     public function initSecurity()
     {
+        $nb_engine = CNabuEngine::getEngine();
         $nb_session = $this->nb_application->getSession();
+
         $this->nb_role = $nb_session->getVariable(self::VAR_SESSION_ROLE, null);
         $this->nb_site_role = $nb_session->getVariable(self::VAR_SESSION_SITE_ROLE, null);
         $this->nb_user = $nb_session->getVariable(self::VAR_SESSION_USER, null);
         $this->nb_site_user = $nb_session->getVariable(self::VAR_SESSION_SITE_USER, null);
         $this->nb_work_customer = $nb_session->getVariable(self::VAR_SESSION_WORK_CUSTOMER, null);
+    }
+
+    /**
+     * Init the Security Manager Engine and recover session variables.
+     */
+    public function applySecurityToSession()
+    {
+        $nb_engine = CNabuEngine::getEngine();
+        $nb_app = $nb_engine->getApplication();
+        $nb_site = $nb_app->getRequest()->getSite();
+        $nb_session = $this->nb_application->getSession();
+        $nb_session->applySecurityRules($nb_site->getForceCookieAsSecure() === 'T');
     }
 
     /**

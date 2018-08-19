@@ -25,10 +25,7 @@ use \nabu\core\CNabuObject;
 use \nabu\core\exceptions\ENabuCoreException;
 use \nabu\core\exceptions\ENabuSingletonException;
 use \nabu\core\interfaces\INabuSingleton;
-use \nabu\data\security\CNabuRole;
-use \nabu\data\security\CNabuUser;
 use \nabu\data\site\CNabuSite;
-use \nabu\data\site\CNabuSiteUser;
 use \nabu\db\interfaces\INabuDBObject;
 
 /**
@@ -108,10 +105,9 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
         }
 
         session_start();
+        $nb_engine->traceLog("Session ID", session_id());
 
         $this->purgeNonce();
-
-        $nb_engine->traceLog("Session ID", session_id());
 
         if (isset($_SESSION) && count($_SESSION) > 0) {
             foreach ($_SESSION as $value) {
@@ -120,6 +116,25 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
                 }
             }
         }
+    }
+
+    /**
+     * Apply requested security options to protect the session.
+     * @param bool $secure If true, forces to set the secure flag of session cookie
+     * @param bool $httponly If true, forces to set the httponly flag of session cookie
+     */
+    public function applySecurityRules(bool $secure = false, bool $httponly = false)
+    {
+        $nb_engine = CNabuEngine::getEngine();
+
+        $attrs = session_get_cookie_params();
+        session_set_cookie_params(
+            $attrs['lifetime'],
+            $attrs['path'],
+            $attrs['domain'],
+            $secure ? true : $attrs['secure'],
+            $httponly ? true : (array_key_exists('httponly', $attrs) ? $attrs['httponly'] : false)
+        );
     }
 
     /**
