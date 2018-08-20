@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/03/07 10:44:19 UTC
+ * Created: 2018/08/20 09:22:46 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -666,6 +666,48 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     public function setOutputType(string $output_type = "HTML") : CNabuDataObject
     {
         $this->setValue('nb_site_target_output_type', $output_type);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Target Render Provider attribute value
+     * @return null|string Returns the Site Target Render Provider value
+     */
+    public function getRenderProvider()
+    {
+        return $this->getValue('nb_site_target_render_provider');
+    }
+
+    /**
+     * Sets the Site Target Render Provider attribute value.
+     * @param string|null $render_provider New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setRenderProvider(string $render_provider = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_target_render_provider', $render_provider);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Target Render Interface attribute value
+     * @return null|string Returns the Site Target Render Interface value
+     */
+    public function getRenderInterface()
+    {
+        return $this->getValue('nb_site_target_render_interface');
+    }
+
+    /**
+     * Sets the Site Target Render Interface attribute value.
+     * @param string|null $render_interface New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setRenderInterface(string $render_interface = null) : CNabuDataObject
+    {
+        $this->setValue('nb_site_target_render_interface', $render_interface);
         
         return $this;
     }

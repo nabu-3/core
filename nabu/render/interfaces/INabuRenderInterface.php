@@ -29,5 +29,13 @@ use nabu\provider\interfaces\INabuProviderInterface;
  */
 interface INabuRenderInterface extends INabuProviderInterface
 {
-
+    /**
+     * Check if this render is the main render.
+     * @return bool Returns true if is the main render.
+     */
+    public function isMainRender() : bool;
+    /**
+     * Renders the content and put the result in the HTTP output stream.
+     */
+    public function render();
 }

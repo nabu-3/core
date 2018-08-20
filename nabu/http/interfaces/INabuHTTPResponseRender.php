@@ -47,7 +47,7 @@ interface INabuHTTPResponseRender
      * Gets the Source File Name assigned to this render if one.
      * @return string|null Returns the filename if exists or null if not.
      */
-    public function getSourceFile() : string;
+    public function getSourceFile();
     /**
      * Sets the Source File Name to work with this render.
      * @param string $filename Source File Name to be assigned.

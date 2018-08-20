@@ -77,9 +77,9 @@
         "nb_medioteca_item_begin_datetime": {
             "name": "nb_medioteca_item_begin_datetime",
             "ordinal": "7",
-            "data_type": "datetime",
+            "data_type": "date",
             "precision": null,
-            "type": "datetime",
+            "type": "date",
             "default": null,
             "is_nullable": true,
             "extra": "",
@@ -88,9 +88,9 @@
         "nb_medioteca_item_end_datetime": {
             "name": "nb_medioteca_item_end_datetime",
             "ordinal": "8",
-            "data_type": "datetime",
+            "data_type": "date",
             "precision": null,
-            "type": "datetime",
+            "type": "date",
             "default": null,
             "is_nullable": true,
             "extra": "",

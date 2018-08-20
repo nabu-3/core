@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/03/07 10:44:07 UTC
+ * Created: 2018/08/20 09:22:19 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -190,26 +190,20 @@ abstract class CNabuClusterUserBase extends CNabuDBInternalObject
 
     /**
      * Get Cluster User OS Id attribute value
-     * @return int Returns the Cluster User OS Id value
+     * @return null|int Returns the Cluster User OS Id value
      */
-    public function getOSId() : int
+    public function getOSId()
     {
         return $this->getValue('nb_cluster_user_os_id');
     }
 
     /**
      * Sets the Cluster User OS Id attribute value.
-     * @param int $os_id New value for attribute
+     * @param int|null $os_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setOSId(int $os_id) : CNabuDataObject
+    public function setOSId(int $os_id = null) : CNabuDataObject
     {
-        if ($os_id === null) {
-            throw new ENabuCoreException(
-                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
-                    array("\$os_id")
-            );
-        }
         $this->setValue('nb_cluster_user_os_id', $os_id);
         
         return $this;
