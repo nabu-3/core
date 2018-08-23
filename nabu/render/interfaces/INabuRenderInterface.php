@@ -19,6 +19,9 @@
  */
 
 namespace nabu\render\interfaces;
+use nabu\http\CNabuHTTPRequest;
+use nabu\http\CNabuHTTPResponse;
+
 use nabu\provider\interfaces\INabuProviderInterface;
 
 /**
@@ -29,6 +32,55 @@ use nabu\provider\interfaces\INabuProviderInterface;
  */
 interface INabuRenderInterface extends INabuProviderInterface
 {
+    /**
+    * Sets the Request instance.
+    * @param CNabuHTTPRequest $nb_request The instance to be setted.
+    * @return INabuRenderInterface Retuns the self instance to grant chained setters functionality.
+    */
+    public function setRequest(CNabuHTTPRequest $nb_request) : INabuRenderInterface;
+    /**
+    * Sets the Response instance.
+    * @param CNabuHTTPResponse $nb_response The instance to be setted.
+    * @return INabuRenderInterface Retuns the self instance to grant chained setters functionality.
+    */
+    public function setResponse(CNabuHTTPResponse $nb_response) : INabuRenderInterface;
+    /**
+     * Gets the Source File Name assigned to this render if one.
+     * @return string|null Returns the filename if exists or null if not.
+     */
+    public function getSourceFile();
+    /**
+     * Sets the Source File Name to work with this render.
+     * @param string $filename Source File Name to be assigned.
+     * @return INabuRenderInterface Returns the self instance to grant chained setters functionality.
+     */
+    public function setSourceFile(string $filename) : INabuRenderInterface;
+    /**
+     * Declares that the Source File associated to this render will be unlinked after finish to render it.
+     * @param bool $unlink If true, the Source File will be unlinked.
+     */
+    public function unlinkSourceFileAfterRender(bool $unlink = true);
+    /**
+     * Gets a variable value from the render instance.
+     * @param string $name Name of the value to get.
+     * @return mixed Returns the value represented by $name.
+     */
+    public function getValue(string $name);
+    /**
+     * Sets a variable value to the render instance.
+     * @param string $name Name of the value to get.
+     * @param mixed $value Value to be setted.
+     * @param mixed $nb_language Language to apply to $value if possible.
+     * @param mixed $cache_key Cache key for the value if it can be cacheable or false if not.
+     * @return INabuRenderInterface Returns the self instance to grant chained setters functionality.
+     */
+    public function setValue(string $name, $value, $nb_language = null, $cache_key = false) : INabuRenderInterface;
+    /**
+     * Check if a value name exists in the render.
+     * @param string $name Name to be checked.
+     * @return bool Returns true if $name is registered.
+     */
+    public function hasValue(string $name) : bool;
     /**
      * Check if this render is the main render.
      * @return bool Returns true if is the main render.

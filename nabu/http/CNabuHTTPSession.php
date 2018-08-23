@@ -165,9 +165,9 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
      * @param string $key Nonce key
      * @param array $word Array of words created for $key
      * @param int $stop_nonce Time limit of words to preserve each one
-     * @param type $new_nonce_list New nonce list which is being built
+     * @param array &$new_nonce_list New nonce list which is being built
      */
-    private function purgeNonceWord($key, $word, $stop_nonce, &$new_nonce_list)
+    private function purgeNonceWord(string $key, array $word, int $stop_nonce, array &$new_nonce_list)
     {
         foreach ($word as $nonce) {
             if ($nonce['time'] >= $stop_nonce) {

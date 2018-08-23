@@ -20,8 +20,9 @@
 
 namespace nabu\render;
 use nabu\core\CNabuEngine;
-use nabu\data\CNabuDataObject;
 use nabu\provider\CNabuProviderFactory;
+use nabu\provider\adapters\CNabuProviderInterfaceFactoryAdapter;
+
 use nabu\render\descriptors\CNabuRenderInterfaceDescriptor;
 use nabu\render\exceptions\ENabuRenderException;
 use nabu\render\interfaces\INabuRenderInterface;
@@ -32,7 +33,7 @@ use nabu\render\interfaces\INabuRenderInterface;
  * @version 3.0.12 Surface
  * @package \nabu\render
  */
-class CNabuRenderFactory extends CNabuDataObject
+class CNabuRenderFactory extends CNabuProviderInterfaceFactoryAdapter
 {
     /** @var string The MIME Type assigned to this Factory. */
     private $mimetype;

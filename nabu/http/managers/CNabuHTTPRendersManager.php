@@ -26,7 +26,9 @@ use nabu\http\app\base\CNabuHTTPApplication;
 use nabu\http\managers\CNabuHTTPRenderDescriptor;
 use nabu\http\managers\base\CNabuHTTPManager;
 use nabu\provider\CNabuProviderFactory;
+use nabu\render\CNabuRenderFactory;
 use nabu\render\CNabuRenderTransformFactory;
+use nabu\render\descriptors\CNabuRenderInterfaceDescriptor;
 use nabu\render\descriptors\CNabuRenderTransformInterfaceDescriptor;
 use nabu\render\exceptions\ENabuRenderException;
 use nabu\render\managers\CNabuRenderPoolManager;
@@ -72,14 +74,29 @@ final class CNabuHTTPRendersManager extends CNabuHTTPManager
         $this->nb_http_render_list->addItem($descriptor);
     }
 
-    public function setResponseRender(CNabuHTTPResponse $nb_response, $descriptor_key)
+    public function setResponseRender(CNabuHTTPResponse $nb_response, string $interface_key = null)
     {
-        $nb_descriptor = $this->nb_http_render_list->getItem($descriptor_key);
-
-        if ($nb_descriptor instanceof CNabuHTTPRenderDescriptor) {
-            $nb_response->setRender($nb_descriptor->createRender($this->nb_application));
+        if ($interface_key === null) {
+            $nb_response->setRender(null);
         } else {
-            throw new ENabuRenderException(ENabuRenderException::ERROR_RENDER_NOT_FOUND, array($descriptor_key));
+            $nb_engine = CNabuEngine::getEngine();
+            $nb_descriptor = $nb_engine->getProviderInterfaceDescriptorByKey(
+                CNabuProviderFactory::INTERFACE_RENDER, $interface_key
+            );
+
+            if ($nb_descriptor instanceof CNabuRenderInterfaceDescriptor &&
+                ($nb_pool_manager = $nb_engine->getRenderPoolManager()) instanceof CNabuRenderPoolManager &&
+                ($nb_render_factory = $nb_pool_manager->getRenderFactory($nb_descriptor)) instanceof CNabuRenderFactory
+            ) {
+                $nb_response->setRenderFactory($nb_render_factory);
+            } else {
+                $nb_descriptor = $this->nb_http_render_list->getItem($interface_key);
+                if ($nb_descriptor instanceof CNabuHTTPRenderDescriptor) {
+                    $nb_response->setRender($nb_descriptor->createRender($this->nb_application));
+                } else {
+                    throw new ENabuRenderException(ENabuRenderException::ERROR_RENDER_NOT_FOUND, array($interface_key));
+                }
+            }
         }
 
         return $this;
