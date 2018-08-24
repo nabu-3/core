@@ -38,8 +38,6 @@ use nabu\render\interfaces\INabuRenderInterface;
  */
 abstract class CNabuRenderInterfaceAdapter extends CNabuObject implements INabuRenderInterface
 {
-    /** @var CNabuHTTPApplication $nb_application Running application instance that owns this render. */
-    protected $nb_application = null;
     /** @var CNabuHTTPRequest $nb_request Request instance. */
     protected $nb_request = null;
     /** @var CNabuHTTPResponse $nb_response Response instance. */
@@ -57,17 +55,14 @@ abstract class CNabuRenderInterfaceAdapter extends CNabuObject implements INabuR
 
     /**
      * Constructor.
-     * @param CNabuAbstractApplication $nb_application HTTP Application instance to run this render.
-     * @param INabuRenderInterface|null $main_render Main render related with this render or null if not needed.
      */
-    public function __construct(CNabuAbstractApplication $nb_application, INabuRenderInterface $main_render = null)
+    public function __construct()
     {
         parent::__construct();
 
-        $this->nb_render_data = new CNabuHTTPResponseRenderData();
+        $this->nb_render_data = new CNabuRenderInterfaceData();
 
-        $this->nb_application = $nb_application;
-        $this->is_main_render = ($main_render !== null);
+        $this->is_main_render = true;
     }
 
     public function setRequest(CNabuHTTPRequest $nb_request) : INabuRenderInterface

@@ -78,12 +78,12 @@ final class CNabuHTTPRendersManager extends CNabuHTTPManager
     {
         if ($interface_key === null) {
             $nb_response->setRender(null);
+            $nb_response->setRenderFactory(null);
         } else {
             $nb_engine = CNabuEngine::getEngine();
             $nb_descriptor = $nb_engine->getProviderInterfaceDescriptorByKey(
                 CNabuProviderFactory::INTERFACE_RENDER, $interface_key
             );
-
             if ($nb_descriptor instanceof CNabuRenderInterfaceDescriptor &&
                 ($nb_pool_manager = $nb_engine->getRenderPoolManager()) instanceof CNabuRenderPoolManager &&
                 ($nb_render_factory = $nb_pool_manager->getRenderFactory($nb_descriptor)) instanceof CNabuRenderFactory

@@ -47,6 +47,10 @@ class ENabuProviderException extends ENabuException
     const ERROR_INTERFACE_TYPE_NOT_EXISTS       = 0x0008;
     /** @var int Descriptor not found for interface. Requires interface name. */
     const ERROR_INTERFACE_DESCRIPTOR_NOT_FOUND  = 0x0009;
+    /** @var int Interface already registered. Requires interface name. */
+    const ERROR_INTERFACE_ALREADY_REGISTERED    = 0x000a;
+    /** @var int Interface not setted. */
+    const ERROR_INTERFACE_NOT_SETTED            = 0x000b;
 
     /**
      * List of all error messages defined in this exception.
@@ -70,7 +74,11 @@ class ENabuProviderException extends ENabuException
         ENabuProviderException::ERROR_INTERFACE_TYPE_NOT_EXISTS =>
             'Provider Interface type [%s] does not exists.',
         ENabuProviderException::ERROR_INTERFACE_DESCRIPTOR_NOT_FOUND =>
-            'The Interface Descriptor [%s] is not found.'
+            'The Interface Descriptor [%s] is not found.',
+        ENabuProviderException::ERROR_INTERFACE_ALREADY_REGISTERED =>
+            'Interface [%s] already registered.',
+        ENabuProviderException::ERROR_INTERFACE_NOT_SETTED =>
+            'Interface not setted.'
     );
 
     public function __construct($code, $values = null)

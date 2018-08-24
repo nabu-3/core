@@ -22,6 +22,9 @@ namespace nabu\provider\adapters;
 use nabu\core\CNabuEngine;
 use nabu\data\CNabuDataObject;
 use nabu\data\lang\CNabuLanguage;
+use nabu\http\CNabuHTTPRequest;
+use nabu\http\CNabuHTTPResponse;
+
 use nabu\provider\base\CNabuProviderInterfaceDescriptor;
 use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
@@ -50,12 +53,6 @@ abstract class CNabuProviderInterfaceFactoryAdapter extends CNabuDataObject
      * @return INabuProviderInterface|false Returns the new Interface or false it's not allowed.
      */
     abstract function createInterface(INabuProviderManager $nb_manager, CNabuProviderInterfaceDescriptor $nb_descriptor);
-    /**
-     * Abstract method to be inherited and implemented.
-     * This method transform the content passed as parameter and exposes the result in the default output stream.
-     * @param mixed $source Source content to be transformed.
-     */
-    abstract function transform($source);
 
     /**
      * Initializes the Factory.
@@ -104,6 +101,40 @@ abstract class CNabuProviderInterfaceFactoryAdapter extends CNabuDataObject
     public function setLanguage(CNabuLanguage $nb_language)
     {
         $this->nb_language = $nb_language;
+
+        return $this;
+    }
+
+    /**
+     * Pass Request instance to managed interface.
+     * @param CNabuHTTPRequest $nb_request Request instance to be passed.
+     * @return CNabuProviderInterfaceFactoryAdapter Returns self pointer to grant chained setters.
+     * @throws ENabuProviderException Raises an exception if the Interface is not setted.
+     */
+    public function setRequest(CNabuHTTPRequest $nb_request) : CNabuProviderInterfaceFactoryAdapter
+    {
+        if ($this->discoverInterface()) {
+            $this->nb_interface->setRequest($nb_request);
+        } else {
+            throw new ENabuProviderException(ENabuProviderException::ERROR_INTERFACE_NOT_SETTED);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Pass Response instance to managed interface.
+     * @param CNabuHTTPResponse|null $nb_response Response instance to be passed.
+     * @return CNabuProviderInterfaceFactoryAdapter Returns self pointer to grant chained setters.
+     * @throws ENabuProviderException Raises an exception if the Interface is not setted.
+     */
+    public function setResponse(CNabuHTTPResponse $nb_response = null) : CNabuProviderInterfaceFactoryAdapter
+    {
+        if ($this->discoverInterface()) {
+            $this->nb_interface->setResponse($nb_response);
+        } else {
+            throw new ENabuProviderException(ENabuProviderException::ERROR_INTERFACE_NOT_SETTED);
+        }
 
         return $this;
     }

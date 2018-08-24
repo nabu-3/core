@@ -27,10 +27,10 @@ namespace nabu\cache\interfaces;
  * @package \nabu\cache\interfaces
  */
 interface INabuCacheStorage {
-    
+
     public function initStorage();
     public function createContainerId($type, $index, $id, $params);
-    public function createContainer($key = false, $source = false);
+    public function createContainer(string $key, $source = false, bool $prevent_callable = false);
     public function getContainer($key);
     public function releaseContainer($key);
 }

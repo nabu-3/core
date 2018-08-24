@@ -38,11 +38,21 @@ class CNabuRenderTransformFactory extends CNabuProviderInterfaceFactoryAdapter
         return $nb_manager->createTransformInterface($nb_descriptor->getClassName());
     }
 
+    /**
+     * @inheritDoc
+     */
+    protected function discoverInterface() : bool
+    {
+        return (parent::discoverInterface() && $this->nb_interface instanceof INabuRenderTransformInterface);
+    }
+
+    /**
+     * This method transform the content passed as parameter and exposes the result in the default output stream.
+     * @param mixed $source Source content to be transformed.
+     */
     public function transform($source)
     {
-        $this->discoverInterface();
-
-        if ($this->nb_interface instanceof INabuRenderTransformInterface) {
+        if ($this->discoverInterface()) {
             $this->nb_interface->transform($source);
         } else {
             throw new ENabuRenderException(

@@ -19,6 +19,7 @@
  */
 
 namespace nabu\render\adapters;
+
 use nabu\core\CNabuEngine;
 use nabu\provider\CNabuProviderFactory;
 use nabu\provider\base\CNabuProviderModuleManagerAdapter;
@@ -36,8 +37,7 @@ use nabu\render\interfaces\INabuRenderTransformInterface;
  * @version 3.0.12 Surface
  * @package \nabu\render\adapters
  */
-abstract class CNabuRenderModuleManagerAdapter extends CNabuProviderModuleManagerAdapter
-    implements INabuRenderModule
+abstract class CNabuRenderModuleManagerAdapter extends CNabuProviderModuleManagerAdapter implements INabuRenderModule
 {
     /** @var array Array of Render Interface instances. */
     private $render_interface_list = null;
@@ -73,8 +73,10 @@ abstract class CNabuRenderModuleManagerAdapter extends CNabuProviderModuleManage
     {
         $nb_engine = CNabuEngine::getEngine();
         $nb_descriptor = $nb_engine->getProviderInterfaceDescriptor(
-            $this->getVendorKey(), $this->getModuleKey(),
-            CNabuProviderFactory::INTERFACE_RENDER, $class_name
+            $this->getVendorKey(),
+            $this->getModuleKey(),
+            CNabuProviderFactory::INTERFACE_RENDER,
+            $class_name
         );
 
         if ($nb_descriptor instanceof CNabuRenderInterfaceDescriptor) {
@@ -91,12 +93,14 @@ abstract class CNabuRenderModuleManagerAdapter extends CNabuProviderModuleManage
                 }
             } else {
                 throw new ENabuRenderException(
-                    ENabuRenderException::ERROR_INVALID_RENDER_CLASS_NAME, array($class_name)
+                    ENabuRenderException::ERROR_INVALID_RENDER_CLASS_NAME,
+                    array($class_name)
                 );
             }
         } else {
             throw new ENabuProviderException(
-                ENabuProviderException::ERROR_INTERFACE_DESCRIPTOR_NOT_FOUND, array($class_name)
+                ENabuProviderException::ERROR_INTERFACE_DESCRIPTOR_NOT_FOUND,
+                array($class_name)
             );
         }
     }
@@ -142,8 +146,10 @@ abstract class CNabuRenderModuleManagerAdapter extends CNabuProviderModuleManage
     {
         $nb_engine = CNabuEngine::getEngine();
         $nb_descriptor = $nb_engine->getProviderInterfaceDescriptor(
-            $this->getVendorKey(), $this->getModuleKey(),
-            CNabuProviderFactory::INTERFACE_RENDER_TRANSFORM, $class_name
+            $this->getVendorKey(),
+            $this->getModuleKey(),
+            CNabuProviderFactory::INTERFACE_RENDER_TRANSFORM,
+            $class_name
         );
 
         if ($nb_descriptor instanceof CNabuRenderTransformInterfaceDescriptor) {
@@ -160,12 +166,14 @@ abstract class CNabuRenderModuleManagerAdapter extends CNabuProviderModuleManage
                 }
             } else {
                 throw new ENabuRenderException(
-                    ENabuRenderException::ERROR_INVALID_RENDER_TRANSFORM_CLASS_NAME, array($class_name)
+                    ENabuRenderException::ERROR_INVALID_RENDER_TRANSFORM_CLASS_NAME,
+                    array($class_name)
                 );
             }
         } else {
             throw new ENabuProviderException(
-                ENabuProviderException::ERROR_INTERFACE_DESCRIPTOR_NOT_FOUND, array($class_name)
+                ENabuProviderException::ERROR_INTERFACE_DESCRIPTOR_NOT_FOUND,
+                array($class_name)
             );
         }
     }
@@ -179,5 +187,4 @@ abstract class CNabuRenderModuleManagerAdapter extends CNabuProviderModuleManage
             unset($this->render_transform_interface_list[$hash]);
         }
     }
-
 }

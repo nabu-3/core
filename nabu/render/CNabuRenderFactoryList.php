@@ -19,9 +19,8 @@
  */
 
 namespace nabu\render;
-use nabu\data\CNabuDataObjectList;
-use nabu\data\customer\CNabuCustomer;
-use nabu\data\customer\traits\TNabuCustomerChild;
+
+use nabu\provider\adapters\CNabuProviderInterfaceFactoryListAdapter;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -29,28 +28,7 @@ use nabu\data\customer\traits\TNabuCustomerChild;
  * @version 3.0.12 Surface
  * @package \nabu\render
  */
-class CNabuRenderFactoryList extends CNabuDataObjectList
+class CNabuRenderFactoryList extends CNabuProviderInterfaceFactoryListAdapter
 {
-    use TNabuCustomerChild;
 
-    public function __construct(CNabuCustomer $nb_customer)
-    {
-        parent::__construct('nb_render_id');
-        $this->setCustomer($nb_customer);
-    }
-
-    protected function createSecondaryIndexes()
-    {
-    }
-
-    /**
-     * Always returns false.
-     * @param string $key Id of the instance to unserialize.
-     * @param string $index Secondary index to be used if needed.
-     * @return bool Always returns false.
-     */
-    protected function acquireItem($key, $index = false)
-    {
-        return false;
-    }
 }

@@ -253,9 +253,14 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
             );
         }
 
-        $this->nb_interface_list[$interface_type]->addItem($nb_descriptor);
+        $retval = $this->nb_interface_list[$interface_type]->addItem($nb_descriptor);
+        if ($retval === false) {
+            throw new ENabuProviderException(
+                ENabuProviderException::ERROR_INTERFACE_ALREADY_REGISTERED, array($nb_descriptor->getClassName())
+            );
+        }
 
-        return true;
+        return $retval;
     }
 
     /**

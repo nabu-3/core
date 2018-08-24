@@ -31,15 +31,15 @@ use \nabu\core\CNabuObject;
  */
 class CNabuCacheNull extends CNabuObject implements INabuCacheStorage
 {
-    public function initStorage() {
-    
+    public function initStorage()
+    {
         return true;
     }
 
-    public function createContainerId($type, $index, $id, $params) {
-        
+    public function createContainerId($type, $index, $id, $params)
+    {
         $id = "$type:$index:$id";
-        
+
         if (count($params) > 0) {
             foreach($params as $key => $value) {
                 if ($value === null) {
@@ -49,25 +49,25 @@ class CNabuCacheNull extends CNabuObject implements INabuCacheStorage
                 } else if ($value === true) {
                     $id .= "|$key=true";
                 } else {
-                    $id .= "|$key=$value"; 
+                    $id .= "|$key=$value";
                 }
             }
         }
         return $id;
     }
-    
-    public function createContainer($key = false, $source = false) {
-        
-        return new CNabuCacheNullContainer($key, $source);
+
+    public function createContainer(string $key, $source = false, bool $prevent_callable = false)
+    {
+        return new CNabuCacheNullContainer($key, $source, $prevent_callable);
     }
 
-    public function getContainer($key) {
-        
+    public function getContainer($key)
+    {
         return null;
     }
 
-    public function releaseContainer($key) {
-        
+    public function releaseContainer($key)
+    {
         return true;
     }
 }

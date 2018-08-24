@@ -41,6 +41,7 @@ use nabu\http\managers\CNabuHTTPRendersManager;
 use nabu\http\managers\CNabuHTTPPluginsManager;
 use nabu\http\managers\CNabuHTTPSecurityManager;
 use nabu\http\managers\CNabuHTTPRenderDescriptor;
+use nabu\render\CNabuRenderFactory;
 use nabu\render\CNabuRenderTransformFactory;
 
 /**
@@ -365,9 +366,15 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
 
         if ($this->nb_request->getMethod() !== 'OPTIONS') {
             if ($nb_site_target instanceof CNabuSiteTarget) {
-                $this->nb_http_renders_manager->setResponseRender(
-                    $this->nb_response, $nb_site_target->getOutputType()
-                );
+                if (strlen($nb_site_target->getRenderInterface()) > 0) {
+                    $this->nb_http_renders_manager->setResponseRender(
+                        $this->nb_response, $nb_site_target->getRenderInterface()
+                    );
+                } else {
+                    $this->nb_http_renders_manager->setResponseRender(
+                        $this->nb_response, $nb_site_target->getOutputType()
+                    );
+                }
                 $this->nb_http_renders_manager->setResponseTransform(
                     $this->nb_response, $nb_site_target->getTransformInterface()
                 );
@@ -465,7 +472,9 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
 
     private function buildResponse()
     {
-        $render = $this->nb_response->getRender();
+        if (($render = $this->nb_response->getRenderFactory()) === null) {
+            $render = $this->nb_response->getRender();
+        }
 
         if (($nb_site = $this->nb_http_server->getSite()) !== null) {
             $this->nb_security_manager->applyRoleMask($nb_site->getSiteMaps());
@@ -489,7 +498,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
             $nb_commerce->sortAll();
         }
 
-        if ($render instanceof INabuHTTPResponseRender) {
+        if (($render instanceof INabuHTTPResponseRender) || ($render instanceof CNabuRenderFactory)) {
             $render->setRequest($this->nb_request);
             $render->setResponse($this->nb_response);
             if ($this->nb_plugins_manager->invoqueBeforeDisplayTarget($this->nb_request, $this->nb_response) &&

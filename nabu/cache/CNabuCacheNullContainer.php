@@ -32,18 +32,20 @@ class CNabuCacheNullContainer extends CNabuObject implements INabuCacheable
 {
     protected $key = null;
     protected $data = null;
-    
-    public function __construct($key = false, $source = false) {
-    
+    protected $prevent_callable = false;
+
+    public function __construct($key = false, $source = false, bool $prevent_callable = false) {
+
         $this->key = $key;
-        $this->data = self::explodeSource($source);
-                
+        $this->prevent_callable = $prevent_callable;
+        $this->data = self::explodeSource($source, $prevent_callable);
+
         parent::__construct();
     }
-    
-    private static function explodeSource($source) {
-        
-        if (is_callable($source)) {
+
+    private static function explodeSource($source, bool $prevent_callable = false) {
+
+        if (!$prevent_callable && is_callable($source)) {
             return $source();
         } else {
             return $source;
@@ -51,17 +53,17 @@ class CNabuCacheNullContainer extends CNabuObject implements INabuCacheable
     }
 
     public function getKey() {
-        
+
         return $this->key;
     }
 
     public function getData() {
-        
+
         return $this->data;
     }
 
     public function setData($data) {
-        
+
         $this->data = $data;
     }
 

@@ -30,6 +30,7 @@ use nabu\http\exceptions\ENabuHTTPException;
 use \nabu\http\exceptions\ENabuRedirectionException;
 use \nabu\http\interfaces\INabuHTTPResponseRender;
 use \nabu\http\managers\CNabuHTTPPluginsManager;
+use nabu\render\CNabuRenderFactory;
 use nabu\render\CNabuRenderTransformFactory;
 
 /**
@@ -67,10 +68,15 @@ final class CNabuHTTPResponse extends CNabuObject
      */
     private $mimetype = null;
     /**
-     * Render subsystem to build the response
+     * Render subsystem to build the Response
      * @var INabuHTTPResponseRender
      */
     private $render = null;
+    /**
+     * Render Factory to render the Response
+     * @var CNabuRenderFactory
+     */
+    private $render_factory = null;
     /**
      * Render Transform Factory to transform the Response
      * @var CNabuRenderTransformFactory
@@ -316,6 +322,25 @@ final class CNabuHTTPResponse extends CNabuObject
     }
 
     /**
+     * Get the current Render Factory for this response.
+     * @return CNabuRenderFactory Returns the Render instance.
+     */
+    public function getRenderFactory()
+    {
+        return $this->render_factory;
+    }
+
+    /**
+     * Set the Render Factory for this response. Calls of this method after call
+     * to {@see CNabuEngine::buildResponse()} has no effect.
+     * @param CNabuRenderFactory|null $factory New Render Factory.
+     */
+    public function setRenderFactory(CNabuRenderFactory $factory = null)
+    {
+        $this->render_factory = $factory;
+    }
+
+    /**
      * Get the current Render Transform Factory for this response.
      * @return CNabuRenderTransformFactory Returns the Render Transform instance.
      */
@@ -325,8 +350,8 @@ final class CNabuHTTPResponse extends CNabuObject
     }
 
     /**
-     * Set the Render Transform for this response. Calls of this metho after call
-     * to {@seee CCMSEngine::buildResponse()} has no effect.
+     * Set the Render Transform Factory for this response. Calls of this method after call
+     * to {@see CNabuEngine::buildResponse()} has no effect.
      * @param CNabuRenderTransformFactory|null $factory New Render Transform Factory.
      */
     public function setTransformFactory(CNabuRenderTransformFactory $factory = null)
