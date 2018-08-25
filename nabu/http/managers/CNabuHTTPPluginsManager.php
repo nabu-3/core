@@ -91,7 +91,9 @@ final class CNabuHTTPPluginsManager extends CNabuHTTPManager
         if (!($nb_response instanceof CNabuHTTPResponse)) {
             throw new ENabuCoreException(
                 ENabuCoreException::ERROR_UNEXPECTED_PARAM_CLASS_TYPE,
-                array(get_class($nb_response), '$nb_response'));
+                array(get_class($nb_response),
+                '$nb_response')
+            );
         }
 
         $nb_site = $nb_request->getSite();
@@ -103,14 +105,16 @@ final class CNabuHTTPPluginsManager extends CNabuHTTPManager
             throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_ALREADY_ASSIGNED);
         }
 
-        if ($nb_site->contains('nb_site_plugin_name') && strlen($class_name = $nb_site->getValue('nb_site_plugin_name')) > 0) {
+        if ($nb_site->contains('nb_site_plugin_name') &&
+            strlen($class_name = $nb_site->getValue('nb_site_plugin_name')) > 0
+        ) {
             try {
                 $this->site_plugin = new $class_name();
                 if (!($this->site_plugin instanceof INabuHTTPSitePlugin)) {
                     throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_NOT_VALID, array($class_name));
                 }
                 $this->invoqueTrap($nb_request, $nb_response);
-            } catch(Exception $ex) {
+            } catch (Exception $ex) {
                 throw new ENabuCoreException(ENabuCoreException::ERROR_SITE_PLUGIN_NOT_VALID, array($class_name));
             }
         }
@@ -335,20 +339,20 @@ final class CNabuHTTPPluginsManager extends CNabuHTTPManager
     {
         if ($nb_request !== null && $nb_request->hasREQUESTField($command)) {
             $func = 'command'.$command;
-            return  $this->pluginRedirectToPage(
-                        $this->site_plugin !== null && method_exists($this->site_plugin, $func)
-                            ? call_user_func(array($this->site_plugin, $func))
-                            : true,
-                        get_class($this->site_plugin),
-                        $func
-                    ) &&
-                    $this->pluginRedirectToPage(
-                        $this->site_target_plugin !== null && method_exists($this->site_target_plugin, $func)
-                            ? call_user_func(array($this->site_target_plugin, $func))
-                            : true,
-                        get_class($this->site_target_plugin),
-                        $func
-                    ) && $this->nb_modules_manager->invoqueCommand($func);
+            return $this->pluginRedirectToPage(
+                $this->site_plugin !== null && method_exists($this->site_plugin, $func)
+                    ? call_user_func(array($this->site_plugin, $func))
+                    : true,
+                get_class($this->site_plugin),
+                $func
+            ) &&
+            $this->pluginRedirectToPage(
+                $this->site_target_plugin !== null && method_exists($this->site_target_plugin, $func)
+                    ? call_user_func(array($this->site_target_plugin, $func))
+                    : true,
+                get_class($this->site_target_plugin),
+                $func
+            ) && $this->nb_modules_manager->invoqueCommand($func);
         }
 
         return true;
