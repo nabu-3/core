@@ -19,13 +19,11 @@
  */
 
 namespace nabu\render\adapters;
+
 use nabu\core\CNabuObject;
-use nabu\core\base\CNabuAbstractApplication;
 
 use nabu\http\CNabuHTTPRequest;
 use nabu\http\CNabuHTTPResponse;
-use nabu\http\app\base\CNabuHTTPApplication;
-use nabu\http\renders\base\CNabuHTTPResponseRenderData;
 
 use nabu\render\interfaces\INabuRenderInterface;
 
@@ -50,8 +48,10 @@ abstract class CNabuRenderInterfaceAdapter extends CNabuObject implements INabuR
     protected $is_main_render = false;
     /** @var CNabuRenderInterfaceData $nb_render_data Render data storage. */
     protected $nb_render_data = null;
-    /** @var bool unlink_source_file_after_render If true, $source_filename will be unlinked after render it. */
+    /** @var bool $unlink_source_file_after_render If true, $source_filename will be unlinked after render it. */
     protected $unlink_source_file_after_render = true;
+    /** @var string|null $mimetype The MIME type to be rendered. */
+    protected $mimetype;
 
     /**
      * Constructor.
@@ -76,6 +76,13 @@ abstract class CNabuRenderInterfaceAdapter extends CNabuObject implements INabuR
     {
         $this->nb_response = $nb_response;
 
+        return $this;
+    }
+
+    public function setMIMEType(string $mimetype): INabuRenderInterface
+    {
+        $this->mimetype = $mimetype;
+        
         return $this;
     }
 
@@ -123,7 +130,8 @@ abstract class CNabuRenderInterfaceAdapter extends CNabuObject implements INabuR
      * @param string $filename File Name of file to be dumped.
      * @return bool Returns true if $filename exits and is a valid file and is dumped.
      */
-    protected function dumpFile($filename) {
+    protected function dumpFile(string $filename)
+    {
 
         if (strlen($filename) > 0 && file_exists($filename) && is_file($filename)) {
             echo file_get_contents($filename);

@@ -19,6 +19,7 @@
  */
 
 namespace nabu\provider\adapters;
+
 use nabu\core\CNabuEngine;
 use nabu\data\CNabuDataObject;
 use nabu\data\lang\CNabuLanguage;
@@ -49,10 +50,14 @@ abstract class CNabuProviderInterfaceFactoryAdapter extends CNabuDataObject
      * Abstract method to be inherited and implemented.
      * This method invoques the Manager instance to create a new Interface.
      * @param INabuProviderManager $nb_manager The Manager instance to ve invoqued.
-     * @param CNabuProviderInterfaceDescriptor $nb_descriptor The Descriptor instance identifying the Interface requested.
+     * @param CNabuProviderInterfaceDescriptor $nb_descriptor The Descriptor instance
+     * identifying the Interface requested.
      * @return INabuProviderInterface|false Returns the new Interface or false it's not allowed.
      */
-    abstract function createInterface(INabuProviderManager $nb_manager, CNabuProviderInterfaceDescriptor $nb_descriptor);
+    abstract protected function createInterface(
+        INabuProviderManager $nb_manager,
+        CNabuProviderInterfaceDescriptor $nb_descriptor
+    );
 
     /**
      * Initializes the Factory.
@@ -82,6 +87,15 @@ abstract class CNabuProviderInterfaceFactoryAdapter extends CNabuDataObject
         }
 
         return ($this->nb_interface instanceof INabuProviderInterface);
+    }
+
+    /**
+     * Gets the Interface instance assigned to this Factory
+     * @return INabuProviderInterface|null Returns a valid Interface if assigned or null if not.
+     */
+    public function getInterface()
+    {
+        return $this->nb_interface;
     }
 
     /**

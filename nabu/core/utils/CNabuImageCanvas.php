@@ -28,12 +28,12 @@ use \nabu\core\CNabuObject;
  * @version 3.0.0 Surface
  * @package \nabu\utils
  */
-class CNabuImageCanvas extends CNabuObject {
-    
+class CNabuImageCanvas extends CNabuObject
+{
     const RENDER_UNKNOWN = 0;
     const RENDER_JPEG = 1;
     const RENDER_PNG = 2;
-    
+
     private $mimetype = false;
     private $imgtype = false;
     private $width = 0;
@@ -42,52 +42,52 @@ class CNabuImageCanvas extends CNabuObject {
     private $channels = 0;
     private $info = null;
     private $source = null;
-    
+
     private $handler = null;
     private $render_type = self::RENDER_UNKNOWN;
-    
-    public function __construct() {
-        
+
+    public function __construct()
+    {
         parent::__construct();
     }
-    
-    public function __destruct() {
-        
+
+    public function __destruct()
+    {
         $this->release();
     }
-    
-    public function getMimetype() {
-        
+
+    public function getMIMEType()
+    {
         return $this->mimetype;
     }
-    
-    public function setMimetype($mimetype) {
-        
+
+    public function setMIMEType($mimetype)
+    {
         $this->mimetype = $mimetype;
     }
-    
-    public function getRenderType() {
-        
+
+    public function getRenderType()
+    {
         return $this->render_type;
     }
-    
-    public function setRenderType($type) {
-        
+
+    public function setRenderType($type)
+    {
         $this->render_type = $type;
     }
-    
-    public function getSize() {
+
+    public function getSize()
+    {
         return array('w' => $this->width, 'h' => $this->height);
     }
-    
-    public function openFile($filename) {
 
+    public function openFile($filename)
+    {
         if (strlen($filename) > 0 && file_exists($filename)) {
-            
             if ($this->handler !== null) {
                 $this->release();
             }
-            
+
             $this->source = $filename;
             $mime = getimagesize($this->source, $this->info);
             $this->width = $mime[0];
@@ -96,12 +96,12 @@ class CNabuImageCanvas extends CNabuObject {
             $this->mimetype = $mime['mime'];
             $this->bits = $mime['bits'];
             $this->channels = (array_key_exists('channels', $mime) ? $mime['channels'] : false);
-            
+
             $this->handler = false;
 
-            
+
             if ($mime['mime'] === 'image/png') {
-                $this->handler = imagecreatefrompng($this->source); 
+                $this->handler = imagecreatefrompng($this->source);
                 $this->render_type = self::RENDER_PNG;
             }
             if ($mime['mime'] === 'image/jpg') {
@@ -116,30 +116,26 @@ class CNabuImageCanvas extends CNabuObject {
                 $this->handler = imagecreatefromjpeg($this->source);
                 $this->render_type = self::RENDER_JPEG;
             }
-            
         }
     }
 
-    public function saveFile($filename) {
-    
+    public function saveFile($filename)
+    {
         switch ($this->render_type) {
-            case self::RENDER_JPEG: {
+            case self::RENDER_JPEG:
                 imagejpeg($this->handler, $filename, 80);
                 break;
-            }
-            case self::RENDER_PNG: {
+            case self::RENDER_PNG:
                 imagepng($this->handler, $filename);
                 break;
-            }
         }
     }
-    
-    public function scale($width, $height) {
-    
+
+    public function scale($width, $height)
+    {
         if ($this->handler && ($width || $height)) {
-            
             $aso = $this->height / $this->width;
-            
+
             if (!($width !== false && $height !== false)) {
                 if (!$width) {
                     $width = round($height / $aso);
@@ -148,7 +144,7 @@ class CNabuImageCanvas extends CNabuObject {
                     $height = round($width * $aso);
                 }
             }
-            
+
             if ($this->render_type === self::RENDER_PNG) {
                 $new_img = imagecreatetruecolor($width, $height);
                 imagealphablending($new_img, false);
@@ -159,8 +155,16 @@ class CNabuImageCanvas extends CNabuObject {
                 $new_img = imagecreatetruecolor($width, $height);
             }
             imagecopyresampled(
-                $new_img, $this->handler, 0, 0, 0, 0,
-                $width, $height, $this->width, $this->height
+                $new_img,
+                $this->handler,
+                0,
+                0,
+                0,
+                0,
+                $width,
+                $height,
+                $this->width,
+                $this->height
             );
             imagedestroy($this->handler);
             $this->handler = $new_img;
@@ -168,14 +172,13 @@ class CNabuImageCanvas extends CNabuObject {
             $this->height = $height;
         }
     }
-    
-    public function crop($width, $height) {
-        
+
+    public function crop($width, $height)
+    {
         if ($this->handler && $width && $height) {
-            
             $aso = $this->height / $this->width;
             $ast = $height / $width;
-            
+
             if ($aso < $ast) {
                 $nw = round($this->height / $ast);
                 $dw = round(($this->width - $nw) / 2);
@@ -189,7 +192,7 @@ class CNabuImageCanvas extends CNabuObject {
                 $dh = round(($this->height - $nh) / 2);
                 $na = $nh / $nw;
             }
-            
+
             if ($this->render_type === self::RENDER_PNG) {
                 $new_img = imagecreatetruecolor($nw, $nh);
                 imagealphablending($new_img, false);
@@ -207,21 +210,25 @@ class CNabuImageCanvas extends CNabuObject {
             $this->scale($width, $height);
         }
     }
-    
-    public function output() {
-        
+
+    public function output()
+    {
         if ($this->handler) {
             switch ($this->render_type) {
-                case self::RENDER_JPEG: imagejpeg($this->handler, null, 80); break;
-                case self::RENDER_PNG: imagepng($this->handler); break;
+                case self::RENDER_JPEG:
+                    imagejpeg($this->handler, null, 80);
+                    break;
+                case self::RENDER_PNG:
+                    imagepng($this->handler);
+                    break;
             }
-        } else if (file_exists($this->source)) {
+        } elseif (file_exists($this->source)) {
             echo file_get_contents($this->source);
         }
     }
-    
-    public function release() {
 
+    public function release()
+    {
         if ($this->handler) {
             imagedestroy($this->handler);
             $this->handler = null;

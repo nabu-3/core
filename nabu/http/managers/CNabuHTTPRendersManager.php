@@ -55,20 +55,6 @@ final class CNabuHTTPRendersManager extends CNabuHTTPManager
         $this->nb_http_render_list = new CNabuHTTPRenderList();
     }
 
-    public function getVendorKey()
-    {
-        return 'nabu-3';
-    }
-
-    /**
-     * Register the provider in current application to extend their functionalities.
-     * @return bool Returns true if enable process is succeed.
-     */
-    public function enableManager()
-    {
-        return true;
-    }
-
     public function registerRender(CNabuHTTPRenderDescriptor $descriptor)
     {
         $this->nb_http_render_list->addItem($descriptor);
@@ -82,12 +68,14 @@ final class CNabuHTTPRendersManager extends CNabuHTTPManager
         } else {
             $nb_engine = CNabuEngine::getEngine();
             $nb_descriptor = $nb_engine->getProviderInterfaceDescriptorByKey(
-                CNabuProviderFactory::INTERFACE_RENDER, $interface_key
+                CNabuProviderFactory::INTERFACE_RENDER,
+                $interface_key
             );
             if ($nb_descriptor instanceof CNabuRenderInterfaceDescriptor &&
                 ($nb_pool_manager = $nb_engine->getRenderPoolManager()) instanceof CNabuRenderPoolManager &&
                 ($nb_render_factory = $nb_pool_manager->getRenderFactory($nb_descriptor)) instanceof CNabuRenderFactory
             ) {
+                $nb_render_factory->setMIMEType($nb_response->getMIMEType());
                 $nb_response->setRenderFactory($nb_render_factory);
             } else {
                 $nb_descriptor = $this->nb_http_render_list->getItem($interface_key);
@@ -121,7 +109,8 @@ final class CNabuHTTPRendersManager extends CNabuHTTPManager
 
             if ($nb_descriptor instanceof CNabuRenderTransformInterfaceDescriptor &&
                 ($nb_pool_manager = $nb_engine->getRenderPoolManager()) instanceof CNabuRenderPoolManager &&
-                ($nb_transform_factory = $nb_pool_manager->getTransformFactory($nb_descriptor)) instanceof CNabuRenderTransformFactory
+                ($nb_transform_factory = $nb_pool_manager->getTransformFactory($nb_descriptor))
+                    instanceof CNabuRenderTransformFactory
             ) {
                 $nb_response->setTransformFactory($nb_transform_factory);
             } else {

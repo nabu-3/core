@@ -19,6 +19,7 @@
  */
 
 namespace nabu\render\interfaces;
+
 use nabu\http\CNabuHTTPRequest;
 use nabu\http\CNabuHTTPResponse;
 
@@ -44,6 +45,12 @@ interface INabuRenderInterface extends INabuProviderInterface
     * @return INabuRenderInterface Retuns the self instance to grant chained setters functionality.
     */
     public function setResponse(CNabuHTTPResponse $nb_response) : INabuRenderInterface;
+    /**
+     * Sets the MIME type to be rendered.
+     * @param string $mimetype The MIME type to be setted.
+     * @return INabuRenderInterface Returns the self instance to grant chained setters functionality.
+     */
+    public function setMIMEType(string $mimetype) : INabuRenderInterface;
     /**
      * Gets the Source File Name assigned to this render if one.
      * @return string|null Returns the filename if exists or null if not.

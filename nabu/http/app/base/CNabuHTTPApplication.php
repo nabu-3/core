@@ -154,8 +154,8 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
 
                     if ($this->prepareResponse() &&
                         $this->processMethods() &&
-                        $this->processCommands())
-                    {
+                        $this->processCommands()
+                    ) {
                         if ($method !== 'OPTIONS' && $method !== 'HEAD') {
                             $this->buildResponse();
                         } else {
@@ -331,21 +331,22 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         return $retval;
     }
 
-    private function prepareLocale() {
-
+    private function prepareLocale()
+    {
         $nb_language = $this->nb_request->getLanguage();
         if ($nb_language !== null) {
             $locale = str_replace('-', '_', $nb_language->getDefaultCountryCode());
             $this->nb_engine->traceLog("Locale", $locale);
-            setlocale(LC_ALL,
+            setlocale(
+                LC_ALL,
                 //LC_TIME | LC_COLLATE | LC_MONETARY | LC_NUMERIC | LC_CTYPE,
                 $locale
             );
         }
     }
 
-    public function prepareModules() {
-
+    public function prepareModules()
+    {
         $this->nb_request->locateModules();
 
         return true;
@@ -360,23 +361,27 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         $nb_site_target = $this->nb_request->getSiteTarget();
         if ($nb_site_target instanceof CNabuDataObject &&
             !$nb_site_target->isValueEmpty('nb_mimetype_id') &&
-            $this->nb_response->getMimetype() === null) {
-            $this->nb_response->setMimetype($this->nb_request->getSiteTarget()->getMimetypeId());
+            $this->nb_response->getMIMEType() === null
+        ) {
+            $this->nb_response->setMIMEType($this->nb_request->getSiteTarget()->getMIMETypeId());
         }
 
         if ($this->nb_request->getMethod() !== 'OPTIONS') {
             if ($nb_site_target instanceof CNabuSiteTarget) {
                 if (strlen($nb_site_target->getRenderInterface()) > 0) {
                     $this->nb_http_renders_manager->setResponseRender(
-                        $this->nb_response, $nb_site_target->getRenderInterface()
+                        $this->nb_response,
+                        $nb_site_target->getRenderInterface()
                     );
                 } else {
                     $this->nb_http_renders_manager->setResponseRender(
-                        $this->nb_response, $nb_site_target->getOutputType()
+                        $this->nb_response,
+                        $nb_site_target->getOutputType()
                     );
                 }
                 $this->nb_http_renders_manager->setResponseTransform(
-                    $this->nb_response, $nb_site_target->getTransformInterface()
+                    $this->nb_response,
+                    $nb_site_target->getTransformInterface()
                 );
             }
 
@@ -389,8 +394,8 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         }
     }
 
-    private function prepareHeaders() {
-
+    private function prepareHeaders()
+    {
         global $NABU_HTTP_CODES;
 
         $http_code = $this->nb_response->getHTTPResponseCode();
@@ -400,8 +405,8 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
             $this->nb_response->setHeader('Content-Language', $nb_language->getISO6391());
         }
 
-        $mimetype = $this->nb_response->getMimetype();
-        $this->nb_engine->traceLog("Mimetype", $mimetype);
+        $mimetype = $this->nb_response->getMIMEType();
+        $this->nb_engine->traceLog("MIME Type", $mimetype);
         if (strlen($mimetype) > 0 && $mimetype != -1) {
             $this->nb_response->setHeader('Content-Type', "$mimetype; charset=utf-8");
         }
@@ -409,8 +414,8 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         $this->nb_response->buildHeaders();
     }
 
-    private function processMethods() {
-
+    private function processMethods()
+    {
         $request_method = strtoupper($this->nb_request->getMethod());
 
         if (!$this->nb_plugins_manager->invoqueMethod($this->nb_request, $request_method)) {
@@ -420,8 +425,8 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         return true;
     }
 
-    private function processCommands() {
-
+    private function processCommands()
+    {
         if ($this->nb_request->getMethod() !== 'OPTIONS') {
             $nb_site_target = $this->nb_request->getSiteTarget();
             if ($nb_site_target !== null) {
@@ -442,8 +447,8 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         return true;
     }
 
-    private function validateCORSOrigin() {
-
+    private function validateCORSOrigin()
+    {
         $retval = true;
 
         $origin = $this->nb_http_server->getOrigin();
@@ -503,8 +508,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
             $render->setResponse($this->nb_response);
             if ($this->nb_plugins_manager->invoqueBeforeDisplayTarget($this->nb_request, $this->nb_response) &&
                 $this->nb_modules_manager->invoqueBeforeMorphDisplay($this->nb_request, $this->nb_response)
-               )
-            {
+            ) {
                 $this->prepareHeaders();
                 /** @todo Pending to revise in a near future */
                 /*

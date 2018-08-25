@@ -19,6 +19,7 @@
  */
 
 namespace nabu\http\app;
+
 use Exception;
 use nabu\core\CNabuEngine;
 use nabu\core\exceptions\ENabuCoreException;
@@ -164,7 +165,7 @@ abstract class CNabuHTTPStandaloneApplication extends CNabuHTTPApplication
     public function addSmartyTarget($display, $content, $default = false)
     {
         $target = new CNabuBuiltInSiteTarget();
-        $target->setMimetypeId('text/html')
+        $target->setMIMETypeId('text/html')
                ->setOutputTypeHTML()
                ->setSmartyDisplayFile($display)
                ->setSmartyContentFile($content)
@@ -176,7 +177,7 @@ abstract class CNabuHTTPStandaloneApplication extends CNabuHTTPApplication
     public function addWebService($plugin, $mimetype = 'application/json')
     {
         $target = new CNabuBuiltInSiteTarget();
-        $target->setMimetypeId($mimetype)
+        $target->setMIMETypeId($mimetype)
                ->setPluginName($plugin)
         ;
 

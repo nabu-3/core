@@ -64,7 +64,7 @@ interface INabuHTTPServer
     public function getHostBaseDirectory();
     public function locateRunningConfiguration();
     public function locateRemoteAddress();
-    public function getAcceptedMimetypes();
+    public function getAcceptedMIMETypes();
     public function getAcceptedLanguages();
     public function getReferer();
     public function getOrigin();

@@ -73,8 +73,8 @@ abstract class CNabuHTTPManager extends CNabuObject
     {
         if ($key === null) {
             throw new ENabuCoreException(
-                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
-                    array("\$key")
+                ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                array("\$key")
             );
         }
         $this->setValue('nb_http_manager_key', $key);

@@ -95,7 +95,8 @@ class CNabuHTTPRequest extends CNabuObject
      */
     private $nb_site_alias;
     /**
-     * If the site alias is disabled, then this variable contains true and $nb_site_alias contains the default for the site
+     * If the site alias is disabled, then this variable contains true and $nb_site_alias
+     * contains the default for the site
      * @var bool
      */
     private $nb_site_alias_force_default;
@@ -448,12 +449,13 @@ class CNabuHTTPRequest extends CNabuObject
         return true;
     }
 
-    public function locateModules() {
-
+    public function locateModules()
+    {
         /** @todo This method is commented temporally and pending to revise in a near future */
         /*
-        if (($this->cms_article instanceof \cms\sites\CCMSArticle) && $this->cms_article->isValueEqualThan('cms_article_use_apps', 'T')) {
-
+        if (($this->cms_article instanceof \cms\sites\CCMSArticle) &&
+            $this->cms_article->isValueEqualThan('cms_article_use_apps', 'T')
+        ) {
             $slots = null;
 
             if ($this->cms_site instanceof \cms\sites\CCMSSite) {
@@ -501,7 +503,7 @@ class CNabuHTTPRequest extends CNabuObject
             $nb_engine->traceLog("Remote IP", $this->user_remote_ip);
         }
 
-        $this->accept_mimetypes = $nb_http_server->getAcceptedMimetypes();
+        $this->accept_mimetypes = $nb_http_server->getAcceptedMIMETypes();
         if (count($this->accept_mimetypes) > 0) {
             $nb_engine->traceLog("Accept", $this->accept_mimetypes);
         }
@@ -573,7 +575,12 @@ class CNabuHTTPRequest extends CNabuObject
 
         $nb_engine = CNabuEngine::getEngine();
 
-        $this->page_uri = filter_input(INPUT_GET, NABU_PATH_PARAM, FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
+        $this->page_uri = filter_input(
+            INPUT_GET,
+            NABU_PATH_PARAM,
+            FILTER_SANITIZE_STRING,
+            FILTER_FLAG_EMPTY_STRING_NULL
+        );
         if (!is_string($this->page_uri) || strlen($this->page_uri) === 0) {
             throw new ENabuCoreException(ENabuCoreException::ERROR_PAGE_URI_NOT_FOUND);
         }
@@ -620,7 +627,6 @@ class CNabuHTTPRequest extends CNabuObject
                 $retval = true;
             }
         } elseif ($this->findTargetByURL($this->page_uri)) {
-
             $nb_engine->traceLog("Page ID", $this->nb_site_target->getId());
 
             if ($this->nb_language === null) {
@@ -658,7 +664,11 @@ class CNabuHTTPRequest extends CNabuObject
 
     public function checkSecurity()
     {
-        return $this->nb_security_manager->validateVisibility($this->nb_site, $this->nb_site_target, $this->nb_language);
+        return $this->nb_security_manager->validateVisibility(
+            $this->nb_site,
+            $this->nb_site_target,
+            $this->nb_language
+        );
     }
 
     private function findTargetByURL($url)
@@ -677,20 +687,22 @@ class CNabuHTTPRequest extends CNabuObject
             }
         } elseif ($this->nb_site_target === null) {
             $this->nb_response->setHTTPResponseCode((int)$this->nb_site->getPageNotFoundErrorCode());
-            switch($this->nb_site->getValue('nb_site_page_not_found_use_site_target')) {
+            switch ($this->nb_site->getValue('nb_site_page_not_found_use_site_target')) {
                 case 'T': // Uses site_target
-                {
-                    $aux_target = new CNabuSiteTarget($this->nb_site->getValue('nb_site_page_not_found_site_target_id'));
+                    $aux_target = new CNabuSiteTarget(
+                        $this->nb_site->getValue('nb_site_page_not_found_site_target_id')
+                    );
                     if ($aux_target->isFetched()) {
-                        $aux_target->setValue('nb_language_id', $this->nb_site->getValue('nb_site_default_language_id'));
+                        $aux_target->setValue(
+                            'nb_language_id',
+                            $this->nb_site->getValue('nb_site_default_language_id')
+                        );
                         $this->nb_site_target = $aux_target;
                     } else {
                         $this->nb_response->setHTTPResponseCode(404);
                     }
                     break;
-                }
                 case 'F': // Uses URL
-                {
                     $target = $this->nb_site->getValue('nb_site_page_not_found_url');
                     $this->nb_response->setHTTPResponseCode(404);
                     if (strlen($target) > 0) {
@@ -698,7 +710,6 @@ class CNabuHTTPRequest extends CNabuObject
                         $this->setLocation($target);
                     }
                     break;
-                }
                 default:
                     $this->nb_response->setHTTPResponseCode(404);
             }
@@ -768,12 +779,14 @@ class CNabuHTTPRequest extends CNabuObject
 
     public function filterURI($uri)
     {
-        /** @todo RGM: Controlar si $nb_site_target está a null y por qué llegamos hasta aquí teniendo un valor null cuando debería salir por otro camino */
+        /** @todo RGM: Controlar si $nb_site_target está a null y por qué llegamos
+          * hasta aquí teniendo un valor null cuando debería salir por otro camino
+          */
         if ($this->nb_site_target !== null &&
             $this->nb_site_target->contains('nb_site_target_lang_url') &&
             $this->nb_site_target->contains('nb_site_target_url_filter') &&
-            $this->nb_site_target->getValue('nb_site_target_url_filter') === 'R')
-        {
+            $this->nb_site_target->getValue('nb_site_target_url_filter') === 'R'
+        ) {
             $parts = array();
             $num = preg_match('/'.$this->nb_site_target->getValue('nb_site_target_lang_url').'/', $uri, $parts);
             if ($num > 0 && count($parts) > 0) {
@@ -849,7 +862,12 @@ class CNabuHTTPRequest extends CNabuObject
     {
         return is_array($this->xdr_post) && array_key_exists($field_name, $this->xdr_post)
                ? $this->xdr_post[$field_name]
-               : filter_input(INPUT_REQUEST, $field_name, $filter, $scalar ? FILTER_REQUIRE_SCALAR : FILTER_REQUIRE_ARRAY)
+               : filter_input(
+                   INPUT_REQUEST,
+                   $field_name,
+                   $filter,
+                   $scalar ? FILTER_REQUIRE_SCALAR : FILTER_REQUIRE_ARRAY
+               )
         ;
     }
 
@@ -897,7 +915,7 @@ class CNabuHTTPRequest extends CNabuObject
 
     /**
      * Get all index key values of parameters containing arrays.
-     * @param array $fields List of fields to be observed. If empty (null) then scan all fields.
+     * @param array|null $fields List of fields to be observed. If empty (null) then scan all fields.
      * @return array Returns an array containing all available fields without duplicates or null if none index is found.
      */
     public function getCombinedPostIndexes(array $fields = null)
@@ -937,7 +955,7 @@ class CNabuHTTPRequest extends CNabuObject
     ) {
         $total = 0;
 
-        foreach($fields as $key=>$value) {
+        foreach ($fields as $key => $value) {
             if ($this->hasPOSTField($key)) {
                 $final = $this->getPOSTField($key);
                 if ($index !== null && is_array($final)) {
@@ -947,11 +965,17 @@ class CNabuHTTPRequest extends CNabuObject
                         unset($final);
                     }
                 }
-            } else if ($def_values && count($def_values) > 0 && array_key_exists($key, $def_values)) {
+            } elseif ($def_values &&
+                      count($def_values) > 0 &&
+                      array_key_exists($key, $def_values)
+            ) {
                 $final = $def_values[$key];
             }
             if (isset($final)) {
-                if ($null_values && count($null_values) > 0 && array_key_exists($key, $null_values) && $final == $null_values[$key]) {
+                if ($null_values && count($null_values) > 0 &&
+                    array_key_exists($key, $null_values) &&
+                    $final == $null_values[$key]
+                ) {
                     $final = null;
                 }
                 $object->setValue($value, $final);

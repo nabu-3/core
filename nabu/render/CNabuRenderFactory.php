@@ -19,6 +19,7 @@
  */
 
 namespace nabu\render;
+
 use nabu\provider\adapters\CNabuProviderInterfaceFactoryAdapter;
 
 use nabu\provider\base\CNabuProviderInterfaceDescriptor;
@@ -55,9 +56,29 @@ class CNabuRenderFactory extends CNabuProviderInterfaceFactoryAdapter
             $this->nb_interface->render();
         } else {
             throw new ENabuRenderException(
-                ENabuRenderException::ERROR_RENDER_TRANSFORM_NOT_FOUND,
+                ENabuRenderException::ERROR_RENDER_NOT_FOUND,
                 array($this->nb_descriptor->getKey())
             );
         }
+    }
+
+    /**
+     * Pass MIME Type to Render Instance.
+     * @param string $mimetype MIME Type to be setted.
+     * @return CNabuRenderFactory Returns self pointer to grant chained setter calls.
+     * @throws ENabuRenderException Raises an exception if the Render Interface is not setted.
+     */
+    public function setMIMEType(string $mimetype)
+    {
+        if ($this->discoverInterface()) {
+            $this->nb_interface->setMIMEType($mimetype);
+        } else {
+            throw new ENabuRenderException(
+                ENabuRenderException::ERROR_RENDER_NOT_FOUND,
+                array($this->nb_descriptor->getKey())
+            );
+        }
+
+        return $this;
     }
 }

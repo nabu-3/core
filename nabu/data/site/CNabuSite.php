@@ -873,7 +873,7 @@ class CNabuSite extends CNabuSiteBase
         return $nb_server->getVirtualCachePath() . DIRECTORY_SEPARATOR . $this->getBasePath();
     }
 
-    public function getUsedMimeTypes()
+    public function getUsedMIMETypes()
     {
         return $this->getDB()->getQueryAsArrayOfSingleField(
             'nb_mimetype_id',

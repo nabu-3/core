@@ -331,7 +331,7 @@ abstract class CNabuDataObject extends CNabuObject
                 $xmldata = new \nabu\core\CNabuXmlElement("<$name/>");
             } else {
                 $xmldata = new \nabu\core\CNabuXmlElement(
-                        "<$name><![CDATA[".htmlentities($value, ENT_COMPAT, 'UTF-8')."]]></$name>"
+                    "<$name><![CDATA[".htmlentities($value, ENT_COMPAT, 'UTF-8')."]]></$name>"
                 );
             }
             return $xmldata;
@@ -348,7 +348,7 @@ abstract class CNabuDataObject extends CNabuObject
         if ($xml instanceof \nabu\core\CNabuXmlElement && $name != null && $this->contains($field)) {
             $value = $this->getValue($field);
             if ($value !== null) {
-                $xml->addAttribute ($name, $value);
+                $xml->addAttribute($name, $value);
 
                 return true;
             }
@@ -413,7 +413,7 @@ abstract class CNabuDataObject extends CNabuObject
             } else {
                 $this->setValue($field, $value);
             }
-        } elseif (func_num_args () > 3) {
+        } elseif (func_num_args() > 3) {
             $value = $defaultvalue;
             $this->setValue($field, $value);
         }

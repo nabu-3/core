@@ -164,9 +164,12 @@ function nb_getArrayValueByKey($key, $array)
 function nb_vnsprintf($format, array $data)
 {
     preg_match_all(
-        '/ (?<!%) % ( (?: [[:alpha:]_-][[:alnum:]_-]* | ([-+])? [0-9]+ (?(2) '
-      . '(?:\.[0-9]+)? | \.[0-9]+ ) ) ) \$ [-+]? \'? .? -? [0-9]* (\.[0-9]+)? \w/x',
-        $format, $match, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
+        '/ (?<!%) % ( (?: [[:alpha:]_-][[:alnum:]_-]* | ([-+])? [0-9]+ (?(2) ' .
+        '(?:\.[0-9]+)? | \.[0-9]+ ) ) ) \$ [-+]? \'? .? -? [0-9]* (\.[0-9]+)? \w/x',
+        $format,
+        $match,
+        PREG_SET_ORDER | PREG_OFFSET_CAPTURE
+    );
     $offset = 0;
     $keys = array_keys($data);
     foreach ($match as &$value) {
@@ -214,7 +217,10 @@ function nb_isBetween($value, $left, $right) : bool
  */
 function nb_isValidKey(string $key = null) : bool
 {
-    return is_string($key) && nb_isBetween(strlen($key), 2, 30) && preg_match('/' . NABU_REGEXP_PATTERN_KEY . '/', $key);
+    return is_string($key) &&
+           nb_isBetween(strlen($key), 2, 30) &&
+           preg_match('/' . NABU_REGEXP_PATTERN_KEY . '/', $key)
+    ;
 }
 
 /**
@@ -231,11 +237,13 @@ function nb_isMIMEType(string $mimetype = null) : bool
         $retval = count($parts) === 2 &&
                   preg_match('/[a-zA-Z0-9]{1}[a-zA-Z0-9!#$&\-\^_.]*/', $parts[0]) &&
                   preg_match('/[a-zA-Z0-9]{1}[a-zA-Z0-9!#$&\-\^_.]*/', $parts[1]) &&
-                  in_array($parts[0],
-                           array(
-                               'application', 'audio', 'font', 'example', 'image', 'message', 'model', 'multipart',
-                               'text', 'video')
-                           )
+                  in_array(
+                      $parts[0],
+                      array(
+                          'application', 'audio', 'font', 'example', 'image', 'message', 'model', 'multipart',
+                          'text', 'video'
+                      )
+                  )
         ;
     }
 
@@ -340,10 +348,11 @@ function nb_getLocalIPv4()
             if (strlen($matches[2]) > 0) {
                 $ifname .= $matches[2];
             }
-        } elseif (preg_match('/inet addr:((?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)'
-                           . '(?:[.](?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)){3})\s/',
-                             $str, $matches)
-        ) {
+        } elseif (preg_match(
+            '/inet addr:((?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)(?:[.](?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)){3})\s/',
+            $str,
+            $matches
+        )) {
             $local_addrs[$ifname] = $matches[1];
         }
     }
@@ -517,9 +526,9 @@ function nb_generateGUID()
         $guid = chr(123)// "{"
             .substr($charid, 0, 8).$hyphen
             .substr($charid, 8, 4).$hyphen
-            .substr($charid,12, 4).$hyphen
-            .substr($charid,16, 4).$hyphen
-            .substr($charid,20,12)
+            .substr($charid, 12, 4).$hyphen
+            .substr($charid, 16, 4).$hyphen
+            .substr($charid, 20, 12)
             .chr(125);// "}"
     }
 
@@ -570,7 +579,7 @@ function nb_prefixFieldList($prefix, $fields, $as_array = false, $remask = false
     }
 
     if (is_array($fields_part)) {
-        array_walk($fields_part, function(&$item, $key) use($prefix, $remask, $quote) {
+        array_walk($fields_part, function (&$item, $key) use ($prefix, $remask, $quote) {
             $item = trim($item);
             $item = $quote . $prefix . '_' . $item . $quote . ($remask ? " as $quote$item$quote" : '');
         });
@@ -599,10 +608,17 @@ function nb_unpackDateInterval($date_interval)
             $seconds = (int)$match[1];
             switch ($match[2]) {
                 case 'Y':
-                case 'N': $seconds *= ($match[2] === 'Y' ? 365 : 30);
-                case 'D': $seconds *= 24;
-                case 'H': $seconds *= 60;
-                case 'M': $seconds *= 60;
+                case 'N':
+                    $seconds *= ($match[2] === 'Y' ? 365 : 30);
+                    // Continue to next case
+                case 'D':
+                    $seconds *= 24;
+                    // Continue to next case
+                case 'H':
+                    $seconds *= 60;
+                    // Continue to next case
+                case 'M':
+                    $seconds *= 60;
             }
             $retval = array('value' => (int)$match[1], 'unit' => $match[2], 'seconds' => $seconds);
         } else {

@@ -173,31 +173,9 @@
             "extra": "",
             "comment": ""
         },
-        "nb_site_target_render_provider": {
-            "name": "nb_site_target_render_provider",
-            "ordinal": "16",
-            "data_type": "varchar",
-            "precision": null,
-            "type": "varchar(256)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
         "nb_site_target_render_interface": {
             "name": "nb_site_target_render_interface",
-            "ordinal": "17",
-            "data_type": "varchar",
-            "precision": null,
-            "type": "varchar(256)",
-            "default": null,
-            "is_nullable": true,
-            "extra": "",
-            "comment": ""
-        },
-        "nb_site_target_transform_provider": {
-            "name": "nb_site_target_transform_provider",
-            "ordinal": "18",
+            "ordinal": "16",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(256)",
@@ -208,7 +186,7 @@
         },
         "nb_site_target_transform_interface": {
             "name": "nb_site_target_transform_interface",
-            "ordinal": "19",
+            "ordinal": "17",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(256)",
@@ -219,7 +197,7 @@
         },
         "nb_site_target_smarty_display_file": {
             "name": "nb_site_target_smarty_display_file",
-            "ordinal": "20",
+            "ordinal": "18",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(150)",
@@ -230,7 +208,7 @@
         },
         "nb_site_target_smarty_content_file": {
             "name": "nb_site_target_smarty_content_file",
-            "ordinal": "21",
+            "ordinal": "19",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(150)",
@@ -241,7 +219,7 @@
         },
         "nb_site_target_smarty_debugging": {
             "name": "nb_site_target_smarty_debugging",
-            "ordinal": "22",
+            "ordinal": "20",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -252,7 +230,7 @@
         },
         "nb_site_target_plugin_name": {
             "name": "nb_site_target_plugin_name",
-            "ordinal": "23",
+            "ordinal": "21",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(150)",
@@ -263,7 +241,7 @@
         },
         "nb_site_target_php_trace": {
             "name": "nb_site_target_php_trace",
-            "ordinal": "24",
+            "ordinal": "22",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -274,7 +252,7 @@
         },
         "nb_site_target_ignore_policies": {
             "name": "nb_site_target_ignore_policies",
-            "ordinal": "25",
+            "ordinal": "23",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -285,7 +263,7 @@
         },
         "nb_site_target_use_commerce": {
             "name": "nb_site_target_use_commerce",
-            "ordinal": "26",
+            "ordinal": "24",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -296,7 +274,7 @@
         },
         "nb_site_target_use_apps": {
             "name": "nb_site_target_use_apps",
-            "ordinal": "27",
+            "ordinal": "25",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F')",
@@ -307,7 +285,7 @@
         },
         "nb_site_target_dynamic_cache_control": {
             "name": "nb_site_target_dynamic_cache_control",
-            "ordinal": "28",
+            "ordinal": "26",
             "data_type": "enum",
             "precision": null,
             "type": "enum('T','F','S')",
@@ -318,7 +296,7 @@
         },
         "nb_site_target_dynamic_cache_max_age": {
             "name": "nb_site_target_dynamic_cache_max_age",
-            "ordinal": "29",
+            "ordinal": "27",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -329,7 +307,7 @@
         },
         "nb_site_target_script_file": {
             "name": "nb_site_target_script_file",
-            "ordinal": "30",
+            "ordinal": "28",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(100)",
@@ -340,7 +318,7 @@
         },
         "nb_site_target_css_file": {
             "name": "nb_site_target_css_file",
-            "ordinal": "31",
+            "ordinal": "29",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(100)",
@@ -351,7 +329,7 @@
         },
         "nb_site_target_css_class": {
             "name": "nb_site_target_css_class",
-            "ordinal": "32",
+            "ordinal": "30",
             "data_type": "varchar",
             "precision": null,
             "type": "varchar(50)",
@@ -362,7 +340,7 @@
         },
         "nb_site_target_commands": {
             "name": "nb_site_target_commands",
-            "ordinal": "33",
+            "ordinal": "31",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -373,7 +351,7 @@
         },
         "nb_site_target_meta_robots": {
             "name": "nb_site_target_meta_robots",
-            "ordinal": "34",
+            "ordinal": "32",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -384,7 +362,7 @@
         },
         "nb_site_target_icon": {
             "name": "nb_site_target_icon",
-            "ordinal": "35",
+            "ordinal": "33",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -395,7 +373,7 @@
         },
         "nb_site_target_apps_slot": {
             "name": "nb_site_target_apps_slot",
-            "ordinal": "36",
+            "ordinal": "34",
             "data_type": "text",
             "precision": null,
             "type": "text",
@@ -406,7 +384,7 @@
         },
         "nb_site_target_attributes": {
             "name": "nb_site_target_attributes",
-            "ordinal": "37",
+            "ordinal": "35",
             "data_type": "text",
             "precision": null,
             "type": "text",

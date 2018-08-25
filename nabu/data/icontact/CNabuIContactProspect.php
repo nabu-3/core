@@ -19,6 +19,7 @@
  */
 
 namespace nabu\data\icontact;
+
 use nabu\core\CNabuEngine;
 
 use nabu\core\exceptions\ENabuCoreException;
@@ -48,15 +49,12 @@ class CNabuIContactProspect extends CNabuIContactProspectBase
     /** @var CNabuIContactProspectAttachmentList Attachments of this Prospect. */
     private $nb_attachment_list = null;
 
-/**
- * @inheritDoc
- */
-public function __construct($nb_icontact_prospect = false)
-{
-    parent::__construct($nb_icontact_prospect);
+    public function __construct($nb_icontact_prospect = false)
+    {
+        parent::__construct($nb_icontact_prospect);
 
-    $this->nb_attachment_list = new CNabuIContactProspectAttachmentList();
-}
+        $this->nb_attachment_list = new CNabuIContactProspectAttachmentList();
+    }
     /**
      * Gets the IContact owner instance.
      * @return CNabuIContact|null Returns the IContact assigned owner instance.
@@ -84,11 +82,10 @@ public function __construct($nb_icontact_prospect = false)
      * @param CNabuIContactProspectStatusType|null $nb_status_type If setted, the list is filtered using this status.
      * @return CNabuIContactProspectList Returns a Prospect List containing all Prospects found.
      */
-    static public function getProspectsForIContact(
+    public static function getProspectsForIContact(
         $nb_icontact,
         CNabuIContactProspectStatusType $nb_status_type = null
-    ) : CNabuIContactProspectList
-    {
+    ) : CNabuIContactProspectList {
         if (is_numeric($nb_icontact_id = nb_getMixedValue($nb_icontact, 'nb_icontact_id'))) {
             $status_id = nb_getMixedValue($nb_status_type, 'nb_icontact_prospect_status_type_id');
             $retval = CNabuIContactProspect::buildObjectListFromSQL(
@@ -98,7 +95,7 @@ public function __construct($nb_icontact_prospect = false)
                   WHERE ip.nb_icontact_id=i.nb_icontact_id
                     AND i.nb_icontact_id=%cont_id$d '
                 . (is_numeric($status_id) ? 'AND ip.nb_icontact_prospect_status_id=%status_id$d ' : '')
-               . 'ORDER BY ip.nb_icontact_prospect_creation_datetime DESC',
+                . 'ORDER BY ip.nb_icontact_prospect_creation_datetime DESC',
                 array(
                     'cont_id' => $nb_icontact_id,
                     'status_id' => $status_id
@@ -106,7 +103,7 @@ public function __construct($nb_icontact_prospect = false)
                 ($nb_icontact instanceof CNabuIContact ? $nb_icontact : null)
             );
             if ($nb_icontact instanceof CNabuIContact) {
-                $retval->iterate(function ($key, $nb_prospect) use($nb_icontact) {
+                $retval->iterate(function ($key, $nb_prospect) use ($nb_icontact) {
                     $nb_prospect->setIContact($nb_icontact);
                     return true;
                 });
@@ -127,11 +124,11 @@ public function __construct($nb_icontact_prospect = false)
      * @param CNabuIContactProspectStatusType|null $nb_status_type If setted, the list is filtered using this status.
      * @return CNabuIContactProspectList Returns a Prospect List containing all Prospects found.
      */
-    static public function getProspectsOfUser(
-        $nb_icontact, $nb_user,
+    public static function getProspectsOfUser(
+        $nb_icontact,
+        $nb_user,
         CNabuIContactProspectStatusType $nb_status_type = null
-    ) : CNabuIContactProspectList
-    {
+    ) : CNabuIContactProspectList {
         if (is_numeric($nb_icontact_id = nb_getMixedValue($nb_icontact, 'nb_icontact_id')) &&
             is_numeric($nb_user_id = nb_getMixedValue($nb_user, 'nb_user_id'))
         ) {
@@ -144,7 +141,7 @@ public function __construct($nb_icontact_prospect = false)
                     AND i.nb_icontact_id=%cont_id$d
                     AND ip.nb_user_id=%user_id$d '
                 . (is_numeric($status_id) ? 'AND ip.nb_icontact_prospect_status_id=%status_id$d ' : '')
-               . 'ORDER BY ip.nb_icontact_prospect_creation_datetime DESC',
+                . 'ORDER BY ip.nb_icontact_prospect_creation_datetime DESC',
                 array(
                     'cont_id' => $nb_icontact_id,
                     'user_id' => $nb_user_id,
@@ -153,7 +150,7 @@ public function __construct($nb_icontact_prospect = false)
                 ($nb_icontact instanceof CNabuIContact ? $nb_icontact : null)
             );
             if ($nb_icontact instanceof CNabuIContact) {
-                $retval->iterate(function ($key, $nb_prospect) use($nb_icontact) {
+                $retval->iterate(function ($key, $nb_prospect) use ($nb_icontact) {
                     $nb_prospect->setIContact($nb_icontact);
                     return true;
                 });
@@ -174,11 +171,11 @@ public function __construct($nb_icontact_prospect = false)
      * @param CNabuIContactProspectStatusType|null $nb_status_type If setted, the list is filtered using this status.
      * @return int Returns the count of all Prospects found.
      */
-    static public function getCountProspectsOfUser(
-        $nb_icontact, $nb_user,
+    public static function getCountProspectsOfUser(
+        $nb_icontact,
+        $nb_user,
         CNabuIContactProspectStatusType $nb_status_type = null
-    ) : int
-    {
+    ) : int {
         if (is_numeric($nb_icontact_id = nb_getMixedValue($nb_icontact, 'nb_icontact_id')) &&
             is_numeric($nb_user_id = nb_getMixedValue($nb_user, 'nb_user_id'))
         ) {
@@ -202,7 +199,7 @@ public function __construct($nb_icontact_prospect = false)
      * @param string $email Email string to be encoded.
      * @return string Returns the encoded Email as string.
      */
-    static public function encodeEmail(string $email) : string
+    public static function encodeEmail(string $email) : string
     {
         return md5(self::EMAIL_PREF . preg_replace('/\\s/', '', mb_strtolower($email)) . self::EMAIL_SUFF);
     }
@@ -224,8 +221,10 @@ public function __construct($nb_icontact_prospect = false)
      * @param string $hash Hash that identifies the Email.
      * @return CNabuIContactProspectList The list of Prospects found.
      */
-    static public function findIContactProspectsByEmailHash(CNabuIContact $nb_icontact, string $hash) : CNabuIContactProspectList
-    {
+    public static function findIContactProspectsByEmailHash(
+        CNabuIContact $nb_icontact,
+        string $hash
+    ) : CNabuIContactProspectList {
         if (is_numeric($nb_icontact_id = nb_getMixedValue($nb_icontact, 'nb_icontact_id')) &&
             strlen($hash) === 32
         ) {
@@ -268,19 +267,27 @@ public function __construct($nb_icontact_prospect = false)
      * @param string $mimetype Mime Type of the attachement
      * @param string $file Full File path and name where the Attachment is originaly stored. I.E. the temporary folder.
      * @param bool $save If true, the Attachment is inmediately saved in the database storage.
-     * @param CNabuIContactProspectDiary|null $nb_diary If needed the Diary annotation instance related with this attachment.
+     * @param CNabuIContactProspectDiary|null $nb_diary If needed the Diary annotation instance
+     * related with this attachment.
      * @return CNabuIContactProspectAttachment Returns a instance object descriptor of created Attachemnt.
      */
-    public function addAttachment(string $name, string $mimetype, string $file, CNabuIContactProspectDiary $nb_diary = null, bool $save = true)
-    {
+    public function addAttachment(
+        string $name,
+        string $mimetype,
+        string $file,
+        CNabuIContactProspectDiary $nb_diary = null,
+        bool $save = true
+    ) {
         if ($this->isFetched()) {
             $nb_icontact = $this->getIContact();
             $base_path = $nb_icontact->getBasePath();
             $retval = $nb_attachment = new CNabuIContactProspectAttachment();
             $nb_attachment->setIcontactProspect($this);
-            $nb_attachment->setIcontactProspectDiaryId($nb_diary instanceof CNabuIContactProspectDiary ? $nb_diary->getId() : null);
+            $nb_attachment->setIcontactProspectDiaryId(
+                $nb_diary instanceof CNabuIContactProspectDiary ? $nb_diary->getId() : null
+            );
             $nb_attachment->setName($name);
-            $nb_attachment->setMimetype($mimetype);
+            $nb_attachment->setMIMEType($mimetype);
             $nb_attachment->grantHash();
             $nb_attachment->putFile($file);
 
@@ -300,13 +307,15 @@ public function __construct($nb_icontact_prospect = false)
      * @param mixed $nb_attachment A CNabuDataObject containing a field named nb_icontact_prospect_attachment_id
      * or a valid Id.
      * @return bool Returns true if the Attachment exists and was deleted.
-     * @throws ENabuIContactException Raises an exception if something happens while delete the attachment in the storage.
+     * @throws ENabuIContactException Raises an exception if something happens while delete
+     * the attachment in the storage.
      */
     public function deleteAttachment($nb_attachment) : bool
     {
         $retval = false;
+        $nb_attachment_id = nb_getMixedValue($nb_attachment, NABU_ICONTACT_PROSPECT_ATTACHMENT_FIELD_ID);
 
-        if (is_numeric($nb_attachment_id = nb_getMixedValue($nb_attachment, NABU_ICONTACT_PROSPECT_ATTACHMENT_FIELD_ID))) {
+        if (is_numeric($nb_attachment_id)) {
             $nb_attachment = $this->nb_attachment_list->getItem($nb_attachment_id);
             if ($nb_attachment->getIContactProspectId() == $this->getId()) {
                 $nb_attachment->deleteFile();
@@ -330,8 +339,7 @@ public function __construct($nb_icontact_prospect = false)
         $retval = parent::save($trace);
 
         $this->nb_attachment_list->iterate(
-            function($key, CNabuIContactProspectAttachment $nb_attachment) use($retval)
-            {
+            function ($key, CNabuIContactProspectAttachment $nb_attachment) use ($retval) {
                 $retval |= $nb_attachment->save();
                 return true;
             }

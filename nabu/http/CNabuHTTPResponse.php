@@ -155,7 +155,7 @@ final class CNabuHTTPResponse extends CNabuObject
      * Get the mimetype for this response
      * @return string Returns the mimetype
      */
-    public function getMimetype()
+    public function getMIMEType()
     {
         return $this->mimetype;
     }
@@ -165,13 +165,13 @@ final class CNabuHTTPResponse extends CNabuObject
      * to {@see CNabuHTTPApplication::prepareHeaders()} has no effect.
      * @param string $mimetype New mimetype
      */
-    public function setMimetype($mimetype)
+    public function setMIMEType($mimetype)
     {
         $this->mimetype = $mimetype;
     }
 
-    public function getHeader($header) {
-
+    public function getHeader($header)
+    {
         if ($this->header_list !== null && array_key_exists($header, $this->header_list)) {
             return $this->header_list[$header];
         }
@@ -179,8 +179,8 @@ final class CNabuHTTPResponse extends CNabuObject
         return null;
     }
 
-    public function setHeader($header, $content) {
-
+    public function setHeader($header, $content)
+    {
         if ($this->header_list === null) {
             $this->header_list = array($header => $content);
         } else {
@@ -211,7 +211,8 @@ final class CNabuHTTPResponse extends CNabuObject
 
     /**
      * Calculates the X-Frame-Options value if setted.
-     * @return string|null If X-Frame-Options is setted returns the proper value, else if not is setted then returns null.
+     * @return string|null If X-Frame-Options is setted returns the proper value,
+     * else if not is setted then returns null.
      * @throws ENabuHTTPException Raises an exception if kind is ALLOW-FROM and none URL is setted.
      */
     private function calculateFrameOptions()
@@ -297,8 +298,13 @@ final class CNabuHTTPResponse extends CNabuObject
      */
     public function getRender()
     {
+        if ($this->render_factory !== null) {
+            $retval = $this->render_factory->getInterface();
+        } else {
+            $retval = $this->render;
+        }
 
-        return $this->render;
+        return $retval;
     }
 
     /**
@@ -311,7 +317,7 @@ final class CNabuHTTPResponse extends CNabuObject
     {
         if ($render instanceof INabuHTTPResponseRender) {
             $this->render = $render;
-        } else if ($render === null) {
+        } elseif ($render === null) {
             $this->render = null;
         } else {
             throw new ENabuCoreException(
@@ -395,12 +401,12 @@ final class CNabuHTTPResponse extends CNabuObject
                 $nb_site_target = CNabuSiteTarget::findByKey($this, $nb_site_target);
                 unset($url);
             }
-        } else if (is_numeric($nb_site_target)) {
+        } elseif (is_numeric($nb_site_target)) {
             $nb_site_target = new CNabuSiteTarget($nb_site_target);
             if ($nb_site_target->isNew()) {
                 $nb_site_target = null;
             }
-        } else if ($nb_site_target instanceof CNabuDataObject) {
+        } elseif ($nb_site_target instanceof CNabuDataObject) {
             if (!($nb_site_target instanceof CNabuSiteTarget)) {
                 $nb_site_target = new CNabuSiteTarget($nb_site_target);
                 if ($nb_site_target->isNew()) {
@@ -430,7 +436,7 @@ final class CNabuHTTPResponse extends CNabuObject
                    ? $nb_site_target->getFullyQualifiedURL($nb_language_id) . $encoded
                    : $nb_site_target);
             throw new ENabuRedirectionException($code, $url);
-        } else if (isset($url)) {
+        } elseif (isset($url)) {
             throw new ENabuRedirectionException($code, $url->getURL());
         } else {
             $this->http_response_code = 500;

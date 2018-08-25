@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/08/22 05:47:07 UTC
+ * Created: 2018/08/25 05:15:04 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -193,20 +193,20 @@ abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalO
     }
 
     /**
-     * Get Messaging Service Stack Attachment Mimetype attribute value
-     * @return null|string Returns the Messaging Service Stack Attachment Mimetype value
+     * Get Messaging Service Stack Attachment MIMEType attribute value
+     * @return null|string Returns the Messaging Service Stack Attachment MIMEType value
      */
-    public function getMimetype()
+    public function getMIMEType()
     {
         return $this->getValue('nb_messaging_service_stack_attachment_mimetype');
     }
 
     /**
-     * Sets the Messaging Service Stack Attachment Mimetype attribute value.
+     * Sets the Messaging Service Stack Attachment MIMEType attribute value.
      * @param string|null $mimetype New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMimetype(string $mimetype = null) : CNabuDataObject
+    public function setMIMEType(string $mimetype = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_attachment_mimetype', $mimetype);
         

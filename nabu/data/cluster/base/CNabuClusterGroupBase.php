@@ -3,19 +3,19 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/08/22 05:45:30 UTC
+ * Created: 2018/08/25 05:13:41 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  * Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  * Copyright 2017-2018 nabu-3 Group
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -50,7 +50,7 @@ abstract class CNabuClusterGroupBase extends CNabuDBInternalObject
         if ($nb_cluster_group) {
             $this->transferMixedValue($nb_cluster_group, 'nb_cluster_group_id');
         }
-
+        
         parent::__construct();
     }
 
@@ -134,13 +134,13 @@ abstract class CNabuClusterGroupBase extends CNabuDBInternalObject
     {
         $fields_part = nb_prefixFieldList(CNabuClusterGroupBase::getStorageName(), $fields, false, true, '`');
         $order_part = nb_prefixFieldList(CNabuClusterGroupBase::getStorageName(), $fields, false, false, '`');
-
+        
         if ($num_items !== 0) {
             $limit_part = ($offset > 0 ? $offset . ', ' : '') . $num_items;
         } else {
             $limit_part = false;
         }
-
+        
         $nb_item_list = CNabuEngine::getEngine()->getMainDB()->getQueryAsArray(
             "select " . ($fields_part ? $fields_part . ' ' : '* ')
             . 'from nb_cluster_group '
@@ -149,7 +149,7 @@ abstract class CNabuClusterGroupBase extends CNabuDBInternalObject
             array(
             )
         );
-
+        
         return $nb_item_list;
     }
 
@@ -176,7 +176,7 @@ abstract class CNabuClusterGroupBase extends CNabuDBInternalObject
             );
         }
         $this->setValue('nb_cluster_group_id', $id);
-
+        
         return $this;
     }
 
@@ -197,7 +197,7 @@ abstract class CNabuClusterGroupBase extends CNabuDBInternalObject
     public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_group_key', $key);
-
+        
         return $this;
     }
 
@@ -218,7 +218,7 @@ abstract class CNabuClusterGroupBase extends CNabuDBInternalObject
     public function setName(string $name = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_group_name', $name);
-
+        
         return $this;
     }
 
@@ -239,7 +239,7 @@ abstract class CNabuClusterGroupBase extends CNabuDBInternalObject
     public function setNotes(string $notes = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_group_notes', $notes);
-
+        
         return $this;
     }
 }
