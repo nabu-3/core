@@ -935,6 +935,11 @@ class CNabuCustomer extends CNabuCustomerBase
         return CNabuUserGroupType::findByKey($this, $key);
     }
 
+    public function getUserGroupsByType($nb_user_group_type, bool $active = false)
+    {
+        return CNabuUserGroup::getGroupsByType($this, $nb_user_group_type, $active);
+    }
+
      /**
       * Get all User Groups instances of a Type, where a User is member (without consider his status).
       * @param mixed $nb_user_group_type A CNabuDataObject instance containing a field named nb_user_group_type_id

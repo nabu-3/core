@@ -80,6 +80,33 @@ class CNabuUserGroup extends CNabuUserGroupBase
         return $retval;
     }
 
+    public static function getGroupsByType($nb_customer, $nb_user_group_type, bool $active = false) : CNabuUserGroupList
+    {
+        if (is_numeric($nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID)) &&
+            is_numeric($nb_user_group_type_id = nb_getMixedValue($nb_user_group_type, NABU_USER_GROUP_TYPE_FIELD_ID))
+        ) {
+            $retval = CNabuUserGroup::buildObjectListFromSQL(
+                'nb_user_group_id',
+                'SELECT ug.*
+                   FROM nb_customer c, nb_user_group_type ugt, nb_user_group ug
+                  WHERE c.nb_customer_id=ug.nb_customer_id
+                    AND c.nb_customer_id=ugt.nb_customer_id
+                    AND c.nb_customer_id=%cust_id$d
+                    AND ugt.nb_user_group_type_id=%type_id$d' .
+                    ($active ? ' AND ug.nb_user_group_status=\'E\'' : ''),
+                array(
+                    'cust_id' => $nb_customer_id,
+                    'type_id' => $nb_user_group_type_id
+                ),
+                ($nb_customer instanceof CNabuCustomer ? $nb_customer : null)
+            );
+        } else {
+            $retval = new CNabuUserGroupList();
+        }
+
+        return $retval;
+    }
+
     public function getOwner(bool $force = false)
     {
         if ($this->nb_user === null || $this->getUserId() !== $this->nb_user->getId() || $force) {
