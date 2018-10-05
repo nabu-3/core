@@ -954,6 +954,106 @@ class CNabuSite extends CNabuSiteBase
         return $retval;
     }
 
+    public function synchronizeRoleGrants($nb_source_role, $nb_target_role, bool $create = false)
+    {
+        if (is_numeric($nb_source_id = nb_getMixedValue($nb_source_role, NABU_ROLE_FIELD_ID)) &&
+            is_numeric($nb_target_id = nb_getMixedValue($nb_target_role, NABU_ROLE_FIELD_ID)) &&
+            ($nb_source_site_role = $this->getSiteRole($nb_source_id)) instanceof CNabuSiteRole
+        ) {
+            $nb_target_site_role = $this->getSiteRole($nb_target_id);
+            if (!($nb_target_site_role instanceof CNabuSiteRole)) {
+                $nb_target_site_role = new CNabuSiteRole();
+                $nb_target_site_role->setSite($this);
+                $nb_target_site_role->setRoleId($nb_target_id);
+            }
+            $nb_target_site_role->setLoginRedirectionTargetUseURI($nb_source_site_role->getLoginRedirectionTargetUseURI());
+            $nb_target_site_role->setLoginRedirectionTargetId($nb_source_site_role->getLoginRedirectionTargetId());
+            $nb_target_site_role->setPoliciesTargetUseURI($nb_source_site_role->getPoliciesTargetUseURI());
+            $nb_target_site_role->setPoliciesTargetId($nb_source_site_role->getPoliciesTargetId());
+            $nb_target_site_role->setMessagingTemplateNewUser($nb_source_site_role->getMessagingTemplateNewUser());
+            $nb_target_site_role->setMessagingTemplateForgotPassword($nb_source_site_role->getMessagingTemplateForgotPassword());
+            $nb_target_site_role->setMessagingTemplateNotifyNewUser($nb_source_site_role->getMessagingTemplateNotifyNewUser());
+            $nb_target_site_role->setMessagingTemplateRememberNewUser($nb_source_site_role->getMessagingTemplateRememberNewUser());
+            $nb_target_site_role->setMessagingTemplateInviteUser($nb_source_site_role->getMessagingTemplateInviteUser());
+            $nb_target_site_role->setMessagingTemplateInviteFriend($nb_source_site_role->getMessagingTemplateInviteFriend());
+            $nb_target_site_role->setMessagingTemplateNewMessage($nb_source_site_role->getMessagingTemplateNewMessage());
+            if ($nb_target_site_role->save()) {
+                $this->getDB()->executeDelete(
+                    "DELETE FROM nb_site_role_lang
+                      WHERE nb_site_id=%site_id\$d
+                        AND nb_role_id=%role_id\$d",
+                    array(
+                        'site_id' => $this->getId(),
+                        'role_id' => $nb_target_id
+                    )
+                );
+                $this->getDB()->executeInsert(
+                    "INSERT INTO nb_site_role_lang (nb_site_id, nb_role_id, nb_language_id, nb_site_role_lang_login_redirection_target_url,
+                                                    nb_site_role_lang_policies_target_url)
+                     SELECT nb_site_id, %target_id\$d, nb_language_id, nb_site_role_lang_login_redirection_target_url,
+                            nb_site_role_lang_policies_target_url
+                       FROM nb_site_role_lang
+                      WHERE nb_site_id=%site_id\$d
+                        AND nb_role_id=%source_id\$d",
+                        array(
+                        'site_id' => $this->getId(),
+                        'source_id' => $nb_source_id,
+                        'target_id' => $nb_target_id
+                    ), true
+                );
+                $this->getDB()->executeDelete(
+                    "DELETE FROM nb_site_target_cta_role
+                      WHERE nb_role_id=%role_id\$d
+                        AND nb_site_target_cta_id in (SELECT stc.nb_site_target_cta_id
+                                                        FROM nb_site_target_cta stc, nb_site_target st
+                                                       WHERE stc.nb_site_target_id=st.nb_site_target_id
+                                                         AND st.nb_site_id=%site_id\$d)",
+                    array(
+                        'site_id' => $this->getId(),
+                        'role_id' => $nb_target_id
+                    ), true
+                );
+                $this->getDB()->executeInsert(
+                    "INSERT INTO nb_site_target_cta_role (nb_site_target_cta_id, nb_role_id, nb_site_target_cta_role_zone)
+                     SELECT str.nb_site_target_cta_id, %target_id\$d, str.nb_site_target_cta_role_zone
+                       FROM nb_site_target_cta stc, nb_site_target_cta_role str, nb_site_target st
+                      WHERE stc.nb_site_target_cta_id=str.nb_site_target_cta_id
+                        AND stc.nb_site_target_id=st.nb_site_target_id
+                        AND st.nb_site_id=%site_id\$d
+                        AND str.nb_role_id=%source_id\$d",
+                    array(
+                        'site_id' => $this->getId(),
+                        'source_id' => $nb_source_id,
+                        'target_id' => $nb_target_id
+                    ), true
+                );
+                $this->getDB()->executeDelete(
+                    "DELETE FROM nb_site_map_role
+                      WHERE nb_role_id=%role_id\$d
+                        AND nb_site_map_id in (SELECT nb_site_map_id FROM nb_site_map WHERE nb_site_id=%site_id\$d)",
+                    array(
+                        'site_id' => $this->getId(),
+                        'role_id' => $nb_target_id
+                    ), true
+                );
+                $this->getDB()->executeInsert(
+                    "INSERT INTO nb_site_map_role (nb_site_map_id, nb_role_id, nb_site_map_role_zone)
+                     SELECT smr.nb_site_map_id, %target_id\$d, smr.nb_site_map_role_zone
+                       FROM nb_site_map sm, nb_site_map_role smr
+                      WHERE sm.nb_site_id=%site_id\$d
+                        AND sm.nb_site_map_id=smr.nb_site_map_id
+                        AND smr.nb_role_id=%source_id\$d",
+                    array(
+                        'site_id' => $this->getId(),
+                        'source_id' => $nb_source_id,
+                        'target_id' => $nb_target_id
+                    ), true
+                );
+                error_log("FIN");
+            }
+        }
+    }
+
     /**
      * Get the full list of available Users. If $nb_role is defined, then filters the list by the represented Role.
      * @param mixed $nb_role If defined, then will be a CNabuDataObject instance containing a field named nb_role_id
