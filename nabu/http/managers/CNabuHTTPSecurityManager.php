@@ -562,7 +562,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
     /**
      * Make internal processes and call plugin to check if the user can be signed in.
      * If sign in is granted and an automatic redirection is configured or returned by plugin, then perform the redirection.
-     * If none redirection is allowed then, returns true if user is logged or false if not.
+     * If none redirection is allowed then returns true if user is logged or false if not.
      * Finally, in any case, log in the user table the timestamp of log in.
      * @param CNabuSite $nb_site Site to give the decision
      * @param CNabuUser $nb_user User to evaluate
@@ -648,6 +648,35 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         }
 
         return $this->logout();
+    }
+
+    /**
+     * Revalidates a password to ensure that the user can continue in the private zone.
+     * @param CNabuSite $nb_site Site to revalidate navigation.
+     * @param CNabuUser $nb_user User to be revalidated.
+     * @param string $passwd Password without encoding.
+     * @return bool Returns true if revalidation success or false if not.
+     */
+    public function revalidatePassword(CNabuSite $nb_site, CNabuUser $nb_user, string $passwd) : bool
+    {
+        if (!($nb_site instanceof CNabuSite)) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_METHOD_PARAMETER_NOT_VALID, array('$nb_site'));
+        }
+
+        if (!($nb_user instanceof CNabuUser) || !$nb_user->isFetched()) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_METHOD_PARAMETER_NOT_VALID, array('$nb_user'));
+        }
+
+        if (!is_string($passwd)) {
+            throw new ENabuCoreException(
+                ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                array('$passwd', print_r($passwd, true))
+            );
+        }
+
+        $nb_log_user = CNabuUser::findBySiteLogin($nb_site, $nb_user->getLogin(), $passwd);
+
+        return $nb_user->getId() == $nb_log_user->getId();
     }
 
     /**
