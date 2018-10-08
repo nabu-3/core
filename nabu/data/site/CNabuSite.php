@@ -791,7 +791,7 @@ class CNabuSite extends CNabuSiteBase
 
     public function getTargetKeysIndex()
     {
-        $this->getTargets();
+        $this->getTargets(true);
 
         return $this->nb_site_target_list->getIndex(CNabuSiteTargetList::INDEX_KEY);
     }
