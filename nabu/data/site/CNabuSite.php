@@ -789,6 +789,13 @@ class CNabuSite extends CNabuSiteBase
         return $this->nb_site_map_tree->getIndex(CNabuSiteMapTree::INDEX_KEY);
     }
 
+    public function getTargetKeysIndex()
+    {
+        $this->getTargets();
+
+        return $this->nb_site_target_list->getIndex(CNabuSiteTargetList::INDEX_KEY);
+    }
+
     public function getStaticContentKeysIndex()
     {
         $this->getStaticContents();
@@ -812,6 +819,7 @@ class CNabuSite extends CNabuSiteBase
         $trdata['roles'] = $this->getRoles();
         $trdata['sitemap_keys'] = $this->getSiteMapKeysIndex();
         $trdata['targets'] = $this->nb_site_target_list;
+        $trdata['target_keys'] = $this->getTargetKeysIndex();
         $trdata['static_content_keys'] = $this->getStaticContentKeysIndex();
 
         return $trdata;
