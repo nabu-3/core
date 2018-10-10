@@ -269,7 +269,6 @@ class CNabuMessagingFactory extends CNabuDataObject
             function($key, CNabuMessagingService $nb_service)
             use (&$retval, $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments)
             {
-                error_log(__METHOD__);
                 $nb_interface = $this->discoverServiceInterface($nb_service);
                 $nb_interface->post($to, $cc, $bcc, $subject, $body_html, $body_text, $attachments);
                 $retval |= true;

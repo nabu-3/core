@@ -309,7 +309,6 @@ abstract class CNabuDataObjectList extends CNabuObject
                     array('$index', get_class($index))
                 );
             } elseif (!is_array($this->secondary_indexes) || !array_key_exists($index, $this->secondary_indexes)) {
-                error_log(print_r(array_keys($this->secondary_indexes), true));
                 throw new ENabuCoreException(ENabuCoreException::ERROR_INVALID_INDEX, array($index));
             }
         }

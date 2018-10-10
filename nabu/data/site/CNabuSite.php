@@ -1057,7 +1057,6 @@ class CNabuSite extends CNabuSiteBase
                         'target_id' => $nb_target_id
                     ), true
                 );
-                error_log("FIN");
             }
         }
     }
