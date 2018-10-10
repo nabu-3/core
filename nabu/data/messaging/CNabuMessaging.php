@@ -77,6 +77,29 @@ class CNabuMessaging extends CNabuMessagingBase
     }
 
     /**
+     * Get Services assigned to this Messaging instance.
+     * @param bool $force If true, the Messaging Service list is refreshed from the database.
+     * @return CNabuMessagingServiceList Returns the list of Services. If none Service exists, the list is empty.
+     */
+    public function getActiveServices($force = false)
+    {
+        if ($this->nb_messaging_service_list === null) {
+            $this->nb_messaging_service_list = new CNabuMessagingServiceList();
+        }
+
+        if ($this->nb_messaging_service_list->isEmpty() || $force) {
+            $this->nb_messaging_service_list->clear();
+            $this->nb_messaging_service_list->merge(CNabuMessagingService::getActiveMessagingServices($this));
+            $this->nb_messaging_service_list->iterate(function($key, CNabuMessagingService $nb_service) {
+                $nb_service->setMessaging($this);
+                return true;
+            });
+        }
+
+        return $this->nb_messaging_service_list;
+    }
+
+    /**
      * Get Templates assigned to this Messaging instance.
      * @param bool $force If true, the Messaging Template List is refreshed from the database.
      * @return CNabuMessagingTemplateList Returns the list of Templates. If noe Template exists, the list is empty.

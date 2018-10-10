@@ -27,7 +27,6 @@ use nabu\data\customer\traits\TNabuCustomerChild;
 use nabu\data\messaging\CNabuMessaging;
 use nabu\messaging\CNabuMessagingFactory;
 use nabu\messaging\CNabuMessagingFactoryList;
-use nabu\messaging\exceptions\ENabuMessagingException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>

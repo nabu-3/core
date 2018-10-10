@@ -93,4 +93,35 @@ class CNabuMessagingService extends CNabuMessagingServiceBase
                ))
         ;
     }
+
+    /**
+     * Get active items in the storage as an associative array where the field 'nb_messaging_service_id' is the index, and
+     * each value is an instance of class CNabuMessagingServiceBase.
+     * @param CNabuMessaging $nb_messaging The CNabuMessaging instance of the Messaging that owns the Messaging Service
+     * List
+     * @return mixed Returns and array with all items.
+     */
+    public static function getActiveMessagingServices(CNabuMessaging $nb_messaging)
+    {
+        $nb_messaging_id = nb_getMixedValue($nb_messaging, 'nb_messaging_id');
+        if (is_numeric($nb_messaging_id)) {
+            $retval = forward_static_call(
+            array(get_called_class(), 'buildObjectListFromSQL'),
+                'nb_messaging_service_id',
+                'SELECT *
+                   FROM nb_messaging_service
+                  WHERE nb_messaging_id=%messaging_id$d
+                    AND nb_messaging_service_status=\'E\'',
+                array(
+                    'messaging_id' => $nb_messaging_id
+                ),
+                $nb_messaging
+            );
+        } else {
+            $retval = new CNabuMessagingServiceList();
+        }
+
+        return $retval;
+    }
+
 }

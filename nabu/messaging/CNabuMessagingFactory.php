@@ -211,7 +211,7 @@ class CNabuMessagingFactory extends CNabuDataObject
         $nb_language = $this->discoverLanguage($nb_language);
         list($subject, $body_html, $body_text) = $this->prepareMessageUsingTemplate($nb_template, $nb_language, $params);
 
-        return $this->postMessage($nb_template->getServices(), $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments);
+        return $this->postMessage($nb_template->getActiveServices(), $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments);
     }
 
     /**
@@ -269,6 +269,7 @@ class CNabuMessagingFactory extends CNabuDataObject
             function($key, CNabuMessagingService $nb_service)
             use (&$retval, $to, $cc, $bcc, $subject, $body_html, $body_text, $attachments)
             {
+                error_log(__METHOD__);
                 $nb_interface = $this->discoverServiceInterface($nb_service);
                 $nb_interface->post($to, $cc, $bcc, $subject, $body_html, $body_text, $attachments);
                 $retval |= true;

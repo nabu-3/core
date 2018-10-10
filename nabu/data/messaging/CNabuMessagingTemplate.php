@@ -62,4 +62,28 @@ class CNabuMessagingTemplate extends CNabuMessagingTemplateBase
 
         return $this->nb_messaging_service_list;
     }
+
+    /**
+     * Get the list of active Service instances connected to this Template.
+     * @param bool $force If true, forces to refresh the list from the database storage.
+     * @return CNabuMessagingServiceList Returns the list of connected services.
+     */
+    public function getActiveServices(bool $force = false) : CNabuMessagingServiceList
+    {
+        if ($this->nb_messaging_service_list->isEmpty() || $force) {
+            $this->nb_messaging_service_list->clear();
+            if (($nb_messaging = $this->getMessaging()) instanceof CNabuMessaging &&
+                !($nb_services_list = $nb_messaging->getActiveServices())->isEmpty()
+            ) {
+                $nb_services_list->iterate(function($key, CNabuMessagingService $nb_service) {
+                    if ($nb_service->isTemplateConnected($this->getId())) {
+                        $this->nb_messaging_service_list->addItem($nb_service);
+                    }
+                    return true;
+                });
+            }
+        }
+
+        return $this->nb_messaging_service_list;
+    }
 }
