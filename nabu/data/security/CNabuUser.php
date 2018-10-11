@@ -56,6 +56,8 @@ class CNabuUser extends CNabuUserBase implements INabuId
 
     /** @var CNabuSiteUserList List of Profiles of this User instance. */
     private $nb_site_user_list = null;
+    /** @var CNabuUser Prescriber user instance. */
+    private $nb_prescriber = null;
 
     public function __construct($nb_user = false)
     {
@@ -285,6 +287,28 @@ class CNabuUser extends CNabuUserBase implements INabuId
         }
 
         return $retval;
+    }
+
+    /**
+     * Gets the Prescriber instance.
+     * @param bool $force If true forces to reload object from the database.
+     * @return CNabuUser|null Returns the Prescriber instance if exists or null if not.
+     */
+    public function getPrescriber(bool $force = false)
+    {
+        if ($this->nb_prescriber == NULL ||
+            $this->nb_prescriber->getId() != $this->getPrescriberId() ||
+            $force
+        ) {
+            $nb_prescriber_id = $this->getPrescriberId();
+            if ($nb_prescriber_id === null || $this->getCustomer() === null) {
+                $this->nb_prescriber = null;
+            } else {
+                $this->nb_prescriber = $this->getCustomer()->getUser($nb_prescriber_id);
+            }
+        }
+
+        return $this->nb_prescriber;
     }
 
     public function getTreeData($nb_language = null, $dataonly = false)

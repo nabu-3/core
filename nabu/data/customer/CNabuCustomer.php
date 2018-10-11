@@ -789,7 +789,8 @@ class CNabuCustomer extends CNabuCustomerBase
         $nb_user_id = nb_getMixedValue($nb_user, NABU_USER_FIELD_ID);
         if (is_numeric($nb_user_id)) {
             $nb_new_user = new CNabuUser($nb_user_id);
-            if ($nb_new_user->validateCustomer($this)) {
+            if ($nb_new_user->isFetched() && $nb_new_user->validateCustomer($this)) {
+                $nb_new_user->setCustomer($this);
                 $retval = $nb_new_user;
             }
         }
@@ -809,6 +810,7 @@ class CNabuCustomer extends CNabuCustomerBase
         if (strlen($login) > 0) {
             $nb_user = CNabuUser::findByLogin($this, $login);
             if ($nb_user instanceof CNabuUser && $nb_user->validateCustomer($this)) {
+                $nb_user->setCustomer($this);
                 $retval = $nb_user;
             }
         }
