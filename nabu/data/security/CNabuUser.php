@@ -154,6 +154,40 @@ class CNabuUser extends CNabuUserBase implements INabuId
     }
 
     /**
+     * Find a User by an static encoded login.
+     * @param mixed $nb_customer A Customer ID, a Data Object containing a field nb_customer_id or a Customer instance.
+     * @param string $key Key encoded string value to find the User.
+     * @return mixed Returns a User instance if $key matches or null if not.
+     */
+    public static function findByStaticEncodedLogin($nb_customer, string $key)
+    {
+        $retval = null;
+
+        if (is_numeric($nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID)) &&
+            strlen($key) > 0
+        ) {
+            $retval = CNabuUser::buildObjectFromSQL(
+                'select * '
+                . 'from nb_user u, nb_customer c '
+               . 'where u.nb_customer_id=c.nb_customer_id '
+                 . 'and c.nb_customer_id=%cust_id$d '
+                 . "and md5(concat('%pref\$s', u.nb_user_login, '%suff\$s'))='%key\$s'",
+                 array(
+                     'pref' => self::PASS_PREF,
+                     'suff' => self::PASS_SUFF,
+                     'cust_id' => $nb_customer_id,
+                     'key' => $key
+                 ), true
+            );
+            if ($nb_customer instanceof CNabuCustomer && $retval !== null) {
+                $retval->setCustomer($nb_customer);
+            }
+        }
+
+        return $retval;
+    }
+
+    /**
      * Find a User by an temporal encoded key.
      * @param mixed $nb_customer A Customer ID, a Data Object containing a field nb_customer_id or a Customer instance.
      * @param string $key Key encoded string value to find the User.
