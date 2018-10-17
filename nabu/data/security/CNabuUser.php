@@ -177,7 +177,7 @@ class CNabuUser extends CNabuUserBase implements INabuId
                      'suff' => self::PASS_SUFF,
                      'cust_id' => $nb_customer_id,
                      'key' => $key
-                 ), true
+                 )
             );
             if ($nb_customer instanceof CNabuCustomer && $retval !== null) {
                 $retval->setCustomer($nb_customer);
@@ -188,7 +188,7 @@ class CNabuUser extends CNabuUserBase implements INabuId
     }
 
     /**
-     * Find a User by an temporal encoded key.
+     * Find a User by a temporal encoded key.
      * @param mixed $nb_customer A Customer ID, a Data Object containing a field nb_customer_id or a Customer instance.
      * @param string $key Key encoded string value to find the User.
      * @param int $expires Time in seconds of the validity interval of encoded ID.

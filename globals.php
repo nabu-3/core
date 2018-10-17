@@ -167,3 +167,5 @@ define('NABU_REGEXP_PATTERN_KEY', '^[a-zA-Z_][a-zA-Z0-9_]+$');
 define('NABU_TEMP_ENC_ID_EXPIRATION_TIME', 1800);
 define('NABU_ENC_ID_PREF', '#hKBFA7C');
 define('NABU_ENC_ID_SUFF', 'v8YgA.tk');
+define('NABU_ENC_LOGIN_PREF','nasn2293');
+define('NABU_ENC_LOGIN_SUFF', '935nkwnf');

@@ -37,4 +37,9 @@ trait TNabuId
     {
         return md5(NABU_ENC_ID_PREF . $this->getId() . NABU_ENC_ID_SUFF) . sprintf("%x",time() + $expires);
     }
+
+    public function createStaticEncodedLogin() : string
+    {
+        return md5(NABU_ENC_LOGIN_PREF . $this->getLogin() . NABU_ENC_LOGIN_SUFF);
+    }
 }
