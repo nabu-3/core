@@ -71,7 +71,7 @@ class CNabuUserGroup extends CNabuUserGroupBase
                         'type_id' => $nb_user_group_type_id,
                         'user_id' => $nb_user_id
                     ),
-                ($nb_user_group_member instanceof CNabuUser ? $nb_user : null)
+                ($nb_user_group_member instanceof CNabuUser ? $nb_user_group_member : null)
             );
         } else {
             $retval = new CNabuUserGroupList();
