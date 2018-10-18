@@ -21,6 +21,8 @@
 namespace nabu\data\site;
 
 use nabu\cache\CNabuCacheNull;
+use nabu\data\lang\CNabuLanguageList;
+
 use nabu\data\security\CNabuUserList;
 
 use nabu\cache\interfaces\INabuCacheStorage;
@@ -534,6 +536,42 @@ class CNabuSite extends CNabuSiteBase
         $this->transferValue($nb_language, 'nb_language_id', 'nb_default_language_id');
 
         return $this;
+    }
+
+    /**
+     * Get the list of all Natural Languages setted for this site.
+     * @param bool $force When true, force to reload list from database.
+     * @return CNabuLanguageList Returns the list of available languages.
+     */
+    public function getNaturalLanguages(bool $force = false) : CNabuLanguageList
+    {
+        $nb_natural = new CNabuLanguageList();
+        $this->getLanguages($force)->iterate(function ($key, CNabuLanguage $nb_language) use ($nb_natural) {
+            if ($nb_language->isNaturalLanguage()) {
+                $nb_natural->addItem($nb_language);
+            }
+            return true;
+        });
+
+        return $nb_natural;
+    }
+
+    /**
+     * Get the list of all API Languages setted for this site.
+     * @param bool $force When true, force to reload list from database.
+     * @return CNabuLanguageList Returns the list of available languages.
+     */
+    public function getAPILanguages(bool $force = false) : CNabuLanguageList
+    {
+        $nb_api = new CNabuLanguageList();
+        $this->getLanguages($force)->iterate(function ($key, CNabuLanguage $nb_language) use ($nb_api) {
+            if ($nb_language->isAPILanguage()) {
+                $nb_api->addItem($nb_language);
+            }
+            return true;
+        });
+
+        return $nb_api;
     }
 
     public function setAlias(CNabuSiteAlias $nb_site_alias)
