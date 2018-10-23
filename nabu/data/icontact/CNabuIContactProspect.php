@@ -182,6 +182,7 @@ class CNabuIContactProspect extends CNabuIContactProspectBase
             $status_id = nb_getMixedValue($nb_status_type, 'nb_icontact_prospect_status_type_id');
             $retval = CNabuEngine::getEngine()->getMainDB()->getQueryAsCount(
                 'nb_icontact_prospect ip, nb_icontact i',
+                null,
                 "ip.nb_icontact_id=i.nb_icontact_id AND i.nb_icontact_id=$nb_icontact_id"
                 ." AND ip.nb_user_id=$nb_user_id"
                 . (is_numeric($status_id) ? " AND ip.nb_icontact_prospect_status_id=$status_id " : '')
