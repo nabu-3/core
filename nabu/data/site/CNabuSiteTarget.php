@@ -90,58 +90,86 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
         $this->nb_site_target_cta_list = new CNabuSiteTargetCTAList();
     }
 
-    public static function findByURL($nb_site, $target_url)
+    /**
+     * Locate a Target by their URL. If the Site is multi-language, the search is performed in all languages.
+     * Accessible via getValue method, you can access to additional fields nb_language_id and nb_site_target_lang_url.
+     * @param CNabuSite $nb_site Site instance that owns the URL.
+     * @param string $target_url The URL to search.
+     * @return CNabuSiteTarget|null Returns an instance of CNabuSiteTarget if found or null if not.
+     */
+    public static function findByURL(CNabuSite $nb_site, string $target_url)
     {
-        $retval = CNabuSiteTarget::buildObjectFromSQL(
-                "SELECT ca.*, cal.nb_language_id, cal.nb_site_target_lang_url
-                   FROM nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl
-                  WHERE ca.nb_site_target_id = cal.nb_site_target_id
-                    AND ca.nb_site_id=%site_id\$d
-                    AND ca.nb_site_id=sl.nb_site_id
-                    AND sl.nb_site_lang_enabled='T'
-                    AND cal.nb_language_id=sl.nb_language_id
-                    AND ca.nb_site_target_url_filter='U'
-                    AND cal.nb_site_target_lang_url='%url\$s'
-                  LIMIT 1",
-                array('site_id' => $nb_site->getId(), 'url' => $target_url)
-            )
+        $retval = null;
 
-            ??
+        if ($nb_site->isPublicBasePathEnabled()) {
+            $check_pbp = CNabuEngine::getEngine()->getMainDB()->getQueryAsSingleField(
+                'nb_site_lang_public_base_path',
+                "SELECT *
+                   FROM nb_site_lang
+                  WHERE length(nb_site_lang_public_base_path) > 0 
+                    AND instr('%url\$s', 1, nb_site_lang_public_base_lang)=1
+                  LIMIT 1"
+            );
 
-            CNabuSiteTarget::buildObjectFromSQL(
-                "SELECT ca.*, cal.nb_language_id, cal.nb_site_target_lang_url
-                   FROM nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl
-                  WHERE ca.nb_site_target_id = cal.nb_site_target_id
-                    AND ca.nb_site_id=%site_id\$d
-                    AND ca.nb_site_id=sl.nb_site_id
-                    AND sl.nb_site_lang_enabled='T'
-                    AND cal.nb_language_id=sl.nb_language_id
-                    AND ca.nb_site_target_url_filter='R'
-                    AND length(cal.nb_site_target_lang_url)>0
-                    AND '%url\$s' REGEXP cal.nb_site_target_lang_url
-                  ORDER BY ca.nb_site_target_order ASC
-                  LIMIT 1",
-                array('site_id' => $nb_site->getValue('nb_site_id'), 'url' => $target_url)
-            )
+            if (strlen($check_pbp) > 0) {
+                $target_url = substr($target_url, strlen($check_pbp));
+            } else {
+                $target_url = null;
+            }
+        }
 
-            ??
+        if ($target_url !== null) {
+            $retval = CNabuSiteTarget::buildObjectFromSQL(
+                    "SELECT ca.*, cal.nb_language_id, cal.nb_site_target_lang_url
+                       FROM nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl
+                      WHERE ca.nb_site_target_id = cal.nb_site_target_id
+                        AND ca.nb_site_id=%site_id\$d
+                        AND ca.nb_site_id=sl.nb_site_id
+                        AND sl.nb_site_lang_enabled='T'
+                        AND cal.nb_language_id=sl.nb_language_id
+                        AND ca.nb_site_target_url_filter='U'
+                        AND cal.nb_site_target_lang_url='%url\$s'
+                      LIMIT 1",
+                    array('site_id' => $nb_site->getId(), 'url' => $target_url)
+                )
 
-            CNabuSiteTarget::buildObjectFromSQL(
-                "SELECT ca.*, cal.nb_language_id, cal.nb_site_target_lang_url
-                   FROM nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl
-                  WHERE ca.nb_site_target_id = cal.nb_site_target_id
-                    AND ca.nb_site_id=%site_id\$d
-                    AND ca.nb_site_id=sl.nb_site_id
-                    AND sl.nb_site_lang_enabled='T'
-                    AND cal.nb_language_id=sl.nb_language_id
-                    AND ca.nb_site_target_url_filter='L'
-                    AND length(cal.nb_site_target_lang_url)>0
-                    AND '%url\$s' LIKE cal.nb_site_target_lang_url
-                  ORDER BY ca.nb_site_target_order ASC
-                  LIMIT 1",
-                array('site_id' => $nb_site->getId(), 'url' => $target_url)
-            )
-        ;
+                ??
+
+                CNabuSiteTarget::buildObjectFromSQL(
+                    "SELECT ca.*, cal.nb_language_id, cal.nb_site_target_lang_url
+                       FROM nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl
+                      WHERE ca.nb_site_target_id = cal.nb_site_target_id
+                        AND ca.nb_site_id=%site_id\$d
+                        AND ca.nb_site_id=sl.nb_site_id
+                        AND sl.nb_site_lang_enabled='T'
+                        AND cal.nb_language_id=sl.nb_language_id
+                        AND ca.nb_site_target_url_filter='R'
+                        AND length(cal.nb_site_target_lang_url)>0
+                        AND '%url\$s' REGEXP cal.nb_site_target_lang_url
+                      ORDER BY ca.nb_site_target_order ASC
+                      LIMIT 1",
+                    array('site_id' => $nb_site->getValue('nb_site_id'), 'url' => $target_url)
+                )
+
+                ??
+
+                CNabuSiteTarget::buildObjectFromSQL(
+                    "SELECT ca.*, cal.nb_language_id, cal.nb_site_target_lang_url
+                       FROM nb_site_target ca, nb_site_target_lang cal, nb_site_lang sl
+                      WHERE ca.nb_site_target_id = cal.nb_site_target_id
+                        AND ca.nb_site_id=%site_id\$d
+                        AND ca.nb_site_id=sl.nb_site_id
+                        AND sl.nb_site_lang_enabled='T'
+                        AND cal.nb_language_id=sl.nb_language_id
+                        AND ca.nb_site_target_url_filter='L'
+                        AND length(cal.nb_site_target_lang_url)>0
+                        AND '%url\$s' LIKE cal.nb_site_target_lang_url
+                      ORDER BY ca.nb_site_target_order ASC
+                      LIMIT 1",
+                    array('site_id' => $nb_site->getId(), 'url' => $target_url)
+                )
+            ;
+        }
 
         if ($retval !== null) {
             $retval->setSite($nb_site);

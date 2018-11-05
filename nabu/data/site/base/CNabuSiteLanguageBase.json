@@ -173,9 +173,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_site_lang_public_base_path": {
+            "name": "nb_site_lang_public_base_path",
+            "ordinal": "16",
+            "data_type": "tinytext",
+            "precision": null,
+            "type": "tinytext",
+            "default": null,
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_site_lang_default_target_url": {
             "name": "nb_site_lang_default_target_url",
-            "ordinal": "16",
+            "ordinal": "17",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -186,7 +197,7 @@
         },
         "nb_site_lang_page_not_found_target_url": {
             "name": "nb_site_lang_page_not_found_target_url",
-            "ordinal": "17",
+            "ordinal": "18",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -197,7 +208,7 @@
         },
         "nb_site_lang_login_target_url": {
             "name": "nb_site_lang_login_target_url",
-            "ordinal": "18",
+            "ordinal": "19",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -208,7 +219,7 @@
         },
         "nb_site_lang_login_redirection_target_url": {
             "name": "nb_site_lang_login_redirection_target_url",
-            "ordinal": "19",
+            "ordinal": "20",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -219,7 +230,7 @@
         },
         "nb_site_lang_logout_redirection_target_url": {
             "name": "nb_site_lang_logout_redirection_target_url",
-            "ordinal": "20",
+            "ordinal": "21",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -230,7 +241,7 @@
         },
         "nb_site_lang_login_max_fails_target_url": {
             "name": "nb_site_lang_login_max_fails_target_url",
-            "ordinal": "21",
+            "ordinal": "22",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -241,7 +252,7 @@
         },
         "nb_site_lang_alias_not_found_target_url": {
             "name": "nb_site_lang_alias_not_found_target_url",
-            "ordinal": "22",
+            "ordinal": "23",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -252,7 +263,7 @@
         },
         "nb_site_lang_alias_locked_target_url": {
             "name": "nb_site_lang_alias_locked_target_url",
-            "ordinal": "23",
+            "ordinal": "24",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
@@ -263,7 +274,7 @@
         },
         "nb_site_lang_policies_target_url": {
             "name": "nb_site_lang_policies_target_url",
-            "ordinal": "24",
+            "ordinal": "25",
             "data_type": "tinytext",
             "precision": null,
             "type": "tinytext",
