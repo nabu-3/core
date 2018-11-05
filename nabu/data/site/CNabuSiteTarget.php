@@ -106,9 +106,14 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
                 'nb_site_lang_public_base_path',
                 "SELECT *
                    FROM nb_site_lang
-                  WHERE length(nb_site_lang_public_base_path) > 0 
-                    AND instr('%url\$s', 1, nb_site_lang_public_base_lang)=1
-                  LIMIT 1"
+                  WHERE nb_site_id=%site_id\$d
+                    AND length(nb_site_lang_public_base_path) > 0
+                    AND instr('%url\$s', nb_site_lang_public_base_path)=1
+                  LIMIT 1",
+                array(
+                    'site_id' => $nb_site->getId(),
+                    'url' => $target_url
+                )
             );
 
             if (strlen($check_pbp) > 0) {
