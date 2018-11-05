@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/08/25 05:13:55 UTC
+ * Created: 2018/11/05 12:49:36 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -48,7 +48,7 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity Site stored in the storage named nb_site.
- * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
+ * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @since 3.0.0 Surface
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
@@ -747,19 +747,19 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Published attribute value
-     * @return mixed Returns the Site Published value
+     * @return string Returns the Site Published value
      */
-    public function getPublished()
+    public function getPublished() : string
     {
         return $this->getValue('nb_site_published');
     }
 
     /**
      * Sets the Site Published attribute value.
-     * @param mixed $published New value for attribute
+     * @param string $published New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setPublished($published) : CNabuDataObject
+    public function setPublished(string $published = "F") : CNabuDataObject
     {
         if ($published === null) {
             throw new ENabuCoreException(
@@ -773,20 +773,47 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     }
 
     /**
-     * Get Site Default Target Use URI attribute value
-     * @return mixed Returns the Site Default Target Use URI value
+     * Get Site Public Base Path Enabled attribute value
+     * @return string Returns the Site Public Base Path Enabled value
      */
-    public function getDefaultTargetUseURI()
+    public function getPublicBasePathEnabled() : string
+    {
+        return $this->getValue('nb_site_public_base_path_enabled');
+    }
+
+    /**
+     * Sets the Site Public Base Path Enabled attribute value.
+     * @param string $public_base_path_enabled New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setPublicBasePathEnabled(string $public_base_path_enabled = "F") : CNabuDataObject
+    {
+        if ($public_base_path_enabled === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$public_base_path_enabled")
+            );
+        }
+        $this->setValue('nb_site_public_base_path_enabled', $public_base_path_enabled);
+        
+        return $this;
+    }
+
+    /**
+     * Get Site Default Target Use URI attribute value
+     * @return string Returns the Site Default Target Use URI value
+     */
+    public function getDefaultTargetUseURI() : string
     {
         return $this->getValue('nb_site_default_target_use_uri');
     }
 
     /**
      * Sets the Site Default Target Use URI attribute value.
-     * @param mixed $default_target_use_uri New value for attribute
+     * @param string $default_target_use_uri New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setDefaultTargetUseURI($default_target_use_uri) : CNabuDataObject
+    public function setDefaultTargetUseURI(string $default_target_use_uri = "N") : CNabuDataObject
     {
         if ($default_target_use_uri === null) {
             throw new ENabuCoreException(
@@ -849,19 +876,19 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Page Not Found Target Use URI attribute value
-     * @return mixed Returns the Site Page Not Found Target Use URI value
+     * @return string Returns the Site Page Not Found Target Use URI value
      */
-    public function getPageNotFoundTargetUseURI()
+    public function getPageNotFoundTargetUseURI() : string
     {
         return $this->getValue('nb_site_page_not_found_target_use_uri');
     }
 
     /**
      * Sets the Site Page Not Found Target Use URI attribute value.
-     * @param mixed $page_not_found_target_use_uri New value for attribute
+     * @param string $page_not_found_target_use_uri New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setPageNotFoundTargetUseURI($page_not_found_target_use_uri) : CNabuDataObject
+    public function setPageNotFoundTargetUseURI(string $page_not_found_target_use_uri = "N") : CNabuDataObject
     {
         if ($page_not_found_target_use_uri === null) {
             throw new ENabuCoreException(
@@ -924,7 +951,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Login Target Use URI attribute value
-     * @return mixed Returns the Site Login Target Use URI value
+     * @return null|string Returns the Site Login Target Use URI value
      */
     public function getLoginTargetUseURI()
     {
@@ -933,10 +960,10 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Login Target Use URI attribute value.
-     * @param mixed $login_target_use_uri New value for attribute
+     * @param string|null $login_target_use_uri New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLoginTargetUseURI($login_target_use_uri) : CNabuDataObject
+    public function setLoginTargetUseURI(string $login_target_use_uri = "N") : CNabuDataObject
     {
         $this->setValue('nb_site_login_target_use_uri', $login_target_use_uri);
         
@@ -966,7 +993,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Login Redirection Target Use URI attribute value
-     * @return mixed Returns the Site Login Redirection Target Use URI value
+     * @return null|string Returns the Site Login Redirection Target Use URI value
      */
     public function getLoginRedirectionTargetUseURI()
     {
@@ -975,10 +1002,10 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Login Redirection Target Use URI attribute value.
-     * @param mixed $login_redirection_target_use_uri New value for attribute
+     * @param string|null $login_redirection_target_use_uri New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLoginRedirectionTargetUseURI($login_redirection_target_use_uri) : CNabuDataObject
+    public function setLoginRedirectionTargetUseURI(string $login_redirection_target_use_uri = "N") : CNabuDataObject
     {
         $this->setValue('nb_site_login_redirection_target_use_uri', $login_redirection_target_use_uri);
         
@@ -1008,7 +1035,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Logout Redirection Target Use URI attribute value
-     * @return mixed Returns the Site Logout Redirection Target Use URI value
+     * @return null|string Returns the Site Logout Redirection Target Use URI value
      */
     public function getLogoutRedirectionTargetUseURI()
     {
@@ -1017,10 +1044,10 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Logout Redirection Target Use URI attribute value.
-     * @param mixed $logout_redirection_target_use_uri New value for attribute
+     * @param string|null $logout_redirection_target_use_uri New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLogoutRedirectionTargetUseURI($logout_redirection_target_use_uri) : CNabuDataObject
+    public function setLogoutRedirectionTargetUseURI(string $logout_redirection_target_use_uri = "N") : CNabuDataObject
     {
         $this->setValue('nb_site_logout_redirection_target_use_uri', $logout_redirection_target_use_uri);
         
@@ -1050,19 +1077,19 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Login Max Fails Target Use URI attribute value
-     * @return mixed Returns the Site Login Max Fails Target Use URI value
+     * @return string Returns the Site Login Max Fails Target Use URI value
      */
-    public function getLoginMaxFailsTargetUseURI()
+    public function getLoginMaxFailsTargetUseURI() : string
     {
         return $this->getValue('nb_site_login_max_fails_target_use_uri');
     }
 
     /**
      * Sets the Site Login Max Fails Target Use URI attribute value.
-     * @param mixed $login_max_fails_target_use_uri New value for attribute
+     * @param string $login_max_fails_target_use_uri New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setLoginMaxFailsTargetUseURI($login_max_fails_target_use_uri) : CNabuDataObject
+    public function setLoginMaxFailsTargetUseURI(string $login_max_fails_target_use_uri = "N") : CNabuDataObject
     {
         if ($login_max_fails_target_use_uri === null) {
             throw new ENabuCoreException(
@@ -1119,19 +1146,19 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Alias Not Found Target Use URI attribute value
-     * @return mixed Returns the Site Alias Not Found Target Use URI value
+     * @return string Returns the Site Alias Not Found Target Use URI value
      */
-    public function getAliasNotFoundTargetUseURI()
+    public function getAliasNotFoundTargetUseURI() : string
     {
         return $this->getValue('nb_site_alias_not_found_target_use_uri');
     }
 
     /**
      * Sets the Site Alias Not Found Target Use URI attribute value.
-     * @param mixed $alias_not_found_target_use_uri New value for attribute
+     * @param string $alias_not_found_target_use_uri New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAliasNotFoundTargetUseURI($alias_not_found_target_use_uri) : CNabuDataObject
+    public function setAliasNotFoundTargetUseURI(string $alias_not_found_target_use_uri = "N") : CNabuDataObject
     {
         if ($alias_not_found_target_use_uri === null) {
             throw new ENabuCoreException(
@@ -1167,19 +1194,19 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Alias Locked Target Use URI attribute value
-     * @return mixed Returns the Site Alias Locked Target Use URI value
+     * @return string Returns the Site Alias Locked Target Use URI value
      */
-    public function getAliasLockedTargetUseURI()
+    public function getAliasLockedTargetUseURI() : string
     {
         return $this->getValue('nb_site_alias_locked_target_use_uri');
     }
 
     /**
      * Sets the Site Alias Locked Target Use URI attribute value.
-     * @param mixed $alias_locked_target_use_uri New value for attribute
+     * @param string $alias_locked_target_use_uri New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setAliasLockedTargetUseURI($alias_locked_target_use_uri) : CNabuDataObject
+    public function setAliasLockedTargetUseURI(string $alias_locked_target_use_uri = "N") : CNabuDataObject
     {
         if ($alias_locked_target_use_uri === null) {
             throw new ENabuCoreException(
@@ -1215,19 +1242,19 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Policies Target Use URI attribute value
-     * @return mixed Returns the Site Policies Target Use URI value
+     * @return string Returns the Site Policies Target Use URI value
      */
-    public function getPoliciesTargetUseURI()
+    public function getPoliciesTargetUseURI() : string
     {
         return $this->getValue('nb_site_policies_target_use_uri');
     }
 
     /**
      * Sets the Site Policies Target Use URI attribute value.
-     * @param mixed $policies_target_use_uri New value for attribute
+     * @param string $policies_target_use_uri New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setPoliciesTargetUseURI($policies_target_use_uri) : CNabuDataObject
+    public function setPoliciesTargetUseURI(string $policies_target_use_uri = "N") : CNabuDataObject
     {
         if ($policies_target_use_uri === null) {
             throw new ENabuCoreException(
@@ -1338,7 +1365,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Use Smarty attribute value
-     * @return mixed Returns the Site Use Smarty value
+     * @return null|string Returns the Site Use Smarty value
      */
     public function getUseSmarty()
     {
@@ -1347,10 +1374,10 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Use Smarty attribute value.
-     * @param mixed $use_smarty New value for attribute
+     * @param string|null $use_smarty New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUseSmarty($use_smarty) : CNabuDataObject
+    public function setUseSmarty(string $use_smarty = "F") : CNabuDataObject
     {
         $this->setValue('nb_site_use_smarty', $use_smarty);
         
@@ -1380,7 +1407,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Smarty Debugging attribute value
-     * @return mixed Returns the Site Smarty Debugging value
+     * @return null|string Returns the Site Smarty Debugging value
      */
     public function getSmartyDebugging()
     {
@@ -1389,10 +1416,10 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Sets the Site Smarty Debugging attribute value.
-     * @param mixed $smarty_debugging New value for attribute
+     * @param string|null $smarty_debugging New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setSmartyDebugging($smarty_debugging) : CNabuDataObject
+    public function setSmartyDebugging(string $smarty_debugging = "F") : CNabuDataObject
     {
         $this->setValue('nb_site_smarty_debugging', $smarty_debugging);
         
@@ -1527,19 +1554,19 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site HTTP Support attribute value
-     * @return mixed Returns the Site HTTP Support value
+     * @return string Returns the Site HTTP Support value
      */
-    public function getHTTPSupport()
+    public function getHTTPSupport() : string
     {
         return $this->getValue('nb_site_http_support');
     }
 
     /**
      * Sets the Site HTTP Support attribute value.
-     * @param mixed $http_support New value for attribute
+     * @param string $http_support New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHTTPSupport($http_support) : CNabuDataObject
+    public function setHTTPSupport(string $http_support = "F") : CNabuDataObject
     {
         if ($http_support === null) {
             throw new ENabuCoreException(
@@ -1554,19 +1581,19 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site HTTPS Support attribute value
-     * @return mixed Returns the Site HTTPS Support value
+     * @return string Returns the Site HTTPS Support value
      */
-    public function getHTTPSSupport()
+    public function getHTTPSSupport() : string
     {
         return $this->getValue('nb_site_https_support');
     }
 
     /**
      * Sets the Site HTTPS Support attribute value.
-     * @param mixed $https_support New value for attribute
+     * @param string $https_support New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setHTTPSSupport($https_support) : CNabuDataObject
+    public function setHTTPSSupport(string $https_support = "F") : CNabuDataObject
     {
         if ($https_support === null) {
             throw new ENabuCoreException(
@@ -1623,19 +1650,19 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Use AWStats attribute value
-     * @return mixed Returns the Site Use AWStats value
+     * @return string Returns the Site Use AWStats value
      */
-    public function getUseAWStats()
+    public function getUseAWStats() : string
     {
         return $this->getValue('nb_site_use_awstats');
     }
 
     /**
      * Sets the Site Use AWStats attribute value.
-     * @param mixed $use_awstats New value for attribute
+     * @param string $use_awstats New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setUseAWStats($use_awstats) : CNabuDataObject
+    public function setUseAWStats(string $use_awstats = "F") : CNabuDataObject
     {
         if ($use_awstats === null) {
             throw new ENabuCoreException(
@@ -1866,20 +1893,26 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site WSearch Enabled attribute value
-     * @return mixed Returns the Site WSearch Enabled value
+     * @return string Returns the Site WSearch Enabled value
      */
-    public function getWSearchEnabled()
+    public function getWSearchEnabled() : string
     {
         return $this->getValue('nb_site_wsearch_enabled');
     }
 
     /**
      * Sets the Site WSearch Enabled attribute value.
-     * @param mixed $wsearch_enabled New value for attribute
+     * @param string $wsearch_enabled New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setWSearchEnabled($wsearch_enabled) : CNabuDataObject
+    public function setWSearchEnabled(string $wsearch_enabled = "F") : CNabuDataObject
     {
+        if ($wsearch_enabled === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$wsearch_enabled")
+            );
+        }
         $this->setValue('nb_site_wsearch_enabled', $wsearch_enabled);
         
         return $this;
@@ -1983,20 +2016,26 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
 
     /**
      * Get Site Enable Session Strict Policies attribute value
-     * @return null|string Returns the Site Enable Session Strict Policies value
+     * @return string Returns the Site Enable Session Strict Policies value
      */
-    public function getEnableSessionStrictPolicies()
+    public function getEnableSessionStrictPolicies() : string
     {
         return $this->getValue('nb_site_enable_session_strict_policies');
     }
 
     /**
      * Sets the Site Enable Session Strict Policies attribute value.
-     * @param string|null $enable_session_strict_policies New value for attribute
+     * @param string $enable_session_strict_policies New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
     public function setEnableSessionStrictPolicies(string $enable_session_strict_policies = "F") : CNabuDataObject
     {
+        if ($enable_session_strict_policies === null) {
+            throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_NULL_VALUE_NOT_ALLOWED_IN,
+                    array("\$enable_session_strict_policies")
+            );
+        }
         $this->setValue('nb_site_enable_session_strict_policies', $enable_session_strict_policies);
         
         return $this;

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/08/25 05:14:32 UTC
+ * Created: 2018/11/05 12:49:52 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -35,7 +35,7 @@ use \SimpleXMLElement;
 
 /**
  * Class to manage the Site Static Content List as a XML branch.
- * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
+ * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
  * @package \nabu\xml\site\base

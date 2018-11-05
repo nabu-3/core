@@ -63,6 +63,9 @@ class CNabuSite extends CNabuSiteBase
     const SITE_PUBLISHED = 'T';
     const SITE_RETIRED = 'F';
 
+    const ENABLE_PUBLIC_BASE_PATH = 'T';
+    const DISABLE_PUBLIC_BASE_PATH = 'F';
+
     const ENABLE_HTTP_SUPPORT = 'T';
     const DISABLE_HTTP_SUPPORT = 'F';
 
@@ -517,6 +520,15 @@ class CNabuSite extends CNabuSiteBase
     {
         return (($this->isValueNumeric('nb_site_id') || $this->isValueGUID('nb_site_id')) &&
                 $this->isValueEqualThan('nb_site_published', 'T'));
+    }
+
+    /**
+     * Check if Public Base Path is enabled or not.
+     * @return bool Returns true if Public Base Path is enabled.
+     */
+    public function isPublicBasePathEnabled()
+    {
+        return $this->getPublicBasePathEnabled() === CNabuSite::ENABLE_PUBLIC_BASE_PATH;
     }
 
     public function getDefaultLanguage($force = false)

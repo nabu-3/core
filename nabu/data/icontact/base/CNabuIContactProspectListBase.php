@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/08/25 05:15:07 UTC
+ * Created: 2018/11/05 12:50:07 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -31,7 +31,7 @@ use \nabu\data\icontact\CNabuIContactProspect;
 
 /**
  * Class to manage a list of iContact Prospect instances.
- * @author Rafael Gutiérrez Martínez <rgutierrez@nabu-3.com>
+ * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\icontact\base
  */
