@@ -60,6 +60,34 @@ class CNabuLanguage extends CNabuLanguageBase
     }
 
     /**
+     * Search a Language using his ISO-639-1 code.
+     * @param string $ISO639_1 The ISO code to request.
+     * @return CNabuLanguage|null Returns a valid instance if the code is found or null if not.
+     */
+    public static function findByISO6391(string $ISO639_1)
+    {
+        return forward_static_call(
+            array(get_called_class(), 'buildObjectFromSQL'),
+            "SELECT * FROM nb_language WHERE nb_language_iso639_1='%iso\$s'",
+            array('iso' => $ISO639_1)
+        );
+    }
+
+    /**
+     * Search a Language using his ISO-639-2 code.
+     * @param string $ISO639_2 The ISO code to request.
+     * @return CNabuLanguage|null Returns a valid instance if the code is found or null if not.
+     */
+    public static function findByISO6392(string $ISO639_2)
+    {
+        return forward_static_call(
+            array(get_called_class(), 'buildObjectFromSQL'),
+            "SELECT * FROM nb_language WHERE nb_language_iso639_2='%iso\$s'",
+            array('iso' => $ISO639_2)
+        );
+    }
+
+    /**
      * Get natural languages list in the storage where the field 'nb_language_id' is the index, and each
      * value is an instance of class CNabuLanguageBase or inherited.
      * @return mixed Returns and array with all items.
