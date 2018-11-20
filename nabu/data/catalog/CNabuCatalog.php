@@ -262,6 +262,67 @@ class CNabuCatalog extends CNabuCatalogBase
     }
 
     /**
+     * Search a set of Items where the root items are in $roots arrays. If $nested is true, then search in the entire
+     * branch of each root.
+     * @param string $key The key to find.
+     * @param array|null $roots Roots ID collection.
+     * @param int $deep If $deep = 0 then the search is performed in the entire branch or tree, else if $deep > 0
+     * then the search is applied only to the number of sublevels contained in $deep.
+     * E.g. $deep = 1 looks on for primary children, $deep = 2 looks for childrens and grandchildrens.
+     * @return CNabuCatalogItem Returns the list of Items in the Id collection with their respective branches to
+     * reach all located Items.
+     */
+    public function findItemByKey(string $key, array $roots = null, $deep = 0)
+    {
+        if (is_array($roots) && count($roots) > 0) {
+            $use_roots = implode(', ', $roots);
+            if (!preg_match('/^[[:digit:]]+(\s*,\s*[[:digit:]]+)*$/', $use_roots)) {
+                throw new ENabuCoreException(
+                    ENabuCoreException::ERROR_UNEXPECTED_PARAM_VALUE,
+                    array('$roots', print_r($roots, true))
+                );
+            }
+            $query = 'select ci2.* '
+                     . 'from nb_catalog_item ci1, nb_catalog_item ci2 '
+                    . 'where ci1.nb_catalog_id=%catalog_id$d '
+                      . "and ci1.nb_catalog_item_id in ($use_roots) "
+                      . 'and ci2.nb_catalog_id=ci1.nb_catalog_id '
+                      . 'and ci2.nb_catalog_item_id=cil2.nb_catalog_item_id '
+                      . 'and ((ci1.nb_catalog_item_next_sibling is null and ci2.nb_catalog_item_order > ci1.nb_catalog_item_order) or '
+                           . '(ci2.nb_catalog_item_order between (ci1.nb_catalog_item_order + 1) and (ci1.nb_catalog_item_next_sibling - 1)))'
+            ;
+            $params = array(
+                'catalog_id' => $this->getId()
+            );
+            if ($deep > 0) {
+                $query .= 'and ci2.nb_catalog_item_level between (ci1.nb_catalog_item_level + 1) and (ci1.nb_catalog_item_level + %deep$d) ';
+                $params['deep'] = $deep;
+            }
+        } else {
+            $query = 'select ci2.* '
+                     . 'from nb_catalog_item ci2 '
+                    . 'where ci2.nb_catalog_id=%catalog_id$d '
+            ;
+            $params = array(
+                'catalog_id' => $this->getId()
+            );
+            if ($deep > 0) {
+                $query .= 'and ci2.nb_catalog_item_level between 1 and %deep$d ';
+                $params['deep'] = $deep;
+            }
+        }
+
+        $query .= 'and ci2.nb_catalog_item_key=\'%key$s\'';
+        $params['key'] = $key;
+
+        if (is_object($retval = CNabuCatalogItem::buildObjectFromSQL($query, $params))) {
+            $retval->setCatalog($this);
+        }
+
+        return $retval;
+    }
+
+    /**
      * Gets all taxonomy instances of the Catalog.
      * @param bool $force If true, then reloads the list from the storage.
      * @return CNabuCatalogTaxonomyList Returns the list of taxonomy instances.
