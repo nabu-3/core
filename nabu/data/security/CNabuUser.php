@@ -19,6 +19,8 @@
  */
 
 namespace nabu\data\security;
+use nabu\core\CNabuEngine;
+
 use nabu\data\CNabuDataObject;
 use nabu\data\customer\CNabuCustomer;
 use nabu\data\interfaces\INabuId;
@@ -381,40 +383,58 @@ class CNabuUser extends CNabuUserBase implements INabuId
     /**
      * Gets a filtered list of User instances represented as an array. Params allows the capability of select
      * a subset of fields, order by concrete fields, or truncate the list by a number of rows starting in an offset.
-     * @param mixed $nb_customer Customer instance, object containing a Customer Id field or an Id.
+     * @param CNabuCustomer $nb_customer Customer instance, object containing a Customer Id field or an Id.
      * @param string $q Query string to filter results using a context index.
-     * @param string|array $fields List of fields to put in the results.
+     * @param string|array|null $fields List of fields to put in the results or null for all fields.
+     * @param string|array $fulltext_fields List of fields to use in fulltext search.
      * @param string|array $order List of fields to order the results. Each field can be suffixed with "ASC" or "DESC"
      * to determine the short order
      * @param int $offset Offset of first row in the results having the first row at offset 0.
      * @param int $num_items Number of continue rows to get as maximum in the results.
+     * @param int|array|null $sites List of site ids to match or null to match all sites.
+     * @param int|array|null $roles List of role ids to match or null to match all roles.
+     * @param int|array|null $exclude_roles List of roles to exclude or null to do not exclude roles.
      * @return array Returns an array with all rows found using the criteria.
      * @throws \nabu\core\exceptions\ENabuCoreException Raises an exception if $fields or $order have invalid values.
      */
-    /*
-    static public function getFilteredUserList(
-        $nb_customer, $q = null, $fields = null, $order = null, $offset = 0, $num_items = 0
+    static public function getFulltextUserList(
+        CNabuCustomer $nb_customer,
+        $q = null,
+        $fields = null,
+        $fulltext_fields = null,
+        $order = null,
+        int $offset = 0,
+        int $num_items = 0,
+        $sites = null,
+        $roles = null,
+        $exclude_roles = null
     ) {
-        $nb_customer_id = nb_getMixedValue($nb_customer, NABU_CUSTOMER_FIELD_ID);
-        if (is_numeric($nb_customer_id)) {
+        $nb_customer_id = $nb_customer->getId();
+        if ($nb_customer->isFetched() && is_numeric($nb_customer_id)) {
             $fields_part = nb_prefixFieldList(CNabuUser::getStorageName(), $fields, false, true);
-            $order_part = nb_prefixFieldList(CNabuUser::getStorageName(), $fields);
+            $fulltext_part = nb_prefixFieldList(CNabuUser::getStorageName(), $fulltext_fields);
+            $order_part = nb_prefixFieldList(CNabuUser::getStorageName(), $order);
+            $roles_part = (is_numeric($roles) ? $roles : (is_array($roles) ? implode(', ', $roles) : false));
+            $exc_roles_part = (is_numeric($exclude_roles) ? $exclude_roles : (is_array($exclude_roles) ? implode(', ', $exclude_roles) : false));
+            $limit_part = ($num_items !== 0 ? ($offset > 0 ? $offset . ', ' : '') . $num_items : false);
 
-            if ($num_items !== 0) {
-                $limit_part = ($offset > 0 ? $offset . ', ' : '') . $num_items;
-            } else {
-                $limit_part = false;
-            }
-
-            $nb_user_list = CNabuEngine::getEngine()->getMainDB()->getQueryAsArray(
-                "select " . ($fields_part ? $fields_part . ' ' : '* ')
-                . 'from nb_user '
-               . 'where ' . NABU_CUSTOMER_FIELD_ID . '=%cust_id$d '
+            //$nb_user_list = CNabuEngine::getEngine()->getMainDB()->getQueryAsArray(
+            $nb_user_list = CNabuUser::buildObjectListFromSQL(
+                NABU_USER_FIELD_ID,
+                "SELECT " . ($fields_part ? $fields_part . ' ' : '* ')
+                . 'FROM ' . CNabuUser::getStorageName() . ' u'
+                . (is_string($exc_roles_part) && strlen($exc_roles_part) > 0 ? ', nb_site_user su, nb_role r ' : ' ')
+               . 'WHERE u.' . NABU_CUSTOMER_FIELD_ID . '=%cust_id$d '
+                . (is_string($exc_roles_part) && strlen($exc_roles_part) ? " AND u.nb_user_id=su.nb_user_id AND su.nb_role_id=r.nb_role_id AND su.nb_role_id NOT IN ($exc_roles_part) " : '')
+                . (strlen($fulltext_part) > 0 && is_string($q) && strlen($q) > 0 ? "AND MATCH($fulltext_part) AGAINST('%against\$s' IN BOOLEAN MODE) " : '')
                 . ($order_part ? "order by $order_part " : '')
                 . ($limit_part ? "limit $limit_part" : ''),
                 array(
-                    'cust_id' => $nb_customer_id
-                )
+                    'cust_id' => $nb_customer_id,
+                    'against' => $q
+                ),
+                $nb_customer,
+                true
             );
         } else {
             $nb_user_list = null;
@@ -422,7 +442,6 @@ class CNabuUser extends CNabuUserBase implements INabuId
 
         return $nb_user_list;
     }
-    */
 
     /**
      *  _   _                  ____
