@@ -433,8 +433,7 @@ class CNabuUser extends CNabuUserBase implements INabuId
                     'cust_id' => $nb_customer_id,
                     'against' => $q
                 ),
-                $nb_customer,
-                true
+                $nb_customer
             );
         } else {
             $nb_user_list = null;
