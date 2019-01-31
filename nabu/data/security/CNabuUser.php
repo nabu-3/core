@@ -394,6 +394,7 @@ class CNabuUser extends CNabuUserBase implements INabuId
      * @param int|array|null $sites List of site ids to match or null to match all sites.
      * @param int|array|null $roles List of role ids to match or null to match all roles.
      * @param int|array|null $exclude_roles List of roles to exclude or null to do not exclude roles.
+     * @param string|array $status List of possible status of users.
      * @return array Returns an array with all rows found using the criteria.
      * @throws \nabu\core\exceptions\ENabuCoreException Raises an exception if $fields or $order have invalid values.
      */
@@ -407,7 +408,8 @@ class CNabuUser extends CNabuUserBase implements INabuId
         int $num_items = 0,
         $sites = null,
         $roles = null,
-        $exclude_roles = null
+        $exclude_roles = null,
+        $status = 'T'
     ) {
         $nb_customer_id = $nb_customer->getId();
         if ($nb_customer->isFetched() && is_numeric($nb_customer_id)) {
@@ -416,6 +418,7 @@ class CNabuUser extends CNabuUserBase implements INabuId
             $order_part = nb_prefixFieldList(CNabuUser::getStorageName(), $order);
             $roles_part = (is_numeric($roles) ? $roles : (is_array($roles) ? implode(', ', $roles) : false));
             $exc_roles_part = (is_numeric($exclude_roles) ? $exclude_roles : (is_array($exclude_roles) ? implode(', ', $exclude_roles) : false));
+            $status_part = (is_string($status) ? "'$status'" : (is_array($status) ? "'" . implode("', '", $status) . "'" : false));
             $limit_part = ($num_items !== 0 ? ($offset > 0 ? $offset . ', ' : '') . $num_items : false);
 
             //$nb_user_list = CNabuEngine::getEngine()->getMainDB()->getQueryAsArray(
@@ -423,9 +426,11 @@ class CNabuUser extends CNabuUserBase implements INabuId
                 NABU_USER_FIELD_ID,
                 "SELECT " . ($fields_part ? $fields_part . ' ' : '* ')
                 . 'FROM ' . CNabuUser::getStorageName() . ' u'
-                . (is_string($exc_roles_part) && strlen($exc_roles_part) > 0 ? ', nb_site_user su, nb_role r ' : ' ')
+                . ((is_string($exc_roles_part) && strlen($exc_roles_part) > 0) || (is_string($roles_part) && strlen($exc_roles_part) > 0) ? ', nb_site_user su, nb_role r ' : ' ')
                . 'WHERE u.' . NABU_CUSTOMER_FIELD_ID . '=%cust_id$d '
-                . (is_string($exc_roles_part) && strlen($exc_roles_part) ? " AND u.nb_user_id=su.nb_user_id AND su.nb_role_id=r.nb_role_id AND su.nb_role_id NOT IN ($exc_roles_part) " : '')
+                 . "AND u.nb_user_validation_status IN ($status_part) "
+                . (is_string($roles_part) && strlen($roles_part) > 0 ? " AND u.nb_user_id=su.nb_user_id AND su.nb_role_id=r.nb_role_id AND su.nb_role_id IN ($roles_part) " : '')
+                . (is_string($exc_roles_part) && strlen($exc_roles_part) > 0 ? " AND u.nb_user_id=su.nb_user_id AND su.nb_role_id=r.nb_role_id AND su.nb_role_id NOT IN ($exc_roles_part) " : '')
                 . (strlen($fulltext_part) > 0 && is_string($q) && strlen($q) > 0 ? "AND MATCH($fulltext_part) AGAINST('%against\$s' IN BOOLEAN MODE) " : '')
                 . ($order_part ? "order by $order_part " : '')
                 . ($limit_part ? "limit $limit_part" : ''),
@@ -433,8 +438,7 @@ class CNabuUser extends CNabuUserBase implements INabuId
                     'cust_id' => $nb_customer_id,
                     'against' => $q
                 ),
-                $nb_customer,
-                true
+                $nb_customer
             );
         } else {
             $nb_user_list = null;
