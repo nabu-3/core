@@ -814,6 +814,27 @@ class CNabuCustomer extends CNabuCustomerBase
                 $retval = $nb_user;
             }
         }
+
+        return $retval;
+    }
+
+    /**
+     * Get a User instance owned by this Customer and identified by his email attribute.
+     * @param string $email A email string to looking for.
+     * @return CNabuUser|null Returns a User instance if found or false if not.
+     */
+    public function getUserByEMail(string $email)
+    {
+        $retval = null;
+
+        if (strlen($email) > 0) {
+            $nb_user = CNabuUser::findByEMail($this, $email);
+            if ($nb_user instanceof CNabuUser && $nb_user->validateCustomer($this)) {
+                $nb_user->setCustomer($this);
+                $retval = $nb_user;
+            }
+        }
+
         return $retval;
     }
 
