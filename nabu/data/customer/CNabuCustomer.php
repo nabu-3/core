@@ -801,7 +801,7 @@ class CNabuCustomer extends CNabuCustomerBase
     /**
      * Get a User instance owned by this Customer and identified by his login attribute.
      * @param string $login A login string to looking for.
-     * @return CNabuUser|null Returns a User instance if found or false if not.
+     * @return CNabuUser|null Returns a User instance if found or null if not.
      */
     public function getUserByLogin(string $login)
     {
