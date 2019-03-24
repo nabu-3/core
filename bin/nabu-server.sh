@@ -1,6 +1,6 @@
 #!/bin/sh
 echo ========================================================================
-echo nabu-3 - Install Tool
+echo nabu-3 - HTTP Server
 echo ========================================================================
 echo Copyright 2009-2011 Rafael Gutierrez Martinez
 echo Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -23,8 +23,8 @@ echo
 # This variable defines the path for config files. You can change this value.
 # When nabu-3 install script runs, he creates this path if not exists.
 NABU_ETC_PATH=/etc/opt/nabu-3.conf.d
-INSTALL_PATH=`realpath $0`
-INSTALL_PATH=`dirname $INSTALL_PATH`
+NABU_SCRIPT_PATH=`realpath $0`
+NABU_SCRIPT_PATH=`dirname $NABU_SCRIPT_PATH`
 
 if [ -d ${NABU_ETC_PATH} ] && [ -f ${NABU_ETC_PATH}/nabu-3.conf ] ; then
     source ${NABU_ETC_PATH}/nabu-3.conf
@@ -33,8 +33,6 @@ else
     exit 1
 fi
 
-if [ -f ${INSTALL_PATH}/inc/messaging-daemon.php ] ; then
-    php ${PHP_PARAMS} ${INSTALL_PATH}/inc/messaging-daemon.php "$@"
-else
-    echo Execution error: messaging-daemon.php script not found.
-fi
+echo $0
+echo Running from ${NABU_SCRIPT_PATH}
+php -S localhost:8000 ${NABU_SCRIPT_PATH}/inc/router.php -d nabu_server_mode=http
