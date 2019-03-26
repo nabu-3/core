@@ -21,6 +21,7 @@
 
 namespace nabu\provider\exceptions;
 use nabu\core\exceptions\ENabuException;
+use nabu\core\exceptions\ENabuCoreException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -84,6 +85,10 @@ class ENabuProviderException extends ENabuException
 
     public function __construct($code, $values = null)
     {
-        parent::__construct(ENabuProviderException::$error_messages[$code], $code, $values);
+        if (array_key_exists($code, ENabuProviderException::$error_messages)) {
+            parent::__construct(ENabuProviderException::$error_messages[$code], $code, $values);
+        } else {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_UNEXPECTED_EXCEPTION_CODE, array($code));
+        }
     }
 }

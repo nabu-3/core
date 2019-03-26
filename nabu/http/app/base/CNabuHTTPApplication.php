@@ -33,7 +33,7 @@ use nabu\http\CNabuHTTPRequest;
 use nabu\http\CNabuHTTPResponse;
 use nabu\http\CNabuHTTPRedirection;
 use nabu\http\exceptions\ENabuRedirectionException;
-use nabu\http\interfaces\INabuHTTPServer;
+use nabu\http\interfaces\INabuHTTPServerInterface;
 use nabu\http\interfaces\INabuHTTPResponseRender;
 use nabu\http\managers\CNabuModulesManager;
 use nabu\http\managers\CNabuHTTPManagerList;
@@ -57,7 +57,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
 {
     /**
      * nabu-3 running HTTP Server instance
-     * @var INabuHTTPServer
+     * @var INabuHTTPServerInterface
      */
     private $nb_http_server = null;
     /**
@@ -130,7 +130,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
     final public function run()
     {
         $this->nb_http_server = $this->nb_engine->getHTTPServer();
-        if (!($this->nb_http_server instanceof INabuHTTPServer)) {
+        if (!($this->nb_http_server instanceof INabuHTTPServerInterface)) {
             throw new ENabuCoreException(ENabuCoreException::ERROR_HTTP_SERVER_NOT_FOUND);
         }
 
@@ -203,7 +203,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
 
     /**
      * Gets the Nabu HTTP Server active instance.
-     * @return INabuHTTPServer Returns the Nabu HTTP Server instance or null if not setted.
+     * @return INabuHTTPServerInterface Returns the Nabu HTTP Server instance or null if not setted.
      */
     public function getHTTPServer()
     {

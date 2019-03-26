@@ -19,41 +19,30 @@
  *  limitations under the License.
  */
 
-namespace nabu\provider\adapters;
-use nabu\data\CNabuDataObjectList;
-use nabu\data\customer\CNabuCustomer;
-use nabu\data\customer\traits\TNabuCustomerChild;
+namespace nabu\http\interfaces;
+
+use nabu\http\exceptions\ENabuHTTPException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\provider\adapters
+ * @package \nabu\http\interfaces
  */
-abstract class CNabuProviderInterfaceFactoryListAdapter extends CNabuDataObjectList
+interface INabuHTTPServerModule
 {
-    use TNabuCustomerChild;
-
-    public function __construct(CNabuCustomer $nb_customer = null)
-    {
-        parent::__construct('nb_interface_id');
-        if ($nb_customer !== null) {
-            $this->setCustomer($nb_customer);
-        }
-    }
-
-    protected function createSecondaryIndexes()
-    {
-    }
+    /**
+     * Create a HTTP Server Interface to manage a HTTP Server.
+     * @param string $class_name Class name to be instantiated.
+     * @return INabuHTTPServerInterface Returns a valid instance if $name is a valid name.
+     * @throws ENabuHTTPException Raises an exception if the interface name is invalid.
+     */
+    public function createHTTPServerInterface(string $class_name) : INabuHTTPServerInterface;
 
     /**
-     * Always returns false.
-     * @param string $key Id of the instance to unserialize.
-     * @param string $index Secondary index to be used if needed.
-     * @return bool Always returns false.
+     * This method is called to finish the use of a Render Interface instance.
+     * @param INabuHTTPServerInterface $interface Interface instance to be released.
+     * @throws ENabuHTTPException Raises an exception if $interface is not a candidate to be released.
      */
-    protected function acquireItem($key, $index = false)
-    {
-        return false;
-    }
+    public function releaseHTTPServerInterface(INabuHTTPServerInterface $interface);
 }

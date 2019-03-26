@@ -20,6 +20,7 @@
  */
 
 namespace nabu\core;
+use Closure;
 use Exception;
 use nabu\core\CNabuOS;
 use nabu\core\CNabuObject;
@@ -40,7 +41,12 @@ use nabu\data\site\builtin\CNabuBuiltInSite;
 use nabu\data\site\builtin\CNabuBuiltInSiteAlias;
 use nabu\db\exceptions\ENabuDBException;
 use nabu\db\interfaces\INabuDBConnector;
-use nabu\http\interfaces\INabuHTTPServer;
+
+use nabu\http\descriptors\CNabuHTTPServerInterfaceDescriptor;
+
+use nabu\http\interfaces\INabuHTTPServerInterface;
+use nabu\http\managers\CNabuHTTPServerPoolManager;
+
 use nabu\messaging\exceptions\ENabuMessagingException;
 use nabu\messaging\managers\CNabuMessagingPoolManager;
 use nabu\provider\CNabuProviderFactory;
@@ -50,7 +56,6 @@ use nabu\provider\exceptions\ENabuProviderException;
 use nabu\provider\interfaces\INabuProviderManager;
 use nabu\render\exceptions\ENabuRenderException;
 use nabu\render\managers\CNabuRenderPoolManager;
-use providers\apache\httpd\CApacheHTTPServer;
 use providers\mysql\driver\CMySQLConnector;
 
 /**
@@ -82,7 +87,10 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     private static $install_mode = false;
     /** @var int Flag specifying the operation mode between Standalone, Stored, Clustered. */
-    private static $operation_mode = CNabuEngine::ENGINE_MODE_STANDALONE;
+    private static $operation_mode = self::ENGINE_MODE_STANDALONE;
+    /** @var mixed Hook locateHTTPServer method after identificate the valid HTTP Server interface. */
+    private static $locateHTTPServerHook = null;
+
     /** @var int Starting microtime to dispatch an engine request */
     private $microtime_start = null;
     /** @var int Ending microtime dispatching an engine request */
@@ -99,7 +107,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     private $main_database = null;
     /** @var CNabuCustomer Customer instance */
     private $nb_customer = null;
-    /** @var INabuHTTPServer Web server instance */
+    /** @var INabuHTTPServerInterface Web server instance */
     private $nb_http_server = null;
     /** @var INabuApplication If the Engine was requested to run an Application here is the instance */
     private $nb_application = null;
@@ -109,6 +117,8 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     private $nb_messaging_pool_manager = null;
     /** @var CNabuRenderPoolManager If the Engine was requested to run a Render pool here is the instance */
     private $nb_render_pool_manager = null;
+    /** @var CNabuHTTPServerPoolManager If the Engine was requested to run a HTTP Server pool here is the instance */
+    private $nb_http_server_pool_manager = null;
 
     /**
      * Default constructor. This object is singleton then, more than one instantiation throws a ENabuSingletonException.
@@ -117,7 +127,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public function __construct()
     {
-        if (CNabuEngine::$nb_engine != null) {
+        if (self::$nb_engine != null) {
             throw new ENabuSingletonException("Engine already instantiated");
         }
 
@@ -131,12 +141,12 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function getEngine()
     {
-        if (CNabuEngine::$nb_engine === null) {
-            CNabuEngine::$nb_engine = new CNabuEngine();
-            CNabuEngine::$nb_engine->init();
+        if (self::$nb_engine === null) {
+            self::$nb_engine = new CNabuEngine();
+            self::$nb_engine->init();
         }
 
-        return CNabuEngine::$nb_engine;
+        return self::$nb_engine;
     }
 
     /**
@@ -145,7 +155,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function isInstantiated() : bool
     {
-        return (CNabuEngine::$nb_engine !== null);
+        return (self::$nb_engine !== null);
     }
 
     /**
@@ -163,7 +173,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function isInstallMode()
     {
-        return CNabuEngine::$install_mode;
+        return self::$install_mode;
     }
 
     /**
@@ -174,17 +184,17 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function setInstallMode($mode)
     {
-        if (CNabuEngine::isCLIEnvironment()) {
+        if (self::isCLIEnvironment()) {
             if ($mode === true) {
-                CNabuEngine::$install_mode = true;
+                self::$install_mode = true;
             } else {
-                if (CNabuEngine::$install_mode &&
-                    CNabuEngine::$nb_engine !== null &&
-                    CNabuEngine::$nb_engine->main_database === null
+                if (self::$install_mode &&
+                    self::$nb_engine !== null &&
+                    self::$nb_engine->main_database === null
                 ) {
-                    CNabuEngine::$nb_engine->registerMainDatabase();
+                    self::$nb_engine->registerMainDatabase();
                 }
-                CNabuEngine::$install_mode = false;
+                self::$install_mode = false;
             }
         } else {
             throw new ENabuCoreException(ENabuCoreException::ERROR_INSTALL_MODE_LOCKED);
@@ -204,19 +214,19 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function setOperationMode($mode)
     {
-        if ($mode !== CNabuEngine::ENGINE_MODE_STANDALONE &&
-            $mode !== CNabuEngine::ENGINE_MODE_HOSTED &&
-            $mode !== CNabuEngine::ENGINE_MODE_CLUSTERED &&
-            $mode !== CNabuEngine::ENGINE_MODE_CLI
+        if ($mode !== self::ENGINE_MODE_STANDALONE &&
+            $mode !== self::ENGINE_MODE_HOSTED &&
+            $mode !== self::ENGINE_MODE_CLUSTERED &&
+            $mode !== self::ENGINE_MODE_CLI
         ) {
             throw new ENabuCoreException(ENabuCoreException::ERROR_OPERATION_MODE_NOT_ALLOWED);
         }
 
-        if (CNabuEngine::$nb_engine !== null) {
+        if (self::$nb_engine !== null) {
             throw new ENabuCoreException(ENabuCoreException::ERROR_OPERATION_MODE_CANNOT_BE_MODIFIED);
         }
 
-        CNabuEngine::$operation_mode = $mode;
+        self::$operation_mode = $mode;
     }
 
     /**
@@ -224,7 +234,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function setOperationModeStandalone()
     {
-        CNabuEngine::setOperationMode(CNabuEngine::ENGINE_MODE_STANDALONE);
+        self::setOperationMode(self::ENGINE_MODE_STANDALONE);
     }
 
     /**
@@ -232,7 +242,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function setOperationModeHosted()
     {
-        CNabuEngine::setOperationMode(CNabuEngine::ENGINE_MODE_HOSTED);
+        self::setOperationMode(self::ENGINE_MODE_HOSTED);
     }
 
     /**
@@ -240,7 +250,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function setOperationModeClustered()
     {
-        CNabuEngine::setOperationMode(CNabuEngine::ENGINE_MODE_CLUSTERED);
+        self::setOperationMode(self::ENGINE_MODE_CLUSTERED);
     }
 
     /**
@@ -248,7 +258,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function setOperationModeCLI()
     {
-        CNabuEngine::setOperationMode(CNabuEngine::ENGINE_MODE_CLI);
+        self::setOperationMode(self::ENGINE_MODE_CLI);
     }
 
     /**
@@ -257,7 +267,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function isOperationModeStandalone()
     {
-        return CNabuEngine::$nb_engine !== null && CNabuEngine::$operation_mode === CNabuEngine::ENGINE_MODE_STANDALONE;
+        return self::$nb_engine !== null && self::$operation_mode === self::ENGINE_MODE_STANDALONE;
     }
 
     /**
@@ -266,7 +276,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function isOperationModeStored()
     {
-        return CNabuEngine::$nb_engine !== null && CNabuEngine::$operation_mode === CNabuEngine::ENGINE_MODE_HOSTED;
+        return self::$nb_engine !== null && self::$operation_mode === self::ENGINE_MODE_HOSTED;
     }
 
     /**
@@ -275,7 +285,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function isOperationModeClustered()
     {
-        return CNabuEngine::$nb_engine !== null && CNabuEngine::$operation_mode === CNabuEngine::ENGINE_MODE_CLUSTERED;
+        return self::$nb_engine !== null && self::$operation_mode === self::ENGINE_MODE_CLUSTERED;
     }
 
     /**
@@ -284,7 +294,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function isOperationModeCLI()
     {
-        return CNabuEngine::$nb_engine !== null && CNabuEngine::$operation_mode === CNabuEngine::ENGINE_MODE_CLI;
+        return self::$nb_engine !== null && self::$operation_mode === self::ENGINE_MODE_CLI;
     }
 
     /**
@@ -337,11 +347,9 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
                 $this->nb_messaging_pool_manager = new CNabuMessagingPoolManager($this->nb_customer);
                 $this->nb_messaging_pool_manager->init();
             } elseif (
-                ($nb_customer = $this->nb_messaging_pool_manager->getCustomer()) instanceof CNabuCustomer &&
-                $this->nb_customer->getId() === $nb_customer->getId()
+                !(($nb_aux_customer = $this->nb_messaging_pool_manager->getCustomer()) instanceof CNabuCustomer) ||
+                $this->nb_customer->getId() !== $nb_aux_customer->getId()
             ) {
-                $retval = $this->nb_messaging_pool_manager;
-            } else {
                 throw new ENabuMessagingException(ENabuMessagingException::ERROR_INVALID_MESSAGING_POOL_MANAGER);
             }
         } else {
@@ -357,7 +365,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      * @return CNabuRenderPoolManager Returns the Render Pool manager.
      * @throws ENabuCoreException Raises an exception if Customer instance is not available or not matches with
      * the existing Render Pool Manager.
-     * @throws ENabuRenderException Raises an exception none Pool Manager available.
+     * @throws ENabuRenderException Raises an exception if no Pool Managers are available.
      */
     public function getRenderPoolManager(bool $force = false) : CNabuRenderPoolManager
     {
@@ -369,11 +377,9 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
                 $this->nb_render_pool_manager = new CNabuRenderPoolManager($this->nb_customer);
                 $this->nb_render_pool_manager->init();
             } elseif (
-                ($nb_customer = $this->nb_render_pool_manager->getCustomer()) instanceof CNabuCustomer &&
-                $this->nb_customer->getId() === $nb_customer->getId()
+                !(($nb_aux_customer = $this->nb_render_pool_manager->getCustomer()) instanceof CNabuCustomer) ||
+                $this->nb_customer->getId() !== $nb_aux_customer->getId()
             ) {
-                $retval = $this->nb_render_pool_manager;
-            } else {
                 throw new ENabuRenderException(ENabuRenderException::ERROR_INVALID_RENDER_POOL_MANAGER);
             }
         } else {
@@ -381,6 +387,24 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         }
 
         return $this->nb_render_pool_manager;
+    }
+
+    /**
+     * Gets current HTTP Server Pool Manager instance. If not defined, then creates one for the current Customer.
+     * @param bool $force Forces to set a new HTTP Server Pool Manager instance.
+     * @return CNabuHTTPServerPoolManager Returns the HTTP Server Pool Manager instance.
+     */
+    public function getHTTPServerPoolManager(bool $force = false) : CNabuHTTPServerPoolManager
+    {
+        if ($this->nb_http_server_pool_manager === null || $force) {
+            if ($this->nb_http_server_pool_manager instanceof CNabuHTTPServerPoolManager) {
+                $this->nb_http_server_pool_manager->finish();
+            }
+            $this->nb_http_server_pool_manager = new CNabuHTTPServerPoolManager();
+            $this->nb_http_server_pool_manager->init();
+        }
+
+        return $this->nb_http_server_pool_manager;
     }
 
     /**
@@ -516,7 +540,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Gets the nabu-3 instance of the running HTTP Server
-     * @return INabuHTTPServer The instance of HTTP Server of null if no instance
+     * @return INabuHTTPServerInterface The instance of HTTP Server of null if no instance
      */
     public function getHTTPServer()
     {
@@ -619,19 +643,17 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     private function registerMainDatabase()
     {
         $filename = NABU_ETC_PATH.DIRECTORY_SEPARATOR.NABU_DB_DEFAULT_FILENAME_CONFIG;
-        if (!file_exists($filename)) {
-            if (($file = fopen($filename, "w")) !== false) {
-                fwrite($file,
-                        "<?php\n".
-                        "\$db_user = \"nabu-3\";\n".
-                        "\$db_passwd = \"nabu-3\";\n".
-                        "\$db_host = \"localhost:3306\";\n".
-                        "\$db_schema = \"nabu-3\";\n".
-                        "\$db_trace_query = false;\n".
-                        "?>\n"
-                        );
-                fclose($file);
-            }
+        if (!file_exists($filename) && ($file = fopen($filename, "w")) !== false) {
+            fwrite($file,
+                    "<?php\n".
+                    "\$db_user = \"nabu-3\";\n".
+                    "\$db_passwd = \"nabu-3\";\n".
+                    "\$db_host = \"localhost:3306\";\n".
+                    "\$db_schema = \"nabu-3\";\n".
+                    "\$db_trace_query = false;\n".
+                    "?>\n"
+                    );
+            fclose($file);
         }
 
         $this->main_database = new CMySQLConnector($filename);
@@ -748,23 +770,24 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         $this->traceLog('Request timestamp', $this->microtime_start);
 
         try {
-            switch (CNabuEngine::$operation_mode) {
-                case CNabuEngine::ENGINE_MODE_STANDALONE:
+            switch (self::$operation_mode) {
+                case self::ENGINE_MODE_STANDALONE:
                     $this->locateHTTPServer();
                     $this->createBuiltInServer();
                     $this->createBuiltInSite();
                     break;
-                case CNabuEngine::ENGINE_MODE_HOSTED:
+                case self::ENGINE_MODE_HOSTED:
                     $this->registerMainDatabase();
                     $this->locateHTTPServer();
                     $this->createBuiltInServer();
                     $this->locateRunningConfiguration();
                     break;
-                case CNabuEngine::ENGINE_MODE_CLUSTERED:
+                case self::ENGINE_MODE_CLUSTERED:
                     $this->registerMainDatabase();
                     $this->locateHTTPServer();
                     $this->locateRunningConfiguration();
                     break;
+                default:
             }
 
             $retval = forward_static_call(array($class_name, 'launch'));
@@ -781,27 +804,64 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
             $retval = false;
         }
 
-        if (CNabuEngine::isInstantiated()) {
-            $nb_engine = CNabuEngine::getEngine();
-            $nb_engine->finish();
+        if (self::isInstantiated()) {
+            self::getEngine()->finish();
             /** @todo Implement CNabuEngine Dump Popup Trace action */
-            // $nb_engine->dumpPopupTrace();
+            /** @source $nb_engine->dumpPopupTrace(); */
         }
 
         return $retval;
     }
 
     /**
+     * Sets the Hook for locateHTTPServer method.
+     * @param mixed $function The Hook function. Can be a function name or a closure.
+     */
+    public static function setLocateHTTPServerHook($function)
+    {
+        if (is_string($function) && function_exists($function)) {
+            self::$locateHTTPServerHook = $function;
+        } elseif ($function instanceof Closure) {
+            error_log(print_r($function, true));
+            self::$locateHTTPServerHook = $function;
+        }
+    }
+
+    /**
+     * Calls the Hook function after locate valid HTTP Server.
+     */
+    private function callLocateHTTPServerHook()
+    {
+        if (is_string(self::$locateHTTPServerHook)) {
+            ${self::$locateHTTPServerHook}($this->nb_http_server);
+        } elseif (self::$locateHTTPServerHook instanceof Closure) {
+            (self::$locateHTTPServerHook)($this->nb_http_server);
+        }
+    }
+
+    /**
      * Try to detect the running HTTP Server attached to this process and returns their nabu-3 manager.
-     * @return INabuHTTPServer Returns an instance of the HTTP Server Engine
+     * @return INabuHTTPServerInterface Returns an instance of the HTTP Server Engine
      * @throws ENabuCoreException Throws an exception if Nabu Engine is not running in a HTTP Server mode.
      */
     private function locateHTTPServer()
     {
-        if (CNabuEngine::isCLIEnvironment()) {
+        if (self::isCLIEnvironment()) {
             throw new ENabuCoreException(ENabuCoreException::ERROR_METHOD_NOT_AVAILABLE, array(__METHOD__));
         } elseif ($this->nb_http_server === null) {
-            $this->nb_http_server = new CApacheHTTPServer();
+            $this->getHTTPServerPoolManager();
+            $this->nb_provider_factory
+                 ->getInterfaceDescriptors(CNabuProviderFactory::INTERFACE_HTTP_SERVER_SERVICE)
+                 ->iterate(function(string $key, CNabuHTTPServerInterfaceDescriptor $descriptor) {
+                     $nb_factory = $this->nb_http_server_pool_manager->getHTTPServerFactory($descriptor);
+                     $nb_interface = $nb_factory->getInterface();
+                     if ($nb_interface instanceof INabuHTTPServerInterface && $nb_interface->recognizeSoftware()) {
+                         $this->nb_http_server = $nb_interface;
+                         $this->callLocateHTTPServerHook();
+                     }
+                     return is_null($this->nb_http_server);
+                 })
+            ;
         }
 
         return $this->nb_http_server;
@@ -822,7 +882,6 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         $server_path = dirname($host_path);
 
         $nb_server->setBasePath(NABU_BASE_PATH);
-        $nb_server->setFrameworkPath(NABU_PHPUTILS_PATH);
         $nb_server->setVirtualHostsPath($server_path);
 
         $this->nb_http_server->setServer($nb_server);
@@ -862,7 +921,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
         $site_path = basename($host_path);
 
         $nb_site->setBasePath(DIRECTORY_SEPARATOR . $site_path);
-        $nb_site->setPHPUtilsPath(NABU_PHPUTILS_FOLDER);
+        /** @source $nb_site->setPHPUtilsPath(NABU_PHPUTILS_FOLDER); */
         $nb_site->setClassesPath(NABU_CLASSES_FOLDER);
         $nb_site->setPluginsPath(NABU_PLUGINS_FOLDER);
         $nb_site->setMainAlias($nb_site_alias);

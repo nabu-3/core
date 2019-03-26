@@ -41,7 +41,7 @@ use nabu\data\customer\CNabuCustomer;
 function nb_autoLoadClasses($class_name)
 {
     $file = stream_resolve_include_path(str_replace('\\', DIRECTORY_SEPARATOR, $class_name) . ".php");
-    //$file = NABU_PHPUTILS_PATH . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $class_name) . ".php";
+
     if (file_exists($file)) {
         if (defined('NABU_TRACE_AUTOLOAD') && NABU_TRACE_AUTOLOAD === true) {
             if (class_exists('nabu\core\CNabuEngine') && \nabu\core\CNabuEngine::isInstantiated()) {
@@ -83,6 +83,7 @@ function nb_requireOnceIsolated($filename, $expose_engine = false, $expose_app =
         }
     }
 
+    error_log($filename);
     require_once $filename;
 }
 

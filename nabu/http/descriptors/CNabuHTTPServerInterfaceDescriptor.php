@@ -19,41 +19,31 @@
  *  limitations under the License.
  */
 
-namespace nabu\provider\adapters;
-use nabu\data\CNabuDataObjectList;
-use nabu\data\customer\CNabuCustomer;
-use nabu\data\customer\traits\TNabuCustomerChild;
+namespace nabu\http\descriptors;
+
+use nabu\provider\CNabuProviderFactory;
+
+use nabu\provider\base\CNabuProviderInterfaceDescriptor;
+
+use nabu\provider\interfaces\INabuProviderManager;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\provider\adapters
+ * @package \nabu\http\descriptors
  */
-abstract class CNabuProviderInterfaceFactoryListAdapter extends CNabuDataObjectList
+class CNabuHTTPServerInterfaceDescriptor extends CNabuProviderInterfaceDescriptor
 {
-    use TNabuCustomerChild;
-
-    public function __construct(CNabuCustomer $nb_customer = null)
-    {
-        parent::__construct('nb_interface_id');
-        if ($nb_customer !== null) {
-            $this->setCustomer($nb_customer);
-        }
-    }
-
-    protected function createSecondaryIndexes()
-    {
-    }
-
-    /**
-     * Always returns false.
-     * @param string $key Id of the instance to unserialize.
-     * @param string $index Secondary index to be used if needed.
-     * @return bool Always returns false.
-     */
-    protected function acquireItem($key, $index = false)
-    {
-        return false;
+    public function __construct(
+        INabuProviderManager $nb_manager,
+        string $key,
+        string $name,
+        string $namespace,
+        string $class_name
+    ) {
+        parent::__construct(
+            $nb_manager, CNabuProviderFactory::INTERFACE_HTTP_SERVER_SERVICE, $key, $name, $namespace, $class_name
+        );
     }
 }

@@ -47,6 +47,8 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
     const INTERFACE_RENDER                      = 0x0003;
     /** @var int Render Transform Interface identificator. */
     const INTERFACE_RENDER_TRANSFORM            = 0x0004;
+    /** @var int HTTP Server Interface identificator. */
+    const INTERFACE_HTTP_SERVER_SERVICE         = 0x0005;
 
     /** @var CNabuProviderFactory Contains the singleton instance of class. */
     private static $nb_provider_factory = null;
@@ -61,20 +63,21 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
      */
     public function __construct()
     {
-        if (CNabuProviderFactory::$nb_provider_factory !== null) {
+        if (self::$nb_provider_factory !== null) {
             throw new ENabuSingletonException('Provider Factory already instantiated');
         }
 
         parent::__construct();
 
-        CNabuProviderFactory::$nb_provider_factory = $this;
+        self::$nb_provider_factory = $this;
 
         $this->nb_manager_list = new CNabuProviderManagerList();
         $this->nb_interface_list = array(
             self::INTERFACE_MESSAGING_SERVICE => new CNabuProviderInterfaceDescriptorList(),
             self::INTERFACE_MESSAGING_TEMPLATE_RENDER => new CNabuProviderInterfaceDescriptorList(),
             self::INTERFACE_RENDER => new CNabuProviderInterfaceDescriptorList(),
-            self::INTERFACE_RENDER_TRANSFORM => new CNabuProviderInterfaceDescriptorList()
+            self::INTERFACE_RENDER_TRANSFORM => new CNabuProviderInterfaceDescriptorList(),
+            self::INTERFACE_HTTP_SERVER_SERVICE => new CNabuProviderInterfaceDescriptorList()
         );
     }
 
@@ -85,12 +88,12 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
      */
     public static function getFactory()
     {
-        if (CNabuProviderFactory::$nb_provider_factory === null) {
-            CNabuProviderFactory::$nb_provider_factory = new CNabuProviderFactory();
-            CNabuProviderFactory::$nb_provider_factory->init();
+        if (self::$nb_provider_factory === null) {
+            self::$nb_provider_factory = new CNabuProviderFactory();
+            self::$nb_provider_factory->init();
         }
 
-        return CNabuProviderFactory::$nb_provider_factory;
+        return self::$nb_provider_factory;
     }
 
     /**
@@ -99,7 +102,7 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
      */
     public static function isInstantiated() : bool
     {
-        return is_object(CNabuProviderFactory::$nb_provider_factory);
+        return is_object(self::$nb_provider_factory);
     }
 
     /**
@@ -300,23 +303,21 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
 
         $nb_descriptor = null;
 
-        if (count($this->nb_interface_list[$interface_type]) > 0) {
-            $this->nb_interface_list[$interface_type]->iterate(
-                function ($key, $nb_interface_desc) use ($vendor, $module, $interface, &$nb_descriptor)
-                {
-                    $retval = true;
-                    $nb_manager = $nb_interface_desc->getManager();
-                    if ($nb_manager->getVendorKey() === $vendor &&
-                        $nb_manager->getModuleKey() === $module &&
-                        $nb_interface_desc->getClassName() === $interface
-                    ) {
-                        $nb_descriptor = $nb_interface_desc;
-                        $retval = false;
-                    }
-                    return $retval;
+        $this->nb_interface_list[$interface_type]->iterate(
+            function ($key, $nb_interface_desc) use ($vendor, $module, $interface, &$nb_descriptor)
+            {
+                $retval = true;
+                $nb_manager = $nb_interface_desc->getManager();
+                if ($nb_manager->getVendorKey() === $vendor &&
+                    $nb_manager->getModuleKey() === $module &&
+                    $nb_interface_desc->getClassName() === $interface
+                ) {
+                    $nb_descriptor = $nb_interface_desc;
+                    $retval = false;
                 }
-            );
-        }
+                return $retval;
+            }
+        );
 
         return $nb_descriptor;
     }

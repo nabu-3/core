@@ -19,41 +19,20 @@
  *  limitations under the License.
  */
 
-namespace nabu\provider\adapters;
-use nabu\data\CNabuDataObjectList;
-use nabu\data\customer\CNabuCustomer;
-use nabu\data\customer\traits\TNabuCustomerChild;
+namespace nabu\http;
+
+use nabu\provider\adapters\CNabuProviderInterfaceFactoryListAdapter;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 3.0.12 Surface
  * @version 3.0.12 Surface
- * @package \nabu\provider\adapters
+ * @package \nabu\http
  */
-abstract class CNabuProviderInterfaceFactoryListAdapter extends CNabuDataObjectList
+class CNabuHTTPServerFactoryList extends CNabuProviderInterfaceFactoryListAdapter
 {
-    use TNabuCustomerChild;
-
-    public function __construct(CNabuCustomer $nb_customer = null)
+    public function __construct()
     {
-        parent::__construct('nb_interface_id');
-        if ($nb_customer !== null) {
-            $this->setCustomer($nb_customer);
-        }
-    }
-
-    protected function createSecondaryIndexes()
-    {
-    }
-
-    /**
-     * Always returns false.
-     * @param string $key Id of the instance to unserialize.
-     * @param string $index Secondary index to be used if needed.
-     * @return bool Always returns false.
-     */
-    protected function acquireItem($key, $index = false)
-    {
-        return false;
+        parent::__construct(null);
     }
 }

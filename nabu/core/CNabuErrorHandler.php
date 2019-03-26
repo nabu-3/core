@@ -21,8 +21,6 @@
 
 namespace nabu\core;
 
-use nabu\core\exceptions\ENabuCoreException;
-
 /**
  * Class to manage the Error Handler and Error Storage
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -31,14 +29,21 @@ use nabu\core\exceptions\ENabuCoreException;
  */
 class CNabuErrorHandler extends CNabuObject
 {
+    /** @var string Internal literal */
+    private const MESSAGES_STACK = 'messages_stack';
+    /** @var string Internal literal */
+    private const LINE_CLASS = 'class';
+    /** @var string Internal literal */
+    private const LINE_FUNCTION = 'function';
+
     /**
      * Contains the instace of CNabuEngine that owns this handler
-     * @var type CNabuEngine
+     * @var CNabuEngine
      */
     private $nb_engine = null;
     /**
      * Enable/disable trace log
-     * @var boolean
+     * @var bool
      */
     private $trace_log_enabled = false;
     /**
@@ -52,15 +57,8 @@ class CNabuErrorHandler extends CNabuObject
      */
     private $trace_log_buffer = null;
 
-    public function __construct($nb_engine)
+    public function __construct(CNabuEngine $nb_engine)
     {
-        if (!($nb_engine instanceof CNabuEngine)) {
-            throw new ENabuCoreException(
-                    ENabuCoreException::ERROR_UNEXPECTED_PARAM_CLASS_TYPE,
-                    array(get_class($nb_engine), '$nb_engine')
-            );
-        }
-
         parent::__construct();
 
         $this->nb_engine = $nb_engine;
@@ -71,15 +69,15 @@ class CNabuErrorHandler extends CNabuObject
     /**
      * Error handler function. Dumps the error to errors log file and stores internally
      * to send at the end of the dispatch method, to a logs store.
-     * @param type $errno Error level
-     * @param type $errstr Error message
-     * @param type $errfile File name where the error was generated
-     * @param type $errline File line where the error was generated
-     * @param type $errcontext Matrix as described in {@see http://php.net/manual/en/function.set-error-handler.php}
-     * @return boolean Returns true if the error is treated and the execution can continue,
+     * @param int $errno Error level
+     * @param string $errstr Error message
+     * @param string $errfile File name where the error was generated
+     * @param string $errline File line where the error was generated
+     * @param array $errcontext Matrix as described in {@see http://php.net/manual/en/function.set-error-handler.php}
+     * @return bool Returns true if the error is treated and the execution can continue,
      * or false if the execution needs to be finished now.
      */
-    public function errorHandler($errno, $errstr, $errfile, $errline, $errcontext)
+    public function errorHandler(int $errno, string $errstr, string $errfile, string $errline, array $errcontext)
     {
         $this->dumpStack($errstr, $errno, $errfile, $errline, $errcontext);
         return true;
@@ -88,30 +86,28 @@ class CNabuErrorHandler extends CNabuObject
     /**
      * Analizes and creates a Stack sequence of call from the beginning of the execution
      * until the point of error and log each step in the Engine Log store.
-     * @global type $NABU_MESSAGE_TYPE_NAME
-     * @param type $message Error message
-     * @param type $type Error type/level
-     * @param type $errfile File name where the error was generated
-     * @param type $errline File line where the error was generated
-     * @param type $errcontext Matrix as described in {@see http://php.net/manual/en/function.set-error-handler.php}
-     * @param type $stack Complete list of stack calls from the beginning of the execution until the point of error
+     * @global string $NABU_MESSAGE_TYPE_NAME
+     * @param string|null $message Error message
+     * @param string|null $type Error type/level
+     * @param string|null $errfile File name where the error was generated
+     * @param int|null $errline File line where the error was generated
+     * @param mixed|null $errcontext Matrix as described in {@see http://php.net/manual/en/function.set-error-handler.php}
+     * @param array|null $stack Complete list of stack calls from the beginning of the execution until the point of error
      */
     public function dumpStack(
-        $message = null,
-        $type = null,
-        $errfile = null,
-        $errline = null,
+        string $message = null,
+        string $type = null,
+        string $errfile = null,
+        int $errline = null,
         $errcontext = null,
-        $stack = null
+        array $stack = null
     ) {
         global $NABU_MESSAGE_TYPE_NAME;
 
-        $nb_engine = CNabuEngine::getEngine();
-
         if (($errtype = nb_getArrayValueByKey($type, $NABU_MESSAGE_TYPE_NAME)) === null) {
-            $nb_engine->errorLog("Unknow error type [$type]: $message in $errfile [line:$errline]");
+            $this->nb_engine->errorLog("Unknow error type [$type]: $message in $errfile [line:$errline]");
         } else {
-            $nb_engine->errorLog("$errtype: $message in $errfile [line:$errline]");
+            $this->nb_engine->errorLog("$errtype: $message in $errfile [line:$errline]");
         }
 
         if ($stack === null) {
@@ -138,22 +134,23 @@ class CNabuErrorHandler extends CNabuObject
 
                 $source = '';
 
-                if (array_key_exists('class', $line)) {
-                    $source .= $line['class'];
+                if (array_key_exists(self::LINE_CLASS, $line)) {
+                    $source .= $line[self::LINE_CLASS];
                 }
                 if (array_key_exists('type', $line)) {
                     $source .= $line['type'];
                 }
-                if (array_key_exists('function', $line)) {
-                    $source .= $line['function'];
+                if (array_key_exists(self::LINE_FUNCTION, $line)) {
+                    $source .= $line[self::LINE_FUNCTION];
                 }
-                if (array_key_exists('class', $line) &&
+                if (array_key_exists(self::LINE_CLASS, $line) &&
                     array_key_exists('type', $line) &&
-                    array_key_exists('function', $line) &&
+                    array_key_exists(self::LINE_FUNCTION, $line) &&
                     array_key_exists('args', $line) &&
-                    count($line['args'] > 0) &&
-                    $line['class'] == 'nabu\\core\\CNabuPluginManager' &&
-                    $line['function'] == 'invoqueCommand'
+                    is_array($line['args']) &&
+                    count($line['args']) > 0 &&
+                    $line[self::LINE_CLASS] == 'nabu\\core\\CNabuPluginManager' &&
+                    $line[self::LINE_FUNCTION] == 'invoqueCommand'
                 ) {
                     $source .= ' calling command ['.$line['args'][0].']';
                 }
@@ -164,7 +161,7 @@ class CNabuErrorHandler extends CNabuObject
                     $source .= " [line:$line[line]]";
                 }
 
-                $nb_engine->errorLog("#$count     at $source");
+                $this->nb_engine->errorLog("#$count     at $source");
 
                 $count++;
             }
@@ -175,9 +172,9 @@ class CNabuErrorHandler extends CNabuObject
     /**
      * Traces a error log message in the error log default system and stores it inside
      * the instance to be transmited after to a logs analyzer database.
-     * @param type $message Text message to log
+     * @param string $message Text message to log
      */
-    public function errorLog($message)
+    public function errorLog(string $message)
     {
         error_log(">>> " . $message);
 
@@ -187,10 +184,10 @@ class CNabuErrorHandler extends CNabuObject
     /**
      * Traces a categorized data in the error log default system and stores it inside
      * the instance to be transmited after to a logs analyzer database.
-     * @param type $key Categorized data key identifier
-     * @param type $message Text message to log
+     * @param string|null $key Categorized data key identifier
+     * @param mixed|null $message Text message to log
      */
-    public function traceLog($key, $message)
+    public function traceLog(string $key = null, $message = null)
     {
         if ($this->trace_log_enabled) {
             if (is_array($message) || is_object($message)) {
@@ -204,17 +201,17 @@ class CNabuErrorHandler extends CNabuObject
             } else {
                 $text = $message;
             }
-            error_log("=== " . ($key !== null ? "$key: " : '') . (is_string($message) ? $message : print_r($message, true)));
+            error_log("=== " . ($key !== null ? "$key: " : '') . $text);
         }
 
         if ($key === null) {
             if ($this->trace_log_buffer === null) {
                 $this->trace_log_buffer = array();
             }
-            if (array_key_exists('messages_stack', $this->trace_log_buffer)) {
-                $this->trace_log_buffer['messages_stack'][] = $message;
+            if (array_key_exists(self::MESSAGES_STACK, $this->trace_log_buffer)) {
+                $this->trace_log_buffer[self::MESSAGES_STACK][] = $message;
             } else {
-                $this->trace_log_buffer['messages_stack'] = array($message);
+                $this->trace_log_buffer[self::MESSAGES_STACK] = array($message);
             }
         } else {
             $this->trace_log_buffer[$key] = $message;

@@ -272,8 +272,7 @@ abstract class CNabuDataObjectList extends CNabuObject
     protected function indexItem(CNabuDataObject $item)
     {
         if (is_array($this->secondary_indexes)) {
-            reset($this->secondary_indexes);
-            while (list($key, $index) = each($this->secondary_indexes)) {
+            foreach ($this->secondary_indexes as $index) {
                 $index->addItem($item);
             }
         }
@@ -286,8 +285,7 @@ abstract class CNabuDataObjectList extends CNabuObject
     protected function removeItemIndex(CNabuDataObject $item)
     {
         if (is_array($this->secondary_indexes)) {
-            reset($this->secondary_indexes);
-            while (list($key, $index) = each($this->secondary_indexes)) {
+            foreach ($this->secondary_indexes as $index) {
                 $index->removeItem($item->getValue($this->index_field));
             }
         }
@@ -394,10 +392,10 @@ abstract class CNabuDataObjectList extends CNabuObject
         $retval = 0;
 
         if (is_array($this->list) && count($this->list) > 0) {
-            reset($this->list);
-            while ($retval!== false && (list($key, $value) = each($this->list))) {
+            foreach ($this->list as $key => $value) {
                 if (!$callback($key, $value)) {
                     $retval = false;
+                    break;
                 } else {
                     $retval++;
                 }

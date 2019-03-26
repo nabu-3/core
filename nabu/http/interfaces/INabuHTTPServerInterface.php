@@ -24,6 +24,8 @@ namespace nabu\http\interfaces;
 use \nabu\data\cluster\CNabuServer;
 use \nabu\data\site\CNabuSite;
 
+use nabu\provider\interfaces\INabuProviderInterface;
+
 /**
  * Interface for classes that represents a Nabu HTTP Server running instance.
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -31,8 +33,13 @@ use \nabu\data\site\CNabuSite;
  * @version 3.0.12 Surface
  * @package \nabu\http\interfaces
  */
-interface INabuHTTPServer
+interface INabuHTTPServerInterface extends INabuProviderInterface
 {
+    /**
+     * Check if the Server instance recognizes the software running as Server in the S.O.
+     * @return bool Returns true if the instance recognizes the software.
+     */
+    public function recognizeSoftware() : bool;
     /**
      * Check if the Server instance is a secure server (HTTPS built-in)
      * @return bool Returns true if is a secure server or false if not.
@@ -46,7 +53,7 @@ interface INabuHTTPServer
     /**
      * Sets the current Server instance.
      * @param CNabuServer $nb_server New Server instance to be setted.
-     * @return INabuHTTPServer Returns the $this instance to grant chained setters.
+     * @return INabuHTTPServerInterface Returns the $this instance to grant chained setters.
      */
     public function setServer(CNabuServer $nb_server);
     /**
@@ -57,11 +64,10 @@ interface INabuHTTPServer
     /**
      * Sets the current Site instance.
      * @param CNabuSite $nb_site New Site instance to be setted.
-     * @return INabuHTTPServer Returns the $this instance to grant chained setters.
+     * @return INabuHTTPServerInterface Returns the $this instance to grant chained setters.
      */
     public function setSite(CNabuSite $nb_site);
 
-    public function createStandaloneConfiguration();
     public function getHostBaseDirectory();
     public function locateRunningConfiguration();
     public function locateRemoteAddress();
@@ -99,4 +105,5 @@ interface INabuHTTPServer
     public function getServerPort();
     public function getServerProtocol();
     public function getServerSignature();
+    public function getServerSoftware();
 }

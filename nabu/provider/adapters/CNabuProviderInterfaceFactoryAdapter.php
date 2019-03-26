@@ -21,7 +21,6 @@
 
 namespace nabu\provider\adapters;
 
-use nabu\core\CNabuEngine;
 use nabu\data\CNabuDataObject;
 use nabu\data\lang\CNabuLanguage;
 use nabu\http\CNabuHTTPRequest;
@@ -79,8 +78,6 @@ abstract class CNabuProviderInterfaceFactoryAdapter extends CNabuDataObject
      */
     protected function discoverInterface() : bool
     {
-        $nb_engine = CNabuEngine::getEngine();
-
         if (!($this->nb_interface instanceof INabuProviderInterface) &&
             ($nb_manager = $this->nb_descriptor->getManager()) instanceof INabuProviderManager
         ) {

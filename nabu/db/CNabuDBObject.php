@@ -180,7 +180,7 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
                 $retval = $this->db->buildSentence($sentence, $params);
             }
         } else {
-            if (count($params) === 0) {
+            if (!is_array($params) || count($params) === 0) {
                 $retval = $this->db->buildSentence($sentence, $this->data);
             } else {
                 $retval = $this->db->buildSentence($sentence, array_merge($this->data, $params));
