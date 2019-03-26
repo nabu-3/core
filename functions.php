@@ -83,7 +83,6 @@ function nb_requireOnceIsolated($filename, $expose_engine = false, $expose_app =
         }
     }
 
-    error_log($filename);
     require_once $filename;
 }
 

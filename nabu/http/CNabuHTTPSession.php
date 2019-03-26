@@ -75,7 +75,7 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
 
     /**
      * Check if the session is instantiated.
-     * @return boolean Returns true if the session is instantiated
+     * @return bool Returns true if the session is instantiated
      */
     public static function isInstantiated() : bool
     {

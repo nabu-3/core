@@ -32,7 +32,7 @@ if (file_exists(NABU_ETC_PATH . DIRECTORY_SEPARATOR . 'license.php')) {
     require_once NABU_ETC_PATH . DIRECTORY_SEPARATOR . 'license.php';
 }
 
-$autoload_file = __DIR__ . DIRECTORY_SEPARATOR . '..'
+$autoload_file = NABU_BASE_PATH
                . DIRECTORY_SEPARATOR . 'lib'
                . DIRECTORY_SEPARATOR . 'autoload.php'
 ;

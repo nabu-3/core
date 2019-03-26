@@ -819,11 +819,12 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     public static function setLocateHTTPServerHook($function)
     {
-        if (is_string($function) && function_exists($function)) {
+        if ((is_string($function) && function_exists($function)) ||
+            ($function instanceof Closure)
+        ) {
             self::$locateHTTPServerHook = $function;
-        } elseif ($function instanceof Closure) {
-            error_log(print_r($function, true));
-            self::$locateHTTPServerHook = $function;
+        } else {
+            self::$locateHTTPServerHook = null;
         }
     }
 
