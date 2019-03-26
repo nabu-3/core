@@ -33,6 +33,11 @@ else
     exit 1
 fi
 
-echo $0
-echo Running from ${NABU_SCRIPT_PATH}
-php -S localhost:8000 ${NABU_SCRIPT_PATH}/inc/router.php -d nabu_server_mode=http
+echo nabu-3 install path is $NABU_BASE_PATH
+echo Running in ${NABU_SCRIPT_PATH}
+echo
+echo Starting HTTP Server...
+php -S localhost:8000 ${NABU_SCRIPT_PATH}/inc/router.php \
+       -d open_basedir=none \
+       -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/ \
+       --http-mode=http
