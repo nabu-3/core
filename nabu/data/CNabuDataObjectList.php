@@ -145,7 +145,7 @@ abstract class CNabuDataObjectList extends CNabuObject
      */
     public function isEmpty()
     {
-        return count($this->list) === 0;
+        return !is_array($this->list) || count($this->list) === 0;
     }
 
     /**
@@ -429,7 +429,7 @@ abstract class CNabuDataObjectList extends CNabuObject
         } else {
             $this->list = $list->list;
             $this->secondary_indexes = $list->secondary_indexes;
-            $count = count($list->list);
+            $count = is_array($list->list) ? count($list->list) : 0;
         }
 
         return $count;

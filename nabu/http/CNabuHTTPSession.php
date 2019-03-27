@@ -104,19 +104,6 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
         } else {
             $nb_engine->traceLog("Session source", "COOKIE");
         }
-
-        session_start();
-        $nb_engine->traceLog("Session ID", session_id());
-
-        $this->purgeNonce();
-
-        if (isset($_SESSION) && count($_SESSION) > 0) {
-            foreach ($_SESSION as $value) {
-                if ($value instanceof INabuDBObject && !$value->isBuiltIn()) {
-                    $value->relinkDB();
-                }
-            }
-        }
     }
 
     /**
@@ -133,9 +120,22 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
             $attrs['lifetime'],
             $attrs['path'],
             $attrs['domain'],
-            $secure ? true : $attrs['secure'],
-            $httponly ? true : (array_key_exists('httponly', $attrs) ? $attrs['httponly'] : false)
+            $secure || $attrs['secure'],
+            $httponly || (array_key_exists('httponly', $attrs) && $attrs['httponly'])
         );
+
+        session_start();
+        $nb_engine->traceLog("Session ID", session_id());
+
+        $this->purgeNonce();
+
+        if (isset($_SESSION) && count($_SESSION) > 0) {
+            foreach ($_SESSION as $value) {
+                if ($value instanceof INabuDBObject && !$value->isBuiltIn()) {
+                    $value->relinkDB();
+                }
+            }
+        }
     }
 
     /**

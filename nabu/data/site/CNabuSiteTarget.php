@@ -457,7 +457,7 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
             $this->nb_site_target_cta_list->clear();
             $this->nb_site_target_cta_list->merge(CNabuSiteTargetCTA::getSiteTargetCTAs($this));
             $translations = CNabuSiteTargetCTALanguage::getCTATranslationsForSiteTarget($this);
-            if (count($translations) > 0) {
+            if (is_array($translations) && count($translations) > 0) {
                 foreach ($translations as $translation) {
                     $nb_site_target_cta = $this->nb_site_target_cta_list->getItem($translation->getSiteTargetCTAId());
                     if ($nb_site_target_cta instanceof CNabuSiteTargetCTA) {
@@ -466,7 +466,7 @@ class CNabuSiteTarget extends CNabuSiteTargetBase implements INabuRoleMask
                 }
             }
             $roles = CNabuSiteTargetCTARole::getCTARolesForSiteTarget($this);
-            if (count($roles) > 0) {
+            if (is_array($roles) && count($roles) > 0) {
                 foreach ($roles as $role) {
                     $nb_site_target_cta = $this->nb_site_target_cta_list->getItem($role->getSiteTargetCTAId());
                     if ($nb_site_target_cta instanceof CNabuSiteTargetCTA) {

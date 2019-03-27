@@ -41,6 +41,11 @@ interface INabuHTTPServerInterface extends INabuProviderInterface
      */
     public function recognizeSoftware() : bool;
     /**
+     * Get the HTTP Server File System instance.
+     * @return INabuHTTPFileSystem Returns the valid instance.
+     */
+    public function getFileSystem() : INabuHTTPFileSystem;
+    /**
      * Check if the Server instance is a secure server (HTTPS built-in)
      * @return bool Returns true if is a secure server or false if not.
      */

@@ -24,6 +24,8 @@ namespace nabu\http\adapters;
 use nabu\core\CNabuEngine;
 use \nabu\core\CNabuObject;
 use \nabu\core\exceptions\ENabuCoreException;
+use nabu\core\utils\CNabuURL;
+
 use \nabu\data\cluster\CNabuServer;
 use nabu\data\customer\CNabuCustomer;
 
@@ -33,6 +35,8 @@ use nabu\data\cluster\CNabuServerHost;
 use nabu\data\domain\CNabuDomainZone;
 use nabu\data\domain\CNabuDomainZoneHost;
 use nabu\data\site\CNabuSiteAlias;
+
+use nabu\http\interfaces\INabuHTTPFileSystem;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -71,19 +75,31 @@ abstract class CNabuHTTPServerAdapter extends CNabuObject implements INabuHTTPSe
      * @var CNabuSiteAlias
      */
     protected $nb_site_alias = null;
+    /**
+     * @var INabuHTTPFileSystem HTTP Server File System instance.
+     */
+    protected $nb_file_system = null;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    /**
+     * Creates the HTTP Server File System instance.
+     * @return INabuHTTPFileSystem Returns created instance to represent the File System.
+     */
+    abstract protected function createFileSystem() : INabuHTTPFileSystem;
 
     public function init()
     {
+        $this->nb_file_system = $this->createFileSystem();
+
         return true;
     }
 
     public function finish()
     {
+    }
+
+    public function getFileSystem(): \nabu\http\interfaces\INabuHTTPFileSystem
+    {
+        return $this->nb_file_system;
     }
 
     public function getServer()
