@@ -136,7 +136,7 @@ abstract class CNabuDataObjectList extends CNabuObject
      */
     public function getSize()
     {
-        return count($this->list);
+        return is_array($this->list) ? count($this->list) : 0;
     }
 
     /**
@@ -446,8 +446,7 @@ abstract class CNabuDataObjectList extends CNabuObject
 
         if (is_array($array)) {
             if (count($array) > 0) {
-                reset($array);
-                while (list($key, $item) = each($array)) {
+                foreach ($array as $key => $item) {
                     if (!$this->containsKey($key)) {
                         $this->addItem($item);
                         $count++;

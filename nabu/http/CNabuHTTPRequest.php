@@ -566,6 +566,33 @@ class CNabuHTTPRequest extends CNabuObject
     }
 
     /**
+     * Search requested URIs using different alternatives.
+     * @return string Returns the URI string if found or null elsewhere.
+     * @throws ENabuCoreException Raises an exception if no URI found.
+     */
+    private function locateURI() : string
+    {
+        $this->page_uri = filter_input(
+            INPUT_GET,
+            NABU_PATH_PARAM,
+            FILTER_SANITIZE_STRING,
+            FILTER_FLAG_EMPTY_STRING_NULL
+        );
+
+        if (!is_string($this->page_uri) || strlen($this->page_uri) === 0) {
+            $this->page_uri = $this->nb_application->getHTTPServer()->getRequestURI();
+        }
+
+        if (!is_string($this->page_uri) || strlen($this->page_uri) === 0) {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_PAGE_URI_NOT_FOUND);
+        }
+
+        CNabuEngine::getEngine()->traceLog("Page requested", $this->page_uri);
+
+        return $this->page_uri;
+    }
+
+    /**
      * Check the request to identify and extract the query and page identifiers
      * @param mixed $target Target reference
      * @return int Returns true if query and page identifiers found or false elsewhere
@@ -574,18 +601,9 @@ class CNabuHTTPRequest extends CNabuObject
     {
         $retval = false;
 
-        $nb_engine = CNabuEngine::getEngine();
+        $this->locateURI();
 
-        $this->page_uri = filter_input(
-            INPUT_GET,
-            NABU_PATH_PARAM,
-            FILTER_SANITIZE_STRING,
-            FILTER_FLAG_EMPTY_STRING_NULL
-        );
-        if (!is_string($this->page_uri) || strlen($this->page_uri) === 0) {
-            throw new ENabuCoreException(ENabuCoreException::ERROR_PAGE_URI_NOT_FOUND);
-        }
-        $nb_engine->traceLog("Page requested", $this->page_uri);
+        $nb_engine = CNabuEngine::getEngine();
 
         if ($target) {
             $temp_target = CNabuSiteTarget::findByURL($this->nb_site, $this->page_uri);
