@@ -27,9 +27,6 @@
         "nabu-3/provider-mysql-driver": ">=0.0",
         "nabu-3/sdk": ">=3.0"
     },
-    "require-dev": {
-        "nabu-3/provider-mysql-driver": "dev-Version-0.0.7"
-    },
     "repositories": [
         {
             "type": "vcs",
