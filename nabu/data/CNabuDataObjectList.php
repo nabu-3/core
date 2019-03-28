@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -135,7 +136,7 @@ abstract class CNabuDataObjectList extends CNabuObject
      */
     public function getSize()
     {
-        return count($this->list);
+        return is_array($this->list) ? count($this->list) : 0;
     }
 
     /**
@@ -144,7 +145,7 @@ abstract class CNabuDataObjectList extends CNabuObject
      */
     public function isEmpty()
     {
-        return count($this->list) === 0;
+        return !is_array($this->list) || count($this->list) === 0;
     }
 
     /**
@@ -271,8 +272,7 @@ abstract class CNabuDataObjectList extends CNabuObject
     protected function indexItem(CNabuDataObject $item)
     {
         if (is_array($this->secondary_indexes)) {
-            reset($this->secondary_indexes);
-            while (list($key, $index) = each($this->secondary_indexes)) {
+            foreach ($this->secondary_indexes as $index) {
                 $index->addItem($item);
             }
         }
@@ -285,8 +285,7 @@ abstract class CNabuDataObjectList extends CNabuObject
     protected function removeItemIndex(CNabuDataObject $item)
     {
         if (is_array($this->secondary_indexes)) {
-            reset($this->secondary_indexes);
-            while (list($key, $index) = each($this->secondary_indexes)) {
+            foreach ($this->secondary_indexes as $index) {
                 $index->removeItem($item->getValue($this->index_field));
             }
         }
@@ -393,10 +392,10 @@ abstract class CNabuDataObjectList extends CNabuObject
         $retval = 0;
 
         if (is_array($this->list) && count($this->list) > 0) {
-            reset($this->list);
-            while ($retval!== false && (list($key, $value) = each($this->list))) {
+            foreach ($this->list as $key => $value) {
                 if (!$callback($key, $value)) {
                     $retval = false;
+                    break;
                 } else {
                     $retval++;
                 }
@@ -430,7 +429,7 @@ abstract class CNabuDataObjectList extends CNabuObject
         } else {
             $this->list = $list->list;
             $this->secondary_indexes = $list->secondary_indexes;
-            $count = count($list->list);
+            $count = is_array($list->list) ? count($list->list) : 0;
         }
 
         return $count;
@@ -447,8 +446,7 @@ abstract class CNabuDataObjectList extends CNabuObject
 
         if (is_array($array)) {
             if (count($array) > 0) {
-                reset($array);
-                while (list($key, $item) = each($array)) {
+                foreach ($array as $key => $item) {
                     if (!$this->containsKey($key)) {
                         $this->addItem($item);
                         $count++;

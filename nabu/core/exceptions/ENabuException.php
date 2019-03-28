@@ -1,5 +1,6 @@
 <?php
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -37,7 +38,7 @@ abstract class ENabuException extends \Exception
      */
     public function __construct(string $message = "", int $code = 0, array $values = null, Exception $previous = null)
     {
-        if (strlen($message) > 0 && count($values) > 0) {
+        if (strlen($message) > 0 && is_array($values) && count($values) > 0) {
             $message = nb_vnsprintf($message, (is_array($values) || $values === null ? $values : array($values)));
         }
         parent::__construct($message, $code, $previous);

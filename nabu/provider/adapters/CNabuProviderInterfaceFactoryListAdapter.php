@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -33,10 +34,12 @@ abstract class CNabuProviderInterfaceFactoryListAdapter extends CNabuDataObjectL
 {
     use TNabuCustomerChild;
 
-    public function __construct(CNabuCustomer $nb_customer)
+    public function __construct(CNabuCustomer $nb_customer = null)
     {
         parent::__construct('nb_interface_id');
-        $this->setCustomer($nb_customer);
+        if ($nb_customer !== null) {
+            $this->setCustomer($nb_customer);
+        }
     }
 
     protected function createSecondaryIndexes()

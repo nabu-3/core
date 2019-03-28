@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -46,6 +47,7 @@ define('NABU_SRC_FOLDER', DIRECTORY_SEPARATOR . 'src');
 define('NABU_SDK_FOLDER', DIRECTORY_SEPARATOR . 'sdk');
 define('NABU_PUB_FOLDER', DIRECTORY_SEPARATOR . 'pub');
 define('NABU_LIB_FOLDER', DIRECTORY_SEPARATOR . 'lib');
+define('NABU_TMP_FOLDER', DIRECTORY_SEPARATOR . 'tmp');
 define('NABU_ICONTACT_FOLDER', DIRECTORY_SEPARATOR . 'icontact');
 
 define('NABU_RUNTIME_FOLDER', DIRECTORY_SEPARATOR . 'runtime');

@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -179,7 +180,7 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
                 $retval = $this->db->buildSentence($sentence, $params);
             }
         } else {
-            if (count($params) === 0) {
+            if (!is_array($params) || count($params) === 0) {
                 $retval = $this->db->buildSentence($sentence, $this->data);
             } else {
                 $retval = $this->db->buildSentence($sentence, array_merge($this->data, $params));

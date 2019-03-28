@@ -1,3 +1,5 @@
 .remote-sync*
 .DS_Store
 lib/**
+.scannerwork
+.sonarlint

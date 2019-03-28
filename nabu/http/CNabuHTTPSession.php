@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -74,7 +75,7 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
 
     /**
      * Check if the session is instantiated.
-     * @return boolean Returns true if the session is instantiated
+     * @return bool Returns true if the session is instantiated
      */
     public static function isInstantiated() : bool
     {
@@ -103,19 +104,6 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
         } else {
             $nb_engine->traceLog("Session source", "COOKIE");
         }
-
-        session_start();
-        $nb_engine->traceLog("Session ID", session_id());
-
-        $this->purgeNonce();
-
-        if (isset($_SESSION) && count($_SESSION) > 0) {
-            foreach ($_SESSION as $value) {
-                if ($value instanceof INabuDBObject && !$value->isBuiltIn()) {
-                    $value->relinkDB();
-                }
-            }
-        }
     }
 
     /**
@@ -132,9 +120,22 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
             $attrs['lifetime'],
             $attrs['path'],
             $attrs['domain'],
-            $secure ? true : $attrs['secure'],
-            $httponly ? true : (array_key_exists('httponly', $attrs) ? $attrs['httponly'] : false)
+            $secure || $attrs['secure'],
+            $httponly || (array_key_exists('httponly', $attrs) && $attrs['httponly'])
         );
+
+        session_start();
+        $nb_engine->traceLog("Session ID", session_id());
+
+        $this->purgeNonce();
+
+        if (isset($_SESSION) && count($_SESSION) > 0) {
+            foreach ($_SESSION as $value) {
+                if ($value instanceof INabuDBObject && !$value->isBuiltIn()) {
+                    $value->relinkDB();
+                }
+            }
+        }
     }
 
     /**

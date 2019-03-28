@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -32,15 +33,19 @@ class ENabuHTTPException extends ENabuException
 {
     /** @var int X-Frame-Options ALLOW-FROM expects a URL as parameter. */
     const ERROR_X_FRAME_OPTIONS_URL_NOT_FOUND                     = 0x0001;
+    /** @var int */
+    const ERROR_INVALID_HTTP_SERVER_POOL_MANAGER                  = 0x0002;
 
     /** @var array List of all error messages defined in this exception. */
     private static $error_messages = array(
         ENabuHTTPException::ERROR_X_FRAME_OPTIONS_URL_NOT_FOUND =>
-            'X-Frame-Options ALLOW-FROM expects a URL as parameter but none found.'
+            'X-Frame-Options ALLOW-FROM expects a URL as parameter but none found.',
+        ENabuHTTPException::ERROR_INVALID_HTTP_SERVER_POOL_MANAGER =>
+            'Invalid HTTP Server Pool Manager.'
     );
 
     public function __construct($code, $values = null)
     {
-        parent::__construct(ENabuHTTPException::$error_messages[$code], $code, $values);
+        parent::__construct(self::$error_messages[$code], $code, $values);
     }
 }

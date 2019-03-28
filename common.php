@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -31,7 +32,7 @@ if (file_exists(NABU_ETC_PATH . DIRECTORY_SEPARATOR . 'license.php')) {
     require_once NABU_ETC_PATH . DIRECTORY_SEPARATOR . 'license.php';
 }
 
-$autoload_file = __DIR__ . DIRECTORY_SEPARATOR . '..'
+$autoload_file = NABU_BASE_PATH
                . DIRECTORY_SEPARATOR . 'lib'
                . DIRECTORY_SEPARATOR . 'autoload.php'
 ;

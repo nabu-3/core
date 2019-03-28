@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -40,7 +41,7 @@ use nabu\data\customer\CNabuCustomer;
 function nb_autoLoadClasses($class_name)
 {
     $file = stream_resolve_include_path(str_replace('\\', DIRECTORY_SEPARATOR, $class_name) . ".php");
-    //$file = NABU_PHPUTILS_PATH . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $class_name) . ".php";
+
     if (file_exists($file)) {
         if (defined('NABU_TRACE_AUTOLOAD') && NABU_TRACE_AUTOLOAD === true) {
             if (class_exists('nabu\core\CNabuEngine') && \nabu\core\CNabuEngine::isInstantiated()) {

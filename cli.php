@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -26,7 +27,7 @@
 
 /**
  * Write the Apache License header in an output handler.
- * @param file_handler $handler Output Handler to write the license.
+ * @param resource $handler Output Handler to write the license.
  * @param string $comment_symbol If required, $comment_symbol is prepended
  * at the beginning or each line.
  */
@@ -45,7 +46,8 @@ function writeApacheLicense($handler, $comment_symbol)
  * If $default is not boolean, then this value is returned in case
  * that the string type was empty.
  * @param string $title Title to preceed the input.
- * @param string|boolean $default Default value if no input.
+ * @param string|bool $default Default value if no input.
+ * @param bool $silent If true and $default is filled returns $default.
  * @return string Returns the string readed from the STDIN.
  */
 function nbCLIInput($title, $default = true, $silent = false)
@@ -73,8 +75,9 @@ function nbCLIInput($title, $default = true, $silent = false)
 /**
  * Request to the user to continue. If $die is true then the execution is aborted
  * if the user answers No.
- * @param boolean $die True if the execution die inmediately.
- * @return boolean Return true y the user type Yes or false if not.
+ * @param bool $die True if the execution die inmediately.
+ * @param string|bool $die_message Message to show.
+ * @return bool Return true y the user type Yes or false if not.
  */
 function nbCLICheckContinue($die = true, $die_message = false)
 {
@@ -84,8 +87,9 @@ function nbCLICheckContinue($die = true, $die_message = false)
 /**
  * Request to the user to confirm an action. If $die is true then the execution
  * is aborted if the user answers No.
- * @param boolean $die True if the execution die inmediately.
- * @return boolean Return true y the user type Yes or false if not.
+ * @param bool $die True if the execution die inmediately.
+ * @param string|bool $die_message Message to show.
+ * @return bool Return true y the user type Yes or false if not.
  */
 function nbCLICheckConfirm($die = true, $die_message = false)
 {

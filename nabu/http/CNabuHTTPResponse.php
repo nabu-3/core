@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -35,7 +36,8 @@ use nabu\render\CNabuRenderTransformFactory;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\http
  */
 final class CNabuHTTPResponse extends CNabuObject

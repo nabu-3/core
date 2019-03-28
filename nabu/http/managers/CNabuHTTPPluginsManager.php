@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -319,14 +320,14 @@ final class CNabuHTTPPluginsManager extends CNabuHTTPManager
                         $this->site_plugin !== null && method_exists($this->site_plugin, $func)
                             ? call_user_func(array($this->site_plugin, $func))
                             : true,
-                        get_class($this->site_plugin),
+                        is_null($this->site_plugin) ? null : get_class($this->site_plugin),
                         $func
                     ) &&
                     $this->pluginRedirectToPage(
                         $this->site_target_plugin !== null && method_exists($this->site_target_plugin, $func)
                             ? call_user_func(array($this->site_target_plugin, $func))
                             : true,
-                        get_class($this->site_target_plugin),
+                        is_null($this->site_target_plugin) ? null : get_class($this->site_target_plugin),
                         $func
                     ) &&
                     $this->nb_modules_manager->invoqueCommand($func);

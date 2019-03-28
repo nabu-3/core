@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -35,6 +36,8 @@ class ENabuCoreException extends ENabuException
     const ERROR_REDIRECTION_TARGET_NOT_VALID            = 0x0003;
     /** @var int A Language instance is required. */
     const ERROR_LANGUAGE_REQUIRED                       = 0x0004;
+    /** @var int A Exception Code is required. */
+    const ERROR_UNEXPECTED_EXCEPTION_CODE              = 0x0005;
 
     const ERROR_FEATURE_NOT_IMPLEMENTED                 = 0x0fff;
 
@@ -156,6 +159,8 @@ class ENabuCoreException extends ENabuException
             'Redirection target not valid',
         ENabuCoreException::ERROR_LANGUAGE_REQUIRED =>
             'A Language instance is required to perform this operation.',
+        ENabuCoreException::ERROR_UNEXPECTED_EXCEPTION_CODE =>
+            'Unexpected excepcion code [%s]',
 
         ENabuCoreException::ERROR_FEATURE_NOT_IMPLEMENTED =>
             'Feature not implemented.',
@@ -250,7 +255,7 @@ class ENabuCoreException extends ENabuException
 
         ENabuCoreException::ERROR_SESSION_NOT_FOUND =>
             'Session not found.',
-            
+
         ENabuCoreException::ERROR_REQUEST_NOT_FOUND =>
             'Request not found.',
 

@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -32,7 +33,7 @@ use nabu\http\CNabuHTTPRequest;
 use nabu\http\CNabuHTTPResponse;
 use nabu\http\CNabuHTTPRedirection;
 use nabu\http\exceptions\ENabuRedirectionException;
-use nabu\http\interfaces\INabuHTTPServer;
+use nabu\http\interfaces\INabuHTTPServerInterface;
 use nabu\http\interfaces\INabuHTTPResponseRender;
 use nabu\http\managers\CNabuModulesManager;
 use nabu\http\managers\CNabuHTTPManagerList;
@@ -56,7 +57,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
 {
     /**
      * nabu-3 running HTTP Server instance
-     * @var INabuHTTPServer
+     * @var INabuHTTPServerInterface
      */
     private $nb_http_server = null;
     /**
@@ -129,7 +130,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
     final public function run()
     {
         $this->nb_http_server = $this->nb_engine->getHTTPServer();
-        if (!($this->nb_http_server instanceof INabuHTTPServer)) {
+        if (!($this->nb_http_server instanceof INabuHTTPServerInterface)) {
             throw new ENabuCoreException(ENabuCoreException::ERROR_HTTP_SERVER_NOT_FOUND);
         }
 
@@ -202,7 +203,7 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
 
     /**
      * Gets the Nabu HTTP Server active instance.
-     * @return INabuHTTPServer Returns the Nabu HTTP Server instance or null if not setted.
+     * @return INabuHTTPServerInterface Returns the Nabu HTTP Server instance or null if not setted.
      */
     public function getHTTPServer()
     {
@@ -300,7 +301,6 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
     private function prepareCookies()
     {
         $this->nb_session->refreshCookies($this->nb_request->getSite());
-        $this->nb_security_manager->applySecurityToSession();
     }
 
     public function prepareRequest()
@@ -316,8 +316,8 @@ abstract class CNabuHTTPApplication extends CNabuAbstractApplication
         $this->nb_request->prepareBody();
         $this->nb_request->locateSite();
         $this->nb_request->locateSiteAlias();
-        $this->nb_security_manager->initSecurity();
         $this->nb_security_manager->applySecurityToSession();
+        $this->nb_security_manager->initSecurity();
 
         $retval = false;
 

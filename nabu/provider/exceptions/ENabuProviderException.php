@@ -1,6 +1,7 @@
 <?php
 
-/*  Copyright 2009-2011 Rafael Gutierrez Martinez
+/** @license
+ *  Copyright 2019-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  *  Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  *  Copyright 2017 nabu-3 Group
@@ -20,6 +21,7 @@
 
 namespace nabu\provider\exceptions;
 use nabu\core\exceptions\ENabuException;
+use nabu\core\exceptions\ENabuCoreException;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -83,6 +85,10 @@ class ENabuProviderException extends ENabuException
 
     public function __construct($code, $values = null)
     {
-        parent::__construct(ENabuProviderException::$error_messages[$code], $code, $values);
+        if (array_key_exists($code, ENabuProviderException::$error_messages)) {
+            parent::__construct(ENabuProviderException::$error_messages[$code], $code, $values);
+        } else {
+            throw new ENabuCoreException(ENabuCoreException::ERROR_UNEXPECTED_EXCEPTION_CODE, array($code));
+        }
     }
 }
