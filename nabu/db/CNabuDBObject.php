@@ -234,14 +234,14 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
         if (!$sentence) {
             $sentence = $this->getSelectRegister();
         } else {
-            if (count($this->data) > 0) {
-                if (count($params) > 0) {
+            if (is_array($this->data) && count($this->data) > 0) {
+                if (is_array($params) && count($params) > 0) {
                     $preserve = array_merge($this->data, $params);
                 } else {
                     $preserve = $this->data;
                 }
             } else {
-                if (count($params) > 0) {
+                if (is_array($params) && count($params) > 0) {
                     $preserve = $params;
                 } else {
                     $preserve = null;
@@ -332,7 +332,7 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
 
             $set_chain = '';
 
-            if (count($fields) > 0) {
+            if (is_array($fields) && count($fields) > 0) {
                 foreach ($fields as $field_name) {
                     if ($field_name === $table . '_creation_datetime') {
                         if ($this->isNew) {
