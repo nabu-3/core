@@ -44,6 +44,8 @@ use nabu\db\interfaces\INabuDBConnector;
 
 use nabu\http\descriptors\CNabuHTTPServerInterfaceDescriptor;
 
+use nabu\http\exceptions\ENabuHTTPException;
+
 use nabu\http\interfaces\INabuHTTPServerInterface;
 use nabu\http\managers\CNabuHTTPServerPoolManager;
 
@@ -842,11 +844,14 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
 
     /**
      * Try to detect the running HTTP Server attached to this process and returns their nabu-3 manager.
-     * @return INabuHTTPServerInterface Returns an instance of the HTTP Server Engine
+     * @return INabuHTTPServerInterface Returns an instance of the HTTP Server Engine.
      * @throws ENabuCoreException Throws an exception if Nabu Engine is not running in a HTTP Server mode.
+     * @throws ENabuHTTPException Throws an exception if HTTP Server Provider is not found.
      */
     private function locateHTTPServer()
     {
+        $this->nb_http_server = null;
+
         if (self::isCLIEnvironment()) {
             throw new ENabuCoreException(ENabuCoreException::ERROR_METHOD_NOT_AVAILABLE, array(__METHOD__));
         } elseif ($this->nb_http_server === null) {
@@ -863,6 +868,10 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
                      return is_null($this->nb_http_server);
                  })
             ;
+        }
+
+        if (is_null($this->nb_http_server)) {
+            throw new ENabuHTTPException(ENabuHTTPException::ERROR_HTTP_SERVER_PROVIDER_NOT_FOUND);
         }
 
         return $this->nb_http_server;
