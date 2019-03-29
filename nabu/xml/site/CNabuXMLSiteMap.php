@@ -81,11 +81,12 @@ class CNabuXMLSiteMap extends CNabuXMLSiteMapBase
                             $address = $target->addChild('url');
                             $address->addAttribute('lang', $nb_language->getHash());
                             $address->addAttribute('url', $url['url']);
-                            $address->addAttribute('match', $turl['match']);
+                            $address->addAttribute('match', $url['match']);
                         }
                     }
                 }
                 break;
+            default:
         }
     }
 

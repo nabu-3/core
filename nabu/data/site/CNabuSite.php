@@ -467,11 +467,7 @@ class CNabuSite extends CNabuSiteBase
 
         $nb_site_map_id = nb_getMixedValue($nb_site_map, 'nb_site_map_id');
         if (is_numeric($nb_site_map_id) || nb_isValidGUID($nb_site_map_id)) {
-            if ($cascade) {
-                $retval = $this->nb_site_map_tree->getItem($nb_site_map_id);
-            } else{
-                $retval = $this->nb_site_map_tree->getItem($nb_site_map_id);
-            }
+            $retval = $this->nb_site_map_tree->getItem($nb_site_map_id);
         }
 
         return $retval;

@@ -63,7 +63,7 @@ class CNabuCatalogItem extends CNabuCatalogItemBase implements INabuDataObjectTr
         $nb_catalog_id = nb_getMixedValue($nb_catalog, NABU_CATALOG_FIELD_ID);
         if (is_numeric($nb_catalog_id)) {
             $retval = CNabuCatalogItem::buildObjectListFromSQL(
-                'nb_catalog_item_id',
+                NABU_CATALOG_ITEM_FIELD_ID,
                 'SELECT *
                    FROM nb_catalog_item
                   WHERE nb_catalog_id=%catalog_id$d '
@@ -75,10 +75,16 @@ class CNabuCatalogItem extends CNabuCatalogItemBase implements INabuDataObjectTr
                 ),
                 ($nb_catalog instanceof CNabuCatalog ? $nb_catalog : null)
             );
-            $retval->setCatalog($nb_catalog);
+            if ($nb_catalog instanceof CNabuCatalog) {
+                $retval->setCatalog($nb_catalog);
+            }
         } else {
-            $retval = new CNabuCatalogItemList($nb_catalog);
-            $retval->setOwner($this);
+            if ($nb_catalog instanceof CNabuCatalog) {
+                $retval = new CNabuCatalogItemList($nb_catalog);
+                $retval->setOwner($nb_catalog);
+            } else  {
+                $retval = new CNabuCatalogItemList();
+            }
         }
 
         return $retval;

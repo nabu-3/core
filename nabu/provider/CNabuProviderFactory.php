@@ -213,7 +213,10 @@ class CNabuProviderFactory extends CNabuObject implements INabuSingleton
         $this->nb_manager_list->addItem($nb_manager);
 
         if (!$nb_manager->enableManager()) {
-            throw new ENabuProviderException(ENabuProviderException::ERROR_PROVIDER_MANAGER_FAIL, array($manager_class));
+            throw new ENabuProviderException(
+                ENabuProviderException::ERROR_PROVIDER_MANAGER_FAIL,
+                array(get_class($nb_manager))
+            );
         }
 
         $nb_application = CNabuEngine::getEngine()->getApplication();
