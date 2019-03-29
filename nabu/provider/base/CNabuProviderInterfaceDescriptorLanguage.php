@@ -36,7 +36,7 @@ class CNabuProviderInterfaceDescriptorLanguage extends CNabuDataObject
 
     public function getLanguage()
     {
-        return $nb_language;
+        return $this->nb_language;
     }
 
     public function setLanguage(CNabuLanguage $nb_language)

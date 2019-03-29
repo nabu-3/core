@@ -58,7 +58,7 @@ class CNabuSiteMapLanguage extends CNabuSiteMapLanguageBase
 
     public function getMatchURLFragment($force = false)
     {
-        if ($match_url_fragment === null || $force) {
+        if ($this->match_url_fragment === null || $force) {
             $fragment = parent::getMatchURLFragment();
             $this->match_url_fragment = json_decode($fragment, true);
         }

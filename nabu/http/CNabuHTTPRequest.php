@@ -395,7 +395,7 @@ class CNabuHTTPRequest extends CNabuObject
                 switch ($this->nb_site->getAliasLockedUseURI()) {
                     case 'F':
                         if ($this->nb_site->isValueString('nb_site_alias_locked_url')) {
-                            new ENabuRedirectionException(307, $this->nb_site->getValue('nb_site_alias_locked_url'));
+                            throw new ENabuRedirectionException(307, $this->nb_site->getValue('nb_site_alias_locked_url'));
                         }
                         break;
                     case 'T':
@@ -412,6 +412,7 @@ class CNabuHTTPRequest extends CNabuObject
                             }
                         }
                         break;
+                    default:
                 }
             }
         } else {
@@ -419,7 +420,7 @@ class CNabuHTTPRequest extends CNabuObject
             switch ($this->nb_site->getAliasNotFoundUseURI()) {
                 case 'F':
                     if ($this->nb_site->isValueString('nb_site_alias_not_found_url')) {
-                        new ENabuRedirectionException(307, $this->nb_site->getAliasNotFoundURL());
+                        throw new ENabuRedirectionException(307, $this->nb_site->getAliasNotFoundURL());
                     }
                     break;
                 case 'T':
@@ -435,6 +436,7 @@ class CNabuHTTPRequest extends CNabuObject
                         }
                     }
                     break;
+                default:
             }
         }
 

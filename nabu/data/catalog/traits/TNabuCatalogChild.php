@@ -42,6 +42,7 @@ trait TNabuCatalogChild
 
     /**
      * Gets the Catalog instance that owns this object.
+     * @param bool $force If true force to reload catalog instance from database.
      * @return CNabuCatalog Returns the catalog instance if exists or null if not.
      */
     public function getCatalog($force = false)
@@ -52,9 +53,9 @@ trait TNabuCatalogChild
                 !$this->isBuiltIn()
                 && $this->isValueNumeric(NABU_CATALOG_FIELD_ID)
             ) {
-                $nb_catalog = new CNabuCatalog($this->getValue(NABU_CATALOG_FIELD_ID));
-                if ($nb_catalog->isFetched()) {
-                    $this->nb_catalog = $nb_catalog;
+                $nb_aux_catalog = new CNabuCatalog($this->getValue(NABU_CATALOG_FIELD_ID));
+                if ($nb_aux_catalog->isFetched()) {
+                    $this->nb_catalog = $nb_aux_catalog;
                 }
             }
         }
