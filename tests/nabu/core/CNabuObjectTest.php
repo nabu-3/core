@@ -21,7 +21,7 @@
 
 namespace tests\nabu\core;
 
-use PHPUnit\Framework\Testcase;
+use PHPUnit\Framework\TestCase;
 
 use nabu\core\CNabuEngine;
 use nabu\core\CNabuObject;
@@ -61,7 +61,7 @@ class CNabuObjectTest extends TestCase
     {
         $nb_object = new CNabuObject();
 
-        $this->assertTrue($nb_object->isBuiltIn());
+        $this->assertFalse($nb_object->isBuiltIn());
     }
 
     /**
