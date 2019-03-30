@@ -10,5 +10,5 @@ addons:
         organization: "nabu-3-github"
 
 script:
-#    - phpunit --bootstrap common.php tests --coverage-clover phpunit.coverage.xml --whitelist nabu
+    - phpunit --bootstrap common.php tests --coverage-clover phpunit.coverage.xml --whitelist nabu
     - sonar-scanner
