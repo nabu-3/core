@@ -26,6 +26,8 @@ use PHPUnit\Framework\Testcase;
 use nabu\core\CNabuEngine;
 use nabu\core\CNabuObject;
 
+require_once "common.php";
+
 class CNabuObjectTest extends TestCase
 {
     /**
