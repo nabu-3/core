@@ -1,7 +1,5 @@
-<phpunit bootstrap="common.php">
-  <testsuites>
+<testsuites>
     <testsuite name="Core section">
-      <directory>tests/nabu/core</directory>
+        <directory>tests/nabu/core</directory>
     </testsuite>
-  </testsuites>
-</phpunit>
+</testsuites>
