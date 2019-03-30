@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="common.php">
+  <testsuites>
+    <testsuite name="Core section">
+      <directory>tests/nabu/core</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

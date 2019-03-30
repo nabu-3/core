@@ -23,10 +23,21 @@ namespace tests\nabu\core;
 
 use PHPUnit\Framework\Testcase;
 
+use nabu\core\CNabuEngine;
 use nabu\core\CNabuObject;
 
 class CNabuObjectTest extends TestCase
 {
+    /**
+     * Constructor overrided to instantiate Nabu Engine.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        CNabuEngine::getEngine();
+    }
+
     /**
      * @test getTimestamp
      */
