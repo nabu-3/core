@@ -1,0 +1,5 @@
+<testsuites>
+    <testsuite name="Core section">
+        <directory>tests/nabu/core</directory>
+    </testsuite>
+</testsuites>
