@@ -1,5 +1,10 @@
 <testsuites>
     <testsuite name="Core section">
         <directory>tests/nabu/core</directory>
+        <filter>
+            <whitelist processUncoveredFilesFromWhitelist="true">
+                <directory suffix=".php">tests/nabu/core</directory>
+            </whitelist>
+        </filter>
     </testsuite>
 </testsuites>
