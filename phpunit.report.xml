@@ -3,8 +3,3 @@
         <directory>tests/nabu/core</directory>
     </testsuite>
 </testsuites>
-<filter>
-    <whitelist processUncoveredFilesFromWhitelist="true">
-        <directory suffix=".php">tests/nabu/core</directory>
-    </whitelist>
-</filter>
