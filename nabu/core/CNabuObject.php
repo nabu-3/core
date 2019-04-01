@@ -71,7 +71,7 @@ class CNabuObject
      * Create a new hash for an instance
      * @return string Return the hash created.
      */
-    public function createHash() : string
+    public function createHash()
     {
         $this->hash = nb_generateGUID();
 
@@ -82,7 +82,7 @@ class CNabuObject
      * Gets the current hash and, if none exists, then creates it.
      * @return string Retuns a valid unique hash (GUID) to identify this instance.
      */
-    public function getHash() : string
+    public function getHash()
     {
         return ($this->hash ? $this->hash : $this->createHash());
     }
