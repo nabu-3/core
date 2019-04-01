@@ -69,7 +69,7 @@ class CNabuOSTest extends TestCase
     {
         $this->expectException(ENabuSingletonException::class);
         $nb_os_3 = new CNabuOS();
-    }  
+    }
 
     /**
      * @test getOSName
@@ -79,7 +79,9 @@ class CNabuOSTest extends TestCase
      */
     public function testGetOSName(CNabuOS $nb_os): CNabuOS
     {
-        $this->assertIsString($nb_os->getOSName());
+        $name = $nb_os->getOSName();
+        $this->assertIsString($name);
+        $this->assertRegExp('/^(Darwin|linux|Windows)$/', $name);
 
         return $nb_os;
     }
