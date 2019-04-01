@@ -42,7 +42,7 @@ class CNabuOSTest extends TestCase
     {
         parent::__construct();
 
-        CNabuEngine::getEngine();
+        //CNabuEngine::getEngine();
     }
 
     /**
