@@ -81,7 +81,7 @@ class CNabuOSTest extends TestCase
     {
         $name = $nb_os->getOSName();
         $this->assertIsString($name);
-        $this->assertRegExp('/^(Darwin|linux|Windows)$/', $name);
+        $this->assertRegExp('/^(Darwin|Linux|Windows)$/', $name);
 
         return $nb_os;
     }
