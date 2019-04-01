@@ -24,7 +24,6 @@ namespace tests\nabu\core;
 use PHPUnit\Framework\TestCase;
 
 use nabu\core\CNabuOS;
-use nabu\core\CNabuEngine;
 
 /**
  * PHPUnit tests to verify functionality of class @see CNabuOS
@@ -36,16 +35,6 @@ use nabu\core\CNabuEngine;
 class CNabuOSTest extends TestCase
 {
     /**
-     * Constructor overrided to instantiate Nabu Engine.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        //CNabuEngine::getEngine();
-    }
-
-    /**
      * @test isInstantiated
      */
     public function testIsInstantiated()
@@ -54,16 +43,16 @@ class CNabuOSTest extends TestCase
     }
 
     /**
-     * @test getInstance
+     * @test getOS
      * @test init
      * @depends testIsInstantiated
      * @return CNabuOS Returns the OS instance.
      */
-    public function testGetInstance(): CNabuOS
+    public function testGetOS(): CNabuOS
     {
-        $nb_os = CNabuOS::getInstance();
+        $nb_os = CNabuOS::getOS();
         $this->assertIsObject($nb_os);
-        $nb_os_2 = CNabuOS::getInstance();
+        $nb_os_2 = CNabuOS::getOS();
         $this->assertSame($nb_os, $nb_os_2);
 
         return $nb_os;
@@ -71,44 +60,52 @@ class CNabuOSTest extends TestCase
 
     /**
      * @test getOSName
-     * @depends testIsInstantiated
+     * @depends testGetOS
      * @param CNabuOS $nb_os OS instance created in previous tests.
+     * @return CNabuOS Returns the OS instance.
      */
-    public function testGetOSName(CNabuOS $nb_os)
+    public function testGetOSName(CNabuOS $nb_os): CNabuOS
     {
         $this->assertIsString($nb_os->getOSName());
+
+        return $nb_os;
     }
 
     /**
      * @test getOSVersion
-     * @depends testIsInstantiated
-     * @after testGetOSName
+     * @depends testGetOS
      * @param CNabuOS $nb_os OS instance created in previous tests.
+     * @return CNabuOS Returns the OS instance.
      */
-    public function testGetOSVersion(CNabuOS $nb_os)
+    public function testGetOSVersion(CNabuOS $nb_os): CNabuOS
     {
         $this->assertIsString($nb_os->getOSVersion());
+
+        return $nb_os;
     }
 
     /**
      * @test getOSArchitecture
-     * @depends testIsInstantiated
-     * @after testGetOSVersion
+     * @depends testGetOS
      * @param CNabuOS $nb_os OS instance created in previous tests.
+     * @return CNabuOS Returns the OS instance.
      */
-    public function testGetOSArchitecture(CNabuOS $nb_os)
+    public function testGetOSArchitecture(CNabuOS $nb_os): CNabuOS
     {
         $this->assertIsString($nb_os->getOSArchitecture());
+
+        return $nb_os;
     }
 
     /**
      * @test getPHPVersion
-     * @depends testIsInstantiated
-     * @after testGetOSArchitecture
+     * @depends testGetOS
      * @param CNabuOS $nb_os OS instance created in previous tests.
      */
     public function testGetPHPVersion(CNabuOS $nb_os)
     {
         $this->assertIsArray($nb_os->getPHPVersion());
+
+        return $nb_os;
     }
 }
