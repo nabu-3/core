@@ -67,7 +67,7 @@ class CNabuOS extends CNabuObject implements INabuSingleton
      */
     public function __construct()
     {
-        if (CNabuOS::$nb_os !== null) {
+        if (self::$nb_os !== null) {
             throw new ENabuSingletonException("OS already instantiated");
         }
 
@@ -80,12 +80,12 @@ class CNabuOS extends CNabuObject implements INabuSingleton
      */
     public static function getOS()
     {
-        if (CNabuOS::$nb_os === null) {
-            CNabuOS::$nb_os = new CNabuOS();
-            CNabuOS::$nb_os->init();
+        if (self::$nb_os === null) {
+            self::$nb_os = new CNabuOS();
+            self::$nb_os->init();
         }
 
-        return CNabuOS::$nb_os;
+        return self::$nb_os;
     }
 
     /**
@@ -94,7 +94,7 @@ class CNabuOS extends CNabuObject implements INabuSingleton
      */
     public static function isInstantiated() : bool
     {
-        return (CNabuOS::$nb_os !== null);
+        return (self::$nb_os !== null);
     }
 
     /**
