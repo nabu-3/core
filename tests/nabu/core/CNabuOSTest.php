@@ -25,6 +25,8 @@ use PHPUnit\Framework\TestCase;
 
 use nabu\core\CNabuOS;
 
+use nabu\core\exceptions\ENabuSingletonException;
+
 /**
  * PHPUnit tests to verify functionality of class @see CNabuOS
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -43,6 +45,7 @@ class CNabuOSTest extends TestCase
     }
 
     /**
+     * @test __construct
      * @test getOS
      * @test init
      * @depends testIsInstantiated
@@ -57,6 +60,16 @@ class CNabuOSTest extends TestCase
 
         return $nb_os;
     }
+
+    /**
+     * @test __construct
+     * @depends testIsInstantiated
+     */
+    public function testConstruct()
+    {
+        $this->expectException(ENabuSingletonException::class);
+        $nb_os_3 = new CNabuOS();
+    }  
 
     /**
      * @test getOSName

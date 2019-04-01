@@ -1,6 +1,7 @@
+lib/**
+tmp/**
 .remote-sync*
 .DS_Store
-lib/**
 .scannerwork
 .sonarlint
 .phpunit*
