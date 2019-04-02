@@ -13,3 +13,6 @@ lib
 pub
 sdk
 tmp
+etc
+var
+test.sh

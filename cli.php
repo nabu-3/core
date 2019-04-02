@@ -150,7 +150,9 @@ function nbCLICheckOption($short, $large, $required = '', $default = false, $die
             $retval = $options[$short];
         }
     } elseif (array_key_exists($large, $options)) {
-        $retval = ($required === '' || strlen($options[$large]) === 0 ? true : $options[$large]);
+        $param = $options[$large];
+        $param = is_array($param) ? $param[count($param) - 1] : $param;
+        $retval = ($required === '' || strlen($param) === 0 ? true : $param);
     } elseif ($die && $required === ':') {
         die ("$large not defined\n");
     }

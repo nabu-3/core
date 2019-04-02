@@ -17,6 +17,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 use \nabu\core\CNabuEngine;
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -26,4 +27,4 @@ require_once 'common.php';
 require_once 'cli.php';
 CNabuEngine::setOperationModeCLI();
 CNabuEngine::setInstallMode(true);
-CNabuEngine::getEngine()->runApplication('\\nabu\\cli\\app\\CNabuInstallApp');
+CNabuEngine::getEngine()->runApplication(\nabu\cli\app\CNabuInstallApp::class);

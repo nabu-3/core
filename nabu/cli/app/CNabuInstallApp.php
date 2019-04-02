@@ -61,7 +61,6 @@ class CNabuInstallApp extends CNabuCLIApplication
         echo "Setting up environment for nabu-3\n";
 
         $this->loadParameters();
-        $this->checkFHSPaths();
         $this->checkPaths();
         $this->prepareMySQLConfiguration();
         $this->prepareWebServerConfiguration();
@@ -99,12 +98,6 @@ class CNabuInstallApp extends CNabuCLIApplication
         $this->mysql_user = nbCLICheckOption('du', 'db-user', ':', $this->mysql_user, false);
         $this->mysql_password = nbCLICheckOption('da', 'db-password', ':', $this->mysql_password, false);
         echo "OK\n";
-    }
-
-    private function checkFHSPaths()
-    {
-        $this->checkingPath('/etc/opt', true);
-        $this->checkingPath('/var/opt', true);
     }
 
     private function checkPaths()
