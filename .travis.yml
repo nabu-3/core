@@ -10,6 +10,7 @@ addons:
         organization: "nabu-3-github"
 
 install:
+    - mkdir -p /etc/opt/nabu-3.conf.d
     - composer require nabu-3/provider-mysql-driver
 
 script:
