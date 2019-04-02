@@ -9,7 +9,9 @@ addons:
     sonarcloud:
         organization: "nabu-3-github"
 
+install:
+    - composer require nabu-3/provider-mysql-driver
+
 script:
-    - composer update
     - phpunit --bootstrap common.php tests --coverage-clover phpunit.coverage.xml --whitelist nabu
     - sonar-scanner
