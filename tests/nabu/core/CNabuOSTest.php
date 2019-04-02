@@ -53,7 +53,7 @@ class CNabuOSTest extends TestCase
 
     /**
      * @test isInstantiated
-     * @depends testConstructReset
+     * @runInSeparateProcess
      */
     public function testIsInstantiated()
     {

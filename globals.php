@@ -64,7 +64,7 @@ define('NABU_VHOST_CONFIG_FOLDER', DIRECTORY_SEPARATOR . 'conf');
 
 define('NABU_ETC_PATH', '/etc/opt/nabu-3.conf.d');
 define('NABU_LOG_PATH', '/var/log/nabu-3');
-define('NABU_BASE_PATH', '/opt/nabu-3');
+define('NABU_BASE_PATH', realpath( dirname(__FILE__) . DIRECTORY_SEPARATOR . '..'));
 
 define('NABU_SRC_PATH', NABU_BASE_PATH . NABU_SRC_FOLDER);
 define('NABU_SDK_PATH', NABU_BASE_PATH . NABU_SDK_FOLDER);

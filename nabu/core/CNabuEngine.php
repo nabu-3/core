@@ -131,9 +131,11 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     {
         if (self::$nb_engine != null) {
             throw new ENabuSingletonException("Engine already instantiated");
+        } else {
+            parent::__construct();
+            self::$nb_engine = $this;
+            self::$nb_engine->init();
         }
-
-        parent::__construct();
     }
 
     /**
@@ -611,13 +613,13 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
      */
     private function finish()
     {
-        $this->microtime_end = microtime(true);
-        $this->microtime_elapsed = $this->microtime_end - $this->microtime_start;
-        $this->traceLog("Execution time", sprintf("%.3f ms", $this->microtime_elapsed * 1000));
-
         if ($this->main_database !== null) {
             $this->main_database->disconnect();
         }
+
+        $this->microtime_end = microtime(true);
+        $this->microtime_elapsed = $this->microtime_end - $this->microtime_start;
+        $this->traceLog("Execution time", sprintf("%.3f ms", $this->microtime_elapsed * 1000));
     }
 
     /**

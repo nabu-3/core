@@ -24,8 +24,8 @@
     "require": {
         "php": ">=7.0",
         "nabu-3/composer-installer-plugin": ">=3.0",
-        "nabu-3/provider-mysql-driver": ">=0.0",
-        "nabu-3/sdk": ">=3.0"
+        "nabu-3/provider-mysql-driver": "dev-master",
+        "nabu-3/sdk": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^8"

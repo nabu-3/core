@@ -40,4 +40,11 @@
             <directory>./nabu</directory>
         </whitelist>
     </filter>
+    <php>
+        <includePath>.</includePath>
+        <includePath>src</includePath>
+        <includePath>sdk</includePath>
+        <includePath>pub</includePath>
+        <includePath>lib</includePath>
+    </php>
 </phpunit>
