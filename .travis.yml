@@ -29,16 +29,16 @@ jobs:
           before_script:
               - sudo apt-get install -y realpath
               - ./tests/travis/install-mysql-$MYSQL_VERSION.sh
-              - bin/nabu-install.sh \
-                    --etc-path=`pwd`/etc/opt/nabu.conf.d \
-                    --base-path=`pwd` \
-                    --web-path=`pwd`/var/opt/nabu-3 \
-                    --log-path=`pwd`/var/log/nabu-3 \
-                    --db-host=localhost \
-                    --db-port=3306 \
-                    --db-schema=nabu-3 \
-                    --db-user=nabu-3 \
-                    --db-password=nabu-3 \
+              - bin/nabu-install.sh
+                    --etc-path=`pwd`/etc/opt/nabu.conf.d
+                    --base-path=`pwd`
+                    --web-path=`pwd`/var/opt/nabu-3
+                    --log-path=`pwd`/var/log/nabu-3
+                    --db-host=localhost
+                    --db-port=3306
+                    --db-schema=nabu-3
+                    --db-user=nabu-3
+                    --db-password=nabu-3
                     --silent
           sudo: required
 
