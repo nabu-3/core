@@ -32,7 +32,7 @@
     },
     "repositories": [
         {
-            "type": "vcs",
+            "type": "git",
             "url": "https://github.com/nabu-3/core"
         }
     ],
