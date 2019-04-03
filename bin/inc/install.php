@@ -1,4 +1,5 @@
 <?php
+
 /** @license
  *  Copyright 2009-2011 Rafael Gutierrez Martinez
  *  Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -19,12 +20,15 @@
  */
 
 use \nabu\core\CNabuEngine;
+
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
  */
+
 require_once 'common.php';
 require_once 'cli.php';
+
 CNabuEngine::setOperationModeCLI();
 CNabuEngine::setInstallMode(true);
 CNabuEngine::getEngine()->runApplication(\nabu\cli\app\CNabuInstallApp::class);

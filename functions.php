@@ -40,11 +40,15 @@ use nabu\data\customer\CNabuCustomer;
  */
 function nb_autoLoadClasses($class_name)
 {
-    $file = stream_resolve_include_path(str_replace('\\', DIRECTORY_SEPARATOR, $class_name) . ".php");
+    $filename = str_replace('\\', DIRECTORY_SEPARATOR, $class_name) . ".php";
+    if (nb_strStartsWith($filename, DIRECTORY_SEPARATOR)) {
+        $filename = substr($filename, strlen(DIRECTORY_SEPARATOR));
+    }
+    $file = stream_resolve_include_path($filename);
 
     if (file_exists($file)) {
         if (defined('NABU_TRACE_AUTOLOAD') && NABU_TRACE_AUTOLOAD === true) {
-            if (class_exists('nabu\core\CNabuEngine') && \nabu\core\CNabuEngine::isInstantiated()) {
+            if (class_exists(NABU_ENGINE_CLASS) && \nabu\core\CNabuEngine::isInstantiated()) {
                 \nabu\core\CNabuEngine::getEngine()->traceLog("Autoload Class", "$class_name in $file");
             } else {
                 error_log("Autoload Class: $class_name in $file");
@@ -52,7 +56,7 @@ function nb_autoLoadClasses($class_name)
         }
         nb_requireOnceIsolated($file);
     } else {
-        if (class_exists('nabu\core\CNabuEngine') && \nabu\core\CNabuEngine::isInstantiated()) {
+        if (class_exists(NABU_ENGINE_CLASS) && \nabu\core\CNabuEngine::isInstantiated()) {
             \nabu\core\CNabuEngine::getEngine()->autoLoadClasses($class_name, false);
         }
     }
@@ -68,7 +72,7 @@ function nb_autoLoadClasses($class_name)
 function nb_requireOnceIsolated($filename, $expose_engine = false, $expose_app = false)
 {
     if ($expose_engine) {
-        if (class_exists('nabu\core\CNabuEngine') && \nabu\core\CNabuEngine::isInstantiated()) {
+        if (class_exists(NABU_ENGINE_CLASS) && \nabu\core\CNabuEngine::isInstantiated()) {
             $nb_engine = \nabu\core\CNabuEngine::getEngine();
         } else {
             $nb_engine = null;
@@ -76,7 +80,7 @@ function nb_requireOnceIsolated($filename, $expose_engine = false, $expose_app =
     }
 
     if ($expose_app) {
-        if (class_exists('nabu\core\CNabuEngine') && \nabu\core\CNabuEngine::isInstantiated()) {
+        if (class_exists(NABU_ENGINE_CLASS) && \nabu\core\CNabuEngine::isInstantiated()) {
             $nb_application = \nabu\core\CNabuEngine::getEngine()->getApplication();
         } else {
             $nb_application = null;
@@ -97,7 +101,7 @@ function nb_requireOnceIsolated($filename, $expose_engine = false, $expose_app =
 function nb_includeIsolated($filename, $params = false, $expose_engine = false, $expose_app = false)
 {
     if ($expose_engine) {
-        if (class_exists('nabu\core\CNabuEngine') && \nabu\core\CNabuEngine::isInstantiated()) {
+        if (class_exists(NABU_ENGINE_CLASS) && \nabu\core\CNabuEngine::isInstantiated()) {
             $nb_engine = \nabu\core\CNabuEngine::getEngine();
         } else {
             $nb_engine = null;
@@ -105,7 +109,7 @@ function nb_includeIsolated($filename, $params = false, $expose_engine = false, 
     }
 
     if ($expose_app) {
-        if (class_exists('nabu\core\CNabuEngine') && \nabu\core\CNabuEngine::isInstantiated()) {
+        if (class_exists(NABU_ENGINE_CLASS) && \nabu\core\CNabuEngine::isInstantiated()) {
             $nb_application = \nabu\core\CNabuEngine::getEngine()->getApplication();
         } else {
             $nb_application = null;
