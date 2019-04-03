@@ -11,7 +11,7 @@ install:
     - travis_retry composer update
 
 script:
-    - phpunit --bootstrap common.php tests --coverage-clover phpunit.coverage.xml --whitelist nabu
+    - ./bin/phpunit --bootstrap common.php tests --coverage-clover phpunit.coverage.xml --whitelist nabu
     - sonar-scanner
 
 cache:

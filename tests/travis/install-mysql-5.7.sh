@@ -14,7 +14,7 @@ sudo DEBIAN_FRONTEND=noninteractive dpkg -i mysql-apt-config_0.8.6-1_all.deb
 sudo rm -rf /var/lib/apt/lists/*
 sudo apt-get clean
 sudo apt-get update -q
-sudo apt-get install -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" mysql-server libmysqlclient-dev
+sudo apt-get install -q -y --allow-unauthenticated -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" mysql-server libmysqlclient-dev
 sudo mysql_upgrade
 
 echo "Restart mysql..."
