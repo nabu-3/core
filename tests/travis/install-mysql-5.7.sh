@@ -21,4 +21,3 @@ echo "Restart mysql..."
 sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
 sudo mysql -e "create schema if not exists \`nabu-3\` default character set utf8mb4 default collate utf8mb4_general_ci"
 sudo mysql -e "grant all on \`nabu-3\`.* to 'nabu-3'@'%' identified by 'nabu-3' with grant option"
-`
