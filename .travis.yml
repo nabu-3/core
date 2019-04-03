@@ -1,6 +1,7 @@
 dist: trusty
-
+sudo: false
 language: php
+
 php:
     - 7.2
     - 7.3
@@ -17,9 +18,6 @@ addons:
 install:
     - travis_retry composer update
 
-before_script:
-    - ./tests/travis/install-mysql-$MYSQL_VERSION.sh
-
 script:
     - phpunit --bootstrap common.php tests --coverage-clover phpunit.coverage.xml --whitelist nabu
     - sonar-scanner
@@ -27,3 +25,12 @@ script:
 cache:
     directories:
         - $HOME/.composer/cache
+
+jobs:
+    include:
+        - stage: Test
+          env: DB=mysql MYSQL_VERSION=5.7
+          php: 7.2
+          before_script:
+              - ./tests/travis/install-mysql-$MYSQL_VERSION.sh
+          sudo: required
