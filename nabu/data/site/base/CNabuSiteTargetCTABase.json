@@ -107,7 +107,7 @@
                 "nb_site_target_cta_id": {
                     "name": "nb_site_target_cta_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -121,7 +121,7 @@
                 "nb_site_target_cta_hash": {
                     "name": "nb_site_target_cta_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -137,7 +137,7 @@
                 "nb_site_target_id": {
                     "name": "nb_site_target_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -153,7 +153,7 @@
                 "nb_site_target_id": {
                     "name": "nb_site_target_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -161,7 +161,7 @@
                 "nb_site_target_cta_order": {
                     "name": "nb_site_target_cta_order",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""

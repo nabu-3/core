@@ -63,7 +63,7 @@
                 "nb_ip_id": {
                     "name": "nb_ip_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -77,7 +77,7 @@
                 "nb_ip_ip": {
                     "name": "nb_ip_ip",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

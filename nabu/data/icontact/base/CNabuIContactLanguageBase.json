@@ -63,13 +63,13 @@
                 "nb_icontact_id": {
                     "name": "nb_icontact_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 },
                 "nb_language_id": {
                     "name": "nb_language_id",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -83,7 +83,7 @@
                 "nb_language_id": {
                     "name": "nb_language_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""

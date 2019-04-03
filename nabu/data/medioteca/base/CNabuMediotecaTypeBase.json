@@ -52,7 +52,7 @@
                 "nb_medioteca_type_id": {
                     "name": "nb_medioteca_type_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -66,7 +66,7 @@
                 "nb_medioteca_type_key": {
                     "name": "nb_medioteca_type_key",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -82,7 +82,7 @@
                 "nb_customer_id": {
                     "name": "nb_customer_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""

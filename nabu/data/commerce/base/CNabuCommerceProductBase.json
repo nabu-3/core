@@ -294,7 +294,7 @@
                 "nb_commerce_product_id": {
                     "name": "nb_commerce_product_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -308,7 +308,7 @@
                 "nb_commerce_id": {
                     "name": "nb_commerce_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -316,7 +316,7 @@
                 "nb_commerce_product_sku": {
                     "name": "nb_commerce_product_sku",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -332,7 +332,7 @@
                 "nb_commerce_product_provider_reference": {
                     "name": "nb_commerce_product_provider_reference",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -348,7 +348,7 @@
                 "nb_provider_id": {
                     "name": "nb_provider_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -364,7 +364,7 @@
                 "nb_commerce_id": {
                     "name": "nb_commerce_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -380,7 +380,7 @@
                 "nb_commerce_product_category_id": {
                     "name": "nb_commerce_product_category_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -396,7 +396,7 @@
                 "nb_commerce_tax_id": {
                     "name": "nb_commerce_tax_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

@@ -299,7 +299,7 @@ class CNabuInstallApp extends CNabuCLIApplication
 
     private function writeEtcConfMainFile()
     {
-        $filename = $this->etc_path . DIRECTORY_SEPARATOR . 'nabu-3.conf';
+        $filename = $this->base_path . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'nabu-3.conf';
 
         echo "    ...writing [$filename]...";
 

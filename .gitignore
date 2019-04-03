@@ -8,6 +8,7 @@ bin/nabu-export.sh
 bin/nabu-import.sh
 bin/nabu-schema2class.sh
 bin/nabu-table2class.sh
+bin/nabu-3.conf
 phpunit
 lib
 pub

@@ -107,7 +107,7 @@
                 "nb_catalog_taxonomy_id": {
                     "name": "nb_catalog_taxonomy_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -121,7 +121,7 @@
                 "nb_catalog_taxonomy_hash": {
                     "name": "nb_catalog_taxonomy_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -137,7 +137,7 @@
                 "nb_catalog_id": {
                     "name": "nb_catalog_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -153,7 +153,7 @@
                 "nb_catalog_id": {
                     "name": "nb_catalog_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -161,7 +161,7 @@
                 "nb_catalog_taxonomy_key": {
                     "name": "nb_catalog_taxonomy_key",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

@@ -492,7 +492,7 @@
                 "nb_user_id": {
                     "name": "nb_user_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -506,7 +506,7 @@
                 "nb_customer_id": {
                     "name": "nb_customer_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -514,7 +514,7 @@
                 "nb_user_login": {
                     "name": "nb_user_login",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -530,7 +530,7 @@
                 "nb_customer_id": {
                     "name": "nb_customer_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -538,7 +538,7 @@
                 "nb_user_email": {
                     "name": "nb_user_email",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": "200",
                     "comments": ""
@@ -554,7 +554,7 @@
                 "nb_user_cellular": {
                     "name": "nb_user_cellular",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -570,7 +570,7 @@
                 "nb_customer_id": {
                     "name": "nb_customer_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -586,7 +586,7 @@
                 "nb_user_medioteca_id": {
                     "name": "nb_user_medioteca_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -602,7 +602,7 @@
                 "nb_user_medioteca_item_id": {
                     "name": "nb_user_medioteca_item_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -618,7 +618,7 @@
                 "wgeo_country_id": {
                     "name": "wgeo_country_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -634,7 +634,7 @@
                 "nb_user_first_name": {
                     "name": "nb_user_first_name",
                     "ordinal": "1",
-                    "collation": "DES",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -642,7 +642,7 @@
                 "nb_user_last_name": {
                     "name": "nb_user_last_name",
                     "ordinal": "2",
-                    "collation": "DES",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -650,7 +650,7 @@
                 "nb_user_city_name": {
                     "name": "nb_user_city_name",
                     "ordinal": "3",
-                    "collation": "DES",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -658,7 +658,7 @@
                 "nb_user_province_name": {
                     "name": "nb_user_province_name",
                     "ordinal": "4",
-                    "collation": "DES",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -666,8 +666,96 @@
                 "nb_user_email": {
                     "name": "nb_user_email",
                     "ordinal": "5",
-                    "collation": "DES",
+                    "collation": null,
                     "null": false,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_login": {
+                    "name": "nb_user_login",
+                    "ordinal": "6",
+                    "collation": null,
+                    "null": false,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_fiscal_number": {
+                    "name": "nb_user_fiscal_number",
+                    "ordinal": "7",
+                    "collation": null,
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_address_1": {
+                    "name": "nb_user_address_1",
+                    "ordinal": "8",
+                    "collation": null,
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_address_2": {
+                    "name": "nb_user_address_2",
+                    "ordinal": "9",
+                    "collation": null,
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_zip_code": {
+                    "name": "nb_user_zip_code",
+                    "ordinal": "10",
+                    "collation": null,
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_web": {
+                    "name": "nb_user_web",
+                    "ordinal": "11",
+                    "collation": null,
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_telephone": {
+                    "name": "nb_user_telephone",
+                    "ordinal": "12",
+                    "collation": null,
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_cellular": {
+                    "name": "nb_user_cellular",
+                    "ordinal": "13",
+                    "collation": null,
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_fax": {
+                    "name": "nb_user_fax",
+                    "ordinal": "14",
+                    "collation": null,
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_work_centre": {
+                    "name": "nb_user_work_centre",
+                    "ordinal": "15",
+                    "collation": null,
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                },
+                "nb_user_work_city": {
+                    "name": "nb_user_work_city",
+                    "ordinal": "16",
+                    "collation": null,
+                    "null": true,
                     "subpart": null,
                     "comments": ""
                 }

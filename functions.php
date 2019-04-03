@@ -56,6 +56,7 @@ function nb_autoLoadClasses($class_name)
         }
         nb_requireOnceIsolated($file);
     } else {
+        error_log($class_name . ' ==== ' . $filename . ' ==== ' . ini_get('include_path'));
         if (class_exists(NABU_ENGINE_CLASS) && \nabu\core\CNabuEngine::isInstantiated()) {
             \nabu\core\CNabuEngine::getEngine()->autoLoadClasses($class_name, false);
         }

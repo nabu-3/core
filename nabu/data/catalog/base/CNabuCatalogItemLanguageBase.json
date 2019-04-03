@@ -162,13 +162,13 @@
                 "nb_catalog_item_id": {
                     "name": "nb_catalog_item_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 },
                 "nb_language_id": {
                     "name": "nb_language_id",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -182,7 +182,7 @@
                 "nb_language_id": {
                     "name": "nb_language_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -198,7 +198,7 @@
                 "nb_catalog_item_lang_slug": {
                     "name": "nb_catalog_item_lang_slug",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -214,7 +214,7 @@
                 "nb_catalog_item_lang_title": {
                     "name": "nb_catalog_item_lang_title",
                     "ordinal": "1",
-                    "collation": "DES",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -222,7 +222,7 @@
                 "nb_catalog_item_lang_subtitle": {
                     "name": "nb_catalog_item_lang_subtitle",
                     "ordinal": "2",
-                    "collation": "DES",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -230,7 +230,7 @@
                 "nb_catalog_item_lang_opening": {
                     "name": "nb_catalog_item_lang_opening",
                     "ordinal": "3",
-                    "collation": "DES",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -238,7 +238,7 @@
                 "nb_catalog_item_lang_content": {
                     "name": "nb_catalog_item_lang_content",
                     "ordinal": "4",
-                    "collation": "DES",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -246,7 +246,7 @@
                 "nb_catalog_item_lang_footer": {
                     "name": "nb_catalog_item_lang_footer",
                     "ordinal": "5",
-                    "collation": "DES",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -254,7 +254,7 @@
                 "nb_catalog_item_lang_aside": {
                     "name": "nb_catalog_item_lang_aside",
                     "ordinal": "6",
-                    "collation": "DES",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

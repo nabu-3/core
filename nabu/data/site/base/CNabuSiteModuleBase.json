@@ -85,13 +85,13 @@
                 "nb_site_id": {
                     "name": "nb_site_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 },
                 "nb_site_module_id": {
                     "name": "nb_site_module_id",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }

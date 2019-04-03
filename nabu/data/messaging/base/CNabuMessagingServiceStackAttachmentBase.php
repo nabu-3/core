@@ -3,12 +3,12 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/11/05 12:50:05 UTC
+ * Created: 2019/04/03 22:59:55 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  * Copyright 2014-2016 Where Ideas Simply Come True, S.L.
- * Copyright 2017-2018 nabu-3 Group
+ * Copyright 2017-2019 nabu-3 Group
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,6 @@ use \nabu\db\CNabuDBInternalObject;
 /**
  * Class to manage the entity Messaging Service Stack Attachment stored in the storage named
  * nb_messaging_service_stack_attachment.
- * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\messaging\base
  */
@@ -193,20 +192,20 @@ abstract class CNabuMessagingServiceStackAttachmentBase extends CNabuDBInternalO
     }
 
     /**
-     * Get Messaging Service Stack Attachment MIMEType attribute value
-     * @return null|string Returns the Messaging Service Stack Attachment MIMEType value
+     * Get Messaging Service Stack Attachment Mimetype attribute value
+     * @return null|string Returns the Messaging Service Stack Attachment Mimetype value
      */
-    public function getMIMEType()
+    public function getMimetype()
     {
         return $this->getValue('nb_messaging_service_stack_attachment_mimetype');
     }
 
     /**
-     * Sets the Messaging Service Stack Attachment MIMEType attribute value.
+     * Sets the Messaging Service Stack Attachment Mimetype attribute value.
      * @param string|null $mimetype New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMIMEType(string $mimetype = null) : CNabuDataObject
+    public function setMimetype(string $mimetype = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_service_stack_attachment_mimetype', $mimetype);
         

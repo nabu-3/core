@@ -162,13 +162,13 @@
                 "nb_catalog_taxonomy_id": {
                     "name": "nb_catalog_taxonomy_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 },
                 "nb_language_id": {
                     "name": "nb_language_id",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -182,7 +182,7 @@
                 "nb_language_id": {
                     "name": "nb_language_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -198,7 +198,7 @@
                 "nb_catalog_taxonomy_lang_slug": {
                     "name": "nb_catalog_taxonomy_lang_slug",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

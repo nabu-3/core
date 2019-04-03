@@ -3,7 +3,7 @@
     "name": "nb_site_static_content",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "210",
+    "autoincrement": "213",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "comment": "",
@@ -96,7 +96,7 @@
                 "nb_site_static_content_id": {
                     "name": "nb_site_static_content_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -110,7 +110,7 @@
                 "nb_site_static_content_hash": {
                     "name": "nb_site_static_content_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -126,7 +126,7 @@
                 "nb_site_id": {
                     "name": "nb_site_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -142,7 +142,7 @@
                 "nb_site_id": {
                     "name": "nb_site_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""

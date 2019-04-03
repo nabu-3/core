@@ -118,7 +118,7 @@
                 "nb_site_alias_id": {
                     "name": "nb_site_alias_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -132,7 +132,7 @@
                 "nb_site_id": {
                     "name": "nb_site_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -148,7 +148,7 @@
                 "nb_domain_zone_host_id": {
                     "name": "nb_domain_zone_host_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -164,7 +164,7 @@
                 "nb_user_id": {
                     "name": "nb_user_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

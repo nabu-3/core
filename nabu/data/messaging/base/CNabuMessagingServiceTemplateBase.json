@@ -41,13 +41,13 @@
                 "nb_messaging_service_id": {
                     "name": "nb_messaging_service_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 },
                 "nb_messaging_template_id": {
                     "name": "nb_messaging_template_id",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -61,7 +61,7 @@
                 "nb_messaging_template_id": {
                     "name": "nb_messaging_template_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""

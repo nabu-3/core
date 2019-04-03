@@ -74,7 +74,7 @@
                 "nb_cluster_group_service_id": {
                     "name": "nb_cluster_group_service_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -88,7 +88,7 @@
                 "nb_cluster_group_id": {
                     "name": "nb_cluster_group_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""

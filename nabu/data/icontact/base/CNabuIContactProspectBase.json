@@ -316,7 +316,7 @@
                 "nb_icontact_prospect_id": {
                     "name": "nb_icontact_prospect_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -330,7 +330,7 @@
                 "nb_icontact_id": {
                     "name": "nb_icontact_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -346,7 +346,7 @@
                 "nb_language_id": {
                     "name": "nb_language_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -362,7 +362,7 @@
                 "nb_user_id": {
                     "name": "nb_user_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -378,7 +378,7 @@
                 "nb_icontact_prospect_status_id": {
                     "name": "nb_icontact_prospect_status_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -394,7 +394,7 @@
                 "nb_icontact_prospect_email_hash": {
                     "name": "nb_icontact_prospect_email_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

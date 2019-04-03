@@ -85,7 +85,7 @@
                 "nb_icontact_prospect_status_type_id": {
                     "name": "nb_icontact_prospect_status_type_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -99,7 +99,7 @@
                 "nb_icontact_id": {
                     "name": "nb_icontact_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -115,7 +115,7 @@
                 "nb_icontact_prospect_status_type_hash": {
                     "name": "nb_icontact_prospect_status_type_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
