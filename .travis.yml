@@ -7,7 +7,7 @@ addons:
         organization: "nabu-3-github"
 
 install:
-    - if [ -f composer.lock] ; rm composer.lock ; fi
+    - if [ -f composer.lock ]; then rm composer.lock; fi
     - travis_retry composer update
 
 script:
