@@ -130,7 +130,7 @@ class ENabuDBException extends ENabuException implements INabuDBException
         $this->sql_script = $sql_script;
 
         if ($code === ENabuDBException::ERROR_QUERY_EXECUTION && $sql_message !== null) {
-            if (count($values) === 0) {
+            if (!is_array($values) || count($values) === 0) {
                 $values = array($sql_message);
             } else {
                 $values = array_unshift($values, $sql_message);

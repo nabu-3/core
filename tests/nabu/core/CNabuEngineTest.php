@@ -25,6 +25,8 @@ use PHPUnit\Framework\TestCase;
 
 use nabu\core\CNabuEngine;
 
+use nabu\core\exceptions\ENabuSingletonException;
+
 /**
  * PHPUnit tests to verify functionality of class @see CNabuEngine
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -35,10 +37,64 @@ use nabu\core\CNabuEngine;
 class CNabuEngineTest extends TestCase
 {
     /**
+     * @test __construct
+     * @test init
      * @test isInstantiated
+     * @test getEngine
+     * @runInSeparateProcess
+     */
+    public function testConstruct()
+    {
+        $this->assertIsObject($nb_os = new CNabuEngine());
+        $this->expectException(ENabuSingletonException::class);
+        $nb_os = new CNabuEngine();
+    }
+
+    /**
+     * @test isInstantiated
+     * @test getEngine
+     * @runInSeparateProcess
      */
     public function testIsInstantiated()
     {
         $this->assertFalse(CNabuEngine::isInstantiated());
+        $nb_engine = CNabuEngine::getEngine();
+        $this->assertIsObject($nb_engine);
+        $this->expectException(ENabuSingletonException::class);
+        $nb_engine_2 = new CNabuEngine();
+    }
+
+    /**
+     * @test getEngine
+     * @runInSeparateProcess
+     */
+    public function testGetEngine()
+    {
+        $this->assertIsObject($nb_engine = CNabuEngine::getEngine());
+        $this->assertSame($nb_engine, CNabuEngine::getEngine());
+    }
+
+    /**
+     * @test isCLIEnvironment
+     */
+    public function testIsCLIEnvironment()
+    {
+        $nb_engine = CNabuEngine::getEngine();
+        $this->assertIsObject($nb_engine);
+        $this->assertTrue($nb_engine->isCLIEnvironment());
+    }
+
+    /**
+     * @test isInstallMode
+     * @test setInstallMode
+     */
+    public function testIsInstallMode()
+    {
+        $nb_engine = CNabuEngine::getEngine();
+        $this->assertFalse($nb_engine->isInstallMode());
+        $nb_engine->setInstallMode(true);
+        $this->assertTrue($nb_engine->isInstallMode());
+        $nb_engine->setInstallMode(false);
+        $this->assertFalse($nb_engine->isInstallMode());
     }
 }

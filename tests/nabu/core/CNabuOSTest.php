@@ -37,7 +37,23 @@ use nabu\core\exceptions\ENabuSingletonException;
 class CNabuOSTest extends TestCase
 {
     /**
+     * @test __construct
+     * @test init
      * @test isInstantiated
+     * @test getOS
+     * @runInSeparateProcess
+     */
+    public function testConstructReset()
+    {
+        $this->assertIsObject($nb_os = new CNabuOS());
+        $this->assertIsString($nb_os->getOSName());
+        $this->expectException(ENabuSingletonException::class);
+        $nb_os = new CNabuOS();
+    }
+
+    /**
+     * @test isInstantiated
+     * @runInSeparateProcess
      */
     public function testIsInstantiated()
     {

@@ -41,6 +41,7 @@ else
     NABU_BASE_PATH=`dirname ${INSTALL_PATH}`
     NABU_BASE_PATH=`dirname ${NABU_BASE_PATH}`
     NABU_WEB_PATH=/var/opt/nabu-3
+    NABU_LOG_PATH=/var/log/nabu-3
     PHP_PARAMS="-d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/"
 fi
 
@@ -49,6 +50,7 @@ if [ -f ${INSTALL_PATH}/inc/install.php ] ; then
         --etc-path=${NABU_ETC_PATH} \
         --base-path=${NABU_BASE_PATH} \
         --web-path=${NABU_WEB_PATH} \
+        --log-path=${NABU_LOG_PATH} \
         --db-host=${MYSQL_SERVER} \
         --db-port=${MYSQL_PORT} \
         --db-schema=${MYSQL_SCHEMA} \

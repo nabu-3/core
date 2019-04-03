@@ -64,7 +64,7 @@ define('NABU_VHOST_CONFIG_FOLDER', DIRECTORY_SEPARATOR . 'conf');
 
 define('NABU_ETC_PATH', '/etc/opt/nabu-3.conf.d');
 define('NABU_LOG_PATH', '/var/log/nabu-3');
-define('NABU_BASE_PATH', '/opt/nabu-3');
+define('NABU_BASE_PATH', dirname(dirname(__FILE__)));
 
 define('NABU_SRC_PATH', NABU_BASE_PATH . NABU_SRC_FOLDER);
 define('NABU_SDK_PATH', NABU_BASE_PATH . NABU_SDK_FOLDER);
@@ -81,6 +81,9 @@ define('NABU_VLIB_PATH', NABU_WEB_PATH . NABU_LIB_FOLDER);
 define('NABU_VCACHE_PATH', NABU_WEB_PATH . NABU_CACHE_FOLDER);
 
 define('NABU_ICONTACT_PATH', NABU_VAR_PATH . NABU_ICONTACT_FOLDER);
+
+/* Class constants */
+define('NABU_ENGINE_CLASS', '\nabu\core\CNabuEngine');
 
 /* Engine constants */
 define('NABU_PATH_PARAM', '__x_nb_path');

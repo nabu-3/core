@@ -68,10 +68,12 @@ class CNabuOS extends CNabuObject implements INabuSingleton
     public function __construct()
     {
         if (self::$nb_os !== null) {
-            throw new ENabuSingletonException("OS already instantiated");
+            throw new ENabuSingletonException("CNabuOS already instantiated");
+        } else {
+            parent::__construct();
+            self::$nb_os = $this;
+            self::$nb_os->init();
         }
-
-        parent::__construct();
     }
 
     /**

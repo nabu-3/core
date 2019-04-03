@@ -61,10 +61,9 @@ class CNabuInstallApp extends CNabuCLIApplication
         echo "Setting up environment for nabu-3\n";
 
         $this->loadParameters();
-        $this->checkFHSPaths();
         $this->checkPaths();
+        $this->changeIniVars();
         $this->prepareMySQLConfiguration();
-        $this->prepareWebServerConfiguration();
         $this->writeConfigFiles();
 
         echo "Machine environment is ready.\n";
@@ -101,10 +100,17 @@ class CNabuInstallApp extends CNabuCLIApplication
         echo "OK\n";
     }
 
-    private function checkFHSPaths()
+    private function changeIniVars()
     {
-        $this->checkingPath('/etc/opt', true);
-        $this->checkingPath('/var/opt', true);
+        ini_set('include_path',
+            implode(PATH_SEPARATOR, array(
+                '.',
+                $this->base_path . NABU_SRC_FOLDER,
+                $this->base_path . NABU_PUB_FOLDER,
+                $this->base_path . NABU_SDK_FOLDER,
+                $this->base_path . NABU_LIB_FOLDER
+            ))
+        );
     }
 
     private function checkPaths()
@@ -223,19 +229,6 @@ class CNabuInstallApp extends CNabuCLIApplication
         }
 
         return $retval;
-    }
-
-    private function prepareWebServerConfiguration()
-    {
-        if ($this->nb_engine->preloadClass('\\providers\\apache\\httpd\\CApacheHTTPDManagerApp')) {
-            $this->prepareApacheConfiguration();
-        } else {
-        }
-    }
-
-    private function prepareApacheConfiguration()
-    {
-        echo "Now we check if you have Apache HTTPD installed.\n";
     }
 
     private function createTables()
