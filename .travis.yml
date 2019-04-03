@@ -11,7 +11,7 @@ addons:
 
 install:
     - sudo mkdir -p /etc/opt/nabu-3.conf.d
-    - composer require nabu-3/provider-mysql-driver
+    - composer install
 
 script:
     - phpunit --bootstrap common.php tests --coverage-clover phpunit.coverage.xml --whitelist nabu
