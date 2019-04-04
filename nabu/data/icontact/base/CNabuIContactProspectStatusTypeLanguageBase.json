@@ -6,6 +6,7 @@
     "autoincrement": null,
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_icontact_prospect_status_type_id": {

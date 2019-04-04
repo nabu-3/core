@@ -265,15 +265,18 @@ class CNabuInstallApp extends CNabuCLIApplication
             $this->createTable('\\nabu\\data\\site\\CNabuSiteAliasService');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteMap');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteMapLanguage');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteMapRole');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteRole');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteRoleLanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteStaticContent');
-            $this->createTable('\\nabu\\data\\site\\CNabuSiteStaticContentLang');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteStaticContentLanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTarget');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetLanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetSection');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetSectionLanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetCTA');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetCTALanguage');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetCTARole');
         }
 
         echo "OK.\n";

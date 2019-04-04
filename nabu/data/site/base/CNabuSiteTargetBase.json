@@ -6,6 +6,7 @@
     "autoincrement": "1110",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "row_format=DYNAMIC",
     "comment": "",
     "fields": {
         "nb_site_target_id": {

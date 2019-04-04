@@ -6,6 +6,7 @@
     "autoincrement": "2",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_catalog_tag_id": {
