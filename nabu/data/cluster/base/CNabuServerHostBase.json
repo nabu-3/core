@@ -6,6 +6,7 @@
     "autoincrement": "3",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_server_host_id": {
@@ -118,7 +119,7 @@
                 "nb_server_host_id": {
                     "name": "nb_server_host_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -132,7 +133,7 @@
                 "nb_server_id": {
                     "name": "nb_server_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -140,7 +141,7 @@
                 "nb_ip_id": {
                     "name": "nb_ip_id",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -148,7 +149,7 @@
                 "nb_server_host_port": {
                     "name": "nb_server_host_port",
                     "ordinal": "3",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -164,7 +165,7 @@
                 "nb_server_id": {
                     "name": "nb_server_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -180,7 +181,7 @@
                 "nb_ip_id": {
                     "name": "nb_ip_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -196,7 +197,7 @@
                 "nb_cluster_group_id": {
                     "name": "nb_cluster_group_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -212,7 +213,7 @@
                 "nb_cluster_group_service_id": {
                     "name": "nb_cluster_group_service_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""

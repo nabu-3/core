@@ -6,6 +6,7 @@
     "autoincrement": null,
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_user_group_id": {
@@ -118,13 +119,13 @@
                 "nb_user_group_id": {
                     "name": "nb_user_group_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 },
                 "nb_user_id": {
                     "name": "nb_user_id",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -138,7 +139,7 @@
                 "nb_user_group_id": {
                     "name": "nb_user_group_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""

@@ -6,6 +6,7 @@
     "autoincrement": "11",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_commerce_product_category_id": {
@@ -107,7 +108,7 @@
                 "nb_commerce_product_category_id": {
                     "name": "nb_commerce_product_category_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -121,7 +122,7 @@
                 "nb_commerce_id": {
                     "name": "nb_commerce_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -129,7 +130,7 @@
                 "nb_commerce_product_category_key": {
                     "name": "nb_commerce_product_category_key",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -145,7 +146,7 @@
                 "nb_commerce_product_category_hash": {
                     "name": "nb_commerce_product_category_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -161,7 +162,7 @@
                 "nb_commerce_id": {
                     "name": "nb_commerce_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -177,7 +178,7 @@
                 "nb_medioteca_id": {
                     "name": "nb_medioteca_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

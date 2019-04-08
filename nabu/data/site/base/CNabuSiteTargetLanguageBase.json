@@ -6,6 +6,7 @@
     "autoincrement": null,
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_site_target_id": {
@@ -173,13 +174,13 @@
                 "nb_site_target_id": {
                     "name": "nb_site_target_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 },
                 "nb_language_id": {
                     "name": "nb_language_id",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -193,7 +194,7 @@
                 "nb_site_target_id": {
                     "name": "nb_site_target_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -209,7 +210,7 @@
                 "nb_language_id": {
                     "name": "nb_language_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""

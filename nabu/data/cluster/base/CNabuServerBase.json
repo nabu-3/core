@@ -6,6 +6,7 @@
     "autoincrement": "2",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_server_id": {
@@ -85,7 +86,7 @@
                 "nb_server_id": {
                     "name": "nb_server_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -99,7 +100,7 @@
                 "nb_server_key": {
                     "name": "nb_server_key",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

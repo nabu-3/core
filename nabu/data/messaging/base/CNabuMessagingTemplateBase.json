@@ -6,6 +6,7 @@
     "autoincrement": "14",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_messaging_template_id": {
@@ -85,7 +86,7 @@
                 "nb_messaging_template_id": {
                     "name": "nb_messaging_template_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -99,7 +100,7 @@
                 "nb_messaging_id": {
                     "name": "nb_messaging_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -115,7 +116,7 @@
                 "nb_messaging_template_hash": {
                     "name": "nb_messaging_template_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

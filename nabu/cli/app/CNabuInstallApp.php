@@ -22,6 +22,7 @@
 namespace nabu\cli\app;
 
 use \nabu\cli\app\CNabuCLIApplication;
+
 use \providers\mysql\driver\CMySQLConnector;
 use \providers\mysql\driver\EMySQLException;
 
@@ -73,6 +74,7 @@ class CNabuInstallApp extends CNabuCLIApplication
     public function run()
     {
         $this->createTables();
+
         echo "\n------------------------------------------------------------------------\n\n";
 
         echo "Installation finished successful.\n\n";
@@ -238,42 +240,103 @@ class CNabuInstallApp extends CNabuCLIApplication
 
         if ($this->silent_mode || nbCLICheckContinue(true, "Installation aborted.\n")) {
             echo "\nCreating tables...\n";
+            $this->createTable('\\nabu\\data\\catalog\\CNabuCatalog');
+            $this->createTable('\\nabu\\data\\catalog\\CNabuCatalogItem');
+            $this->createTable('\\nabu\\data\\catalog\\CNabuCatalogItemLanguage');
+            $this->createTable('\\nabu\\data\\catalog\\CNabuCatalogItemTag');
+            $this->createTable('\\nabu\\data\\catalog\\CNabuCatalogLanguage');
+            $this->createTable('\\nabu\\data\\catalog\\CNabuCatalogTag');
+            $this->createTable('\\nabu\\data\\catalog\\CNabuCatalogTagLanguage');
+            $this->createTable('\\nabu\\data\\catalog\\CNabuCatalogTaxonomy');
+            $this->createTable('\\nabu\\data\\catalog\\CNabuCatalogTaxonomyLanguage');
+
+            $this->createtable('\\nabu\\data\\cluster\\CNabuClusterGroup');
+            $this->createTable('\\nabu\\data\\cluster\\CNabuClusterGroupService');
+            $this->createTable('\\nabu\\data\\cluster\\CNabuClusterUser');
+            $this->createTable('\\nabu\\data\\cluster\\CNabuClusterUserGroup');
             $this->createTable('\\nabu\\data\\cluster\\CNabuIP');
             $this->createTable('\\nabu\\data\\cluster\\CNabuServer');
             $this->createTable('\\nabu\\data\\cluster\\CNabuServerHost');
-            $this->createTable('\\nabu\\data\\cluster\\CNabuClusterUserGroup');
-            $this->createTable('\\nabu\\data\\cluster\\CNabuClusterUser');
-            $this->createtable('\\nabu\\data\\cluster\\CNabuClusterGroup');
-            $this->createTable('\\nabu\\data\\cluster\\CNabuClusterGroupService');
+
+            $this->createTable('\\nabu\\data\\commerce\\CNabuCommerce');
+            $this->createTable('\\nabu\\data\\commerce\\CNabuCommerceLanguage');
+            $this->createTable('\\nabu\\data\\commerce\\CNabuCommerceProduct');
+            $this->createTable('\\nabu\\data\\commerce\\CNabuCommerceProductCategory');
+            $this->createTable('\\nabu\\data\\commerce\\CNabuCommerceProductCategoryLanguage');
+            $this->createTable('\\nabu\\data\\commerce\\CNabuCommerceProductLanguage');
 
             $this->createTable('\\nabu\\data\\customer\\CNabuCustomer');
+            $this->createTable('\\nabu\\data\\customer\\CNabuCustomerUser');
 
             $this->createTable('\\nabu\\data\\domain\\CNabuDomainZone');
             $this->createTable('\\nabu\\data\\domain\\CNabuDomainZoneHost');
 
+            $this->createTable('\\nabu\\data\\icontact\\CNabuIContact');
+            $this->createTable('\\nabu\\data\\icontact\\CNabuIContactLanguage');
+            $this->createTable('\\nabu\\data\\icontact\\CNabuIContactProspect');
+            $this->createTable('\\nabu\\data\\icontact\\CNabuIContactProspectAttachment');
+            $this->createTable('\\nabu\\data\\icontact\\CNabuIContactProspectDiary');
+            $this->createTable('\\nabu\\data\\icontact\\CNabuIContactProspectStatusType');
+            $this->createTable('\\nabu\\data\\icontact\\CNabuIContactProspectStatusTypeLanguage');
+            /** @todo $this->createTable('\\nabu\\data\\icontact\\CNabuIContactTemplate'); */
+
             $this->createTable('\\nabu\\data\\lang\\CNabuLanguage');
+
+            $this->createTable('\\nabu\\data\\medioteca\\CNabuMedioteca');
+            $this->createTable('\\nabu\\data\\medioteca\\CNabuMediotecaItem');
+            $this->createTable('\\nabu\\data\\medioteca\\CNabuMediotecaItemLanguage');
+            $this->createTable('\\nabu\\data\\medioteca\\CNabuMediotecaLanguage');
+            $this->createTable('\\nabu\\data\\medioteca\\CNabuMediotecaType');
+            $this->createTable('\\nabu\\data\\medioteca\\CNabuMediotecaTypeLanguage');
+
+            $this->createTable('\\nabu\\data\\messaging\\CNabuMessaging');
+            $this->createTable('\\nabu\\data\\messaging\\CNabuMessagingLanguage');
+            $this->createTable('\\nabu\\data\\messaging\\CNabuMessagingService');
+            $this->createTable('\\nabu\\data\\messaging\\CNabuMessagingServiceStack');
+            $this->createTable('\\nabu\\data\\messaging\\CNabuMessagingServiceStackAttachment');
+            $this->createTable('\\nabu\\data\\messaging\\CNabuMessagingServiceTemplate');
+            $this->createTable('\\nabu\\data\\messaging\\CNabuMessagingTemplate');
+            $this->createTable('\\nabu\\data\\messaging\\CNabuMessagingTemplateLanguage');
+
+            $this->createTable('\\nabu\\data\\project\\CNabuProject');
+            $this->createTable('\\nabu\\data\\project\\CNabuProjectLanguage');
+            $this->createTable('\\nabu\\data\\project\\CNabuProjectVersion');
+            $this->createTable('\\nabu\\data\\project\\CNabuProjectVersionLanguage');
 
             $this->createTable('\\nabu\\data\\security\\CNabuRole');
             $this->createTable('\\nabu\\data\\security\\CNabuRoleLanguage');
             $this->createTable('\\nabu\\data\\security\\CNabuUser');
+            $this->createTable('\\nabu\\data\\security\\CNabuUserGroup');
+            $this->createTable('\\nabu\\data\\security\\CNabuUserGroupLanguage');
+            $this->createTable('\\nabu\\data\\security\\CNabuUserGroupMember');
+            $this->createTable('\\nabu\\data\\security\\CNabuUserGroupType');
+            $this->createTable('\\nabu\\data\\security\\CNabuUserGroupTypeLanguage');
 
             $this->createTable('\\nabu\\data\\site\\CNabuSite');
-            $this->createTable('\\nabu\\data\\site\\CNabuSiteLanguage');
-            $this->createTable('\\nabu\\data\\site\\CNabuSiteUser');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteAlias');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteAliasHost');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteAliasService');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteLanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteMap');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteMapLanguage');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteMapRole');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteMedioteca');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteModule');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteRole');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteRoleLanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteStaticContent');
-            $this->createTable('\\nabu\\data\\site\\CNabuSiteStaticContentLang');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteStaticContentLanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTarget');
-            $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetLanguage');
-            $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetSection');
-            $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetSectionLanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetCTA');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetCTALanguage');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetCTARole');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetLanguage');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetMedioteca');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetSection');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetSectionLanguage');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteUser');
+
+            $this->createTable('\\nabu\\visual\\site\\CNabuSiteVisualEditorItem');
         }
 
         echo "OK.\n";
@@ -299,7 +362,7 @@ class CNabuInstallApp extends CNabuCLIApplication
 
     private function writeEtcConfMainFile()
     {
-        $filename = $this->etc_path . DIRECTORY_SEPARATOR . 'nabu-3.conf';
+        $filename = $this->base_path . NABU_ETC_FOLDER . DIRECTORY_SEPARATOR . 'nabu-3.conf';
 
         echo "    ...writing [$filename]...";
 
@@ -319,7 +382,11 @@ class CNabuInstallApp extends CNabuCLIApplication
                   . "MYSQL_USER=$this->mysql_user\n"
                   . "MYSQL_PASSWORD=$this->mysql_password\n"
                   . "\n# Configure PHP common params\n"
-                  . 'PHP_PARAMS="-d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/"' . "\n"
+                  . 'PHP_PARAMS="-d safe_mode=Off -d open_basedir=none -d '
+                  . 'include_path=.:${NABU_BASE_PATH}' . NABU_SRC_FOLDER . DIRECTORY_SEPARATOR . PATH_SEPARATOR
+                  . '${NABU_BASE_PATH}' . NABU_PUB_FOLDER . DIRECTORY_SEPARATOR . PATH_SEPARATOR
+                  . '${NABU_BASE_PATH}' . NABU_SDK_FOLDER . NABU_SRC_FOLDER . DIRECTORY_SEPARATOR . PATH_SEPARATOR
+                  . '${NABU_BASE_PATH}' . NABU_LIB_FOLDER . DIRECTORY_SEPARATOR . "\"\n"
             );
 
             fclose($handle);

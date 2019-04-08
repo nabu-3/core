@@ -6,6 +6,7 @@
     "autoincrement": "1067",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_site_target_section_id": {
@@ -129,7 +130,7 @@
                 "nb_site_target_section_id": {
                     "name": "nb_site_target_section_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -143,7 +144,7 @@
                 "nb_site_target_section_hash": {
                     "name": "nb_site_target_section_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -159,7 +160,7 @@
                 "nb_medioteca_id": {
                     "name": "nb_medioteca_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -175,7 +176,7 @@
                 "nb_site_target_id": {
                     "name": "nb_site_target_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -191,7 +192,7 @@
                 "nb_site_target_id": {
                     "name": "nb_site_target_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -199,7 +200,7 @@
                 "nb_site_target_section_parent_id": {
                     "name": "nb_site_target_section_parent_id",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -207,7 +208,7 @@
                 "nb_site_target_section_order": {
                     "name": "nb_site_target_section_order",
                     "ordinal": "3",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""

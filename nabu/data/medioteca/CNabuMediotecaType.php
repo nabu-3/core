@@ -26,6 +26,7 @@ use \nabu\data\medioteca\base\CNabuMediotecaTypeBase;
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @version 3.0.0 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\data\medioteca
  */
 class CNabuMediotecaType extends CNabuMediotecaTypeBase

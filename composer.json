@@ -39,5 +39,7 @@
     "bin": [
         "bin/nabu-install.sh",
         "bin/nabu-messaging-daemon.sh"
-    ]
+    ],
+    "prefer-stable": false,
+    "minimum-stability": "dev"
 }

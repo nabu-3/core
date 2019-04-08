@@ -25,7 +25,8 @@ use nabu\data\customer\base\CNabuCustomerListBase;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
- * @version 3.0.0 Surface
+ * @since 3.0.0 Surface
+ * @version 3.0.12 Surface
  * @package \nabu\data\customer
  */
 class CNabuCustomerList extends CNabuCustomerListBase

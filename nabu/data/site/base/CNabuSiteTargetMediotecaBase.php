@@ -3,12 +3,12 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/11/05 12:49:47 UTC
+ * Created: 2019/04/08 13:40:04 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  * Copyright 2014-2016 Where Ideas Simply Come True, S.L.
- * Copyright 2017-2018 nabu-3 Group
+ * Copyright 2017-2019 nabu-3 Group
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,20 +33,19 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity Site Target Medioteca stored in the storage named nb_site_target_medioteca.
- * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
  */
-abstract class CNabuSiteTargetMedioteca extends CNabuDBInternalObject
+abstract class CNabuSiteTargetMediotecaBase extends CNabuDBInternalObject
 {
     use TNabuSiteTargetChild;
 
     /**
      * Instantiates the class. If you fill enough parameters to identify an instance serialized in the storage, then
      * the instance is deserialized from the storage.
-     * @param mixed $nb_site_target An instance of CNabuSiteTargetMedioteca or another object descending from
+     * @param mixed $nb_site_target An instance of CNabuSiteTargetMediotecaBase or another object descending from
      * \nabu\data\CNabuDataObject which contains a field named nb_site_target_id, or a valid ID.
-     * @param mixed $nb_medioteca An instance of CNabuSiteTargetMedioteca or another object descending from
+     * @param mixed $nb_medioteca An instance of CNabuSiteTargetMediotecaBase or another object descending from
      * \nabu\data\CNabuDataObject which contains a field named nb_medioteca_id, or a valid ID.
      */
     public function __construct($nb_site_target = false, $nb_medioteca = false)
@@ -111,8 +110,8 @@ abstract class CNabuSiteTargetMedioteca extends CNabuDBInternalObject
      */
     public static function getFilteredSiteTargetMediotecaList($q = null, $fields = null, $order = null, $offset = 0, $num_items = 0)
     {
-        $fields_part = nb_prefixFieldList(CNabuSiteTargetMedioteca::getStorageName(), $fields, false, true, '`');
-        $order_part = nb_prefixFieldList(CNabuSiteTargetMedioteca::getStorageName(), $fields, false, false, '`');
+        $fields_part = nb_prefixFieldList(CNabuSiteTargetMediotecaBase::getStorageName(), $fields, false, true, '`');
+        $order_part = nb_prefixFieldList(CNabuSiteTargetMediotecaBase::getStorageName(), $fields, false, false, '`');
         
         if ($num_items !== 0) {
             $limit_part = ($offset > 0 ? $offset . ', ' : '') . $num_items;

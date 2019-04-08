@@ -6,6 +6,7 @@
     "autoincrement": null,
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_site_id": {
@@ -85,13 +86,13 @@
                 "nb_site_id": {
                     "name": "nb_site_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 },
                 "nb_site_module_id": {
                     "name": "nb_site_module_id",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }

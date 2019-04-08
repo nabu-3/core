@@ -6,6 +6,7 @@
     "autoincrement": "4",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_language_id": {
@@ -151,7 +152,7 @@
                 "nb_language_id": {
                     "name": "nb_language_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -165,7 +166,39 @@
                 "nb_language_hash": {
                     "name": "nb_language_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_language_iso6391_idx": {
+            "name": "nb_language_iso6391_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_language_ISO639_1": {
+                    "name": "nb_language_ISO639_1",
+                    "ordinal": "1",
+                    "collation": null,
+                    "null": true,
+                    "subpart": null,
+                    "comments": ""
+                }
+            }
+        },
+        "nb_language_iso_6392_idx": {
+            "name": "nb_language_iso_6392_idx",
+            "primary": false,
+            "unique": false,
+            "index_type": "BTREE",
+            "fields": {
+                "nb_language_ISO639_2": {
+                    "name": "nb_language_ISO639_2",
+                    "ordinal": "1",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

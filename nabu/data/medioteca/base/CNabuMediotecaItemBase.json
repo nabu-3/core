@@ -6,6 +6,7 @@
     "autoincrement": "250",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_medioteca_item_id": {
@@ -151,7 +152,7 @@
                 "nb_medioteca_item_id": {
                     "name": "nb_medioteca_item_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -165,7 +166,7 @@
                 "nb_medioteca_id": {
                     "name": "nb_medioteca_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -181,7 +182,7 @@
                 "nb_medioteca_id": {
                     "name": "nb_medioteca_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -189,7 +190,7 @@
                 "nb_medioteca_item_key": {
                     "name": "nb_medioteca_item_key",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -205,7 +206,7 @@
                 "nb_medioteca_item_hash": {
                     "name": "nb_medioteca_item_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

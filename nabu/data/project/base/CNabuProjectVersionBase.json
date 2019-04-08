@@ -6,6 +6,7 @@
     "autoincrement": "4",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_project_version_id": {
@@ -63,7 +64,7 @@
                 "nb_project_version_id": {
                     "name": "nb_project_version_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -77,7 +78,7 @@
                 "nb_project_id": {
                     "name": "nb_project_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -93,7 +94,7 @@
                 "nb_project_version_hash": {
                     "name": "nb_project_version_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

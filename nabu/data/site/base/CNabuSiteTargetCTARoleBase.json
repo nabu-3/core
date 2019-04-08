@@ -6,6 +6,7 @@
     "autoincrement": null,
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_site_target_cta_id": {
@@ -52,13 +53,13 @@
                 "nb_site_target_cta_id": {
                     "name": "nb_site_target_cta_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 },
                 "nb_role_id": {
                     "name": "nb_role_id",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -72,7 +73,7 @@
                 "nb_role_id": {
                     "name": "nb_role_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""

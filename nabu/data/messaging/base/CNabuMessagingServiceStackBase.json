@@ -6,6 +6,7 @@
     "autoincrement": "1",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_messaging_service_stack_id": {
@@ -206,7 +207,7 @@
                 "nb_messaging_service_stack_id": {
                     "name": "nb_messaging_service_stack_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -220,7 +221,7 @@
                 "nb_messaging_id": {
                     "name": "nb_messaging_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -236,7 +237,7 @@
                 "nb_messaging_service_id": {
                     "name": "nb_messaging_service_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -252,7 +253,7 @@
                 "nb_messaging_template_id": {
                     "name": "nb_messaging_template_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -268,7 +269,7 @@
                 "nb_language_id": {
                     "name": "nb_language_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -284,7 +285,7 @@
                 "nb_messaging_service_stack_p2p_from_internal_id": {
                     "name": "nb_messaging_service_stack_p2p_from_internal_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -300,7 +301,7 @@
                 "nb_messaging_service_stack_p2p_to_internal_id": {
                     "name": "nb_messaging_service_stack_p2p_to_internal_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

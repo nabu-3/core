@@ -6,6 +6,7 @@
     "autoincrement": "1110",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "row_format=DYNAMIC",
     "comment": "",
     "fields": {
         "nb_site_target_id": {
@@ -404,7 +405,7 @@
                 "nb_site_target_id": {
                     "name": "nb_site_target_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -418,7 +419,7 @@
                 "nb_site_target_hash": {
                     "name": "nb_site_target_hash",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -434,7 +435,7 @@
                 "nb_mimetype_id": {
                     "name": "nb_mimetype_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
@@ -450,7 +451,7 @@
                 "nb_site_id": {
                     "name": "nb_site_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -466,7 +467,7 @@
                 "nb_site_id": {
                     "name": "nb_site_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -474,7 +475,7 @@
                 "nb_site_target_key": {
                     "name": "nb_site_target_key",
                     "ordinal": "2",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""

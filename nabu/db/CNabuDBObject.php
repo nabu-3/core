@@ -117,7 +117,6 @@ abstract class CNabuDBObject extends CNabuDataObject implements INabuDBObject
     {
         if (CNabuEngine::getEngine()->isInstallMode()) {
             $script = forward_static_call(array(get_called_class(), 'getCreationStorageSentence'));
-            error_log($script);
             if (strlen($script) > 0) {
                 if (!$connector) {
                     $nb_engine = CNabuEngine::getEngine();

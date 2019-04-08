@@ -3,12 +3,12 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2018/11/05 12:50:02 UTC
+ * Created: 2019/04/08 13:40:28 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  * Copyright 2014-2016 Where Ideas Simply Come True, S.L.
- * Copyright 2017-2018 nabu-3 Group
+ * Copyright 2017-2019 nabu-3 Group
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,6 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity Medioteca Language stored in the storage named nb_medioteca_lang.
- * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\medioteca\base
  */

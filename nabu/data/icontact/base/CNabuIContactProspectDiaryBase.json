@@ -6,6 +6,7 @@
     "autoincrement": "1",
     "charset": "utf8",
     "collation": "utf8_general_ci",
+    "create_options": "",
     "comment": "",
     "fields": {
         "nb_icontact_prospect_diary_id": {
@@ -107,7 +108,7 @@
                 "nb_icontact_prospect_diary_id": {
                     "name": "nb_icontact_prospect_diary_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "comments": ""
                 }
             }
@@ -121,7 +122,7 @@
                 "nb_icontact_prospect_id": {
                     "name": "nb_icontact_prospect_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": false,
                     "subpart": null,
                     "comments": ""
@@ -137,7 +138,7 @@
                 "nb_user_id": {
                     "name": "nb_user_id",
                     "ordinal": "1",
-                    "collation": "ASC",
+                    "collation": null,
                     "null": true,
                     "subpart": null,
                     "comments": ""
