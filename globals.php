@@ -43,11 +43,15 @@ define('NABU_VHOST_CONFIG_FILENAME', 'httpd.include');
 define('NABU_TRACE_AUTOLOAD', false);
 
 /* Path constants definition */
+define('NABU_ETC_FOLDER', DIRECTORY_SEPARATOR . 'etc');
 define('NABU_SRC_FOLDER', DIRECTORY_SEPARATOR . 'src');
 define('NABU_SDK_FOLDER', DIRECTORY_SEPARATOR . 'sdk');
 define('NABU_PUB_FOLDER', DIRECTORY_SEPARATOR . 'pub');
 define('NABU_LIB_FOLDER', DIRECTORY_SEPARATOR . 'lib');
 define('NABU_TMP_FOLDER', DIRECTORY_SEPARATOR . 'tmp');
+define('NABU_VAR_FOLDER', DIRECTORY_SEPARATOR . 'var');
+define('NABU_LOG_FOLDER', DIRECTORY_SEPARATOR . 'log');
+
 define('NABU_ICONTACT_FOLDER', DIRECTORY_SEPARATOR . 'icontact');
 
 define('NABU_RUNTIME_FOLDER', DIRECTORY_SEPARATOR . 'runtime');
@@ -62,9 +66,22 @@ define('NABU_PROVIDERS_FOLDER', DIRECTORY_SEPARATOR . 'providers');
 define('NABU_CACHE_FOLDER', DIRECTORY_SEPARATOR . 'cache');
 define('NABU_VHOST_CONFIG_FOLDER', DIRECTORY_SEPARATOR . 'conf');
 
-define('NABU_ETC_PATH', '/etc/opt/nabu-3.conf.d');
-define('NABU_LOG_PATH', '/var/log/nabu-3');
-define('NABU_BASE_PATH', dirname(dirname(__FILE__)));
+$dirname = dirname(__FILE__);
+while (strlen($dirname) > 0 && !defined('NABU_BASE_PATH')) {
+    if (file_exists($dirname . NABU_ETC_FOLDER)) {
+        define('NABU_BASE_PATH', $dirname);
+    } else {
+        $dirname = dirname($dirname);
+    }
+}
+
+if (!defined('NABU_BASE_PATH')) {
+    error_log('nabu-3 base path not found.');
+    die();
+}
+
+define('NABU_ETC_PATH', NABU_BASE_PATH . NABU_ETC_FOLDER);
+define('NABU_LOG_PATH', NABU_BASE_PATH . NABU_VAR_FOLDER . NABU_LOG_FOLDER);
 
 define('NABU_SRC_PATH', NABU_BASE_PATH . NABU_SRC_FOLDER);
 define('NABU_SDK_PATH', NABU_BASE_PATH . NABU_SDK_FOLDER);

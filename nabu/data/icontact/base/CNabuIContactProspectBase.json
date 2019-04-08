@@ -83,7 +83,7 @@
             "type": "datetime",
             "default": "CURRENT_TIMESTAMP",
             "is_nullable": false,
-            "extra": "",
+            "extra": "DEFAULT_GENERATED",
             "comment": ""
         },
         "nb_icontact_prospect_last_update_datetime": {

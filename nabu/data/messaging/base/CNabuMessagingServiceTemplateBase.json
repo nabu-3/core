@@ -3,7 +3,7 @@
     "name": "nb_messaging_service_template",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": null,
+    "autoincrement": "1",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "create_options": "",

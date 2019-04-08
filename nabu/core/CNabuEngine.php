@@ -642,7 +642,7 @@ final class CNabuEngine extends CNabuObject implements INabuSingleton
     /**
      * If database configuration file does not exists then creates a default one.
      * Instantiate the object descriptor for main database. Assumes in this version
-     * that the only database available for main storage is MySQL.
+     * that the only database engine available for main storage is MySQL.
      */
     private function registerMainDatabase()
     {

@@ -3,7 +3,7 @@
     "name": "nb_role",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "16",
+    "autoincrement": "1",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "create_options": "",

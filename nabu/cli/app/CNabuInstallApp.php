@@ -22,6 +22,8 @@
 namespace nabu\cli\app;
 
 use \nabu\cli\app\CNabuCLIApplication;
+use nabu\core\CNabuEngine;
+
 use \providers\mysql\driver\CMySQLConnector;
 use \providers\mysql\driver\EMySQLException;
 
@@ -72,6 +74,8 @@ class CNabuInstallApp extends CNabuCLIApplication
 
     public function run()
     {
+        CNabuEngine::getEngine()->enableLogTrace();
+        CNabuEngine::getEngine()->getMainDB()->setTrace(true);
         $this->createTables();
         echo "\n------------------------------------------------------------------------\n\n";
 
@@ -264,7 +268,7 @@ class CNabuInstallApp extends CNabuCLIApplication
             $this->createTable('\\nabu\\data\\commerce\\CNabuCommerceProductLanguage');
 
             $this->createTable('\\nabu\\data\\customer\\CNabuCustomer');
-            /** @todo $this->createTable('\\nabu\\data\\customer\\CNabuCustomerUser'); */
+            $this->createTable('\\nabu\\data\\customer\\CNabuCustomerUser');
 
             $this->createTable('\\nabu\\data\\domain\\CNabuDomainZone');
             $this->createTable('\\nabu\\data\\domain\\CNabuDomainZoneHost');
@@ -285,7 +289,7 @@ class CNabuInstallApp extends CNabuCLIApplication
             $this->createTable('\\nabu\\data\\medioteca\\CNabuMediotecaItemLanguage');
             $this->createTable('\\nabu\\data\\medioteca\\CNabuMediotecaLanguage');
             $this->createTable('\\nabu\\data\\medioteca\\CNabuMediotecaType');
-            /** @todo $this->createTable('\\nabu\\data\\medioteca\\CNabuMediotecaTypeLanguage'); */
+            $this->createTable('\\nabu\\data\\medioteca\\CNabuMediotecaTypeLanguage');
 
             $this->createTable('\\nabu\\data\\messaging\\CNabuMessaging');
             $this->createTable('\\nabu\\data\\messaging\\CNabuMessagingLanguage');
@@ -318,7 +322,7 @@ class CNabuInstallApp extends CNabuCLIApplication
             $this->createTable('\\nabu\\data\\site\\CNabuSiteMap');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteMapLanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteMapRole');
-            /** @todo $this->createTable('\\nabu\\data\\site\\CNabuSiteMedioteca'); */
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteMedioteca');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteModule');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteRole');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteRoleLanguage');
@@ -329,6 +333,7 @@ class CNabuInstallApp extends CNabuCLIApplication
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetCTALanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetCTARole');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetLanguage');
+            $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetMedioteca');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetSection');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetSectionLanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteUser');

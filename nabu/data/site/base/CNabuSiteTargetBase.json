@@ -3,7 +3,7 @@
     "name": "nb_site_target",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "1110",
+    "autoincrement": "1",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "create_options": "row_format=DYNAMIC",
@@ -61,7 +61,7 @@
             "type": "datetime",
             "default": "CURRENT_TIMESTAMP",
             "is_nullable": false,
-            "extra": "",
+            "extra": "DEFAULT_GENERATED",
             "comment": ""
         },
         "nb_site_target_last_update_datetime": {

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2019/04/04 14:16:01 UTC
+ * Created: 2019/04/08 06:59:29 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -35,7 +35,7 @@ use \nabu\data\site\CNabuSiteTargetMedioteca;
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
  */
-abstract class CNabuSiteTargetMediotecaList extends CNabuDataObjectList
+abstract class CNabuSiteTargetMediotecaListBase extends CNabuDataObjectList
 {
     /**
      * Instantiates the class.

@@ -3,7 +3,7 @@
     "name": "nb_user",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "5",
+    "autoincrement": "1",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "create_options": "",
@@ -138,7 +138,7 @@
             "type": "datetime",
             "default": "CURRENT_TIMESTAMP",
             "is_nullable": false,
-            "extra": "",
+            "extra": "DEFAULT_GENERATED",
             "comment": ""
         },
         "nb_user_last_update_datetime": {
