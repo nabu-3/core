@@ -22,7 +22,6 @@
 namespace nabu\cli\app;
 
 use \nabu\cli\app\CNabuCLIApplication;
-use nabu\core\CNabuEngine;
 
 use \providers\mysql\driver\CMySQLConnector;
 use \providers\mysql\driver\EMySQLException;
@@ -74,9 +73,8 @@ class CNabuInstallApp extends CNabuCLIApplication
 
     public function run()
     {
-        CNabuEngine::getEngine()->enableLogTrace();
-        CNabuEngine::getEngine()->getMainDB()->setTrace(true);
         $this->createTables();
+
         echo "\n------------------------------------------------------------------------\n\n";
 
         echo "Installation finished successful.\n\n";
@@ -337,7 +335,8 @@ class CNabuInstallApp extends CNabuCLIApplication
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetSection');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteTargetSectionLanguage');
             $this->createTable('\\nabu\\data\\site\\CNabuSiteUser');
-            /** @todo $this->createTable('\\nabu\\data\\site\\CNabuSiteVisualEditorItem'); */
+
+            $this->createTable('\\nabu\\visual\\site\\CNabuSiteVisualEditorItem');
         }
 
         echo "OK.\n";
@@ -363,7 +362,7 @@ class CNabuInstallApp extends CNabuCLIApplication
 
     private function writeEtcConfMainFile()
     {
-        $filename = $this->base_path . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'nabu-3.conf';
+        $filename = $this->base_path . NABU_ETC_FOLDER . DIRECTORY_SEPARATOR . 'nabu-3.conf';
 
         echo "    ...writing [$filename]...";
 
@@ -383,7 +382,11 @@ class CNabuInstallApp extends CNabuCLIApplication
                   . "MYSQL_USER=$this->mysql_user\n"
                   . "MYSQL_PASSWORD=$this->mysql_password\n"
                   . "\n# Configure PHP common params\n"
-                  . 'PHP_PARAMS="-d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/"' . "\n"
+                  . 'PHP_PARAMS="-d safe_mode=Off -d open_basedir=none -d '
+                  . 'include_path=.:${NABU_BASE_PATH}' . NABU_SRC_FOLDER . DIRECTORY_SEPARATOR . PATH_SEPARATOR
+                  . '${NABU_BASE_PATH}' . NABU_PUB_FOLDER . DIRECTORY_SEPARATOR . PATH_SEPARATOR
+                  . '${NABU_BASE_PATH}' . NABU_SDK_FOLDER . NABU_SRC_FOLDER . DIRECTORY_SEPARATOR . PATH_SEPARATOR
+                  . '${NABU_BASE_PATH}' . NABU_LIB_FOLDER . DIRECTORY_SEPARATOR . "\"\n"
             );
 
             fclose($handle);

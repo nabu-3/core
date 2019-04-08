@@ -50,7 +50,7 @@
             "type": "datetime",
             "default": "CURRENT_TIMESTAMP",
             "is_nullable": false,
-            "extra": "DEFAULT_GENERATED",
+            "extra": "",
             "comment": ""
         },
         "nb_icontact_prospect_diary_last_update_datetime": {

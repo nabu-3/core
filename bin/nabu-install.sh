@@ -29,12 +29,12 @@ echo
 
 # This variable defines the path for config files. You can change this value.
 # When the PHP install script runs, he creates this path if not exists.
-NABU_ETC_PATH=/etc/opt/nabu-3.conf.d
 INSTALL_PATH=`realpath $0`
 INSTALL_PATH=`dirname $INSTALL_PATH`
+NABU_ETC_PATH=`realpath ${INSTALL_PATH}/etc/`
 
-if [ -d ${INSTALL_PATH} ] && [ -f ${INSTALL_PATH}/nabu-3.conf ] ; then
-    source ${INSTALL_PATH}/nabu-3.conf
+if [ -d ${INSTALL_PATH}/../etc ] && [ -f ${INSTALL_PATH}/../etc/nabu-3.conf ] ; then
+    source ${INSTALL_PATH}/../etc/nabu-3.conf
 else
     echo Install warning: Config not found. Using defaults.
     echo
@@ -42,7 +42,7 @@ else
     NABU_BASE_PATH=`dirname ${NABU_BASE_PATH}`
     NABU_WEB_PATH=/var/opt/nabu-3
     NABU_LOG_PATH=/var/log/nabu-3
-    PHP_PARAMS="-d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/"
+    PHP_PARAMS="-d safe_mode=Off -d open_basedir=none -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/src/:${NABU_BASE_PATH}/lib/"
 fi
 
 if [ -f ${INSTALL_PATH}/inc/install.php ] ; then

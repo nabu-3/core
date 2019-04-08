@@ -3,7 +3,7 @@
     "name": "nb_site_map",
     "engine": "MyISAM",
     "type": "table",
-    "autoincrement": "1",
+    "autoincrement": "1031",
     "charset": "utf8",
     "collation": "utf8_general_ci",
     "create_options": "",
