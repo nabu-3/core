@@ -39,7 +39,7 @@ class CNabuSiteTargetLanguage extends CNabuSiteTargetLanguageBase
             if (($nb_site_target->isURLRegExpExpression() || $nb_site_target->isURLLikeExpression()) &&
                 strlen($this->getURLRebuild()) > 0
             ) {
-                if (count($params) > 0) {
+                if (is_array($params) && count($params) > 0) {
                     $url = nb_vnsprintf($this->getURLRebuild(), $params);
                 } else {
                     $url = $this->getURLRebuild();
