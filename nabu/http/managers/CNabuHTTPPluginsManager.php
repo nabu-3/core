@@ -344,7 +344,7 @@ final class CNabuHTTPPluginsManager extends CNabuHTTPManager
                 $this->site_plugin !== null && method_exists($this->site_plugin, $func)
                     ? call_user_func(array($this->site_plugin, $func))
                     : true,
-                get_class($this->site_plugin),
+                (is_null($this->site_plugin) ? null : get_class($this->site_plugin)),
                 $func
             ) &&
             $this->pluginRedirectToPage(
