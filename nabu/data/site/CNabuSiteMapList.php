@@ -56,14 +56,14 @@ class CNabuSiteMapList extends CNabuSiteMapListBase implements INabuRoleMask
         $nb_site = $this->getSite();
         $this->merge(CNabuSiteMap::getMapsForSite($nb_site));
         $translations = CNabuSiteMapLanguage::getMapTranslationsForSite($nb_site);
-        if (count($translations) > 0) {
+        if (is_array($translations) && count($translations) > 0) {
             foreach ($translations as $translation) {
                 $item = $this->getItem($translation->getSiteMapId());
                 $item->setTranslation($translation);
             }
         }
         $roles = CNabuSiteMapRole::getMapRolesForSite($nb_site);
-        if (count($roles) > 0) {
+        if (is_array($roles) && count($roles) > 0) {
             foreach ($roles as $role) {
                 $item = $this->getItem($role->getSiteMapId());
                 $item->addRole($role);
