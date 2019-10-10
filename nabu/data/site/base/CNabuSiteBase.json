@@ -900,9 +900,20 @@
             "extra": "",
             "comment": ""
         },
+        "nb_site_force_cookie_as_httponly": {
+            "name": "nb_site_force_cookie_as_httponly",
+            "ordinal": "82",
+            "data_type": "enum",
+            "precision": null,
+            "type": "enum('T','F')",
+            "default": "F",
+            "is_nullable": true,
+            "extra": "",
+            "comment": ""
+        },
         "nb_site_max_signin_retries": {
             "name": "nb_site_max_signin_retries",
-            "ordinal": "82",
+            "ordinal": "83",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",
@@ -913,7 +924,7 @@
         },
         "nb_site_signin_lock_delay": {
             "name": "nb_site_signin_lock_delay",
-            "ordinal": "83",
+            "ordinal": "84",
             "data_type": "int",
             "precision": "10",
             "type": "int(11)",

@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2019/04/08 13:40:37 UTC
+ * Created: 2019/10/10 11:56:25 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -35,6 +35,7 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity iContact Prospect Attachment stored in the storage named nb_icontact_prospect_attachment.
+ * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\icontact\base
  */
@@ -270,20 +271,20 @@ abstract class CNabuIContactProspectAttachmentBase extends CNabuDBInternalObject
     }
 
     /**
-     * Get Icontact Prospect Attachment Mimetype attribute value
-     * @return null|string Returns the Icontact Prospect Attachment Mimetype value
+     * Get Icontact Prospect Attachment MIMEType attribute value
+     * @return null|string Returns the Icontact Prospect Attachment MIMEType value
      */
-    public function getMimetype()
+    public function getMIMEType()
     {
         return $this->getValue('nb_icontact_prospect_attachment_mimetype');
     }
 
     /**
-     * Sets the Icontact Prospect Attachment Mimetype attribute value.
+     * Sets the Icontact Prospect Attachment MIMEType attribute value.
      * @param string|null $mimetype New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMimetype(string $mimetype = null) : CNabuDataObject
+    public function setMIMEType(string $mimetype = null) : CNabuDataObject
     {
         $this->setValue('nb_icontact_prospect_attachment_mimetype', $mimetype);
         

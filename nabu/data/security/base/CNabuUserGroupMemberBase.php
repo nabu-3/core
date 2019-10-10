@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2019/04/08 13:39:44 UTC
+ * Created: 2019/10/10 11:55:51 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -32,6 +32,7 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity User Group Member stored in the storage named nb_user_group_member.
+ * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\security\base
  */

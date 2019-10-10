@@ -116,6 +116,7 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
         $nb_engine = CNabuEngine::getEngine();
 
         $attrs = session_get_cookie_params();
+        error_log(print_r($attrs, true));
         session_set_cookie_params(
             $attrs['lifetime'],
             $attrs['path'],
@@ -123,7 +124,9 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
             $secure || $attrs['secure'],
             $httponly || (array_key_exists('httponly', $attrs) && $attrs['httponly'])
         );
+        error_log(print_r($attrs, true));
 
+        session_name('NABUSESSID');
         session_start();
         $nb_engine->traceLog("Session ID", session_id());
 

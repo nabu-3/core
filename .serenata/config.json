@@ -1,0 +1,11 @@
+{
+    "uris": [
+        "file:///Users/rgutierrez/GitHub/nabu-3/core"
+    ],
+    "indexDatabaseUri": "file:///Users/rgutierrez/Library/Preferences/php-ide-serenata/index-bf410355cfa2cf632f65e9ad1e7162ae.sqlite",
+    "phpVersion": 7.3,
+    "excludedPathExpressions": [],
+    "fileExtensions": [
+        "php"
+    ]
+}
