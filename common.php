@@ -28,9 +28,25 @@
 /* Include files */
 require_once 'globals.php';
 
-if (file_exists(NABU_ETC_PATH . DIRECTORY_SEPARATOR . 'license.php')) {
-    require_once NABU_ETC_PATH . DIRECTORY_SEPARATOR . 'license.php';
+$license_file = NABU_ETC_PATH . DIRECTORY_SEPARATOR . 'license.php';
+if (file_exists($license_file)) {
+    require_once $license_file;
+} else {
+    if ($handle = fopen($license_file, 'w+')) {
+        $content = <<<FILE
+<?php
+
+define('NABU_LICENSED', 'nabu-3 group');
+define('NABU_LICENSEE_TARGET', 'https://www.nabu-3.com/');
+FILE;
+        fwrite($handle, $content);
+        fclose($handle);
+        require_once $license_file;
+    } else {
+        error_log('Error creating license file');
+    }
 }
+unset($license_file);
 
 $autoload_file = NABU_BASE_PATH
                . DIRECTORY_SEPARATOR . 'lib'
