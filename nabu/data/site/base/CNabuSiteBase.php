@@ -3,19 +3,19 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2019/04/08 13:39:46 UTC
+ * Created: 2019/10/10 11:55:52 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
  * Copyright 2014-2016 Where Ideas Simply Come True, S.L.
  * Copyright 2017-2019 nabu-3 Group
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -48,6 +48,7 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity Site stored in the storage named nb_site.
+ * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @since 3.0.0 Surface
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
@@ -71,7 +72,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
         if ($nb_site) {
             $this->transferMixedValue($nb_site, 'nb_site_id');
         }
-        
+
         parent::__construct();
         $this->__translatedConstruct();
         $this->translations_list = new CNabuSiteLanguageList();
@@ -95,7 +96,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function delete() : bool
     {
         $this->deleteTranslations(true);
-        
+
         return parent::delete();
     }
 
@@ -172,7 +173,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
         } else {
             $retval = null;
         }
-        
+
         return $retval;
     }
 
@@ -200,7 +201,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
         } else {
             $retval = new CNabuSiteList();
         }
-        
+
         return $retval;
     }
 
@@ -224,13 +225,13 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
         if (is_numeric($nb_customer_id)) {
             $fields_part = nb_prefixFieldList(CNabuSiteBase::getStorageName(), $fields, false, true, '`');
             $order_part = nb_prefixFieldList(CNabuSiteBase::getStorageName(), $fields, false, false, '`');
-        
+
             if ($num_items !== 0) {
                 $limit_part = ($offset > 0 ? $offset . ', ' : '') . $num_items;
             } else {
                 $limit_part = false;
             }
-        
+
             $nb_item_list = CNabuEngine::getEngine()->getMainDB()->getQueryAsArray(
                 "select " . ($fields_part ? $fields_part . ' ' : '* ')
                 . 'from nb_site '
@@ -244,7 +245,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
         } else {
             $nb_item_list = null;
         }
-        
+
         return $nb_item_list;
     }
 
@@ -274,7 +275,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
         ) {
             $this->languages_list = CNabuSiteLanguage::getLanguagesForTranslatedObject($this);
         }
-        
+
         return $this->languages_list;
     }
 
@@ -291,7 +292,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
         ) {
             $this->translations_list = CNabuSiteLanguage::getTranslationsForTranslatedObject($this);
         }
-        
+
         return $this->translations_list;
     }
 
@@ -317,7 +318,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
         } else {
             $nb_translation = null;
         }
-        
+
         return $nb_translation;
     }
 
@@ -344,7 +345,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
         } else {
             $nb_language_list = new CNabuLanguageList();
         }
-        
+
         return $nb_language_list;
     }
 
@@ -371,7 +372,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_id', $id);
-        
+
         return $this;
     }
 
@@ -392,7 +393,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setHash(string $hash = null) : CNabuDataObject
     {
         $this->setValue('nb_site_hash', $hash);
-        
+
         return $this;
     }
 
@@ -413,7 +414,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setKey(string $key = null) : CNabuDataObject
     {
         $this->setValue('nb_site_key', $key);
-        
+
         return $this;
     }
 
@@ -434,7 +435,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setClusterGroupId(int $nb_cluster_group_id = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_group_id', $nb_cluster_group_id);
-        
+
         return $this;
     }
 
@@ -455,7 +456,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setClusterUserId(int $nb_cluster_user_id = null) : CNabuDataObject
     {
         $this->setValue('nb_cluster_user_id', $nb_cluster_user_id);
-        
+
         return $this;
     }
 
@@ -476,7 +477,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setCustomerId(int $nb_customer_id = null) : CNabuDataObject
     {
         $this->setValue('nb_customer_id', $nb_customer_id);
-        
+
         return $this;
     }
 
@@ -497,7 +498,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setProjectId(int $nb_project_id = null) : CNabuDataObject
     {
         $this->setValue('nb_project_id', $nb_project_id);
-        
+
         return $this;
     }
 
@@ -518,7 +519,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setCommerceId(int $nb_commerce_id = null) : CNabuDataObject
     {
         $this->setValue('nb_commerce_id', $nb_commerce_id);
-        
+
         return $this;
     }
 
@@ -539,7 +540,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setMessagingId(int $nb_messaging_id = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_id', $nb_messaging_id);
-        
+
         return $this;
     }
 
@@ -560,7 +561,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setAppOSId(int $nb_app_os_id = null) : CNabuDataObject
     {
         $this->setValue('nb_app_os_id', $nb_app_os_id);
-        
+
         return $this;
     }
 
@@ -581,7 +582,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setDelegateForRole(int $delegate_for_role = null) : CNabuDataObject
     {
         $this->setValue('nb_site_delegate_for_role', $delegate_for_role);
-        
+
         return $this;
     }
 
@@ -602,7 +603,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setDefaultRoleId(int $default_role_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_default_role_id', $default_role_id);
-        
+
         return $this;
     }
 
@@ -623,7 +624,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setDefaultLanguageId(int $default_language_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_default_language_id', $default_language_id);
-        
+
         return $this;
     }
 
@@ -644,7 +645,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setApiLanguageId(int $api_language_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_api_language_id', $api_language_id);
-        
+
         return $this;
     }
 
@@ -665,7 +666,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setMainAliasId(int $main_alias_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_main_alias_id', $main_alias_id);
-        
+
         return $this;
     }
 
@@ -692,7 +693,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_mounting_order', $mounting_order);
-        
+
         return $this;
     }
 
@@ -719,7 +720,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_creation_datetime', $creation_datetime);
-        
+
         return $this;
     }
 
@@ -740,7 +741,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setLastUpdateDatetime($last_update_datetime) : CNabuDataObject
     {
         $this->setValue('nb_site_last_update_datetime', $last_update_datetime);
-        
+
         return $this;
     }
 
@@ -767,7 +768,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_published', $published);
-        
+
         return $this;
     }
 
@@ -794,7 +795,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_public_base_path_enabled', $public_base_path_enabled);
-        
+
         return $this;
     }
 
@@ -821,7 +822,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_default_target_use_uri', $default_target_use_uri);
-        
+
         return $this;
     }
 
@@ -842,7 +843,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setDefaultTargetId(int $default_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_default_target_id', $default_target_id);
-        
+
         return $this;
     }
 
@@ -869,7 +870,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_default_error_code', $default_error_code);
-        
+
         return $this;
     }
 
@@ -896,7 +897,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_page_not_found_target_use_uri', $page_not_found_target_use_uri);
-        
+
         return $this;
     }
 
@@ -917,7 +918,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setPageNotFoundTargetId(int $page_not_found_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_page_not_found_target_id', $page_not_found_target_id);
-        
+
         return $this;
     }
 
@@ -944,7 +945,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_page_not_found_error_code', $page_not_found_error_code);
-        
+
         return $this;
     }
 
@@ -965,7 +966,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setLoginTargetUseURI(string $login_target_use_uri = "N") : CNabuDataObject
     {
         $this->setValue('nb_site_login_target_use_uri', $login_target_use_uri);
-        
+
         return $this;
     }
 
@@ -986,7 +987,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setLoginTargetId(int $login_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_login_target_id', $login_target_id);
-        
+
         return $this;
     }
 
@@ -1007,7 +1008,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setLoginRedirectionTargetUseURI(string $login_redirection_target_use_uri = "N") : CNabuDataObject
     {
         $this->setValue('nb_site_login_redirection_target_use_uri', $login_redirection_target_use_uri);
-        
+
         return $this;
     }
 
@@ -1028,7 +1029,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setLoginRedirectionTargetId(int $login_redirection_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_login_redirection_target_id', $login_redirection_target_id);
-        
+
         return $this;
     }
 
@@ -1049,7 +1050,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setLogoutRedirectionTargetUseURI(string $logout_redirection_target_use_uri = "N") : CNabuDataObject
     {
         $this->setValue('nb_site_logout_redirection_target_use_uri', $logout_redirection_target_use_uri);
-        
+
         return $this;
     }
 
@@ -1070,7 +1071,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setLogoutRedirectionTargetId(int $logout_redirection_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_logout_redirection_target_id', $logout_redirection_target_id);
-        
+
         return $this;
     }
 
@@ -1097,7 +1098,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_login_max_fails_target_use_uri', $login_max_fails_target_use_uri);
-        
+
         return $this;
     }
 
@@ -1118,7 +1119,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setLoginMaxFailsTargetId(int $login_max_fails_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_login_max_fails_target_id', $login_max_fails_target_id);
-        
+
         return $this;
     }
 
@@ -1139,7 +1140,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setLoginMaxFailsErrorCode(int $login_max_fails_error_code = null) : CNabuDataObject
     {
         $this->setValue('nb_site_login_max_fails_error_code', $login_max_fails_error_code);
-        
+
         return $this;
     }
 
@@ -1166,7 +1167,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_alias_not_found_target_use_uri', $alias_not_found_target_use_uri);
-        
+
         return $this;
     }
 
@@ -1187,7 +1188,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setAliasNotFoundTargetId(int $alias_not_found_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_alias_not_found_target_id', $alias_not_found_target_id);
-        
+
         return $this;
     }
 
@@ -1214,7 +1215,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_alias_locked_target_use_uri', $alias_locked_target_use_uri);
-        
+
         return $this;
     }
 
@@ -1235,7 +1236,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setAliasLockedTargetId(int $alias_locked_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_alias_locked_target_id', $alias_locked_target_id);
-        
+
         return $this;
     }
 
@@ -1262,7 +1263,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_policies_target_use_uri', $policies_target_use_uri);
-        
+
         return $this;
     }
 
@@ -1283,7 +1284,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setPoliciesTargetId(int $policies_target_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_policies_target_id', $policies_target_id);
-        
+
         return $this;
     }
 
@@ -1310,7 +1311,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_require_policies_after_login', $require_policies_after_login);
-        
+
         return $this;
     }
 
@@ -1337,7 +1338,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_use_cache', $use_cache);
-        
+
         return $this;
     }
 
@@ -1358,7 +1359,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setCacheHandler(string $cache_handler = null) : CNabuDataObject
     {
         $this->setValue('nb_site_cache_handler', $cache_handler);
-        
+
         return $this;
     }
 
@@ -1379,7 +1380,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setUseSmarty(string $use_smarty = "F") : CNabuDataObject
     {
         $this->setValue('nb_site_use_smarty', $use_smarty);
-        
+
         return $this;
     }
 
@@ -1400,7 +1401,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setSmartyErrorReporting(int $smarty_error_reporting = null) : CNabuDataObject
     {
         $this->setValue('nb_site_smarty_error_reporting', $smarty_error_reporting);
-        
+
         return $this;
     }
 
@@ -1421,7 +1422,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setSmartyDebugging(string $smarty_debugging = "F") : CNabuDataObject
     {
         $this->setValue('nb_site_smarty_debugging', $smarty_debugging);
-        
+
         return $this;
     }
 
@@ -1442,7 +1443,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setSmartyTemplatePath(string $smarty_template_path = null) : CNabuDataObject
     {
         $this->setValue('nb_site_smarty_template_path', $smarty_template_path);
-        
+
         return $this;
     }
 
@@ -1463,7 +1464,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setSmartyCompilePath(string $smarty_compile_path = null) : CNabuDataObject
     {
         $this->setValue('nb_site_smarty_compile_path', $smarty_compile_path);
-        
+
         return $this;
     }
 
@@ -1484,7 +1485,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setSmartyCachePath(string $smarty_cache_path = null) : CNabuDataObject
     {
         $this->setValue('nb_site_smarty_cache_path', $smarty_cache_path);
-        
+
         return $this;
     }
 
@@ -1505,7 +1506,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setSmartyConfigsPath(string $smarty_configs_path = null) : CNabuDataObject
     {
         $this->setValue('nb_site_smarty_configs_path', $smarty_configs_path);
-        
+
         return $this;
     }
 
@@ -1526,7 +1527,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setSmartyModelsPath(string $smarty_models_path = null) : CNabuDataObject
     {
         $this->setValue('nb_site_smarty_models_path', $smarty_models_path);
-        
+
         return $this;
     }
 
@@ -1547,7 +1548,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setPluginName(string $plugin_name = null) : CNabuDataObject
     {
         $this->setValue('nb_site_plugin_name', $plugin_name);
-        
+
         return $this;
     }
 
@@ -1574,7 +1575,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_http_support', $http_support);
-        
+
         return $this;
     }
 
@@ -1601,7 +1602,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_https_support', $https_support);
-        
+
         return $this;
     }
 
@@ -1622,7 +1623,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setGoogleWMRDomainId(string $google_wmr_domain_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_google_wmr_domain_id', $google_wmr_domain_id);
-        
+
         return $this;
     }
 
@@ -1643,7 +1644,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setGoogleWMRSiteId(string $google_wmr_site_id = null) : CNabuDataObject
     {
         $this->setValue('nb_site_google_wmr_site_id', $google_wmr_site_id);
-        
+
         return $this;
     }
 
@@ -1670,7 +1671,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_use_awstats', $use_awstats);
-        
+
         return $this;
     }
 
@@ -1691,7 +1692,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setLocalPath(string $local_path = null) : CNabuDataObject
     {
         $this->setValue('nb_site_local_path', $local_path);
-        
+
         return $this;
     }
 
@@ -1718,7 +1719,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_dynamic_cache_control', $dynamic_cache_control);
-        
+
         return $this;
     }
 
@@ -1739,7 +1740,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setDynamicCacheDefaultMaxAge(int $dynamic_cache_default_max_age = null) : CNabuDataObject
     {
         $this->setValue('nb_site_dynamic_cache_default_max_age', $dynamic_cache_default_max_age);
-        
+
         return $this;
     }
 
@@ -1760,7 +1761,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setMessagingTemplateNewUser(int $nb_messaging_template_new_user = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_new_user', $nb_messaging_template_new_user);
-        
+
         return $this;
     }
 
@@ -1781,7 +1782,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setMessagingTemplateForgotPassword(int $nb_messaging_template_forgot_password = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_forgot_password', $nb_messaging_template_forgot_password);
-        
+
         return $this;
     }
 
@@ -1802,7 +1803,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setMessagingTemplateNotifyNewUser(int $nb_messaging_template_notify_new_user = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_notify_new_user', $nb_messaging_template_notify_new_user);
-        
+
         return $this;
     }
 
@@ -1823,7 +1824,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setMessagingTemplateRememberNewUser(int $nb_messaging_template_remember_new_user = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_remember_new_user', $nb_messaging_template_remember_new_user);
-        
+
         return $this;
     }
 
@@ -1844,7 +1845,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setMessagingTemplateInviteUser(int $nb_messaging_template_invite_user = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_invite_user', $nb_messaging_template_invite_user);
-        
+
         return $this;
     }
 
@@ -1865,7 +1866,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setMessagingTemplateInviteFriend(int $nb_messaging_template_invite_friend = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_invite_friend', $nb_messaging_template_invite_friend);
-        
+
         return $this;
     }
 
@@ -1886,7 +1887,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setMessagingTemplateNewMessage(int $nb_messaging_template_new_message = null) : CNabuDataObject
     {
         $this->setValue('nb_messaging_template_new_message', $nb_messaging_template_new_message);
-        
+
         return $this;
     }
 
@@ -1913,7 +1914,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_wsearch_enabled', $wsearch_enabled);
-        
+
         return $this;
     }
 
@@ -1940,7 +1941,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_use_framework', $use_framework);
-        
+
         return $this;
     }
 
@@ -1967,7 +1968,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_enable_vhost_file', $enable_vhost_file);
-        
+
         return $this;
     }
 
@@ -1988,7 +1989,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setSessionTimeoutInterval(string $session_timeout_interval = null) : CNabuDataObject
     {
         $this->setValue('nb_site_session_timeout_interval', $session_timeout_interval);
-        
+
         return $this;
     }
 
@@ -2009,7 +2010,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setSessionPreserveInterval(string $session_preserve_interval = null) : CNabuDataObject
     {
         $this->setValue('nb_site_session_preserve_interval', $session_preserve_interval);
-        
+
         return $this;
     }
 
@@ -2036,7 +2037,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_enable_session_strict_policies', $enable_session_strict_policies);
-        
+
         return $this;
     }
 
@@ -2063,7 +2064,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_static_content_use_alternative', $static_content_use_alternative);
-        
+
         return $this;
     }
 
@@ -2084,7 +2085,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setBasePath(string $base_path = null) : CNabuDataObject
     {
         $this->setValue('nb_site_base_path', $base_path);
-        
+
         return $this;
     }
 
@@ -2105,7 +2106,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setModulesSlots(string $modules_slots = null) : CNabuDataObject
     {
         $this->setValue('nb_site_modules_slots', $modules_slots);
-        
+
         return $this;
     }
 
@@ -2126,7 +2127,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setNotificationEmail(string $notification_email = null) : CNabuDataObject
     {
         $this->setValue('nb_site_notification_email', $notification_email);
-        
+
         return $this;
     }
 
@@ -2147,7 +2148,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setXFrameOptions(string $x_frame_options = null) : CNabuDataObject
     {
         $this->setValue('nb_site_x_frame_options', $x_frame_options);
-        
+
         return $this;
     }
 
@@ -2168,7 +2169,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function setXFrameOptionsURL(string $x_frame_options_url = null) : CNabuDataObject
     {
         $this->setValue('nb_site_x_frame_options_url', $x_frame_options_url);
-        
+
         return $this;
     }
 
@@ -2195,7 +2196,28 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_force_cookie_as_secure', $force_cookie_as_secure);
-        
+
+        return $this;
+    }
+
+    /**
+     * Get Site Force Cookie As HTTPOnly attribute value
+     * @return null|string Returns the Site Force Cookie As HTTPOnly value
+     */
+    public function getForceCookieAsHTTPOnly()
+    {
+        return $this->getValue('nb_site_force_cookie_as_httponly');
+    }
+
+    /**
+     * Sets the Site Force Cookie As HTTPOnly attribute value.
+     * @param string|null $force_cookie_as_httponly New value for attribute
+     * @return CNabuDataObject Returns self instance to grant chained setters call.
+     */
+    public function setForceCookieAsHTTPOnly(string $force_cookie_as_httponly = "F") : CNabuDataObject
+    {
+        $this->setValue('nb_site_force_cookie_as_httponly', $force_cookie_as_httponly);
+
         return $this;
     }
 
@@ -2222,7 +2244,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_max_signin_retries', $max_signin_retries);
-        
+
         return $this;
     }
 
@@ -2249,7 +2271,7 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
             );
         }
         $this->setValue('nb_site_signin_lock_delay', $signin_lock_delay);
-        
+
         return $this;
     }
 
@@ -2262,9 +2284,9 @@ abstract class CNabuSiteBase extends CNabuDBInternalObject implements INabuTrans
     public function getTreeData($nb_language = null, $dataonly = false)
     {
         $trdata = parent::getTreeData($nb_language, $dataonly);
-        
+
         $trdata = $this->appendTranslatedTreeData($trdata, $nb_language, $dataonly);
-        
+
         return $trdata;
     }
 }

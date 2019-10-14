@@ -124,6 +124,7 @@ final class CNabuHTTPSession extends CNabuObject implements INabuSingleton
             $httponly || (array_key_exists('httponly', $attrs) && $attrs['httponly'])
         );
 
+        session_name('NABUSESSID');
         session_start();
         $nb_engine->traceLog("Session ID", session_id());
 

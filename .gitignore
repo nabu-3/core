@@ -3,6 +3,7 @@
 .scannerwork
 .sonarlint
 .phpunit*
+.serenata
 composer.lock
 bin/nabu-export.sh
 bin/nabu-import.sh

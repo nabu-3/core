@@ -135,7 +135,7 @@
             "ordinal": "12",
             "data_type": "varchar",
             "precision": null,
-            "type": "varchar(50)",
+            "type": "varchar(256)",
             "default": null,
             "is_nullable": true,
             "extra": "",

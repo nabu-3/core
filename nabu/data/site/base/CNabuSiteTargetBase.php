@@ -3,7 +3,7 @@
  * File generated automatically by nabu-3.
  * You can modify this file if you need to add more functionalities.
  * ---------------------------------------------------------------------------
- * Created: 2019/04/08 13:39:52 UTC
+ * Created: 2019/10/10 11:55:56 UTC
  * ===========================================================================
  * Copyright 2009-2011 Rafael Gutierrez Martinez
  * Copyright 2012-2013 Welma WEB MKT LABS, S.L.
@@ -44,6 +44,7 @@ use \nabu\db\CNabuDBInternalObject;
 
 /**
  * Class to manage the entity Site Target stored in the storage named nb_site_target.
+ * @author Rafael Gutiérrez <rgutierrez@nabu-3.com>
  * @version 3.0.12 Surface
  * @package \nabu\data\site\base
  */
@@ -602,20 +603,20 @@ abstract class CNabuSiteTargetBase extends CNabuDBInternalObject implements INab
     }
 
     /**
-     * Get Mimetype Id attribute value
-     * @return null|string Returns the Mimetype Id value
+     * Get MIMEType Id attribute value
+     * @return null|string Returns the MIMEType Id value
      */
-    public function getMimetypeId()
+    public function getMIMETypeId()
     {
         return $this->getValue('nb_mimetype_id');
     }
 
     /**
-     * Sets the Mimetype Id attribute value.
+     * Sets the MIMEType Id attribute value.
      * @param string|null $nb_mimetype_id New value for attribute
      * @return CNabuDataObject Returns self instance to grant chained setters call.
      */
-    public function setMimetypeId(string $nb_mimetype_id = null) : CNabuDataObject
+    public function setMIMETypeId(string $nb_mimetype_id = null) : CNabuDataObject
     {
         $this->setValue('nb_mimetype_id', $nb_mimetype_id);
         

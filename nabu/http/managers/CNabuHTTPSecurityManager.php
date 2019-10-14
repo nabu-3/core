@@ -119,7 +119,7 @@ class CNabuHTTPSecurityManager extends CNabuHTTPManager
         $nb_app = $nb_engine->getApplication();
         $nb_site = $nb_app->getRequest()->getSite();
         $nb_session = $this->nb_application->getSession();
-        $nb_session->applySecurityRules($nb_site->getForceCookieAsSecure() === 'T');
+        $nb_session->applySecurityRules($nb_site->getForceCookieAsSecure() === 'T', $nb_site->getForceCookieAsHTTPOnly() === 'T');
     }
 
     /**
